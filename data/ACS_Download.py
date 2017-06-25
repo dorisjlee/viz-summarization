@@ -16,7 +16,8 @@ periodCovered = 5 #year(s)
 #flTables = {'B98013'}#'B00001','B01001','B02001','B02005','B02006','B02007','B02010','B05002'}#'S0101'}#'DP05'} #'B98013'{'B08013', 'B08134', 'B15002', 'B15010', 'B17001', 'B17005', 'B17010', 'B19013', 'B25064', 'B25077', 'B25119'}
 #acsTables = {'NY':nyTables, 'FL':flTables}
 #acsTables={'B00001','B01001','B02001','B02005','B02006','B02007','B02010','B05002'}#'S0101'}#'DP05'} #'B98013'
-acsTables={'B02006'}#'S0101'}#'DP05'} #'B98013'
+#acsTables={'B02006'}#'S0101'}#'DP05'} #'B98013'
+acsTables = {'C15002H'}
 downloadURL = 'http://www2.census.gov/programs-surveys/acs/summary_file/2014/data/5_year_seq_by_state/'
 
 #==============================================================================
@@ -30,7 +31,7 @@ import numpy as np
 import requests, zipfile, StringIO, os, natsort
 # This will be used later to convert the line number floats to text integers
 #print states
-states = {'IL':'Illinois'}
+#states = {'IL':'Illinois'}
 def flotToInt(text):
     if '.0' in text:
         return text[:text.rfind('.0')]
@@ -42,7 +43,7 @@ def validMetaData(n):
     if n%2 == 0 or (n+1)%2 == 0:
         return True
     return False
-    
+
 # Get the Sequence & Table Numbers
 print('Downloading Sequence and Table Number Lookup')
 #lookupURL = 'http://www2.census.gov/programs-surveys/acs/summary_file/2014/documentation/user_tools/ACS_5yr_Seq_Table_Number_Lookup.txt'
@@ -57,9 +58,9 @@ sequenceNumbers = lookup[['Table ID','Sequence Number']].drop_duplicates()
 for stateAbreviation, stateName in states.iteritems():
     print('Downloading ACS data for ' + stateAbreviation)
     stateDownloadURL = downloadURL + stateName + '/All_Geographies_Not_Tracts_Block_Groups/'
-    
+
     # Grab the geography file once although we will use it more than once
-    geoFileName = 'g' + str(referenceYear) + str(periodCovered) + stateAbreviation.lower() + '.csv'    
+    geoFileName = 'g' + str(referenceYear) + str(periodCovered) + stateAbreviation.lower() + '.csv'
     geoURL = stateDownloadURL + geoFileName
     if not os.path.exists(geoFileName):
         os.system("wget {} -O {}".format(geoURL,geoFileName))
@@ -73,7 +74,7 @@ for stateAbreviation, stateName in states.iteritems():
     geo.columns = ['FILEID', 'STUSAB', 'SUMLEVEL', 'COMPONENT', 'LOGRECNO', 'US', 'REGION', 'DIVISION', 'STATECE', 'STATE', 'COUNTY', 'COUSUB', 'PLACE', 'TRACT', 'BLKGRP', 'CONCIT', 'AIANHH', 'AIANHHFP', 'AIHHTLI', 'AITSCE', 'AITS', 'ANRC', 'CBSA',  'CSA', 'METDIV', 'MACC', 'MEMI', 'NECTA', 'CNECTA', 'NECTADIV ', 'UA', 'BLANK', 'CDCURR', 'SLDU', 'SLDL', 'BLANK', 'BLANK', 'ZCTA5', 'SUBMCD', 'SDELM', 'SDSEC', 'SDUNI', 'UR', 'PCI', 'BLANK', 'BLANK', 'PUMA5', 'BLANK', 'GEOID', 'NAME', 'BTTR', 'BTBG', 'BLANK']
     # Grab only the columns that we want
     geo = geo[['LOGRECNO', 'GEOID', 'NAME']]
-    
+
     # Iterate through the table list
     for acsTable in acsTables:
         fileName = stateAbreviation + '/' + acsTable + '.csv'
@@ -85,21 +86,21 @@ for stateAbreviation, stateName in states.iteritems():
         if len(sequenceNumber) == 0:
             print('************************* Table '+acsTable+' Not Downloadable *************************')
         else:
-            sequenceNumber = sequenceNumbers['Sequence Number'].values[sequenceNumbers['Table ID'].values == acsTable][0]       
-            
+            sequenceNumber = sequenceNumbers['Sequence Number'].values[sequenceNumbers['Table ID'].values == acsTable][0]
+
             # Create the data frame column names
-            # Since the data does not have a header we need to create a list of 
+            # Since the data does not have a header we need to create a list of
             # column names we can use to name the columns
             columnStart = ['File Type', 'Estimate Type', 'State', 'ltter#', 'SeqNum', 'LOGRECNO']
             columnNames = list(columnStart)
             estColumnNames = list(columnStart)
             moeColumnNames = list(columnStart)
-            
+
             metaData = lookup[lookup['Sequence Number'] == sequenceNumber]
             # Remove rows without a line number
             metaData = metaData[np.isfinite(metaData['Line Number'])]
             # Remove the rows with a .5 ending
-            metaData = metaData[metaData['Line Number'].apply(validMetaData)]        
+            metaData = metaData[metaData['Line Number'].apply(validMetaData)]
             # Create the begining of the column name
             metaData['columnNameBase'] = metaData['Table ID'] + '_' + metaData['Line Number'].map(np.str)
             # Remove the fraction part from the float
@@ -109,9 +110,9 @@ for stateAbreviation, stateName in states.iteritems():
             metaData['moeColumnName'] = metaData['columnNameBase'] + '_MOE'
             estColumnNames.extend(metaData['estColumnName'].tolist())
             moeColumnNames.extend(metaData['moeColumnName'].tolist())
-            
+
             print('Getting ' + acsTable + ' data')
-            # Download the ACS data        
+            # Download the ACS data
             leading_zeros = '0' * (4 - len(sequenceNumber))
             zipFileName = str(referenceYear) + str(periodCovered) + stateAbreviation.lower() + leading_zeros + sequenceNumber + '000.zip'
             tableURL = stateDownloadURL + zipFileName
@@ -121,34 +122,34 @@ for stateAbreviation, stateName in states.iteritems():
             zipFile.extractall()
             # Build a list of files that were zipped
             ZipNameList = zipFile.namelist()
-            
+
             print('Processing ' + acsTable + ' data')
-            # Read in the estimates and margins of errors        
+            # Read in the estimates and margins of errors
             converter = {0: np.str, 1: np.str, 2: np.str, 3: np.str, 4: np.str, 5: np.str} # make these variables strings
             estimate = pd.read_csv(ZipNameList[0], header=None, converters=converter)
             moe = pd.read_csv(ZipNameList[1], header=None, converters=converter)
-            # Rename the columns        
+            # Rename the columns
             estimate.columns = estColumnNames
             moe.columns = moeColumnNames
-    
+
             # Select the columns with the ACS table name in their name
             estCols = columnStart + [col for col in estimate.columns if acsTable+'_' in col]
             estimate = estimate[estCols]
             moeCols = columnStart + [col for col in moe.columns if acsTable+'_' in col]
             moe = moe[moeCols]
-            
+
             # Now we are ready to merge the estimate, moe and geography data frames
-            # First we need to drop the moe estimate types column b/c it messes up 
+            # First we need to drop the moe estimate types column b/c it messes up
             # the merge
             moe = moe.drop('Estimate Type', 1)
-            
+
             # Now we merge the estimates and geography data. Then merge in the moes
             acsData = estimate.merge(geo)
             acsData = acsData.merge(moe)
-            
+
             # We need to set up the final data frame.  First we start with our
             # column names list and add in the geography variables.  Next we get
-            # the estimate and moe variables however they will be unsorted (the 
+            # the estimate and moe variables however they will be unsorted (the
             # estimate is not next to the moe).  We will sort this list and add it
             # to our column names list.
             geoCols = ['GEOID', 'NAME']
@@ -156,7 +157,7 @@ for stateAbreviation, stateName in states.iteritems():
             unsortedCols = list(set(acsData.columns) - set(columnStart) - set(geoCols))
             sortedCols = natsort.natsorted(unsortedCols, key=lambda y: y.lower())
             columnNames.extend(sortedCols)
-            
+
             # Create the data frame with the columns we want in the right order
             acsData = acsData[columnNames]
             # Drop GeoID
@@ -166,7 +167,7 @@ for stateAbreviation, stateName in states.iteritems():
             # Save the ACS data as a csv file
             print('Saving ' + fileName)
             acsData.to_csv(fileName, index=False)
-            
+
             # Delete the files we unzipped
             os.remove(ZipNameList[0])
             os.remove(ZipNameList[1])
