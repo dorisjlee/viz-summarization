@@ -3,7 +3,7 @@ from vizObj import vizObj
 import networkx as nx
 
 
-class singleNode:
+class vizNode:
 
     '''
     A Node object contains a list of vizObj (data objects)
@@ -16,7 +16,8 @@ class singleNode:
         self.filters = filters
 
     def __repr__(self):
-        return '(Filters: %s, vizObjs: %s)' % (self.filters, self.vizObj)
+         return str(self.filters)
+        # return '(Filters: %s, vizObjs: %s)' % (self.filters, self.vizObj)
 
 
 

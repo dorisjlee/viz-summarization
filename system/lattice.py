@@ -12,7 +12,7 @@ class Lattice:
 
     # contain a graph of Node objects
     def __init__(self):
-        self.graph = nx.Graph()
+        self.graph = nx.DiGraph()
         self.type = 'summarized' #'full' or summarized
 
     # not worry about
