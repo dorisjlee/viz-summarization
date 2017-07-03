@@ -1,0 +1,42 @@
+      #chartid body {
+        margin: 0px;
+        padding: 0px;
+        font-family: 'Avenir';
+      }
+
+      #chartid h1, button {
+        margin-left: 25px;
+        text-align: left;
+      }
+
+      #chartid h1 {
+        font-size: 25px;
+      }
+
+      #chartid button {
+        margin-bottom: 25px;
+      }
+
+      .main {
+        margin: 0px 25px;
+      }
+
+      #chartid svg {
+        padding: 20px 40px;
+      }
+
+      .axis path,
+      .axis line {
+        fill: none;
+        stroke: black;
+        shape-rendering: crispEdges;
+      }
+
+      text,
+      .axis text {
+        font-size: 11px;
+      }
+
+      rect:hover {
+        fill: orange;
+      }
