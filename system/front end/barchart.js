@@ -1,12 +1,15 @@
-  function render_chart(){
+function render_chart(){
     // Golden Snowglobe totals (as of 2/5/15)
-    var dataset = [
-      {"city": "Buffalo", "snow": 75.5},
-      {"city": "Syracuse", "snow": 60.1},
-      {"city": "Binghamton", "snow": 58.7},
-      {"city": "Rochester", "snow": 54.2},
-      {"city": "Albany", "snow": 52.3}
-    ]
+
+    dataset = data[1].slice(0, data[1].length-1)
+
+    yAxis_name = data[1][data[1].length-1]["yName"]
+
+    title = data[1][data[1].length-1]["filter"]
+
+    $("#title").html(title) 
+    //alert(dataset[0][0].xAxis);
+   
 
     // Dimensions for the chart: height, width, and space b/t the bars
     var margins = {top: 30, right: 50, bottom: 30, left: 50}
@@ -19,7 +22,7 @@
     // >> Range - physical range of the scale (reversed)
     var yScale = d3.scale.linear()
       .domain([0, d3.max(dataset, function(d){
-        return d.snow;
+        return d.yAxis;
       })])
       .range([height, 0]);
 
@@ -34,7 +37,7 @@
     // Creates a scale for the x-axis based on city names
     var xScale = d3.scale.ordinal()
       .domain(dataset.map(function(d){
-        return d.city;
+        return d.xAxis;
       }))
       .rangeRoundBands([0, width], .1);
 
@@ -47,7 +50,7 @@
     // >> Select - grabs the empty <div> above this script
     // >> Append - places an <svg> wrapper inside the div
     // >> Attr - applies our height & width values from above
-    var chart = d3.select('#chartid2')
+    var chart = d3.select('.main')
       .append('svg')
       .attr('width', width + margins.left + margins.right)
       .attr('height', height + margins.top + margins.bottom)
@@ -70,10 +73,10 @@
       //        points & the width of the chart
       // >> Y - Places vertically based on scale
       .attr('x', function(d, i){
-        return xScale(d.city);
+        return xScale(d.xAxis);
       })
       .attr('y', function(d){
-        return yScale(d.snow);
+        return yScale(d.yAxis);
       })
 
       // Step 3: Height & Width
@@ -81,16 +84,16 @@
       // >> Height - Scale and height of the chart area
       .attr('width', (width / dataset.length) - barPadding)
       .attr('height', function(d){
-        return height - yScale(d.snow);
+        return height - yScale(d.yAxis);
       })
       .attr('fill', 'steelblue')
 
       // Step 4: Info for hover interaction
       .attr('class', function(d){
-        return d.city;
+        return d.xAxis;
       })
       .attr('id', function(d){
-        return d.snow;
+        return d.yAxis;
       });
 
     // Renders the yAxis once the chart is finished
@@ -108,7 +111,7 @@
 
     // Adds yAxis title
     chart.append('text')
-      .text('Snow Totals')
+      .text(yAxis_name)
       .attr('transform', 'translate(-30, -20)');
   }
   function handleMouseOver() {
@@ -120,8 +123,8 @@
     render_chart();
     
     $('rect').mouseenter(function(){
-      $('#city').html(this.className.animVal);
-      $('#inches').html($(this).attr('id'));
+      $('#xAxis').html(this.className.animVal);
+      $('#yAxis').html($(this).attr('id'));
     });
   }
   
