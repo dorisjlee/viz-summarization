@@ -1,11 +1,11 @@
 function render_chart(){
     // Golden Snowglobe totals (as of 2/5/15)
 
-    dataset = data[1].slice(0, data[1].length-1)
+    dataset = data[2].slice(0, data[2].length-1)
 
-    yAxis_name = data[1][data[1].length-1]["yName"]
+    yAxis_name = data[2][data[2].length-1]["yName"]
 
-    title = data[1][data[1].length-1]["filter"]
+    title = data[2][data[2].length-1]["filter"]
 
     $("#title").html(title) 
     //alert(dataset[0][0].xAxis);
