@@ -14,6 +14,8 @@ class Lattice:
     def __init__(self):
         self.graph = nx.DiGraph()
         self.type = 'summarized' #'full' or summarized
+        self.nodeDic = {}
+        #
 
     # not worry about
     def generateDashboard(self):
@@ -32,13 +34,14 @@ class Lattice:
 
 
         # wrapper function for adding a node
-    def addNode(self, node_name):
-        self.graph.add_node(node_name)
+    def addNode(self, node):
+        node.id = self.numberOfNodes() + 1
+        self.graph.add_node(node)
 
     # wrapper function for adding multiple nodes
     def addMultiNodes(self, list):
         for node in list:
-            self.graph.add_node(node)
+            self.addNode(node)
 
     # wrapper function for adding a node with (k,v) attribute
     # [(race,black), (age,15), (gender,female)]

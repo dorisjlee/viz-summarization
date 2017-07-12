@@ -1,13 +1,13 @@
-function render_chart(){
+function render_chart(i){
     // Golden Snowglobe totals (as of 2/5/15)
 
-    dataset = data[2].slice(0, data[2].length-1)
+    dataset = data[i].slice(0, data[i].length-1)
 
-    yAxis_name = data[2][data[2].length-1]["yName"]
+    yAxis_name = data[i][data[i].length-1]["yName"]
 
-    title = data[2][data[2].length-1]["filter"]
+    title = data[i][data[i].length-1]["filter"]
 
-    $("#title").html(title) 
+    //$("#title").html(title) 
     //alert(dataset[0][0].xAxis);
    
 
@@ -50,7 +50,7 @@ function render_chart(){
     // >> Select - grabs the empty <div> above this script
     // >> Append - places an <svg> wrapper inside the div
     // >> Attr - applies our height & width values from above
-    var chart = d3.select('.main')
+    var chart = d3.select('#chart'+i)
       .append('svg')
       .attr('width', width + margins.left + margins.right)
       .attr('height', height + margins.top + margins.bottom)
@@ -118,13 +118,31 @@ function render_chart(){
     console.log("alert");
     //alert("alert");
   }
-  function test_chart(){
+  /**function test_chart(){
     // On document load, call the render() function to load the graph
-    render_chart();
-    
-    $('rect').mouseenter(function(){
-      $('#xAxis').html(this.className.animVal);
-      $('#yAxis').html($(this).attr('id'));
-    });
+
+    for (i = 0; i < data.length; i++) 
+    { 
+        render_chart(i);
+        $('rect').mouseenter(function(){
+        $('#xAxis').html(this.className.animVal);
+        $('#yAxis').html($(this).attr('id'));
+      });
+    }**/
+
+    function test_chart(arrayDiv){
+    // On document load, call the render() function to load the graph
+
+    for(var i=0; i < data.length; i++){
+        arrayDiv[i] = document.createElement('div');
+        arrayDiv[i].id = 'block' + i;
+        // arrayDiv[i].innerHTML = "render_chart("+i+");$('rect').mouseenter(function(){$('#xAxis').html(this.className.animVal);$('#yAxis').html($(this).attr('id'));});"
+        arrayDiv[i].innerHTML = "<div id=chart"+i+"></div>"
+        render_chart(i);
+    }
   }
+    
+    
+    
+  
   

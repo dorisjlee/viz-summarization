@@ -27,12 +27,16 @@ M = vizNode(parents = [root], filters = ["Gender = M"])
 F = vizNode(parents = [root], filters = ["Gender = F"])
 White = vizNode(parents = [root], filters = ["Race = White"])
 Black = vizNode(parents = [root], filters = ["Race = Black"])
-root.set_children([M,F,White,Black])
 
 WM = vizNode(parents = [White, M], filters = ["Race = White", "Gender = M"])
 WF = vizNode(parents=[White, F], filters=["Race = White", "Gender = F"])
 BM = vizNode(parents = [Black, M], filters = ["Race = Black", "Gender = M"])
 BF = vizNode(parents=[Black, F], filters=["Race = Black", "Gender = F"])
+
+G.addMultiNodes([root,M,F,White,Black,WM,WF,BM,BF])
+
+
+root.set_children([M,F,White,Black])
 M.set_children([WM, BM])
 F.set_children([WF, BF])
 White.set_children([WM, WF])
@@ -40,7 +44,6 @@ Black.set_children([BM, BF])
 
 WM.set_viz([v2])
 
-G.addMultiNodes([root,M,F,White,Black,WM,WF,BM,BF])
 
 
 
@@ -102,15 +105,42 @@ for nodes in G.getNodes():
     current = viz[0]
     for idx, val in enumerate(current.X):
       each.append({"xAxis": val, "yAxis": current.data[idx]})
-    each.append({"filter": ' '.join(current.filters), "yName": current.Y})
+    each.append({"filter": ' '.join(current.filters), "yName": current.Y, "childrenIndex" : nodes.childrenIndex})
     total.append(each)
-print(total)
+#print(total)
 
 
 with open('data.json', 'w') as outfile:
     json.dump(total, outfile)
 
+
+
+#create a dictionary contains{0: node0, 1: node2}
+node_dic = {}
+for node in G.getNodes():
+    each = []
+    viz = node.get_viz()
+    current = viz[0]
+    for idx, val in enumerate(current.X):
+        each.append({"xAxis": val, "yAxis": current.data[idx]})
+    each.append({"filter": ' '.join(current.filters), "yName": current.Y})
+
+    node_dic[node.id] = each
+
+
+print(node_dic)
+
+with open('nodeDic.json', 'w') as outfile:
+    json.dump(node_dic, outfile)
+
+
+
+
+for node in G.getNodes():
+    print(node.id)
+
 G = G.graph
+
 
 #print(G.numberOfEdges())
 p=nx.drawing.nx_pydot.to_pydot(G)
