@@ -1,11 +1,11 @@
 function render_chart(i){
     // Golden Snowglobe totals (as of 2/5/15)
 
-    dataset = data[i].slice(0, data[i].length-1)
+    dataset = Dic[i].slice(0, Dic[i].length-1)
 
-    yAxis_name = data[i][data[i].length-1]["yName"]
+    yAxis_name = Dic[i][Dic[i].length-1]["yName"]
 
-    title = data[i][data[i].length-1]["filter"]
+    title = Dic[i][Dic[i].length-1]["filter"]
 
     //$("#title").html(title) 
     //alert(dataset[0][0].xAxis);
@@ -13,8 +13,8 @@ function render_chart(i){
 
     // Dimensions for the chart: height, width, and space b/t the bars
     var margins = {top: 30, right: 50, bottom: 30, left: 50}
-    var height = 400 - margins.left - margins.right,
-        width = 700 - margins.top - margins.bottom,
+    var height = 300 - margins.left - margins.right,
+        width = 450 - margins.top - margins.bottom,
         barPadding = 5
 
     // Create a scale for the y-axis based on data

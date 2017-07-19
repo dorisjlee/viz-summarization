@@ -1,87 +1,37 @@
+var chart_config = {
+        chart: {
+            container: "#tree_container",
 
-   // Array approach
-    var config = {
-        container: "#tree_container",
-
-        animateOnInit: true,
-        
-        node: {
-            collapsable: true
-
+            animateOnInit: true,
+            
+            node: {
+                collapsable: true
+            },
+            animation: {
+                nodeAnimation: "easeOutBounce",
+                nodeSpeed: 700,
+                connectorsAnimation: "bounce",
+                connectorsSpeed: 700
+            }
         },
-        animation: {
-            nodeAnimation: "easeOutBounce",
-            nodeSpeed: 700,
-            connectorsAnimation: "bounce",
-            connectorsSpeed: 700
-        }
-    },
-    malory = {
-        innerHTML: "#chart0"
-    },
+        nodeStructure: treeTreant2
+    };
 
-    lana = {
-        parent: malory,
-        innerHTML: "#chart1"
-    },
 
-    figgs = {
-        parent: lana,
-        innerHTML: "#chart2"
-    },
 
-    sterling = {
-        parent: malory,
-        childrenDropLevel: 1,
-        innerHTML: "#chart3"
-    },
 
-    woodhouse = {
-        parent: sterling,
-        innerHTML: "#chart4"
-    },
-
-    pseudo = {
-        parent: malory,
-        pseudo: true,
-        innerHTML: "#chart5"
-
-    },
-
-    cheryl = {
-        parent: pseudo,
-        innerHTML: "#chart6"
-    },
-
-    pam = {
-        parent: pseudo,
-        innerHTML: "#chart7"
-    },
-
-    obama = {
-        parent: pseudo,
-        innerHTML: "#chart8"
-    }
-
-    chart_config = [config, malory, lana, figgs, sterling, woodhouse, pseudo, pam, cheryl, obama];
 
 
     function test_chart_collapsable(arrayDiv){
         // On document load, call the render() function to load the graph
-        chart_container = document.getElementById("chart_container");
-
-        /*
-        c = document.createElement('div');
-        c.id = 'chart' + 0;
-        chart_container.appendChild(c);
-        render_chart(0);
-        chart0 = document.getElementById("chart0");
-        */
+        chartid = document.getElementById("chartid");
         
-        for(var i = 0; i < data.length; i++) {
+        for(var i = 1; i < data.length; i++) {
             arrayDiv[i] = document.createElement('div');
             arrayDiv[i].id = 'chart' + i;
-            chart_container.appendChild(arrayDiv[i]);
+
+            chartid.appendChild(arrayDiv[i]);
+            
 
             p = document.createElement('p');
             spanx = document.createElement('span');
@@ -103,5 +53,45 @@
         
         console.log("done");
     }
+
+
+
+
+
+
+
+
+/**{
+            innerHTML: "#chart1",
+            children: [
+                {
+                    innerHTML: "#chart2",
+                    children: [
+                        {
+                            innerHTML: "#chart3"
+                        }
+                    ]
+                },
+                {
+                    innerHTML: "#chart4",
+                    children: [
+                        {
+                            innerHTML: "#chart5"
+                        }
+                    ]
+                },
+                {
+                    innerHTML: "#chart6",
+                    children: [
+                        {
+                            innerHTML: "#chart7"
+                        },
+                        {
+                            innerHTML: "#chart8"
+                        }
+                    ]
+                }
+            ]
+        }**/
 
 

@@ -2,6 +2,7 @@ from lattice import Lattice
 from node import vizNode
 import networkx as nx
 from vizObj import vizObj
+from collections import OrderedDict
 import json
 
 
@@ -123,7 +124,8 @@ for node in G.getNodes():
     current = viz[0]
     for idx, val in enumerate(current.X):
         each.append({"xAxis": val, "yAxis": current.data[idx]})
-    each.append({"filter": ' '.join(current.filters), "yName": current.Y})
+    each.append({"filter": ' '.join(current.filters), "yName": current.Y, "childrenIndex" : node.childrenIndex})
+
 
     node_dic[node.id] = each
 
@@ -147,10 +149,25 @@ p=nx.drawing.nx_pydot.to_pydot(G)
 p.write_png('example2.png')
 
 
+tree = OrderedDict()
+tree["innerHTML"] = "#chart" + str(root.id)
+
+tree["children"] = []
+
+for each in root.childrenIndex:
+    thisBracket = {}
+    thisBracket["innerHTML"] = "#chart" + str(each)
+
+    if node_dic[each][len(node_dic[each])-1]["childrenIndex"] != []:
+        i = node_dic[each][len(node_dic[each])-1]["childrenIndex"]
+        thisBracket["children"] = []
+        for c in i:
+            this = {}
+            this["innerHTML"] = "#chart" + str(c)
+            thisBracket["children"].append(this)
+        tree["children"].append(thisBracket)
 
 
-
-
-
-
+with open('tree.json', 'w') as outfile:
+    json.dump(tree, outfile,indent=4)
 

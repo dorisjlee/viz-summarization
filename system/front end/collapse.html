@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="Treant.css">
     <link rel="stylesheet" href="collapsable.css">
     <link rel="stylesheet" href="style.css">
-    <script type="text/javascript" src="collapsable.js"></script>
-    <script type="text/javascript" src="data.json"></script>
+
+    <script type="text/javascript" src="nodeDic.json"></script>
+    <script type="text/javascript" src="treeNode.json"></script>
+    <script type="text/javascript" src="collapsable.js"></script>    
+
     <script type="text/javascript" src="barchart.js"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="vendor/raphael.js"></script>
@@ -18,29 +21,52 @@
     <script src="vendor/jquery.easing.js"></script>
     <script type="text/javascript" src="data.json"></script>
 </head>
+
 <body>
-    <div class = "chart" id = "tree_container"></div>
+    <div class = "chart" id = "tree_container" style="height:100%; width:100%;"></div>
 
     <div id = "chart_container">
 
-        <!--
-        <div style="visibility: hidden; display:inline;"id="chartid">
-            <div class="main">
-                <p><span id="xAxis"></span> - <span id="yAxis"></span></p>
-            </div>
-            <div id="chartid2">
+        
+        <div style="visibility: hidden; display:inline; width: 0%; height: 0px" id="chartid">
+            
+            <div id="chartid2" style="width: 0px; height: 0px">
             
             </div>
 
         </div>
-        -->
+        
 
     </div>
 
-    <script>
+    <script>        
         var arrayDiv = new Array();
         test_chart_collapsable(arrayDiv)
+
+        /**var div = document.getElementById('chartid');
+        // get an array of child nodes
+        divChildren = div.childNodes;
+
+        for (var i=0; i<divChildren.length; i++) {
+            if(divChildren[i].nodeName == "DIV")
+            {
+                divChildren[i].style.width = "0px";
+                divChildren[i].style.height = "0px";
+            }
+            
+        }**/
+
+
         tree = new Treant(chart_config);
+        // Destroy hidden objects
+        // var element = document.getElementById("element-id");
+        // element.parentNode.removeChild(element);
+        for(i = 1; i <= 8; i++) {
+            var element = document.getElementById("chart"+i)
+            element.parentNode.removeChild(element)
+        }
+        $("#w3s").attr("href", "https://www.w3schools.com/jquery");
+        $("#w3s").attr("href", "https://www.w3schools.com/jquery");
     </script>
 
 </body>

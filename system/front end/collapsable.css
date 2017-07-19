@@ -16,3 +16,4 @@ body { background: #fff; }
 .Treant .collapse-switch { width: 100%; height: 100%; border: none; }
 .Treant .node.collapsed { background-color: #DEF82D; }
 .Treant .node.collapsed .collapse-switch { background: none; }
+.chart .Treant .Treant-loaded {width: 100%; height: 100%;}
