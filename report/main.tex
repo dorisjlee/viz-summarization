@@ -1,0 +1,109 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage[bitstream-charter]{mathdesign}
+\linespread{1.05}
+\usepackage[T1]{fontenc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath}
+\usepackage[numbers]{natbib}
+\usepackage[inline]{enumitem}
+\usepackage{graphicx}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\title{{\tt VizInNuce:} Efficient Data-Driven Visual Summarization to Support Visual Analytics}
+\date{\today}
+\author{%
+    \Large{Himel Dev, Doris Lee}\\
+    \texttt{hdev3,jlee782@illinois.edu}
+}
+
+\begin{document}
+\maketitle
+
+\input{abstract}
+\input{problem}
+
+\iffalse
+\section{System Design}
+In this report, we discuss the system design choices for our dashboard construction problem. 
+
+\subsection{Dashboard Interface Design}
+Dashboard interface design is one of the key design choices in dashboard construction problem. The design of dashboard interface and users' interaction with the interface critically affect the overall system architecture. We particularly focus on the static/dynamic nature of dashboard interface.
+\newline
+\newline
+\textbf{Static Dashboard:} For the static version of dashboard construction problem, our goal is to find the set of k visualizations that maximize our proposed objective function, in a single shot. For this problem, user interaction is limited to the initial selection of sub-population and dimension variables of interest. This static problem has several pros and cons that we list below.
+
+\begin{itemize}
+\item Pros: In the static problem, users can specify the amount of time that they are willing to wait. The benefit is that since this does not require user-in-the-loop, a user can specify an arbitrarily long wait-time, e.g., several days, to generate the result. The user can check the result at the end of the specified wait-time. If the specified wait-time is small, the system can generate approximate \emph{good-enough} result.  
+
+\item Cons: Since this problem does not involve user-in-the-loop, the user can not filter or guide the system towards specific attributes/subpopulations that he/she would be interested in, so while the user expectation model updates based on the visualizations that the users have seen along the path, the prior of the expectation model at the start is generic for all users. This yields interesting visualization for analysts to explore previously unseen datasets in a cold-start manner, but the system quickly looses its usefulness as the users learn more about the dataset and have no way to specifying these learned insights to the system.
+\end{itemize}
+\newline
+\newline
+\textbf{Dynamic Dashboard:}
+ After data loading, the user begins exploring the dashboard in a top-down manner, starting at the root and drilling down.  For each node visited, the user is shown all available child nodes based on the current visualization, the node color indicates how likely would this subpopulation be a promising child to visit. The user has the option to visit the nodes following the system's recommendation or he could chose to view another subpopulation of that he deems interesting.
+ 
+ \begin{figure}[ht!]
+\includegraphics[scale=0.3]{MixedInitiativeFig.pdf}
+\caption{As an example usage scenario, the user is currently viewing visualization V2, he sees the subpopulation recommendation at the next level, V4 is the most promising child to explore (darkest hue of blue). At the current stage, the user is not allowed to explore any of the greyed out visualizations (unconnected parents or children).}
+
+\end{figure}
+ \begin{itemize}
+ \item Pros: Mixed initiative approach means that users has input at every step of the exploration regarding the children visualizations that they would like to explore. Compare to direct manipulation of viewing all possible bar charts, the mixed initiative exploration should be more tractable since the pruning done by the system and recommendations done to create the DAG significantly limits the number of bar charts that the users could end up seeing. This would also be more interpretable because the interaction enforces that the visualization explored must be connected through the parent-child relationship. The analyst is able to employ the familiar analogy of drill-down and roll-up to explore the DAG.
+ % are we allowing roll-ups to explore other parents? 
+ \item Cons: The user's selection of a subpopulation means that we must show that visualization in an online manner, which means we lose out on a lot of the precomputation that we could do if we had known the attributes of interest beforehand (based on data-driven measures, level and subpopulation limit). One way around this is to still apply these constraints specified in the materialization phase and limit the amount of possible child nodes that the analyst could chose from. (i.e. chose between drilling down along v1 or v3 versus chosing between v1,v2,v3,v4,v5 at that level)
+ \end{itemize}
+
+
+
+
+\section*{Offline Phase}
+\begin{enumerate}
+\item  Offline phase: The analyst loads in a dataset of interest and uses the selection tools in the interface to make the following selections:
+\begin{itemize}
+\item Choice of Root population. The user has the option to start the exploration from a specific subpopulation of interest (e.g. AB). By default, the root is set as the highest level of aggregation, which is equivalent to the whole population.
+\item  The amount of time that he is willing to wait for before the interactive stage. By using a cost model, we can translate this budget into an estimate of amount of cube materialization we are allowed to make in the offline stage. 
+\item Constraints on the types of visualizations that analyst would like to see. This can be translated into materialization strategies such as material all cubes that satisfy the iceberg criterion or show me only visualizations at level 3 or above.
+\item Measure. The analyst selects the measure variable that they are interested in visualizing, such as population or sales.
+\item Metrics. Based on our desiderata, 
+  \begin{itemize}
+    \item Connectedness: Visualizations in a dashboard should present a connected story, i.e., there should be connections/relationships among the chosen visualizations. This is enforced by traversing the DAG from parent to child nodes.
+    \item Informativeness: These connections/relationships should be informative rather than misleading. Informativeness is incorporated in our expectation model by chosing the most informative true parent among the multiple parents.
+    \item Surprisingness: We are interested in the informative, yet surprising relationships. Surprisingness is measured by deviation from user expectation.
+    \item Subpopulation size: Each visualization should cover a significant population. Surprising relationships appearing in the low levels of data (e.g., 0.1\% of tuples) are not of interest.
+  \end{itemize}
+The first three criterion listed are essential to our current problem formulation, there are other metrics that could be optionally added in to combine to form our objective functions.
+\item Visualization objective. What type of visualization insight is the analyst hoping to get from the analysis? (breadth/depth based?). Understanding the users motivation enable us to tune the tradeoff between the parameters that we use in our objective function, to decide on whether to spend our budget on exploring new nodes with different sets of parents or drilling down along the same child visualizations.
+\end{itemize}
+
+\end{enumerate}
+% Aditya comments:
+% - description of user interface
+% - user tuning tradeoff between metrics and parameter (knob to tune) vi
+%	- breadth and depth based 
+% - exploring multiple dimensions , measures , going down multiple measures, (e..g profits and sales, portions that these are not correlated, correlated would be interesting) How does multiple variable relationship change this problem, or is this jsut a matter of tracking multiple measure values? (separate objective?)
+% can brushing and linking tools be used for visual summarization? 
+
+\fi
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+%\bibliographystyle{abbrv}
+%\bibliography{sample}
+
+\end{document}
+
