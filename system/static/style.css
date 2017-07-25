@@ -1,42 +1,123 @@
-      #chartid body {
-        margin: 0px;
-        padding: 0px;
-        font-family: 'Avenir';
-      }
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
+    margin: 0;
+    padding: 0;
+}
 
-      #chartid h1, button {
-        margin-left: 25px;
-        text-align: left;
-      }
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
 
-      #chartid h1 {
-        font-size: 25px;
-      }
+fieldset,
+img {
+    border: 0;
+}
 
-      #chartid button {
-        margin-bottom: 25px;
-      }
+address,caption,cite,code,dfn,em,strong,th,var {
+    font-style: normal;
+    font-weight: normal;
+}
 
-      .main {
-        margin: 0px 25px;
-      }
+caption,
+th {
+    text-align: left;
+}
 
-      #chartid svg {
-        padding: 20px 40px;
-      }
+h1,h2,h3,h4,h5,h6{
+    font-size: 100%;
+    font-weight: normal;
+}
 
-      .axis path,
-      .axis line {
-        fill: none;
-        stroke: black;
-        shape-rendering: crispEdges;
-      }
+q:before,
+q:after {
+    content: '';
+}
 
-      text,
-      .axis text {
-        font-size: 11px;
-      }
+abbr,
+acronym {
+    border: 0;
+}
 
-      rect:hover {
-        fill: orange;
-      }
+body {
+    background: #fff;
+}
+/*Treant settings */
+
+.chart {
+    height: 600px;
+    margin: 5px;
+    width: 900px;
+}
+
+.Treant > .node {
+    padding: 3px;
+    border: 1px solid #484848;
+    border-radius: 3px;
+}
+
+.Treant > .node img {
+    width: 100%;
+    height: 100%;
+}
+
+.Treant .collapse-switch {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.Treant .node.collapsed {
+    background-color: #DEF82D;
+}
+
+.Treant .node.collapsed .collapse-switch {
+    background: none;
+}
+
+.chart .Treant .Treant-loaded {
+    width: 100%;
+    height: 100%;
+}
+/*Webpage Style settings */
+#chartid body {
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Avenir';
+}
+
+#chartid h1, button {
+  margin-left: 25px;
+  text-align: left;
+}
+
+#chartid h1 {
+  font-size: 25px;
+}
+
+#chartid button {
+  margin-bottom: 25px;
+}
+
+.main {
+  margin: 0px 25px;
+}
+
+#chartid svg {
+  padding: 20px 40px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges;
+}
+
+text,
+.axis text {
+  font-size: 11px;
+}
+
+rect:hover {
+  fill: orange;
+}

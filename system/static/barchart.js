@@ -1,10 +1,6 @@
 function render_chart(i){
-    // Golden Snowglobe totals (as of 2/5/15)
-
     dataset = Dic[i].slice(0, Dic[i].length-1)
-
     yAxis_name = Dic[i][Dic[i].length-1]["yName"]
-
     title = Dic[i][Dic[i].length-1]["filter"]
 
     //$("#title").html(title) 
