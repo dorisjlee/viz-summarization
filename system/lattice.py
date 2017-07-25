@@ -1,13 +1,5 @@
-
-
-
 import networkx as nx
-
-
 # 	Lattice is a DAG (graph) of Node objects
-
-
-
 class Lattice:
 
     # contain a graph of Node objects

@@ -1,12 +1,9 @@
-# Look at superset/viz.py to see how visualizations classes in superset should be written.
-
 import networkx as nx
 
 
 class vizObj:
     '''
     A vizObj contains the data values for generating the visualization.
-
     '''
     def __init__(self, XLists = [], yaxis = ""):
         self.X = XLists #strings
