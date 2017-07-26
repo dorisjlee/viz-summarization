@@ -1,5 +1,13 @@
+
+
+
 import networkx as nx
+import json
+
 # 	Lattice is a DAG (graph) of Node objects
+
+
+
 class Lattice:
 
     # contain a graph of Node objects
@@ -75,3 +83,72 @@ class Lattice:
     # number of edges
     def numberOfEdges(self):
         return self.graph.number_of_edges()
+
+
+    # generate a node_dic
+    def generateNodeDic(self):
+        # create a dictionary contains{0: node0, 1: node2}
+        node_dic = {}
+        for node in self.getNodes():
+            each = []
+            viz = node.get_viz()
+            current = viz[0]
+            for idx, val in enumerate(current.X):
+                each.append({"xAxis": val, "yAxis": current.data[idx]})
+            each.append({"filter": ' '.join(current.filters), "yName": current.Y, "childrenIndex": node.childrenIndex})
+
+            node_dic[node.id] = each
+        return node_dic
+
+
+
+
+    #generate a treeNode.json file
+    def generateJson(self, root, node_dic):
+
+        tree = "{"
+        tree += '"innerHTML"' + ' : ' + '"#chart' + str(root.id) + '"' + "," 
+
+        tree += '"children"' +' : '+'['
+
+        for i in range(len(root.childrenIndex)):
+            thisBracket = "{"
+            thisBracket += '"innerHTML"' + ' : ' + '"#chart' + str(root.childrenIndex[i]) + '"'+","
+        
+            #if i != len(root.childrenIndex) - 1:
+                #thisBracket += ","
+            
+
+
+            if node_dic[root.childrenIndex[i]][len(node_dic[root.childrenIndex[i]]) - 1]["childrenIndex"] != []:
+                arr = node_dic[root.childrenIndex[i]][len(node_dic[root.childrenIndex[i]]) - 1]["childrenIndex"]
+                thisBracket += '"children"' +' : '+'['
+                for j in range(len(arr)):
+                    this = "{"
+                    this += '"innerHTML"' + ' : ' + '"#chart' + str(arr[j]) + '"' 
+                    if j != len(arr) - 1:
+                        this += "},"
+                    else:
+                        this += "}"
+                    thisBracket += this
+                if i != len(root.childrenIndex)-1:
+                    thisBracket += ']},'
+                else:
+                    thisBracket += ']}'
+                tree += thisBracket
+
+        tree += ']}'
+    
+        print("generate json")
+        print(tree)
+        return tree
+
+
+
+    # draw a graph
+    def drawGraph(self):
+        G = self.graph
+
+        # print(G.numberOfEdges())
+        p = nx.drawing.nx_pydot.to_pydot(G)
+        p.write_png('example2.png')

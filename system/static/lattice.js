@@ -1,3 +1,8 @@
+
+var node_struct = document.getElementById("treeNode").innerHTML;
+
+
+
 var chart_config = {
         chart: {
             container: "#tree_container",
@@ -14,7 +19,7 @@ var chart_config = {
                 connectorsSpeed: 700
             }
         },
-        nodeStructure: treeTreant2
+        nodeStructure: JSON.parse(node_struct)
     };
 
 
@@ -26,7 +31,7 @@ var chart_config = {
         // On document load, call the render() function to load the graph
         chartid = document.getElementById("chartid");
         
-        for(var i = 1; i < data.length; i++) {
+        for(var i = 1; i < 10; i++) {
             arrayDiv[i] = document.createElement('div');
             arrayDiv[i].id = 'chart' + i;
 
@@ -57,41 +62,5 @@ var chart_config = {
 
 
 
-
-
-
-
-/**{
-            innerHTML: "#chart1",
-            children: [
-                {
-                    innerHTML: "#chart2",
-                    children: [
-                        {
-                            innerHTML: "#chart3"
-                        }
-                    ]
-                },
-                {
-                    innerHTML: "#chart4",
-                    children: [
-                        {
-                            innerHTML: "#chart5"
-                        }
-                    ]
-                },
-                {
-                    innerHTML: "#chart6",
-                    children: [
-                        {
-                            innerHTML: "#chart7"
-                        },
-                        {
-                            innerHTML: "#chart8"
-                        }
-                    ]
-                }
-            ]
-        }**/
 
 

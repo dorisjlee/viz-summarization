@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title> Visual Summarization Lattice </title>
+    
+    <!-- Data dependencies (should eventually be eliminated) -->
+    <script type="text/javascript" src="../static/example/nodeDic.json"></script>
+    
+    <!-- Javascript files -->
+    <script type="text/javascript" src="../static/lattice.js"></script>    
+    <script type="text/javascript" src="../static/barchart.js"></script>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../static/resources/Treant.css">
+    <link rel="stylesheet" href="../static/style.css">
+    <!-- Dependencies -->
+    <script src="../static/resources/d3.v3.min.js"></script>
+    <script src="../static/resources/raphael.js"></script>
+    <script src="../static/resources/Treant.js"></script>
+    <script src="../static/resources/jquery.min.js"></script>
+    <script src="../static/resources/jquery.easing.js"></script>
+</head>
+
+<body>
+
+    <div id = "treeNode"  treeContent = {{treeTreant2}}>
+            {{treeTreant2}}
+
+    </div>
+    <script type="text/javascript" src="collapsable.js"></script>    
+
+
+    <div class = "chart" id = "tree_container" style="height:100%; width:100%;"></div>
+
+    <div id = "chart_container">
+
+        
+        <div style="visibility: hidden; display:inline; width: 0%; height: 0px" id="chartid">
+            
+            <div id="chartid2" style="width: 0px; height: 0px">
+            
+            </div>
+
+        </div>
+        
+
+    </div>
+
+
+    <script>        
+        var arrayDiv = new Array();
+        test_chart_collapsable(arrayDiv)
+
+        tree = new Treant(chart_config);
+        // Destroy hidden objects
+        // var element = document.getElementById("element-id");
+        // element.parentNode.removeChild(element);
+        /**var dummy = document.getElementById("treeNode")
+        element.parentNode.removeChild(element)**/
+
+        for(i = 1; i <= 8; i++) {
+            var element = document.getElementById("chart"+i)
+            element.parentNode.removeChild(element)
+        }
+        $("#w3s").attr("href", "https://www.w3schools.com/jquery");
+        $("#w3s").attr("href", "https://www.w3schools.com/jquery");
+    </script>
+
+</body>
+</html>

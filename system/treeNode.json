@@ -1,0 +1,49 @@
+{
+    "innerHTML": "#chart1", 
+    "children": [
+        {
+            "children": [
+                {
+                    "innerHTML": "#chart6"
+                }, 
+                {
+                    "innerHTML": "#chart8"
+                }
+            ], 
+            "innerHTML": "#chart2"
+        }, 
+        {
+            "children": [
+                {
+                    "innerHTML": "#chart7"
+                }, 
+                {
+                    "innerHTML": "#chart9"
+                }
+            ], 
+            "innerHTML": "#chart3"
+        }, 
+        {
+            "children": [
+                {
+                    "innerHTML": "#chart6"
+                }, 
+                {
+                    "innerHTML": "#chart7"
+                }
+            ], 
+            "innerHTML": "#chart4"
+        }, 
+        {
+            "children": [
+                {
+                    "innerHTML": "#chart8"
+                }, 
+                {
+                    "innerHTML": "#chart9"
+                }
+            ], 
+            "innerHTML": "#chart5"
+        }
+    ]
+}
