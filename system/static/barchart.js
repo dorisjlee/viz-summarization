@@ -116,7 +116,6 @@ function render_chart(i){
   }
   /**function test_chart(){
     // On document load, call the render() function to load the graph
-
     for (i = 0; i < data.length; i++) 
     { 
         render_chart(i);
@@ -137,8 +136,3 @@ function render_chart(i){
         render_chart(i);
     }
   }
-    
-    
-    
-  
-  
