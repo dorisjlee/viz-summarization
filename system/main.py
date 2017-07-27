@@ -1,8 +1,6 @@
-
 from flask import Flask
 from flask import render_template
 from Data import getJsonFromLattice
-
 app = Flask(__name__, static_url_path = '', static_folder = 'static', template_folder = 'templates')
 
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
