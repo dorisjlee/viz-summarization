@@ -20,7 +20,7 @@ def upload_data():
 	4) then upload onto the sql table 
 	'''
 	raise NotImplementedError
-def get_all_tables():
+def get_tables():
 	'''
 	Get a list of all the tables inside the viz-summarization folder
 	summarization=# SELECT TABLE_NAME  FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE' AND  TABLE_SCHEMA='public' ORDER BY TABLE_NAME;
@@ -31,15 +31,27 @@ def get_all_tables():
 	We want to be able to retreive this in the front end so that the uplaod dataset dropdown menu updates dynamically.
 	'''
 	raise NotImplementedError
-def get_all_columns(tablename):
+def get_columns(tablename):
 	'''
 	Get a list of all the columns inside a particular table to display to the front end 
 	in the x and y axis selection panel dropdown menu
 
-	
+	SELECT column_name FROM information_schema.columns WHERE table_schema = 'public' AND table_name = '<tablename>';
+
+	e.g. 
+	summarization=# SELECT column_name FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'titanic';
+	 column_name
+	-------------
+	 Name
+	 PClass
+	 Age
+	 Sex
+	 Survived
+	 SexCode
+	(6 rows)
 	'''
 	raise NotImplementedError
-def construct_query(tablename,x_attr,y_attr, agg_func, filters):
+def query_vizData(tablename,x_attr,y_attr, agg_func, filters):
 	'''
 	Constructs a typical query for each visualization 
 	1) SELECT <agg_func>(<y_attr>) FROM  <tablename> WHERE <filters> GROUPBY <x_attr> 
