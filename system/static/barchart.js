@@ -11,7 +11,7 @@ function render_chart(i){
     var margins = {top: 30, right: 50, bottom: 30, left: 50}
     var height = 300 - margins.left - margins.right,
         width = 450 - margins.top - margins.bottom,
-        barPadding = 5
+        barPadding = 25
 
     // Create a scale for the y-axis based on data
     // >> Domain - min and max values in the dataset
