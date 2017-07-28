@@ -1,5 +1,6 @@
 from flask.ext.sqlalchemy import SQLAlchemy
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/viz-summarization'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/viz-summarization'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://summarization:lattice@localhost:5432'
 db = SQLAlchemy(app)
 
 def initialize_DB():

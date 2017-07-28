@@ -3,17 +3,26 @@
     <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title> Visual Summarization Lattice </title>
-    
+
     <!-- Data dependencies (should eventually be eliminated) -->
     <script type="text/javascript" src="example/nodeDic.json"></script>
     <!-- Javascript files -->
     <script type="text/javascript" src="lattice.js"></script>    
     <script type="text/javascript" src="barchart.js"></script>
     <!-- Stylesheets -->
+     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+ 
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="resources/Treant.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="form.css">
+   
+
     <!-- Dependencies -->
     <script src="resources/d3.v3.min.js"></script>
     <script src="resources/raphael.js"></script>
@@ -26,16 +35,105 @@
 
 <body>
 
-    <div id = "treeNode"  treeContent = {{treeTreant2}}>
-            {{treeTreant2}}
 
+
+<div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left" style="display:none" id="mySidebar">
+  <button class="w3-bar-item w3-button w3-large"
+  onclick="w3_close()">Close &times;</button>
+
+<button onclick="myFunction('Demo1')" class="w3-button w3-block w3-blue w3-left-align">
+Dataset</button>
+
+<div id="Demo1" class="w3-hide">
+  <a class="w3-button w3-block w3-left-align" href="#">Titantic</a>
+  <a class="w3-button w3-block w3-left-align" href="#">Real Estate</a>
+  <a class="w3-button w3-block w3-left-align" href="#">Election</a>
+</div>
+
+ <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-blue w3-left-align">
+Category</button>
+
+<div id="Demo2" class="w3-hide">
+  <a class="w3-button w3-block w3-left-align" href="#">Metro</a>
+  <a class="w3-button w3-block w3-left-align" href="#">State</a>
+  <a class="w3-button w3-block w3-left-align" href="#">City</a>
+  <a class="w3-button w3-block w3-left-align" href="#">County</a>
+
+</div>
+
+<button onclick="myFunction('Demo3')" class="w3-button w3-block w3-blue w3-left-align">
+X-Axis</button>
+
+<div id="Demo3" class="w3-hide">
+  <a class="w3-button w3-block w3-left-align" href="#">Quarter</a>
+  <a class="w3-button w3-block w3-left-align" href="#">Month</a>
+  <a class="w3-button w3-block w3-left-align" href="#">Year</a>
+</div>
+
+<button onclick="myFunction('Demo4')" class="w3-button w3-block w3-blue w3-left-align">
+Y-Axis</button>
+
+<div id="Demo4" class="w3-hide">
+  <a class="w3-button w3-block w3-left-align" href="#">SoldPrice</a>
+  <a class="w3-button w3-block w3-left-align" href="#">SaleToListRatio</a>
+  <a class="w3-button w3-block w3-left-align" href="#">NumberForRent</a>
+</div>
+
+
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="control-group" id="fields">
+            <label class="control-label" for="field1">Customized Filters</label>
+            <div class="controls"> 
+                <form role="form" autocomplete="off">
+                    <input type="submit" style = "background-color: #2196f3;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px;margin: 2px 2px;cursor: pointer;right:40;" value="Submit">
+
+                    <div class="entry input-group col-xs-3">
+                        <input class="form-control" name="fields[]" type="text" placeholder="Type something" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-success btn-add" type="button">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            
+            </div>
+        </div>
     </div>
-    <script type="text/javascript" src="lattice.js"></script>    
+</div>
 
 
-    <div class = "chart" id = "tree_container" style="height:100%; width:100%;"></div>
 
-    <div id = "chart_container">
+</div>
+
+
+<div zclass="w3-main" id="main">
+
+<div class="w3-teal">
+  <div class="w3-container">
+    <h1 style="color:white; font-size:26px;font-family:Arial">Filter Box</h1>
+  </div>
+  <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
+</div>
+
+
+
+    <div class="w3-container">
+
+
+        <div id = "treeNode"  treeContent = {{treeTreant2}}>
+                {{treeTreant2}}
+
+        </div>
+        <script type="text/javascript" src="lattice.js"></script>    
+
+
+        <div class = "chart" id = "tree_container" style="height:100%; width:100%;"></div>
+
+        <div id = "chart_container">
 
         
         <div style="visibility: hidden; display:inline; width: 0%; height: 0px" id="chartid">
@@ -47,7 +145,15 @@
         </div>
         
 
+        </div>
     </div>
+
+
+
+
+
+
+
 
 
     <script>        
@@ -68,6 +174,58 @@
         $("#w3s").attr("href", "https://www.w3schools.com/jquery");
         $("#w3s").attr("href", "https://www.w3schools.com/jquery");
     </script>
+
+
+
+    <script>
+
+    $(function()
+    {
+    $(document).on('click', '.btn-add', function(e)
+    {
+        e.preventDefault();
+
+        var controlForm = $('.controls form:first'),
+            currentEntry = $(this).parents('.entry:first'),
+            newEntry = $(currentEntry.clone()).appendTo(controlForm);
+
+        newEntry.find('input').val('');
+        controlForm.find('.entry:not(:last) .btn-add')
+            .removeClass('btn-add').addClass('btn-remove')
+            .removeClass('btn-success').addClass('btn-danger')
+            .html('<span class="glyphicon glyphicon-minus"></span>');
+    }).on('click', '.btn-remove', function(e)
+    {
+        $(this).parents('.entry:first').remove();
+
+        e.preventDefault();
+        return false;
+    });
+    });
+
+
+    function w3_open() {
+        document.getElementById("main").style.marginLeft = "25%";
+        document.getElementById("mySidebar").style.width = "25%";
+        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("openNav").style.display = 'none';
+    }
+    function w3_close() {
+        document.getElementById("main").style.marginLeft = "0%";
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("openNav").style.display = "inline-block";
+    }
+
+    function myFunction(id) {
+        var x = document.getElementById(id);
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else { 
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+    </script>
+
 
 </body>
 </html>
