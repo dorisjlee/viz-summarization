@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +12,7 @@
 
     <!-- Data dependencies (should eventually be eliminated) -->
     <script type="text/javascript" src="example/nodeDic.json"></script>
+
     <!-- Javascript files -->
     <script type="text/javascript" src="lattice.js"></script>    
     <script type="text/javascript" src="barchart.js"></script>
@@ -37,7 +41,7 @@
 
 
 
-<div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left" style="display:none" id="mySidebar">
+<div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left" style="display:none;overflow-x:hidden;" id="mySidebar">
   <button class="w3-bar-item w3-button w3-large"
   onclick="w3_close()">Close &times;</button>
 
@@ -45,9 +49,11 @@
 Dataset</button>
 
 <div id="Demo1" class="w3-hide">
-  <a class="w3-button w3-block w3-left-align" href="#">Titantic</a>
-  <a class="w3-button w3-block w3-left-align" href="#">Real Estate</a>
-  <a class="w3-button w3-block w3-left-align" href="#">Election</a>
+  
+  {% for each in table %}
+      <a class="w3-button w3-block w3-left-align" href="#">{{each}}</a>
+​  {% endfor %}
+
 </div>
 
  <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-blue w3-left-align">
@@ -65,18 +71,20 @@ Category</button>
 X-Axis</button>
 
 <div id="Demo3" class="w3-hide">
-  <a class="w3-button w3-block w3-left-align" href="#">Quarter</a>
-  <a class="w3-button w3-block w3-left-align" href="#">Month</a>
-  <a class="w3-button w3-block w3-left-align" href="#">Year</a>
+
+  {% for each in column %}
+      <a class="w3-button w3-block w3-left-align" href="#"> {{each}}</a>
+​  {% endfor %}
+  
 </div>
 
 <button onclick="myFunction('Demo4')" class="w3-button w3-block w3-blue w3-left-align">
 Y-Axis</button>
 
 <div id="Demo4" class="w3-hide">
-  <a class="w3-button w3-block w3-left-align" href="#">SoldPrice</a>
-  <a class="w3-button w3-block w3-left-align" href="#">SaleToListRatio</a>
-  <a class="w3-button w3-block w3-left-align" href="#">NumberForRent</a>
+   {% for each in column %}
+      <a class="w3-button w3-block w3-left-align" href="#"> {{each}}</a>
+​   {% endfor %}
 </div>
 
 
@@ -86,9 +94,11 @@ Y-Axis</button>
     <div class="row">
         <div class="control-group" id="fields">
             <label class="control-label" for="field1">Customized Filters</label>
+            <input type="submit" style = "background-color: #2196f3;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 2px 2px;cursor: pointer;right:40;" value="Submit">
+
             <div class="controls"> 
                 <form role="form" autocomplete="off">
-                    <input type="submit" style = "background-color: #2196f3;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px;margin: 2px 2px;cursor: pointer;right:40;" value="Submit">
+                    
 
                     <div class="entry input-group col-xs-3">
                         <input class="form-control" name="fields[]" type="text" placeholder="Type something" />
@@ -114,7 +124,7 @@ Y-Axis</button>
 
 <div class="w3-teal">
   <div class="w3-container">
-    <h1 style="color:white; font-size:26px;font-family:Arial">Filter Box</h1>
+    <h1 style="color:white; font-size:26px;font-family:Arial"></h1>
   </div>
   <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
 </div>
