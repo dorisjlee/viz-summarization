@@ -101,6 +101,22 @@ class Lattice:
         return node_dic
 
 
+    def generateNodeDicJsonFile(self):
+        node_dic = {}
+        for node in self.getNodes():
+            each = []
+            viz = node.get_viz()
+            current = viz[0]
+            for idx, val in enumerate(current.X):
+                each.append({"xAxis": val, "yAxis": current.data[idx]})
+            each.append({"filter": ' '.join(current.filters), "yName": current.Y})
+
+            node_dic[node.id] = each
+
+        jsonFile = json.dumps(node_dic)
+        return jsonFile
+
+
 
 
     #generate a treeNode.json file

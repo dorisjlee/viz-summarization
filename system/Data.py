@@ -86,7 +86,8 @@ def getJsonFromLattice():
             G.addEdge(nodes, child)
 
     ret = G.generateJson(root, G.generateNodeDic())
-    return ret
+    ret2 = G.generateNodeDicJsonFile()
+    return (ret, ret2)
 
 
 

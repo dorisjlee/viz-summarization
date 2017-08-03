@@ -1,7 +1,9 @@
 
 var node_struct = document.getElementById("treeNode").innerHTML;
 
-
+var nodeDic = document.getElementById("treeNode2").innerHTML;
+console.log("nodedic")
+console.log(nodeDic)
 
 var chart_config = {
         chart: {
@@ -27,7 +29,7 @@ var chart_config = {
 
 
 
-    function test_chart_collapsable(arrayDiv){
+    function test_chart_collapsable(arrayDiv, nodeDic){
         // On document load, call the render() function to load the graph
         chartid = document.getElementById("chartid");
         
@@ -52,7 +54,8 @@ var chart_config = {
                 $('#xAxis' + i).html(this.className.animVal);
                 $('#yAxis' + i).html($(this).attr('id'));
             });
-            render_chart(i);
+            console.log(nodeDic)
+            render_chart(i, nodeDic);
         }
 
         

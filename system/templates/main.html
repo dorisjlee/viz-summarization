@@ -11,13 +11,11 @@
     <title> Visual Summarization Lattice </title>
 
     <!-- Data dependencies (should eventually be eliminated) -->
-    <script type="text/javascript" src="example/nodeDic.json"></script>
 
     <!-- Javascript files -->
     <script type="text/javascript" src="lattice.js"></script>    
     <script type="text/javascript" src="barchart.js"></script>
     <!-- Stylesheets -->
-     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
  
@@ -49,7 +47,6 @@
 Dataset</button>
 
 <div id="Demo1" class="w3-hide">
-  
   {% for each in table %}
       <a class="w3-button w3-block w3-left-align" href="#">{{each}}</a>
 ​  {% endfor %}
@@ -136,8 +133,14 @@ Y-Axis</button>
 
         <div id = "treeNode"  treeContent = {{treeTreant2}}>
                 {{treeTreant2}}
+        </div>
+
+        <div id = "treeNode2"  treeContent = {{nodeDic}}>
+                {{nodeDic}}
 
         </div>
+
+
         <script type="text/javascript" src="lattice.js"></script>    
 
 
@@ -168,7 +171,7 @@ Y-Axis</button>
 
     <script>        
         var arrayDiv = new Array();
-        test_chart_collapsable(arrayDiv)
+        test_chart_collapsable(arrayDiv,nodeDic)
 
         tree = new Treant(chart_config);
         // Destroy hidden objects

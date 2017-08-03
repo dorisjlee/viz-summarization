@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 import pandas as pd
-
+import json
 
 
 '''
@@ -51,7 +51,7 @@ def get_tables():
     ret = []
     for row in result:
         ret.append(str(row["table_name"]))
-    return ret
+    return json.dumps(ret)
 
 ret = get_tables()
 print ret
@@ -82,7 +82,7 @@ def get_columns(tablename):
   ret = []
   for row in result:
       ret.append(str(row["column_name"]))
-  return ret
+  return json.dumps(ret)
 
 
 r2 = get_columns("titanic")
