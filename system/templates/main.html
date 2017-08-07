@@ -37,9 +37,7 @@
 
 <body>
 
-
-
-<div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left" style="display:none;overflow-x:hidden;" id="mySidebar">
+<div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left" style="display:none" id="mySidebar">
   <button class="w3-bar-item w3-button w3-large"
   onclick="w3_close()">Close &times;</button>
 
@@ -47,20 +45,24 @@
 Dataset</button>
 
 <div id="Demo1" class="w3-hide">
+
+  <select>
   {% for each in table %}
-      <a class="w3-button w3-block w3-left-align" href="#">{{each}}</a>
+        <option value= {{each}} >{{each}}</option>
 ​  {% endfor %}
+  </select>
 
 </div>
 
- <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-blue w3-left-align">
+<button onclick="myFunction('Demo2')" class="w3-button w3-block w3-blue w3-left-align">
 Category</button>
 
 <div id="Demo2" class="w3-hide">
-  <a class="w3-button w3-block w3-left-align" href="#">Metro</a>
-  <a class="w3-button w3-block w3-left-align" href="#">State</a>
-  <a class="w3-button w3-block w3-left-align" href="#">City</a>
-  <a class="w3-button w3-block w3-left-align" href="#">County</a>
+  <select>
+  {% for each in table %}
+        <option value= {{each}} >{{each}}</option>
+​  {% endfor %}
+  </select>
 
 </div>
 
@@ -69,9 +71,11 @@ X-Axis</button>
 
 <div id="Demo3" class="w3-hide">
 
+  <select>
   {% for each in column %}
-      <a class="w3-button w3-block w3-left-align" href="#"> {{each}}</a>
+        <option value= {{each}} >{{each}}</option>
 ​  {% endfor %}
+  </select>
   
 </div>
 
@@ -79,10 +83,13 @@ X-Axis</button>
 Y-Axis</button>
 
 <div id="Demo4" class="w3-hide">
-   {% for each in column %}
-      <a class="w3-button w3-block w3-left-align" href="#"> {{each}}</a>
-​   {% endfor %}
+<select>
+  {% for each in column %}
+        <option value= {{each}} >{{each}}</option>
+​  {% endfor %}
+  </select>
 </div>
+
 
 
 <br>

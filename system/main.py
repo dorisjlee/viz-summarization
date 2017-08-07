@@ -54,10 +54,13 @@ def index():
     print "ret: "
     '''
     table_name = session.get('table_name', None)
+    print("line 57" )
+    print(table_name)
     treeTreant = session.get('treeTreant', None)
     nodeDic = session.get('nodeDic', None)
     column_name = getColumns("titanic")
 
+    print("line 61")
     print table_name
     print column_name
     return render_template("main.html", treeTreant2 = treeTreant, table = json.loads(table_name), column = json.loads(column_name),
