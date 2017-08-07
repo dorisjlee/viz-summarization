@@ -46,7 +46,7 @@ Dataset</button>
 
 <div id="Demo1" class="w3-hide">
 
-  <select>
+  <select id = "select1" >
   {% for each in table %}
         <option value= {{each}} >{{each}}</option>
 ​  {% endfor %}
@@ -58,7 +58,7 @@ Dataset</button>
 Category</button>
 
 <div id="Demo2" class="w3-hide">
-  <select>
+  <select id = "select2" >
   {% for each in table %}
         <option value= {{each}} >{{each}}</option>
 ​  {% endfor %}
@@ -71,7 +71,7 @@ X-Axis</button>
 
 <div id="Demo3" class="w3-hide">
 
-  <select>
+  <select id = "select3" >
   {% for each in column %}
         <option value= {{each}} >{{each}}</option>
 ​  {% endfor %}
@@ -83,7 +83,7 @@ X-Axis</button>
 Y-Axis</button>
 
 <div id="Demo4" class="w3-hide">
-<select>
+<select id = "select4" >
   {% for each in column %}
         <option value= {{each}} >{{each}}</option>
 ​  {% endfor %}
