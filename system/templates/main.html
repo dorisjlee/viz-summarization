@@ -41,53 +41,60 @@
   <button class="w3-bar-item w3-button w3-large"
   onclick="w3_close()">Close &times;</button>
 
+
 <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-blue w3-left-align">
 Dataset</button>
 
 <div id="Demo1" class="w3-hide">
 
-  <select id = "select1" >
-  {% for each in table %}
-        <option value= {{each}} >{{each}}</option>
-​  {% endfor %}
-  </select>
 
+<form class="form-inline" method="POST" action="{{ url_for('index') }}">
+  <div class="form-group">
+            <select name="table_select" id = "table" class="selectpicker form-control">
+              {% for each in table %}
+                <option value= {{each}} >{{each}}</option>
+​              {% endfor %}
+            </select>
+    </div>
+    <button type="submit" class="btn btn-default">submit</button>
+</form>
 </div>
 
 <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-blue w3-left-align">
-Category</button>
-
-<div id="Demo2" class="w3-hide">
-  <select id = "select2" >
-  {% for each in table %}
-        <option value= {{each}} >{{each}}</option>
-​  {% endfor %}
-  </select>
-
-</div>
-
-<button onclick="myFunction('Demo3')" class="w3-button w3-block w3-blue w3-left-align">
 X-Axis</button>
 
-<div id="Demo3" class="w3-hide">
+<div id="Demo2" class="w3-hide">
 
-  <select id = "select3" >
-  {% for each in column %}
-        <option value= {{each}} >{{each}}</option>
-​  {% endfor %}
-  </select>
+<form class="form-inline" method="POST" action="{{ url_for('index') }}">
+  <div class="form-group">
+             <select id = "xaxis_select" id = "xaxis" class="selectpicker form-control">
+                {% for each in column %}
+                    <option value= {{each}} >{{each}}</option>
+​                {% endfor %}
+            </select>
+    </div>
+    <button type="submit" class="btn btn-default">submit</button>
+</form>
+ 
   
 </div>
 
-<button onclick="myFunction('Demo4')" class="w3-button w3-block w3-blue w3-left-align">
+<button onclick="myFunction('Demo3')" class="w3-button w3-block w3-blue w3-left-align">
 Y-Axis</button>
 
-<div id="Demo4" class="w3-hide">
-<select id = "select4" >
-  {% for each in column %}
-        <option value= {{each}} >{{each}}</option>
-​  {% endfor %}
-  </select>
+<div id="Demo3" class="w3-hide">
+
+<form class="form-inline" method="POST" action="{{ url_for('index') }}">
+  <div class="form-group">
+        <select id = "yaxis_select"  id = "yaxis" class="selectpicker form-control">
+            {% for each in column %}
+                <option value= {{each}} >{{each}}</option>
+​            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-default">submit</button>
+</form>
+
 </div>
 
 

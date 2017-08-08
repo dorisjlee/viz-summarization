@@ -28,6 +28,14 @@ def getColumns(tablename):
   session['column_name'] = column_name  # a list containing all the column names
   return column_name
 
+'''
+@app.route("/handle_data", methods=['GET', 'POST'])
+def handle_data():
+    table_name = request.form.get('table_select')
+    print "handle data"
+    print table_name
+    return (str(table_name))
+'''
 
 @app.route("/getTables")
 def getTables():
@@ -44,7 +52,7 @@ def getTree():
   return nodeDic
 
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def index():
     '''
     (ret, nodeDic) = getJsonFromLattice()
@@ -58,7 +66,12 @@ def index():
     print(table_name)
     treeTreant = session.get('treeTreant', None)
     nodeDic = session.get('nodeDic', None)
-    column_name = getColumns("titanic")
+    column_name = [""]
+
+    select_table_name = str(request.form.get('table_select'))
+
+    if select_table_name is not None:
+      column_name = getColumns(select_table_name)
 
     print("line 61")
     print table_name
