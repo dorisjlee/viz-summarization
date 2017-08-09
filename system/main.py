@@ -73,7 +73,9 @@ def index():
     select_avg_name = str(request.form.get('avg'))
     select_filter = str(request.form.get('fields[]'))
     print "filter name"
-    print select_filter
+    filter_list = request.form.getlist('fields[]')
+    for key in filter_list:
+      print key
 
 
     if select_table_name is not None:

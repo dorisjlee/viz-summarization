@@ -229,6 +229,7 @@ Y-Axis</button>
             newEntry = $(currentEntry.clone()).appendTo(controlForm);
 
         newEntry.find('input').val('');
+
         controlForm.find('.entry:not(:last) .btn-add')
             .removeClass('btn-add').addClass('btn-remove')
             .removeClass('btn-success').addClass('btn-danger')
