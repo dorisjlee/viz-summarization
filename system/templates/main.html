@@ -50,14 +50,18 @@ Dataset</button>
 
 <form class="form-inline" method="POST" action="{{ url_for('index') }}">
   <div class="form-group">
-            <select name="table_select" id = "table" class="selectpicker form-control">
+            <select onchange="this.form.submit()" name="table_select" id = "table" class="selectpicker form-control">
               {% for each in table %}
+                <option selected="true" value = "--selected--"> --selected--</option>
                 <option value= {{each}} >{{each}}</option>
 ​              {% endfor %}
             </select>
     </div>
-    <button type="submit" class="btn btn-default">submit</button>
 </form>
+
+
+
+</script>
 </div>
 
 <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-blue w3-left-align">
@@ -67,13 +71,14 @@ X-Axis</button>
 
 <form class="form-inline" method="POST" action="{{ url_for('index') }}">
   <div class="form-group">
-             <select id = "xaxis_select" id = "xaxis" class="selectpicker form-control">
+             <select onchange="this.form.submit()" name = "xaxis_select" id = "xaxis" class="selectpicker form-control">
+                <option selected="true" value = "--selected--"> --selected--</option>
+
                 {% for each in column %}
                     <option value= {{each}} >{{each}}</option>
 ​                {% endfor %}
             </select>
     </div>
-    <button type="submit" class="btn btn-default">submit</button>
 </form>
  
   
@@ -86,14 +91,16 @@ Y-Axis</button>
 
 <form class="form-inline" method="POST" action="{{ url_for('index') }}">
   <div class="form-group">
-        <select id = "yaxis_select"  id = "yaxis" class="selectpicker form-control">
+        <select onchange="this.form.submit()" name = "yaxis_select"  id = "yaxis" class="selectpicker form-control">
+            <option selected="true" value = "--selected--"> --selected--</option>
+
             {% for each in column %}
                 <option value= {{each}} >{{each}}</option>
 ​            {% endfor %}
         </select>
     </div>
-    <button type="submit" class="btn btn-default">submit</button>
 </form>
+</script>
 
 </div>
 
@@ -103,11 +110,10 @@ Y-Axis</button>
 <h2 style = "font-family:Verdana,sans-serif; font-size:15px;"><b> Aggration function select: </b></h2>
 <br>
 <form style="position:relative; left:35px; top:-5px;" class="form-inline" id = "avg_select" name = "avg_select" method="POST" action="{{ url_for('index') }}">
-  <input type="radio" name="avg" id = "SUM" value="SUM" checked> SUM<br>
-  <input type="radio" name="avg" id = "AVERAGE" value="AVERAGE"> AVERAGE<br>
-  <input type="radio" name="avg" id = "COUNT" value="COUNT"> COUNT   
+  <input type="radio" name="avg" id = "SUM" value="SUM" onclick="this.form.submit()"> SUM<br>
+  <input type="radio" name="avg" id = "AVERAGE" value="AVERAGE" onclick="this.form.submit()"> AVERAGE<br>
+  <input type="radio" name="avg" id = "COUNT" value="COUNT" onclick="this.form.submit()"> COUNT   
   <br>
-  <input type="submit" style="background-color: #2196f3;border: none;color: white;padding: 8px 16px;text-align: center;text-decoration: none;display: inline-block;font-size: 12px;margin: 2px 2px;cursor: pointer;" value="Submit">
 </form> 
 
 
@@ -116,11 +122,10 @@ Y-Axis</button>
 <div class="container">
     <div class="row">
         <div class="control-group" id="fields">
-            <label class="control-label" for="field1">Customized Filters</label>
            
-
             <div class="controls"> 
                 <form role="form" autocomplete="off" name = "filter_select" method="POST" action="{{ url_for('index') }}">
+                    <label class="control-label" for="field1">Customized Filters</label>
                      <input type="submit" style = "background-color: #2196f3;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 2px 2px;cursor: pointer;right:40;" value="Submit">
 
                     <div class="entry input-group col-xs-3">
@@ -217,6 +222,9 @@ Y-Axis</button>
 
 
     <script>
+
+
+
 
     $(function()
     {

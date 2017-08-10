@@ -62,21 +62,29 @@ def index():
     print "ret: "
     '''
     table_name = session.get('table_name', None)
-    print("line 57" )
-    print(table_name)
+   
     treeTreant = session.get('treeTreant', None)
     nodeDic = session.get('nodeDic', None)
     column_name = [""]
 
     select_table_name = str(request.form.get('table_select'))
 
+    print("line 70" )
+    print(select_table_name)
+
+
     select_avg_name = str(request.form.get('avg'))
     select_filter = str(request.form.get('fields[]'))
+    print "avg name"
+    print select_avg_name
     print "filter name"
+
     filter_list = request.form.getlist('fields[]')
     for key in filter_list:
       print key
 
+    print "x axis"
+    print(str(request.form.get('xaxis_select')))
 
     if select_table_name is not None:
       column_name = getColumns(select_table_name)
