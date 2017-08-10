@@ -74,7 +74,6 @@ def index():
 
 
     select_avg_name = str(request.form.get('avg'))
-    select_filter = str(request.form.get('fields[]'))
     print "avg name"
     print select_avg_name
     print "filter name"
@@ -84,10 +83,27 @@ def index():
       print key
 
     print "x axis"
-    print(str(request.form.get('xaxis_select')))
+    select_aaxis = str(request.form.get('xaxis_select'))
+
+    select_yaxis = str(request.form.get('yaxis_select'))
+
 
     if select_table_name is not None:
       column_name = getColumns(select_table_name)
+
+    print "---------------"
+    print select_avg_name
+    print select_yaxis
+    print select_aaxis
+    print select_table_name
+    print filter_list
+
+
+    if(select_table_name is not None) and (len(filter_list) != 0) and (select_aaxis is not None) and (select_yaxis is not None) and (select_avg_name is not None):
+      query_vizData(select_table_name, select_aaxis, select_yaxis, select_avg_name, filter_list)
+
+
+
 
     print("line 61")
     print table_name

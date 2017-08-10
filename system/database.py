@@ -85,10 +85,26 @@ def get_columns(tablename):
   return json.dumps(ret)
 
 
-r2 = get_columns("titanic")
-print r2
-# def query_vizData(tablename,x_attr,y_attr, agg_func, filters):
-# 	'''
+
+def query_vizData(tablename,x_attr,y_attr, agg_func, filters):
+
+  filter_str = ""
+  for idx, val in enumerate(filters):
+    if(idx != len(filters)-1):
+      filter_str += val
+      filter_str += " AND "
+    else:
+      filter_str += val
+
+
+
+  query = "SELECT " + agg_func +"(" + y_attr + ")" + " FROM " + tablename + " WHERE " + filter_str + " GROUP BY " + x_attr
+  result = connection.execute(query)
+
+  for row in result:
+    print str(row)
+
+  
 # 	Constructs a typical query for each visualization 
 # 	1) SELECT <agg_func>(<y_attr>) FROM  <tablename> WHERE <filters> GROUPBY <x_attr> 
 # 	e.g. SELECT SUM(Population) FROM census WHERE RACE=Asian & GENDER=Female GROUPBY GENDER
@@ -96,5 +112,11 @@ print r2
 # 	3) return tuples for each bar in the visualization [a1,a2,a3]
 #   #str = "SELECT" + agg_func + "(" + y_attr + ")" + "FROM" + tablename + "WHERE" + filters + "GROUPBY" + x_attr
 #   #result = connection.execute(str)
-#   '''
-#   raise NotImplementedError
+
+#query_vizData("titanic", "survived", "id", "COUNT", ["sex='male'", "age<20"])
+
+
+
+
+
+
