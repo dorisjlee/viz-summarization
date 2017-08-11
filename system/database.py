@@ -13,6 +13,7 @@ Configure Flask by providing the PostgreSQL URI so that the app is able to conne
 
 #data = pd.read_csv('../data/titanic/titanic.csv',index_col=0)
 engine = create_engine("postgresql://summarization:lattice@localhost:5433")
+#engine = create_engine("postgresql://summarization:lattice@localhost:5432")
 # data.to_sql(name='titanic', con=engine, if_exists = 'replace', index=False)
 
 connection = engine.connect()
@@ -53,8 +54,8 @@ def get_tables():
         ret.append(str(row["table_name"]))
     return json.dumps(ret)
 
-ret = get_tables()
-print ret
+# ret = get_tables()
+# print ret
 
 
 def get_columns(tablename):
@@ -98,12 +99,15 @@ def query_vizData(tablename,x_attr,y_attr, agg_func, filters):
 
 
 
-  query = "SELECT " + agg_func +"(" + y_attr + ")" + " FROM " + tablename + " WHERE " + filter_str + " GROUP BY " + x_attr
+  query = "SELECT " + x_attr, agg_func +"(" + y_attr + ")" + " FROM " + tablename + " WHERE " + filter_str + " GROUP BY " + x_attr
   result = connection.execute(query)
-
+  xVals = []
+  yVals=[]
   for row in result:
-    print str(row)
-
+    xVals.append(row[0])
+    yVals.append(row[1])
+  return xVals,yVals
+  # return [0,1],[count]
   
 # 	Constructs a typical query for each visualization 
 # 	1) SELECT <agg_func>(<y_attr>) FROM  <tablename> WHERE <filters> GROUPBY <x_attr> 
