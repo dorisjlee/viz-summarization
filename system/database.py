@@ -113,7 +113,7 @@ def query_vizData(tablename,x_attr,y_attr, agg_func, filters):
 #   #str = "SELECT" + agg_func + "(" + y_attr + ")" + "FROM" + tablename + "WHERE" + filters + "GROUPBY" + x_attr
 #   #result = connection.execute(str)
 
-#query_vizData("titanic", "survived", "id", "COUNT", ["sex='male'", "age<20"])
+query_vizData("titanic", "survived", "id", "COUNT", ["sex='male'", "age<20"])
 
 
 

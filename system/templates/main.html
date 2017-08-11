@@ -38,7 +38,7 @@
 <body>
 
 <div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left" style="display:none" id="mySidebar">
-  <button class="w3-bar-item w3-button w3-large"
+  <button class="w3-bar-item w3-button w3-large" style="left:30px"
   onclick="w3_close()">Close &times;</button>
 
 
@@ -48,11 +48,11 @@ Dataset</button>
 <div id="Demo1" class="w3-hide">
 
 
-<form class="form-inline" method="POST" action="{{ url_for('index') }}">
+<form class="form-inline" method="POST" action="{{ url_for('getData') }}">
   <div class="form-group">
-            <select onchange="this.form.submit()" name="table_select" id = "table" class="selectpicker form-control">
+            <select style="left:20px; position:relative;" onchange="this.form.submit()" name="table_select" id = "table" class="selectpicker form-control">
               {% for each in table %}
-                <option selected="true" value = "--selected--"> --selected--</option>
+                <option selected="true" value = "None"> None</option>
                 <option value= {{each}} >{{each}}</option>
 ​              {% endfor %}
             </select>
@@ -69,10 +69,10 @@ X-Axis</button>
 
 <div id="Demo2" class="w3-hide">
 
-<form class="form-inline" method="POST" action="{{ url_for('index') }}">
+<form id = "la"  onsubmit="return false" class="form-inline" method="POST" action="{{ url_for('getData') }}">
   <div class="form-group">
-             <select onchange="this.form.submit()" name = "xaxis_select" id = "xaxis" class="selectpicker form-control">
-                <option selected="true" value = "--selected--"> --selected--</option>
+             <select style="left:20px; position:relative;" onchange="this.form.submit()" name = "xaxis_select" id = "xaxis" class="selectpicker form-control">
+                <option selected="true" value = "None"> None </option>
 
                 {% for each in column %}
                     <option value= {{each}} >{{each}}</option>
@@ -89,10 +89,10 @@ Y-Axis</button>
 
 <div id="Demo3" class="w3-hide">
 
-<form class="form-inline" method="POST" action="{{ url_for('index') }}">
+<form class="form-inline" method="POST" action="{{ url_for('getData') }}">
   <div class="form-group">
-        <select onchange="this.form.submit()" name = "yaxis_select"  id = "yaxis" class="selectpicker form-control">
-            <option selected="true" value = "--selected--"> --selected--</option>
+        <select style="left:20px; position:relative;" onchange="this.form.submit()" name = "yaxis_select"  id = "yaxis" class="selectpicker form-control">
+            <option selected="true" value = "None"> None</option>
 
             {% for each in column %}
                 <option value= {{each}} >{{each}}</option>
@@ -107,9 +107,9 @@ Y-Axis</button>
 <br>
 <br>
 <br>
-<h2 style = "font-family:Verdana,sans-serif; font-size:15px;"><b> Aggration function select: </b></h2>
+<h2 style = "left:40px; font-family:Verdana,sans-serif; font-size:15px;"><b> Aggration function select: </b></h2>
 <br>
-<form style="position:relative; left:35px; top:-5px;" class="form-inline" id = "avg_select" name = "avg_select" method="POST" action="{{ url_for('index') }}">
+<form style="position:relative; left:35px; top:-5px;" class="form-inline" id = "avg_select" name = "avg_select" method="POST" action="{{ url_for('getData') }}">
   <input type="radio" name="avg" id = "SUM" value="SUM" onclick="this.form.submit()"> SUM<br>
   <input type="radio" name="avg" id = "AVERAGE" value="AVERAGE" onclick="this.form.submit()"> AVERAGE<br>
   <input type="radio" name="avg" id = "COUNT" value="COUNT" onclick="this.form.submit()"> COUNT   
@@ -124,8 +124,8 @@ Y-Axis</button>
         <div class="control-group" id="fields">
            
             <div class="controls"> 
-                <form role="form" autocomplete="off" name = "filter_select" method="POST" action="{{ url_for('index') }}">
-                    <label class="control-label" for="field1">Customized Filters</label>
+                <form role="form" autocomplete="off" name = "filter_select" method="POST" action="{{ url_for('getData') }}">
+                    <label style= "left:40px" class="control-label" for="field1">Customized Filters</label>
                      <input type="submit" style = "background-color: #2196f3;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 2px 2px;cursor: pointer;right:40;" value="Submit">
 
                     <div class="entry input-group col-xs-3">
@@ -223,7 +223,9 @@ Y-Axis</button>
 
     <script>
 
-
+    $('#la').submit(function () {
+ return false;
+});
 
 
     $(function()

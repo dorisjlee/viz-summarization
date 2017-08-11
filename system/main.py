@@ -52,6 +52,31 @@ def getTree():
   return nodeDic
 
 
+
+
+
+@app.route("/data", methods=['GET', 'POST'])
+def getData():
+    select_table_name = str(request.form.get('table_select'))
+    session['select_table_name'] = select_table_name
+    select_avg_name = str(request.form.get('avg'))
+    session['select_avg_name'] = select_avg_name
+
+    filter_list = request.form.getlist('fields[]')
+    for key in filter_list:
+      print key
+
+    session['filter_list'] = filter_list
+    select_aaxis = str(request.form.get('xaxis_select'))
+    session['select_aaxis'] = select_aaxis
+    select_yaxis = str(request.form.get('yaxis_select'))
+    session['select_yaxis'] = select_yaxis
+    return redirect(url_for('index'))
+
+
+
+
+
 @app.route("/", methods=['GET', 'POST'])
 def index():
     '''
@@ -67,40 +92,19 @@ def index():
     nodeDic = session.get('nodeDic', None)
     column_name = [""]
 
-    select_table_name = str(request.form.get('table_select'))
-
-    print("line 70" )
-    print(select_table_name)
-
-
-    select_avg_name = str(request.form.get('avg'))
-    print "avg name"
-    print select_avg_name
-    print "filter name"
-
-    filter_list = request.form.getlist('fields[]')
-    for key in filter_list:
-      print key
-
-    print "x axis"
-    select_aaxis = str(request.form.get('xaxis_select'))
-
-    select_yaxis = str(request.form.get('yaxis_select'))
-
-
-    if select_table_name is not None:
-      column_name = getColumns(select_table_name)
+    if session.get('select_table_name', None) is not None:
+      column_name = getColumns(session.get('select_table_name', None))
 
     print "---------------"
-    print select_avg_name
-    print select_yaxis
-    print select_aaxis
-    print select_table_name
-    print filter_list
+    print session.get('select_avg_name', None)
+    print session.get('select_yaxis', None)
+    print session.get('select_aaxis', None)
+    print session.get('select_table_name', None)
+    print session.get('filter_list', None)
+    print "----------------"
 
-
-    if(select_table_name is not None) and (len(filter_list) != 0) and (select_aaxis is not None) and (select_yaxis is not None) and (select_avg_name is not None):
-      query_vizData(select_table_name, select_aaxis, select_yaxis, select_avg_name, filter_list)
+    if(session.get('select_table_name', None) is not None) and (len(session.get('filter_list', None)) != 0) and (session.get('select_yaxis', None) is not None) and (session.get('select_aaxis', None) is not None) and (session.get('select_avg_name', None) is not None):
+      query_vizData(session.get('select_table_name', None), session.get('select_aaxis', None), session.get('select_yaxis', None), session.get('select_avg_name', None), session.get('filter_list', None))
 
 
 
