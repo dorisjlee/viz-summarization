@@ -113,6 +113,14 @@ function render_chart(i, nodeDic){
     chart.append('text')
       .text(yAxis_name)
       .attr('transform', 'translate(-30, -20)');
+
+    chart.append("text")
+        .attr("x", (width / 2)) 
+        .attr("y",  "-8px")
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px") 
+        .style("text-decoration", "underline")  
+        .text(title);
   }
   function handleMouseOver() {
     console.log("alert");

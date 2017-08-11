@@ -48,7 +48,7 @@ Dataset</button>
 <div id="Demo1" class="w3-hide">
 
 
-<form class="form-inline" method="POST" action="{{ url_for('getData') }}">
+<form class="form-inline" method="POST" action="{{ url_for('index') }}">
   <div class="form-group">
             <select style="left:20px; position:relative;" onchange="this.form.submit()" name="table_select" id = "table" class="selectpicker form-control">
               {% for each in table %}
@@ -69,7 +69,7 @@ X-Axis</button>
 
 <div id="Demo2" class="w3-hide">
 
-<form id = "la"  onsubmit="return false" class="form-inline" method="POST" action="{{ url_for('getData') }}">
+<form id = "la"  onsubmit="return false" class="form-inline" method="POST" action="{{ url_for('index') }}">
   <div class="form-group">
              <select style="left:20px; position:relative;" onchange="this.form.submit()" name = "xaxis_select" id = "xaxis" class="selectpicker form-control">
                 <option selected="true" value = "None"> None </option>
@@ -89,7 +89,7 @@ Y-Axis</button>
 
 <div id="Demo3" class="w3-hide">
 
-<form class="form-inline" method="POST" action="{{ url_for('getData') }}">
+<form class="form-inline" method="POST" action="{{ url_for('index') }}">
   <div class="form-group">
         <select style="left:20px; position:relative;" onchange="this.form.submit()" name = "yaxis_select"  id = "yaxis" class="selectpicker form-control">
             <option selected="true" value = "None"> None</option>
@@ -107,9 +107,9 @@ Y-Axis</button>
 <br>
 <br>
 <br>
-<h2 style = "left:40px; font-family:Verdana,sans-serif; font-size:15px;"><b> Aggration function select: </b></h2>
+<h2 class = "center" style = "left:40px; font-family:Verdana,sans-serif; font-size:15px;"><b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aggration function select: </b></h2>
 <br>
-<form style="position:relative; left:35px; top:-5px;" class="form-inline" id = "avg_select" name = "avg_select" method="POST" action="{{ url_for('getData') }}">
+<form style="position:relative; left:35px; top:-5px;" class="form-inline" id = "avg_select" name = "avg_select" method="POST" action="{{ url_for('index') }}">
   <input type="radio" name="avg" id = "SUM" value="SUM" onclick="this.form.submit()"> SUM<br>
   <input type="radio" name="avg" id = "AVERAGE" value="AVERAGE" onclick="this.form.submit()"> AVERAGE<br>
   <input type="radio" name="avg" id = "COUNT" value="COUNT" onclick="this.form.submit()"> COUNT   
@@ -124,8 +124,8 @@ Y-Axis</button>
         <div class="control-group" id="fields">
            
             <div class="controls"> 
-                <form role="form" autocomplete="off" name = "filter_select" method="POST" action="{{ url_for('getData') }}">
-                    <label style= "left:40px" class="control-label" for="field1">Customized Filters</label>
+                <form role="form" autocomplete="off" name = "filter_select" method="POST" action="{{ url_for('index') }}">
+                    <label style= "left:40px" class="control-label" for="field1">&nbsp;&nbsp;&nbsp;&nbsp;Customized Filters</label>
                      <input type="submit" style = "background-color: #2196f3;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 2px 2px;cursor: pointer;right:40;" value="Submit">
 
                     <div class="entry input-group col-xs-3">

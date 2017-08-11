@@ -2,6 +2,8 @@ from flask import Flask, redirect, url_for, request, session
 from flask import render_template
 from Data import *
 from database import *
+from vizGeneration import *
+
 from flask_sqlalchemy import SQLAlchemy
 import json
 
@@ -55,28 +57,6 @@ def getTree():
 
 
 
-@app.route("/data", methods=['GET', 'POST'])
-def getData():
-    select_table_name = str(request.form.get('table_select'))
-    session['select_table_name'] = select_table_name
-    select_avg_name = str(request.form.get('avg'))
-    session['select_avg_name'] = select_avg_name
-
-    filter_list = request.form.getlist('fields[]')
-    for key in filter_list:
-      print key
-
-    session['filter_list'] = filter_list
-    select_aaxis = str(request.form.get('xaxis_select'))
-    session['select_aaxis'] = select_aaxis
-    select_yaxis = str(request.form.get('yaxis_select'))
-    session['select_yaxis'] = select_yaxis
-    return redirect(url_for('index'))
-
-
-
-
-
 @app.route("/", methods=['GET', 'POST'])
 def index():
     '''
@@ -92,6 +72,21 @@ def index():
     nodeDic = session.get('nodeDic', None)
     column_name = [""]
 
+    select_table_name = str(request.form.get('table_select'))
+    session['select_table_name'] = select_table_name
+    select_avg_name = str(request.form.get('avg'))
+    session['select_avg_name'] = select_avg_name
+
+    filter_list = request.form.getlist('fields[]')
+    for key in filter_list:
+      print key
+
+    session['filter_list'] = filter_list
+    select_aaxis = str(request.form.get('xaxis_select'))
+    session['select_aaxis'] = select_aaxis
+    select_yaxis = str(request.form.get('yaxis_select'))
+    session['select_yaxis'] = select_yaxis
+
     if session.get('select_table_name', None) is not None:
       column_name = getColumns(session.get('select_table_name', None))
 
@@ -106,7 +101,7 @@ def index():
     if(session.get('select_table_name', None) is not None) and (len(session.get('filter_list', None)) != 0) and (session.get('select_yaxis', None) is not None) and (session.get('select_aaxis', None) is not None) and (session.get('select_avg_name', None) is not None):
       query_vizData(session.get('select_table_name', None), session.get('select_aaxis', None), session.get('select_yaxis', None), session.get('select_avg_name', None), session.get('filter_list', None))
 
-
+    generateVizObj("titanic", "survived", "id", "COUNT", ["sex='male'", "age<20"])
 
 
     print("line 61")
