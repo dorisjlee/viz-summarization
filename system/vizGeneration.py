@@ -1,6 +1,8 @@
 # This file contains code that constructs the visualization node and lattices
 from database import *
 from vizObj import *
+from node import *
+from lattice import *
 
 def generateVizObj(tablename,x_attr,y_attr, agg_func, filters):
 	v = vizObj()
@@ -20,6 +22,10 @@ def generateVizObj(tablename,x_attr,y_attr, agg_func, filters):
 
 
 def generateLattice(filters):
+	if filters is None:
+		return None
+
+
 	# Automatically parse a list of filter as strings and generate lattice of x numbers of nodes given a list of filters 
 	# code should automatically infer who is parent and set children based on what's in the filter
 	# e.g. since the filter "sex='male'" is contained in the filter "sex='male' AND age<20", and "sex='male'" only has 1 condition
@@ -32,4 +38,38 @@ def generateLattice(filters):
 	#  "sex='male' AND AGE>20","sex='female' AND AND AGE>20","sex='male' AND AGE<20","sex='female' AND AND AGE<20"]
 	# Output : Lattice containing 9 vizObjs each of them has one of the filter from the filters list
 	# with the according parent child relationship set. 
-	pass
+	'''
+	G = Lattice()
+	root = vizNode()
+
+
+	nodeList = []
+
+	for each in filters:
+	 	if(str(each) == "root"):
+	 		    root = vizNode(filters=["All"])
+	 		    nodeList.append(root)
+
+
+	for each in filters:
+	 	if(str(each) != "root"):
+	 				nodeList.append(vizNode(parents=[root], filters=[str(each)]))
+
+
+
+	for idx, val in enumerate(filters):
+
+	 		cuarr = val.split("=")
+		if(val != "root"):
+	 			current.set_parents(["root"])
+		else
+	 			continue
+	 	for i in range(idx, len(filters)):
+	 			cp = filters[i]
+	 			cparr = cp.split("=")
+	 			if cparr[0] != cuarr[0]: #different filter title
+	 				combined = val + " AND " + cp
+
+	 				combinedNode = vizNode(parents=[White, M], filters=["Race = White", "Gender = M"])
+'''
+pass

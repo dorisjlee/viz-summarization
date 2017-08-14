@@ -50,7 +50,7 @@ Dataset</button>
 
 <form class="form-inline" method="POST" action="{{ url_for('index') }}">
   <div class="form-group">
-            <select style="left:20px; position:relative;" onchange="this.form.submit()" name="table_select" id = "table" class="selectpicker form-control">
+            <select style="left:25px; position:relative;" onchange="this.form.submit()" name="table_select" id = "table" class="selectpicker form-control">
               {% for each in table %}
                 <option selected="true" value = "None"> None</option>
                 <option value= {{each}} >{{each}}</option>
@@ -69,9 +69,9 @@ X-Axis</button>
 
 <div id="Demo2" class="w3-hide">
 
-<form id = "la"  onsubmit="return false" class="form-inline" method="POST" action="{{ url_for('index') }}">
+<form  class="form-inline" method="POST" action="{{ url_for('index') }}">
   <div class="form-group">
-             <select style="left:20px; position:relative;" onchange="this.form.submit()" name = "xaxis_select" id = "xaxis" class="selectpicker form-control">
+             <select style="left:25px; position:relative;" onchange="this.form.submit()" name = "xaxis_select" id = "xaxis" class="selectpicker form-control">
                 <option selected="true" value = "None"> None </option>
 
                 {% for each in column %}
@@ -91,7 +91,7 @@ Y-Axis</button>
 
 <form class="form-inline" method="POST" action="{{ url_for('index') }}">
   <div class="form-group">
-        <select style="left:20px; position:relative;" onchange="this.form.submit()" name = "yaxis_select"  id = "yaxis" class="selectpicker form-control">
+        <select style="left:25px; position:relative;" onchange="this.form.submit()" name = "yaxis_select"  id = "yaxis" class="selectpicker form-control">
             <option selected="true" value = "None"> None</option>
 
             {% for each in column %}
@@ -129,7 +129,7 @@ Y-Axis</button>
                      <input type="submit" style = "background-color: #2196f3;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 2px 2px;cursor: pointer;right:40;" value="Submit">
 
                     <div class="entry input-group col-xs-3">
-                        <input class="form-control" name="fields[]" type="text" placeholder="Type something" />
+                        <input class="form-control" style = "left:25px" name="fields[]" type="text" placeholder="Type something" />
                         <span class="input-group-btn">
                             <button class="btn btn-success btn-add" type="button">
                                 <span class="glyphicon glyphicon-plus"></span>
@@ -222,10 +222,6 @@ Y-Axis</button>
 
 
     <script>
-
-    $('#la').submit(function () {
- return false;
-});
 
 
     $(function()

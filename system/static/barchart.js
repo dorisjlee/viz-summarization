@@ -114,6 +114,7 @@ function render_chart(i, nodeDic){
       .text(yAxis_name)
       .attr('transform', 'translate(-30, -20)');
 
+    // add bar chart title
     chart.append("text")
         .attr("x", (width / 2)) 
         .attr("y",  "-8px")
