@@ -46,16 +46,29 @@
 Dataset</button>
 
 <div id="Demo1" class="w3-hide">
+<script type=text/javascript>
+  $(function() {
+    $('a#calculate').bind('click', function() {
+      $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
+        a: $('input[name="a"]').val(),
+        b: $('input[name="b"]').val()
+      }, function(data) {
+        $("#result").text(data.result);
+      });
+      return false;
+    });
+  });
+</script>
 
-
-<form class="form-inline" method="POST" action="{{ url_for('index') }}">
+<!-- <form class="form-inline" method="POST" action="{{ url_for('index') }}"> -->
+<form class="form-inline" method="POST" action="{{ url_for('getColumns') }}">
   <div class="form-group">
-            <select style="left:25px; position:relative;" onchange="this.form.submit()" name="table_select" id = "table" class="selectpicker form-control">
-              {% for each in table %}
-                <option selected="true" value = "None"> None</option>
-                <option value= {{each}} >{{each}}</option>
-​              {% endfor %}
-            </select>
+        <select style="left:25px; position:relative;" onchange="this.form.submit()" name="table_selected" id = "all_tables" class="selectpicker form-control">
+            <option selected="true" value = "None"> None</option>
+            {% for dataset in all_tables %}
+                <option value= {{dataset}} >{{dataset}}</option>
+​            {% endfor %}
+        </select>
     </div>
 </form>
 
