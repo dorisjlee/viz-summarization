@@ -1,19 +1,13 @@
+from config import app
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 import pandas as pd
 import json
 
-
-'''
-Configure Flask by providing the PostgreSQL URI so that the app is able to connect to the database, through
-'''
-
-
-
 #data = pd.read_csv('../data/titanic/titanic.csv',index_col=0)
 # engine = create_engine("postgresql://summarization:lattice@localhost:5433")
-engine = create_engine("postgresql://summarization:lattice@localhost:5432")
+engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 # data.to_sql(name='titanic', con=engine, if_exists = 'replace', index=False)
 
 connection = engine.connect()
@@ -37,26 +31,20 @@ def upload_data():
   '''
   raise NotImplementedError
 def get_tables():
-    '''
-        Get a list of all the tables inside the viz-summarization folder
-        summarization=# SELECT TABLE_NAME  FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE' AND  TABLE_SCHEMA='public' ORDER BY TABLE_NAME;
-        table_name
-        ------------
-        titanic
-        (1 row)
-        We want to be able to retreive this in the front end so that the uplaod dataset dropdown menu updates dynamically.
-    '''
-    result = connection.execute("SELECT TABLE_NAME  FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE' AND  TABLE_SCHEMA='public' ORDER BY TABLE_NAME;")
-    print "table"
-    print '--------'
-    ret = []
-    for row in result:
-        ret.append(str(row["table_name"]))
-    return json.dumps(ret)
-
-ret = get_tables()
-print ret
-
+  '''
+    Get a list of all the tables inside the viz-summarization user
+    summarization=# SELECT TABLE_NAME  FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE' AND  TABLE_SCHEMA='public' ORDER BY TABLE_NAME;
+    table_name
+    ------------
+    titanic
+    (1 row)
+    We want to be able to retreive this in the front end so that the uplaod dataset dropdown menu updates dynamically.
+  '''
+  result = connection.execute("SELECT TABLE_NAME  FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE' AND  TABLE_SCHEMA='public' ORDER BY TABLE_NAME;")
+  all_tables = []
+  for row in result:
+      all_tables.append(str(row["table_name"]))
+  return all_tables
 
 def get_columns(tablename):
   '''
@@ -88,7 +76,15 @@ def get_columns(tablename):
 
 
 def query_vizData(tablename,x_attr,y_attr, agg_func, filters):
-
+  '''
+  Constructs a typical query for each visualization
+  1) SELECT <agg_func>(<y_attr>) FROM  <tablename> WHERE <filters> GROUPBY <x_attr>
+  e.g. SELECT SUM(Population) FROM census WHERE RACE=Asian & GENDER=Female GROUPBY GENDER
+  2) Read retreived results and store it as a tuple
+  3) return tuples for each bar in the visualization [a1,a2,a3]
+  #str = "SELECT" + agg_func + "(" + y_attr + ")" + "FROM" + tablename + "WHERE" + filters + "GROUPBY" + x_attr
+  #result = connection.execute(str)
+  '''
   filter_str = ""
   for idx, val in enumerate(filters):
     if(idx != len(filters)-1):
@@ -97,8 +93,6 @@ def query_vizData(tablename,x_attr,y_attr, agg_func, filters):
     else:
       filter_str += val
 
-
-
   query = "SELECT " + x_attr + ", " +agg_func +"(" + y_attr + ")" + " FROM " + tablename + " WHERE " + filter_str + " GROUP BY " + x_attr
   result = connection.execute(query)
   xVals = []
@@ -106,19 +100,10 @@ def query_vizData(tablename,x_attr,y_attr, agg_func, filters):
   for row in result:
     xVals.append(str(row[0]))
     yVals.append(str(row[1]))
-  print xVals
-  print yVals
   return (xVals,yVals)
 
-#   Constructs a typical query for each visualization
-#   1) SELECT <agg_func>(<y_attr>) FROM  <tablename> WHERE <filters> GROUPBY <x_attr>
-#   e.g. SELECT SUM(Population) FROM census WHERE RACE=Asian & GENDER=Female GROUPBY GENDER
-#   2) Read retreived results and store it as a tuple
-#   3) return tuples for each bar in the visualization [a1,a2,a3]
-#   #str = "SELECT" + agg_func + "(" + y_attr + ")" + "FROM" + tablename + "WHERE" + filters + "GROUPBY" + x_attr
-#   #result = connection.execute(str)
-
-query_vizData("titanic", "survived", "id", "COUNT", ["sex='male'", "age<20"])
+if __name__=="__main__":
+  query_vizData("titanic", "survived", "id", "COUNT", ["sex='male'", "age<20"])
 
 
 

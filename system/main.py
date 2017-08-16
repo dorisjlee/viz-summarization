@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, request, session
+from config import *
 from flask import render_template
 from Data import *
 from database import *
@@ -7,15 +7,6 @@ from vizGeneration import *
 from flask_sqlalchemy import SQLAlchemy
 import json
 
-
-app = Flask(__name__, static_url_path = '', static_folder = 'static', template_folder = 'templates')
-app.secret_key = "super secret key"
-
-
-
-app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://summarization:lattice@localhost:5433'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://summarization:lattice@localhost:5432'
 db = SQLAlchemy(app)
 
 @app.route("/getTreeJSON")
@@ -44,8 +35,6 @@ def handle_data():
 def getTables():
   table_name = get_tables()
   session['table_name'] = table_name
-  print 'lala'
-  print table_name
   return table_name
 
 @app.route("/getTree")
