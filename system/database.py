@@ -12,7 +12,8 @@ Configure Flask by providing the PostgreSQL URI so that the app is able to conne
 
 
 #data = pd.read_csv('../data/titanic/titanic.csv',index_col=0)
-engine = create_engine("postgresql://summarization:lattice@localhost:5433")
+# engine = create_engine("postgresql://summarization:lattice@localhost:5433")
+engine = create_engine("postgresql://summarization:lattice@localhost:5432")
 # data.to_sql(name='titanic', con=engine, if_exists = 'replace', index=False)
 
 connection = engine.connect()
@@ -28,11 +29,11 @@ def upload_data():
   '''
   User uploads data from frontend using a csv file
   This function uploads the data into Postgres DB
-  
-  1) For frontend, look at fileUploader.js and index.html in ZV 
-  2) Frontend send request to backend after submit the form 
+
+  1) For frontend, look at fileUploader.js and index.html in ZV
+  2) Frontend send request to backend after submit the form
   3) Then in this function we take the request, read in as a pandas table
-  4) then upload onto the sql table 
+  4) then upload onto the sql table
   '''
   raise NotImplementedError
 def get_tables():
@@ -59,12 +60,12 @@ print ret
 
 def get_columns(tablename):
   '''
-  Get a list of all the columns inside a particular table to display to the front end 
+  Get a list of all the columns inside a particular table to display to the front end
   in the x and y axis selection panel dropdown menu
 
   SELECT column_name FROM information_schema.columns WHERE table_schema = 'public' AND table_name = '<tablename>';
 
-  e.g. 
+  e.g.
   summarization=# SELECT column_name FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'titanic';
    column_name
   -------------
@@ -108,9 +109,9 @@ def query_vizData(tablename,x_attr,y_attr, agg_func, filters):
   print xVals
   print yVals
   return (xVals,yVals)
-  
-#   Constructs a typical query for each visualization 
-#   1) SELECT <agg_func>(<y_attr>) FROM  <tablename> WHERE <filters> GROUPBY <x_attr> 
+
+#   Constructs a typical query for each visualization
+#   1) SELECT <agg_func>(<y_attr>) FROM  <tablename> WHERE <filters> GROUPBY <x_attr>
 #   e.g. SELECT SUM(Population) FROM census WHERE RACE=Asian & GENDER=Female GROUPBY GENDER
 #   2) Read retreived results and store it as a tuple
 #   3) return tuples for each bar in the visualization [a1,a2,a3]

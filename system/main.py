@@ -14,7 +14,8 @@ app.secret_key = "super secret key"
 
 
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://summarization:lattice@localhost:5433'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://summarization:lattice@localhost:5433'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://summarization:lattice@localhost:5432'
 db = SQLAlchemy(app)
 
 @app.route("/getTreeJSON")
@@ -67,7 +68,7 @@ def index():
     print "ret: "
     '''
     table_name = session.get('table_name', None)
-   
+
     treeTreant = session.get('treeTreant', None)
     nodeDic = session.get('nodeDic', None)
     column_name = [""]
@@ -111,10 +112,10 @@ def index():
 nodeDic = nodeDic)
 
 
-  
+
 
 
 if __name__ == "__main__":
-    
+
     app.debug = True
     app.run()
