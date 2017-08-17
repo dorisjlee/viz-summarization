@@ -22,11 +22,11 @@ def getTreeJSON():
 #   session['nodeDic'] = nodeDic
 #   return nodeDic
 
-@app.route("/getColumns", methods=['GET'])
+@app.route("/getColumns", methods=['POST','GET'])
 def getColumns():
   print "getColumns"
-  print request.form["table_selected"]
-  column_name = get_columns(request.form["table_selected"])
+  print request.form.get('table_select')
+  column_name = get_columns('titanic')
   print "column_name:",column_name
   session['column_name'] = column_name  # a list containing all the column names
   return jsonify(column_name)
