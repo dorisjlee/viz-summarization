@@ -3,7 +3,7 @@ from flask import render_template
 from Data import *
 from database import *
 from vizGeneration import *
-
+from flask import jsonify
 from flask_sqlalchemy import SQLAlchemy
 import json
 
@@ -29,8 +29,11 @@ def getColumns():
   column_name = get_columns(request.form["table_selected"])
   print "column_name:",column_name
   session['column_name'] = column_name  # a list containing all the column names
-  return json.dumps(column_name)
-
+  return jsonify(column_name)
+# @app.route('/more/', methods=['POST'])
+# def _more():
+#     new_fetched_data = fetch_data() # Data fetch function through sqlalchemy
+#     return jsonify('fetched_data', render_template('dynamic_data.html', new_fetched_data=new_fetched_data))
 '''
 @app.route("/handle_data", methods=['GET', 'POST'])
 def handle_data():

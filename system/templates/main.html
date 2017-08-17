@@ -10,11 +10,6 @@
 
     <title> Visual Summarization Lattice </title>
 
-    <!-- Data dependencies (should eventually be eliminated) -->
-
-    <!-- Javascript files -->
-    <script type="text/javascript" src="lattice.js"></script>    
-    <script type="text/javascript" src="barchart.js"></script>
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -31,7 +26,10 @@
     <script src="resources/Treant.js"></script>
     <script src="resources/jquery.min.js"></script>
     <script src="resources/jquery.easing.js"></script>
-    
+    <!-- Javascript files -->
+    <script type="text/javascript" src="lattice.js"></script>    
+    <script type="text/javascript" src="barchart.js"></script>
+    <script type="text/javascript" src="sidebar.js"></script>
     
 </head>
 
@@ -39,24 +37,21 @@
 
 <div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left" style="display:none" id="mySidebar">
   <button class="w3-bar-item w3-button w3-large" style="left:30px"
-  onclick="w3_close()">Close &times;</button>
+  onclick="menuItem_close()">Close &times;</button>
 
 
-<button onclick="myFunction('Demo1')" class="w3-button w3-block w3-blue w3-left-align">
+<button onclick="menuItem_onclick('Demo1')" class="w3-button w3-block w3-blue w3-left-align">
 Dataset</button>
 
 <div id="Demo1" class="w3-hide">
 <script type=text/javascript>
-  $(function() {
-    $('a#calculate').bind('click', function() {
-      $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
-        a: $('input[name="a"]').val(),
-        b: $('input[name="b"]').val()
-      }, function(data) {
-        $("#result").text(data.result);
-      });
-      return false;
-    });
+  $.ajax({
+    url: "/getColumns",
+    type: "GET",
+    dataType: "json",
+    success: function(data){
+        $(html).append(data);
+    }
   });
 </script>
 
@@ -77,7 +72,7 @@ Dataset</button>
 </script>
 </div>
 
-<button onclick="myFunction('Demo2')" class="w3-button w3-block w3-blue w3-left-align">
+<button onclick="menuItem_onclick('Demo2')" class="w3-button w3-block w3-blue w3-left-align">
 X-Axis</button>
 
 <div id="Demo2" class="w3-hide">
@@ -86,7 +81,6 @@ X-Axis</button>
   <div class="form-group">
              <select style="left:25px; position:relative;" onchange="this.form.submit()" name = "xaxis_select" id = "xaxis" class="selectpicker form-control">
                 <option selected="true" value = "None"> None </option>
-
                 {% for each in column %}
                     <option value= {{each}} >{{each}}</option>
 ​                {% endfor %}
@@ -97,7 +91,7 @@ X-Axis</button>
   
 </div>
 
-<button onclick="myFunction('Demo3')" class="w3-button w3-block w3-blue w3-left-align">
+<button onclick="menuItem_onclick('Demo3')" class="w3-button w3-block w3-blue w3-left-align">
 Y-Axis</button>
 
 <div id="Demo3" class="w3-hide">
@@ -106,7 +100,6 @@ Y-Axis</button>
   <div class="form-group">
         <select style="left:25px; position:relative;" onchange="this.form.submit()" name = "yaxis_select"  id = "yaxis" class="selectpicker form-control">
             <option selected="true" value = "None"> None</option>
-
             {% for each in column %}
                 <option value= {{each}} >{{each}}</option>
 ​            {% endfor %}
@@ -167,7 +160,7 @@ Y-Axis</button>
   <div class="w3-container">
     <h1 style="color:white; font-size:26px;font-family:Arial"></h1>
   </div>
-  <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
+  <button class="w3-button w3-teal w3-xlarge" onclick="menuItem_open()">&#9776;</button>
 </div>
 
 
@@ -206,13 +199,7 @@ Y-Axis</button>
     </div>
 
 
-
-
-
-
-
-
-
+ 
     <script>        
         var arrayDiv = new Array();
         test_chart_collapsable(arrayDiv,nodeDic)
@@ -231,59 +218,7 @@ Y-Axis</button>
         $("#w3s").attr("href", "https://www.w3schools.com/jquery");
         $("#w3s").attr("href", "https://www.w3schools.com/jquery");
     </script>
-
-
-
-    <script>
-
-
-    $(function()
-    {
-    $(document).on('click', '.btn-add', function(e)
-    {
-        e.preventDefault();
-
-        var controlForm = $('.controls form:first'),
-            currentEntry = $(this).parents('.entry:first'),
-            newEntry = $(currentEntry.clone()).appendTo(controlForm);
-
-        newEntry.find('input').val('');
-
-        controlForm.find('.entry:not(:last) .btn-add')
-            .removeClass('btn-add').addClass('btn-remove')
-            .removeClass('btn-success').addClass('btn-danger')
-            .html('<span class="glyphicon glyphicon-minus"></span>');
-    }).on('click', '.btn-remove', function(e)
-    {
-        $(this).parents('.entry:first').remove();
-
-        e.preventDefault();
-        return false;
-    });
-    });
-
-
-    function w3_open() {
-        document.getElementById("main").style.marginLeft = "25%";
-        document.getElementById("mySidebar").style.width = "25%";
-        document.getElementById("mySidebar").style.display = "block";
-        document.getElementById("openNav").style.display = 'none';
-    }
-    function w3_close() {
-        document.getElementById("main").style.marginLeft = "0%";
-        document.getElementById("mySidebar").style.display = "none";
-        document.getElementById("openNav").style.display = "inline-block";
-    }
-
-    function myFunction(id) {
-        var x = document.getElementById(id);
-        if (x.className.indexOf("w3-show") == -1) {
-            x.className += " w3-show";
-        } else { 
-            x.className = x.className.replace(" w3-show", "");
-        }
-    }
-    </script>
+ 
 
 
 </body>

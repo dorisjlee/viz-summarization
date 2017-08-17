@@ -62,8 +62,3 @@ var chart_config = {
         console.log("done");
     }
 
-
-
-
-
-
