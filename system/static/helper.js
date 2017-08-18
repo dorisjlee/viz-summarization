@@ -1,7 +1,7 @@
 var columns =[];
 $("#all_tables").change(
     $.post('/getColumns',{
-        table_name: 'titanic'
+        "table_name": $("#all_tables").val()
     }).success( function(data){
         // console.log(data)
         columns = JSON.parse(data);

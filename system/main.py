@@ -24,12 +24,27 @@ def getTreeJSON():
 
 @app.route("/getColumns", methods=['POST','GET'])
 def getColumns():
-  print "getColumns"
-  print request.form.get('table_select')
-  column_name = get_columns('titanic')
+  print "inside getColumns"
+  print request
+  print "args",request.args
+  # print request.args.get("table_name","",type=string)
+  print request.form
+  print request.form['table_name']
+  print request.form.get('table_name')
+  print request.json["table_name"]
+  column_name = get_columns(request.json["table_name"])
   print "column_name:",column_name
   session['column_name'] = column_name  # a list containing all the column names
   return jsonify(column_name)
+
+@app.route("/upload_data", methods=['POST'])
+def upload_data():
+  import pandas as pd
+  from sqlalchemy import create_engine
+  data = pd.read_csv("mushrooms.csv")
+  engine = create_engine("postgresql://summarization:lattice@localhost:5432")
+  data.to_sql(name='mushroom', con=engine, if_exists = 'replace', index=False)
+
 # @app.route('/more/', methods=['POST'])
 # def _more():
 #     new_fetched_data = fetch_data() # Data fetch function through sqlalchemy
@@ -45,9 +60,9 @@ def handle_data():
 
 @app.route("/getTables")
 def getTables():
-  table_name = get_tables()
-  session['table_name'] = table_name
-  return table_name
+  tableList = get_tables()
+  session['tableList'] = tableList
+  return tableList
 
 
 @app.route("/getSelectedAxis", methods=['GET', 'POST'])
