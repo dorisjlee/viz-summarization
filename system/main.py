@@ -1,10 +1,11 @@
 from config import *
 from flask import render_template
-from Data import *
+from data import *
 from database import *
 from vizGeneration import *
 from flask import jsonify
 from flask_sqlalchemy import SQLAlchemy
+from query import Query 
 import json
 
 db = SQLAlchemy(app)
@@ -36,19 +37,6 @@ def upload_data():
   engine = create_engine("postgresql://summarization:lattice@localhost:5432")
   data.to_sql(name='mushroom', con=engine, if_exists = 'replace', index=False)
 
-# @app.route('/more/', methods=['POST'])
-# def _more():
-#     new_fetched_data = fetch_data() # Data fetch function through sqlalchemy
-#     return jsonify('fetched_data', render_template('dynamic_data.html', new_fetched_data=new_fetched_data))
-'''
-@app.route("/handle_data", methods=['GET', 'POST'])
-def handle_data():
-    table_name = request.form.get('table_select')
-    print "handle data"
-    print table_name
-    return (str(table_name))
-'''
-
 @app.route("/getTables")
 def getTables():
   tableList = get_tables()
@@ -56,30 +44,22 @@ def getTables():
   return tableList
 
 
-@app.route("/getSelectedAxis", methods=['GET', 'POST'])
-def getSelectedAxis():
+@app.route("/postQuery", methods=['GET', 'POST'])
+def postQuery():
     
-    select_avg_name = str(request.form.get('avg'))
-    session['select_avg_name'] = select_avg_name
-
-    filter_list = request.form.getlist('fields[]')
-    for key in filter_list:
-      print key
-
-    session['filter_list'] = filter_list
-    select_xaxis = str(request.form.get('xaxis_select'))
-    session['select_xaxis'] = select_xaxis
-    select_yaxis = str(request.form.get('yaxis_select'))
-    session['select_yaxis'] = select_yaxis
-
-
-    print "---------------"
-    print session.get('select_avg_name', None)
-    print session.get('select_yaxis', None)
-    print session.get('select_xaxis', None)
-    print session.get('select_table_name', None)
-    print session.get('filter_list', None)
-    print "----------------"
+    dataset = request.form['dataset']
+    xAxis = request.form['xAxis']
+    yAxis = request.form['yAxis']
+    aggFunc = request.form['aggFunc']
+    filters = []
+    method ="query"
+    # filter_list = request.form.getlist('fields[]')
+    # for key in filter_list:
+    #   print key
+    print dataset, xAxis,yAxis,aggFunc,filters,method
+    query = Query(dataset,xAxis,yAxis,aggFunc,filters,method)
+    print query
+    return jsonify({"results":"test"})
 
 
 @app.route("/", methods=['GET', 'POST'])

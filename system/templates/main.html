@@ -31,10 +31,10 @@
 <div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left" style="display:none" id="mySidebar">
   <button class="w3-bar-item w3-button w3-large" style="left:30px"
   onclick="menuItem_close()">Close &times;</button>
-<button onclick="menuItem_onclick('Demo1')" class="w3-button w3-block w3-blue w3-left-align">
+<button onclick="menuItem_onclick('menuItem1')" class="w3-button w3-block w3-blue w3-left-align">
 Dataset</button>
 
-<div id="Demo1" class="w3-hide">
+<div id="menuItem1" class="w3-hide">
 
 <form class="form-inline">
   <div class="form-group">
@@ -46,21 +46,17 @@ Dataset</button>
         </select>
     </div>
 </form>
-
-
-
 </script>
 </div>
 
-<button onclick="menuItem_onclick('Demo2')" class="w3-button w3-block w3-blue w3-left-align">
+<button onclick="menuItem_onclick('menuItem2')" class="w3-button w3-block w3-blue w3-left-align">
 X-Axis</button>
 
-<div id="Demo2" class="w3-hide">
+<div id="menuItem2" class="w3-hide">
 
-<form  class="form-inline" method="POST" action="{{ url_for('index') }}">
+<form  class="form-inline">
   <div class="form-group">
-         <select style="left:25px; position:relative;" onchange="this.form.submit()" name = "xaxis_select" id = "xaxis" class="selectpicker form-control">
-            <option selected="true" value = "None"> None </option>
+         <select style="left:25px; position:relative;" name = "xaxis_select" id = "xaxis" class="selectpicker form-control">
         </select>
     </div>
 </form>
@@ -68,14 +64,14 @@ X-Axis</button>
   
 </div>
 
-<button onclick="menuItem_onclick('Demo3')" class="w3-button w3-block w3-blue w3-left-align">
+<button onclick="menuItem_onclick('menuItem3')" class="w3-button w3-block w3-blue w3-left-align">
 Y-Axis</button>
 
-<div id="Demo3" class="w3-hide">
+<div id="menuItem3" class="w3-hide">
 
-<form class="form-inline" method="POST" action="{{ url_for('index') }}">
+<form class="form-inline">
   <div class="form-group">
-        <select style="left:25px; position:relative;" onchange="this.form.submit()" name = "yaxis_select"  id = "yaxis" class="selectpicker form-control">
+        <select style="left:25px; position:relative;" name = "yaxis_select"  id = "yaxis" class="selectpicker form-control">
             <option selected="true" value = "None"> None</option>
         </select>
     </div>
@@ -87,12 +83,12 @@ Y-Axis</button>
 <br>
 <br>
 <br>
-<h2 class = "center" style = "left:40px; font-family:Verdana,sans-serif; font-size:15px;"><b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aggration function select: </b></h2>
+<h2 class = "center" style = "left:40px; font-family:Verdana,sans-serif; font-size:15px;"><b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aggration function: </b></h2>
 <br>
-<form style="position:relative; left:35px; top:-5px;" class="form-inline" id = "avg_select" name = "avg_select" method="POST" action="{{ url_for('index') }}">
-  <input type="radio" name="avg" id = "SUM" value="SUM" onclick="this.form.submit()"> SUM<br>
-  <input type="radio" name="avg" id = "AVERAGE" value="AVERAGE" onclick="this.form.submit()"> AVERAGE<br>
-  <input type="radio" name="avg" id = "COUNT" value="COUNT" onclick="this.form.submit()"> COUNT   
+<form style="position:relative; left:35px; top:-5px;" class="form-inline" id = "agg_select" name = "agg_select">
+  <input type="radio" name = "aggFunc" id = "SUM" value="SUM"> SUM<br>
+  <input type="radio" name = "aggFunc" id = "AVERAGE" value="AVERAGE"> AVERAGE<br>
+  <input type="radio" name = "aggFunc" id = "COUNT" value="COUNT"> COUNT   
   <br>
 </form> 
 
@@ -104,7 +100,7 @@ Y-Axis</button>
         <div class="control-group" id="fields">
            
             <div class="controls"> 
-                <form role="form" autocomplete="off" name = "filter_select" method="POST" action="{{ url_for('index') }}">
+                <form role="form" autocomplete="off" name = "filter_select">
                     <label style= "left:40px" class="control-label" for="field1">&nbsp;&nbsp;&nbsp;&nbsp;Customized Filters</label>
                      <input type="submit" style = "background-color: #2196f3;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 2px 2px;cursor: pointer;right:40;" value="Submit">
 
