@@ -24,16 +24,7 @@ def getTreeJSON():
 
 @app.route("/getColumns", methods=['POST','GET'])
 def getColumns():
-  print "inside getColumns"
-  print request
-  print "args",request.args
-  # print request.args.get("table_name","",type=string)
-  print request.form
-  print request.form['table_name']
-  print request.form.get('table_name')
-  print request.json["table_name"]
-  column_name = get_columns(request.json["table_name"])
-  print "column_name:",column_name
+  column_name = get_columns(request.form['tablename'])
   session['column_name'] = column_name  # a list containing all the column names
   return jsonify(column_name)
 
