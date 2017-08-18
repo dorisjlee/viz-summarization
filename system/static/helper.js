@@ -1,6 +1,6 @@
 var columns =[];
-$("#all_tables").change(
-    console.log("test")
+$("#all_tables").change(function ()
+    {console.log("test")
     // $.post('/getColumns',{
     //     "table_name": $("#all_tables").val()
     // }).success( function(data){
@@ -10,7 +10,7 @@ $("#all_tables").change(
     //     populateOptions(columns,document.getElementById("xaxis"));
     //     populateOptions(columns,document.getElementById("yaxis"));
     // })
-)
+})
 
 function populateOptions(list,selector)
 {
