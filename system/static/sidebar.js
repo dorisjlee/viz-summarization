@@ -28,12 +28,10 @@ function menuItem_open() {
     document.getElementById("main").style.marginLeft = "25%";
     document.getElementById("mySidebar").style.width = "25%";
     document.getElementById("mySidebar").style.display = "block";
-    document.getElementById("openNav").style.display = 'none';
 }
 function menuItem_close() {
     document.getElementById("main").style.marginLeft = "0%";
     document.getElementById("mySidebar").style.display = "none";
-    document.getElementById("openNav").style.display = "inline-block";
 }
 
 function menuItem_onclick(id) {
