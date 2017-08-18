@@ -31,81 +31,54 @@
 <div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left" style="display:none" id="mySidebar">
   <button class="w3-bar-item w3-button w3-large" style="left:30px"
   onclick="menuItem_close()">Close &times;</button>
-<button onclick="menuItem_onclick('menuItem1')" class="w3-button w3-block w3-blue w3-left-align">
-Dataset</button>
 
-<div id="menuItem1" class="w3-hide">
-
-<form class="form-inline">
+<form class="form-inline menu-item">
+  <h2 class = "title"><b>Dataset</b></h2>
   <div class="form-group">
-        <select style="left:25px; position:relative;" name="table_selected" id = "all_tables" class="selectpicker form-control">
+        <select name="table_selected" id = "all_tables" class="selectpicker form-control">
             <option selected="true" value = "None">None</option>
             {% for dataset in all_tables %}
                 <option value= {{dataset}} >{{dataset}}</option>
 ​            {% endfor %}
         </select>
-    </div>
+  </div>
 </form>
-</script>
-</div>
-
-<button onclick="menuItem_onclick('menuItem2')" class="w3-button w3-block w3-blue w3-left-align">
-X-Axis</button>
-
-<div id="menuItem2" class="w3-hide">
-
-<form  class="form-inline">
+<br>
+<form class="form-inline menu-item">
+   <h2 class = "title"><b>X-Axis</b></h2>
   <div class="form-group">
-         <select style="left:25px; position:relative;" name = "xaxis_select" id = "xaxis" class="selectpicker form-control">
+         <select name = "xaxis_select" id = "xaxis" class="selectpicker form-control">
         </select>
     </div>
 </form>
- 
-  
-</div>
-
-<button onclick="menuItem_onclick('menuItem3')" class="w3-button w3-block w3-blue w3-left-align">
-Y-Axis</button>
-
-<div id="menuItem3" class="w3-hide">
-
-<form class="form-inline">
-  <div class="form-group">
-        <select style="left:25px; position:relative;" name = "yaxis_select"  id = "yaxis" class="selectpicker form-control">
+<br> 
+<form class="form-inline menu-item">
+    <h2 class = "title"><b>Y-Axis</b></h2>
+    <div class="form-group">
+        <select name = "yaxis_select"  id = "yaxis" class="selectpicker form-control">
             <option selected="true" value = "None"> None</option>
         </select>
     </div>
 </form>
-</script>
-
-</div>
-
-<br>
-<br>
-<br>
-<h2 class = "center" style = "left:40px; font-family:Verdana,sans-serif; font-size:15px;"><b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aggration function: </b></h2>
-<br>
-<form style="position:relative; left:35px; top:-5px;" class="form-inline" id = "agg_select" name = "agg_select">
+<br> 
+<form class="form-inline menu-item" class="form-inline" id = "agg_select" name = "agg_select">
+  <h2 class = "title"><b>Aggregation function:</b></h2>
   <input type="radio" name = "aggFunc" id = "SUM" value="SUM"> SUM<br>
   <input type="radio" name = "aggFunc" id = "AVERAGE" value="AVERAGE"> AVERAGE<br>
   <input type="radio" name = "aggFunc" id = "COUNT" value="COUNT"> COUNT   
   <br>
 </form> 
-
-
-<br>
-<br>
+<br> 
 <div class="container">
     <div class="row">
         <div class="control-group" id="fields">
-           
             <div class="controls"> 
-                <form role="form" autocomplete="off" name = "filter_select">
-                    <label style= "left:40px" class="control-label" for="field1">&nbsp;&nbsp;&nbsp;&nbsp;Customized Filters</label>
-                     <input type="submit" style = "background-color: #2196f3;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 2px 2px;cursor: pointer;right:40;" value="Submit">
-
+                <form role="form" class="menu-item" autocomplete="off" name = "filter_select">
+                    <h2 class = "title"><b>Filters</b></h2>
+                     <!-- <input type="submit" style = "background-color: #2196f3;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 2px 2px;cursor: pointer;right:40;" value="Submit">
+                     -->
                     <div class="entry input-group col-xs-3">
-                        <input class="form-control" style = "left:25px" name="fields[]" type="text" placeholder="Type something" />
+                        <input class="form-control" style = "left:25px" name="fields[]" type="text" />
                         <span class="input-group-btn">
                             <button class="btn btn-success btn-add" type="button">
                                 <span class="glyphicon glyphicon-plus"></span>

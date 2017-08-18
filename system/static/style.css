@@ -142,3 +142,15 @@ select {
   background-position: right 20px center, right bottom, right bottom, right bottom;   
 }
 
+
+
+.title h2 {
+  left:40px; 
+  font-family:Verdana,sans-serif; 
+  font-size:15px;
+}
+
+.menu-item{
+  margin-left: 20px;
+  display: inline-block;
+}
