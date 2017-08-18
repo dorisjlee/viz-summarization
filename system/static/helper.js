@@ -1,14 +1,15 @@
 var columns =[];
 $("#all_tables").change(
-    $.post('/getColumns',{
-        "table_name": $("#all_tables").val()
-    }).success( function(data){
-        // console.log(data)
-        columns = JSON.parse(data);
-        console.log(columns)
-        populateOptions(columns,document.getElementById("xaxis"));
-        populateOptions(columns,document.getElementById("yaxis"));
-    })
+    console.log("test")
+    // $.post('/getColumns',{
+    //     "table_name": $("#all_tables").val()
+    // }).success( function(data){
+    //     // console.log(data)
+    //     columns = JSON.parse(data);
+    //     console.log(columns)
+    //     populateOptions(columns,document.getElementById("xaxis"));
+    //     populateOptions(columns,document.getElementById("yaxis"));
+    // })
 )
 
 function populateOptions(list,selector)

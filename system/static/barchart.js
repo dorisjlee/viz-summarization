@@ -1,7 +1,4 @@
 function render_chart(i, nodeDic){
-
-    console.log(nodeDic)
-
     Dic = JSON.parse(nodeDic)
     dataset = Dic[i].slice(0, Dic[i].length-1)
     yAxis_name = Dic[i][Dic[i].length-1]["yName"]

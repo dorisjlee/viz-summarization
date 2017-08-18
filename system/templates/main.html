@@ -24,11 +24,7 @@
 <script src="resources/Treant.js"></script>
 <script src="resources/jquery.min.js"></script>
 <script src="resources/jquery.easing.js"></script>
-<!-- Javascript files -->
-<script type="text/javascript" src="lattice.js"></script>    
-<script type="text/javascript" src="barchart.js"></script>
-<script type="text/javascript" src="sidebar.js"></script>
-<script type="text/javascript" src="helper.js"></script>    
+
 </head>
 
 <body>
@@ -178,25 +174,30 @@ Y-Axis</button>
 
 
  
-    <script>        
-        var arrayDiv = new Array();
-        test_chart_collapsable(arrayDiv,nodeDic)
+<!-- Javascript files -->
+<script type="text/javascript" src="sidebar.js"></script>
+<script type="text/javascript" src="helper.js"></script>    
+<script type="text/javascript" src="barchart.js"></script>
+<script type="text/javascript" src="lattice.js"></script>  
+<script>        
+    var arrayDiv = new Array();
+    test_chart_collapsable(arrayDiv,nodeDic)
 
-        tree = new Treant(chart_config);
-        // Destroy hidden objects
-        // var element = document.getElementById("element-id");
-        // element.parentNode.removeChild(element);
-        /**var dummy = document.getElementById("treeNode")
-        element.parentNode.removeChild(element)**/
+    tree = new Treant(chart_config);
+    // Destroy hidden objects
+    // var element = document.getElementById("element-id");
+    // element.parentNode.removeChild(element);
+    /**var dummy = document.getElementById("treeNode")
+    element.parentNode.removeChild(element)**/
 
-        for(i = 1; i <= 8; i++) {
-            var element = document.getElementById("chart"+i)
-            element.parentNode.removeChild(element)
-        }
-        $("#w3s").attr("href", "https://www.w3schools.com/jquery");
-        $("#w3s").attr("href", "https://www.w3schools.com/jquery");
-    </script>
- 
+    for(i = 1; i <= 8; i++) {
+        var element = document.getElementById("chart"+i)
+        element.parentNode.removeChild(element)
+    }
+    $("#w3s").attr("href", "https://www.w3schools.com/jquery");
+    $("#w3s").attr("href", "https://www.w3schools.com/jquery");
+</script>
+
 
 
 </body>

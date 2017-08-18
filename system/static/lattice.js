@@ -1,9 +1,7 @@
-
 var node_struct = document.getElementById("treeNode").innerHTML;
-
 var nodeDic = document.getElementById("treeNode2").innerHTML;
-console.log("nodedic")
-console.log(nodeDic)
+// console.log("nodedic")
+// console.log(nodeDic)
 
 var chart_config = {
         chart: {
@@ -54,11 +52,9 @@ var chart_config = {
                 $('#xAxis' + i).html(this.className.animVal);
                 $('#yAxis' + i).html($(this).attr('id'));
             });
-            console.log(nodeDic)
+            // console.log(nodeDic)
             render_chart(i, nodeDic);
         }
-
-        
-        console.log("done");
+        // console.log("done");
     }
 
