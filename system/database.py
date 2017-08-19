@@ -72,9 +72,6 @@ def get_columns(tablename):
   for row in result:
       ret.append(str(row["column_name"]))
   return json.dumps(ret)
-
-
-
 def query_vizData(tablename,x_attr,y_attr, agg_func, filters):
   '''
   Constructs a typical query for each visualization

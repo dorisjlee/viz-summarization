@@ -1,13 +1,6 @@
-
-
-
 import networkx as nx
 import json
-
 # 	Lattice is a DAG (graph) of Node objects
-
-
-
 class Lattice:
 
     # contain a graph of Node objects
@@ -15,9 +8,7 @@ class Lattice:
         self.graph = nx.DiGraph()
         self.type = 'summarized' #'full' or summarized
         self.nodeDic = {}
-        #
-
-    # not worry about
+        
     def generateDashboard(self):
         raise NotImplementedError
 
@@ -103,6 +94,9 @@ class Lattice:
 
     def generateNodeDicJsonFile(self):
         node_dic = {}
+        print "generateNodeDicJsonFile"
+        print self.nodeDic
+        print self.getNodes()
         for node in self.getNodes():
             each = []
             viz = node.get_viz()

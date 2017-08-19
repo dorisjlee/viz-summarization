@@ -1,9 +1,11 @@
 function constructQuery(){
     query = {
-        "dataset": $("#all_tables").val(),
-        "xAxis": $("#xaxis").val(),
-        "yAxis": $("#yaxis").val(),
-        "aggFunc": $("input[name='aggFunc']:checked").val()
+        "dataset": $("#all_tables").val() || "",
+        "xAxis": $("#xaxis").val() || "",
+        "yAxis": $("#yaxis").val() || "",
+        "aggFunc": $("input[name='aggFunc']:checked").val() || "",
+        "filters": JSON.stringify(filters) ,
+        "method": "query"
     }
     return query
 }

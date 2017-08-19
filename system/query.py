@@ -5,10 +5,18 @@ class Query:
         self.xAxis = xAxis
         self.yAxis = yAxis
         self.aggFunc = aggFunc
-        self.filters = filters
+        self.filters = filters.split(",") # string split to lists
         self.method = method #What you want to do with this
+        self.whereClause = self.filter2Where()
+    def filter2Where(self):
+        whereClause = ""
+        for condition in self.filters[-1]:
+          whereClause+= condition+" AND "
+        whereClause+=self.filters[-1]
+        return whereClause
     def execute(self):
     	return query_vizData(self.dataset,self.xAxis,self.yAxis, self.aggFunc, self.filters)
     def __repr__(self):
     	# query = "SELECT " + x_attr + ", " +agg_func +"(" + y_attr + ")" + " FROM " + tablename + " WHERE " + filter_str + " GROUP BY " + x_attr
-    	return "<{}: {}, x={}, {}({}) WHERE {}>".format(self.method,self.dataset,self.xAxis,self.aggFunc,self.yAxis,self.filters)
+    	return "<{}: {}, x={}, {}({}) WHERE {}>".format(self.method,self.dataset,self.xAxis,self.aggFunc,self.yAxis,self.whereClause)
+  

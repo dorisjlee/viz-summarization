@@ -1,3 +1,6 @@
+// Filter Form
+var filters=[];
+
 $(function()
 {
     $(document).on('click', '.btn-add', function(e)
@@ -22,8 +25,18 @@ $(function()
             return false;
         });
 });
+// Reading values from filter form
 
+$("#filterSubmit").click( function(){
+    filters=[];
+    $('.filter').each(function(index,item){
+        console.log(item);
+        filters.push(item.value);
+        constructQueryCallback();
+    });
+});
 
+// Expandable menuItem (Not being used right now)
 function menuItem_open() {
     document.getElementById("main").style.marginLeft = "25%";
     document.getElementById("mySidebar").style.width = "25%";

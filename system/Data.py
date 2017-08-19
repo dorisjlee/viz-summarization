@@ -5,9 +5,6 @@ from vizObj import vizObj
 from collections import OrderedDict
 import json
 
-
-
-
 def getJsonFromLattice():
     # set up the tree example
     G = Lattice()
@@ -84,13 +81,7 @@ def getJsonFromLattice():
     for nodes in G.getNodes():
         for child in nodes.get_child():
             G.addEdge(nodes, child)
-
-    ret = G.generateJson(root, G.generateNodeDic())
+    nodeDic = G.generateNodeDic()
+    ret = G.generateJson(root, nodeDic)
     ret2 = G.generateNodeDicJsonFile()
     return (ret, ret2)
-
-
-
-
-
-
