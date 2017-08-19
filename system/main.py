@@ -51,9 +51,10 @@ def postQuery():
     xAxis = request.form['xAxis']
     yAxis = request.form['yAxis']
     aggFunc = request.form['aggFunc']
-    filters = request.form['filters']
+    filters = str(request.form['filters'])
     method = request.form['method']
-    
+    print filters
+    print type(filters)
     # filter_list = request.form.getlist('fields[]')
     # for key in filter_list:
     #   print key

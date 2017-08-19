@@ -1,3 +1,4 @@
+import ast
 from database import * 
 class Query:
     def __init__(self,dataset,xAxis,yAxis,aggFunc,filters,method):
@@ -5,12 +6,15 @@ class Query:
         self.xAxis = xAxis
         self.yAxis = yAxis
         self.aggFunc = aggFunc
-        self.filters = filters.split(",") # string split to lists
+        self.filters = ast.literal_eval(filters) # string split to lists
         self.method = method #What you want to do with this
         self.whereClause = self.filter2Where()
     def filter2Where(self):
+        print self.filters
+        print type(self.filters)
+
         whereClause = ""
-        for condition in self.filters[-1]:
+        for condition in self.filters[:-1]:
           whereClause+= condition+" AND "
         whereClause+=self.filters[-1]
         return whereClause
