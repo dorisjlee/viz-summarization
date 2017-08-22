@@ -25,7 +25,7 @@ def getTreeJSON():
 
 @app.route("/getColumns", methods=['POST','GET'])
 def getColumns():
-  column_name = get_columns(request.form['tablename'])
+  column_name = json.dumps(get_columns(request.form['tablename'])["column_name"])
   session['column_name'] = column_name  # a list containing all the column names
   return jsonify(column_name)
 
@@ -53,14 +53,8 @@ def postQuery():
     aggFunc = request.form['aggFunc']
     filters = str(request.form['filters'])
     method = request.form['method']
-    print filters
-    print type(filters)
-    # filter_list = request.form.getlist('fields[]')
-    # for key in filter_list:
-    #   print key
-    print dataset, xAxis,yAxis,aggFunc,filters,method
     query = Query(dataset,xAxis,yAxis,aggFunc,filters,method)
-    print query
+    # run create lattice code 
     return jsonify({"results":"test"})
 
 

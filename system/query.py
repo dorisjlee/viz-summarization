@@ -10,10 +10,9 @@ class Query:
         self.method = method #What you want to do with this
         self.whereClause = self.filter2Where()
     def filter2Where(self):
-        print self.filters
-        print type(self.filters)
-
         whereClause = ""
+        if len(self.filters)<=0:
+            return whereClause
         for condition in self.filters[:-1]:
           whereClause+= condition+" AND "
         whereClause+=self.filters[-1]

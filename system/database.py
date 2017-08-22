@@ -18,7 +18,20 @@ def initialize_DB():
   initialize database, if first time running this, then create engine should check if DB called summarization exist or not
   '''
   raise NotImplementedError
-
+def executeQuery(query):
+  #Executes query and returns ResultSet as a dictionary of values
+  resultSet = connection.execute(query)
+  result = {}
+  cols = resultSet.keys()
+  resultList = [[] for _col in cols]
+  for row in resultSet :
+      for i in range(len(cols)):
+          resultList[i].append(row[i])
+      #col.append(row[colname])
+      # return result
+  for ci,colname in enumerate(cols):
+      result[str(colname)]=resultList[ci]
+  return result
 def upload_data():
   '''
   User uploads data from frontend using a csv file
@@ -32,19 +45,17 @@ def upload_data():
   raise NotImplementedError
 def get_tables():
   '''
-    Get a list of all the tables inside the viz-summarization user
-    summarization=# SELECT TABLE_NAME  FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE' AND  TABLE_SCHEMA='public' ORDER BY TABLE_NAME;
-    table_name
-    ------------
-    titanic
-    (1 row)
-    We want to be able to retreive this in the front end so that the uplaod dataset dropdown menu updates dynamically.
+  Get a list of all the tables inside the viz-summarization user
+  summarization=# SELECT TABLE_NAME  FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE' AND  TABLE_SCHEMA='public' ORDER BY TABLE_NAME;
+  table_name
+  ------------
+  titanic
+  (1 row)
+  We want to be able to retreive this in the front end so that the uplaod dataset dropdown menu updates dynamically.
   '''
-  result = connection.execute("SELECT TABLE_NAME  FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE' AND  TABLE_SCHEMA='public' ORDER BY TABLE_NAME;")
-  all_tables = []
-  for row in result:
-      all_tables.append(str(row["table_name"]))
-  return all_tables
+  query = "SELECT TABLE_NAME  FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE' AND  TABLE_SCHEMA='public' ORDER BY TABLE_NAME;"
+  result = executeQuery(query)
+  return result["table_name"]
 
 def get_columns(tablename):
   '''
@@ -65,13 +76,9 @@ def get_columns(tablename):
    SexCode
   (6 rows)
   '''
-  result = connection.execute("SELECT column_name FROM information_schema.columns WHERE table_schema = 'public' AND table_name = " + "'" + tablename + "';")
-  print "column_name"
-  print '--------'
-  ret = []
-  for row in result:
-      ret.append(str(row["column_name"]))
-  return json.dumps(ret)
+  query = "SELECT column_name FROM information_schema.columns WHERE table_schema = 'public' AND table_name = " + "'" + tablename + "';"
+  result = executeQuery(query)
+  return result
 def query_vizData(tablename,x_attr,y_attr, agg_func, filters):
   '''
   Constructs a typical query for each visualization
@@ -91,16 +98,15 @@ def query_vizData(tablename,x_attr,y_attr, agg_func, filters):
       filter_str += val
 
   query = "SELECT " + x_attr + ", " +agg_func +"(" + y_attr + ")" + " FROM " + tablename + " WHERE " + filter_str + " GROUP BY " + x_attr
-  result = connection.execute(query)
-  xVals = []
-  yVals=[]
-  for row in result:
-    xVals.append(str(row[0]))
-    yVals.append(str(row[1]))
-  return (xVals,yVals)
+  result = executeQuery(query)
+  return result
 
+def unit_test():
+  print "get_tables:\n", get_tables()
+  print "get_columns:\n", get_columns('titanic')
+  print "query_vizData:\n", query_vizData("titanic", "survived", "id", "COUNT", ["sex='male'", "age<20"])
 if __name__=="__main__":
-  query_vizData("titanic", "survived", "id", "COUNT", ["sex='male'", "age<20"])
+  unit_test()
 
 
 

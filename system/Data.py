@@ -32,7 +32,6 @@ def getJsonFromLattice():
     BF = vizNode(parents=[Black, F], filters=["Race = Black", "Gender = F"])
 
     G.addMultiNodes([root, M, F, White, Black, WM, WF, BM, BF])
-
     root.set_children([M, F, White, Black])
     M.set_children([WM, BM])
     F.set_children([WF, BF])
@@ -77,7 +76,6 @@ def getJsonFromLattice():
     BF.set_viz([v9])
 
     # set up the tree example
-
     for nodes in G.getNodes():
         for child in nodes.get_child():
             G.addEdge(nodes, child)

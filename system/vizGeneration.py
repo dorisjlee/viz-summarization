@@ -21,11 +21,12 @@ def generateVizObj(tablename,x_attr,y_attr, agg_func, filters):
 	return v  
 
 
-def generateLattice(filters):
-	if filters is None:
-		return None
-
-
+def generateLattice(attributes):
+	'''
+	Given a list of categorical attributes, automatically generate 
+	lattice structure with appropriate parent child relationship. 
+	'''
+	'''
 	# Automatically parse a list of filter as strings and generate lattice of x numbers of nodes given a list of filters 
 	# code should automatically infer who is parent and set children based on what's in the filter
 	# e.g. since the filter "sex='male'" is contained in the filter "sex='male' AND age<20", and "sex='male'" only has 1 condition
@@ -38,6 +39,12 @@ def generateLattice(filters):
 	#  "sex='male' AND AGE>20","sex='female' AND AND AGE>20","sex='male' AND AGE<20","sex='female' AND AND AGE<20"]
 	# Output : Lattice containing 9 vizObjs each of them has one of the filter from the filters list
 	# with the according parent child relationship set. 
+	'''
+	# if filters is None:
+	# 	return None
+
+
+	
 	'''
 	G = Lattice()
 	root = vizNode()
@@ -71,5 +78,4 @@ def generateLattice(filters):
 	 				combined = val + " AND " + cp
 
 	 				combinedNode = vizNode(parents=[White, M], filters=["Race = White", "Gender = M"])
-'''
-pass
+	'''

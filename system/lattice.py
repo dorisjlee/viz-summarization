@@ -12,73 +12,64 @@ class Lattice:
     def generateDashboard(self):
         raise NotImplementedError
 
-    # testing
     # populate a lattice of given visualizations to test rendering functions
     def populateDummyLattice(self):
         raise NotImplementedError
 
-    # print formatted string summarization of object when 'print latticeObj' is called
-    # return number of nodes in lattice and other attributes (would be nice to display graph structure
-    # TODO
     def __repr__(self):
         return '(Nodes: %s, numberOfNodes: %s)' % (self.getNodes(), self.numberOfNodes())
 
 
-        # wrapper function for adding a node
     def addNode(self, node):
+        # wrapper function for adding a node
         node.id = self.numberOfNodes() + 1
         self.graph.add_node(node)
 
-    # wrapper function for adding multiple nodes
     def addMultiNodes(self, list):
+        # wrapper function for adding multiple nodes
         for node in list:
             self.addNode(node)
 
-    # wrapper function for adding a node with (k,v) attribute
-    # [(race,black), (age,15), (gender,female)]
     def addNodePlus(self, node_name, attribute):
+        # wrapper function for adding a node with (k,v) attribute
+        # [(race,black), (age,15), (gender,female)]
         for (k,v) in attribute:
             self.graph.add_node(node_name,k=v)
 
-    # wrapper function for deleting a node
     def deleteNode(self, node_name):
+        # wrapper function for deleting a node
         self.graph.remove_node(node_name)
 
-    # wrapper function for adding an edge
+
     def addEdge(self, head, tail):
-            self.graph.add_edge(head, tail)
+        # wrapper function for adding an edge
+        self.graph.add_edge(head, tail)
 
-    # wrapper function for adding an Edge with (k,v) attribute
-    # [(race,black), (age,15), (gender,female)]
     def addEdgePlus(self, head, tail, attribute):
-            for (k, v) in attribute:
-                self.graph.add_edge(head, tail, k=v)
+        # wrapper function for adding an Edge with (k,v) attribute
+        # [(race,black), (age,15), (gender,female)]
+        for (k, v) in attribute:
+            self.graph.add_edge(head, tail, k=v)
 
-
-    # wrapper function for deleting an Edge
     def deleteEdge(self, head, tail):
+        # wrapper function for deleting an Edge
         self.graph.remove_edge(head, tail)
 
-    # getter
     def getNodes(self):
         return self.graph.nodes()
 
-    # setter
     def getEdges(self):
         return self.graph.edges()
 
-    # number of nodes
     def numberOfNodes(self):
         return self.graph.number_of_nodes()
 
-    # number of edges
     def numberOfEdges(self):
         return self.graph.number_of_edges()
 
-
-    # generate a node_dic
     def generateNodeDic(self):
-        # create a dictionary contains{0: node0, 1: node2}
+        # Generates a Node dictionary
+        # containing index and node object: {0: node0, 1: node2}
         node_dic = {}
         for node in self.getNodes():
             each = []
@@ -110,12 +101,9 @@ class Lattice:
         jsonFile = json.dumps(node_dic)
         return jsonFile
 
-
-
-
-    #generate a treeNode.json file
+    
     def generateJson(self, root, node_dic):
-
+        # Generate JSON representation of tree for Treant to render
         tree = "{"
         tree += '"innerHTML"' + ' : ' + '"#chart' + str(root.id) + '"' + "," 
 
@@ -127,9 +115,6 @@ class Lattice:
         
             #if i != len(root.childrenIndex) - 1:
                 #thisBracket += ","
-            
-
-
             if node_dic[root.childrenIndex[i]][len(node_dic[root.childrenIndex[i]]) - 1]["childrenIndex"] != []:
                 arr = node_dic[root.childrenIndex[i]][len(node_dic[root.childrenIndex[i]]) - 1]["childrenIndex"]
                 thisBracket += '"children"' +' : '+'['
@@ -146,19 +131,11 @@ class Lattice:
                 else:
                     thisBracket += ']}'
                 tree += thisBracket
-
         tree += ']}'
-    
-        print("generate json")
-        print(tree)
         return tree
 
-
-
-    # draw a graph
-    def drawGraph(self):
+    def drawGraphToPNG(self):
         G = self.graph
-
         # print(G.numberOfEdges())
         p = nx.drawing.nx_pydot.to_pydot(G)
-        p.write_png('example2.png')
+        p.write_png('graph.png')
