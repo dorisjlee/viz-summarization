@@ -101,10 +101,19 @@ def query_vizData(tablename,x_attr,y_attr, agg_func, filters):
   result = executeQuery(query)
   return result
 
+def findDistinctAttrVal(attribute,tablename):
+  #Find the distinct values for this attribute
+  query = "SELECT DISTINCT "+ attribute +" FROM "+tablename+" ;"
+  return executeQuery(query)
+
 def unit_test():
+  print "executeQuery:\n"
+  query = "SELECT survived, COUNT(id) FROM titanic WHERE sex='male' AND age<20 GROUP BY survived;"
+  executeQuery(query)
   print "get_tables:\n", get_tables()
   print "get_columns:\n", get_columns('titanic')
   print "query_vizData:\n", query_vizData("titanic", "survived", "id", "COUNT", ["sex='male'", "age<20"])
+  print "findDistinctAttrVal:\n", findDistinctAttrVal("cap_surface","mushroom")
 if __name__=="__main__":
   unit_test()
 

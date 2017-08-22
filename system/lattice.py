@@ -24,6 +24,9 @@ class Lattice:
         # wrapper function for adding a node
         node.id = self.numberOfNodes() + 1
         self.graph.add_node(node)
+        if node.parents!=None: #not Root
+            for parent in node.parents:
+                self.addEdge(parent.vizObj, node.vizObj)
 
     def addMultiNodes(self, list):
         # wrapper function for adding multiple nodes

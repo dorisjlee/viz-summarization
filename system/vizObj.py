@@ -5,11 +5,11 @@ class vizObj:
     '''
     A vizObj contains the data values for generating the visualization.
     '''
-    def __init__(self, XLists = [], yaxis = ""):
-        self.X = XLists #strings
-        self.Y = yaxis
+    def __init__(self, x, y,filters,agg_func):
+        self.X = x #strings
+        self.Y = y
         self.filters = [] # List of constraints, it is the same as the filters in parents. [("gender","female")]
-        self.agg_func = 'SUM' # vaggregation function
+        self.agg_func = 'SUM' # aggregation function
         self.data = [] #list of data values y1,y2...
         self.expectation = self.get_expectation('NULL')
 
@@ -19,13 +19,13 @@ class vizObj:
 
     # TODO
     def __repr__(self):
-        return '(X_axis: %s, Y_axis: %s, filters: %s, data: %s)' % (self.X, self.Y, self.filters, self.data)
+        return '(X: {}, Y: {}, filters: {}, data: {})'.format(self.X, self.Y, self.filters, self.data)
 
-    def setX(self, strings):
-        self.X.append(strings)
+    def setX(self, x):
+        self.X =x 
 
-    def setY(self, yaxis):
-        self.Y = yaxis
+    def setY(self, y):
+        self.Y = y
 
     def setFilters(self, constraints):
         self.filters = constraints
@@ -33,9 +33,5 @@ class vizObj:
     def setAgg(self, agg):
         self.agg_func = agg
 
-    def setData(self, list):
-        self.data = list
-
-
-
-# class Constraint
+    def setData(self, data):
+        self.data = data
