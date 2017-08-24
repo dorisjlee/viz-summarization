@@ -23,7 +23,7 @@ class Lattice:
     def addNode(self, node):
         # wrapper function for adding a node
         node.id = self.numberOfNodes() + 1
-        self.graph.add_node(str(list(node.filters)),vizObj=node)
+        self.graph.add_node(node,filters=str(list(node.filters)),id=node.id)
         if node.parents!=None: #not Root
             for parent in node.parents:
                 self.addEdge(parent, node)
