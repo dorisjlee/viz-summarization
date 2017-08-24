@@ -65,5 +65,5 @@ class vizNode:
 
 
     def __repr__(self):
-        return "<vizObj "+self.vizObj.__repr__()+">"
+        return "<vizNode "+self.vizObj.__repr__()+">"
 
