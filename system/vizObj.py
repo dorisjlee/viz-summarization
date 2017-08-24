@@ -8,8 +8,8 @@ class vizObj:
     def __init__(self, x, y,filters,agg_func):
         self.X = x #strings
         self.Y = y
-        self.filters = [] # List of constraints, it is the same as the filters in parents. [("gender","female")]
-        self.agg_func = 'SUM' # aggregation function
+        self.filters = filters # List of constraints, it is the same as the filters in parents. [("gender","female")]
+        self.agg_func = agg_func # aggregation function
         self.data = [] #list of data values y1,y2...
         self.expectation = self.get_expectation('NULL')
 
