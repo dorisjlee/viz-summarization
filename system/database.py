@@ -89,15 +89,18 @@ def query_vizData(tablename,x_attr,y_attr, agg_func, filters):
   #str = "SELECT" + agg_func + "(" + y_attr + ")" + "FROM" + tablename + "WHERE" + filters + "GROUPBY" + x_attr
   #result = connection.execute(str)
   '''
-  filter_str = ""
-  for idx, val in enumerate(filters):
-    if(idx != len(filters)-1):
-      filter_str += val
-      filter_str += " AND "
-    else:
-      filter_str += val
+  if filters is None:
+    query = "SELECT " + x_attr + ", " +agg_func +"(" + y_attr + ")" + " FROM " + tablename + " GROUP BY " + x_attr+";"
+  else: 
+    filter_str = ""
+    for idx, val in enumerate(filters):
+      if(idx != len(filters)-1):
+        filter_str += val
+        filter_str += " AND "
+      else:
+        filter_str += val
 
-  query = "SELECT " + x_attr + ", " +agg_func +"(" + y_attr + ")" + " FROM " + tablename + " WHERE " + filter_str + " GROUP BY " + x_attr
+    query = "SELECT " + x_attr + ", " +agg_func +"(" + y_attr + ")" + " FROM " + tablename + " WHERE " + filter_str + " GROUP BY " + x_attr+";"
   result = executeQuery(query)
   return result
 
