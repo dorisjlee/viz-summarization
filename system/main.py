@@ -69,7 +69,9 @@ def index():
     '''
     
     all_tables = getTables()
-    treeTreant, nodeDic = getTreeJSON()
+    # dummy example 
+    #treeTreant, nodeDic = getTreeJSON()
+    
     # column_name = [""]
     # select_table_name = str(request.form.get('table_select'))
     # session['select_table_name'] = select_table_name
@@ -82,8 +84,9 @@ def index():
 
     # return render_template("main.html", treeTreant2 = treeTreant, all_tables = all_tables,\
     #                         column = json.loads(column_name), nodeDic = nodeDic)
-    return render_template("main.html", treeTreant2 = treeTreant, all_tables = all_tables,\
-                            nodeDic = nodeDic)
+    #return render_template("main.html", treeTreant2 = treeTreant, all_tables = all_tables,\
+    #                        nodeDic = nodeDic)
+    return render_template("main.html", all_tables = all_tables)
 
 if __name__ == "__main__":
 
