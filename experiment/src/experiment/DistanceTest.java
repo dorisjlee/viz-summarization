@@ -19,6 +19,8 @@ public class DistanceTest {
 		assertTrue("L2-norm Test", lpobj.computeDistance(viz1, viz2)==ed.computeDistance(viz1, viz2));
 		KLDivergence kldiv = new KLDivergence();
 		assertTrue("KL Divergence",kldiv.computeDistance(viz1,viz2)==-5.9566905402196895); // 2.1*np.log2((2.1/2.5))+3.2*np.log2((3.2/7.8))+2.5*np.log2((2.5/3.6))
+		MaxDiff mdiff = new MaxDiff();
+		assertTrue("Max Difference",mdiff.computeDistance(viz1,viz2)==4.6); // max(0.4,4.6,1.1)
 //		EarthMover emd = new EarthMover();
 //		System.out.println(emd.computeDistance(viz1,viz2));
 		
