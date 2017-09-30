@@ -7,6 +7,7 @@ public class KLDivergence implements Distance {
 	}
 	@Override
 	public double computeDistance(double [] viz1, double [] viz2) {
+		// Computing the KL divergence from Q to reference P
 		assert viz1.length==viz2.length;
 		for (int i=0; i<viz1.length;i++) {
 			if (viz1[i]!=0 & viz2[i]!=0) {
