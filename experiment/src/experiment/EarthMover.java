@@ -1,9 +1,4 @@
 package experiment;
-
-//import experiment.JFastEMD.src.com.telmomenezes.jfastemd.Feature2D;
-//import experiment.JFastEMD.src.com.telmomenezes.jfastemd.JFastEMD;
-//import experiment.JFastEMD.src.com.telmomenezes.jfastemd.Signature;
-//import experiment.JFastEMD.src.com.telmomenezes.jfastemd.Test;
 public class EarthMover implements Distance{
 	private double emd;
 	public EarthMover() {
