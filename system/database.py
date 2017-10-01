@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 import pandas as pd
 import json
 
-#data = pd.read_csv('../data/titanic/titanic.csv',index_col=0)
+#data = pd.read_csv('../data/titanic.csv',index_col=0)
 # engine = create_engine("postgresql://summarization:lattice@localhost:5433")
 engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 # data.to_sql(name='titanic', con=engine, if_exists = 'replace', index=False)
