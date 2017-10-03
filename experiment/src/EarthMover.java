@@ -1,4 +1,3 @@
-package experiment;
 public class EarthMover implements Distance{
 	private double emd;
 	public EarthMover() {

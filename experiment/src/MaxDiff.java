@@ -1,4 +1,3 @@
-package experiment;
 public class MaxDiff implements Distance{
 	private double mdiff;
 	public MaxDiff() {

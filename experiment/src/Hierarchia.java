@@ -2,10 +2,10 @@
  * @author himeldev
  */
 import java.util.*;
-
 public class Hierarchia 
 {
-    public static void main(String[] args) 
+//    public static void main(String[] args)
+	public static HashMap<String, ArrayList<Double>>  computeVisualizationMap()
     {
         ArrayList<String> attribute_names = new ArrayList<>(Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H"));
         HashMap<String, ArrayList<Double>> visualization_map = new HashMap<String, ArrayList<Double>>();
@@ -62,6 +62,7 @@ public class Hierarchia
         }
         System.out.println("Number of visualizations: "+visualization_map.size());
         print_map(visualization_map);
+        return visualization_map;
         
     }
     
