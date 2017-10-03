@@ -120,6 +120,9 @@ public class Hierarchia
         //System.out.println("Number of visualizations: "+map_id_to_metric_values.size());
         //print_map(map_id_to_metric_values);
         
+		Euclidean ed = new Euclidean();
+		Traversal.greedyPicking( map_id_to_metric_values, node_list, map_id_to_index, ed);
+		
     }
     
     static void generate_k_combinations(ArrayList<String> attribute_names, int len, int start, ArrayList<String> current_combination, 
