@@ -2,13 +2,20 @@
  * @author himeldev
  */
 import java.util.*;
+
 public class Hierarchia 
 {
-//    public static void main(String[] args)
-	public static HashMap<String, ArrayList<Double>>  computeVisualizationMap()
+    public static void main(String[] args)
     {
         ArrayList<String> attribute_names = new ArrayList<>(Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H"));
-        HashMap<String, ArrayList<Double>> visualization_map = new HashMap<String, ArrayList<Double>>();
+        HashMap<String, ArrayList<Double>> map_id_to_metric_values = new HashMap<String, ArrayList<Double>>();
+        ArrayList<Node> node_list = new ArrayList<Node>();
+        HashMap<String, Integer> map_id_to_index = new HashMap<String, Integer>();
+        
+        Node root = new Node("#");
+        node_list.add(root);
+        map_id_to_index.put("#", 0);
+        
         
         int n = attribute_names.size();
         for(int k = 1; k <= n; k++)
@@ -49,20 +56,69 @@ public class Hierarchia
                 for(int j=0; j < value_permutations.size(); j++)
                 {
                     current_permutation = value_permutations.get(j);
-                    String visualization_key = "";
+                    String visualization_key = "#";
                     for(int sp = 0; sp < k; sp++)
                     {
                         visualization_key += current_combination.get(sp)+"$"+current_permutation.get(sp)+"#";  
                     }
-                    //System.out.println(visualization_key);
-                    visualization_map.put(visualization_key, compute_visualization(current_combination, current_permutation));
+                    // id: list of metric values
+                    // node_list: list of child indexes
+
+                    // After generating viz put in map
+                    map_id_to_metric_values.put(visualization_key, compute_visualization(current_combination, current_permutation));
+                    Node node = new Node(visualization_key);
+                    node_list.add(node); // add parent first, then children
+                    map_id_to_index.put(visualization_key, node_list.size()-1);
+                    
+                    for(int dr = 0; dr < k; dr++)
+                    {
+                        visualization_key = "#";
+                        for(int sp = 0; sp < k; sp++)
+                        {
+                            if(sp!=dr) // which filter do I drop to get the children
+                                visualization_key += current_combination.get(sp)+"$"+current_permutation.get(sp)+"#";
+                        }
+                        int parent_index = map_id_to_index.get(visualization_key);
+                        ArrayList<Integer> child_list = node_list.get(parent_index).get_child_list(); //update list of children
+                        child_list.add(node_list.size()-1);
+                        node_list.get(parent_index).set_child_list(child_list);
+                        
+                    }
+                    /*
+                    System.out.print("Node List: ");
+                    for(int x = 0; x < node_list.size(); x++)
+                    {
+                        System.out.print(node_list.get(x).get_id()+" ");
+                    }
+                    System.out.println();
+                    for(int x = 0; x < node_list.size(); x++)
+                    {
+                        System.out.println("Node: "+node_list.get(x).get_id());
+                        for(int y=0; y < node_list.get(x).get_child_list().size(); y++)
+                        {
+                            System.out.print(node_list.get(x).get_child_list().get(y)+" ");
+                        }
+                        System.out.println();
+                    }
+                    */
                     
                 }
             }            
         }
-        System.out.println("Number of visualizations: "+visualization_map.size());
-        print_map(visualization_map);
-        return visualization_map;
+        // traverse to check if this is corectly generate the lattice , node list stores viz along with reference to children
+        /*
+        for(int x = 0; x < node_list.size(); x++)
+        {
+            System.out.println("Node index: "+x+", Node id: "+node_list.get(x).get_id());
+            System.out.print("Parents of following nodes: ");
+            for(int y=0; y < node_list.get(x).get_child_list().size(); y++)
+            {
+                System.out.print(node_list.get(node_list.get(x).get_child_list().get(y)).get_id()+" ");
+            }
+            System.out.println();
+        */
+        //System.out.println("Number of visualizations: "+map_id_to_metric_values.size());
+        //print_map(map_id_to_metric_values);
         
     }
     
@@ -101,9 +157,11 @@ public class Hierarchia
     static ArrayList<Double> compute_visualization(ArrayList<String> current_combination, ArrayList<String> current_permutation)
     {
         ArrayList<Double> measure_values = new ArrayList<Double>();
-        double x = (Math.random() * 100) ;
-        measure_values.add(100.0-x);
+        double Min = 1.0;
+        double Max = 99.0;
+        double x = Min + (Math.random() * ((Max - Min) + 1));
         measure_values.add(x);
+        measure_values.add(100-x);
         return measure_values;
     }
     
