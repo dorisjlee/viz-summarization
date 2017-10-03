@@ -101,8 +101,9 @@ public class Hierarchia
     static ArrayList<Double> compute_visualization(ArrayList<String> current_combination, ArrayList<String> current_permutation)
     {
         ArrayList<Double> measure_values = new ArrayList<Double>();
-        measure_values.add(80.0);
-        measure_values.add(20.0);
+        double x = (Math.random() * 100) ;
+        measure_values.add(100.0-x);
+        measure_values.add(x);
         return measure_values;
     }
     
