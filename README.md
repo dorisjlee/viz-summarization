@@ -1,9 +1,15 @@
-# viz-summarizationThe system is a Flask application inside the ``systems/`` directory, to run the webapp, make sure you have the latest version of Flask installed. 
- ```
+# viz-summarization
+
+The system is a Flask application inside the ``systems/`` directory, to run the webapp, make sure you have the latest version of Flask installed. 
+ 
+```
 export FLASK_APP=main.py
 python -m flask run
 ```
 
+Install postgres at: https://postgresapp.com/
+
+If it doesn't work on the current port(5432), try a another port.
 ```
 $psql -d postgres
 
