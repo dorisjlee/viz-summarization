@@ -1,5 +1,3 @@
-package experiment;
-
 public class KLDivergence implements Distance {
 	private double kldiv;
 	public KLDivergence() {

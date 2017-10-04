@@ -1,9 +1,6 @@
-package experiment;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
-import experiment.Euclidean;
-import experiment.LpNorm;
-import experiment.EarthMover;
 
 public class DistanceTest {
 	public static boolean almostEqual(double a, double b, double eps){
