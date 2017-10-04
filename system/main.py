@@ -70,7 +70,7 @@ def index():
     
     all_tables = getTables()
     # dummy example 
-    #treeTreant, nodeDic = getTreeJSON()
+    treeTreant, nodeDic = getTreeJSON()
     
     # column_name = [""]
     # select_table_name = str(request.form.get('table_select'))
@@ -86,7 +86,7 @@ def index():
     #                         column = json.loads(column_name), nodeDic = nodeDic)
     #return render_template("main.html", treeTreant2 = treeTreant, all_tables = all_tables,\
     #                        nodeDic = nodeDic)
-    return render_template("main.html", all_tables = all_tables)
+    return render_template("main.html", all_tables = all_tables, treeTreant2 = treeTreant,nodeDic = nodeDic)
 
 if __name__ == "__main__":
 

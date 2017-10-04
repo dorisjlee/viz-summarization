@@ -11,7 +11,7 @@ class vizObj:
         self.filters = filters # List of constraints, it is the same as the filters in parents. [("gender","female")]
         self.agg_func = agg_func # aggregation function
         self.tablename = tablename
-        self.data = self.compute_data() #list of data values y1,y2...
+        self.data = []#self.compute_data() #list of data values y1,y2...
         self.expectation = self.get_expectation('NULL')
         
     def compute_data(self):

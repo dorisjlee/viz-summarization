@@ -78,13 +78,14 @@ class Lattice:
         # containing index and node object: {0: node0, 1: node2}
         node_dic = {}
         for node in self.getNodes():
+            print node
             each = []
             viz = node.get_viz()
-            current = viz[0]
+            # current = viz[0]
+            current=viz
             for idx, val in enumerate(current.X):
                 each.append({"xAxis": val, "yAxis": current.data[idx]})
             each.append({"filter": ' '.join(current.filters), "yName": current.Y, "childrenIndex": node.childrenIndex})
-
             node_dic[node.id] = each
         return node_dic
 
@@ -97,7 +98,8 @@ class Lattice:
         for node in self.getNodes():
             each = []
             viz = node.get_viz()
-            current = viz[0]
+            # current = viz[0]
+            current=viz
             for idx, val in enumerate(current.X):
                 each.append({"xAxis": val, "yAxis": current.data[idx]})
             each.append({"filter": ' '.join(current.filters), "yName": current.Y})
@@ -121,6 +123,10 @@ class Lattice:
         
             #if i != len(root.childrenIndex) - 1:
                 #thisBracket += ","
+            print node_dic
+            print i
+            print "root children index"
+            print root.childrenIndex
             if node_dic[root.childrenIndex[i]][len(node_dic[root.childrenIndex[i]]) - 1]["childrenIndex"] != []:
                 arr = node_dic[root.childrenIndex[i]][len(node_dic[root.childrenIndex[i]]) - 1]["childrenIndex"]
                 thisBracket += '"children"' +' : '+'['

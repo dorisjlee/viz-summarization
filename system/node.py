@@ -12,9 +12,10 @@ class vizNode:
     def __init__(self,viz,parents):
         self.vizObj = viz
         self.id = 0
+        self.children=[]
         # self.children = children
         self.parents = parents
-        #self.childrenIndex = [] #index of all the children ids 
+        self.childrenIndex = [] #index of all the children ids 
         self.filters = viz.filters
 
     def __repr__(self):
@@ -36,14 +37,14 @@ class vizNode:
     def set_parents(self, parent):
         self.parents = parent
 
-    # def set_children(self, children):
-    #     self.children = children
-    #     for each in children:
-    #         self.childrenIndex.append(each.id)
+    def set_children(self, children):
+        self.children = children
+        for each in children:
+            self.childrenIndex.append(each.id)
 
 
-    # def set_children_index(self, index):
-    #     self.childrenIndex = index
+    def set_children_index(self, index):
+        self.childrenIndex = index
 
     def set_viz(self, viz):
         self.vizObj = viz
