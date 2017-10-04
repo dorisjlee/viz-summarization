@@ -1,22 +1,25 @@
 /*
  * @author himeldev
  */
+import java.io.*;
 import java.util.*;
 
 public class Hierarchia 
 {
-    public static void main(String[] args)
+    public static void main(String[] args) 
     {
-        ArrayList<String> attribute_names = new ArrayList<>(Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H"));
-        // id: String list of metric values
+        ArrayList<String> attribute_names = get_attribute_names();
+        System.out.println(attribute_names);
+        
         HashMap<String, ArrayList<Double>> map_id_to_metric_values = new HashMap<String, ArrayList<Double>>();
         ArrayList<Node> node_list = new ArrayList<Node>();// node_list: list of child indexes
         HashMap<String, Integer> map_id_to_index = new HashMap<String, Integer>();
         
+        map_id_to_metric_values.put("#", new ArrayList<Double>(Arrays.asList(43.40,56.60)));
         Node root = new Node("#");
         node_list.add(root);
         map_id_to_index.put("#", 0);
-        map_id_to_metric_values.put("#", new ArrayList<Double>(Arrays.asList(20.0,80.0))); //Placeholder
+        
         
         int n = attribute_names.size();
         for(int k = 1; k <= n; k++)
@@ -29,9 +32,9 @@ public class Hierarchia
                 current_combination.add("#");
             }
             generate_k_combinations(attribute_names, k, 0, current_combination, k_attribute_combinations);
-            System.out.println("Number of combinations: "+k_attribute_combinations.size());
+            //System.out.println("Number of combinations: "+k_attribute_combinations.size());
             
-            System.out.println("Attribute Combinations: "+k_attribute_combinations);
+            //System.out.println("Attribute Combinations: "+k_attribute_combinations);
             
             for(int i = 0; i < k_attribute_combinations.size(); i++)
             {
@@ -63,25 +66,67 @@ public class Hierarchia
                         visualization_key += current_combination.get(sp)+"$"+current_permutation.get(sp)+"#";  
                     }
                     
-                    // After generating viz put in map
-                    map_id_to_metric_values.put(visualization_key, compute_visualization(current_combination, current_permutation));
-                    Node node = new Node(visualization_key);
-                    node_list.add(node); // add parent first, then children
-                    map_id_to_index.put(visualization_key, node_list.size()-1);
+                    ArrayList<Double> measure_values = compute_visualization(attribute_names, current_combination, current_permutation);
                     
-                    for(int dr = 0; dr < k; dr++)
+                    if(measure_values.get(0) > 0.0 || measure_values.get(1)> 0.0 )
                     {
-                        visualization_key = "#";
-                        for(int sp = 0; sp < k; sp++)
+                        System.out.println("Current Visualization: "+visualization_key+" -- "+measure_values);
+                        //System.out.print("C");
+                        ArrayList<Double> current_visualization_measure_values = 
+                                compute_visualization(attribute_names, current_combination, current_permutation);
+                        map_id_to_metric_values.put(visualization_key, current_visualization_measure_values);
+                        Node node = new Node(visualization_key);
+                        node_list.add(node);
+                        map_id_to_index.put(visualization_key, node_list.size()-1);
+
+                        double min_distance = 1000000;
+                        for(int dr = 0; dr < k; dr++)
                         {
-                            if(sp!=dr) // which filter do I drop to get the children
-                                visualization_key += current_combination.get(sp)+"$"+current_permutation.get(sp)+"#";
+                            visualization_key = "#";
+                            for(int sp = 0; sp < k; sp++)
+                            {
+                                if(sp!=dr)
+                                    visualization_key += current_combination.get(sp)+"$"+current_permutation.get(sp)+"#";
+                            }
+                            //System.out.println("Potential parent: "+visualization_key+" -- "+map_id_to_metric_values.get(visualization_key));
+                            if(map_id_to_metric_values.get(visualization_key) != null)
+                            {
+                                ArrayList<Double> parent_visualization_measure_values = map_id_to_metric_values.get(visualization_key);
+                                double distance = compute_distance(current_visualization_measure_values, parent_visualization_measure_values);
+                                if(distance < min_distance)
+                                    min_distance = distance;
+                            }
                         }
-                        int parent_index = map_id_to_index.get(visualization_key);
-                        ArrayList<Integer> child_list = node_list.get(parent_index).get_child_list(); //update list of children
-                        child_list.add(node_list.size()-1);
-                        node_list.get(parent_index).set_child_list(child_list);
                         
+                        for(int dr = 0; dr < k; dr++)
+                        {
+                            visualization_key = "#";
+                            for(int sp = 0; sp < k; sp++)
+                            {
+                                if(sp!=dr)
+                                    visualization_key += current_combination.get(sp)+"$"+current_permutation.get(sp)+"#";
+                            }
+                            
+                            if(map_id_to_metric_values.get(visualization_key) != null)
+                            {
+                                ArrayList<Double> parent_visualization_measure_values = map_id_to_metric_values.get(visualization_key);
+                                double distance = compute_distance(current_visualization_measure_values, parent_visualization_measure_values);
+                                if(distance*0.8 <= min_distance)
+                                {
+                                    int parent_index = map_id_to_index.get(visualization_key);
+                                    
+                                    ArrayList<Integer> child_list = node_list.get(parent_index).get_child_list();
+                                    child_list.add(node_list.size()-1);
+                                    node_list.get(parent_index).set_child_list(child_list);
+                                    
+                                    ArrayList<Double> dist_list = node_list.get(parent_index).get_dist_list();
+                                    dist_list.add(distance);
+                                    node_list.get(parent_index).set_child_list(child_list);
+                                    //System.out.print("I");
+                                    //System.out.println("Informative parent: "+visualization_key+" -- "+map_id_to_metric_values.get(visualization_key));
+                                }
+                            }
+                        }
                     }
                     /*
                     System.out.print("Node List: ");
@@ -104,25 +149,107 @@ public class Hierarchia
                 }
             }            
         }
-        // traverse to check if this is corectly generate the lattice , node list stores viz along with reference to children
-        /*
+        
+        
         for(int x = 0; x < node_list.size(); x++)
         {
             System.out.println("Node index: "+x+", Node id: "+node_list.get(x).get_id());
-            System.out.print("Parents of following nodes: ");
+            System.out.println("Parents of "+node_list.get(x).get_child_list().size()+" nodes:");
             for(int y=0; y < node_list.get(x).get_child_list().size(); y++)
             {
-                System.out.print(node_list.get(node_list.get(x).get_child_list().get(y)).get_id()+" ");
+                System.out.println(node_list.get(node_list.get(x).get_child_list().get(y)).get_id()+" "
+                        +node_list.get(x).get_dist_list().get(y));
             }
             System.out.println();
-        */
+        }
+        
+        
+        
+        
         //System.out.println("Number of visualizations: "+map_id_to_metric_values.size());
         //print_map(map_id_to_metric_values);
+        int k = 20;
+        ArrayList<Integer> dashboard = new ArrayList<Integer>();
+        dashboard.add(0);
+        while(dashboard.size()<k)
+        {
+            //System.out.println("Dashboard Size: "+dashboard.size());
+            double max_utility = 0;
+            int next = -1;
+            for(int i = 0; i < dashboard.size(); i++)
+            {
+                //System.out.println("Children of: "+node_list.get(dashboard.get(i)).get_id());
+                for(int j = 0; j < node_list.get(dashboard.get(i)).get_dist_list().size(); j++)
+                {
+                    int flag = 0;
+                    /*
+                    System.out.println("Dashboard: ");
+                    for(int sp = 0; sp < dashboard.size(); sp++)
+                    {
+                        System.out.print(dashboard.get(sp)+" ");
+                    }
+                    System.out.println();
+                    */
+                    
+                    //System.out.println("Current Node: "+node_list.get(dashboard.get(i)).get_child_list().get(j));
+                    for(int sp = 0; sp < dashboard.size(); sp++)
+                    {
+                        
+                        if(node_list.get(dashboard.get(i)).get_child_list().get(j) == dashboard.get(sp))
+                        {
+                            //System.out.println("Already in");
+                            flag =1;
+                            break;
+                        }
+                    }
+                    if(flag == 0 && node_list.get(dashboard.get(i)).get_dist_list().get(j) > max_utility)
+                    {
+                        max_utility = node_list.get(dashboard.get(i)).get_dist_list().get(j);
+                        next = node_list.get(dashboard.get(i)).get_child_list().get(j);
+                    }
+                }
+            }
+            dashboard.add(next); 
+        }
+        for(int i = 1; i < dashboard.size(); i++)
+        {
+            String id = node_list.get(dashboard.get(i)).get_id();
+            String[] attribute_value_combos = id.replaceFirst("^#", "").split("#");
+            
+            for(int j = 0; j < attribute_value_combos.length; j++)
+            {
+                String[] attribute_value = attribute_value_combos[j].split("\\$");
+                System.out.print(attribute_value[0]+" = "+attribute_value[1]+" ");
+            }
+            System.out.print(map_id_to_metric_values.get(id));
+            System.out.println();
+        }
         
-		Euclidean ed = new Euclidean();
-		Traversal tr = new Traversal(map_id_to_metric_values, node_list, map_id_to_index, ed);
-		tr.greedyPicking();
-		
+    }
+    
+    static ArrayList<String> get_attribute_names()
+    {
+        ArrayList<String> attribute_names = new ArrayList<String>();
+        try
+        {
+            BufferedReader reader = new BufferedReader(new FileReader("materialized_view.csv"));
+            String line = null;
+            if((line = reader.readLine()) != null) 
+            {
+                String [] names = line.split(", ");
+                for(int i = 0; i < names.length-2; i++)
+                {
+                    attribute_names.add(names[i]);
+                }
+            }
+            
+        }
+        catch(IOException e)
+        {
+            System.out.println("Error");
+        }
+        return attribute_names;
+        
     }
     
     static void generate_k_combinations(ArrayList<String> attribute_names, int len, int start, ArrayList<String> current_combination, 
@@ -157,14 +284,72 @@ public class Hierarchia
             generate_value_permutations(attribute_values, depth + 1, current_permutation, value_permutations);
         }
     }
-    static ArrayList<Double> compute_visualization(ArrayList<String> current_combination, ArrayList<String> current_permutation)
+    static ArrayList<Double> compute_visualization(ArrayList<String> attribute_names, ArrayList<String> current_combination, ArrayList<String> current_permutation)
     {
+        //System.out.println("Attribute-Value Combination: "+current_combination+" -- "+current_permutation);
         ArrayList<Double> measure_values = new ArrayList<Double>();
+        double sum_0 = 0;
+        double sum_1 = 0;  
+        
+        ArrayList<Integer> attribute_positions = new ArrayList<Integer>();
+        for(int i = 0; i < current_combination.size(); i++)
+        {
+            for(int j = 0; j < attribute_names.size(); j++)
+            {
+                if(current_combination.get(i).equals(attribute_names.get(j)))
+                {
+                    attribute_positions.add(j);
+                }
+            }
+        }
+        try
+        {
+            BufferedReader reader = new BufferedReader(new FileReader("materialized_view.csv"));
+            String line = reader.readLine();
+                 
+            
+            while((line = reader.readLine()) != null) 
+            {
+                String [] values = line.split(",");
+                int flag = 1;
+                for(int i = 0; i < attribute_positions.size(); i++)
+                {
+                    if(!values[attribute_positions.get(i)].equals(current_permutation.get(i)))
+                    {
+                        flag = 0;
+                        break;
+                    }
+                }
+                if(flag == 1 && values[values.length-2].equals("0"))
+                    sum_0 += Double.parseDouble(values[values.length-1]);
+                else if(flag == 1 && values[values.length-2].equals("1"))
+                    sum_1 += Double.parseDouble(values[values.length-1]);
+                    
+            }
+            
+        }
+        catch(IOException e)
+        {
+            System.out.println("Error");
+        }
+        /*
         double Min = 1.0;
         double Max = 99.0;
         double x = Min + (Math.random() * ((Max - Min) + 1));
         measure_values.add(x);
         measure_values.add(100-x);
+        */
+        if(Math.abs(sum_0-0.0) <0.000001 &&  Math.abs(sum_1-0.0) <0.000001)
+        {
+            measure_values.add(-1.0);
+            measure_values.add(-1.0);
+        }
+        else
+        {
+            measure_values.add(sum_0/(sum_0+sum_1)*100);
+            measure_values.add(sum_1/(sum_0+sum_1)*100);
+        }
+        //System.out.println(measure_values);
         return measure_values;
     }
     
@@ -177,6 +362,21 @@ public class Hierarchia
             System.out.println(pair.getKey() + " = " + pair.getValue());
             it.remove(); // avoids a ConcurrentModificationException
         }
+    }
+
+    
+    static double compute_distance(ArrayList<Double> l1, ArrayList<Double> l2)
+    {
+        double distance = 0;
+        
+        for(int i=0; i < l1.size() && i < l2.size(); i++)
+        {
+            //distance += (l1.get(i)-l2.get(i))*(l1.get(i)-l2.get(i));
+            distance += Math.abs(l1.get(i)-l2.get(i));
+        }
+        //return Math.sqrt(distance);
+        return distance;
+
     }
     
 }
