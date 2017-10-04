@@ -8,14 +8,15 @@ public class Hierarchia
     public static void main(String[] args)
     {
         ArrayList<String> attribute_names = new ArrayList<>(Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H"));
+        // id: String list of metric values
         HashMap<String, ArrayList<Double>> map_id_to_metric_values = new HashMap<String, ArrayList<Double>>();
-        ArrayList<Node> node_list = new ArrayList<Node>();
+        ArrayList<Node> node_list = new ArrayList<Node>();// node_list: list of child indexes
         HashMap<String, Integer> map_id_to_index = new HashMap<String, Integer>();
         
         Node root = new Node("#");
         node_list.add(root);
         map_id_to_index.put("#", 0);
-        
+        map_id_to_metric_values.put("#", new ArrayList<Double>(Arrays.asList(20.0,80.0))); //Placeholder
         
         int n = attribute_names.size();
         for(int k = 1; k <= n; k++)
@@ -61,9 +62,7 @@ public class Hierarchia
                     {
                         visualization_key += current_combination.get(sp)+"$"+current_permutation.get(sp)+"#";  
                     }
-                    // id: list of metric values
-                    // node_list: list of child indexes
-
+                    
                     // After generating viz put in map
                     map_id_to_metric_values.put(visualization_key, compute_visualization(current_combination, current_permutation));
                     Node node = new Node(visualization_key);
