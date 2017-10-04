@@ -120,7 +120,8 @@ public class Hierarchia
         //print_map(map_id_to_metric_values);
         
 		Euclidean ed = new Euclidean();
-		Traversal.greedyPicking( map_id_to_metric_values, node_list, map_id_to_index, ed);
+		Traversal tr = new Traversal(map_id_to_metric_values, node_list, map_id_to_index, ed);
+		tr.greedyPicking();
 		
     }
     
