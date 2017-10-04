@@ -29,8 +29,8 @@
 
 <body>
 <div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left" style="display:none" id="mySidebar">
-  <button class="w3-bar-item w3-button w3-large" style="left:30px"
-  onclick="menuItem_close()">Close &times;</button>
+  <button class="w3-bar-item w3-button w3-large" style="margin: 10px 300px;"
+  onclick="menuItem_close()"> &times;</button>
 
 <form class="form-inline menu-item">
   <h2 class = "title"><b>Dataset</b></h2>
@@ -63,11 +63,16 @@
 <br> 
 <form class="form-inline menu-item" class="form-inline" id = "agg_select" name = "agg_select">
   <h2 class = "title"><b>Aggregation function:</b></h2>
-  <input type="radio" name = "aggFunc" id = "SUM" value="SUM"> SUM<br>
-  <input type="radio" name = "aggFunc" id = "AVERAGE" value="AVERAGE"> AVERAGE<br>
-  <input type="radio" name = "aggFunc" id = "COUNT" value="COUNT"> COUNT   
+    <div class="form-group">
+        <select name = "AggFunc"  id = "AggFunc" class="selectpicker form-control">
+            <option selected="true" value = "None"> None</option>
+            <option value= "SUM">SUM</option>
+            <option value= "AVERAGE">AVERAGE</option>
+            <option value= "COUNT">COUNT</option>
+        </select>
+    </div>
   <br>
-</form> 
+</form>
 <br> 
 <div class="container">
     <div class="row">
@@ -76,7 +81,7 @@
                 <form role="form" class="menu-item" autocomplete="off" name = "filter_select">
                     <h2 class = "title"><b>Filters</b></h2>
                     <div class="entry input-group col-xs-3">
-                        <input class="filter form-control" style = "left:25px" type="text" />
+                        <input class="filter form-control" style = "left:2px" type="text" />
                         <span class="input-group-btn">
                             <button class="btn btn-success btn-add" type="button">
                                 <span class="glyphicon glyphicon-plus"></span>
@@ -87,7 +92,7 @@
             </div>
         </div>
     </div>
-    <input type="submit" id="filterSubmit" style = "background-color: #2196f3;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 2px 2px;cursor: pointer;right:40;" value="Submit">  
+    <input type="submit" id="filterSubmit" style = "background-color: #359EDA;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 100px 100px;cursor: pointer;right:40;" value="Submit">
 </div>
 
 
