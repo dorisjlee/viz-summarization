@@ -78,7 +78,6 @@ class Lattice:
         # containing index and node object: {0: node0, 1: node2}
         node_dic = {}
         for node in self.getNodes():
-            print node
             each = []
             viz = node.get_viz()
             # current = viz[0]
@@ -92,9 +91,6 @@ class Lattice:
 
     def generateNodeDicJsonFile(self):
         node_dic = {}
-        print "generateNodeDicJsonFile"
-        print self.nodeDic
-        print self.getNodes()
         for node in self.getNodes():
             each = []
             viz = node.get_viz()
@@ -122,11 +118,7 @@ class Lattice:
             thisBracket += '"innerHTML"' + ' : ' + '"#chart' + str(root.childrenIndex[i]) + '"'+","
         
             #if i != len(root.childrenIndex) - 1:
-                #thisBracket += ","
-            print node_dic
-            print i
-            print "root children index"
-            print root.childrenIndex
+                #thisBracket += ","        
             if node_dic[root.childrenIndex[i]][len(node_dic[root.childrenIndex[i]]) - 1]["childrenIndex"] != []:
                 arr = node_dic[root.childrenIndex[i]][len(node_dic[root.childrenIndex[i]]) - 1]["childrenIndex"]
                 thisBracket += '"children"' +' : '+'['

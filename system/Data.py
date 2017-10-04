@@ -18,14 +18,18 @@ def getJsonFromLattice():
     v2.setData([31, 62, 7])
     W = vizNode(viz=v2,parents=[root])
 
+    v3 = vizObj(x=["Clinton", "Trump", "Others"],y="% of vote",filters=["Gender = F"],\
+                agg_func="SUM",tablename="election")
+    v3.setData([21, 70, 9])
+    F = vizNode(viz=v3,parents=[root])
     # set up the tree example
     for nodes in G.getNodes():
         for child in nodes.get_child():
             G.addEdge(nodes, child)
-    G.addMultiNodes([root,W])
-    root.set_children([W])   
+    G.addMultiNodes([root,W,F])
+    root.set_children([W,F])   
 
-    
+
     nodeDic = G.generateNodeDic()
     ret = G.generateJson(root, nodeDic)
     ret2 = G.generateNodeDicJsonFile()

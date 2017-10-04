@@ -31,7 +31,7 @@ var chart_config = {
         // On document load, call the render() function to load the graph
         chartid = document.getElementById("chartid");
         
-        for(var i = 1; i < 10; i++) {
+        for(var i = 1; i < 3; i++) { // Need to replace this number 3 to dynamically read values from length of the nodeDic
             arrayDiv[i] = document.createElement('div');
             arrayDiv[i].id = 'chart' + i;
 
