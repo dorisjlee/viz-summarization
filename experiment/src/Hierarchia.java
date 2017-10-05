@@ -8,65 +8,8 @@ import org.w3c.dom.NodeList;
 
 public class Hierarchia 
 {
-	
-    
-    public void HDgreedyPicking(Lattice lattice) {
-    	 //System.out.println("Number of visualizations: "+map_id_to_metric_values.size());
-        //print_map(map_id_to_metric_values);
-        int k = 20;
-        double total_utility =0;
-        ArrayList<Integer> dashboard = new ArrayList<Integer>();
-        dashboard.add(0);
-        while(dashboard.size()<k)
-        {
-        		double max_utility = 0;
-            //System.out.println("Dashboard Size: "+dashboard.size());
-            int next = -1;
-            for(int i = 0; i < dashboard.size(); i++)
-            {
-                //System.out.println("Children of: "+node_list.get(dashboard.get(i)).get_id());
-                for(int j = 0; j < lattice.nodeList.get(dashboard.get(i)).get_dist_list().size(); j++)
-                {
-                    int flag = 0;
-                    //System.out.println("Current Node: "+node_list.get(dashboard.get(i)).get_child_list().get(j));
-                    for(int sp = 0; sp < dashboard.size(); sp++)
-                    {
-                        
-                        if(lattice.nodeList.get(dashboard.get(i)).get_child_list().get(j) == dashboard.get(sp))
-                        {
-                            //System.out.println("Already in");
-                            flag =1;
-                            break;
-                        }
-                    }
-                    if(flag == 0 && lattice.nodeList.get(dashboard.get(i)).get_dist_list().get(j) > max_utility)
-                    {
-                        max_utility = lattice.nodeList.get(dashboard.get(i)).get_dist_list().get(j);
-                        next = lattice.nodeList.get(dashboard.get(i)).get_child_list().get(j);
-                    }
-                }
-            }
-            dashboard.add(next); 
-        }
-        for(int i = 1; i < dashboard.size(); i++)
-        {
-            String id = lattice.nodeList.get(dashboard.get(i)).get_id();
-            String[] attribute_value_combos = id.replaceFirst("^#", "").split("#");
-            
-            for(int j = 0; j < attribute_value_combos.length; j++)
-            {
-                String[] attribute_value = attribute_value_combos[j].split("\\$");
-                System.out.print(attribute_value[0]+" = "+attribute_value[1]+" ");
-            }
-            System.out.print(lattice.id2MetricMap.get(id));
-            System.out.println();
-        }
-        //
-        lattice.maxSubgraph= dashboard; 
-        lattice.maxSubgraphUtility=total_utility;
-    }
     public static Lattice generateFullyMaterializedLattice(){
-    	    System.out.print("---------------- Generate Fully Materialized Lattice -----------------");
+    	    System.out.println("---------------- Generate Fully Materialized Lattice -----------------");
     		ArrayList<String> attribute_names = get_attribute_names();
         //System.out.println(attribute_names);
         

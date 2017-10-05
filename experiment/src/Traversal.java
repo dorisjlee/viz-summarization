@@ -17,6 +17,12 @@ public class Traversal {
 		 }
 		return target;
 	}
+	public void greedyPicking(Integer k ) {
+		System.out.println("---------------- Greedy Picking -----------------");
+		 // Starting from Root,this trigger recursive call to findBestChild and updates maxSubgraph and maxSubgraphUtility
+		findBestChild(0, k);
+		printMaxSubgraphSummary();
+	}	
 	public void findBestChild(Integer parentIndex,Integer k) {
 		//printMaxSubgraphSummary();
 		// Variable Initialization
@@ -43,13 +49,13 @@ public class Traversal {
 			return ; 
 		}else {
 			HashMap<Integer,Double> childUtilities =new HashMap<Integer,Double> ();
-			System.out.println("From all children:");
+			//System.out.println("From all children:");
 			for (Integer childID: children) {
 				childNode = lattice.nodeList.get(childID);
 				childVal = ArrayList2Array(lattice.id2MetricMap.get(childNode.get_id()));
 				utility = metric.computeDistance(parentVal, childVal);
 				childUtilities.put(childID,utility);
-				System.out.println("<"+childID+","+lattice.nodeList.get(childID).get_id()+","+utility+">");
+				//System.out.println("<"+childID+","+lattice.nodeList.get(childID).get_id()+","+utility+">");
 			}
 			// Find the child with the max utility
 			HashMap.Entry<Integer, Double> maxEntry = null;
@@ -60,18 +66,70 @@ public class Traversal {
 			        maxEntry = entry;
 			    }
 			}
-			System.out.println("Picked max Child: <"+ maxEntry.getKey() +","+lattice.nodeList.get(maxEntry.getKey()).get_id()+","+maxEntry.getValue()+">");
+			//System.out.println("Picked max child: <"+ maxEntry.getKey() +","+lattice.nodeList.get(maxEntry.getKey()).get_id()+","+maxEntry.getValue()+">");
 			lattice.maxSubgraph.add(maxEntry.getKey()); // adding this best child into the subgraph
 			lattice.maxSubgraphUtility+=maxEntry.getValue();
-			findBestChild( maxEntry.getKey(),k);
+			findBestChild(maxEntry.getKey(),k);
 		}
 	}
-	public void greedyPicking(Integer k ) {
-		System.out.println("---------------- Greedy Picking -----------------");
-		 // Starting from Root,this trigger recursive call to findBestChild and updates maxSubgraph and maxSubgraphUtility
-		findBestChild( 0, k);
-		printMaxSubgraphSummary();
-	}	
+	
+	public void HDgreedyPicking(Integer k) {
+   	   //System.out.println("Number of visualizations: "+map_id_to_metric_values.size());
+       //print_map(map_id_to_metric_values);
+       double total_utility =0;
+       ArrayList<Integer> dashboard = new ArrayList<Integer>();
+       dashboard.add(0);
+       while(dashboard.size()<k)
+       {
+       	   double max_utility = 0;
+           //System.out.println("Dashboard Size: "+dashboard.size());
+           int next = -1;
+           for(int i = 0; i < dashboard.size(); i++)
+           {
+               //System.out.println("Children of: "+node_list.get(dashboard.get(i)).get_id());
+               for(int j = 0; j < lattice.nodeList.get(dashboard.get(i)).get_dist_list().size(); j++)
+               {
+                   int flag = 0;
+                   //System.out.println("Current Node: "+node_list.get(dashboard.get(i)).get_child_list().get(j));
+                   for(int sp = 0; sp < dashboard.size(); sp++)
+                   {
+                       
+                       if(lattice.nodeList.get(dashboard.get(i)).get_child_list().get(j) == dashboard.get(sp))
+                       {
+                           //System.out.println("Already in");
+                           flag =1;
+                           break;
+                       }
+                   }
+                   if(flag == 0 && lattice.nodeList.get(dashboard.get(i)).get_dist_list().get(j) > max_utility)
+                   {
+                       max_utility = lattice.nodeList.get(dashboard.get(i)).get_dist_list().get(j);
+                       next = lattice.nodeList.get(dashboard.get(i)).get_child_list().get(j);
+                   }
+               }
+           }
+           dashboard.add(next);
+           total_utility+=max_utility;
+       }
+       for(int i = 1; i < dashboard.size(); i++)
+       {
+           String id = lattice.nodeList.get(dashboard.get(i)).get_id();
+           String[] attribute_value_combos = id.replaceFirst("^#", "").split("#");
+           
+           for(int j = 0; j < attribute_value_combos.length; j++)
+           {
+               String[] attribute_value = attribute_value_combos[j].split("\\$");
+               //System.out.print(attribute_value[0]+" = "+attribute_value[1]+" ");
+           }
+//           System.out.print(lattice.id2MetricMap.get(id));
+//           System.out.println();
+       }
+       //
+       lattice.maxSubgraph= dashboard; 
+       lattice.maxSubgraphUtility=total_utility;
+       printMaxSubgraphSummary();
+   }
+	
 	public void printMaxSubgraphSummary() {
 		// Summary of maximum subgraph 
 		System.out.print("Max Subgraph: [");
@@ -100,5 +158,6 @@ public class Traversal {
 //       Hierarchia.print_map(lattice.id2MetricMap);
        Traversal tr = new Traversal(lattice,new Euclidean());
        tr.greedyPicking(10);
+       tr.HDgreedyPicking(10);
     }
 }
