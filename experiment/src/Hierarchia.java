@@ -66,8 +66,9 @@ public class Hierarchia
         lattice.maxSubgraphUtility=total_utility;
     }
     public static Lattice generateFullyMaterializedLattice(){
+    	    System.out.print("---------------- Generate Fully Materialized Lattice -----------------");
     		ArrayList<String> attribute_names = get_attribute_names();
-        System.out.println(attribute_names);
+        //System.out.println(attribute_names);
         
         HashMap<String, ArrayList<Double>> map_id_to_metric_values = new HashMap<String, ArrayList<Double>>();
         ArrayList<Node> node_list = new ArrayList<Node>();// node_list: list of child indexes
@@ -81,7 +82,7 @@ public class Hierarchia
         int n = attribute_names.size();
         for(int k = 1; k <= n; k++)
         {
-            System.out.println("k: "+k);
+        		// System.out.println("k: "+k);
             ArrayList<ArrayList<String>> k_attribute_combinations = new ArrayList<ArrayList<String>>();
             ArrayList<String> current_combination = new ArrayList<String>();
             for(int i = 0; i < k; i++)
@@ -127,7 +128,7 @@ public class Hierarchia
                     
                     if(measure_values.get(0) > 0.0 || measure_values.get(1)> 0.0 )
                     {
-                        System.out.println("Current Visualization: "+visualization_key+" -- "+measure_values);
+                        //System.out.println("Current Visualization: "+visualization_key+" -- "+measure_values);
                         //System.out.print("C");
                         ArrayList<Double> current_visualization_measure_values = 
                                 compute_visualization(attribute_names, current_combination, current_permutation);

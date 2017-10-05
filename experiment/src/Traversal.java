@@ -95,9 +95,9 @@ public class Traversal {
 	public static void main(String[] args) 
     {
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice();
-       System.out.println(lattice.nodeList);
-       Hierarchia.print_map(lattice.id2IDMap);
-       Hierarchia.print_map(lattice.id2MetricMap);
+//       System.out.println(lattice.nodeList);
+//       Hierarchia.print_map(lattice.id2IDMap);
+//       Hierarchia.print_map(lattice.id2MetricMap);
        Traversal tr = new Traversal(lattice,new Euclidean());
        tr.greedyPicking(10);
     }
