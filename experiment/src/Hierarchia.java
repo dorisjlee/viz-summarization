@@ -4,11 +4,69 @@
 import java.io.*;
 import java.util.*;
 
+import org.w3c.dom.NodeList;
+
 public class Hierarchia 
 {
-    public static void main(String[] args) 
-    {
-        ArrayList<String> attribute_names = get_attribute_names();
+	
+    
+    public void HDgreedyPicking(Lattice lattice) {
+    	 //System.out.println("Number of visualizations: "+map_id_to_metric_values.size());
+        //print_map(map_id_to_metric_values);
+        int k = 20;
+        double total_utility =0;
+        ArrayList<Integer> dashboard = new ArrayList<Integer>();
+        dashboard.add(0);
+        while(dashboard.size()<k)
+        {
+        		double max_utility = 0;
+            //System.out.println("Dashboard Size: "+dashboard.size());
+            int next = -1;
+            for(int i = 0; i < dashboard.size(); i++)
+            {
+                //System.out.println("Children of: "+node_list.get(dashboard.get(i)).get_id());
+                for(int j = 0; j < lattice.nodeList.get(dashboard.get(i)).get_dist_list().size(); j++)
+                {
+                    int flag = 0;
+                    //System.out.println("Current Node: "+node_list.get(dashboard.get(i)).get_child_list().get(j));
+                    for(int sp = 0; sp < dashboard.size(); sp++)
+                    {
+                        
+                        if(lattice.nodeList.get(dashboard.get(i)).get_child_list().get(j) == dashboard.get(sp))
+                        {
+                            //System.out.println("Already in");
+                            flag =1;
+                            break;
+                        }
+                    }
+                    if(flag == 0 && lattice.nodeList.get(dashboard.get(i)).get_dist_list().get(j) > max_utility)
+                    {
+                        max_utility = lattice.nodeList.get(dashboard.get(i)).get_dist_list().get(j);
+                        next = lattice.nodeList.get(dashboard.get(i)).get_child_list().get(j);
+                    }
+                }
+            }
+            dashboard.add(next); 
+        }
+        for(int i = 1; i < dashboard.size(); i++)
+        {
+            String id = lattice.nodeList.get(dashboard.get(i)).get_id();
+            String[] attribute_value_combos = id.replaceFirst("^#", "").split("#");
+            
+            for(int j = 0; j < attribute_value_combos.length; j++)
+            {
+                String[] attribute_value = attribute_value_combos[j].split("\\$");
+                System.out.print(attribute_value[0]+" = "+attribute_value[1]+" ");
+            }
+            System.out.print(lattice.id2MetricMap.get(id));
+            System.out.println();
+        }
+        //
+        lattice.maxSubgraph= dashboard; 
+        lattice.maxSubgraphUtility=total_utility;
+    }
+    public static Lattice generateFullyMaterializedLattice(){
+    		ArrayList<String> attribute_names = get_attribute_names();
         System.out.println(attribute_names);
         
         HashMap<String, ArrayList<Double>> map_id_to_metric_values = new HashMap<String, ArrayList<Double>>();
@@ -19,7 +77,6 @@ public class Hierarchia
         Node root = new Node("#");
         node_list.add(root);
         map_id_to_index.put("#", 0);
-        
         
         int n = attribute_names.size();
         for(int k = 1; k <= n; k++)
@@ -149,8 +206,8 @@ public class Hierarchia
                 }
             }            
         }
-        
-        
+        /*
+        // Printing out materialized outputs 
         for(int x = 0; x < node_list.size(); x++)
         {
             System.out.println("Node index: "+x+", Node id: "+node_list.get(x).get_id());
@@ -161,72 +218,10 @@ public class Hierarchia
                         +node_list.get(x).get_dist_list().get(y));
             }
             System.out.println();
-        }
-        
-        
-        
-        
-        //System.out.println("Number of visualizations: "+map_id_to_metric_values.size());
-        //print_map(map_id_to_metric_values);
-        int k = 20;
-        ArrayList<Integer> dashboard = new ArrayList<Integer>();
-        dashboard.add(0);
-        while(dashboard.size()<k)
-        {
-            //System.out.println("Dashboard Size: "+dashboard.size());
-            double max_utility = 0;
-            int next = -1;
-            for(int i = 0; i < dashboard.size(); i++)
-            {
-                //System.out.println("Children of: "+node_list.get(dashboard.get(i)).get_id());
-                for(int j = 0; j < node_list.get(dashboard.get(i)).get_dist_list().size(); j++)
-                {
-                    int flag = 0;
-                    /*
-                    System.out.println("Dashboard: ");
-                    for(int sp = 0; sp < dashboard.size(); sp++)
-                    {
-                        System.out.print(dashboard.get(sp)+" ");
-                    }
-                    System.out.println();
-                    */
-                    
-                    //System.out.println("Current Node: "+node_list.get(dashboard.get(i)).get_child_list().get(j));
-                    for(int sp = 0; sp < dashboard.size(); sp++)
-                    {
-                        
-                        if(node_list.get(dashboard.get(i)).get_child_list().get(j) == dashboard.get(sp))
-                        {
-                            //System.out.println("Already in");
-                            flag =1;
-                            break;
-                        }
-                    }
-                    if(flag == 0 && node_list.get(dashboard.get(i)).get_dist_list().get(j) > max_utility)
-                    {
-                        max_utility = node_list.get(dashboard.get(i)).get_dist_list().get(j);
-                        next = node_list.get(dashboard.get(i)).get_child_list().get(j);
-                    }
-                }
-            }
-            dashboard.add(next); 
-        }
-        for(int i = 1; i < dashboard.size(); i++)
-        {
-            String id = node_list.get(dashboard.get(i)).get_id();
-            String[] attribute_value_combos = id.replaceFirst("^#", "").split("#");
-            
-            for(int j = 0; j < attribute_value_combos.length; j++)
-            {
-                String[] attribute_value = attribute_value_combos[j].split("\\$");
-                System.out.print(attribute_value[0]+" = "+attribute_value[1]+" ");
-            }
-            System.out.print(map_id_to_metric_values.get(id));
-            System.out.println();
-        }
-        
+        }*/
+        Lattice materialized_lattice = new Lattice(map_id_to_metric_values,node_list,map_id_to_index);
+        return materialized_lattice;
     }
-    
     static ArrayList<String> get_attribute_names()
     {
         ArrayList<String> attribute_names = new ArrayList<String>();
