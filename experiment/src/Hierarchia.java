@@ -16,8 +16,9 @@ public class Hierarchia
         HashMap<String, ArrayList<Double>> map_id_to_metric_values = new HashMap<String, ArrayList<Double>>();
         ArrayList<Node> node_list = new ArrayList<Node>();// node_list: list of child indexes
         HashMap<String, Integer> map_id_to_index = new HashMap<String, Integer>();
-        // Note that the value of root needs to be fixed to retrieve from appropriate value
-        map_id_to_metric_values.put("#", new ArrayList<Double>(Arrays.asList(43.40,56.60)));
+        ArrayList<Double> root_measure_values = compute_visualization(attribute_names,new ArrayList<String>(),new ArrayList<String>());
+        
+        map_id_to_metric_values.put("#", root_measure_values);
         Node root = new Node("#");
         node_list.add(root);
         map_id_to_index.put("#", 0);
@@ -32,6 +33,16 @@ public class Hierarchia
             {
                 current_combination.add("#");
             }
+            /*
+	            System.out.println("current_combination:"+current_combination);
+	            current_combination:[#]
+				current_combination:[#, #]
+				current_combination:[#, #, #]
+				current_combination:[#, #, #, #]
+				current_combination:[#, #, #, #, #]
+				current_combination:[#, #, #, #, #, #]
+				current_combination:[#, #, #, #, #, #, #]
+            */
             generate_k_combinations(attribute_names, k, 0, current_combination, k_attribute_combinations);
             //System.out.println("Number of combinations: "+k_attribute_combinations.size());
             
@@ -208,7 +219,6 @@ public class Hierarchia
             generate_k_combinations(attribute_names, len-1, i+1, current_combination, k_combination_list);
         }
     }
-    
     static void generate_value_permutations(ArrayList<ArrayList<String>> attribute_values, int depth,
             ArrayList<String> current_permutation, ArrayList<ArrayList<String>> value_permutations)
     {
@@ -227,7 +237,7 @@ public class Hierarchia
     }
     static ArrayList<Double> compute_visualization(ArrayList<String> attribute_names, ArrayList<String> current_combination, ArrayList<String> current_permutation)
     {
-        //System.out.println("Attribute-Value Combination: "+current_combination+" -- "+current_permutation);
+        //System.out.println("Attribute-Value Combination:"+current_combination+" -- "+current_permutation);
         ArrayList<Double> measure_values = new ArrayList<Double>();
         double sum_0 = 0;
         double sum_1 = 0;  
