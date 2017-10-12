@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -150,7 +151,7 @@ public class Traversal {
 		}
 		System.out.println("Total Utility:"+Double.toString(lattice.maxSubgraphUtility));
 	}
-	public static void main(String[] args) 
+	public static void main(String[] args) throws SQLException 
     {
 	   Euclidean ed = new Euclidean();
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed);

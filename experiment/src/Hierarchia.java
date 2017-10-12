@@ -2,13 +2,15 @@
  * @author himeldev
  */
 import java.io.*;
+import java.sql.SQLException;
 import java.util.*;
-
 import org.w3c.dom.NodeList;
 
 public class Hierarchia 
 {
-    public static Lattice generateFullyMaterializedLattice(Distance distance){
+	private static String datasetName= "mushroom";
+    public static Lattice generateFullyMaterializedLattice(Distance distance) throws SQLException{
+    		Database db = new Database();
     	    System.out.println("---------------- Generate Fully Materialized Lattice -----------------");
     		ArrayList<String> attribute_names = get_attribute_names();
         //System.out.println(attribute_names);
@@ -24,9 +26,9 @@ public class Hierarchia
         map_id_to_index.put("#", 0);
         
         int n = attribute_names.size();
-        for(int k = 1; k <= n; k++)
+        for(int k = 1; k <= n; k++) // k-attribute combination
         {
-        		// System.out.println("k: "+k);
+        		System.out.println("k: "+k);
             ArrayList<ArrayList<String>> k_attribute_combinations = new ArrayList<ArrayList<String>>();
             ArrayList<String> current_combination = new ArrayList<String>();
             for(int i = 0; i < k; i++)
@@ -46,20 +48,28 @@ public class Hierarchia
             generate_k_combinations(attribute_names, k, 0, current_combination, k_attribute_combinations);
             //System.out.println("Number of combinations: "+k_attribute_combinations.size());
             
-            //System.out.println("Attribute Combinations: "+k_attribute_combinations);
+            System.out.println("Attribute Combinations: "+k_attribute_combinations);
             
-            for(int i = 0; i < k_attribute_combinations.size(); i++)
+            for(int i = 0; i < k_attribute_combinations.size(); i++) // Looping through the i-th item in the k-attribute combination
             {
                 current_combination = k_attribute_combinations.get(i);
-                
+//                System.out.println(current_combination);
+//                System.out.println(current_combination.get(0));
                 ArrayList<ArrayList<String>> attribute_values = new ArrayList<ArrayList<String>>();
                 for(int j = 0; j < k; j++)
                 {
-                    ArrayList<String> binary_values = new ArrayList<String>();
-                    binary_values.add("0");
-                    binary_values.add("1");
-                    attribute_values.add(binary_values);       
+//                		System.out.println(j);
+//                		System.out.println(current_combination.get(j));
+                		ArrayList<String> possibleAttrVals = 
+                				db.resultSet2ArrayStr(Database.findDistinctAttrVal(current_combination.get(j), datasetName));
+                		System.out.println(possibleAttrVals);
+//                    ArrayList<String> binary_values = new ArrayList<String>();
+//                    binary_values.add("0");
+//                    binary_values.add("1");
+//                    attribute_values.add(binary_values);
+                    attribute_values.add(possibleAttrVals);       
                 }
+                System.out.println(attribute_values);
                 ArrayList<ArrayList<String>> value_permutations = new ArrayList<ArrayList<String>>();
                 ArrayList<String> current_permutation = new ArrayList<String>();
                 for(int j = 0; j < k; j++)
@@ -184,7 +194,7 @@ public class Hierarchia
         ArrayList<String> attribute_names = new ArrayList<String>();
         try
         {
-            BufferedReader reader = new BufferedReader(new FileReader("materialized_view.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader(datasetName+".csv"));
             String line = null;
             if((line = reader.readLine()) != null) 
             {
@@ -255,7 +265,7 @@ public class Hierarchia
         }
         try
         {
-            BufferedReader reader = new BufferedReader(new FileReader("materialized_view.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader(datasetName+".csv"));
             String line = reader.readLine();
                  
             
