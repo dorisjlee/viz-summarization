@@ -152,7 +152,8 @@ public class Traversal {
 	}
 	public static void main(String[] args) 
     {
-       Lattice lattice = Hierarchia.generateFullyMaterializedLattice();
+	   Euclidean ed = new Euclidean();
+       Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed);
 //       System.out.println(lattice.nodeList);
 //       Hierarchia.print_map(lattice.id2IDMap);
 //       Hierarchia.print_map(lattice.id2MetricMap);

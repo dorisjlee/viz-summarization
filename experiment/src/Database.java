@@ -1,4 +1,3 @@
-import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -150,7 +149,6 @@ public class Database {
 		ArrayList<String> colArrs = new ArrayList<String>(Arrays.asList("cap_shape", "cap_surface" , "cap_color" , "bruises" , "odor"));
 		rs = Database.viz_query("mushroom", colArrs, "type", "COUNT", new ArrayList<String>(Arrays.asList()));
 		resultSet2csv(rs,"mushroom",colArrs,"COUNT(type)");
-		
     }
 	
 }

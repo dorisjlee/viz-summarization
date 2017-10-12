@@ -8,7 +8,7 @@ import org.w3c.dom.NodeList;
 
 public class Hierarchia 
 {
-    public static Lattice generateFullyMaterializedLattice(){
+    public static Lattice generateFullyMaterializedLattice(Distance distance){
     	    System.out.println("---------------- Generate Fully Materialized Lattice -----------------");
     		ArrayList<String> attribute_names = get_attribute_names();
         //System.out.println(attribute_names);
@@ -93,9 +93,11 @@ public class Hierarchia
                             if(map_id_to_metric_values.get(visualization_key) != null)
                             {
                                 ArrayList<Double> parent_visualization_measure_values = map_id_to_metric_values.get(visualization_key);
-                                double distance = compute_distance(current_visualization_measure_values, parent_visualization_measure_values);
-                                if(distance < min_distance)
-                                    min_distance = distance;
+                                double [] cviz = Traversal.ArrayList2Array(current_visualization_measure_values);
+                            		double [] pviz =  Traversal.ArrayList2Array(parent_visualization_measure_values);
+                                double dist = distance.computeDistance(cviz,pviz);
+                                if(dist < min_distance)
+                                    min_distance = dist;
                             }
                         }
                         
@@ -111,8 +113,8 @@ public class Hierarchia
                             if(map_id_to_metric_values.get(visualization_key) != null)
                             {
                                 ArrayList<Double> parent_visualization_measure_values = map_id_to_metric_values.get(visualization_key);
-                                double distance = compute_distance(current_visualization_measure_values, parent_visualization_measure_values);
-                                if(distance*0.8 <= min_distance)
+                                double dist = compute_distance(current_visualization_measure_values, parent_visualization_measure_values);
+                                if(dist*0.8 <= min_distance)
                                 {
                                     int parent_index = map_id_to_index.get(visualization_key);
                                     
@@ -121,7 +123,7 @@ public class Hierarchia
                                     node_list.get(parent_index).set_child_list(child_list);
                                     
                                     ArrayList<Double> dist_list = node_list.get(parent_index).get_dist_list();
-                                    dist_list.add(distance);
+                                    dist_list.add(dist);
                                     node_list.get(parent_index).set_child_list(child_list);
                                     //System.out.print("I");
                                     //System.out.println("Informative parent: "+visualization_key+" -- "+map_id_to_metric_values.get(visualization_key));
@@ -309,11 +311,11 @@ public class Hierarchia
         double distance = 0;
         for(int i=0; i < l1.size() && i < l2.size(); i++)
         {
-            //distance += (l1.get(i)-l2.get(i))*(l1.get(i)-l2.get(i));
-            distance += Math.abs(l1.get(i)-l2.get(i));
+            distance += (l1.get(i)-l2.get(i))*(l1.get(i)-l2.get(i));
+            //distance += Math.abs(l1.get(i)-l2.get(i));
         }
-        //return Math.sqrt(distance);
-        return distance;
+        return Math.sqrt(distance);
+//        return distance;
     }
     
 }
