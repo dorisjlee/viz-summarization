@@ -16,7 +16,7 @@ public class Hierarchia
         HashMap<String, ArrayList<Double>> map_id_to_metric_values = new HashMap<String, ArrayList<Double>>();
         ArrayList<Node> node_list = new ArrayList<Node>();// node_list: list of child indexes
         HashMap<String, Integer> map_id_to_index = new HashMap<String, Integer>();
-        
+        // Note that the value of root needs to be fixed to retrieve from appropriate value
         map_id_to_metric_values.put("#", new ArrayList<Double>(Arrays.asList(43.40,56.60)));
         Node root = new Node("#");
         node_list.add(root);
@@ -307,7 +307,6 @@ public class Hierarchia
     static double compute_distance(ArrayList<Double> l1, ArrayList<Double> l2)
     {
         double distance = 0;
-        
         for(int i=0; i < l1.size() && i < l2.size(); i++)
         {
             //distance += (l1.get(i)-l2.get(i))*(l1.get(i)-l2.get(i));
@@ -315,7 +314,6 @@ public class Hierarchia
         }
         //return Math.sqrt(distance);
         return distance;
-
     }
     
 }

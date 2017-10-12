@@ -23,5 +23,6 @@
 			<attribute name="maven.scope" value="system"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Users/dorislee/Desktop/Research/viz-sum/experiment/postgresql-42.1.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
