@@ -9,12 +9,23 @@ import org.w3c.dom.NodeList;
 public class Hierarchia 
 {
 	private static String datasetName= "turn";
+	public static Database db = new Database();
+	public static HashMap<String, ArrayList<String>> populateUniqueAttributeKeyVals(ArrayList<String> attribute_names) throws SQLException{
+		HashMap<String, ArrayList<String>> uniqueAttributeKeyVals =new HashMap<String, ArrayList<String>>();
+		for (int i=0;i<attribute_names.size();i++) {
+			String key = attribute_names.get(i);
+			ArrayList<String> attrVals = 
+					db.resultSet2ArrayStr(Database.findDistinctAttrVal(key, datasetName));
+			uniqueAttributeKeyVals.put(key, attrVals);
+		}
+		return uniqueAttributeKeyVals;
+	}
     public static Lattice generateFullyMaterializedLattice(Distance distance) throws SQLException{
-    		Database db = new Database();
     	    System.out.println("---------------- Generate Fully Materialized Lattice -----------------");
     		ArrayList<String> attribute_names = get_attribute_names();
-        //System.out.println(attribute_names);
-        
+        System.out.println("attribute_names:"+attribute_names);
+        HashMap<String, ArrayList<String>> uniqueAttributeKeyVals = populateUniqueAttributeKeyVals(attribute_names);
+        System.out.println("uniqueAttributeKeyVals:"+uniqueAttributeKeyVals);
         HashMap<String, ArrayList<Double>> map_id_to_metric_values = new HashMap<String, ArrayList<Double>>();
         ArrayList<Node> node_list = new ArrayList<Node>();// node_list: list of child indexes
         HashMap<String, Integer> map_id_to_index = new HashMap<String, Integer>();
@@ -26,7 +37,6 @@ public class Hierarchia
         map_id_to_index.put("#", 0);
         
         int n = attribute_names.size();
-        System.out.println(n);
         for(int k = 1; k <= n; k++) // k-attribute combination
         {
         		System.out.println("k: "+k);
@@ -50,7 +60,6 @@ public class Hierarchia
             //System.out.println("Number of combinations: "+k_attribute_combinations.size());
             
             System.out.println("Attribute Combinations: "+k_attribute_combinations);
-            
             for(int i = 0; i < k_attribute_combinations.size(); i++) // Looping through the i-th item in the k-attribute combination
             {
                 current_combination = k_attribute_combinations.get(i);
@@ -61,16 +70,15 @@ public class Hierarchia
                 {
 //                		System.out.println(j);
 //                		System.out.println(current_combination.get(j));
-                		ArrayList<String> possibleAttrVals = 
-                				db.resultSet2ArrayStr(Database.findDistinctAttrVal(current_combination.get(j), datasetName));
-                		System.out.println(possibleAttrVals);
+//                		ArrayList<String> possibleAttrVals = 
+//                				db.resultSet2ArrayStr(Database.findDistinctAttrVal(current_combination.get(j), datasetName));
+                		ArrayList<String> possibleAttrVals = uniqueAttributeKeyVals.get(current_combination.get(j));
 //                    ArrayList<String> binary_values = new ArrayList<String>();
 //                    binary_values.add("0");
 //                    binary_values.add("1");
 //                    attribute_values.add(binary_values);
                     attribute_values.add(possibleAttrVals);       
                 }
-                System.out.println(attribute_values);
                 ArrayList<ArrayList<String>> value_permutations = new ArrayList<ArrayList<String>>();
                 ArrayList<String> current_permutation = new ArrayList<String>();
                 for(int j = 0; j < k; j++)
@@ -78,7 +86,7 @@ public class Hierarchia
                     current_permutation.add("#");
                 }
                 generate_value_permutations(attribute_values, 0, current_permutation, value_permutations);
-                System.out.println("Value Permutations: "+value_permutations);
+//                System.out.println("Value Permutations: "+value_permutations);
                 
                 for(int j=0; j < value_permutations.size(); j++)
                 {
@@ -250,6 +258,7 @@ public class Hierarchia
     {
         //System.out.println("Attribute-Value Combination:"+current_combination+" -- "+current_permutation);
         ArrayList<Double> measure_values = new ArrayList<Double>();
+        ArrayList<Double> normalized_measure_values = new ArrayList<Double>();
         double sum_0 = 0;
         double sum_1 = 0;  
         
@@ -303,16 +312,16 @@ public class Hierarchia
         */
         if(Math.abs(sum_0-0.0) <0.000001 &&  Math.abs(sum_1-0.0) <0.000001)
         {
-            measure_values.add(-1.0);
-            measure_values.add(-1.0);
+        		normalized_measure_values.add(-1.0);
+        		normalized_measure_values.add(-1.0);
         }
         else
         {
-            measure_values.add(sum_0/(sum_0+sum_1)*100);
-            measure_values.add(sum_1/(sum_0+sum_1)*100);
+        		normalized_measure_values.add(sum_0/(sum_0+sum_1)*100);
+        		normalized_measure_values.add(sum_1/(sum_0+sum_1)*100);
         }
         //System.out.println(measure_values);
-        return measure_values;
+        return normalized_measure_values;
     }
     
     static void print_map(Map mp) 

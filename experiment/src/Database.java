@@ -31,7 +31,8 @@ public class Database {
 	      return stmt.executeQuery(sQLQuery);
 	}
 	
-	public static ArrayList<Double> resultSet2Array(ResultSet rs) throws SQLException {
+	
+	public static ArrayList<Double> printResultSet(ResultSet rs) throws SQLException {
 		
 		ArrayList<Double> rsArr = new ArrayList<Double>();
 		while (rs.next()) {
@@ -48,10 +49,10 @@ public class Database {
 		ArrayList<String> rsArr = new ArrayList<String>();
 		while (rs.next()) {
 			for (int j =1 ; j< rs.getMetaData().getColumnCount()+1; j++ ) {
-				System.out.print(rs.getString(j)+",");
+				//System.out.print(rs.getString(j)+",");
 				rsArr.add(rs.getString(j));
 			}
-			System.out.print("\n");
+			//System.out.print("\n");
 	    }
 		return rsArr;
 	}
@@ -126,7 +127,6 @@ public class Database {
 	public static ResultSet findDistinctAttrVal(String attribute, String tablename) throws SQLException {
 		// Find the distinct values for this attribute
 		String query_stmt = "SELECT DISTINCT "+ attribute +" FROM "+tablename+" ;";
-		System.out.println(query_stmt);
 		return Database.query(query_stmt);
 	}
 
@@ -135,11 +135,11 @@ public class Database {
 		Database db = new Database();
 //		ResultSet rs = db.query("SELECT id, name FROM titanic LIMIT 5;");
 //		System.out.println(rs);
-//		ArrayList<Double> rsArr = resultSet2Array(rs);
+//		ArrayList<Double> rsArr = printResultSet(rs);
 		ResultSet rs = Database.viz_query("titanic", new ArrayList<String>(Arrays.asList("survived")), "id", "COUNT", new ArrayList<String>(Arrays.asList("sex='male'", "age<20")));
-		ArrayList<Double> rsArr = resultSet2Array(rs);
+		ArrayList<Double> rsArr = printResultSet(rs);
 		rs = Database.viz_query("titanic", new ArrayList<String>(Arrays.asList("survived","sexcode","pc_class")), "id", "COUNT", new ArrayList<String>(Arrays.asList()));
-		//rsArr = resultSet2Array(rs);
+		//rsArr = printResultSet(rs);
 		resultSet2csv(rs,"titanic",new ArrayList<String>(Arrays.asList("survived","sexcode","pc_class")),"COUNT(id)");
 // 		If compute using all columns then there is only one item for each group 
 //		ResultSet cols = Database.getColumns("mushroom");
