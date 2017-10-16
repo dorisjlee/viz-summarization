@@ -282,7 +282,7 @@ public class Hierarchia
         {
             BufferedReader reader = new BufferedReader(new FileReader(datasetName+".csv"));
             String line = reader.readLine();
-            for (int icol =0 ; icol<attribute_names.size() ; icol++) {
+            for (int icol =0 ; icol<attribute_positions.size() ; icol++) {
         			measure_values.add(new ArrayList<Double>());
         			for (int iattr=0;iattr<uniqueAttributeKeyVals.get(attribute_names.get(icol)).size();iattr++) {
         				measure_values.get(icol).add(0.0); //initialize summation
@@ -405,7 +405,7 @@ public class Hierarchia
     public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
     {
     		uniqueAttributeKeyVals = populateUniqueAttributeKeyVals();
-    		compute_visualization(new ArrayList<String>(Arrays.asList("is_multi_query","is_profile_query")), 
+    		compute_visualization(new ArrayList<String>(Arrays.asList("has_impressions_tbl", "has_clicks_tbl")), 
     							  new ArrayList<String>(Arrays.asList("0","0")));
     }
 }
