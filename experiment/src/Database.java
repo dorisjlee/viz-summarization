@@ -126,6 +126,7 @@ public class Database {
 	public static ResultSet findDistinctAttrVal(String attribute, String tablename) throws SQLException {
 		// Find the distinct values for this attribute
 		String query_stmt = "SELECT DISTINCT "+ attribute +" FROM "+tablename+" ;";
+		System.out.println(query_stmt);
 		return Database.query(query_stmt);
 	}
 

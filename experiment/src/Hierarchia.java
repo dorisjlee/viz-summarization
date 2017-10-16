@@ -8,7 +8,7 @@ import org.w3c.dom.NodeList;
 
 public class Hierarchia 
 {
-	private static String datasetName= "mushroom";
+	private static String datasetName= "turn";
     public static Lattice generateFullyMaterializedLattice(Distance distance) throws SQLException{
     		Database db = new Database();
     	    System.out.println("---------------- Generate Fully Materialized Lattice -----------------");
@@ -19,13 +19,14 @@ public class Hierarchia
         ArrayList<Node> node_list = new ArrayList<Node>();// node_list: list of child indexes
         HashMap<String, Integer> map_id_to_index = new HashMap<String, Integer>();
         ArrayList<Double> root_measure_values = compute_visualization(attribute_names,new ArrayList<String>(),new ArrayList<String>());
-        
+        System.out.println("Root measure:"+root_measure_values);
         map_id_to_metric_values.put("#", root_measure_values);
         Node root = new Node("#");
         node_list.add(root);
         map_id_to_index.put("#", 0);
         
         int n = attribute_names.size();
+        System.out.println(n);
         for(int k = 1; k <= n; k++) // k-attribute combination
         {
         		System.out.println("k: "+k);
@@ -77,7 +78,7 @@ public class Hierarchia
                     current_permutation.add("#");
                 }
                 generate_value_permutations(attribute_values, 0, current_permutation, value_permutations);
-                //System.out.println("Value Permutations: "+value_permutations);
+                System.out.println("Value Permutations: "+value_permutations);
                 
                 for(int j=0; j < value_permutations.size(); j++)
                 {
@@ -210,8 +211,8 @@ public class Hierarchia
         {
             System.out.println("Error");
         }
+        	//System.out.println(attribute_names);
         return attribute_names;
-        
     }
     
     static void generate_k_combinations(ArrayList<String> attribute_names, int len, int start, ArrayList<String> current_combination, 
