@@ -10,7 +10,10 @@ public class Hierarchia
 {
 	private static String datasetName= "turn";
 	public static Database db = new Database();
-	public static HashMap<String, ArrayList<String>> populateUniqueAttributeKeyVals(ArrayList<String> attribute_names) throws SQLException{
+	public static ArrayList<String> attribute_names = get_attribute_names();
+	//System.out.println("attribute_names:"+attribute_names);
+	public static HashMap<String, ArrayList<String>> uniqueAttributeKeyVals;
+	public static HashMap<String, ArrayList<String>> populateUniqueAttributeKeyVals() throws SQLException{
 		HashMap<String, ArrayList<String>> uniqueAttributeKeyVals =new HashMap<String, ArrayList<String>>();
 		for (int i=0;i<attribute_names.size();i++) {
 			String key = attribute_names.get(i);
@@ -20,16 +23,14 @@ public class Hierarchia
 		}
 		return uniqueAttributeKeyVals;
 	}
-    public static Lattice generateFullyMaterializedLattice(Distance distance) throws SQLException{
+    public static Lattice generateFullyMaterializedLattice(Distance distance) throws SQLException {
     	    System.out.println("---------------- Generate Fully Materialized Lattice -----------------");
-    		ArrayList<String> attribute_names = get_attribute_names();
-        System.out.println("attribute_names:"+attribute_names);
-        HashMap<String, ArrayList<String>> uniqueAttributeKeyVals = populateUniqueAttributeKeyVals(attribute_names);
-        System.out.println("uniqueAttributeKeyVals:"+uniqueAttributeKeyVals);
         HashMap<String, ArrayList<Double>> map_id_to_metric_values = new HashMap<String, ArrayList<Double>>();
         ArrayList<Node> node_list = new ArrayList<Node>();// node_list: list of child indexes
+        uniqueAttributeKeyVals = populateUniqueAttributeKeyVals();
+        //System.out.println("uniqueAttributeKeyVals:"+uniqueAttributeKeyVals);
         HashMap<String, Integer> map_id_to_index = new HashMap<String, Integer>();
-        ArrayList<Double> root_measure_values = compute_visualization(attribute_names,new ArrayList<String>(),new ArrayList<String>());
+        ArrayList<Double> root_measure_values = compute_visualization(new ArrayList<String>(),new ArrayList<String>());
         System.out.println("Root measure:"+root_measure_values);
         map_id_to_metric_values.put("#", root_measure_values);
         Node root = new Node("#");
@@ -97,14 +98,13 @@ public class Hierarchia
                         visualization_key += current_combination.get(sp)+"$"+current_permutation.get(sp)+"#";  
                     }
                     
-                    ArrayList<Double> measure_values = compute_visualization(attribute_names, current_combination, current_permutation);
+                    ArrayList<Double> measure_values = compute_visualization(current_combination, current_permutation);
                     
                     if(measure_values.get(0) > 0.0 || measure_values.get(1)> 0.0 )
                     {
                         //System.out.println("Current Visualization: "+visualization_key+" -- "+measure_values);
                         //System.out.print("C");
-                        ArrayList<Double> current_visualization_measure_values = 
-                                compute_visualization(attribute_names, current_combination, current_permutation);
+                        ArrayList<Double> current_visualization_measure_values = compute_visualization(current_combination, current_permutation);
                         map_id_to_metric_values.put(visualization_key, current_visualization_measure_values);
                         Node node = new Node(visualization_key);
                         node_list.add(node);
@@ -254,7 +254,7 @@ public class Hierarchia
             generate_value_permutations(attribute_values, depth + 1, current_permutation, value_permutations);
         }
     }
-    static ArrayList<Double> compute_visualization(ArrayList<String> attribute_names, ArrayList<String> current_combination, ArrayList<String> current_permutation)
+    static ArrayList<Double> compute_visualization(ArrayList<String> current_combination, ArrayList<String> current_permutation)
     {
         //System.out.println("Attribute-Value Combination:"+current_combination+" -- "+current_permutation);
         ArrayList<Double> measure_values = new ArrayList<Double>();
