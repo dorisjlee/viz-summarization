@@ -80,8 +80,12 @@ public class Database {
 		String arrJoined="";
 		for (int i=0; i< arr.size(); i++) {
 			if (i != arr.size()-1) {
-				arrJoined += arr.get(i) ; 
-				arrJoined += " "+delimiter+" "; 
+				arrJoined += arr.get(i) ;
+				if (delimiter==",") {
+					arrJoined += delimiter;
+				}else {
+					arrJoined += " "+delimiter+" ";
+				}
 			}else {
 				arrJoined += arr.get(i);
 			}

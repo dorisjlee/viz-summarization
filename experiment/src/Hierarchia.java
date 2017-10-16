@@ -8,26 +8,31 @@ import org.w3c.dom.NodeList;
 
 public class Hierarchia 
 {
-	private static String datasetName= "turn";
-	public static Database db = new Database();
-	public static ArrayList<String> attribute_names = get_attribute_names();
-	//System.out.println("attribute_names:"+attribute_names);
+	private static String datasetName;
+	public static Database db;
+	public static ArrayList<String> attribute_names;
 	public static HashMap<String, ArrayList<String>> uniqueAttributeKeyVals;
+	
+	public Hierarchia(String datasetName) throws SQLException {
+		Hierarchia.datasetName = datasetName;
+		Hierarchia.db =  new Database();
+		Hierarchia.attribute_names = get_attribute_names();
+		Hierarchia.uniqueAttributeKeyVals = populateUniqueAttributeKeyVals();
+	}
 	public static HashMap<String, ArrayList<String>> populateUniqueAttributeKeyVals() throws SQLException{
 		HashMap<String, ArrayList<String>> uniqueAttributeKeyVals =new HashMap<String, ArrayList<String>>();
 		for (int i=0;i<attribute_names.size();i++) {
 			String key = attribute_names.get(i);
 			ArrayList<String> attrVals = 
-					db.resultSet2ArrayStr(Database.findDistinctAttrVal(key, datasetName));
-			uniqueAttributeKeyVals.put(key, attrVals);
+					Database.resultSet2ArrayStr(Database.findDistinctAttrVal(key, datasetName));
+			uniqueAttributeKeyVals.put(key, attrVals);			
 		}
 		return uniqueAttributeKeyVals;
 	}
-    public static Lattice generateFullyMaterializedLattice(Distance distance) throws SQLException {
+    public static Lattice generateFullyMaterializedLattice(Distance distance){
     	    System.out.println("---------------- Generate Fully Materialized Lattice -----------------");
         HashMap<String, ArrayList<Double>> map_id_to_metric_values = new HashMap<String, ArrayList<Double>>();
-        ArrayList<Node> node_list = new ArrayList<Node>();// node_list: list of child indexes
-        uniqueAttributeKeyVals = populateUniqueAttributeKeyVals();
+        ArrayList<Node> node_list = new ArrayList<Node>();// node_list: list of child indexes       
         //System.out.println("uniqueAttributeKeyVals:"+uniqueAttributeKeyVals);
         HashMap<String, Integer> map_id_to_index = new HashMap<String, Integer>();
         //ArrayList<Double> root_measure_values = compute_visualization(new ArrayList<String>(),new ArrayList<String>());
@@ -211,8 +216,9 @@ public class Hierarchia
             String line = null;
             if((line = reader.readLine()) != null) 
             {
-                String [] names = line.split(", ");
-                for(int i = 0; i < names.length-2; i++)
+                String [] names = line.split(",");
+                //System.out.println(Arrays.toString(names));
+                for(int i = 0; i < names.length-1; i++)
                 {
                     attribute_names.add(names[i]);
                 }
@@ -268,6 +274,7 @@ public class Hierarchia
         ArrayList<Double> normalized_measure_values = new ArrayList<Double>();
         
         ArrayList<Integer> attribute_positions = new ArrayList<Integer>();
+        System.out.println("attribute_names:"+attribute_names);
         for(int i = 0; i < current_combination.size(); i++)
         {
             for(int j = 0; j < attribute_names.size(); j++)
@@ -278,6 +285,10 @@ public class Hierarchia
                 }
             }
         }
+        System.out.println("----");
+        System.out.println("attribute_positions:"+attribute_positions);
+        System.out.println("current_permutation:"+current_permutation);
+        
         try
         {
             BufferedReader reader = new BufferedReader(new FileReader(datasetName+".csv"));
@@ -298,7 +309,10 @@ public class Hierarchia
             
             while((line = reader.readLine()) != null) 
             {
+            		// Checking if condition is satisfied for all columns
+            		// if any column does not satisfied, then flag=1;
                 String [] values = line.split(",");
+                
                 int flag = 1;
                 for(int i = 0; i < attribute_positions.size(); i++)
                 {
@@ -308,13 +322,12 @@ public class Hierarchia
                         break;
                     }
                 }
-                System.out.println("----");
-                System.out.println("attribute_positions:"+attribute_positions);
-                System.out.println("current_permutation:"+current_permutation);
-                System.out.println("values:"+values.toString());
+                if (flag==1) {
+                		System.out.println("values:"+Arrays.toString(values));
+                }
                 
-                for (int i =0;i <attribute_positions.size();i ++) {
-                		ArrayList<String> attrVals = uniqueAttributeKeyVals.get(attribute_names.get(attribute_positions.get(i)));
+                for (int ii =0;ii <attribute_positions.size();ii ++) {
+                		ArrayList<String> attrVals = uniqueAttributeKeyVals.get(attribute_names.get(attribute_positions.get(ii)));
                 		for (int j =0;j <attrVals.size();j ++){
                 			String attr = attrVals.get(j);
                 			//System.out.println("attr:"+attr);
@@ -325,8 +338,8 @@ public class Hierarchia
                 				double measure_val;
                 				measure_val = Double.parseDouble(values[values.length-1]);
                 				//System.out.println(measure_val);
-                				measure_values.get(i).set(j, measure_values.get(i).get(j)+measure_val);
-                				System.out.println("After:"+measure_values.get(i).get(j));
+                				measure_values.get(ii).set(j, measure_values.get(ii).get(j)+measure_val);
+                				//System.out.println("After:"+measure_values.get(i).get(j));
                 				//measure_values.set(i, measure_values.get(i).get(j)+measure_val);
                             //sum_0 += Double.parseDouble(values[values.length-1]);
                 			}
@@ -404,8 +417,11 @@ public class Hierarchia
     }
     public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
     {
-    		uniqueAttributeKeyVals = populateUniqueAttributeKeyVals();
+    		Hierarchia h = new Hierarchia("turn");
     		compute_visualization(new ArrayList<String>(Arrays.asList("has_impressions_tbl", "has_clicks_tbl")), 
     							  new ArrayList<String>(Arrays.asList("0","0")));
+    		h = new Hierarchia("mushroom");
+    		compute_visualization(new ArrayList<String>(Arrays.asList("cap_shape","cap_surface","cap_color")), 
+    							new ArrayList<String>(Arrays.asList("f","s","g")));
     }
 }
