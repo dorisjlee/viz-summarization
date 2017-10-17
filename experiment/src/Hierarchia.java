@@ -326,15 +326,18 @@ public class Hierarchia
                 if (flag==1) {
                 		System.out.println("values:"+Arrays.toString(values));
                 }
-                
+                int xidx =attribute_names.indexOf(xAxis);
+//                System.out.println(xAxis);
+//                System.out.println(xidx);
                 //for (int ii =0;ii <attribute_positions.size();ii ++) {
                 //		ArrayList<String> attrVals = uniqueAttributeKeyVals.get(attribute_names.get(attribute_positions.get(ii)));
+                		ArrayList<String> attrVals = uniqueAttributeKeyVals.get(xAxis);
                 		for (int j =0;j <numXaxis;j ++){
-                			ArrayList<String> attrVals = uniqueAttributeKeyVals.get(attribute_names.get(j));
+                			//System.out.println(attribute_names.get(j));
                 			String attr = attrVals.get(j);
                 			//System.out.println("attr:"+attr);
                 			//System.out.println(values[values.length-2]);
-                			if(flag == 1 && values[values.length-2].equals(attr)) {
+                			if(flag == 1 && values[xidx].equals(attr)) {
                 				//System.out.println("inside");
                 				//System.out.println("Before:"+measure_values.get(i).get(j));
                 				double measure_val;
@@ -376,8 +379,13 @@ public class Hierarchia
 	    		for (int j =0;j <numXaxis;j ++){
 	    			denominator += measure_values.get(j);
 	    		}
+	    		//System.out.println("denominator:"+denominator);
 	    		for (int j =0;j <numXaxis;j ++){
-	    			normalized_measure_values.add(measure_values.get(j)/denominator*100);
+	    			if (Math.abs(denominator)>0.000001) {
+	    				normalized_measure_values.add(measure_values.get(j)/denominator*100);
+	    			}else {
+	    				normalized_measure_values.add(-1.0);
+	    			}
 	    		}
     		//}
 //        if(Math.abs(sum_0-0.0) <0.000001 &&  Math.abs(sum_1-0.0) <0.000001)
@@ -426,5 +434,8 @@ public class Hierarchia
     		h = new Hierarchia("mushroom","type");
     		compute_visualization(new ArrayList<String>(Arrays.asList("cap_shape","cap_surface","cap_color")), 
     							new ArrayList<String>(Arrays.asList("f","s","g")));
+    		h = new Hierarchia("titanic","survived");
+    		compute_visualization(new ArrayList<String>(Arrays.asList("pc_class")), 
+    							new ArrayList<String>(Arrays.asList("3")));
     }
 }
