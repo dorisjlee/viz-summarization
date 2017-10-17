@@ -12,12 +12,13 @@ public class Hierarchia
 	public static Database db;
 	public static ArrayList<String> attribute_names;
 	public static HashMap<String, ArrayList<String>> uniqueAttributeKeyVals;
-	
-	public Hierarchia(String datasetName) throws SQLException {
+	public static String xAxis;
+	public Hierarchia(String datasetName, String xAxis) throws SQLException {
 		Hierarchia.datasetName = datasetName;
 		Hierarchia.db =  new Database();
 		Hierarchia.attribute_names = get_attribute_names();
 		Hierarchia.uniqueAttributeKeyVals = populateUniqueAttributeKeyVals();
+		Hierarchia.xAxis=xAxis;
 	}
 	public static HashMap<String, ArrayList<String>> populateUniqueAttributeKeyVals() throws SQLException{
 		HashMap<String, ArrayList<String>> uniqueAttributeKeyVals =new HashMap<String, ArrayList<String>>();
@@ -266,15 +267,16 @@ public class Hierarchia
     }
     static ArrayList<Double> compute_visualization(ArrayList<String> current_combination, ArrayList<String> current_permutation)
     {
-    		
+    		System.out.println(xAxis);
+    		int  numXaxis = uniqueAttributeKeyVals.get(xAxis).size();
     		System.out.println("Attribute-Value Combination:"+current_combination+" -- "+current_permutation);
+    		
         //Attribute-Value Combination:
     	    //Attribute-Value Combination:[cap_shape , cap_surface , cap_color ] -- [f, s, g]
-        ArrayList<ArrayList<Double>> measure_values = new ArrayList<ArrayList<Double>>();
+        ArrayList<Double> measure_values = new ArrayList<Double>();
         ArrayList<Double> normalized_measure_values = new ArrayList<Double>();
-        
         ArrayList<Integer> attribute_positions = new ArrayList<Integer>();
-        System.out.println("attribute_names:"+attribute_names);
+        System.out.println("attribute_names:"+ attribute_names);
         for(int i = 0; i < current_combination.size(); i++)
         {
             for(int j = 0; j < attribute_names.size(); j++)
@@ -293,12 +295,11 @@ public class Hierarchia
         {
             BufferedReader reader = new BufferedReader(new FileReader(datasetName+".csv"));
             String line = reader.readLine();
-            for (int icol =0 ; icol<attribute_positions.size() ; icol++) {
-        			measure_values.add(new ArrayList<Double>());
-        			for (int iattr=0;iattr<uniqueAttributeKeyVals.get(attribute_names.get(icol)).size();iattr++) {
-        				measure_values.get(icol).add(0.0); //initialize summation
-        			}
-            }
+            
+    			for (int iattr=0;iattr< numXaxis;iattr++) {
+    				measure_values.add(0.0); //initialize summation
+    			}
+            
             
 //            for (int icol =0 ; icol<attribute_names.size() ; icol++) {
 //	        		System.out.println(attribute_names.get(icol));
@@ -326,9 +327,10 @@ public class Hierarchia
                 		System.out.println("values:"+Arrays.toString(values));
                 }
                 
-                for (int ii =0;ii <attribute_positions.size();ii ++) {
-                		ArrayList<String> attrVals = uniqueAttributeKeyVals.get(attribute_names.get(attribute_positions.get(ii)));
-                		for (int j =0;j <attrVals.size();j ++){
+                //for (int ii =0;ii <attribute_positions.size();ii ++) {
+                //		ArrayList<String> attrVals = uniqueAttributeKeyVals.get(attribute_names.get(attribute_positions.get(ii)));
+                		for (int j =0;j <numXaxis;j ++){
+                			ArrayList<String> attrVals = uniqueAttributeKeyVals.get(attribute_names.get(j));
                 			String attr = attrVals.get(j);
                 			//System.out.println("attr:"+attr);
                 			//System.out.println(values[values.length-2]);
@@ -338,7 +340,7 @@ public class Hierarchia
                 				double measure_val;
                 				measure_val = Double.parseDouble(values[values.length-1]);
                 				//System.out.println(measure_val);
-                				measure_values.get(ii).set(j, measure_values.get(ii).get(j)+measure_val);
+                				measure_values.set(j, measure_values.get(j)+measure_val);
                 				//System.out.println("After:"+measure_values.get(i).get(j));
                 				//measure_values.set(i, measure_values.get(i).get(j)+measure_val);
                             //sum_0 += Double.parseDouble(values[values.length-1]);
@@ -346,7 +348,7 @@ public class Hierarchia
                 				
                 		}
 	    				//measure_values.get(icol).add(0.0); //initialize summation
-	    			}
+                		//}
 //                if(flag == 1 && values[values.length-2].equals("0"))
 //                    sum_0 += Double.parseDouble(values[values.length-1]);
 //                else if(flag == 1 && values[values.length-2].equals("1"))
@@ -366,16 +368,18 @@ public class Hierarchia
         measure_values.add(x);
         measure_values.add(100-x);
         */
-        for (int i =0;i <attribute_positions.size();i ++) {
-	    		ArrayList<String> attrVals = uniqueAttributeKeyVals.get(attribute_names.get(attribute_positions.get(i)));
+//        for (int i =0;i <attribute_positions.size();i ++) {
+//	    		ArrayList<String> attrVals = uniqueAttributeKeyVals.get(attribute_names.get(attribute_positions.get(i)));
+
+			
 	    		double denominator = 0;
-	    		for (int j =0;j <attrVals.size();j ++){
-	    			denominator += measure_values.get(i).get(j);
+	    		for (int j =0;j <numXaxis;j ++){
+	    			denominator += measure_values.get(j);
 	    		}
-	    		for (int j =0;j <attrVals.size();j ++){
-	    			normalized_measure_values.add(measure_values.get(i).get(j)/denominator*100);
+	    		for (int j =0;j <numXaxis;j ++){
+	    			normalized_measure_values.add(measure_values.get(j)/denominator*100);
 	    		}
-    		}
+    		//}
 //        if(Math.abs(sum_0-0.0) <0.000001 &&  Math.abs(sum_1-0.0) <0.000001)
 //        {
 //        		normalized_measure_values.add(-1.0);
@@ -386,7 +390,6 @@ public class Hierarchia
 //        		normalized_measure_values.add(sum_0/(sum_0+sum_1)*100);
 //        		normalized_measure_values.add(sum_1/(sum_0+sum_1)*100);
 //        }
-        System.out.println("EOF compute_viz");
         System.out.println(measure_values);
         System.out.println(normalized_measure_values);
         return normalized_measure_values;
@@ -417,10 +420,10 @@ public class Hierarchia
     }
     public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
     {
-    		Hierarchia h = new Hierarchia("turn");
-    		compute_visualization(new ArrayList<String>(Arrays.asList("has_impressions_tbl", "has_clicks_tbl")), 
-    							  new ArrayList<String>(Arrays.asList("0","0")));
-    		h = new Hierarchia("mushroom");
+    		Hierarchia h = new Hierarchia("turn","has_list_fn");
+    		compute_visualization(new ArrayList<String>(Arrays.asList("has_impressions_tbl", "has_clicks_tbl","is_profile_query")), 
+    							  new ArrayList<String>(Arrays.asList("0","0","1")));
+    		h = new Hierarchia("mushroom","type");
     		compute_visualization(new ArrayList<String>(Arrays.asList("cap_shape","cap_surface","cap_color")), 
     							new ArrayList<String>(Arrays.asList("f","s","g")));
     }
