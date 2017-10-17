@@ -15,10 +15,10 @@ public class Hierarchia
 	public static String xAxis;
 	public Hierarchia(String datasetName, String xAxis) throws SQLException {
 		Hierarchia.datasetName = datasetName;
+		Hierarchia.xAxis=xAxis;
 		Hierarchia.db =  new Database();
 		Hierarchia.attribute_names = get_attribute_names();
 		Hierarchia.uniqueAttributeKeyVals = populateUniqueAttributeKeyVals();
-		Hierarchia.xAxis=xAxis;
 	}
 	public static HashMap<String, ArrayList<String>> populateUniqueAttributeKeyVals() throws SQLException{
 		HashMap<String, ArrayList<String>> uniqueAttributeKeyVals =new HashMap<String, ArrayList<String>>();
@@ -46,7 +46,9 @@ public class Hierarchia
         Node root = new Node("#");
         node_list.add(root);
         map_id_to_index.put("#", 0);
-        
+        ArrayList <String> attribute_combination = new ArrayList<String>(); // List of attribute combination that excludes the xAxis item
+        attribute_combination.addAll(attribute_names); // Deep copy original attribute names
+        attribute_combination.remove(xAxis); // remove the xAxis item in the attribute list
         int n = attribute_names.size();
         for(int k = 1; k <= n; k++) // k-attribute combination
         {
@@ -67,7 +69,7 @@ public class Hierarchia
 				current_combination:[#, #, #, #, #, #]
 				current_combination:[#, #, #, #, #, #, #]
             */
-            generate_k_combinations(attribute_names, k, 0, current_combination, k_attribute_combinations);
+            generate_k_combinations(attribute_combination, k, 0, current_combination, k_attribute_combinations);
             //System.out.println("Number of combinations: "+k_attribute_combinations.size());
             
             System.out.println("Attribute Combinations: "+k_attribute_combinations);
@@ -224,13 +226,11 @@ public class Hierarchia
                     attribute_names.add(names[i]);
                 }
             }
-            
         }
         catch(IOException e)
         {
             System.out.println("Error");
         }
-        	//System.out.println(attribute_names);
         return attribute_names;
     }
     
