@@ -36,10 +36,10 @@ public class Hierarchia
         ArrayList<Node> node_list = new ArrayList<Node>();// node_list: list of child indexes       
         //System.out.println("uniqueAttributeKeyVals:"+uniqueAttributeKeyVals);
         HashMap<String, Integer> map_id_to_index = new HashMap<String, Integer>();
-        //ArrayList<Double> root_measure_values = compute_visualization(new ArrayList<String>(),new ArrayList<String>());
-        ArrayList<Double> root_measure_values = new ArrayList<Double>(); 
-        root_measure_values.add(46.0);
-        root_measure_values.add(64.0);
+        ArrayList<Double> root_measure_values = compute_visualization(new ArrayList<String>(),new ArrayList<String>());
+        //ArrayList<Double> root_measure_values = new ArrayList<Double>(); 
+		//root_measure_values.add(46.0);
+		//root_measure_values.add(64.0);
         System.out.print("Root measure:");
         System.out.println(root_measure_values);
         map_id_to_metric_values.put("#", root_measure_values);

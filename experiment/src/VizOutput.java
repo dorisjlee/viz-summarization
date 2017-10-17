@@ -55,12 +55,18 @@ public class VizOutput {
 	public static void main(String[] args) throws SQLException 
     {
 	   Euclidean ed = new Euclidean();
-	   Hierarchia h = new Hierarchia("titanic","survived");
+	   //Hierarchia h = new Hierarchia("titanic","survived");
+	   //Hierarchia h = new Hierarchia("turn","has_list_fn");
+	   Hierarchia h = new Hierarchia("mushroom","type");
+	   //Hierarchia h = new Hierarchia("mushroom","cap_surface");
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed);
        Traversal tr = new Traversal(lattice,new Euclidean());
-       tr.greedyPicking(10);
+       tr.HDgreedyPicking(10);
        VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h,"COUNT(id)");
        System.out.println("nodeDic:"+vo.generateNodeDic());
        System.out.println("LatticeDic:"+vo.generateLatticeDic());
+       System.out.println(h.uniqueAttributeKeyVals.keySet());
+       System.out.println(h.uniqueAttributeKeyVals.values());
+       System.out.println(h.uniqueAttributeKeyVals.size());
     }
 }

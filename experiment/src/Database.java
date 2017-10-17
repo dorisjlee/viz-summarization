@@ -101,7 +101,6 @@ public class Database {
 			query_stmt += " WHERE "+ arr2DelimitedStrings(filters, "AND");
 	        query_stmt +=" GROUP BY " + xAttrJoined +";";
 		}
-		System.out.println(query_stmt);
 		ResultSet result = query(query_stmt);
 		return result;
 	}
@@ -143,24 +142,31 @@ public class Database {
 		
 //		ResultSet rs = Database.viz_query("titanic", new ArrayList<String>(Arrays.asList("survived")), "id", "COUNT", new ArrayList<String>(Arrays.asList("sex='male'", "age<20")));
 //		ArrayList<Double> rsArr = printResultSet(rs);
-		ArrayList<String> colArrs = new ArrayList<String>(Arrays.asList("survived","sexcode","pc_class"));
-		ResultSet rs = Database.viz_query("titanic", colArrs, "id", "COUNT", new ArrayList<String>(Arrays.asList()));
-		//rsArr = printResultSet(rs);
-		resultSet2csv(rs,"titanic",new ArrayList<String>(Arrays.asList("survived","sexcode","pc_class")),"COUNT(id)");
+		
+//		ArrayList<String> colArrs = new ArrayList<String>(Arrays.asList("survived","sexcode","pc_class"));
+//		ResultSet rs = Database.viz_query("titanic", colArrs, "id", "COUNT", new ArrayList<String>(Arrays.asList()));
+//		//rsArr = printResultSet(rs);
+//		resultSet2csv(rs,"titanic",new ArrayList<String>(Arrays.asList("survived","sexcode","pc_class")),"COUNT(id)");
+		
 // 		If compute using all columns then there is only one item for each group 
 //		ResultSet cols = Database.getColumns("mushroom");
 //		ArrayList<String> colArrs = resultSet2ArrayStr(cols);
 //		colArrs.remove("type");
 //		rs = Database.viz_query("mushroom", colArrs, "type", "COUNT", new ArrayList<String>(Arrays.asList()));
 //		resultSet2csv(rs,"mushroom",colArrs,"COUNT(type)");
-		colArrs = new ArrayList<String>(Arrays.asList("type","cap_shape", "cap_surface" , "cap_color" , "bruises" , "odor"));
-		rs = Database.viz_query("mushroom", colArrs, "type", "COUNT", new ArrayList<String>(Arrays.asList()));
-		resultSet2csv(rs,"mushroom",colArrs,"COUNT(type)");
 		
-		colArrs = new ArrayList<String>(Arrays.asList( "is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
-													  "has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
-		rs = Database.viz_query("turn", colArrs, "slots_millis_reduces", "SUM", new ArrayList<String>(Arrays.asList()));
-		resultSet2csv(rs,"turn",colArrs,"SUM(slots_millis_reduces)");
+		// Small Mushroom example
+		ArrayList<String> colArrs = new ArrayList<String>(Arrays.asList("type","cap_shape", "cap_surface" , "cap_color" , "bruises" , "odor"));
+		ResultSet rs = Database.viz_query("mushroom", colArrs, "type", "COUNT", new ArrayList<String>(Arrays.asList()));
+		resultSet2csv(rs,"mushroom",colArrs,"COUNT(type)");
+		// All mushroom attributes example 
+//		ArrayList<String> colArrs = new ArrayList<String>(Arrays.asList("type","cap_shape",  "cap_color" , "bruises" , "odor","gill_size","gill_color","habitat"));
+//		ResultSet rs = Database.viz_query("mushroom", colArrs, "type", "COUNT", new ArrayList<String>(Arrays.asList()));
+//		resultSet2csv(rs,"mushroom",colArrs,"COUNT(type)");
+//		colArrs = new ArrayList<String>(Arrays.asList( "is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
+//													  "has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
+//		rs = Database.viz_query("turn", colArrs, "slots_millis_reduces", "SUM", new ArrayList<String>(Arrays.asList()));
+//		resultSet2csv(rs,"turn",colArrs,"SUM(slots_millis_reduces)");
     }
 	
 }
