@@ -1,12 +1,17 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class VizOutput {
 	Lattice lattice; 
 	ArrayList<Integer> selectedNodes;
-	public VizOutput(Lattice lattice, ArrayList<Integer> selectedNodes) {
+	Hierarchia h;
+	String yName;
+	public VizOutput(Lattice lattice, ArrayList<Integer> selectedNodes,Hierarchia h, String yName) {
 		this.lattice = lattice;
 		this.selectedNodes = selectedNodes;
+		this.h = h ;
+		this.yName=yName;
 	}
 	public String generateNodeDic() {
 		// Node dictionary contains all the data required for generating the visualizations
@@ -23,7 +28,25 @@ public class VizOutput {
 			  {'xAxis': 'Others', 'yAxis': 9},
 			  {'childrenIndex': [], 'filter': 'Gender = F', 'yName': '% of vote'}]}
 		*/
-		return null;
+		ArrayList<String> xAttr = h.uniqueAttributeKeyVals.get(h.xAxis);
+		String nodeDic = "{";
+		for (int i=0; i<selectedNodes.size();i++) {
+			nodeDic+= "\\\""+(i+1)+"\\\": [";
+			int selectedNodeID = selectedNodes.get(i);
+			Node selectedNode = lattice.nodeList.get(selectedNodeID);
+			ArrayList<Double> nodeVal = lattice.id2MetricMap.get(selectedNode.id);
+			for (int ix=0; ix<xAttr.size();ix++) {
+				nodeDic+="{ \\\"xAxis\\\": \\\""+xAttr.get(ix)+"\\\", \\\"yAxis\\\":"+ nodeVal.get(ix) +"},";
+			}
+			nodeDic+="{\\\"childrenIndex\\\":"+selectedNode.get_child_list()
+				   +", \\\"filter\\\":\\\""+selectedNode.get_id() +"\\\",\\\"yName\\\":\\\""+yName+"\\\"}]";
+			if (i!=selectedNodes.size()-1) {
+				nodeDic+=',';
+			}
+		}
+		
+		nodeDic+="}";
+		return nodeDic;
 	}
 	public String generateLatticeDic() {
 		// Dictionary containing node IDs and Lattice/Graph 
@@ -36,7 +59,7 @@ public class VizOutput {
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed);
        Traversal tr = new Traversal(lattice,new Euclidean());
        tr.greedyPicking(10);
-       VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph);
+       VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h,"COUNT(id)");
        System.out.println("nodeDic:"+vo.generateNodeDic());
        System.out.println("LatticeDic:"+vo.generateLatticeDic());
     }
