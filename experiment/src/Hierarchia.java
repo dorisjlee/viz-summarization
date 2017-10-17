@@ -52,7 +52,7 @@ public class Hierarchia
         int n = attribute_names.size();
         for(int k = 1; k <= n; k++) // k-attribute combination
         {
-        		System.out.println("k: "+k);
+        		//System.out.println("k: "+k);
             ArrayList<ArrayList<String>> k_attribute_combinations = new ArrayList<ArrayList<String>>();
             ArrayList<String> current_combination = new ArrayList<String>();
             for(int i = 0; i < k; i++)
@@ -72,7 +72,7 @@ public class Hierarchia
             generate_k_combinations(attribute_combination, k, 0, current_combination, k_attribute_combinations);
             //System.out.println("Number of combinations: "+k_attribute_combinations.size());
             
-            System.out.println("Attribute Combinations: "+k_attribute_combinations);
+            //System.out.println("Attribute Combinations: "+k_attribute_combinations);
             for(int i = 0; i < k_attribute_combinations.size(); i++) // Looping through the i-th item in the k-attribute combination
             {
                 current_combination = k_attribute_combinations.get(i);
@@ -267,16 +267,14 @@ public class Hierarchia
     }
     static ArrayList<Double> compute_visualization(ArrayList<String> current_combination, ArrayList<String> current_permutation)
     {
-    		System.out.println(xAxis);
     		int  numXaxis = uniqueAttributeKeyVals.get(xAxis).size();
-    		System.out.println("Attribute-Value Combination:"+current_combination+" -- "+current_permutation);
+    		//System.out.println("Attribute-Value Combination:"+current_combination+" -- "+current_permutation);
     		
-        //Attribute-Value Combination:
     	    //Attribute-Value Combination:[cap_shape , cap_surface , cap_color ] -- [f, s, g]
         ArrayList<Double> measure_values = new ArrayList<Double>();
         ArrayList<Double> normalized_measure_values = new ArrayList<Double>();
         ArrayList<Integer> attribute_positions = new ArrayList<Integer>();
-        System.out.println("attribute_names:"+ attribute_names);
+        //System.out.println("attribute_names:"+ attribute_names);
         for(int i = 0; i < current_combination.size(); i++)
         {
             for(int j = 0; j < attribute_names.size(); j++)
@@ -287,9 +285,9 @@ public class Hierarchia
                 }
             }
         }
-        System.out.println("----");
-        System.out.println("attribute_positions:"+attribute_positions);
-        System.out.println("current_permutation:"+current_permutation);
+//        System.out.println("----");
+//        System.out.println("attribute_positions:"+attribute_positions);
+//        System.out.println("current_permutation:"+current_permutation);
         
         try
         {
@@ -323,9 +321,10 @@ public class Hierarchia
                         break;
                     }
                 }
-                if (flag==1) {
+                /* Printing out the value (list of rows) that satisfies the conditions
+                 * if (flag==1) {
                 		System.out.println("values:"+Arrays.toString(values));
-                }
+                }*/
                 int xidx =attribute_names.indexOf(xAxis);
 //                System.out.println(xAxis);
 //                System.out.println(xidx);
@@ -387,19 +386,8 @@ public class Hierarchia
 	    				normalized_measure_values.add(-1.0);
 	    			}
 	    		}
-    		//}
-//        if(Math.abs(sum_0-0.0) <0.000001 &&  Math.abs(sum_1-0.0) <0.000001)
-//        {
-//        		normalized_measure_values.add(-1.0);
-//        		normalized_measure_values.add(-1.0);
-//        }
-//        else
-//        {
-//        		normalized_measure_values.add(sum_0/(sum_0+sum_1)*100);
-//        		normalized_measure_values.add(sum_1/(sum_0+sum_1)*100);
-//        }
-        System.out.println(measure_values);
-        System.out.println(normalized_measure_values);
+//        System.out.println("measure_values:"+measure_values);
+//        System.out.println("normalized_measure_values:"+normalized_measure_values);
         return normalized_measure_values;
     }
     
