@@ -153,6 +153,10 @@
             </div>
         </div>
     </div>
+    <div> 
+        <br> nodeDic: <input type="text" id="nodeDic" style="width: 30%;">
+        <br> graphDic: <input type="text" id="graphDic" style="width: 30%;">
+    </div>
     <input type="submit" id="filterSubmit" style = "background-color: #359EDA;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 100px 100px;cursor: pointer;right:40;" value="Submit">
 </div>
 
@@ -173,21 +177,9 @@
 
 
     <div class="w3-container">
-
-
-        <div id = "treeNode" style ="display: none" treeContent = {{treeTreant2}}>
-                {{treeTreant2}}
-        </div>
-
-        <div id = "treeNode2" style ="display: none" treeContent = {{nodeDic}}>
-                {{nodeDic}}
-
-        </div>
-
-
-        <script type="text/javascript" src="lattice.js"></script>    
-
-
+       <!--<div id = "treeNode" style ="display: none" treeContent = {{treeTreant2}}>{{treeTreant2}}</div>
+        <div id = "treeNode2" style ="display: none" treeContent = {{nodeDic}}> {{nodeDic}}</div> -->
+        <!-- <script type="text/javascript" src="lattice.js"></script>    --> 
         <!--<div class = "chart" id = "tree_container" style="height:100%; width:100%;"></div>-->
         <div id="mynetwork" style="height:100%; width:100%;"></div>
         <div id = "chart_container">
@@ -211,7 +203,7 @@
 <script type="text/javascript" src="sidebar.js"></script>
 <script type="text/javascript" src="helper.js"></script>    
 <script type="text/javascript" src="barchart.js"></script>
-<script type="text/javascript" src="lattice.js"></script>
+<!-- <script type="text/javascript" src="lattice.js"></script> -->
 <!--<script>-->
     <!--var arrayDiv = new Array();-->
     <!--test_chart_collapsable(arrayDiv,nodeDic)-->
