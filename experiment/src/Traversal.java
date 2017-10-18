@@ -157,6 +157,8 @@ public class Traversal {
 	   Hierarchia h = new Hierarchia("turn","has_list_fn");
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed);
        Traversal tr = new Traversal(lattice,new Euclidean());
+       //Hierarchia.print_map(lattice.id2MetricMap);
+       //Hierarchia.print_map(lattice.id2IDMap);
        tr.greedyPicking(15);
        tr.HDgreedyPicking(10);
     }
