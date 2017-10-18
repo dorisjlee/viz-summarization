@@ -2,6 +2,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Traversal {
 	// Traversal methods take in a hashmap representing the materialized graph and return a maximal subgraph (list of node indices)
@@ -131,6 +133,67 @@ public class Traversal {
        printMaxSubgraphSummary();
    }
 	
+	/**
+	 * In each iteration we pick a node with the highest utility from a set of "frontier" nodes.
+	 * Then, the children of the picked node are added to the frontier.
+	 * 
+	 * @param k
+	 * @author saarkuzi
+	 */
+	public void frontierGreedyPicking(Integer k)
+	{
+	    lattice.maxSubgraph.clear();
+	    lattice.maxSubgraphUtility = 0;
+	    
+		// first, we add the root
+		Integer rootId = lattice.id2IDMap.get("#");
+		if(rootId == null)
+		{
+			System.err.println("Lattice root cannot be found in the nodes list");
+			return;
+		}
+		lattice.maxSubgraph.add(rootId);
+		HashMap<Integer,Float> frontierNodesUtility = expandFrontier(new HashMap<>(), rootId);
+		
+		// In each iteration: choose node from frontier and then expand the frontier
+		for(int i = 0 ; i < k - 1 ; i++)
+		{
+			if(frontierNodesUtility.size() == 0) break;
+			Integer selectedNodeID = Collections.max(frontierNodesUtility.entrySet(), Map.Entry.comparingByValue()).getKey();
+			lattice.maxSubgraphUtility += frontierNodesUtility.get(selectedNodeID);
+			lattice.maxSubgraph.add(selectedNodeID);
+			frontierNodesUtility = expandFrontier(frontierNodesUtility, selectedNodeID);
+		}
+		printMaxSubgraphSummary();
+	}
+	
+	/**
+	 * Adding nodes to a frontier group which are the children of some given parent node.
+	 * This function can be using in one of the node picking functions.
+	 * 
+	 * @param currentFrontier, parentNodeId
+	 * @author saarkuzi
+	 */
+	private HashMap<Integer, Float> expandFrontier(HashMap<Integer, Float> currentFrontier, Integer parentNodeId)
+	{
+		HashMap<Integer, Float> newFrontier = currentFrontier;
+		newFrontier.remove(parentNodeId);
+		Node parentNode = lattice.nodeList.get(parentNodeId);
+		double[] parentVal = ArrayList2Array(lattice.id2MetricMap.get(parentNode.get_id()));
+		for(Integer childId : parentNode.get_child_list())
+		{	
+			if(lattice.maxSubgraph.contains(childId)) continue;
+			Node childNode = lattice.nodeList.get(childId);
+			double[] childVal = ArrayList2Array(lattice.id2MetricMap.get(childNode.get_id()));
+			double utility = metric.computeDistance(childVal, parentVal);
+			if(newFrontier.containsKey(childId))
+				newFrontier.put(childId, (float) Math.max(newFrontier.get(childId), utility));
+			else
+				newFrontier.put(childId, (float) utility);
+		}
+		return newFrontier;
+	}
+	
 	public void printMaxSubgraphSummary() {
 		// Summary of maximum subgraph 
 		System.out.print("Max Subgraph: [");
@@ -155,11 +218,14 @@ public class Traversal {
     {
 	   Euclidean ed = new Euclidean();
 	   Hierarchia h = new Hierarchia("turn","has_list_fn");
+	   //Hierarchia h = new Hierarchia("titanic","pc_class");
+	   //Hierarchia h = new Hierarchia("mushroom","cap_shape");
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed);
        Traversal tr = new Traversal(lattice,new Euclidean());
-       //Hierarchia.print_map(lattice.id2MetricMap);
-       //Hierarchia.print_map(lattice.id2IDMap);
+       Hierarchia.print_map(lattice.id2MetricMap);
+       Hierarchia.print_map(lattice.id2IDMap);
        tr.greedyPicking(15);
        tr.HDgreedyPicking(10);
+       tr.frontierGreedyPicking(10);
     }
 }
