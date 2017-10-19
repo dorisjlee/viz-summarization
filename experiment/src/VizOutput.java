@@ -38,8 +38,9 @@ public class VizOutput {
 			for (int ix=0; ix<xAttr.size();ix++) {
 				nodeDic+="{ \\\"xAxis\\\": \\\""+xAttr.get(ix)+"\\\", \\\"yAxis\\\":"+ nodeVal.get(ix) +"},";
 			}
-			nodeDic+="{\\\"childrenIndex\\\":"+selectedNode.get_child_list()
-				   +", \\\"filter\\\":\\\""+selectedNode.get_id() +"\\\",\\\"yName\\\":\\\""+yName+"\\\"}]";
+			nodeDic+="{\\\"childrenIndex\\\":"+selectedNode.get_child_list()+
+					", \\\"populationSize\\\":"+selectedNode.getPopulation_size()+
+				    ", \\\"filter\\\":\\\""+selectedNode.get_id() +"\\\",\\\"yName\\\":\\\""+yName+"\\\"}]";
 			if (i!=selectedNodes.size()-1) {
 				nodeDic+=',';
 			}

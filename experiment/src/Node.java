@@ -8,8 +8,14 @@ public class Node
     String id;
     ArrayList<Integer> child_list;
     ArrayList<Double> dist_list;
-    
-    Node(String id)
+    int population_size;
+    public double getPopulation_size() {
+		return population_size;
+	}
+	public void setPopulation_size(int population_size) {
+		this.population_size = population_size;
+	}
+	Node(String id)
     {
         this.id = id; 
         child_list = new ArrayList<>();
