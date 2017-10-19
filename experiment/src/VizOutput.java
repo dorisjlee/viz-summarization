@@ -57,9 +57,9 @@ public class VizOutput {
     {
 	   Euclidean ed = new Euclidean();
 	   //Hierarchia h = new Hierarchia("titanic","survived");
-	   //Hierarchia h = new Hierarchia("turn","has_list_fn");
+	   Hierarchia h = new Hierarchia("turn","has_list_fn");
 	   //Hierarchia h = new Hierarchia("mushroom","type");
-	   Hierarchia h = new Hierarchia("mushroom","cap_surface");
+	   //Hierarchia h = new Hierarchia("mushroom","cap_surface");
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed);
        Traversal tr = new Traversal(lattice,new Euclidean());
        tr.HDgreedyPicking(10);

@@ -110,14 +110,14 @@ public class Hierarchia
                         visualization_key += current_combination.get(sp)+"$"+current_permutation.get(sp)+"#";  
                     }
                     
-                    ArrayList<Double> measure_values = compute_visualization(new Node("#"),current_combination, current_permutation);
+//                    ArrayList<Double> measure_values = compute_visualization(new Node("#"),current_combination, current_permutation);
+                    Node node = new Node(visualization_key);
+                    ArrayList<Double> current_visualization_measure_values = compute_visualization(node,current_combination, current_permutation);
                     
-                    if(measure_values.get(0) > 0.0 || measure_values.get(1)> 0.0 )
+                    if(current_visualization_measure_values.get(0) > 0.0 || current_visualization_measure_values.get(1)> 0.0 )
                     {
                         //System.out.println("Current Visualization: "+visualization_key+" -- "+measure_values);
                         //System.out.print("C");
-                    		Node node = new Node(visualization_key);
-                        ArrayList<Double> current_visualization_measure_values = compute_visualization(node,current_combination, current_permutation);
                         map_id_to_metric_values.put(visualization_key, current_visualization_measure_values);
                         node_list.add(node);
                         map_id_to_index.put(visualization_key, node_list.size()-1);
@@ -374,7 +374,7 @@ public class Hierarchia
 //	    		ArrayList<String> attrVals = uniqueAttributeKeyVals.get(attribute_names.get(attribute_positions.get(i)));
 
 			
-        		int denominator = 0;
+        		long denominator = 0;
 	    		for (int j =0;j <numXaxis;j ++){
 	    			denominator += measure_values.get(j);
 	    		}
@@ -382,13 +382,14 @@ public class Hierarchia
 	    		for (int j =0;j <numXaxis;j ++){
 	    			if (Math.abs(denominator)>0.000001) {
 	    				normalized_measure_values.add(measure_values.get(j)/denominator*100);
+	    				//System.out.println("measure_values:"+measure_values);
+	    		        //System.out.println("normalized_measure_values:"+normalized_measure_values);
 	    			}else {
 	    				normalized_measure_values.add(-1.0);
 	    			}
 	    		}
 	    		node.setPopulation_size(denominator);
-//        System.out.println("measure_values:"+measure_values);
-//        System.out.println("normalized_measure_values:"+normalized_measure_values);
+        
         return normalized_measure_values;
     }
     
