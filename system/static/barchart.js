@@ -113,11 +113,11 @@ function render_chart(i, nodeDic){
 
     // add bar chart title
     chart.append("text")
-        .attr("x", (width / 2)) 
+        .attr("x", (width / 2))
         .attr("y",  "-8px")
-        .attr("text-anchor", "middle")  
-        .style("font-size", "16px") 
-        .style("text-decoration", "underline")  
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("text-decoration", "underline")
         .text(title);
   }
   function handleMouseOver() {

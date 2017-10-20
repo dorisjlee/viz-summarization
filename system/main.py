@@ -12,10 +12,10 @@ db = SQLAlchemy(app)
 
 @app.route("/getTreeJSON")
 def getTreeJSON():
-  (treeTreant, nodeDic) = getJsonFromLattice()
-  session['treeTreant'] = treeTreant
+  (visjs, nodeDic) = getJsonFromLattice()
+  session['visjs'] = visjs
   session['nodeDic'] = nodeDic
-  return treeTreant, nodeDic
+  return visjs, nodeDic
 
 # @app.route("/getTree")
 # def getTree():

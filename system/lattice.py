@@ -1,3 +1,4 @@
+
 import networkx as nx
 import json
 # 	Lattice is a DAG (graph) of Node objects
@@ -104,39 +105,43 @@ class Lattice:
 
         jsonFile = json.dumps(node_dic)
         return jsonFile
-
     
     def generateJson(self, root, node_dic):
         # Generate JSON representation of tree for Treant to render
-        tree = "{"
-        tree += '"innerHTML"' + ' : ' + '"#chart' + str(root.id) + '"' + "," 
-
-        tree += '"children"' +' : '+'['
-
+        node = ""
+        edge = ""
+        # tree += '"innerHTML"' + ' : ' + '"#chart' + str(root.id) + '"' + ","
+        node += '{' + 'id: ' + str(root.id) + ', image: url' + ', shape: \'image\'}'
         for i in range(len(root.childrenIndex)):
-            thisBracket = "{"
-            thisBracket += '"innerHTML"' + ' : ' + '"#chart' + str(root.childrenIndex[i]) + '"'+","
-        
-            #if i != len(root.childrenIndex) - 1:
-                #thisBracket += ","        
-            if node_dic[root.childrenIndex[i]][len(node_dic[root.childrenIndex[i]]) - 1]["childrenIndex"] != []:
-                arr = node_dic[root.childrenIndex[i]][len(node_dic[root.childrenIndex[i]]) - 1]["childrenIndex"]
-                thisBracket += '"children"' +' : '+'['
-                for j in range(len(arr)):
-                    this = "{"
-                    this += '"innerHTML"' + ' : ' + '"#chart' + str(arr[j]) + '"' 
-                    if j != len(arr) - 1:
-                        this += "},"
-                    else:
-                        this += "}"
-                    thisBracket += this
-                if i != len(root.childrenIndex)-1:
-                    thisBracket += ']},'
-                else:
-                    thisBracket += ']}'
-                tree += thisBracket
-        tree += ']}'
-        return tree
+            node += '{' + 'id: ' + str(root.childrenIndex[i]) + ', image: url'  +', shape: \'image\'}'
+            edge += '{from:' + str(root.id) + ', to:' + str(root.childrenIndex[i]) + ', length: 200}'
+
+        #tree += '"children"' +' : '+'['
+
+        # for i in range(len(root.childrenIndex)):
+        #     thisBracket = "{"
+        #     thisBracket += '"innerHTML"' + ' : ' + '"#chart' + str(root.childrenIndex[i]) + '"'+","
+        #
+        #     #if i != len(root.childrenIndex) - 1:
+        #         #thisBracket += ","
+        #     if node_dic[root.childrenIndex[i]][len(node_dic[root.childrenIndex[i]]) - 1]["childrenIndex"] != []:
+        #         arr = node_dic[root.childrenIndex[i]][len(node_dic[root.childrenIndex[i]]) - 1]["childrenIndex"]
+        #         thisBracket += '"children"' +' : '+'['
+        #         for j in range(len(arr)):
+        #             this = "{"
+        #             this += '"innerHTML"' + ' : ' + '"#chart' + str(arr[j]) + '"'
+        #             if j != len(arr) - 1:
+        #                 this += "},"
+        #             else:
+        #                 this += "}"
+        #             thisBracket += this
+        #         if i != len(root.childrenIndex)-1:
+        #             thisBracket += ']},'
+        #         else:
+        #             thisBracket += ']}'
+        #         tree += thisBracket
+        # tree += ']}'
+        return node, edge
 
     def drawGraphToPNG(self):
         G = self.graph
