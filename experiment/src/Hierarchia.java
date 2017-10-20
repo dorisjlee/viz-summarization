@@ -36,14 +36,14 @@ public class Hierarchia
         ArrayList<Node> node_list = new ArrayList<Node>();// node_list: list of child indexes       
         //System.out.println("uniqueAttributeKeyVals:"+uniqueAttributeKeyVals);
         HashMap<String, Integer> map_id_to_index = new HashMap<String, Integer>();
-        ArrayList<Double> root_measure_values = compute_visualization(new ArrayList<String>(),new ArrayList<String>());
+        Node root = new Node("#");
+        ArrayList<Double> root_measure_values = compute_visualization(root,new ArrayList<String>(),new ArrayList<String>());
         //ArrayList<Double> root_measure_values = new ArrayList<Double>(); 
 		//root_measure_values.add(46.0);
 		//root_measure_values.add(64.0);
         System.out.print("Root measure:");
         System.out.println(root_measure_values);
         map_id_to_metric_values.put("#", root_measure_values);
-        Node root = new Node("#");
         node_list.add(root);
         map_id_to_index.put("#", 0);
         ArrayList <String> attribute_combination = new ArrayList<String>(); // List of attribute combination that excludes the xAxis item
@@ -110,15 +110,15 @@ public class Hierarchia
                         visualization_key += current_combination.get(sp)+"$"+current_permutation.get(sp)+"#";  
                     }
                     
-                    ArrayList<Double> measure_values = compute_visualization(current_combination, current_permutation);
+//                    ArrayList<Double> measure_values = compute_visualization(new Node("#"),current_combination, current_permutation);
+                    Node node = new Node(visualization_key);
+                    ArrayList<Double> current_visualization_measure_values = compute_visualization(node,current_combination, current_permutation);
                     
-                    if(measure_values.get(0) > 0.0 || measure_values.get(1)> 0.0 )
+                    if(current_visualization_measure_values.get(0) > 0.0 || current_visualization_measure_values.get(1)> 0.0 )
                     {
                         //System.out.println("Current Visualization: "+visualization_key+" -- "+measure_values);
                         //System.out.print("C");
-                        ArrayList<Double> current_visualization_measure_values = compute_visualization(current_combination, current_permutation);
                         map_id_to_metric_values.put(visualization_key, current_visualization_measure_values);
-                        Node node = new Node(visualization_key);
                         node_list.add(node);
                         map_id_to_index.put(visualization_key, node_list.size()-1);
 
@@ -265,7 +265,7 @@ public class Hierarchia
             generate_value_permutations(attribute_values, depth + 1, current_permutation, value_permutations);
         }
     }
-    static ArrayList<Double> compute_visualization(ArrayList<String> current_combination, ArrayList<String> current_permutation)
+    static ArrayList<Double> compute_visualization(Node node, ArrayList<String> current_combination, ArrayList<String> current_permutation)
     {
     		int  numXaxis = uniqueAttributeKeyVals.get(xAxis).size();
     		//System.out.println("Attribute-Value Combination:"+current_combination+" -- "+current_permutation);
@@ -374,7 +374,7 @@ public class Hierarchia
 //	    		ArrayList<String> attrVals = uniqueAttributeKeyVals.get(attribute_names.get(attribute_positions.get(i)));
 
 			
-	    		double denominator = 0;
+        		long denominator = 0;
 	    		for (int j =0;j <numXaxis;j ++){
 	    			denominator += measure_values.get(j);
 	    		}
@@ -382,12 +382,14 @@ public class Hierarchia
 	    		for (int j =0;j <numXaxis;j ++){
 	    			if (Math.abs(denominator)>0.000001) {
 	    				normalized_measure_values.add(measure_values.get(j)/denominator*100);
+	    				//System.out.println("measure_values:"+measure_values);
+	    		        //System.out.println("normalized_measure_values:"+normalized_measure_values);
 	    			}else {
 	    				normalized_measure_values.add(-1.0);
 	    			}
 	    		}
-//        System.out.println("measure_values:"+measure_values);
-//        System.out.println("normalized_measure_values:"+normalized_measure_values);
+	    		node.setPopulation_size(denominator);
+        
         return normalized_measure_values;
     }
     
@@ -416,13 +418,14 @@ public class Hierarchia
     public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
     {
     		Hierarchia h = new Hierarchia("turn","has_list_fn");
-    		compute_visualization(new ArrayList<String>(Arrays.asList("has_impressions_tbl", "has_clicks_tbl","is_profile_query")), 
+    		Node placeholderNode = new Node("#");
+    		compute_visualization(placeholderNode,new ArrayList<String>(Arrays.asList("has_impressions_tbl", "has_clicks_tbl","is_profile_query")), 
     							  new ArrayList<String>(Arrays.asList("0","0","1")));
     		h = new Hierarchia("mushroom","type");
-    		compute_visualization(new ArrayList<String>(Arrays.asList("cap_shape","cap_surface","cap_color")), 
+    		compute_visualization(placeholderNode, new ArrayList<String>(Arrays.asList("cap_shape","cap_surface","cap_color")), 
     							new ArrayList<String>(Arrays.asList("f","s","g")));
     		h = new Hierarchia("titanic","survived");
-    		compute_visualization(new ArrayList<String>(Arrays.asList("pc_class")), 
+    		compute_visualization(placeholderNode, new ArrayList<String>(Arrays.asList("pc_class")), 
     							new ArrayList<String>(Arrays.asList("3")));
     }
 }
