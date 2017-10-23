@@ -82,8 +82,8 @@ public class Traversal {
        double total_utility =0;
        ArrayList<Integer> dashboard = new ArrayList<Integer>();
        dashboard.add(0);
-       while(dashboard.size()<k)
-       {
+       while(dashboard.size()<k && dashboard.size() < lattice.nodeList.size())
+       {	
        	   double max_utility = 0;
            //System.out.println("Dashboard Size: "+dashboard.size());
            int next = -1;
@@ -217,8 +217,8 @@ public class Traversal {
 	public static void main(String[] args) throws SQLException 
     {
 	   Euclidean ed = new Euclidean();
-	   Hierarchia h = new Hierarchia("turn","has_list_fn");
-	   //Hierarchia h = new Hierarchia("titanic","pc_class");
+	   //Hierarchia h = new Hierarchia("turn","has_list_fn");
+	   Hierarchia h = new Hierarchia("titanic","pc_class");
 	   //Hierarchia h = new Hierarchia("mushroom","cap_shape");
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed);
        Traversal tr = new Traversal(lattice,new Euclidean());
