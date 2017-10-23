@@ -38,8 +38,9 @@ public class VizOutput {
 			for (int ix=0; ix<xAttr.size();ix++) {
 				nodeDic+="{ \\\"xAxis\\\": \\\""+xAttr.get(ix)+"\\\", \\\"yAxis\\\":"+ nodeVal.get(ix) +"},";
 			}
-			nodeDic+="{\\\"childrenIndex\\\":"+selectedNode.get_child_list()
-				   +", \\\"filter\\\":\\\""+selectedNode.get_id() +"\\\",\\\"yName\\\":\\\""+yName+"\\\"}]";
+			nodeDic+="{\\\"childrenIndex\\\":"+selectedNode.get_child_list()+
+					", \\\"populationSize\\\":"+selectedNode.getPopulation_size()+
+				    ", \\\"filter\\\":\\\""+selectedNode.get_id() +"\\\",\\\"yName\\\":\\\""+yName+"\\\"}]";
 			if (i!=selectedNodes.size()-1) {
 				nodeDic+=',';
 			}
@@ -56,9 +57,9 @@ public class VizOutput {
     {
 	   Euclidean ed = new Euclidean();
 	   //Hierarchia h = new Hierarchia("titanic","survived");
-	   //Hierarchia h = new Hierarchia("turn","has_list_fn");
+	   Hierarchia h = new Hierarchia("turn","has_list_fn");
 	   //Hierarchia h = new Hierarchia("mushroom","type");
-	   Hierarchia h = new Hierarchia("mushroom","cap_surface");
+	   //Hierarchia h = new Hierarchia("mushroom","cap_surface");
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed);
        Traversal tr = new Traversal(lattice,new Euclidean());
        tr.HDgreedyPicking(10);
