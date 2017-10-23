@@ -84,8 +84,9 @@ public class Traversal {
 	
 	public void greedyPicking(Integer k) {
 		/**
-		 * Greedily adding in nodes with larger utility than current max, over of all children of current node.
-		 * Stop until reach k
+		 * Looping through all children of current node (over all node in nodeList)
+		 * Greedily adding in nodes with larger utility than current max 
+		 * Stop until reach k nodes in dashboard
 		 */
 	   System.out.println("---------------- Greedy Picking -----------------");
        double total_utility =0;
