@@ -1,7 +1,9 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 public class VizOutput {
 	Lattice lattice; 
 	ArrayList<Integer> selectedNodes;
@@ -53,18 +55,29 @@ public class VizOutput {
 		// Dictionary containing node IDs and Lattice/Graph 
 		return null;
 	}
+	public static void dumpString2File(String filename,String content) {
+		try {
+            Files.write(Paths.get(filename), content.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
 	public static void main(String[] args) throws SQLException 
     {
 	   Euclidean ed = new Euclidean();
 	   //Hierarchia h = new Hierarchia("titanic","survived");
-	   Hierarchia h = new Hierarchia("turn","has_list_fn");
+	   //Hierarchia h = new Hierarchia("turn","has_list_fn");
 	   //Hierarchia h = new Hierarchia("mushroom","type");
-	   //Hierarchia h = new Hierarchia("mushroom","cap_surface");
+	   Hierarchia h = new Hierarchia("mushroom","cap_surface");
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed);
        Traversal tr = new Traversal(lattice,new Euclidean());
-       tr.HDgreedyPicking(10);
+       //tr.greedyPicking(20);
+       tr.greedyPicking(20);
+       //tr.frontierGreedyPicking(20);
        VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h,"COUNT(id)");
-       System.out.println("nodeDic:"+vo.generateNodeDic());
+       String nodeDic = vo.generateNodeDic();
+       dumpString2File("nodeDic.json", nodeDic);
+       System.out.println("nodeDic:"+nodeDic);
        System.out.println("LatticeDic:"+vo.generateLatticeDic());
        System.out.println(h.uniqueAttributeKeyVals.keySet());
        System.out.println(h.uniqueAttributeKeyVals.values());

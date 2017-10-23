@@ -6,8 +6,8 @@ import java.util.*;
 public class Node 
 {
     String id;
-    ArrayList<Integer> child_list;
-    ArrayList<Double> dist_list;
+    ArrayList<Integer> child_list; // List of node IDs of the children
+    ArrayList<Double> dist_list; // edge weights (distance) of this node to all the children 
     long population_size;
     public long getPopulation_size() {
 		return population_size;

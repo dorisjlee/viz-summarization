@@ -20,8 +20,14 @@ public class Traversal {
 		 }
 		return target;
 	}
-	public void greedyPicking(Integer k ) {
-		System.out.println("---------------- Greedy Picking -----------------");
+	public void naiveGreedyPicking(Integer k ) {
+		/**
+		 * Naive recursive level-wise picking strategy that picks one best node at each level.
+		 * Resulting in a maximal subgraph of size MIN(k, max_depth) where max_depth = # of attributes 
+		 * @param k
+		 * @author dorislee
+		 */
+		System.out.println("---------------- Naive Greedy Picking -----------------");
 		 // Starting from Root,this trigger recursive call to findBestChild and updates maxSubgraph and maxSubgraphUtility
 		findBestChild(0, k);
 		printMaxSubgraphSummary();
@@ -76,12 +82,16 @@ public class Traversal {
 		}
 	}
 	
-	public void HDgreedyPicking(Integer k) {
-   	   //System.out.println("Number of visualizations: "+map_id_to_metric_values.size());
-       //print_map(map_id_to_metric_values);
+	public void greedyPicking(Integer k) {
+		/**
+		 * Greedily adding in nodes with larger utility than current max, over of all children of current node.
+		 * Stop until reach k
+		 */
+	   System.out.println("---------------- Greedy Picking -----------------");
        double total_utility =0;
        ArrayList<Integer> dashboard = new ArrayList<Integer>();
-       dashboard.add(0);
+       dashboard.add(0); // Adding root
+       // Stop when dashboard exceeds desired size k 
        while(dashboard.size()<k && dashboard.size() < lattice.nodeList.size())
        {	
        	   double max_utility = 0;
@@ -90,14 +100,16 @@ public class Traversal {
            for(int i = 0; i < dashboard.size(); i++)
            {
                //System.out.println("Children of: "+node_list.get(dashboard.get(i)).get_id());
+        	       // Looping through all children indexes 
                for(int j = 0; j < lattice.nodeList.get(dashboard.get(i)).get_dist_list().size(); j++)
                {
+            	   	   
                    int flag = 0;
                    //System.out.println("Current Node: "+node_list.get(dashboard.get(i)).get_child_list().get(j));
                    for(int sp = 0; sp < dashboard.size(); sp++)
                    {
-                       
-                       if(lattice.nodeList.get(dashboard.get(i)).get_child_list().get(j) == dashboard.get(sp))
+                       // Check if the node to be added is already in the dashboard 
+                       if(lattice.nodeList.get(dashboard.get(i)).get_child_list().get(j).equals(dashboard.get(sp)))
                        {
                            //System.out.println("Already in");
                            flag =1;
@@ -114,20 +126,6 @@ public class Traversal {
            dashboard.add(next);
            total_utility+=max_utility;
        }
-       for(int i = 1; i < dashboard.size(); i++)
-       {
-           String id = lattice.nodeList.get(dashboard.get(i)).get_id();
-           String[] attribute_value_combos = id.replaceFirst("^#", "").split("#");
-           
-           for(int j = 0; j < attribute_value_combos.length; j++)
-           {
-               String[] attribute_value = attribute_value_combos[j].split("\\$");
-               //System.out.print(attribute_value[0]+" = "+attribute_value[1]+" ");
-           }
-//           System.out.print(lattice.id2MetricMap.get(id));
-//           System.out.println();
-       }
-       //
        lattice.maxSubgraph= dashboard; 
        lattice.maxSubgraphUtility=total_utility;
        printMaxSubgraphSummary();
@@ -142,6 +140,7 @@ public class Traversal {
 	 */
 	public void frontierGreedyPicking(Integer k)
 	{
+		System.out.println("---------------- Frontier Greedy Picking -----------------");
 	    lattice.maxSubgraph.clear();
 	    lattice.maxSubgraphUtility = 0;
 	    
@@ -218,14 +217,14 @@ public class Traversal {
     {
 	   Euclidean ed = new Euclidean();
 	   //Hierarchia h = new Hierarchia("turn","has_list_fn");
-	   Hierarchia h = new Hierarchia("titanic","pc_class");
-	   //Hierarchia h = new Hierarchia("mushroom","cap_shape");
+	   //Hierarchia h = new Hierarchia("titanic","pc_class");
+	   Hierarchia h = new Hierarchia("mushroom","cap_shape");
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed);
        Traversal tr = new Traversal(lattice,new Euclidean());
-       Hierarchia.print_map(lattice.id2MetricMap);
-       Hierarchia.print_map(lattice.id2IDMap);
-       tr.greedyPicking(15);
-       tr.HDgreedyPicking(10);
-       tr.frontierGreedyPicking(10);
+       //Hierarchia.print_map(lattice.id2MetricMap);
+       //Hierarchia.print_map(lattice.id2IDMap);
+       tr.naiveGreedyPicking(20);
+       tr.greedyPicking(20);
+       tr.frontierGreedyPicking(20);
     }
 }
