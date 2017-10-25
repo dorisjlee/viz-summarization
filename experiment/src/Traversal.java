@@ -219,25 +219,7 @@ public class Traversal {
 		}
 		System.out.println("Total Utility:"+Double.toString(lattice.maxSubgraphUtility));
 	}
-	public static void mergeNodes(Lattice lattice) {
-//		lattice.maxSubgraph;
-//		lattice.id2MetricMap
-		HashMap<ArrayList<Double>,ArrayList<Integer>> val2IDsMap=new HashMap<ArrayList<Double>,ArrayList<Integer>>();
-		for (int id : lattice.maxSubgraph) {
-			ArrayList<Double> value = lattice.id2MetricMap.get(lattice.nodeList.get(id).get_id());
-			System.out.println(value);
-			ArrayList<Integer> IDs = val2IDsMap.get(value);
-			if (IDs!=null) {
-				// exist previous entry, add to previous list
-				val2IDsMap.get(value).add(id);
-			}else {
-				// No previous entry, add new array list with that ID
-				val2IDsMap.put(value, new ArrayList<Integer>(id));
-			}
-		}
-		//Hierarchia.print_map(val2IDsMap);
-//		for (ArrayList<Double>,ArrayList<Integer> a :val2IDsMap.entrySet())
-	}
+	
 	public static void main(String[] args) throws SQLException 
     {
 	   Euclidean ed = new Euclidean();
@@ -251,6 +233,6 @@ public class Traversal {
 //       tr.naiveGreedyPicking(20);
 //       tr.greedyPicking(20);
        tr.frontierGreedyPicking(20);
-       mergeNodes(lattice);
+       //mergeNodes(lattice);
     }
 }

@@ -428,6 +428,49 @@ public class Hierarchia
         return Math.sqrt(distance);
 //        return distance;
     }
+    public static void mergeNodes(Lattice lattice) {
+    		/**
+    		 *  Merge nodes is a preprocessing step that is done after the lattice is generated
+    		 *  before the traversal. This resembles the compression of C-cube, where the cube 
+    		 *  has no cells with descendants that have the same measure values. This function merges
+    		 *  all the nodes that have identical values who are siblings into one node with concatenated.
+    		 */
+    	    
+		HashMap<ArrayList<Double>,ArrayList<String>> val2IDsMap=new HashMap<ArrayList<Double>,ArrayList<String>>();
+		for (Node node : lattice.nodeList) {
+			String id = node.get_id();
+			ArrayList<Double> value = lattice.id2MetricMap.get(node.get_id());
+			//System.out.println(value);
+			ArrayList<String> IDs = val2IDsMap.get(value);
+			if (IDs!=null) {
+				// exist previous entry, add to previous list
+				val2IDsMap.get(value).add(id);
+			}else {
+				// No previous entry, add new array list with that ID
+				val2IDsMap.put(value, new ArrayList<String>(Arrays.asList(id)));
+			}
+		}
+//		Hierarchia.print_map(val2IDsMap);
+		Iterator it = val2IDsMap.entrySet().iterator();
+	    while (it.hasNext()) {
+	        Map.Entry pair = (Map.Entry)it.next();
+	        ArrayList<Double> k = (ArrayList<Double>) pair.getKey();
+	        ArrayList<String> v = (ArrayList<String>) pair.getValue();
+	        if (v.size()>1) {
+	        		// Merge nodes which has more than one same-value node
+	        		ArrayList<String> nodes2merge = v; // Note later we will have better strategies for choosing which nodes to merge (e.g. only descendants, only siblings, etc)
+	        		System.out.println(nodes2merge);
+	        		for (String nodeKeys:nodes2merge) {
+	        			int nodeID = lattice.id2IDMap.get(nodeKeys);
+	        			lattice.id2IDMap.remove(nodeKeys);
+	        			lattice.id2MetricMap.remove(nodeKeys);
+	        			lattice.nodeList.remove(nodeID);
+	        		}
+	        }
+	        //System.out.println(k+ " =: " + v);
+	    }
+//		for (ArrayList<Double>,ArrayList<Integer> a :val2IDsMap.entrySet())
+	}
     public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
     {
 //    		Hierarchia h = new Hierarchia("turn","has_list_fn");
@@ -443,5 +486,6 @@ public class Hierarchia
 	   Euclidean ed = new Euclidean();
  	   Hierarchia h = new Hierarchia("mushroom","type");
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
+       mergeNodes(lattice);
     }
 }
