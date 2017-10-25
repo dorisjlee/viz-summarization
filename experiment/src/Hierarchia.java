@@ -30,8 +30,15 @@ public class Hierarchia
 		}
 		return uniqueAttributeKeyVals;
 	}
-    public static Lattice generateFullyMaterializedLattice(Distance distance){
+    public static Lattice generateFullyMaterializedLattice(Distance distance, double iceberg_ratio, double informative_criteria){
+    	/**
+    	 * Fully Materialize Visualization Lattice by populating id2MetricMap, nodeList, id2IDMap 
+    	 * @param distance: Distance function used for computing edge weights between parent & child
+    	 * iceberg_ratio: enforces that all nodes to be added into the lattice must be > x % of size of the root node
+    	 * informative_criteria: for a parent to be added to the lattice, it must be within x % the minimum distance to be declared an "informative parent" 
+    	 */
     	    System.out.println("---------------- Generate Fully Materialized Lattice -----------------");
+    	    System.out.println("Informative parent defined as parents within "+informative_criteria*100+"% the minimum.");
         HashMap<String, ArrayList<Double>> map_id_to_metric_values = new HashMap<String, ArrayList<Double>>();
         ArrayList<Node> node_list = new ArrayList<Node>();// node_list: list of child indexes       
         //System.out.println("uniqueAttributeKeyVals:"+uniqueAttributeKeyVals);
@@ -41,8 +48,11 @@ public class Hierarchia
         //ArrayList<Double> root_measure_values = new ArrayList<Double>(); 
 		//root_measure_values.add(46.0);
 		//root_measure_values.add(64.0);
-        System.out.print("Root measure:");
-        System.out.println(root_measure_values);
+        System.out.println("Root measure:"+root_measure_values);
+        long rootSize = root.getPopulation_size();
+        System.out.println("Root size:"+rootSize);
+        double  min_iceberg_support = iceberg_ratio*rootSize;
+		System.out.println("Minimum Iceberg support:"+min_iceberg_support);
         map_id_to_metric_values.put("#", root_measure_values);
         node_list.add(root);
         map_id_to_index.put("#", 0);
@@ -114,65 +124,68 @@ public class Hierarchia
                     Node node = new Node(visualization_key);
                     ArrayList<Double> current_visualization_measure_values = compute_visualization(node,current_combination, current_permutation);
                     
-                    if(current_visualization_measure_values.get(0) > 0.0 || current_visualization_measure_values.get(1)> 0.0 )
-                    {
-                        //System.out.println("Current Visualization: "+visualization_key+" -- "+measure_values);
-                        //System.out.print("C");
-                        map_id_to_metric_values.put(visualization_key, current_visualization_measure_values);
-                        node_list.add(node);
-                        map_id_to_index.put(visualization_key, node_list.size()-1);
-
-                        double min_distance = 1000000;
-                        for(int dr = 0; dr < k; dr++)
-                        {
-                            visualization_key = "#";
-                            for(int sp = 0; sp < k; sp++)
-                            {
-                                if(sp!=dr)
-                                    visualization_key += current_combination.get(sp)+"$"+current_permutation.get(sp)+"#";
-                            }
-                            //System.out.println("Potential parent: "+visualization_key+" -- "+map_id_to_metric_values.get(visualization_key));
-                            if(map_id_to_metric_values.get(visualization_key) != null)
-                            {
-                                ArrayList<Double> parent_visualization_measure_values = map_id_to_metric_values.get(visualization_key);
-                                double [] cviz = Traversal.ArrayList2Array(current_visualization_measure_values);
-                            		double [] pviz =  Traversal.ArrayList2Array(parent_visualization_measure_values);
-                                double dist = distance.computeDistance(cviz,pviz);
-                                if(dist < min_distance)
-                                    min_distance = dist;
-                            }
-                        }
-                        
-                        for(int dr = 0; dr < k; dr++)
-                        {
-                            visualization_key = "#";
-                            for(int sp = 0; sp < k; sp++)
-                            {
-                                if(sp!=dr)
-                                    visualization_key += current_combination.get(sp)+"$"+current_permutation.get(sp)+"#";
-                            }
-                            
-                            if(map_id_to_metric_values.get(visualization_key) != null)
-                            {
-                                ArrayList<Double> parent_visualization_measure_values = map_id_to_metric_values.get(visualization_key);
-                                double dist = compute_distance(current_visualization_measure_values, parent_visualization_measure_values);
-                                if(dist*0.8 <= min_distance)
-                                {
-                                    int parent_index = map_id_to_index.get(visualization_key);
-                                    
-                                    ArrayList<Integer> child_list = node_list.get(parent_index).get_child_list();
-                                    child_list.add(node_list.size()-1);
-                                    node_list.get(parent_index).set_child_list(child_list);
-                                    
-                                    ArrayList<Double> dist_list = node_list.get(parent_index).get_dist_list();
-                                    dist_list.add(dist);
-                                    node_list.get(parent_index).set_child_list(child_list);
-                                    //System.out.print("I");
-                                    //System.out.println("Informative parent: "+visualization_key+" -- "+map_id_to_metric_values.get(visualization_key));
-                                }
-                            }
-                        }
-                    }
+                    if (node.getPopulation_size()>= min_iceberg_support) {
+	                    	if(current_visualization_measure_values.get(0) > 0.0 || current_visualization_measure_values.get(1)> 0.0 )
+	                        {
+	                            //System.out.println("Current Visualization: "+visualization_key+" -- "+measure_values);
+	                            //System.out.print("C");
+	                            map_id_to_metric_values.put(visualization_key, current_visualization_measure_values);
+	                            node_list.add(node);
+	                            map_id_to_index.put(visualization_key, node_list.size()-1);
+	
+	                            double min_distance = 1000000;
+	                            for(int dr = 0; dr < k; dr++)
+	                            {
+	                                visualization_key = "#";
+	                                for(int sp = 0; sp < k; sp++)
+	                                {
+	                                    if(sp!=dr)
+	                                        visualization_key += current_combination.get(sp)+"$"+current_permutation.get(sp)+"#";
+	                                }
+	                                //System.out.println("Potential parent: "+visualization_key+" -- "+map_id_to_metric_values.get(visualization_key));
+	                                if(map_id_to_metric_values.get(visualization_key) != null)
+	                                {
+	                                    ArrayList<Double> parent_visualization_measure_values = map_id_to_metric_values.get(visualization_key);
+	                                    double [] cviz = Traversal.ArrayList2Array(current_visualization_measure_values);
+	                                		double [] pviz =  Traversal.ArrayList2Array(parent_visualization_measure_values);
+	                                    double dist = distance.computeDistance(cviz,pviz);
+	                                    if(dist < min_distance)
+	                                        min_distance = dist;
+	                                }
+	                            }
+	                            
+	                            for(int dr = 0; dr < k; dr++)
+	                            {
+	                                visualization_key = "#";
+	                                for(int sp = 0; sp < k; sp++)
+	                                {
+	                                    if(sp!=dr)
+	                                        visualization_key += current_combination.get(sp)+"$"+current_permutation.get(sp)+"#";
+	                                }
+	                                
+	                                if(map_id_to_metric_values.get(visualization_key) != null)
+	                                {
+	                                    ArrayList<Double> parent_visualization_measure_values = map_id_to_metric_values.get(visualization_key);
+	                                    double dist = compute_distance(current_visualization_measure_values, parent_visualization_measure_values);
+	                                    if(dist*informative_criteria <= min_distance)
+	                                    {
+	                                        int parent_index = map_id_to_index.get(visualization_key);
+	                                        
+	                                        ArrayList<Integer> child_list = node_list.get(parent_index).get_child_list();
+	                                        child_list.add(node_list.size()-1);
+	                                        node_list.get(parent_index).set_child_list(child_list);
+	                                        
+	                                        ArrayList<Double> dist_list = node_list.get(parent_index).get_dist_list();
+	                                        dist_list.add(dist);
+	                                        node_list.get(parent_index).set_child_list(child_list);
+	                                        //System.out.print("I");
+	                                        //System.out.println("Informative parent: "+visualization_key+" -- "+map_id_to_metric_values.get(visualization_key));
+	                                    }
+	                                }
+	                            }
+	                        }
+                    		}
+                    
                     /*
                     System.out.print("Node List: ");
                     for(int x = 0; x < node_list.size(); x++)
@@ -208,6 +221,7 @@ public class Hierarchia
             System.out.println();
         }*/
         Lattice materialized_lattice = new Lattice(map_id_to_metric_values,node_list,map_id_to_index);
+        System.out.println("------------------------------------------------ ");
         return materialized_lattice;
     }
     static ArrayList<String> get_attribute_names()
@@ -389,7 +403,6 @@ public class Hierarchia
 	    			}
 	    		}
 	    		node.setPopulation_size(denominator);
-        
         return normalized_measure_values;
     }
     
@@ -417,15 +430,18 @@ public class Hierarchia
     }
     public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
     {
-    		Hierarchia h = new Hierarchia("turn","has_list_fn");
-    		Node placeholderNode = new Node("#");
-    		compute_visualization(placeholderNode,new ArrayList<String>(Arrays.asList("has_impressions_tbl", "has_clicks_tbl","is_profile_query")), 
-    							  new ArrayList<String>(Arrays.asList("0","0","1")));
-    		h = new Hierarchia("mushroom","type");
-    		compute_visualization(placeholderNode, new ArrayList<String>(Arrays.asList("cap_shape","cap_surface","cap_color")), 
-    							new ArrayList<String>(Arrays.asList("f","s","g")));
-    		h = new Hierarchia("titanic","survived");
-    		compute_visualization(placeholderNode, new ArrayList<String>(Arrays.asList("pc_class")), 
-    							new ArrayList<String>(Arrays.asList("3")));
+//    		Hierarchia h = new Hierarchia("turn","has_list_fn");
+//    		Node placeholderNode = new Node("#");
+//    		compute_visualization(placeholderNode,new ArrayList<String>(Arrays.asList("has_impressions_tbl", "has_clicks_tbl","is_profile_query")), 
+//    							  new ArrayList<String>(Arrays.asList("0","0","1")));
+//    		h = new Hierarchia("mushroom","type");
+//    		compute_visualization(placeholderNode, new ArrayList<String>(Arrays.asList("cap_shape","cap_surface","cap_color")), 
+//    							new ArrayList<String>(Arrays.asList("f","s","g")));
+//    		h = new Hierarchia("titanic","survived");
+//    		compute_visualization(placeholderNode, new ArrayList<String>(Arrays.asList("pc_class")), 
+//    							new ArrayList<String>(Arrays.asList("3")));
+	   Euclidean ed = new Euclidean();
+ 	   Hierarchia h = new Hierarchia("mushroom","type");
+       Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
     }
 }

@@ -69,11 +69,11 @@ public class VizOutput {
 	   //Hierarchia h = new Hierarchia("turn","has_list_fn");
 	   //Hierarchia h = new Hierarchia("mushroom","type");
 	   Hierarchia h = new Hierarchia("mushroom","cap_surface");
-       Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed);
+	   Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.1,0.8);
        Traversal tr = new Traversal(lattice,new Euclidean());
        //tr.greedyPicking(20);
-       tr.greedyPicking(20);
-       //tr.frontierGreedyPicking(20);
+       //tr.greedyPicking(20);
+       tr.frontierGreedyPicking(20);
        VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h,"COUNT(id)");
        String nodeDic = vo.generateNodeDic();
        dumpString2File("nodeDic.json", nodeDic);

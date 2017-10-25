@@ -1,9 +1,14 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 
 public class Traversal {
 	// Traversal methods take in a hashmap representing the materialized graph and return a maximal subgraph (list of node indices)
@@ -214,18 +219,38 @@ public class Traversal {
 		}
 		System.out.println("Total Utility:"+Double.toString(lattice.maxSubgraphUtility));
 	}
+	public static void mergeNodes(Lattice lattice) {
+//		lattice.maxSubgraph;
+//		lattice.id2MetricMap
+		HashMap<ArrayList<Double>,ArrayList<Integer>> val2IDsMap=new HashMap<ArrayList<Double>,ArrayList<Integer>>();
+		for (int id : lattice.maxSubgraph) {
+			ArrayList<Double> value = lattice.id2MetricMap.get(lattice.nodeList.get(id).get_id());
+			System.out.println(value);
+			ArrayList<Integer> IDs = val2IDsMap.get(value);
+			if (IDs!=null) {
+				// exist previous entry, add to previous list
+				val2IDsMap.get(value).add(id);
+			}else {
+				// No previous entry, add new array list with that ID
+				val2IDsMap.put(value, new ArrayList<Integer>(id));
+			}
+		}
+		//Hierarchia.print_map(val2IDsMap);
+//		for (ArrayList<Double>,ArrayList<Integer> a :val2IDsMap.entrySet())
+	}
 	public static void main(String[] args) throws SQLException 
     {
 	   Euclidean ed = new Euclidean();
 	   //Hierarchia h = new Hierarchia("turn","has_list_fn");
 	   //Hierarchia h = new Hierarchia("titanic","pc_class");
-	   Hierarchia h = new Hierarchia("mushroom","cap_shape");
-       Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed);
+	   Hierarchia h = new Hierarchia("mushroom","type");
+	   Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
        Traversal tr = new Traversal(lattice,new Euclidean());
        //Hierarchia.print_map(lattice.id2MetricMap);
        //Hierarchia.print_map(lattice.id2IDMap);
-       tr.naiveGreedyPicking(20);
-       tr.greedyPicking(20);
+//       tr.naiveGreedyPicking(20);
+//       tr.greedyPicking(20);
        tr.frontierGreedyPicking(20);
+       mergeNodes(lattice);
     }
 }
