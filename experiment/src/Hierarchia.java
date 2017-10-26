@@ -472,41 +472,16 @@ public class Hierarchia
 		for (int i =0; i<nodes2merge.size();i++) {
 			String nodeKey = nodes2merge.get(i);
 			int nodeID = lattice.id2IDMap.get(nodeKey);
-//			System.out.println(lattice.nodeList.size());
-//			System.out.println(nodeKey);
-//			print_map(lattice.id2IDMap);
-//			System.out.println(lattice.id2IDMap.get(nodeKey));
 			if (i==0) {
 				keepNode = lattice.nodeList.get(nodeID);
 				// For each nodeKeys, chose the first one to retain and accumulate all the filter names
 				keepNode.setMerged_nodes_keys(new ArrayList<String>(Arrays.asList(nodeKey)));
-//				if (node.getMerged_nodes_keys()==null) {
-//					node.setMerged_nodes_keys(new ArrayList<String>(Arrays.asList(nodeKey)));
-//				}else {
-//					node.getMerged_nodes_keys().add(nodeKey);
-//				}
 			}else {
 				keepNode.getMerged_nodes_keys().add(nodeKey);
 				// remove the remaining nodes
-//				System.out.println(nodeKey);
-//				System.out.println(lattice.id2IDMap.get(nodeKey));
-//				int newNodeID = lattice.id2IDMap.get(nodeKey);
-//				lattice.nodeList.remove(newNodeID); //arrays remove by index
-//				if (lattice.id2IDMap.get(nodeKey)!=null) {
-//					int newNodeID = lattice.id2IDMap.get(nodeKey);
-//					System.out.println(lattice.nodeList.size());
-//					System.out.println(lattice.id2IDMap.size());
-//					System.out.println(lattice.id2MetricMap.size());
-//					lattice.id2IDMap.put(keepNode.get_id(), lattice.nodeList.get(keepNode))
-//					System.out.println("nodeKey:"+nodeKey);
-//					System.out.println("newNodeID:"+newNodeID);
-//					lattice.nodeList.remove(newNodeID); //arrays remove by index
-//				}
-				
 				lattice.id2IDMap.remove(nodeKey); // hashmaps remove by key object
 				lattice.id2MetricMap.remove(nodeKey);
 				// Note that we are not deleting the items inside nodeList because the id2IDMap needs to be updated to those index otherwise.
-
 			}
 		}
     }
@@ -532,7 +507,5 @@ public class Hierarchia
        System.out.println(lattice.nodeList.size());
        System.out.println(lattice.nodeList.get(lattice.id2IDMap.get("#cap_shape$f#cap_color$p#")).getMerged_nodes_keys());
        System.out.println(lattice.nodeList.get(lattice.id2IDMap.get("#cap_shape$b#cap_surface$f#")).getMerged_nodes_keys());
-       
-       
     }
 }
