@@ -435,7 +435,7 @@ public class Hierarchia
     		 *  has no cells with descendants that have the same measure values. This function merges
     		 *  all the nodes that have identical values who are siblings into one node with concatenated.
     		 */
-    	    
+    	    //System.out.println("---------------- Merging Nodes -----------------");
 		HashMap<ArrayList<Double>,ArrayList<String>> val2IDsMap=new HashMap<ArrayList<Double>,ArrayList<String>>();
 		for (Node node : lattice.nodeList) {
 			String id = node.get_id();
@@ -450,7 +450,7 @@ public class Hierarchia
 				val2IDsMap.put(value, new ArrayList<String>(Arrays.asList(id)));
 			}
 		}
-//		Hierarchia.print_map(val2IDsMap);
+		//Hierarchia.print_map(val2IDsMap);
 		Iterator it = val2IDsMap.entrySet().iterator();
 	    while (it.hasNext()) {
 	        Map.Entry pair = (Map.Entry)it.next();
@@ -459,18 +459,57 @@ public class Hierarchia
 	        if (v.size()>1) {
 	        		// Merge nodes which has more than one same-value node
 	        		ArrayList<String> nodes2merge = v; // Note later we will have better strategies for choosing which nodes to merge (e.g. only descendants, only siblings, etc)
-	        		System.out.println(nodes2merge);
-	        		for (String nodeKeys:nodes2merge) {
-	        			int nodeID = lattice.id2IDMap.get(nodeKeys);
-	        			lattice.id2IDMap.remove(nodeKeys);
-	        			lattice.id2MetricMap.remove(nodeKeys);
-	        			lattice.nodeList.remove(nodeID);
-	        		}
+	        		mergeNodesInLattice(lattice,nodes2merge);
 	        }
 	        //System.out.println(k+ " =: " + v);
 	    }
-//		for (ArrayList<Double>,ArrayList<Integer> a :val2IDsMap.entrySet())
 	}
+    public static void mergeNodesInLattice(Lattice lattice,ArrayList<String> nodes2merge) {
+    		/* 
+    		 * Given a list of nodes keys to merge, merge the nodes in the lattice
+    		 */
+    		Node keepNode= lattice.nodeList.get(lattice.id2IDMap.get(nodes2merge.get(0)));
+		for (int i =0; i<nodes2merge.size();i++) {
+			String nodeKey = nodes2merge.get(i);
+			int nodeID = lattice.id2IDMap.get(nodeKey);
+//			System.out.println(lattice.nodeList.size());
+//			System.out.println(nodeKey);
+//			print_map(lattice.id2IDMap);
+//			System.out.println(lattice.id2IDMap.get(nodeKey));
+			if (i==0) {
+				keepNode = lattice.nodeList.get(nodeID);
+				// For each nodeKeys, chose the first one to retain and accumulate all the filter names
+				keepNode.setMerged_nodes_keys(new ArrayList<String>(Arrays.asList(nodeKey)));
+//				if (node.getMerged_nodes_keys()==null) {
+//					node.setMerged_nodes_keys(new ArrayList<String>(Arrays.asList(nodeKey)));
+//				}else {
+//					node.getMerged_nodes_keys().add(nodeKey);
+//				}
+			}else {
+				keepNode.getMerged_nodes_keys().add(nodeKey);
+				// remove the remaining nodes
+//				System.out.println(nodeKey);
+//				System.out.println(lattice.id2IDMap.get(nodeKey));
+//				int newNodeID = lattice.id2IDMap.get(nodeKey);
+//				lattice.nodeList.remove(newNodeID); //arrays remove by index
+//				if (lattice.id2IDMap.get(nodeKey)!=null) {
+//					int newNodeID = lattice.id2IDMap.get(nodeKey);
+//					System.out.println(lattice.nodeList.size());
+//					System.out.println(lattice.id2IDMap.size());
+//					System.out.println(lattice.id2MetricMap.size());
+//					lattice.id2IDMap.put(keepNode.get_id(), lattice.nodeList.get(keepNode))
+//					System.out.println("nodeKey:"+nodeKey);
+//					System.out.println("newNodeID:"+newNodeID);
+//					lattice.nodeList.remove(newNodeID); //arrays remove by index
+//				}
+				
+				lattice.id2IDMap.remove(nodeKey); // hashmaps remove by key object
+				lattice.id2MetricMap.remove(nodeKey);
+				// Note that we are not deleting the items inside nodeList because the id2IDMap needs to be updated to those index otherwise.
+
+			}
+		}
+    }
     public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
     {
 //    		Hierarchia h = new Hierarchia("turn","has_list_fn");
@@ -486,6 +525,14 @@ public class Hierarchia
 	   Euclidean ed = new Euclidean();
  	   Hierarchia h = new Hierarchia("mushroom","type");
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
+       System.out.println(lattice.id2IDMap.size());
+       System.out.println(lattice.nodeList.size());
        mergeNodes(lattice);
+       System.out.println(lattice.id2IDMap.size());
+       System.out.println(lattice.nodeList.size());
+       System.out.println(lattice.nodeList.get(lattice.id2IDMap.get("#cap_shape$f#cap_color$p#")).getMerged_nodes_keys());
+       System.out.println(lattice.nodeList.get(lattice.id2IDMap.get("#cap_shape$b#cap_surface$f#")).getMerged_nodes_keys());
+       
+       
     }
 }

@@ -232,7 +232,8 @@ public class Traversal {
        //Hierarchia.print_map(lattice.id2IDMap);
 //       tr.naiveGreedyPicking(20);
 //       tr.greedyPicking(20);
+       //Hierarchia.mergeNodes(lattice); 
        tr.frontierGreedyPicking(20);
-       //mergeNodes(lattice);
+       
     }
 }
