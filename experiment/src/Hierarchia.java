@@ -509,7 +509,7 @@ public class Hierarchia
 		{
 			System.out.println("x:"+x);
 			System.out.println(nodeIDs2remove.get(x));
-			lattice.nodeList.remove(nodeIDs2remove.get(x)); // remove by index
+			lattice.nodeList.remove((int) nodeIDs2remove.get(x));// remove by index
 			System.out.println("Removed:"+nodeIDs2remove.get(x));
 		}
 		System.out.println("After:"+lattice.nodeList.size());
