@@ -1,7 +1,14 @@
 public class MaxDiff implements Distance{
 	private double mdiff;
+	String distName = "maxdiff";
 	public MaxDiff() {
 		mdiff = 0;
+	}
+	public String getDistName() {
+		return distName;
+	}
+	public void setDistName(String distName) {
+		this.distName = distName;
 	}
 	@Override
 	public double computeDistance(double [] viz1, double [] viz2) {

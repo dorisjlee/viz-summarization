@@ -536,12 +536,16 @@ public class Hierarchia
 //    		compute_visualization(placeholderNode, new ArrayList<String>(Arrays.asList("pc_class")), 
 //    							new ArrayList<String>(Arrays.asList("3")));
 	   Euclidean ed = new Euclidean();
- 	   Hierarchia h = new Hierarchia("mushroom","type");
+ 	   Hierarchia h = new Hierarchia("mushroom","cap_color");
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
-       System.out.println("# of nodes before merging:"+lattice.nodeList.size());
-       mergeNodes(lattice);
-       System.out.println("# of nodes after merging:"+lattice.nodeList.size());
-       System.out.println(lattice.nodeList.get(lattice.id2IDMap.get("#cap_shape$f#cap_color$p#")).getMerged_nodes_keys());
-       System.out.println(lattice.nodeList.get(lattice.id2IDMap.get("#cap_shape$b#cap_surface$f#")).getMerged_nodes_keys());
+//       System.out.println("# of nodes before merging:"+lattice.nodeList.size());
+//       mergeNodes(lattice);
+//       System.out.println("# of nodes after merging:"+lattice.nodeList.size());
+       // For now, the traversal strategy doesn't work with merging yet, because it is not entirely clear how 
+       // we should pick merged nodes. Right now merged nodes has key as the original nodes with an additional 
+       // attribute merged_nodes_keys containing a list of keys for the merged nodes, traversal needs to account for this.
+       
+//       Traversal tr = new FrontierGreedyPicking(lattice,new Euclidean());
+//       tr.pickVisualizations(20);
     }
 }

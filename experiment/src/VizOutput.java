@@ -65,22 +65,35 @@ public class VizOutput {
 	public static void main(String[] args) throws SQLException 
     {
 	   Euclidean ed = new Euclidean();
+	   /////////////////////////////
+	   String datasetName = "titanic";
+	   String xAxisName = "survived";
+	   String yAxisName = "COUNT (id)";
+	   int k = 10;
+	   Distance dist = new Euclidean();
+	   String distName = dist.getDistName();
+	   double iceberg_ratio = 0.1; // [ic] % of root population size to keep as a node
+	   double informative_critera = 0.8; //[ip] % closeness to minDist to be regarded as informative parent
+	   Hierarchia h = new Hierarchia(datasetName,xAxisName);
+	   Lattice lattice = Hierarchia.generateFullyMaterializedLattice(dist,iceberg_ratio,informative_critera);
+       Traversal tr = new FrontierGreedyPicking(lattice,dist);
+       String algo = tr.getAlgoName().toLowerCase().replace(" ","");
+	   String fname = datasetName+"_"+xAxisName+"_"+algo+"_"+distName+"_ic"+iceberg_ratio+"_ip"+informative_critera+"_k"+k+".json"; 
+	   /////////////////////////////
 	   //Hierarchia h = new Hierarchia("titanic","survived");
 	   //Hierarchia h = new Hierarchia("turn","has_list_fn");
 	   //Hierarchia h = new Hierarchia("mushroom","type");
-	   Hierarchia h = new Hierarchia("mushroom","cap_surface");
-	   Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.1,0.8);
-       Traversal tr = new FrontierGreedyPicking(lattice,new Euclidean());
+	   //Hierarchia h = new Hierarchia("mushroom","cap_surface");
        //tr.greedyPicking(20);
        //tr.greedyPicking(20);
-       tr.pickVisualizations(20);
-       VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h,"COUNT(id)");
+       tr.pickVisualizations(k);
+       VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h,yAxisName);
        String nodeDic = vo.generateNodeDic();
-       dumpString2File("nodeDic.json", nodeDic);
-       System.out.println("nodeDic:"+nodeDic);
-       System.out.println("LatticeDic:"+vo.generateLatticeDic());
-       System.out.println(h.uniqueAttributeKeyVals.keySet());
-       System.out.println(h.uniqueAttributeKeyVals.values());
-       System.out.println(h.uniqueAttributeKeyVals.size());
+       dumpString2File("../ipynb/dashboards/json/"+fname, nodeDic);
+//       System.out.println("nodeDic:"+nodeDic);
+//       System.out.println("LatticeDic:"+vo.generateLatticeDic());
+//       System.out.println(h.uniqueAttributeKeyVals.keySet());
+//       System.out.println(h.uniqueAttributeKeyVals.values());
+//       System.out.println(h.uniqueAttributeKeyVals.size());
     }
 }

@@ -6,6 +6,13 @@ import net.sf.javaml.distance.NormDistance;
 
 public class LpNorm implements Distance{
 	private NormDistance lpObj;
+	String distName = "lpnorm";
+	public String getDistName() {
+		return distName;
+	}
+	public void setDistName(String distName) {
+		this.distName = distName;
+	}
 	public LpNorm(double power) {
 		lpObj = new NormDistance(power);
 	}

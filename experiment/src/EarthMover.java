@@ -1,5 +1,12 @@
 public class EarthMover implements Distance{
 	private double emd;
+	String distName = "emd";
+	public String getDistName() {
+		return distName;
+	}
+	public void setDistName(String distName) {
+		this.distName = distName;
+	}
 	public EarthMover() {
 		emd = 0;
 	}
