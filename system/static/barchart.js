@@ -1,5 +1,6 @@
 function render_chart(i, nodeDic){
-    Dic = JSON.parse(nodeDic)
+//    Dic = JSON.parse(nodeDic)
+    Dic = nodeDic
     dataset = Dic[i].slice(0, Dic[i].length-1)
     yAxis_name = Dic[i][Dic[i].length-1]["yName"]
     title = Dic[i][Dic[i].length-1]["filter"]
@@ -119,6 +120,8 @@ function render_chart(i, nodeDic){
         .style("font-size", "16px")
         .style("text-decoration", "underline")
         .text(title);
+
+   return chart;
   }
   function handleMouseOver() {
     console.log("alert");
