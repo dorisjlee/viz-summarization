@@ -1,3 +1,4 @@
+import java.io.File;
 import java.sql.SQLException;
 
 public class Experiment {
@@ -15,6 +16,7 @@ public class Experiment {
 	Traversal algo;
 	String fname;
 	int nbars;
+	public String experiment_name="../ipynb/dashboards/json/"+"vary_dataset_ip";
 	public Experiment(String datasetName, String xAxisName, String yAxisName, int k, String algoName, Distance dist,
 			double iceberg_ratio, double informative_critera) throws SQLException {
 		super();
@@ -37,13 +39,22 @@ public class Experiment {
 		}else if (this.algoName.equals("naiveGreedy")) {
 			this.algo = new NaiveGreedyPicking(lattice, dist);
 		}
-	    this.fname = datasetName+"_"+xAxisName.replace("_","-")+"_"+algoName+"_"+distName+"_ic"+iceberg_ratio+"_ip"+informative_critera+"_k"+k+"_nbar"+nbars+".json"; 
+		if (experiment_name!="") {
+			File directory = new File(experiment_name);
+			System.out.println("dir exists:"+directory.exists());
+		    if (! directory.exists()){
+		        directory.mkdir();
+		    }
+			this.fname = experiment_name+"/"+datasetName+"_"+xAxisName.replace("_","-")+"_"+algoName+"_"+distName+"_ic"+iceberg_ratio+"_ip"+informative_critera+"_k"+k+"_nbar"+nbars+".json";
+		}else {
+			this.fname = datasetName+"_"+xAxisName.replace("_","-")+"_"+algoName+"_"+distName+"_ic"+iceberg_ratio+"_ip"+informative_critera+"_k"+k+"_nbar"+nbars+".json";
+		}
 	}
 	public void runOutput() {
 		algo.pickVisualizations(k);
 		VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h, yAxisName);
         String nodeDic = vo.generateNodeDic();
-        VizOutput.dumpString2File("../ipynb/dashboards/json/"+fname, nodeDic);
+        VizOutput.dumpString2File(fname, nodeDic);
 	}
 	public static void main(String[] args) throws SQLException 
 	{
@@ -52,14 +63,21 @@ public class Experiment {
        String algo = "frontierGreedy"; 
 	   //String algo = "naiveGreedy";
 	   //String algo = "greedy";
-	   Experiment exp = new Experiment("titanic", "survived", "COUNT(id)", k, algo, new Euclidean(),0.1,0.8);
-	   exp.runOutput();
-	   exp = new Experiment("turn", "has_list_fn", "SUM(slots_millis_reduces)", k, algo, new Euclidean(),0.1,0.8);
-	   exp.runOutput();
-	   exp = new Experiment("mushroom","type", "COUNT", k, algo, new Euclidean(),0.1,0.8);
-	   exp.runOutput();
-	   exp = new Experiment("mushroom","cap_surface", "COUNT", k, algo, new Euclidean(),0.1,0.8);
-	   exp.runOutput();   
+       double [] ip_vals = {0.5,0.6,0.7,0.8,0.9,1};
+       Experiment exp ;
+       for (double ip: ip_vals) {
+    	   	   System.out.println("ip:"+ip);
+	    	   exp = new Experiment("titanic", "survived", "COUNT(id)", k, algo, new Euclidean(),0.1,ip);
+	    	   exp.runOutput();
+	    	   exp = new Experiment("turn", "has_list_fn", "SUM(slots_millis_reduces)", k, algo, new Euclidean(),0.1,ip);
+	    	   exp.runOutput();
+	    	   exp = new Experiment("mushroom","type", "COUNT", k, algo, new Euclidean(),0.1,ip);
+	    	   exp.runOutput();
+	    	   exp = new Experiment("mushroom","cap_surface", "COUNT", k, algo, new Euclidean(),0.1,ip);
+	    	   exp.runOutput();
+	    	   exp.h.db.c.close();
+       }
+	      
 	   //}
 	   
 	   

@@ -372,11 +372,12 @@ public class Hierarchia
 //                    sum_1 += Double.parseDouble(values[values.length-1]);
 //                    
             }
-            
+            reader.close();
         }
         catch(IOException e)
         {
-            System.out.println("Error");
+            System.out.println("IOException in compute_visualization Error");
+            System.out.println("measure_values:"+measure_values);
         }
         /*
         double Min = 1.0;
