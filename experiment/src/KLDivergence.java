@@ -1,7 +1,14 @@
 public class KLDivergence implements Distance {
 	private double kldiv;
+	String distName = "kldiv";
 	public KLDivergence() {
 		kldiv = 0;
+	}
+	public String getDistName() {
+		return distName;
+	}
+	public void setDistName(String distName) {
+		this.distName = distName;
 	}
 	@Override
 	public double computeDistance(double [] viz1, double [] viz2) {

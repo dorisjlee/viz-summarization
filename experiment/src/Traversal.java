@@ -27,6 +27,14 @@ public abstract class Traversal {
 		this.algoName = algoName;
 	}
 	
+	public String getAlgoName() {
+		return algoName;
+	}
+
+	public void setAlgoName(String algoName) {
+		this.algoName = algoName;
+	}
+	
 	public void printAlgoName()
 	{
 		System.out.println("---------------- " + algoName +  " -----------------");

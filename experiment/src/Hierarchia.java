@@ -244,6 +244,7 @@ public class Hierarchia
         catch(IOException e)
         {
             System.out.println("Error");
+            System.out.println("attribute_names:"+attribute_names);
         }
         return attribute_names;
     }
@@ -435,7 +436,7 @@ public class Hierarchia
     		 *  has no cells with descendants that have the same measure values. This function merges
     		 *  all the nodes that have identical values who are siblings into one node with concatenated.
     		 */
-    	    //System.out.println("---------------- Merging Nodes -----------------");
+    	    System.out.println("---------------- Merging Nodes -----------------");
 		HashMap<ArrayList<Double>,ArrayList<String>> val2IDsMap=new HashMap<ArrayList<Double>,ArrayList<String>>();
 		for (Node node : lattice.nodeList) {
 			String id = node.get_id();
@@ -463,27 +464,64 @@ public class Hierarchia
 	        }
 	        //System.out.println(k+ " =: " + v);
 	    }
+//	    System.out.println("---------------- Done Merging Nodes -----------------");
 	}
     public static void mergeNodesInLattice(Lattice lattice,ArrayList<String> nodes2merge) {
     		/* 
     		 * Given a list of nodes keys to merge, merge the nodes in the lattice
     		 */
-    		Node keepNode= lattice.nodeList.get(lattice.id2IDMap.get(nodes2merge.get(0)));
+//    		System.out.println("--mergeNodesInLattice--");
+//    		System.out.println("nodes2merge:"+nodes2merge);
+    		
+    		int nonNullIdx = 0;
+    		while (lattice.id2IDMap.get(nodes2merge.get(nonNullIdx))==null) {
+    			nonNullIdx+=1;
+    		}
+//    		System.out.println("lattice.id2IDMap.get(nodes2merge.get(nonNullIdx)):"+lattice.id2IDMap.get(nodes2merge.get(nonNullIdx)));
+    		Node keepNode= lattice.nodeList.get(lattice.id2IDMap.get(nodes2merge.get(nonNullIdx)));
+    		ArrayList<String> nodes2remove = new ArrayList<String>();
+    		ArrayList<Integer> nodeIDs2remove = new ArrayList<Integer>();
 		for (int i =0; i<nodes2merge.size();i++) {
 			String nodeKey = nodes2merge.get(i);
 			int nodeID = lattice.id2IDMap.get(nodeKey);
-			if (i==0) {
+			if (i==nonNullIdx) {
 				keepNode = lattice.nodeList.get(nodeID);
 				// For each nodeKeys, chose the first one to retain and accumulate all the filter names
 				keepNode.setMerged_nodes_keys(new ArrayList<String>(Arrays.asList(nodeKey)));
 			}else {
 				keepNode.getMerged_nodes_keys().add(nodeKey);
-				// remove the remaining nodes
-				lattice.id2IDMap.remove(nodeKey); // hashmaps remove by key object
+//				System.out.println("nodeID:"+nodeID);
+//				System.out.println("node:"+lattice.nodeList.get(nodeID));
+				keepNode.get_child_list().addAll(lattice.nodeList.get(nodeID).get_child_list());
+				keepNode.get_dist_list().addAll(lattice.nodeList.get(nodeID).get_dist_list());
+				//lattice.nodeList.remove(nodeID);
 				lattice.id2MetricMap.remove(nodeKey);
-				// Note that we are not deleting the items inside nodeList because the id2IDMap needs to be updated to those index otherwise.
+				nodes2remove.add(nodeKey);
+				nodeIDs2remove.add(nodeID);
 			}
 		}
+//		System.out.println("Where is cap color =b:"+lattice.id2IDMap.get("#cap_color$b#"));
+		// 1. Remove elements in nodes2remove in nodeList
+//		System.out.println("Before:"+lattice.nodeList.size());
+//		System.out.println("nodeIDs2remove:"+nodeIDs2remove);
+//		System.out.println("nodes2remove:"+nodes2remove);
+		for(int x = nodeIDs2remove.size()-1 ; x > 0; x--)
+		{
+//			System.out.println("x:"+x);
+//			System.out.println(nodeIDs2remove.get(x));
+			lattice.nodeList.remove((int) nodeIDs2remove.get(x));// remove by index
+//			System.out.println("Removed:"+nodeIDs2remove.get(x));
+		}
+//		System.out.println("After:"+lattice.nodeList.size());
+//		System.out.println("Where is cap color =b:"+lattice.id2IDMap.get("#cap_color$b#"));
+		// 2. rebuild id2IDMap according to the new nodeList
+//		System.out.println("Before lattice.id2IDMap.size():"+lattice.id2IDMap.size());
+		lattice.id2IDMap.clear();
+		for (int i=0; i<lattice.nodeList.size();i++) {
+			lattice.id2IDMap.put(lattice.nodeList.get(i).get_id(),i);
+		}
+//		print_map(lattice.id2IDMap);
+//		System.out.println("id2IDMap size:"+lattice.id2IDMap.size());
     }
     public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
     {
@@ -498,14 +536,16 @@ public class Hierarchia
 //    		compute_visualization(placeholderNode, new ArrayList<String>(Arrays.asList("pc_class")), 
 //    							new ArrayList<String>(Arrays.asList("3")));
 	   Euclidean ed = new Euclidean();
- 	   Hierarchia h = new Hierarchia("mushroom","type");
+ 	   Hierarchia h = new Hierarchia("mushroom","cap_color");
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
-       System.out.println(lattice.id2IDMap.size());
-       System.out.println(lattice.nodeList.size());
-       mergeNodes(lattice);
-       System.out.println(lattice.id2IDMap.size());
-       System.out.println(lattice.nodeList.size());
-       System.out.println(lattice.nodeList.get(lattice.id2IDMap.get("#cap_shape$f#cap_color$p#")).getMerged_nodes_keys());
-       System.out.println(lattice.nodeList.get(lattice.id2IDMap.get("#cap_shape$b#cap_surface$f#")).getMerged_nodes_keys());
+//       System.out.println("# of nodes before merging:"+lattice.nodeList.size());
+//       mergeNodes(lattice);
+//       System.out.println("# of nodes after merging:"+lattice.nodeList.size());
+       // For now, the traversal strategy doesn't work with merging yet, because it is not entirely clear how 
+       // we should pick merged nodes. Right now merged nodes has key as the original nodes with an additional 
+       // attribute merged_nodes_keys containing a list of keys for the merged nodes, traversal needs to account for this.
+       
+//       Traversal tr = new FrontierGreedyPicking(lattice,new Euclidean());
+//       tr.pickVisualizations(20);
     }
 }
