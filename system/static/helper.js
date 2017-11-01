@@ -60,5 +60,6 @@ $("#graphDicSubmit").click(function(){
         console.log(edgeList)
         console.log("nodeList:")
         console.log(nodeList)
+        draw(nodeList,edgeList)
     })
 })

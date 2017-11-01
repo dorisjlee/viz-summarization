@@ -131,9 +131,11 @@ class Lattice:
 
     def generateEdge(self, node_dic):
         edge = []
-        for key in node_dic.keys():
-            if len(node_dic[key][3])>2: #some childrenIndex might be empty (avoid indexing these otherwise keyerror)
-                for i in node_dic[key][3]['childrenIndex']: #index [3] need to generalize to things with more than 2 bars
+        if len(node_dic)>0:
+            nBars = len(node_dic.values()[0])-1
+            for key in node_dic.keys():
+                # if len(node_dic[key][nBars])>2: #some childrenIndex might be empty (avoid indexing these otherwise keyerror)
+                for i in node_dic[key][nBars]['childrenIndex']: #index [3] need to generalize to things with more than 2 bars
                     edge.append(key)
                     edge.append(i)
         return edge
