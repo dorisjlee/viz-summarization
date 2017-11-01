@@ -48,3 +48,17 @@ $("#all_tables").change(function (){
 $("#xaxis").change(constructQueryCallback)
 $("#yaxis").change(constructQueryCallback)
 $("input[name='aggFunc']").change(constructQueryCallback)
+
+// graphDic Submission form 
+$("#graphDicSubmit").click(function(){
+    $.post("/getNodeEdgeList",{
+        "nodeDic" : $("#graphDic").val()
+    },'application/json').success(function(data){
+        edgeList = data[0];
+        nodeList = data[1];
+        console.log("edgeList:")
+        console.log(edgeList)
+        console.log("nodeList:")
+        console.log(nodeList)
+    })
+})

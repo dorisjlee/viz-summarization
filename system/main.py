@@ -6,6 +6,7 @@ from vizGeneration import *
 from flask import jsonify
 from flask_sqlalchemy import SQLAlchemy
 from query import Query
+from lattice import Lattice
 from barchart import bar_chart
 import json
 
@@ -31,6 +32,16 @@ def getColumns():
   session['column_name'] = column_name  # a list containing all the column names
   return jsonify(column_name)
 
+@app.route("/getNodeEdgeList", methods=['POST','GET'])
+def getNodeEdgeList():
+  # Given the nodeDic, compute node list and edge list in Lattice.py, then return them as JS vars.
+  print request.form['nodeDic']
+  nodeDic = json.loads(request.form['nodeDic'].replace('\n', '').decode('string_escape'))
+  print nodeDic
+  G = Lattice()
+  node = G.generateNode(nodeDic)
+  edge = G.generateEdge(nodeDic)
+  return jsonify(edge,node)
 @app.route("/upload_data", methods=['POST'])
 def upload_data():
   import pandas as pd

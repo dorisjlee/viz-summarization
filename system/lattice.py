@@ -14,7 +14,10 @@ class Lattice:
         
     def generateDashboard(self):
         raise NotImplementedError
-
+    def setNodeDic(self,nodeDic):
+        self.nodeDic = nodeDic
+    def getNodeDic(self):
+        return self.nodeDic 
     # populate a lattice of given visualizations to test rendering functions
     def populateDummyLattice(self):
         raise NotImplementedError
@@ -89,53 +92,8 @@ class Lattice:
                 each.append({"xAxis": val, "yAxis": current.data[idx]})
             each.append({"filter": ' '.join(current.filters), "yName": current.Y, "childrenIndex": node.childrenIndex})
             node_dic[node.id] = each
+        self.setNodeDic(node_dic)
         return node_dic
-
-
-    def generateNodeDicJsonFile(self):
-        node_dic = {}
-        for node in self.getNodes():
-            each = []
-            viz = node.get_viz()
-            # current = viz[0]
-            current=viz
-            for idx, val in enumerate(current.X):
-                each.append({"xAxis": val, "yAxis": current.data[idx]})
-            each.append({"filter": ' '.join(current.filters), "yName": current.Y})
-
-            node_dic[node.id] = each
-
-        #jsonFile = json.dumps(node_dic)
-        return node_dic
-    
-    #def generateJson(self, root, node_dic):
-        # Generate JSON representation of tree for Treant to render
-        # tree += '"innerHTML"' + ' : ' + '"#chart' + str(root.id) + '"' + ","
-        #tree += '"children"' +' : '+'['
-
-        # for i in range(len(root.childrenIndex)):
-        #     thisBracket = "{"
-        #     thisBracket += '"innerHTML"' + ' : ' + '"#chart' + str(root.childrenIndex[i]) + '"'+","
-        #
-        #     #if i != len(root.childrenIndex) - 1:
-        #         #thisBracket += ","
-        #     if node_dic[root.childrenIndex[i]][len(node_dic[root.childrenIndex[i]]) - 1]["childrenIndex"] != []:
-        #         arr = node_dic[root.childrenIndex[i]][len(node_dic[root.childrenIndex[i]]) - 1]["childrenIndex"]
-        #         thisBracket += '"children"' +' : '+'['
-        #         for j in range(len(arr)):
-        #             this = "{"
-        #             this += '"innerHTML"' + ' : ' + '"#chart' + str(arr[j]) + '"'
-        #             if j != len(arr) - 1:
-        #                 this += "},"
-        #             else:
-        #                 this += "}"
-        #             thisBracket += this
-        #         if i != len(root.childrenIndex)-1:
-        #             thisBracket += ']},'
-        #         else:
-        #             thisBracket += ']}'
-        #         tree += thisBracket
-        # tree += ']}'
 
     def drawGraphToPNG(self):
         G = self.graph
@@ -143,10 +101,9 @@ class Lattice:
         p = nx.drawing.nx_pydot.to_pydot(G)
         p.write_png('graph.png')
 
-    def generateNode(self, root, node_dic):
-        # Generate  tree for Treant to render
+    def generateNode(self, node_dic):
         node = []
-        nodes = list(self.generateNodeDic().values())
+        nodes = list(node_dic.values())
         barcharts = []
         for i in nodes:
             yVals = []
@@ -172,17 +129,15 @@ class Lattice:
             node.append(barcharts_new[i])
         return node
 
-    def generateEdge(self, root, node_dic):
-        # Generate  tree for Treant to render
-        edgeDic = self.generateNodeDic()
-        #print(edgelist)
+    def generateEdge(self, node_dic):
         edge = []
-        for key in edgeDic.keys():
-            for i in edgeDic[key][3]['childrenIndex']:
-                edge.append(key)
-                edge.append(i)
+        for key in node_dic.keys():
+            if len(node_dic[key][3])>2: #some childrenIndex might be empty (avoid indexing these otherwise keyerror)
+                for i in node_dic[key][3]['childrenIndex']: #index [3] need to generalize to things with more than 2 bars
+                    edge.append(key)
+                    edge.append(i)
         return edge
 
-    def generateSvg(self, root, node_dic):
+    def generateSvg(self, node_dic):
         return None
 
