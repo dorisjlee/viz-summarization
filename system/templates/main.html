@@ -28,7 +28,7 @@
 </head>
 
 
-<body onload="draw()">
+<body onload="draw(node,edge)">
 
 <div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left" style="display:none" id="mySidebar">
   <button class="w3-bar-item w3-button w3-large" style="margin: 10px 300px;"
@@ -94,10 +94,7 @@
             </div>
         </div>
     </div>
-    <div> 
-        <br> nodeDic: <input type="text" id="nodeDic" style="width: 30%;">
-        <br> graphDic: <input type="text" id="graphDic" style="width: 30%;">
-    </div>
+    
     <input type="submit" id="filterSubmit" style = "background-color: #359EDA;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 100px 100px;cursor: pointer;right:40;" value="Submit">
 </div>
 
@@ -116,20 +113,29 @@
 </div>
 
 <div class="w3-container">
-
-
-        <div id = "treeNode" style ="display: none" treeContent = {{visjs}}>
-                {{visjs}}
+        <div> 
+            <!--<br> nodeDic: <input type="text" id="nodeDic" style="width: 30%;">-->
+            <br> graphDic: <input type="text" id="graphDic" style="width: 30%;"> 
+            <input type="submit" id="graphDicSubmit" style = "display: inline-block;font-size: 15px;">
+        </div>
+        <div id = "nodeDic" style ="display: block" treeContent = {{nodeDic}}>
+                {{nodeDic}}
         </div>
 
-        <div id = "treeNode2" style ="display: none" treeContent = {{nodeDic}}>
-                {{nodeDic}}
+        <div id = "node" style ="display: none" treeContent = {{node}}>
+                {{node}}
+        </div>
+
+        <div id = "edge" style ="display: block" treeContent = {{edge}}>
+                {{edge}}
         </div>
 
         <script type="text/javascript" src="lattice.js"></script>
 
         <!--<div class = "chart" id = "tree_container" style="height:100%; width:100%;"></div>-->
-        <div id="mynetwork" style="height:100%; width:100%;"></div>
+
+        <div id="mynetwork" style="height:600px; width:1332px;"></div>
+
         <div id = "chart_container">
 
         <div style="visibility: hidden; display:inline; width: 0%; height: 0px" id="chartid">
@@ -141,62 +147,20 @@
 </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.20.1/vis.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.20.1/vis.min.css" rel="stylesheet" type="text/css" />
-
+    <script type="text/javascript" src="barchart.js"></script>
     <script type="text/javascript">
-        var nodes = null;
-        var edges = null;
-        var network = null;
 
-        var DIR = 'img/refresh-cl/';
-        var LENGTH_MAIN = 150;
-        var LENGTH_SUB = 50;
-        var barchart = document.getElementById('treeNode2').textContent;
-        var url = "data:image/svg+xml;base64,"+ btoa(barchart);
+        var nodeDic = document.getElementById('nodeDic').textContent;
+        var node = document.getElementById('node').textContent;
+        var edge = document.getElementById('edge').textContent;
 
-        // Called when the Visualization API is loaded.
-        function draw() {
-            // Create a data table with nodes.
-            nodes = [];
-            // Create a data table with links.
-            edges = [];
-            nodes.push({id: 1, image: url, shape: 'image'});
-            nodes.push({id: 2, image: url, shape: 'image'});
-            edges.push({from: 1, to: 2, length: 200});
-            // create a network
-            var container = document.getElementById('mynetwork');
-            var data = {
-                nodes: nodes,
-                edges: edges
-            };
-            var options = {
-                nodes: {
-                  borderWidth:2,
-                  size:30,
-                  color: {
-                      border: '#C0E0FD',
-                      background: '#FFFFFF'
-                    },
-                  font:{color:'#0B131A',
-                        size:8
-                  },
-                  shapeProperties: {
-                      useBorderWithImage:true
-                    }
-                },
-                physics: {stabilization: false},
-                edges: {smooth: false,
-                        color: 'lightblue'
-                }
-            };
-            network = new vis.Network(container, data, options);
-        }
     </script>
 
 <!-- Javascript files -->
 <script type="text/javascript" src="sidebar.js"></script>
 <script type="text/javascript" src="helper.js"></script>    
 <script type="text/javascript" src="barchart.js"></script>
-<script type="text/javascript" src="lattice.js"></script>
+<!--<script type="text/javascript" src="lattice.js"></script>-->
 <!--<script>-->
     <!--var arrayDiv = new Array();-->
     <!--test_chart_collapsable(arrayDiv,nodeDic)-->

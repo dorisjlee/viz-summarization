@@ -5,17 +5,20 @@ from database import *
 from vizGeneration import *
 from flask import jsonify
 from flask_sqlalchemy import SQLAlchemy
-from query import Query 
+from query import Query
+from lattice import Lattice
+from barchart import bar_chart
 import json
 
 db = SQLAlchemy(app)
 
 @app.route("/getTreeJSON")
 def getTreeJSON():
-  (visjs, nodeDic) = getJsonFromLattice()
-  session['visjs'] = visjs
+  (nodeDic, node, edge) = getJsonFromLattice()
   session['nodeDic'] = nodeDic
-  return visjs, nodeDic
+  session['node'] = node
+  session['edge'] = edge
+  return nodeDic, node, edge
 
 # @app.route("/getTree")
 # def getTree():
@@ -29,6 +32,16 @@ def getColumns():
   session['column_name'] = column_name  # a list containing all the column names
   return jsonify(column_name)
 
+@app.route("/getNodeEdgeList", methods=['POST','GET'])
+def getNodeEdgeList():
+  # Given the nodeDic, compute node list and edge list in Lattice.py, then return them as JS vars.
+  print request.form['nodeDic']
+  nodeDic = json.loads(request.form['nodeDic'].replace('\n', '').decode('string_escape'))
+  print nodeDic
+  G = Lattice()
+  node = G.generateNode(nodeDic)
+  edge = G.generateEdge(nodeDic)
+  return jsonify(edge,node)
 @app.route("/upload_data", methods=['POST'])
 def upload_data():
   import pandas as pd
@@ -70,7 +83,7 @@ def index():
     
     all_tables = getTables()
     # dummy example 
-    treeTreant, nodeDic = getTreeJSON()
+    nodeDic, node, edge= getTreeJSON()
     
     # column_name = [""]
     # select_table_name = str(request.form.get('table_select'))
@@ -86,7 +99,7 @@ def index():
     #                         column = json.loads(column_name), nodeDic = nodeDic)
     #return render_template("main.html", treeTreant2 = treeTreant, all_tables = all_tables,\
     #                        nodeDic = nodeDic)
-    return render_template("main.html", all_tables = all_tables, treeTreant2 = treeTreant,nodeDic = nodeDic)
+    return render_template("main.html", all_tables = all_tables, nodeDic = nodeDic, node = node, edge = edge)
 
 if __name__ == "__main__":
 
