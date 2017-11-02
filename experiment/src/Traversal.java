@@ -71,7 +71,6 @@ public abstract class Traversal {
 	 * informative parents - in such case we add the maximal interestingness to 
 	 * the overall utility.
 	 * 
-	 * @author saarkuzi
 	 */
 	private void updateSubGraphUtility() 
 	{
@@ -100,21 +99,60 @@ public abstract class Traversal {
 			lattice.maxSubgraphUtility += nodeID2utility.get(nodeId);
 	}
 	
-	public static void main(String[] args) throws SQLException 
+	/**
+	 * Calculate interestingness score between parent and child nodes
+	 */
+	public double calculateDistance(int nodeId1, int nodeId2)
+	{
+		Node node1 = lattice.nodeList.get(nodeId1);
+		Node node2 = lattice.nodeList.get(nodeId2);
+		double[] node1Val = ArrayList2Array(lattice.id2MetricMap.get(node1.get_id()));
+		double[] node2Val = ArrayList2Array(lattice.id2MetricMap.get(node2.get_id()));
+		double utility = metric.computeDistance(node1Val, node2Val);
+		return utility;
+	}
+	
+	public Float sumMapByValue(HashMap<Integer,Float> map)
+	{
+		Float sum = 0f;
+		for(Float val : map.values())
+		{
+			sum += val;
+		}
+		return sum;
+	}
+	
+	public HashMap<Integer,Float> cloneMap(HashMap<Integer,Float> inputMap)
+	{
+		HashMap<Integer,Float> outputMap = new HashMap<>();
+		for(Map.Entry<Integer, Float> entry : inputMap.entrySet())
+		{
+			outputMap.put(entry.getKey(), entry.getValue());
+		}
+		return outputMap;
+	}
+	
+ 	public static void main(String[] args) throws SQLException 
     {
 	   String[] datasets = {"turn", "titanic", "mushroom"};
 	   String[] xAxis = {"has_list_fn", "pc_class", "type"};
-	   int dataset_id = 0;
+	   int dataset_id = 2;
 	   
 	   Euclidean ed = new Euclidean();
 	   Hierarchia h = new Hierarchia(datasets[dataset_id], xAxis[dataset_id]);
 	   Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
+       //Hierarchia.print_map(lattice.id2MetricMap);
+       //Hierarchia.print_map(lattice.id2IDMap);
 	   
        Traversal tr; 
        //tr = new NaiveGreedyPicking(lattice,new Euclidean());
        tr = new FrontierGreedyPicking(lattice,new Euclidean());
-       //tr = new GreedyPicking(lattice,new Euclidean());
-       tr.pickVisualizations(20);
+       
+       tr.pickVisualizations(5);
+       
+       tr = new GreedyPicking(lattice,new Euclidean());
+       tr.pickVisualizations(5);
+       
        //Hierarchia.print_map(lattice.id2MetricMap);
        //Hierarchia.print_map(lattice.id2IDMap);
        //Hierarchia.mergeNodes(lattice); 
