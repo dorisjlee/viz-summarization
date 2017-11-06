@@ -1,5 +1,5 @@
 
-console.log(nodeid);
+
 console.log(svglist);
 console.log(edgelist);
 var network = null;
@@ -30,7 +30,7 @@ function draw(node,edge) {
     nodeid = []
     svglist = []
     for(var i=0; i<nodelist.length; i=i+2) { nodeid.push(+nodelist[i]); }
-    for(var i=1; i<nodelist.length; i=i+2) { svglist.push(nodelist[i].slice(1,-1)); }
+    for(var i=1; i<nodelist.length; i=i+2) { svglist.push(nodelist[i]); }
     
     nodes = [];
     edges = [];
