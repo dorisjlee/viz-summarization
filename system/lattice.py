@@ -102,19 +102,19 @@ class Lattice:
         p.write_png('graph.png')
 
     def generateNode(self, node_dic):
-        node = []
+        nodeList = []
         nodes = list(node_dic.values())
-        barcharts = []
+        #barcharts = []
         print nodes
-        for i in nodes:
+        for i,node in enumerate(nodes):
             yVals = []
-            for values in i:
+            for values in node:
                 try:
                     yVals.append(values['yAxis'])
                 except KeyError:
                     pass
             xAttrs = []
-            for values in i:
+            for values in node:
                 try:
                     xAttrs.append(values['xAxis'])
                 except KeyError:
@@ -123,22 +123,18 @@ class Lattice:
                 filterVal="root"
             else:
                 filterVal = str(values["filter"][1:-1].replace("#",",\n").replace("$","="))
-            barcharts.append(bar_chart(yVals, xAttrs, xtitle="", ytitle="", title=filterVal, top_right_text="", N=1, width=0.1))
-
-        barcharts_new = []
-        for i in barcharts:
-            barcharts_new.append(base64.b64encode(i))
-
-        for i in range(len(nodes)):
-            node.append(i+1)
-            node.append(barcharts_new[i])
-        return node
+            svgString = bar_chart(yVals, xAttrs, xtitle="", ytitle="", title=filterVal, top_right_text="", N=1, width=0.1)
+            nodeList.append(i+1)
+            nodeList.append(base64.b64encode(svgString))
+        return nodeList
 
     def generateEdge(self, node_dic):
         edge = []
         if len(node_dic)>0:
             nBars = len(node_dic.values()[0])-1
-            for key in node_dic.keys():
+            print "node_dic.keys():"
+            for key in sorted(node_dic.keys()):
+                print key
                 # if len(node_dic[key][nBars])>2: #some childrenIndex might be empty (avoid indexing these otherwise keyerror)
                 for i in node_dic[key][nBars]['childrenIndex']: #index [3] need to generalize to things with more than 2 bars
                     edge.append(key)

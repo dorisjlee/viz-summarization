@@ -11,6 +11,7 @@ from barchart import bar_chart
 import pandas as pd
 import json
 import glob
+from ast import literal_eval
 db = SQLAlchemy(app)
 
 @app.route("/getTreeJSON")
@@ -46,13 +47,11 @@ def getNodeEdgeList():
   print type(request.form['jsonClean'])
   if str(request.form["jsonClean"]) =="true":
     print "jsonClean yes"
-    nodeDic = json.loads(request.form['nodeDic'].replace('\n', '').decode('string_escape'))
+    nodeDic = literal_eval(json.loads(request.form['nodeDic'].replace('\n', '').decode('string_escape')))
   else:
     print "jsonClean no"
     nodeDic = json.loads(request.form['nodeDic'])
     
-
-  print nodeDic
   G = Lattice()
   node = G.generateNode(nodeDic)
   edge = G.generateEdge(nodeDic)
