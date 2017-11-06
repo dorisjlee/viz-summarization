@@ -79,7 +79,7 @@ def postQuery():
 def readExperimentJsons():
     #read the available experiment jsons and get a list of available experiment parameters that to show on the frontend
     metadata = []
-    for fname in glob.glob("generated_dashboards/*"):
+    for fname in glob.glob("static/generated_dashboards/*"):
         datasetname, xAxis,algo,dist,ic,ip,k,nbar = fname[:-5].split("/")[-1].split("_")
         ic = float(ic[2:])
         ip = float(ip[2:])

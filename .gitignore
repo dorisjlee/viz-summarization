@@ -5,4 +5,4 @@ ipynb/.ipynb_checkpoints/
 /bin/
 2.17.3/
 ipynb/dashboards/
-system/generated_dashboards/
+system/static/generated_dashboards/

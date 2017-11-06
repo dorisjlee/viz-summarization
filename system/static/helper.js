@@ -13,23 +13,30 @@ function constructQuery(){
     return query
 }
 function readDashboardOutput(query){
-    fname = "../generated_dashboards/"+query["dataset"]+"_"+query["xAxis"]+"_"+query["algorithm"]+"_"+query["metric"]+"_ic0.1_ip0.6_k20_nbar2.json"
+    fname = "generated_dashboards/"+query["dataset"]+"_"+query["xAxis"]+"_"+query["algorithm"]+"_"+query["metric"]+"_ic0.1_ip0.6_k20_nbar2.json"
     console.log(fname)
     // Data Upload after options selection
-    $.getJSON(fname, function(json) {
-        console.log(json); 
-    });
-}
-function constructQueryCallback(){
-    var query = constructQuery();
-    $.post('/postQuery', query ,'application/json')
-    .success(
-        function(data){
-            // results = JSON.parse(data);
-            console.log(data)
-            // Do stuff 
+    console.log(window.location.pathname)
+    var nodeDic = ""
+    $.ajax({
+        url: "http://"+window.location.hostname+":"+window.location.port+"/"+fname,
+        type: "GET",
+        dataType: "text",
+        success: function(data) {
+            getNodeEdgeListThenDraw(data);
+        }
     })
 }
+// function constructQueryCallback(){
+//     var query = constructQuery();
+//     $.post('/postQuery', query ,'application/json')
+//     .success(
+//         function(data){
+//             // results = JSON.parse(data);
+//             console.log(data)
+//             // Do stuff 
+//     })
+// }
 
 function populateOptions(list,selector)
 {
@@ -68,16 +75,15 @@ $("#all_tables").change(function (){
         columns=data
         console.log(columns)
         populateOptions(columns,document.getElementById("xaxis"));
-        constructQueryCallback()
+        constructQuery()
     })
 })
-$("#xaxis").change(constructQueryCallback)
-$("input[name='aggFunc']").change(constructQueryCallback)
-
-// Direct input graphDic submission form 
-$("#graphDicSubmit").click(function(){
+$("#submit").click(constructQuery)
+// $("#xaxis").change(constructQuery)
+// $("input[name='aggFunc']").change(constructQuery)
+function getNodeEdgeListThenDraw(nodeDicStr){
     $.post("/getNodeEdgeList",{
-        "nodeDic" : $("#graphDic").val()
+        "nodeDic" : nodeDicStr
     },'application/json').success(function(data){
         edgeList = data[0];
         nodeList = data[1];
@@ -87,4 +93,8 @@ $("#graphDicSubmit").click(function(){
         console.log(nodeList)
         draw(nodeList,edgeList)
     })
+}
+// Direct input graphDic submission form 
+$("#graphDicSubmit").click(function(){
+    getNodeEdgeListThenDraw($("#graphDic").val());
 })
