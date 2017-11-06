@@ -1,9 +1,4 @@
-
-
-console.log(svglist);
-console.log(edgelist);
 var network = null;
-
 var DIR = 'img/refresh-cl/';
 var LENGTH_MAIN = 150;
 var LENGTH_SUB = 50;
@@ -29,7 +24,7 @@ function draw(node,edge) {
     
     nodeid = []
     svglist = []
-    for(var i=0; i<nodelist.length; i=i+2) { nodeid.push(+nodelist[i]); }
+    for(var i=0; i<nodelist.length; i=i+2) { nodeid.push(nodelist[i]); }
     for(var i=1; i<nodelist.length; i=i+2) { svglist.push(nodelist[i]); }
     
     nodes = [];
@@ -39,7 +34,7 @@ function draw(node,edge) {
         nodes.push({id: nodeid[i], image: "data:image/svg+xml;base64," + svglist[i], shape: 'image'});
     }
     for(var i=0; i<edgelist.length; i=i+2){
-        edges.push({from: edgelist[i], to: edgelist[i+1], length: 200, arrows:'to'});
+        edges.push({from: parseInt(edgelist[i]), to: edgelist[i+1], length: 200, arrows:'to'});
     }
     // create a network
     var container = document.getElementById('mynetwork');
@@ -68,6 +63,9 @@ function draw(node,edge) {
         }
     };
     network = new vis.Network(container, data, options);
+    var div = document.createElement('div')
+    div.innerHTML="<img src='resources/Eclipse.svg' id = 'loadingDashboard' style='display: none; position: relative; z-index: 10; width: 100%; height: 50%;'>"
+    container.append(div.firstChild);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////

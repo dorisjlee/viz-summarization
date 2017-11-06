@@ -82,8 +82,14 @@ $("#submit").click(constructQuery)
 // $("#xaxis").change(constructQuery)
 // $("input[name='aggFunc']").change(constructQuery)
 function getNodeEdgeListThenDraw(nodeDicStr){
+    var jsonClean = true
+    if (typeof(nodeDicStr)=="object"){
+        jsonClean = false
+    }
+    document.getElementById("loadingDashboard").style.display = "inline"
     $.post("/getNodeEdgeList",{
-        "nodeDic" : nodeDicStr
+        "nodeDic" : JSON.stringify(nodeDicStr),
+        "jsonClean":jsonClean
     },'application/json').success(function(data){
         edgeList = data[0];
         nodeList = data[1];
@@ -92,9 +98,20 @@ function getNodeEdgeListThenDraw(nodeDicStr){
         console.log("nodeList:")
         console.log(nodeList)
         draw(nodeList,edgeList)
+        document.getElementById("loadingDashboard").style.display = "none";
     })
+}
+function IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
 }
 // Direct input graphDic submission form 
 $("#graphDicSubmit").click(function(){
     getNodeEdgeListThenDraw($("#graphDic").val());
 })
+// Trump Clinton example
+getNodeEdgeListThenDraw({'1': [{'xAxis': 'Clinton', 'yAxis': 48}, {'xAxis': 'Trump', 'yAxis': 46}, {'xAxis': 'Others', 'yAxis': 6}, {'filter': 'All', 'childrenIndex': [2, 3], 'yName': '% of vote'}], '2': [{'xAxis': 'Clinton', 'yAxis': 31}, {'xAxis': 'Trump', 'yAxis': 62}, {'xAxis': 'Others', 'yAxis': 7}, {'filter': 'Race = White', 'childrenIndex': [4, 5], 'yName': '% of vote'}], '3': [{'xAxis': 'Clinton', 'yAxis': 21}, {'xAxis': 'Trump', 'yAxis': 70}, {'xAxis': 'Others', 'yAxis': 9}, {'filter': 'Gender = F', 'childrenIndex': [], 'yName': '% of vote'}], '4': [{'xAxis': 'Clinton', 'yAxis': 21}, {'xAxis': 'Trump', 'yAxis': 52}, {'xAxis': 'Others', 'yAxis': 27}, {'filter': 'Color = Blue', 'childrenIndex': [5], 'yName': '% of vote'}], '5': [{'xAxis': 'Clinton', 'yAxis': 20}, {'xAxis': 'Trump', 'yAxis': 30}, {'xAxis': 'Others', 'yAxis': 50}, {'filter': 'Job = Student', 'childrenIndex': [], 'yName': '% of vote'}]})

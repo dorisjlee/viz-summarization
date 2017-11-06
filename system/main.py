@@ -41,7 +41,17 @@ def getColumns():
 def getNodeEdgeList():
   # Given the nodeDic, compute node list and edge list in Lattice.py, then return them as JS vars.
   print request.form['nodeDic']
-  nodeDic = json.loads(request.form['nodeDic'].replace('\n', '').decode('string_escape'))
+  print "jsonClean:"
+  print request.form['jsonClean']
+  print type(request.form['jsonClean'])
+  if str(request.form["jsonClean"]) =="true":
+    print "jsonClean yes"
+    nodeDic = json.loads(request.form['nodeDic'].replace('\n', '').decode('string_escape'))
+  else:
+    print "jsonClean no"
+    nodeDic = json.loads(request.form['nodeDic'])
+    
+
   print nodeDic
   G = Lattice()
   node = G.generateNode(nodeDic)
@@ -116,7 +126,7 @@ def index():
     #                         column = json.loads(column_name), nodeDic = nodeDic)
     #return render_template("main.html", treeTreant2 = treeTreant, all_tables = all_tables,\
     #                        nodeDic = nodeDic)
-    return render_template("main.html", all_tables = all_tables, nodeDic = nodeDic, node = node, edge = edge)
+    return render_template("main.html", all_tables = all_tables)#, nodeDic = nodeDic, node = node, edge = edge)
 
 if __name__ == "__main__":
 

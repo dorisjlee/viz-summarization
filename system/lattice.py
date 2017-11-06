@@ -105,6 +105,7 @@ class Lattice:
         node = []
         nodes = list(node_dic.values())
         barcharts = []
+        print nodes
         for i in nodes:
             yVals = []
             for values in i:
@@ -118,7 +119,11 @@ class Lattice:
                     xAttrs.append(values['xAxis'])
                 except KeyError:
                     pass
-            barcharts.append(bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", N=1, width=0.1))
+            if values["filter"]=="#":
+                filterVal="root"
+            else:
+                filterVal = str(values["filter"][1:-1].replace("#",",\n").replace("$","="))
+            barcharts.append(bar_chart(yVals, xAttrs, xtitle="", ytitle="", title=filterVal, top_right_text="", N=1, width=0.1))
 
         barcharts_new = []
         for i in barcharts:
