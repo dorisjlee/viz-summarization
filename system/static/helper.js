@@ -4,10 +4,21 @@ function constructQuery(){
         "xAxis": $("#xaxis").val() || "",
         "yAxis": $("#yaxis").val() || "",
         "aggFunc": $("input[name='aggFunc']:checked").val() || "",
+        "algorithm": $("#algorithm").val() || "",
+        "metric": $("#metric").val() || "",
         "filters": JSON.stringify(filters) ,
         "method": "query"
     }
+    readDashboardOutput(query)
     return query
+}
+function readDashboardOutput(query){
+    fname = "../generated_dashboards/"+query["dataset"]+"_"+query["xAxis"]+"_"+query["algorithm"]+"_"+query["metric"]+"_ic0.1_ip0.6_k20_nbar2.json"
+    console.log(fname)
+    // Data Upload after options selection
+    $.getJSON(fname, function(json) {
+        console.log(json); 
+    });
 }
 function constructQueryCallback(){
     var query = constructQuery();
@@ -30,26 +41,40 @@ function populateOptions(list,selector)
     }
     console.log("added options")
 }
-
+// Proper way of actually reading from a DB
+// var columns =[];
+// $("#all_tables").change(function (){
+//     $.post('/getColumns',{
+//         "tablename": $("#all_tables").val()
+//     },'application/json').success( function(data){
+//         // console.log(data)
+//         columns = JSON.parse(data);
+//         console.log(columns)
+//         populateOptions(columns,document.getElementById("xaxis"));
+//         populateOptions(columns,document.getElementById("yaxis"));
+//         constructQueryCallback()
+//     })
+// })
+// $("#xaxis").change(constructQueryCallback)
+// $("#yaxis").change(constructQueryCallback)
+// $("input[name='aggFunc']").change(constructQueryCallback)
 var columns =[];
 $("#all_tables").change(function (){
     $.post('/getColumns',{
         "tablename": $("#all_tables").val()
     },'application/json').success( function(data){
-        // console.log(data)
-        columns = JSON.parse(data);
+        console.log(data)
+        // columns = JSON.parse(data);
+        columns=data
         console.log(columns)
         populateOptions(columns,document.getElementById("xaxis"));
-        populateOptions(columns,document.getElementById("yaxis"));
         constructQueryCallback()
     })
-
 })
 $("#xaxis").change(constructQueryCallback)
-$("#yaxis").change(constructQueryCallback)
 $("input[name='aggFunc']").change(constructQueryCallback)
 
-// graphDic Submission form 
+// Direct input graphDic submission form 
 $("#graphDicSubmit").click(function(){
     $.post("/getNodeEdgeList",{
         "nodeDic" : $("#graphDic").val()

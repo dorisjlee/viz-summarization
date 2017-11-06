@@ -4,3 +4,5 @@ ipynb/.ipynb_checkpoints/
 *.zip
 /bin/
 2.17.3/
+ipynb/dashboards/
+system/generated_dashboards/

@@ -53,7 +53,7 @@
         </select>
     </div>
 </form>
-<br> 
+<!-- <br> 
 <form class="form-inline menu-item">
     <h2 class = "title"><b>Y-Axis</b></h2>
     <div class="form-group">
@@ -61,6 +61,32 @@
             <option selected="true" value = "None"> None</option>
         </select>
     </div>
+</form> -->
+<br> 
+<form class="form-inline menu-item" class="form-inline" id = "agg_select" name = "agg_select">
+  <h2 class = "title"><b>Metric</b></h2>
+    <div class="form-group">
+        <select name = "metric"  id = "metric" class="selectpicker form-control">
+            <option selected="true" value = "None"> None</option>
+            <option value= "euclidean">Euclidean</option>
+            <option value= "kldiv">KL Divergence</option>
+            <option value= "maxdiff">MaxDiff</option>
+            <option value= "emd">Earth Mover</option>
+        </select>
+    </div>
+  <br>
+</form>
+<br> 
+<form class="form-inline menu-item" class="form-inline" id = "agg_select" name = "agg_select">
+  <h2 class = "title"><b>Algorithm</b></h2>
+    <div class="form-group">
+        <select name = "algorithm"  id = "algorithm" class="selectpicker form-control">
+            <option selected="true" value = "None"> None</option>
+            <option value= "frontierGreedy">Frontier Greedy</option>
+            <option value= "greedy">Greedy</option>
+        </select>
+    </div>
+  <br>
 </form>
 <br> 
 <form class="form-inline menu-item" class="form-inline" id = "agg_select" name = "agg_select">
@@ -76,7 +102,8 @@
   <br>
 </form>
 <br> 
-<div class="container">
+<input type="submit" id="submit" style = "background-color: #359EDA;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 10px 230px;cursor: pointer;" value="Submit">
+<!-- <div class="container">
     <div class="row">
         <div class="control-group" id="fields">
             <div class="controls"> 
@@ -93,9 +120,9 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> -->
     
-    <input type="submit" id="filterSubmit" style = "background-color: #359EDA;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 100px 100px;cursor: pointer;right:40;" value="Submit">
+    <!-- <input type="submit" id="filterSubmit" style = "background-color: #359EDA;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 100px 100px;cursor: pointer;right:40;" value="Submit"> -->
 </div>
 
 

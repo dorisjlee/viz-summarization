@@ -8,8 +8,9 @@ from flask_sqlalchemy import SQLAlchemy
 from query import Query
 from lattice import Lattice
 from barchart import bar_chart
+import pandas as pd
 import json
-
+import glob
 db = SQLAlchemy(app)
 
 @app.route("/getTreeJSON")
@@ -28,7 +29,11 @@ def getTreeJSON():
 
 @app.route("/getColumns", methods=['POST','GET'])
 def getColumns():
-  column_name = json.dumps(get_columns(request.form['tablename'])["column_name"])
+  # The proper way of reading from DB (not from JSON outputs)
+  # column_name = json.dumps(get_columns(request.form['tablename'])["column_name"])
+  metadata = readExperimentJsons()
+  column_name = list(set(metadata[metadata["datasetname"]==request.form['tablename']].xAxis))
+  print column_name
   session['column_name'] = column_name  # a list containing all the column names
   return jsonify(column_name)
 
@@ -52,10 +57,11 @@ def upload_data():
 
 @app.route("/getTables")
 def getTables():
-  tableList = get_tables()
+  metadata = readExperimentJsons()
+  # tableList = get_tables() # The proper way of reading from DB (not from JSON outputs)
+  tableList = list(set(metadata["datasetname"]))
   session['tableList'] = tableList
   return tableList
-
 
 @app.route("/postQuery", methods=['GET', 'POST'])
 def postQuery():
@@ -70,7 +76,19 @@ def postQuery():
     # run create lattice code 
     return jsonify({"results":"test"})
 
-
+def readExperimentJsons():
+    #read the available experiment jsons and get a list of available experiment parameters that to show on the frontend
+    metadata = []
+    for fname in glob.glob("generated_dashboards/*"):
+        datasetname, xAxis,algo,dist,ic,ip,k,nbar = fname[:-5].split("/")[-1].split("_")
+        ic = float(ic[2:])
+        ip = float(ip[2:])
+        k = int(k[1:])
+        nbar = int(nbar[4:])
+        #print datasetname, xAxis,algo,dist,ic,ip,k,nbar
+        metadata.append([datasetname, xAxis,algo,dist,ic,ip,k,nbar])
+    metadata =pd.DataFrame(metadata,columns=["datasetname","xAxis","algo","dist","ic","ip","k","nbar"])
+    return metadata 
 @app.route("/", methods=['GET', 'POST'])
 def index():
     '''
@@ -80,7 +98,6 @@ def index():
 
     print "ret: "
     '''
-    
     all_tables = getTables()
     # dummy example 
     nodeDic, node, edge= getTreeJSON()
