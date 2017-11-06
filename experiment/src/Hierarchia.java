@@ -172,7 +172,9 @@ public class Hierarchia
 	                                        int parent_index = map_id_to_index.get(visualization_key);
 	                                        
 	                                        ArrayList<Integer> child_list = node_list.get(parent_index).get_child_list();
-	                                        child_list.add(node_list.size()-1);
+	                                        if (parent_index!=node_list.size()-1) {
+	                                        		child_list.add(node_list.size()-1);
+	                                        }
 	                                        node_list.get(parent_index).set_child_list(child_list);
 	                                        
 	                                        ArrayList<Double> dist_list = node_list.get(parent_index).get_dist_list();
