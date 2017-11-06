@@ -103,9 +103,7 @@ class Lattice:
 
     def generateNode(self, node_dic):
         nodeList = []
-        nodes = list(node_dic.values())
-        #barcharts = []
-        print nodes
+        nodes = sorted(list(node_dic.values()))
         for i,node in enumerate(nodes):
             yVals = []
             for values in node:
@@ -125,7 +123,9 @@ class Lattice:
                 filterVal = str(values["filter"][1:-1].replace("#",",\n").replace("$","="))
             svgString = bar_chart(yVals, xAttrs, xtitle="", ytitle="", title=filterVal, top_right_text="", N=1, width=0.1)
             nodeList.append(i+1)
+            #nodeList.append(filterVal)
             nodeList.append(base64.b64encode(svgString))
+            #nodes.push({"id": i+1, image: "data:image/svg+xml;base64," + svglist[i], shape: 'image'});
         return nodeList
 
     def generateEdge(self, node_dic):
@@ -137,8 +137,9 @@ class Lattice:
                 print key
                 # if len(node_dic[key][nBars])>2: #some childrenIndex might be empty (avoid indexing these otherwise keyerror)
                 for i in node_dic[key][nBars]['childrenIndex']: #index [3] need to generalize to things with more than 2 bars
-                    edge.append(key)
-                    edge.append(i)
+                    # edge.append(key)
+                    # edge.append(i)
+                    edge.append({"from": int(key), "to": i, "length": 200, "arrows":'to'});
         return edge
 
     def generateSvg(self, node_dic):
