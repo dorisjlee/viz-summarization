@@ -70,7 +70,6 @@ $("#all_tables").change(function (){
     $.post('/getColumns',{
         "tablename": $("#all_tables").val()
     },'application/json').success( function(data){
-        console.log(data)
         // columns = JSON.parse(data);
         columns=data
         console.log(columns)

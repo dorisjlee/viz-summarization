@@ -41,15 +41,9 @@ def getColumns():
 @app.route("/getNodeEdgeList", methods=['POST','GET'])
 def getNodeEdgeList():
   # Given the nodeDic, compute node list and edge list in Lattice.py, then return them as JS vars.
-  print request.form['nodeDic']
-  print "jsonClean:"
-  print request.form['jsonClean']
-  print type(request.form['jsonClean'])
   if str(request.form["jsonClean"]) =="true":
-    print "jsonClean yes"
     nodeDic = literal_eval(json.loads(request.form['nodeDic'].replace('\n', '').decode('string_escape')))
   else:
-    print "jsonClean no"
     nodeDic = json.loads(request.form['nodeDic'])
     
   G = Lattice()

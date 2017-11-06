@@ -5,38 +5,6 @@ var LENGTH_SUB = 50;
 
 // Called when the Visualization API is loaded.
 function draw(node,edge) {
-    // if (typeof(node)=="string"){
-    //   nodelist = node.replace("[","").replace("]","");
-    //   nodelist = nodelist.trim();
-    //   nodelist = nodelist.split(',');
-    //   for(var i=0; i<nodelist.length; i++) { nodelist[i] = nodelist[i].trim(); }
-    // }else{
-    //   nodelist = node;
-    // }
-    // if (typeof(edge)=="string"){
-    //   edgelist = edge.replace("[","").replace("]","");
-    //   edgelist = edgelist.split(',').map(function(item) {
-    //       return parseInt(item, 10);
-    //   });      
-    // }else{
-    //   edgelist = edge;
-    // }
-    
-    // nodeid = []
-    // svglist = []
-    // for(var i=0; i<nodelist.length; i=i+2) { nodeid.push(nodelist[i]); }
-    // for(var i=1; i<nodelist.length; i=i+2) { svglist.push(nodelist[i]); }
-    
-    // nodes = [];
-    
-    // // edges = [];
-    // for(var i=0; i<nodeid.length; i++) {
-    //     nodes.push({id: nodeid[i], image: "data:image/svg+xml;base64," + svglist[i], shape: 'image'});
-    // }
-    // for(var i=0; i<edgelist.length; i=i+2){
-    //     edges.push({from: parseInt(edgelist[i]), to: edgelist[i+1], length: 200, arrows:'to'});
-    // }
-    // console.log(edges)
     // create a network
     var container = document.getElementById('mynetwork');
     var data = {

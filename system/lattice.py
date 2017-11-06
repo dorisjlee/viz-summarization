@@ -103,13 +103,11 @@ class Lattice:
 
     def generateNode(self, node_dic):
         nodeList = []
-        #nodes = sorted(list(node_dic.values()))
         nodes = sorted(list(node_dic.keys()))
-        #for i,node in enumerate(nodes):
+        # Traverse in the order of keys
         for i in nodes:
             node = node_dic[i]
             yVals = []
-            print node
             for values in node:
                 try:
                     yVals.append(values['yAxis'])
@@ -126,10 +124,6 @@ class Lattice:
             else:
                 filterVal = str(values["filter"][1:-1].replace("#",",\n").replace("$","="))
             svgString = bar_chart(yVals, xAttrs, xtitle="", ytitle="", title=filterVal, top_right_text="", N=1, width=0.1)
-            #nodeList.append(i+1)
-            ##nodeList.append(filterVal)
-            #nodeList.append(base64.b64encode(svgString))
-            #nodes.push({"id": i+1, image: "data:image/svg+xml;base64," + svglist[i], shape: 'image'});
             nodeList.append({"id": int(i), "filterVal":filterVal,"image": "data:image/svg+xml;base64," + base64.b64encode(svgString), "shape": 'image'});
         return nodeList
 
@@ -137,13 +131,8 @@ class Lattice:
         edge = []
         if len(node_dic)>0:
             nBars = len(node_dic.values()[0])-1
-            print "node_dic.keys():"
             for key in sorted(node_dic.keys()):
-                print key
-                # if len(node_dic[key][nBars])>2: #some childrenIndex might be empty (avoid indexing these otherwise keyerror)
-                for i in node_dic[key][nBars]['childrenIndex']: #index [3] need to generalize to things with more than 2 bars
-                    # edge.append(key)
-                    # edge.append(i)
+                for i in node_dic[key][nBars]['childrenIndex']:
                     edge.append({"from": int(key), "to": i, "length": 200, "arrows":'to'});
         return edge
 
