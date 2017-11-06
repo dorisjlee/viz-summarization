@@ -103,9 +103,13 @@ class Lattice:
 
     def generateNode(self, node_dic):
         nodeList = []
-        nodes = sorted(list(node_dic.values()))
-        for i,node in enumerate(nodes):
+        #nodes = sorted(list(node_dic.values()))
+        nodes = sorted(list(node_dic.keys()))
+        #for i,node in enumerate(nodes):
+        for i in nodes:
+            node = node_dic[i]
             yVals = []
+            print node
             for values in node:
                 try:
                     yVals.append(values['yAxis'])
@@ -122,10 +126,11 @@ class Lattice:
             else:
                 filterVal = str(values["filter"][1:-1].replace("#",",\n").replace("$","="))
             svgString = bar_chart(yVals, xAttrs, xtitle="", ytitle="", title=filterVal, top_right_text="", N=1, width=0.1)
-            nodeList.append(i+1)
-            #nodeList.append(filterVal)
-            nodeList.append(base64.b64encode(svgString))
+            #nodeList.append(i+1)
+            ##nodeList.append(filterVal)
+            #nodeList.append(base64.b64encode(svgString))
             #nodes.push({"id": i+1, image: "data:image/svg+xml;base64," + svglist[i], shape: 'image'});
+            nodeList.append({"id": int(i), "filterVal":filterVal,"image": "data:image/svg+xml;base64," + base64.b64encode(svgString), "shape": 'image'});
         return nodeList
 
     def generateEdge(self, node_dic):
