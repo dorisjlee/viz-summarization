@@ -32,7 +32,7 @@ function readDashboardOutput(query){
         }
     })
     var div = document.getElementById("additionalInfoPanel")
-    div.innerHTML += "<a href=\""+json_pathloc+"\">"+"filename:"+fname+"</a>"
+    div.innerHTML = "<a href=\""+json_pathloc+"\">"+"filename:"+fname+"</a>"
 }
 // function constructQueryCallback(){
 //     var query = constructQuery();
@@ -84,7 +84,7 @@ $("#all_tables").change(function (){
         populateOptions(data["k"],document.getElementById("k"));
     })
 })
-$("#submit").click(constructQuery)
+// $("#submit").click(constructQuery)
 // $("#xaxis").change(constructQuery)
 // $("input[name='aggFunc']").change(constructQuery)
 function getNodeEdgeListThenDraw(nodeDicStr){

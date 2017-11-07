@@ -62,27 +62,35 @@ public class Experiment {
 	{
 	   // Testing different algo on different datasets
 	   Experiment exp ;
+	   Distance [] distList = {new KLDivergence(),new MaxDiff(),new EarthMover()};//new Euclidean(),
        String [] algoList = {"frontierGreedy","naiveGreedy","greedy"};
        experiment_name="../ipynb/dashboards/json/"+"vary_all";
        double [] ip_vals = {0.1,0.3,0.5,0.7,0.9,1};
        double [] ic_vals = {0,0.05,0.1,0.15,0.2};
        int [] k_vals = {15,20,25,30};
-       for (String algo:algoList) {
-    	   	   for (double ip: ip_vals) {
-    	   		   for (double ic: ic_vals) {
-    	   			   for (int k : k_vals) {
-    	   				   exp = new Experiment("titanic", "survived", "COUNT(id)", k, algo, new Euclidean(),ic,ip);
-				    	   exp.runOutput();
-				    	   exp = new Experiment("turn", "has_list_fn", "SUM(slots_millis_reduces)", k, algo, new Euclidean(),ic,ip);
-				    	   exp.runOutput();
-				    	   exp = new Experiment("mushroom","type", "COUNT", k, algo, new Euclidean(),ic,ip);
-				    	   exp.runOutput();
-				    	   exp = new Experiment("mushroom","cap_surface", "COUNT", k, algo, new Euclidean(),ic,ip);
-				    	   exp.runOutput();
-    	   			   }
-    	   		   }
-    	   	   }
+       for (Distance dist:distList) {
+	    	   for (String algo:algoList) {
+	    	   	   for (double ip: ip_vals) {
+	    	   		   for (double ic: ic_vals) {
+	    	   			   for (int k : k_vals) {
+	    	   				   try {
+		    	   				   exp = new Experiment("titanic", "survived", "COUNT(id)", k, algo, dist,ic,ip);
+						    	   exp.runOutput();
+						    	   exp = new Experiment("turn", "has_list_fn", "SUM(slots_millis_reduces)", k, algo, dist,ic,ip);
+						    	   exp.runOutput();
+						    	   exp = new Experiment("mushroom","type", "COUNT", k, algo, dist,ic,ip);
+						    	   exp.runOutput();
+						    	   exp = new Experiment("mushroom","cap_surface", "COUNT", k, algo, dist,ic,ip);
+						    	   exp.runOutput();
+	    	   				   }catch (Exception e){
+	    	   					   System.out.println("Failed at:"+k+","+ic+","+ip+","+algo);
+	    	   				   }
+	    	   			   }
+	    	   		   }
+	    	   	   }
+	       }
        }
+       
        /*
        String algo = "frontierGreedy";
        double [] ip_vals = {0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1};

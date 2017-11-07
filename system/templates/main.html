@@ -35,14 +35,19 @@
   <h1>Preloaded Selections:</h1>
   <br>
   <a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true">Mushroom</a>
-            <button type="button" name="query1" ng-click="populateWeatherQuery1()" aria-pressed="false" class="btn btn-default btn-xs">Q1</button>
-            <button type="button" name="query2" ng-click="populateWeatherQuery2()" aria-pressed="false" class="btn btn-default btn-xs">Q2</button>
-            <button type="button" name="query3" ng-click="populateWeatherQuery3()" aria-pressed="false" class="btn btn-default btn-xs">Q3</button>
+            <button type="button" name="D1Q1" onclick="populateD1Query1()" aria-pressed="false" class="btn btn-default btn-xs">Q1</button>
+            <button type="button" name="D1Q2" onclick="populateD1Query2()" aria-pressed="false" class="btn btn-default btn-xs">Q2</button>
+            <!-- <button type="button" name="query3" onclick="populateQuery3()" aria-pressed="false" class="btn btn-default btn-xs">Q3</button> -->
   <br>
-  <a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true">Real Estate</a>
-            <button type="button" name="query3" ng-click="populateQuery3()" aria-pressed="false" class="btn btn-default btn-xs">Q4</button>
-            <button type="button" name="query4" ng-click="populateQuery4()" aria-pressed="false" class="btn btn-default btn-xs">Q5</button>
-            <button type="button" name="query5" ng-click="populateQuery5()" aria-pressed="false" class="btn btn-default btn-xs">Q6</button>
+  <a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true">Turn</a>
+            <button type="button" name="D2Q1" onclick="populateD2Query1()" aria-pressed="false" class="btn btn-default btn-xs">Q1</button>
+            <button type="button" name="D2Q2" onclick="populateD2Query2()" aria-pressed="false" class="btn btn-default btn-xs">Q2</button>
+            <!-- <button type="button" name="query6" onclick="populateQuery6()" aria-pressed="false" class="btn btn-default btn-xs">Q6</button> -->
+   <br>
+   <a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true">Titanic</a>
+            <button type="button" name="D3Q1" onclick="populateD3Query1()" aria-pressed="false" class="btn btn-default btn-xs">Q1</button>
+            <button type="button" name="D3Q2" onclick="populateD3Query2()" aria-pressed="false" class="btn btn-default btn-xs">Q2</button>
+            <!-- <button type="button" name="query6" onclick="populateQuery6()" aria-pressed="false" class="btn btn-default btn-xs">Q6</button> -->
 </div>
 <br><br>
 <form class="form-inline menu-item">
@@ -140,7 +145,7 @@
   <br>
 </form>
  --><br> 
-<input type="submit" id="submit" style = "background-color: #359EDA;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 10px 230px;cursor: pointer;" value="Submit">
+<input type="submit" id="submit" onclick="constructQuery()" style = "background-color: #359EDA;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 10px 230px;cursor: pointer;" value="Submit">
 <!-- <div class="container">
     <div class="row">
         <div class="control-group" id="fields">

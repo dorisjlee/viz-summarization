@@ -55,3 +55,95 @@ function menuItem_onclick(id) {
         x.className = x.className.replace(" w3-show", "");
     }
 }
+function setIfNotAdd(selector_name,val){
+    // if the item is not in the dropdown menu, then add it into the list of items and set it as that.
+    if($(selector_name+' option[value="' + val + '"]').length === 0) {
+        $(selector_name).append('<option value="' + val + '">' + val + '</option>');
+    }    
+    $(selector_name).val(val);
+}
+
+// Pre-populated queries
+// function populateD1Query1(){
+//     $("#all_tables").val("mushroom").trigger("change").ajaxSuccess(function(event){
+//         $("#xaxis").val("type");
+//         $("#metric").val("euclidean");
+//         $("#algorithm").val("frontierGreedy");
+//         $("#k").val("20");
+//         $("#ic").val("0.2");
+//         $("#ip").val("0.1");   
+//         $("#submit").click();
+//         event.preventDefault();
+//         event.stopPropagation();
+//     })
+// }
+function populateD1Query1(){
+    $("#all_tables").val("mushroom")
+    setIfNotAdd("#xaxis","type")
+    setIfNotAdd("#metric","euclidean")
+    setIfNotAdd("#algorithm","frontierGreedy")
+    setIfNotAdd("#k","20")
+    setIfNotAdd("#ic","0.2")
+    setIfNotAdd("#ip","0.1")
+    $("#submit").click();
+}
+function populateD1Query2(){
+    $("#all_tables").val("mushroom")
+    setIfNotAdd("#xaxis","cap-surface")
+    setIfNotAdd("#metric","euclidean")
+    setIfNotAdd("#algorithm","frontierGreedy")
+    setIfNotAdd("#k","20")
+    setIfNotAdd("#ic","0.2")
+    setIfNotAdd("#ip","0.1")
+    $("#submit").click();
+}
+function populateD2Query1(){
+    $("#all_tables").val("turn")
+    setIfNotAdd("#xaxis","has-list-fn")
+    setIfNotAdd("#metric","euclidean")
+    setIfNotAdd("#algorithm","frontierGreedy")
+    setIfNotAdd("#k","10")
+    setIfNotAdd("#ic","0.2")
+    setIfNotAdd("#ip","0.1")
+    $("#submit").click();
+}
+function populateD2Query2(){
+    $("#all_tables").val("turn")
+    setIfNotAdd("#xaxis","has-list-fn")
+    setIfNotAdd("#metric","euclidean")
+    setIfNotAdd("#algorithm","frontierGreedy")
+    setIfNotAdd("#k","30")
+    setIfNotAdd("#ic","0")
+    setIfNotAdd("#ip","0.1")
+    $("#submit").click();
+}
+function populateD2Query1(){
+    $("#all_tables").val("turn")
+    setIfNotAdd("#xaxis","has-list-fn")
+    setIfNotAdd("#metric","euclidean")
+    setIfNotAdd("#algorithm","frontierGreedy")
+    setIfNotAdd("#k","15")
+    setIfNotAdd("#ic","0")
+    setIfNotAdd("#ip","0.1")
+    $("#submit").click();
+}
+function populateD3Query1(){
+    $("#all_tables").val("titanic")
+    setIfNotAdd("#xaxis","survived")
+    setIfNotAdd("#metric","euclidean")
+    setIfNotAdd("#algorithm","frontierGreedy")
+    setIfNotAdd("#k","15")
+    setIfNotAdd("#ic","0")
+    setIfNotAdd("#ip","0.1")
+    $("#submit").click();
+}
+function populateD3Query2(){
+    $("#all_tables").val("titanic")
+    setIfNotAdd("#xaxis","survived")
+    setIfNotAdd("#metric","kldiv")
+    setIfNotAdd("#algorithm","frontierGreedy")
+    setIfNotAdd("#k","30")
+    setIfNotAdd("#ic","0")
+    setIfNotAdd("#ip","0.9")
+    $("#submit").click();
+}
