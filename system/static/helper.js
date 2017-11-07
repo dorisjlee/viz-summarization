@@ -7,25 +7,32 @@ function constructQuery(){
         "algorithm": $("#algorithm").val() || "",
         "metric": $("#metric").val() || "",
         "filters": JSON.stringify(filters) ,
+        "ic":parseFloat($("#ic").val()).toFixed(1)|| "",
+        "ip":parseFloat($("#ip").val()).toFixed(1)|| "",
+        "k":$("#k").val()|| "",
         "method": "query"
     }
     readDashboardOutput(query)
     return query
 }
 function readDashboardOutput(query){
-    fname = "generated_dashboards/"+query["dataset"]+"_"+query["xAxis"]+"_"+query["algorithm"]+"_"+query["metric"]+"_ic0.1_ip0.6_k20_nbar2.json"
+    fname = query["dataset"]+"_"+query["xAxis"]+"_"+query["algorithm"]
+            +"_"+query["metric"]+"_ic"+query["ic"]+"_ip"+query["ip"]+"_k"+query["k"]+".json"
     console.log(fname)
     // Data Upload after options selection
     console.log(window.location.pathname)
     var nodeDic = ""
+    var json_pathloc = "http://"+window.location.hostname+":"+window.location.port+"/generated_dashboards/"+fname
     $.ajax({
-        url: "http://"+window.location.hostname+":"+window.location.port+"/"+fname,
+        url: json_pathloc,
         type: "GET",
         dataType: "text",
         success: function(data) {
             getNodeEdgeListThenDraw(data);
         }
     })
+    var div = document.getElementById("additionalInfoPanel")
+    div.innerHTML += "<a href=\""+json_pathloc+"\">"+"filename:"+fname+"</a>"
 }
 // function constructQueryCallback(){
 //     var query = constructQuery();
@@ -40,13 +47,11 @@ function readDashboardOutput(query){
 
 function populateOptions(list,selector)
 {
-    console.log(selector.length)
     selector.innerHTML="";
-    selector.options[0] = new Option("None","None");
+    //selector.options[0] = new Option("None","None");
     for (var i=0;i<list.length;i++){
       selector.options[i+1] = new Option(list[i],list[i]);
     }
-    console.log("added options")
 }
 // Proper way of actually reading from a DB
 // var columns =[];
@@ -67,14 +72,16 @@ function populateOptions(list,selector)
 // $("input[name='aggFunc']").change(constructQueryCallback)
 var columns =[];
 $("#all_tables").change(function (){
-    $.post('/getColumns',{
+    $.post('/getAvailableFiles',{
         "tablename": $("#all_tables").val()
     },'application/json').success( function(data){
-        // columns = JSON.parse(data);
-        columns=data
-        console.log(columns)
-        populateOptions(columns,document.getElementById("xaxis"));
-        // constructQuery()
+        console.log(data)
+        populateOptions(data["xAxis"],document.getElementById("xaxis"));
+        populateOptions(data["dist"],document.getElementById("metric"));
+        populateOptions(data["algo"],document.getElementById("algorithm"));
+        populateOptions(data["ic"],document.getElementById("ic"));
+        populateOptions(data["ip"],document.getElementById("ip"));
+        populateOptions(data["k"],document.getElementById("k"));
     })
 })
 $("#submit").click(constructQuery)
@@ -112,5 +119,5 @@ function IsJsonString(str) {
 $("#graphDicSubmit").click(function(){
     getNodeEdgeListThenDraw($("#graphDic").val());
 })
-// Trump Clinton example
+// Trump Clinton example (display by default, on startup)
 getNodeEdgeListThenDraw({'1': [{'xAxis': 'Clinton', 'yAxis': 48}, {'xAxis': 'Trump', 'yAxis': 46}, {'xAxis': 'Others', 'yAxis': 6}, {'filter': 'All', 'childrenIndex': [2, 3], 'yName': '% of vote'}], '2': [{'xAxis': 'Clinton', 'yAxis': 31}, {'xAxis': 'Trump', 'yAxis': 62}, {'xAxis': 'Others', 'yAxis': 7}, {'filter': 'Race = White', 'childrenIndex': [4, 5], 'yName': '% of vote'}], '3': [{'xAxis': 'Clinton', 'yAxis': 21}, {'xAxis': 'Trump', 'yAxis': 70}, {'xAxis': 'Others', 'yAxis': 9}, {'filter': 'Gender = F', 'childrenIndex': [], 'yName': '% of vote'}], '4': [{'xAxis': 'Clinton', 'yAxis': 21}, {'xAxis': 'Trump', 'yAxis': 52}, {'xAxis': 'Others', 'yAxis': 27}, {'filter': 'Color = Blue', 'childrenIndex': [5], 'yName': '% of vote'}], '5': [{'xAxis': 'Clinton', 'yAxis': 20}, {'xAxis': 'Trump', 'yAxis': 30}, {'xAxis': 'Others', 'yAxis': 50}, {'filter': 'Job = Student', 'childrenIndex': [], 'yName': '% of vote'}]})

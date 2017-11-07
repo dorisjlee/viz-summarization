@@ -31,7 +31,23 @@
   <button class="w3-bar-item w3-button w3-large" style="margin: 10px 300px;"
   onclick="menuItem_close()"> &times;</button>
 
+<div class="btn-group" style ="margin-left: 20px;">
+  <h1>Preloaded Selections:</h1>
+  <br>
+  <a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true">Mushroom</a>
+            <button type="button" name="query1" ng-click="populateWeatherQuery1()" aria-pressed="false" class="btn btn-default btn-xs">Q1</button>
+            <button type="button" name="query2" ng-click="populateWeatherQuery2()" aria-pressed="false" class="btn btn-default btn-xs">Q2</button>
+            <button type="button" name="query3" ng-click="populateWeatherQuery3()" aria-pressed="false" class="btn btn-default btn-xs">Q3</button>
+  <br>
+  <a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true">Real Estate</a>
+            <button type="button" name="query3" ng-click="populateQuery3()" aria-pressed="false" class="btn btn-default btn-xs">Q4</button>
+            <button type="button" name="query4" ng-click="populateQuery4()" aria-pressed="false" class="btn btn-default btn-xs">Q5</button>
+            <button type="button" name="query5" ng-click="populateQuery5()" aria-pressed="false" class="btn btn-default btn-xs">Q6</button>
+</div>
+<br><br>
 <form class="form-inline menu-item">
+  <h1>Dashboard Options:</h1>
+  <br>
   <h2 class = "title"><b>Dataset</b></h2>
   <div class="form-group">
         <select name="table_selected" id = "all_tables" class="selectpicker form-control">
@@ -60,11 +76,10 @@
     </div>
 </form> -->
 <br> 
-<form class="form-inline menu-item" class="form-inline" id = "agg_select" name = "agg_select">
+<form class="form-inline menu-item" class="form-inline">
   <h2 class = "title"><b>Metric</b></h2>
     <div class="form-group">
         <select name = "metric"  id = "metric" class="selectpicker form-control">
-            <option selected="true" value = "None"> None</option>
             <option value= "euclidean">Euclidean</option>
             <option value= "kldiv">KL Divergence</option>
             <option value= "maxdiff">MaxDiff</option>
@@ -74,11 +89,10 @@
   <br>
 </form>
 <br> 
-<form class="form-inline menu-item" class="form-inline" id = "agg_select" name = "agg_select">
+<form class="form-inline menu-item" class="form-inline">
   <h2 class = "title"><b>Algorithm</b></h2>
     <div class="form-group">
         <select name = "algorithm"  id = "algorithm" class="selectpicker form-control">
-            <option selected="true" value = "None"> None</option>
             <option value= "frontierGreedy">Frontier Greedy</option>
             <option value= "greedy">Greedy</option>
         </select>
@@ -86,6 +100,33 @@
   <br>
 </form>
 <br> 
+<form class="form-inline menu-item" class="form-inline">
+  <h2 class = "title"><b>k</b></h2>
+    <div class="form-group">
+        <select name = "k"  id = "k" class="selectpicker form-control">
+        </select>
+    </div>
+  <br>
+</form>
+<br>
+<form class="form-inline menu-item" class="form-inline">
+  <h2 class = "title"><b>iceberg condition</b></h2>
+    <div class="form-group">
+        <select name = "ic"  id = "ic" class="selectpicker form-control">
+        </select>
+    </div>
+  <br>
+</form>
+<br>
+<form class="form-inline menu-item" class="form-inline">
+  <h2 class = "title"><b>informative parent criterion</b></h2>
+    <div class="form-group">
+        <select name = "ip"  id = "ip" class="selectpicker form-control">
+        </select>
+    </div>
+  <br>
+</form>
+<div id="additionalInfoPanel" style="margin-left: 10px; word-wrap: break-word;"></div>
 <!-- <form class="form-inline menu-item" class="form-inline" id = "agg_select" name = "agg_select">
   <h2 class = "title"><b>Aggregation function:</b></h2>
     <div class="form-group">

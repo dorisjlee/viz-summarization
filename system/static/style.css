@@ -22,8 +22,11 @@ caption,
 th {
     text-align: left;
 }
-
-h1,h2,h3,h4,h5,h6{
+h1{
+  font-size: 130%;
+  font-weight: bold;
+}
+h2,h3,h4,h5,h6{
     font-size: 100%;
     font-weight: normal;
 }

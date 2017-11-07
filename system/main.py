@@ -37,7 +37,18 @@ def getColumns():
   print column_name
   session['column_name'] = column_name  # a list containing all the column names
   return jsonify(column_name)
-
+@app.route("/getAvailableFiles", methods=['POST','GET'])
+def getAvailableFiles():
+  # The proper way of reading from DB (not from JSON outputs)
+  # column_name = json.dumps(get_columns(request.form['tablename'])["column_name"])
+  metadata = readExperimentJsons()
+  available_files={}
+  for attr_name in metadata.columns:
+    available_files[attr_name]=getUniqueCols(metadata,request.form['tablename'],attr_name)
+  session['available_files'] = available_files
+  return jsonify(available_files)
+def getUniqueCols(metadata,datasetname,attributeName):
+  return list(set(metadata[metadata["datasetname"]==datasetname][attributeName]))
 @app.route("/getNodeEdgeList", methods=['POST','GET'])
 def getNodeEdgeList():
   # Given the nodeDic, compute node list and edge list in Lattice.py, then return them as JS vars.
@@ -83,14 +94,12 @@ def readExperimentJsons():
     #read the available experiment jsons and get a list of available experiment parameters that to show on the frontend
     metadata = []
     for fname in glob.glob("static/generated_dashboards/*"):
-        datasetname, xAxis,algo,dist,ic,ip,k,nbar = fname[:-5].split("/")[-1].split("_")
+        datasetname, xAxis,algo,dist,ic,ip,k = fname[:-5].split("/")[-1].split("_")
         ic = float(ic[2:])
         ip = float(ip[2:])
         k = int(k[1:])
-        nbar = int(nbar[4:])
-        #print datasetname, xAxis,algo,dist,ic,ip,k,nbar
-        metadata.append([datasetname, xAxis,algo,dist,ic,ip,k,nbar])
-    metadata =pd.DataFrame(metadata,columns=["datasetname","xAxis","algo","dist","ic","ip","k","nbar"])
+        metadata.append([datasetname, xAxis,algo,dist,ic,ip,k])
+    metadata =pd.DataFrame(metadata,columns=["datasetname","xAxis","algo","dist","ic","ip","k"])
     return metadata 
 @app.route("/", methods=['GET', 'POST'])
 def index():
