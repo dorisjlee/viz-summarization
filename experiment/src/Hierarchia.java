@@ -539,8 +539,16 @@ public class Hierarchia
 //    		compute_visualization(placeholderNode, new ArrayList<String>(Arrays.asList("pc_class")), 
 //    							new ArrayList<String>(Arrays.asList("3")));
 	   Euclidean ed = new Euclidean();
- 	   Hierarchia h = new Hierarchia("mushroom","cap_color");
+ 	   //Hierarchia h = new Hierarchia("mushroom","cap_color");
+ 	   Hierarchia h = new Hierarchia("titanic","survived");
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
+       //Pick all nodes to put in maxSubgraph
+       for (int i=0;i<lattice.nodeList.size();i++) {
+    	   		lattice.maxSubgraph.add(i);
+       }
+       VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h, "COUNT");
+       String nodeDic = vo.generateNodeDic();
+       VizOutput.dumpString2File("test.json", nodeDic);
 //       System.out.println("# of nodes before merging:"+lattice.nodeList.size());
 //       mergeNodes(lattice);
 //       System.out.println("# of nodes after merging:"+lattice.nodeList.size());

@@ -16,7 +16,7 @@ public class Experiment {
 	Traversal algo;
 	String fname;
 	int nbars;
-	public String experiment_name="../ipynb/dashboards/json/"+"vary_dataset_ip";
+	public static String experiment_name="../ipynb/dashboards/json/"+"vary_dataset_ip";
 	public Experiment(String datasetName, String xAxisName, String yAxisName, int k, String algoName, Distance dist,
 			double iceberg_ratio, double informative_critera) throws SQLException {
 		super();
@@ -65,6 +65,7 @@ public class Experiment {
 	   //String algo = "greedy";
        double [] ip_vals = {0.5,0.6,0.7,0.8,0.9,1};
        Experiment exp ;
+       experiment_name="../ipynb/dashboards/json/"+"vary_dataset_ip";
        for (double ip: ip_vals) {
     	   	   System.out.println("ip:"+ip);
 	    	   exp = new Experiment("titanic", "survived", "COUNT(id)", k, algo, new Euclidean(),0.1,ip);
