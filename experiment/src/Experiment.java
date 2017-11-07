@@ -1,5 +1,6 @@
 import java.io.File;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 public class Experiment {
 	String datasetName;
@@ -50,7 +51,8 @@ public class Experiment {
 			this.fname = datasetName+"_"+xAxisName.replace("_","-")+"_"+algoName+"_"+distName+"_ic"+iceberg_ratio+"_ip"+informative_critera+"_k"+k+"_nbar"+nbars+".json";
 		}
 	}
-	public void runOutput() {
+	public void runOutput() throws SQLException {
+		h.db.c.close();
 		algo.pickVisualizations(k);
 		VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h, yAxisName);
         String nodeDic = vo.generateNodeDic();
@@ -59,12 +61,31 @@ public class Experiment {
 	public static void main(String[] args) throws SQLException 
 	{
 	   // Testing different algo on different datasets
-	   int k = 20;
-       String algo = "frontierGreedy"; 
-	   //String algo = "naiveGreedy";
-	   //String algo = "greedy";
-       double [] ip_vals = {0.5,0.6,0.7,0.8,0.9,1};
-       Experiment exp ;
+	   Experiment exp ;
+       String [] algoList = {"frontierGreedy","naiveGreedy","greedy"};
+       experiment_name="../ipynb/dashboards/json/"+"vary_all";
+       double [] ip_vals = {0.1,0.3,0.5,0.7,0.9,1};
+       double [] ic_vals = {0,0.05,0.1,0.15,0.2};
+       int [] k_vals = {15,20,25,30};
+       for (String algo:algoList) {
+    	   	   for (double ip: ip_vals) {
+    	   		   for (double ic: ic_vals) {
+    	   			   for (int k : k_vals) {
+    	   				   exp = new Experiment("titanic", "survived", "COUNT(id)", k, algo, new Euclidean(),ic,ip);
+				    	   exp.runOutput();
+				    	   exp = new Experiment("turn", "has_list_fn", "SUM(slots_millis_reduces)", k, algo, new Euclidean(),ic,ip);
+				    	   exp.runOutput();
+				    	   exp = new Experiment("mushroom","type", "COUNT", k, algo, new Euclidean(),ic,ip);
+				    	   exp.runOutput();
+				    	   exp = new Experiment("mushroom","cap_surface", "COUNT", k, algo, new Euclidean(),ic,ip);
+				    	   exp.runOutput();
+    	   			   }
+    	   		   }
+    	   	   }
+       }
+       /*
+       String algo = "frontierGreedy";
+       double [] ip_vals = {0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1};
        experiment_name="../ipynb/dashboards/json/"+"vary_dataset_ip";
        for (double ip: ip_vals) {
     	   	   System.out.println("ip:"+ip);
@@ -78,9 +99,7 @@ public class Experiment {
 	    	   exp.runOutput();
 	    	   exp.h.db.c.close();
        }
-	      
-	   //}
-	   
+	   */	   
 	   
 	}
 }

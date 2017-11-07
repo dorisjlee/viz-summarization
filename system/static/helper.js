@@ -74,7 +74,7 @@ $("#all_tables").change(function (){
         columns=data
         console.log(columns)
         populateOptions(columns,document.getElementById("xaxis"));
-        constructQuery()
+        // constructQuery()
     })
 })
 $("#submit").click(constructQuery)

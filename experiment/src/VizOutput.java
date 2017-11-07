@@ -33,7 +33,7 @@ public class VizOutput {
 		ArrayList<String> xAttr = h.uniqueAttributeKeyVals.get(h.xAxis);
 		String nodeDic = "{";
 		for (int i=0; i<selectedNodes.size();i++) {
-			nodeDic+= "\\\""+(i+1)+"\\\": [";
+			nodeDic+= "\\\""+(i)+"\\\": [";
 			int selectedNodeID = selectedNodes.get(i);
 			Node selectedNode = lattice.nodeList.get(selectedNodeID);
 			ArrayList<Double> nodeVal = lattice.id2MetricMap.get(selectedNode.id);

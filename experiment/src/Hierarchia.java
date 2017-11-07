@@ -167,6 +167,7 @@ public class Hierarchia
 	                                {
 	                                    ArrayList<Double> parent_visualization_measure_values = map_id_to_metric_values.get(visualization_key);
 	                                    double dist = compute_distance(current_visualization_measure_values, parent_visualization_measure_values);
+	                                    System.out.println("dist criteria:"+min_distance/informative_criteria);
 	                                    if(dist*informative_criteria <= min_distance)
 	                                    {
 	                                        int parent_index = map_id_to_index.get(visualization_key);
@@ -176,12 +177,12 @@ public class Hierarchia
 	                                        		child_list.add(node_list.size()-1);
 	                                        }
 	                                        node_list.get(parent_index).set_child_list(child_list);
-	                                        
 	                                        ArrayList<Double> dist_list = node_list.get(parent_index).get_dist_list();
 	                                        dist_list.add(dist);
-	                                        node_list.get(parent_index).set_child_list(child_list);
 	                                        //System.out.print("I");
-	                                        //System.out.println("Informative parent: "+visualization_key+" -- "+map_id_to_metric_values.get(visualization_key));
+	                                        System.out.println("Informative parent: "+visualization_key+" -- "+dist);
+	                                    }else {
+	                                    		System.out.println("Non-informative parent:"+visualization_key+" -- "+dist);
 	                                    }
 	                                }
 	                            }
@@ -195,9 +196,11 @@ public class Hierarchia
                         System.out.print(node_list.get(x).get_id()+" ");
                     }
                     System.out.println();
+                    */
+                    /*
                     for(int x = 0; x < node_list.size(); x++)
                     {
-                        System.out.println("Node: "+node_list.get(x).get_id());
+                        System.out.println("Node"+x+": "+node_list.get(x).get_id());
                         for(int y=0; y < node_list.get(x).get_child_list().size(); y++)
                         {
                             System.out.print(node_list.get(x).get_child_list().get(y)+" ");
@@ -541,6 +544,7 @@ public class Hierarchia
 	   Euclidean ed = new Euclidean();
  	   //Hierarchia h = new Hierarchia("mushroom","cap_color");
  	   Hierarchia h = new Hierarchia("titanic","survived");
+ 	   //Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0); // Fully materialized lattice
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
        //Pick all nodes to put in maxSubgraph
        for (int i=0;i<lattice.nodeList.size();i++) {
