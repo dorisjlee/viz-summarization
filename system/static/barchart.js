@@ -26,9 +26,23 @@ function draw(node,edge) {
               useBorderWithImage:true
             }
         },
-        physics: {stabilization: false},
+        physics: {enabled: false},
         edges: {smooth: false,
                 color: 'lightblue'
+        },
+        layout: {
+            randomSeed: undefined,
+            improvedLayout:true,
+            hierarchical: {
+              enabled:true,
+              levelSeparation: 150,
+              nodeSpacing: 100,
+              treeSpacing: 200,
+              blockShifting: true,
+              edgeMinimization: true,
+              parentCentralization: true,
+              sortMethod: 'directed'   // hubsize, directed
+            }
         }
     };
     network = new vis.Network(container, data, options);
