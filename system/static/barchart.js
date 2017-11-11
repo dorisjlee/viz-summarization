@@ -16,7 +16,7 @@ function draw(node,edge) {
           borderWidth:2,
           size:30,
           color: {
-              border: '#C0E0FD',
+              border: '#A1BACB',
               background: '#FFFFFF'
             },
           font:{color:'#0B131A',
@@ -28,7 +28,7 @@ function draw(node,edge) {
         },
         physics: {enabled: false},
         edges: {smooth: false,
-                color: 'lightblue'
+                color: '4E7189'
         },
         layout: {
             randomSeed: undefined,
