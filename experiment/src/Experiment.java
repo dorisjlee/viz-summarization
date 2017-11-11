@@ -62,7 +62,8 @@ public class Experiment {
 	{
 	   // Testing different algo on different datasets
 	   Experiment exp ;
-	   Distance [] distList = {new KLDivergence(),new MaxDiff(),new EarthMover()};//new Euclidean(),
+	   //Distance [] distList = {new KLDivergence(),new MaxDiff(),new EarthMover()};//new Euclidean(),
+	   Distance [] distList = {new Euclidean()};
        String [] algoList = {"frontierGreedy","naiveGreedy","greedy"};
        experiment_name="../ipynb/dashboards/json/"+"vary_all";
        double [] ip_vals = {0.1,0.3,0.5,0.7,0.9,1};
