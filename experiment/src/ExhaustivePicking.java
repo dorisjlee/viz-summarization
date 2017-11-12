@@ -44,10 +44,9 @@ public class ExhaustivePicking extends Traversal{
 			return;
 		}
 		localMaxSubgraph.put(rootId, 0f);
-		System.out.println("rootId:"+rootId);
 		ArrayList<Integer> rootSubgraph = new ArrayList<Integer>(Arrays.asList(rootId));
 		pickChildren(k, rootSubgraph, lattice.nodeList.get(rootId));
-		//printMaxSubgraphSummary();
+		printMaxSubgraphSummary();
 	}
 	
 	/*
@@ -61,21 +60,28 @@ public class ExhaustivePicking extends Traversal{
 		int n = G.size();
 		ArrayList<Integer> pivot_children = pivot.get_child_list();
 		int m = Math.min(k-n, pivot_children.size());
-		System.out.println(m);
-		for (int i =1; i<m; i++) {
+		
+		for (int i =1; i<=m; i++) {
 			ArrayList<ArrayList<Integer>> child_combo_list = combination(pivot_children,i);
-			System.out.println("child_combo_list:"+child_combo_list);
+			//System.out.println("child_combo_list:"+child_combo_list);
 			for (ArrayList<Integer> child_combo : child_combo_list) {
-				System.out.println("child_combo:"+child_combo);
+				//System.out.println("child_combo:"+child_combo);
+				//System.out.println("G:"+G);
 				ArrayList<Integer> newG =  (ArrayList<Integer>) Stream.concat(G.stream(), child_combo.stream())
                         						.collect(Collectors.toList());
+				//System.out.println("newG:"+newG);
+				//System.out.println("newG.size():"+newG.size());
 				for (int childID: child_combo) {
+					int childIdx = pivot.get_child_list().indexOf(childID);
 					Node childNode  = lattice.nodeList.get(childID);
 					if (newG.size()<k) {
 						pickChildren(k,newG, childNode);
 					}else {
-						double totalUtility=0;
+//						System.out.println("newG.size():"+newG.size());
+						double totalUtility=computeSubGraphUtility(newG);
 						if (totalUtility>lattice.maxSubgraphUtility) {
+							//System.out.println("newG:"+newG);
+							//System.out.println("totalUtility:"+totalUtility);
 							lattice.maxSubgraph = newG;
 							lattice.maxSubgraphUtility = totalUtility;
 							return ;
@@ -85,7 +91,6 @@ public class ExhaustivePicking extends Traversal{
 			}
 		}
 	}
-	
     static void combinationUtil(ArrayList<ArrayList<Integer>> all_combo,ArrayList<Integer> arr, ArrayList<Integer> data, int start,
                                 int end, int index, int r)
     {
@@ -131,11 +136,19 @@ public class ExhaustivePicking extends Traversal{
         combination(pivot_children, r);
         */
     		Euclidean ed = new Euclidean();
-    		Hierarchia h = new Hierarchia("titanic","survived");
+    		Hierarchia h = new Hierarchia("mushroom","cap_surface");
+    		//Hierarchia h = new Hierarchia("turn","has_list_fn");
+    		//Hierarchia h = new Hierarchia("titanic","survived");
     		Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
         Traversal tr; 
         tr = new ExhaustivePicking(lattice,new Euclidean());
         tr.pickVisualizations(5);
-        tr.printMaxSubgraphSummary();
+        
+        tr = new GreedyPicking(lattice,new Euclidean());
+        tr.pickVisualizations(5);
+        
+        
+        tr = new FrontierGreedyPicking(lattice,new Euclidean());
+        tr.pickVisualizations(5);
     }
 }

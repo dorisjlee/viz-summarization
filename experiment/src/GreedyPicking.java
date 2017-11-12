@@ -53,6 +53,6 @@ public class GreedyPicking extends Traversal{
        }
        lattice.maxSubgraph= dashboard; 
        lattice.maxSubgraphUtility=total_utility;
-       //printMaxSubgraphSummary();
+       printMaxSubgraphSummary();
    }
 }
