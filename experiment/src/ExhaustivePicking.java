@@ -74,17 +74,17 @@ public class ExhaustivePicking extends Traversal{
 				for (int childID: child_combo) {
 					int childIdx = pivot.get_child_list().indexOf(childID);
 					Node childNode  = lattice.nodeList.get(childID);
+					double totalUtility=computeSubGraphUtility(newG);
 					if (newG.size()<k) {
 						pickChildren(k,newG, childNode);
 					}else {
-//						System.out.println("newG.size():"+newG.size());
-						double totalUtility=computeSubGraphUtility(newG);
+						//System.out.println("newG:"+newG+":"+totalUtility);
+						//System.out.println("newG.size():"+newG.size());
 						if (totalUtility>lattice.maxSubgraphUtility) {
 							//System.out.println("newG:"+newG);
 							//System.out.println("totalUtility:"+totalUtility);
 							lattice.maxSubgraph = newG;
 							lattice.maxSubgraphUtility = totalUtility;
-							return ;
 						}
 					}
 				}
@@ -136,9 +136,9 @@ public class ExhaustivePicking extends Traversal{
         combination(pivot_children, r);
         */
     		Euclidean ed = new Euclidean();
-    		Hierarchia h = new Hierarchia("mushroom","cap_surface");
+    		//Hierarchia h = new Hierarchia("mushroom","cap_surface");
     		//Hierarchia h = new Hierarchia("turn","has_list_fn");
-    		//Hierarchia h = new Hierarchia("titanic","survived");
+    		Hierarchia h = new Hierarchia("titanic","survived");
     		Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
         Traversal tr; 
         tr = new ExhaustivePicking(lattice,new Euclidean());
