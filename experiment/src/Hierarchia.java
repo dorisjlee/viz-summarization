@@ -20,6 +20,13 @@ public class Hierarchia
 		Hierarchia.attribute_names = get_attribute_names();
 		Hierarchia.uniqueAttributeKeyVals = populateUniqueAttributeKeyVals();
 	}
+	public static ArrayList<String> getAttribute_names() {
+		return attribute_names;
+	}
+	public static void setAttribute_names(ArrayList<String> attribute_names) throws SQLException {
+		Hierarchia.attribute_names = attribute_names;
+		Hierarchia.uniqueAttributeKeyVals = populateUniqueAttributeKeyVals();
+	}
 	public static HashMap<String, ArrayList<String>> populateUniqueAttributeKeyVals() throws SQLException{
 		HashMap<String, ArrayList<String>> uniqueAttributeKeyVals =new HashMap<String, ArrayList<String>>();
 		for (int i=0;i<attribute_names.size();i++) {
@@ -225,7 +232,7 @@ public class Hierarchia
             System.out.println();
         }*/
         Lattice materialized_lattice = new Lattice(map_id_to_metric_values,node_list,map_id_to_index);
-        System.out.println("------------------------------------------------ ");
+        //System.out.println("------------------------------------------------ ");
         return materialized_lattice;
     }
     static ArrayList<String> get_attribute_names()
@@ -247,7 +254,7 @@ public class Hierarchia
         }
         catch(IOException e)
         {
-            System.out.println("Error");
+            System.out.println("Error in get_attribute_names()");
             System.out.println("attribute_names:"+attribute_names);
         }
         return attribute_names;
