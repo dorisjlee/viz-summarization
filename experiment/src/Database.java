@@ -27,8 +27,9 @@ public class Database {
 	}
 	// Query database and return result
 	public static  ResultSet query(String sQLQuery) throws SQLException {
-	      Statement stmt = c.createStatement();
-	      return stmt.executeQuery(sQLQuery);
+		//System.out.println(sQLQuery);
+	    Statement stmt = c.createStatement();
+	    return stmt.executeQuery(sQLQuery);
 	}
 	
 	
