@@ -232,7 +232,7 @@ public class Hierarchia
             System.out.println();
         }*/
         Lattice materialized_lattice = new Lattice(map_id_to_metric_values,node_list,map_id_to_index);
-        System.out.println("------------------------------------------------ ");
+        //System.out.println("------------------------------------------------ ");
         return materialized_lattice;
     }
     static ArrayList<String> get_attribute_names()

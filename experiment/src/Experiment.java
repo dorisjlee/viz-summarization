@@ -60,7 +60,6 @@ public class Experiment {
 		}
 		if (experiment_name!="") {
 			File directory = new File(experiment_name);
-			System.out.println("dir exists:"+directory.exists());
 		    if (! directory.exists()){
 		        directory.mkdir();
 		    }
@@ -105,27 +104,13 @@ public class Experiment {
 	   experiment_name="../ipynb/dashboards/json/"+"baseline";
 	   PrintWriter writer = new PrintWriter("output.csv", "UTF-8");
 	   writer.println("xAxis,yAxis,algo,groupby,total_time,total_utility");
-	   // Example that works
-	   /*ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
-			   	"has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
-   	   exp = new Experiment("turn", "has_list_fn", "slots_millis_reduces",groupby,"SUM", k, "greedy", new Euclidean(),0,0.8);
-	   exp.runOutput();
-	   System.out.println(exp.lattice.maxSubgraphUtility);*/
-	   
-	   // Example that doesn't work
-	   //[has_corr_list_fn, has_list_min_fn, has_list_max_fn, has_prof_impressions_tbl, has_actions_tbl, has_distinct, is_multi_query, has_list_has_fn]
-	   //has_list_min_fn,reduce_input_groups
-//	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("has_corr_list_fn","has_list_min_fn","has_list_max_fn","has_prof_impressions_tbl","has_actions_tbl","has_distinct","is_multi_query","has_list_has_fn"));
-//  	   exp = new Experiment("turn", "has_list_min_fn", "reduce_input_groups",groupby,"SUM", k, "greedy", new Euclidean(),0,0.8);
-//	   exp.runOutput();
-//	   System.out.println(exp.lattice.maxSubgraphUtility);
 	   for (int i=0;i<numIterations;i++) {
 		   // We are picking 8 random dimensions in the groupby and one random measure value, since 35C5 combinations is too much, we are just picking random samples of potential dashboards in our experiments.
 		   ArrayList<String> groupby = pickNRandom(all_dimensions, 8);
 		   String yAxis = all_measures.get(new Random().nextInt(all_measures.size()));
 		   String xAxis = groupby.get(new Random().nextInt(groupby.size()));
-		   System.out.println(groupby);
-		   System.out.println(xAxis+","+yAxis);
+		   //System.out.println(groupby);
+		   //System.out.println(xAxis+","+yAxis);
 		   for (String algo : algoList) {
 			   exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", k, algo, new Euclidean(),0,0.8);
 			   long duration = exp.timedRunOutput();
@@ -133,11 +118,6 @@ public class Experiment {
 		   }
 	   }
 	   writer.close();
-	   
-	   //ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("type","cap_shape", "cap_surface" , "cap_color" , "bruises" , "odor"));
-	   //exp = new Experiment("titanic", "survived", "id",groupby, "COUNT", k, algo, dist,ic,ip);
-	   
-	   //exp.runOutput();
 	   /*
 	   Distance [] distList = {new KLDivergence(),new MaxDiff(),new EarthMover(),new Euclidean()};
        String [] algoList = {"frontierGreedy","naiveGreedy","greedy"};
