@@ -94,16 +94,16 @@ public class Experiment {
 	}
 	public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
 	{
-	   Experiment exp;
-	   ArrayList<String> all_dimensions = new ArrayList<String>(Arrays.asList("is_successful","is_multi_query","is_profile_query","is_event_query","has_impressions_tbl","has_clicks_tbl","has_actions_tbl","has_rtbids_tbl","has_engagement_evnets_tbl","has_viewability_tbl","has_prof_impressions_tbl","has_prof_clicks_tbl","has_prof_actions_tbl","has_prof_rtbids_tbl","has_prof_engagement_events_tbl","has_prof_data_tbl","has_prof_provider_user_ids_tbl","has_prof_container_tags_tbl","has_prof_segments_tbl","has_prof_viewability_tbl","has_distinct","has_count_distinct","has_sum_distinct","has_est_distinct","has_list_fn","has_corr_list_fn","has_list_has_fn","has_list_count_fn","has_list_sum_fn","has_list_min_fn","has_list_max_fn","has_list_sum_range_fn","has_list_max_range_fn","has_list_min_range_fn","has_where_clause","has_having_clause","has_order_by_clause"));
-	   ArrayList<String> all_measures = new ArrayList<String>(Arrays.asList("hdfs_bytes_read","hdfs_bytes_written","total_launched_maps","total_launched_reduces","map_input_records","map_output_records","reduce_input_records","reduce_input_groups","reduce_output_records","slots_millis_maps","slots_millis_reduces"));
-	   String [] algoList = {"frontierGreedy","naiveGreedy","greedy","exhaustive"};
-	   int numIterations = 10;
-	   int k =10;
-	   String aggFunc="SUM";
-	   experiment_name="../ipynb/dashboards/json/"+"baseline";
-	   //Debugging Exhaustive
-	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("has_list_sum_range_fn","has_corr_list_fn","has_prof_clicks_tbl","has_est_distinct","has_list_sum_fn","has_impressions_tbl","is_profile_query","has_prof_engagement_events_tbl"));
+//	   Experiment exp;
+//	   ArrayList<String> all_dimensions = new ArrayList<String>(Arrays.asList("is_successful","is_multi_query","is_profile_query","is_event_query","has_impressions_tbl","has_clicks_tbl","has_actions_tbl","has_rtbids_tbl","has_engagement_evnets_tbl","has_viewability_tbl","has_prof_impressions_tbl","has_prof_clicks_tbl","has_prof_actions_tbl","has_prof_rtbids_tbl","has_prof_engagement_events_tbl","has_prof_data_tbl","has_prof_provider_user_ids_tbl","has_prof_container_tags_tbl","has_prof_segments_tbl","has_prof_viewability_tbl","has_distinct","has_count_distinct","has_sum_distinct","has_est_distinct","has_list_fn","has_corr_list_fn","has_list_has_fn","has_list_count_fn","has_list_sum_fn","has_list_min_fn","has_list_max_fn","has_list_sum_range_fn","has_list_max_range_fn","has_list_min_range_fn","has_where_clause","has_having_clause","has_order_by_clause"));
+//	   ArrayList<String> all_measures = new ArrayList<String>(Arrays.asList("hdfs_bytes_read","hdfs_bytes_written","total_launched_maps","total_launched_reduces","map_input_records","map_output_records","reduce_input_records","reduce_input_groups","reduce_output_records","slots_millis_maps","slots_millis_reduces"));
+//	   String [] algoList = {"frontierGreedy","naiveGreedy","greedy","exhaustive"};
+//	   int numIterations = 10;
+//	   int k =10;
+//	   String aggFunc="SUM";
+//	   experiment_name="../ipynb/dashboards/json/"+"baseline";
+//	   //Debugging Exhaustive
+//	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("has_list_sum_range_fn","has_corr_list_fn","has_prof_clicks_tbl","has_est_distinct","has_list_sum_fn","has_impressions_tbl","is_profile_query","has_prof_engagement_events_tbl"));
 //	   exp = new Experiment("turn", "has_prof_clicks_tbl", "hdfs_bytes_written",groupby,"SUM", k, "frontierGreedy", new Euclidean(),0,0.8);
 //	   long duration = exp.timedRunOutput();
 //	   System.out.println("Duration:"+duration);
@@ -118,24 +118,25 @@ public class Experiment {
 //	   System.out.println("Duration:"+duration);
 //	   exp.algo.printMaxSubgraphSummary();
 	   
-	   groupby = new ArrayList<String>(Arrays.asList( "is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
-			   	"has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
-	   exp = new Experiment("turn", "has_list_fn", "slots_millis_reduces",groupby,"SUM", 30, "frontierGreedy", new Euclidean(),0,0.1);
-	   exp.runOutput();
-//	   int[] array = new int[exp.lattice.nodeList.size()];
-	   ArrayList<Integer> list = new ArrayList<Integer>();
-	   for (int i =0;i<50;i=i+2)
-	   {
-		   list.add(i);
-	   }
-	   VizOutput.dumpGenerateNodeDicFromNoHierarchia(99, exp.lattice,list); 
-//	   VizOutput.dumpGenerateNodeDicFromNoHierarchia(99, exp.lattice,exp.lattice.maxSubgraph);
-	   System.out.println(exp.lattice.id2IDMap.get("#has_clicks_tbl$1#"));
-	   System.out.println(exp.lattice.nodeList.get(exp.lattice.id2IDMap.get("#has_clicks_tbl$1#")).get_child_list());
-	   for (int i: exp.lattice.nodeList.get(exp.lattice.id2IDMap.get("#has_clicks_tbl$1#")).get_child_list()) {
-		   System.out.println(exp.lattice.nodeList.get(i).get_id());
-	   }
+//	   groupby = new ArrayList<String>(Arrays.asList( "is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
+//			   	"has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
+//	   exp = new Experiment("turn", "has_list_fn", "slots_millis_reduces",groupby,"SUM", 30, "frontierGreedy", new Euclidean(),0,0.1);
+//	   exp.runOutput();
+////	   int[] array = new int[exp.lattice.nodeList.size()];
+//	   ArrayList<Integer> list = new ArrayList<Integer>();
+//	   for (int i =0;i<50;i=i+2)
+//	   {
+//		   list.add(i);
+//	   }
+//	   VizOutput.dumpGenerateNodeDicFromNoHierarchia(99, exp.lattice,list); 
+////	   VizOutput.dumpGenerateNodeDicFromNoHierarchia(99, exp.lattice,exp.lattice.maxSubgraph);
+//	   System.out.println(exp.lattice.id2IDMap.get("#has_clicks_tbl$1#"));
+//	   System.out.println(exp.lattice.nodeList.get(exp.lattice.id2IDMap.get("#has_clicks_tbl$1#")).get_child_list());
+//	   for (int i: exp.lattice.nodeList.get(exp.lattice.id2IDMap.get("#has_clicks_tbl$1#")).get_child_list()) {
+//		   System.out.println(exp.lattice.nodeList.get(i).get_id());
+//	   }
 	   /*
+	   // Baseline experiment
 	   PrintWriter writer = new PrintWriter("output.csv", "UTF-8");
 	   writer.println("xAxis,yAxis,algo,groupby,total_time,total_utility");
 	   for (int i=0;i<numIterations;i++) {
@@ -154,7 +155,9 @@ public class Experiment {
 	   }
 	   writer.close();
 	   */
-	   /*
+	   
+	   // Generating all possible outputs for frontend to use
+	   Experiment exp;
 	   Distance [] distList = {new KLDivergence(),new MaxDiff(),new EarthMover(),new Euclidean()};
        String [] algoList = {"frontierGreedy","naiveGreedy","greedy"};
        experiment_name="../ipynb/dashboards/json/"+"vary_all";
@@ -166,8 +169,8 @@ public class Experiment {
 	    	   	   for (double ip: ip_vals) {
 	    	   		   for (double ic: ic_vals) {
 	    	   			   for (int k : k_vals) {
-	    	   				   try {
-		    	   				   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("type","cap_shape", "cap_surface" , "cap_color" , "bruises" , "odor"));
+//	    	   				   try {
+		    	   				   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("survived","sexcode","pc_class"));
 		    	   				   exp = new Experiment("titanic", "survived", "id",groupby, "COUNT", k, algo, dist,ic,ip);
 						    	   exp.runOutput();
 						    	   groupby = new ArrayList<String>(Arrays.asList( "is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
@@ -179,15 +182,16 @@ public class Experiment {
 						    	   exp.runOutput();
 						    	   exp = new Experiment("mushroom","cap_surface","cap_surface",groupby, "COUNT", k, algo, dist,ic,ip);
 						    	   exp.runOutput();
-	    	   				   }catch (Exception e){
-	    	   					   System.out.println("Failed at:"+k+","+ic+","+ip+","+algo);
-	    	   				   }
+//	    	   				   }
+//	    	   				   catch (Exception e){
+//	    	   					   System.out.println("Failed at:"+k+","+ic+","+ip+","+algo);
+//	    	   				   }
 	    	   			   }
 	    	   		   }
 	    	   	   }
 	       }
        }
-       */
+       
        
        /*
 		// Testing different algo on different datasets

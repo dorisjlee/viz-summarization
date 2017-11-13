@@ -31,12 +31,9 @@ public class VizOutput {
 			  {'childrenIndex': [], 'filter': 'Gender = F', 'yName': '% of vote'}]}
 		*/
 		ArrayList<String> xAttr = h.uniqueAttributeKeyVals.get(h.xAxis);
-		System.out.println(h.xAxis);
-		System.out.println(xAttr);
 		String nodeDic = "{";
 		for (int i=0; i<selectedNodes.size();i++) {
 			int selectedNodeID = selectedNodes.get(i);
-			//System.out.println("i="+i+",nodeID:"+selectedNodeID);
 			nodeDic+= "\\\""+(selectedNodeID)+"\\\": [";
 			Node selectedNode = lattice.nodeList.get(selectedNodeID);
 			ArrayList<Double> nodeVal = lattice.id2MetricMap.get(selectedNode.id);
@@ -61,7 +58,6 @@ public class VizOutput {
 		String nodeDic = "{";
 		for (int i=0; i<selectedNodes.size();i++) {
 			int selectedNodeID = selectedNodes.get(i);
-			System.out.println("i="+i+",nodeID:"+selectedNodeID);
 			nodeDic+= "\\\""+(selectedNodeID)+"\\\": [";
 			Node selectedNode = lattice.nodeList.get(selectedNodeID);
 			ArrayList<Double> nodeVal = lattice.id2MetricMap.get(selectedNode.id);
@@ -110,30 +106,10 @@ public class VizOutput {
        String algo = tr.getAlgoName().toLowerCase().replace(" ","");
 	   String fname = datasetName+"_"+xAxisName+"_"+algo+"_"+distName+"_ic"+iceberg_ratio+"_ip"+informative_critera+"_k"+k+".json"; 
 	   /////////////////////////////
-	   //Hierarchia h = new Hierarchia("titanic","survived");
-	   //Hierarchia h = new Hierarchia("turn","has_list_fn");
-	   //Hierarchia h = new Hierarchia("mushroom","type");
-	   //Hierarchia h = new Hierarchia("mushroom","cap_surface");
-       //tr.greedyPicking(20);
-       //tr.greedyPicking(20);
+	   
        tr.pickVisualizations(k);
        VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h,yAxisName);
        String nodeDic = vo.generateNodeDic();
-       //dumpString2File("../ipynb/dashboards/json/"+fname, nodeDic);
-       
-//       System.out.println(lattice.id2IDMap.get("#has_clicks_tbl$1#has_distinct$1#"));
-       System.out.println(lattice.id2IDMap.get("#is_profile_query$0#"));
-//       System.out.println(lattice.nodeList.get(lattice.id2IDMap.get("#is_profile_query$1#")+1).get_id());
-//       System.out.println(lattice.nodeList.get(lattice.id2IDMap.get("#is_profile_query$1#")-1).get_id());
-	   System.out.println(lattice.nodeList.get(lattice.id2IDMap.get("#is_profile_query$0#")).get_child_list());
-	   for (int i: lattice.nodeList.get(lattice.id2IDMap.get("#is_profile_query$0#")).get_child_list()) {
-		   System.out.println(lattice.nodeList.get(i).get_id());
-	   }
-       dumpString2File("test.json", nodeDic);
-//       System.out.println("nodeDic:"+nodeDic);
-//       System.out.println("LatticeDic:"+vo.generateLatticeDic());
-//       System.out.println(h.uniqueAttributeKeyVals.keySet());
-//       System.out.println(h.uniqueAttributeKeyVals.values());
-//       System.out.println(h.uniqueAttributeKeyVals.size());
+       dumpString2File("../ipynb/dashboards/json/"+fname, nodeDic);
     }
 }
