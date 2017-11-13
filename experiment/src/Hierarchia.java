@@ -8,7 +8,7 @@ import org.w3c.dom.NodeList;
 
 public class Hierarchia 
 {
-	private static String datasetName;
+	public static String datasetName;
 	public static Database db;
 	public static ArrayList<String> attribute_names;
 	public static HashMap<String, ArrayList<String>> uniqueAttributeKeyVals;

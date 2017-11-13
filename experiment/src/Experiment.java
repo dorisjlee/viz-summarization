@@ -20,35 +20,38 @@ public class Experiment {
 	String distName;
 	double iceberg_ratio;// [ic] % of root population size to keep as a node
 	double informative_critera; //[ip] % closeness to minDist to be regarded as informative parent
-	Lattice lattice;
-	Hierarchia h;
+	private Lattice lattice;
+	private Hierarchia h;
 	Traversal algo;
 	String fname;
 	int nbars;
 	private ArrayList<String> groupby;
 	private String aggFunc;
 	public static String experiment_name="../ipynb/dashboards/json/"+"vary_dataset_ip";
-	public Experiment(String datasetName, String xAxisName, String yAxisName, ArrayList<String> groupby, String aggFunc, int k, String algoName, Distance dist,
-			double iceberg_ratio, double informative_critera) throws SQLException, FileNotFoundException, UnsupportedEncodingException {
+	public Experiment(String datasetName, String xAxisName, String yAxisName, ArrayList<String> groupby,  String aggFunc,Distance dist, double iceberg_ratio, double informative_critera) throws SQLException, FileNotFoundException, UnsupportedEncodingException {
 		super();
 		this.datasetName = datasetName;
 		this.xAxisName = xAxisName;
 		this.yAxisName = yAxisName;
 		this.groupby = groupby;
 		this.aggFunc = aggFunc.toUpperCase();
-		this.k = k;
-		this.algoName = algoName;
-		this.dist = dist;
 		this.iceberg_ratio = iceberg_ratio;
 		this.informative_critera = informative_critera;
+		this.dist = dist;
 		this.distName = dist.getDistName();
 		this.h = new Hierarchia(datasetName,xAxisName);
+		System.out.println("init h:"+this.h.datasetName);
 		this.h.setAttribute_names(this.groupby);
 		// Generate base table via group-by
 		ResultSet rs = Database.viz_query(this.datasetName, this.groupby, this.yAxisName, this.aggFunc, new ArrayList<String>(Arrays.asList()));
 		Database.resultSet2csv(rs,this.datasetName,this.groupby,this.aggFunc+"("+this.yAxisName+")");
 		this.lattice = Hierarchia.generateFullyMaterializedLattice(dist,iceberg_ratio,informative_critera);
 		this.nbars = lattice.id2MetricMap.get("#").size();
+		
+	}
+	public void initializeExperimentParam(int k, String algoName ) {
+		this.k = k;
+		this.algoName = algoName;
 		if (this.algoName.equals("frontierGreedy")) {
 			this.algo = new FrontierGreedyPicking(lattice,dist);   
 		}else if (this.algoName.equals("greedy")) {
@@ -68,20 +71,23 @@ public class Experiment {
 			this.fname = datasetName+"_"+xAxisName.replace("_","-")+"_"+algoName+"_"+distName+"_ic"+iceberg_ratio+"_ip"+informative_critera+"_k"+k+".json";
 		}
 	}
-	public void runOutput() throws SQLException {
-		h.db.c.close();
+	public void runOutput( int k, String algoName) throws SQLException {
+		initializeExperimentParam(k, algoName);
+		this.h.db.c.close(); 
+		System.out.println(this.h.datasetName);
 		algo.pickVisualizations(k);
-		VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h, yAxisName);
+		VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, this.h, yAxisName);
         String nodeDic = vo.generateNodeDic();
         VizOutput.dumpString2File(fname, nodeDic);
 	}
 	
-	public long timedRunOutput() throws SQLException {
-		h.db.c.close();
+	public long timedRunOutput(int k, String algoName) throws SQLException {
+		initializeExperimentParam(k, algoName);
+		this.h.db.c.close();
 		long startTime = System.nanoTime();
 		algo.pickVisualizations(k);
 		long endTime = System.nanoTime();
-		VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h, yAxisName);
+		VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, this.h, yAxisName);
         String nodeDic = vo.generateNodeDic();
         VizOutput.dumpString2File(fname, nodeDic);
         long duration = (endTime - startTime);
@@ -92,18 +98,22 @@ public class Experiment {
 	    Collections.shuffle(copy);
 	    return new ArrayList<String>(copy.subList(0, n));
 	}
+<<<<<<< HEAD
+	public Hierarchia getH() {
+		return h;
+=======
 	public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
 	{
-//	   Experiment exp;
-//	   ArrayList<String> all_dimensions = new ArrayList<String>(Arrays.asList("is_successful","is_multi_query","is_profile_query","is_event_query","has_impressions_tbl","has_clicks_tbl","has_actions_tbl","has_rtbids_tbl","has_engagement_evnets_tbl","has_viewability_tbl","has_prof_impressions_tbl","has_prof_clicks_tbl","has_prof_actions_tbl","has_prof_rtbids_tbl","has_prof_engagement_events_tbl","has_prof_data_tbl","has_prof_provider_user_ids_tbl","has_prof_container_tags_tbl","has_prof_segments_tbl","has_prof_viewability_tbl","has_distinct","has_count_distinct","has_sum_distinct","has_est_distinct","has_list_fn","has_corr_list_fn","has_list_has_fn","has_list_count_fn","has_list_sum_fn","has_list_min_fn","has_list_max_fn","has_list_sum_range_fn","has_list_max_range_fn","has_list_min_range_fn","has_where_clause","has_having_clause","has_order_by_clause"));
-//	   ArrayList<String> all_measures = new ArrayList<String>(Arrays.asList("hdfs_bytes_read","hdfs_bytes_written","total_launched_maps","total_launched_reduces","map_input_records","map_output_records","reduce_input_records","reduce_input_groups","reduce_output_records","slots_millis_maps","slots_millis_reduces"));
-//	   String [] algoList = {"frontierGreedy","naiveGreedy","greedy","exhaustive"};
-//	   int numIterations = 10;
-//	   int k =10;
-//	   String aggFunc="SUM";
-//	   experiment_name="../ipynb/dashboards/json/"+"baseline";
-//	   //Debugging Exhaustive
-//	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("has_list_sum_range_fn","has_corr_list_fn","has_prof_clicks_tbl","has_est_distinct","has_list_sum_fn","has_impressions_tbl","is_profile_query","has_prof_engagement_events_tbl"));
+	   Experiment exp;
+	   ArrayList<String> all_dimensions = new ArrayList<String>(Arrays.asList("is_successful","is_multi_query","is_profile_query","is_event_query","has_impressions_tbl","has_clicks_tbl","has_actions_tbl","has_rtbids_tbl","has_engagement_evnets_tbl","has_viewability_tbl","has_prof_impressions_tbl","has_prof_clicks_tbl","has_prof_actions_tbl","has_prof_rtbids_tbl","has_prof_engagement_events_tbl","has_prof_data_tbl","has_prof_provider_user_ids_tbl","has_prof_container_tags_tbl","has_prof_segments_tbl","has_prof_viewability_tbl","has_distinct","has_count_distinct","has_sum_distinct","has_est_distinct","has_list_fn","has_corr_list_fn","has_list_has_fn","has_list_count_fn","has_list_sum_fn","has_list_min_fn","has_list_max_fn","has_list_sum_range_fn","has_list_max_range_fn","has_list_min_range_fn","has_where_clause","has_having_clause","has_order_by_clause"));
+	   ArrayList<String> all_measures = new ArrayList<String>(Arrays.asList("hdfs_bytes_read","hdfs_bytes_written","total_launched_maps","total_launched_reduces","map_input_records","map_output_records","reduce_input_records","reduce_input_groups","reduce_output_records","slots_millis_maps","slots_millis_reduces"));
+	   String [] algoList = {"frontierGreedy","naiveGreedy","greedy","exhaustive"};
+	   int numIterations = 10;
+	   int k =10;
+	   String aggFunc="SUM";
+	   experiment_name="../ipynb/dashboards/json/"+"baseline";
+	   //Debugging Exhaustive
+	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("has_list_sum_range_fn","has_corr_list_fn","has_prof_clicks_tbl","has_est_distinct","has_list_sum_fn","has_impressions_tbl","is_profile_query","has_prof_engagement_events_tbl"));
 //	   exp = new Experiment("turn", "has_prof_clicks_tbl", "hdfs_bytes_written",groupby,"SUM", k, "frontierGreedy", new Euclidean(),0,0.8);
 //	   long duration = exp.timedRunOutput();
 //	   System.out.println("Duration:"+duration);
@@ -118,25 +128,24 @@ public class Experiment {
 //	   System.out.println("Duration:"+duration);
 //	   exp.algo.printMaxSubgraphSummary();
 	   
-//	   groupby = new ArrayList<String>(Arrays.asList( "is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
-//			   	"has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
-//	   exp = new Experiment("turn", "has_list_fn", "slots_millis_reduces",groupby,"SUM", 30, "frontierGreedy", new Euclidean(),0,0.1);
-//	   exp.runOutput();
-////	   int[] array = new int[exp.lattice.nodeList.size()];
-//	   ArrayList<Integer> list = new ArrayList<Integer>();
-//	   for (int i =0;i<50;i=i+2)
-//	   {
-//		   list.add(i);
-//	   }
-//	   VizOutput.dumpGenerateNodeDicFromNoHierarchia(99, exp.lattice,list); 
-////	   VizOutput.dumpGenerateNodeDicFromNoHierarchia(99, exp.lattice,exp.lattice.maxSubgraph);
-//	   System.out.println(exp.lattice.id2IDMap.get("#has_clicks_tbl$1#"));
-//	   System.out.println(exp.lattice.nodeList.get(exp.lattice.id2IDMap.get("#has_clicks_tbl$1#")).get_child_list());
-//	   for (int i: exp.lattice.nodeList.get(exp.lattice.id2IDMap.get("#has_clicks_tbl$1#")).get_child_list()) {
-//		   System.out.println(exp.lattice.nodeList.get(i).get_id());
-//	   }
+	   groupby = new ArrayList<String>(Arrays.asList( "is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
+			   	"has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
+	   exp = new Experiment("turn", "has_list_fn", "slots_millis_reduces",groupby,"SUM", 30, "frontierGreedy", new Euclidean(),0,0.1);
+	   exp.runOutput();
+//	   int[] array = new int[exp.lattice.nodeList.size()];
+	   ArrayList<Integer> list = new ArrayList<Integer>();
+	   for (int i =0;i<50;i=i+2)
+	   {
+		   list.add(i);
+	   }
+	   VizOutput.dumpGenerateNodeDicFromNoHierarchia(99, exp.lattice,list); 
+//	   VizOutput.dumpGenerateNodeDicFromNoHierarchia(99, exp.lattice,exp.lattice.maxSubgraph);
+	   System.out.println(exp.lattice.id2IDMap.get("#has_clicks_tbl$1#"));
+	   System.out.println(exp.lattice.nodeList.get(exp.lattice.id2IDMap.get("#has_clicks_tbl$1#")).get_child_list());
+	   for (int i: exp.lattice.nodeList.get(exp.lattice.id2IDMap.get("#has_clicks_tbl$1#")).get_child_list()) {
+		   System.out.println(exp.lattice.nodeList.get(i).get_id());
+	   }
 	   /*
-	   // Baseline experiment
 	   PrintWriter writer = new PrintWriter("output.csv", "UTF-8");
 	   writer.println("xAxis,yAxis,algo,groupby,total_time,total_utility");
 	   for (int i=0;i<numIterations;i++) {
@@ -155,9 +164,7 @@ public class Experiment {
 	   }
 	   writer.close();
 	   */
-	   
-	   // Generating all possible outputs for frontend to use
-	   Experiment exp;
+	   /*
 	   Distance [] distList = {new KLDivergence(),new MaxDiff(),new EarthMover(),new Euclidean()};
        String [] algoList = {"frontierGreedy","naiveGreedy","greedy"};
        experiment_name="../ipynb/dashboards/json/"+"vary_all";
@@ -169,8 +176,8 @@ public class Experiment {
 	    	   	   for (double ip: ip_vals) {
 	    	   		   for (double ic: ic_vals) {
 	    	   			   for (int k : k_vals) {
-//	    	   				   try {
-		    	   				   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("survived","sexcode","pc_class"));
+	    	   				   try {
+		    	   				   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("type","cap_shape", "cap_surface" , "cap_color" , "bruises" , "odor"));
 		    	   				   exp = new Experiment("titanic", "survived", "id",groupby, "COUNT", k, algo, dist,ic,ip);
 						    	   exp.runOutput();
 						    	   groupby = new ArrayList<String>(Arrays.asList( "is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
@@ -182,16 +189,15 @@ public class Experiment {
 						    	   exp.runOutput();
 						    	   exp = new Experiment("mushroom","cap_surface","cap_surface",groupby, "COUNT", k, algo, dist,ic,ip);
 						    	   exp.runOutput();
-//	    	   				   }
-//	    	   				   catch (Exception e){
-//	    	   					   System.out.println("Failed at:"+k+","+ic+","+ip+","+algo);
-//	    	   				   }
+	    	   				   }catch (Exception e){
+	    	   					   System.out.println("Failed at:"+k+","+ic+","+ip+","+algo);
+	    	   				   }
 	    	   			   }
 	    	   		   }
 	    	   	   }
 	       }
        }
-       
+       */
        
        /*
 		// Testing different algo on different datasets
@@ -212,5 +218,10 @@ public class Experiment {
        }
 	   */	   
 	   
+>>>>>>> parent of 4e3a451... working experiment version now, modifying st initialize experiment is not reran every time, for every dataset.
 	}
+	public void setH(Hierarchia h) {
+		this.h = h;
+	}
+
 }
