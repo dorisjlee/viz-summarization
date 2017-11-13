@@ -102,9 +102,44 @@ public class Experiment {
 	   int k =10;
 	   String aggFunc="SUM";
 	   experiment_name="../ipynb/dashboards/json/"+"baseline";
+	   //Debugging Exhaustive
+	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("has_list_sum_range_fn","has_corr_list_fn","has_prof_clicks_tbl","has_est_distinct","has_list_sum_fn","has_impressions_tbl","is_profile_query","has_prof_engagement_events_tbl"));
+//	   exp = new Experiment("turn", "has_prof_clicks_tbl", "hdfs_bytes_written",groupby,"SUM", k, "frontierGreedy", new Euclidean(),0,0.8);
+//	   long duration = exp.timedRunOutput();
+//	   System.out.println("Duration:"+duration);
+//	   exp.algo.printMaxSubgraphSummary();
+//	   exp = new Experiment("turn", "has_prof_clicks_tbl", "hdfs_bytes_written",groupby,"SUM", k, "greedy", new Euclidean(),0,0.8);
+//	   duration = exp.timedRunOutput();
+//	   System.out.println("Duration:"+duration);
+//	   exp.algo.printMaxSubgraphSummary();
+//	   
+//	   exp = new Experiment("turn", "has_prof_clicks_tbl", "hdfs_bytes_written",groupby,"SUM", k, "exhaustive", new Euclidean(),0,0.8);
+//	   long duration = exp.timedRunOutput();
+//	   System.out.println("Duration:"+duration);
+//	   exp.algo.printMaxSubgraphSummary();
+	   
+	   groupby = new ArrayList<String>(Arrays.asList( "is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
+			   	"has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
+	   exp = new Experiment("turn", "has_list_fn", "slots_millis_reduces",groupby,"SUM", 30, "frontierGreedy", new Euclidean(),0,0.1);
+	   exp.runOutput();
+//	   int[] array = new int[exp.lattice.nodeList.size()];
+	   ArrayList<Integer> list = new ArrayList<Integer>();
+	   for (int i =0;i<50;i=i+2)
+	   {
+		   list.add(i);
+	   }
+	   VizOutput.dumpGenerateNodeDicFromNoHierarchia(99, exp.lattice,list); 
+//	   VizOutput.dumpGenerateNodeDicFromNoHierarchia(99, exp.lattice,exp.lattice.maxSubgraph);
+	   System.out.println(exp.lattice.id2IDMap.get("#has_clicks_tbl$1#"));
+	   System.out.println(exp.lattice.nodeList.get(exp.lattice.id2IDMap.get("#has_clicks_tbl$1#")).get_child_list());
+	   for (int i: exp.lattice.nodeList.get(exp.lattice.id2IDMap.get("#has_clicks_tbl$1#")).get_child_list()) {
+		   System.out.println(exp.lattice.nodeList.get(i).get_id());
+	   }
+	   /*
 	   PrintWriter writer = new PrintWriter("output.csv", "UTF-8");
 	   writer.println("xAxis,yAxis,algo,groupby,total_time,total_utility");
 	   for (int i=0;i<numIterations;i++) {
+		   System.out.println("---------------- Iteration #"+i+"----------------");
 		   // We are picking 8 random dimensions in the groupby and one random measure value, since 35C5 combinations is too much, we are just picking random samples of potential dashboards in our experiments.
 		   ArrayList<String> groupby = pickNRandom(all_dimensions, 8);
 		   String yAxis = all_measures.get(new Random().nextInt(all_measures.size()));
@@ -118,6 +153,7 @@ public class Experiment {
 		   }
 	   }
 	   writer.close();
+	   */
 	   /*
 	   Distance [] distList = {new KLDivergence(),new MaxDiff(),new EarthMover(),new Euclidean()};
        String [] algoList = {"frontierGreedy","naiveGreedy","greedy"};

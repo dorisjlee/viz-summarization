@@ -69,16 +69,22 @@ public class ExhaustivePicking extends Traversal{
 				//System.out.println("G:"+G);
 				ArrayList<Integer> newG =  (ArrayList<Integer>) Stream.concat(G.stream(), child_combo.stream())
                         						.collect(Collectors.toList());
+				double totalUtility =0;
+				if (newG.size()==k) {
+					totalUtility=computeSubGraphUtility(newG);
+					VizOutput.dumpGenerateNodeDicFromNoHierarchia(i, lattice, newG);
+					/*if (newG.get(1)==14) {
+						System.out.println("newG:"+newG+":"+totalUtility);
+					}*/
+				}
 				//System.out.println("newG:"+newG);
 				//System.out.println("newG.size():"+newG.size());
 				for (int childID: child_combo) {
 					int childIdx = pivot.get_child_list().indexOf(childID);
 					Node childNode  = lattice.nodeList.get(childID);
-					double totalUtility=computeSubGraphUtility(newG);
 					if (newG.size()<k) {
 						pickChildren(k,newG, childNode);
 					}else {
-						//System.out.println("newG:"+newG+":"+totalUtility);
 						//System.out.println("newG.size():"+newG.size());
 						if (totalUtility>lattice.maxSubgraphUtility) {
 							//System.out.println("newG:"+newG);
@@ -136,19 +142,18 @@ public class ExhaustivePicking extends Traversal{
         combination(pivot_children, r);
         */
     		Euclidean ed = new Euclidean();
-    		//Hierarchia h = new Hierarchia("mushroom","cap_surface");
+    		Hierarchia h = new Hierarchia("mushroom","cap_surface");
     		//Hierarchia h = new Hierarchia("turn","has_list_fn");
-    		Hierarchia h = new Hierarchia("titanic","survived");
+    		//Hierarchia h = new Hierarchia("titanic","survived");
     		Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
         Traversal tr; 
         tr = new ExhaustivePicking(lattice,new Euclidean());
-        tr.pickVisualizations(5);
+        tr.pickVisualizations(8);
         
         tr = new GreedyPicking(lattice,new Euclidean());
-        tr.pickVisualizations(5);
-        
+        tr.pickVisualizations(8);
         
         tr = new FrontierGreedyPicking(lattice,new Euclidean());
-        tr.pickVisualizations(5);
+        tr.pickVisualizations(8);
     }
 }
