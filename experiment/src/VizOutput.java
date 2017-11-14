@@ -61,7 +61,7 @@ public class VizOutput {
 		String nodeDic = "{";
 		for (int i=0; i<selectedNodes.size();i++) {
 			int selectedNodeID = selectedNodes.get(i);
-			System.out.println("i="+i+",nodeID:"+selectedNodeID);
+			//System.out.println("i="+i+",nodeID:"+selectedNodeID);
 			nodeDic+= "\\\""+(selectedNodeID)+"\\\": [";
 			Node selectedNode = lattice.nodeList.get(selectedNodeID);
 			ArrayList<Double> nodeVal = lattice.id2MetricMap.get(selectedNode.id);
