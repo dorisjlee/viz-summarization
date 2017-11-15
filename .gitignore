@@ -1,5 +1,6 @@
 *.csv
 *.pyc
+*.pdf
 ipynb/.ipynb_checkpoints/
 *.zip
 /bin/
