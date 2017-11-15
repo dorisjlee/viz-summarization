@@ -1,3 +1,4 @@
+package algorithms;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -5,6 +6,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
+
+import distance.Distance;
+import distance.Euclidean;
+import lattice.Hierarchia;
+import lattice.Lattice;
+import lattice.Node;
+import lattice.Tuple;
 
 /**
  * In each iteration we pick a node with the highest utility from a set of "frontier" nodes.
@@ -148,7 +156,7 @@ public class ProbablisticPicking extends Traversal{
 		for(int childId : currentNode.child_list)
 		{
 			if(!currentMaxSubgraph.containsKey(childId)) continue;
-			Double newUtility = super.calculateDistance(nodeId, childId);
+			Double newUtility = Traversal.calculateDistance(nodeId, childId,lattice, metric);
 			Float currentUtility = currentMaxSubgraph.get(childId);
 			currentMaxSubgraph.put(childId, (float) Math.max(currentUtility, newUtility));
 		}	
@@ -167,7 +175,7 @@ public class ProbablisticPicking extends Traversal{
 		for(Integer childId : lattice.nodeList.get(parentNodeId).get_child_list())
 		{	
 			if(lattice.maxSubgraph.contains(childId)) continue;
-			double utility = super.calculateDistance(parentNodeId, childId);
+			double utility = Traversal.calculateDistance(parentNodeId, childId, lattice, metric);
 			if(currentFrontier.containsKey(childId))
 				currentFrontier.put(childId, (float) Math.max(currentFrontier.get(childId), utility));
 			else
@@ -259,7 +267,7 @@ public class ProbablisticPicking extends Traversal{
 				Node possibleParentNode = lattice.nodeList.get(possibleParentId);
 				if(possibleParentNode.child_list.contains(childId))
 				{
-					double dist = super.calculateDistance(possibleParentId, childId);
+					double dist = Traversal.calculateDistance(possibleParentId, childId, lattice, metric);
 					otherParents.put(possibleParentId, (float) dist);
 				}
 			}

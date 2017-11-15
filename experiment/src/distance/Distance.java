@@ -1,3 +1,4 @@
+package distance;
 public interface Distance {
 	public String getDistName();
 	public void setDistName(String distName);

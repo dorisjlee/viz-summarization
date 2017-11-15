@@ -1,6 +1,13 @@
+package lattice;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import algorithms.BreadthFirstPicking;
+import algorithms.Traversal;
+import distance.Distance;
+import distance.Euclidean;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

@@ -1,4 +1,8 @@
+package algorithms;
 import java.util.ArrayList;
+
+import distance.Distance;
+import lattice.Lattice;
 
 /**
  * Looping through all children of current node (over all node in nodeList)

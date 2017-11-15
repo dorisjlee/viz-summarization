@@ -1,7 +1,12 @@
+package algorithms;
 
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import distance.Distance;
+import lattice.Lattice;
+import lattice.Node;
 
 /**
  * Naive recursive level-wise picking strategy that picks one best node at each level.

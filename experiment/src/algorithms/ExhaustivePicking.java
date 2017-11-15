@@ -1,3 +1,4 @@
+package algorithms;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,6 +7,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import distance.Distance;
+import distance.Euclidean;
+import lattice.Hierarchia;
+import lattice.Lattice;
+import lattice.Node;
 
 /**
  * 

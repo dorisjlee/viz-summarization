@@ -1,3 +1,4 @@
+package lattice;
 public class Tuple {
 	public Integer x;
 	public Float y;

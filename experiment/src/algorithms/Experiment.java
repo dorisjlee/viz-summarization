@@ -1,3 +1,4 @@
+package algorithms;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -9,6 +10,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;
+
+import distance.Distance;
+import distance.Euclidean;
+import lattice.Database;
+import lattice.Hierarchia;
+import lattice.Lattice;
+import lattice.VizOutput;
 
 public class Experiment {
 	String datasetName;

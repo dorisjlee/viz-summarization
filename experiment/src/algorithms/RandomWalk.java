@@ -1,6 +1,12 @@
+package algorithms;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
+
+import distance.Distance;
+import distance.Euclidean;
+import lattice.Hierarchia;
+import lattice.Lattice;
 
 /**
  * Randomly picking children of the current nodes in dashboard (if not already present)

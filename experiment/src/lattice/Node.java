@@ -1,3 +1,4 @@
+package lattice;
 /*
  * @author Himel
  */
@@ -5,9 +6,9 @@ import java.util.*;
 
 public class Node 
 {
-    String id;
-    ArrayList<Integer> child_list; // List of node IDs of the children
-    ArrayList<Double> dist_list; // edge weights (distance) of this node to all the children
+    public String id;
+    public ArrayList<Integer> child_list; // List of node IDs of the children
+    public ArrayList<Double> dist_list; // edge weights (distance) of this node to all the children
     ArrayList<String> merged_nodes_keys;
     long population_size;
     
@@ -31,23 +32,23 @@ public class Node
         child_list = new ArrayList<>();
         dist_list = new ArrayList<>();
     }
-    void set_child_list(ArrayList<Integer> child_list)
+	public void set_child_list(ArrayList<Integer> child_list)
     {
         this.child_list = new ArrayList<>(child_list);
     }
-    void set_dist_list(ArrayList<Double> dist_list)
+    public void set_dist_list(ArrayList<Double> dist_list)
     {
         this.dist_list = new ArrayList<>(dist_list);
     }
-    String get_id()
+    public String get_id()
     {
         return id;
     }
-    ArrayList<Integer> get_child_list()
+    public ArrayList<Integer> get_child_list()
     {
         return child_list;
     }  
-    ArrayList<Double> get_dist_list()
+    public ArrayList<Double> get_dist_list()
     {
         return dist_list;
     } 

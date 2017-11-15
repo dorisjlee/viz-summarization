@@ -1,3 +1,4 @@
+package algorithms;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -5,6 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+
+import distance.Distance;
+import lattice.Lattice;
 
 /**
  * Randomly picking children of the current nodes in dashboard (if not already present)

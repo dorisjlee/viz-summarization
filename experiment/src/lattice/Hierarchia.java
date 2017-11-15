@@ -1,3 +1,4 @@
+package lattice;
 /*
  * @author himeldev
  */
@@ -5,6 +6,10 @@ import java.io.*;
 import java.sql.SQLException;
 import java.util.*;
 import org.w3c.dom.NodeList;
+
+import algorithms.Traversal;
+import distance.Distance;
+import distance.Euclidean;
 
 public class Hierarchia 
 {

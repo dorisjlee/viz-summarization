@@ -1,3 +1,4 @@
+package distance;
 public class EarthMover implements Distance{
 	private double emd;
 	String distName = "emd";

@@ -1,12 +1,13 @@
+package lattice;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Lattice {
-	ArrayList<Integer> maxSubgraph;
-	double maxSubgraphUtility;
-	HashMap<String, ArrayList<Double>>  id2MetricMap;
-	ArrayList<Node> nodeList;
-	HashMap<String, Integer> id2IDMap;
+	public ArrayList<Integer> maxSubgraph;
+	public double maxSubgraphUtility;
+	public HashMap<String, ArrayList<Double>>  id2MetricMap;
+	public ArrayList<Node> nodeList;
+	public HashMap<String, Integer> id2IDMap;
 	public Lattice(HashMap<String, ArrayList<Double>> id2MetricMap,  
 			ArrayList<Node> nodeList, HashMap<String, Integer> id2IDMap) {
 		this.id2MetricMap = id2MetricMap;

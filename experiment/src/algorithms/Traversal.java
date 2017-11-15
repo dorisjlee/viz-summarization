@@ -1,3 +1,4 @@
+package algorithms;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +10,12 @@ import java.util.function.Function;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
+
+import distance.Distance;
+import distance.Euclidean;
+import lattice.Hierarchia;
+import lattice.Lattice;
+import lattice.Node;
 
 /**
  * Traversal algorithms take in a HashMap representing the materialized graph 
@@ -119,17 +126,17 @@ public abstract class Traversal {
 	/**
 	 * Calculate interestingness score between parent and child nodes
 	 */
-	public double calculateDistance(int nodeId1, int nodeId2)
+	public static double calculateDistance(int nodeId1, int nodeId2, Lattice l, Distance m)
 	{
-		Node node1 = lattice.nodeList.get(nodeId1);
-		Node node2 = lattice.nodeList.get(nodeId2);
-		double[] node1Val = ArrayList2Array(lattice.id2MetricMap.get(node1.get_id()));
-		double[] node2Val = ArrayList2Array(lattice.id2MetricMap.get(node2.get_id()));
-		double utility = metric.computeDistance(node1Val, node2Val);
+		Node node1 = l.nodeList.get(nodeId1);
+		Node node2 = l.nodeList.get(nodeId2);
+		double[] node1Val = ArrayList2Array(l.id2MetricMap.get(node1.get_id()));
+		double[] node2Val = ArrayList2Array(l.id2MetricMap.get(node2.get_id()));
+		double utility = m.computeDistance(node1Val, node2Val);
 		return utility;
 	}
 	
-	public Float sumMapByValue(HashMap<Integer,Float> map)
+	public static Float sumMapByValue(HashMap<Integer,Float> map)
 	{
 		Float sum = 0f;
 		for(Float val : map.values())
@@ -139,7 +146,7 @@ public abstract class Traversal {
 		return sum;
 	}
 	
-	public HashMap<Integer,Float> cloneMap(HashMap<Integer,Float> inputMap)
+	public static HashMap<Integer,Float> cloneMap(HashMap<Integer,Float> inputMap)
 	{
 		HashMap<Integer,Float> outputMap = new HashMap<>();
 		for(Map.Entry<Integer, Float> entry : inputMap.entrySet())

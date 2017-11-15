@@ -1,3 +1,4 @@
+package distance;
 public class KLDivergence implements Distance {
 	private double kldiv;
 	String distName = "kldiv";

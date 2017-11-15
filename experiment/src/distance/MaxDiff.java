@@ -1,3 +1,4 @@
+package distance;
 public class MaxDiff implements Distance{
 	private double mdiff;
 	String distName = "maxdiff";
