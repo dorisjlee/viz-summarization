@@ -25,6 +25,14 @@ public class Experiment {
 	Traversal algo;
 	String fname;
 	int nbars;
+	int maxCount;
+	public int getMaxCount() {
+		return maxCount;
+	}
+	public void setMaxCount(int maxCount) {
+		this.maxCount = maxCount;
+		this.algo = new MultipleRandomWalk(this.maxCount, lattice, dist);
+	}
 	private ArrayList<String> groupby;
 	private String aggFunc;
 	public static String experiment_name="../ipynb/dashboards/json/"+"vary_dataset_ip";
@@ -49,6 +57,7 @@ public class Experiment {
 		Database.resultSet2csv(rs,this.datasetName,this.groupby,this.aggFunc+"("+this.yAxisName+")");
 		this.lattice = Hierarchia.generateFullyMaterializedLattice(dist,iceberg_ratio,informative_critera);
 		this.nbars = lattice.id2MetricMap.get("#").size();
+		this.maxCount=0;
 		if (this.algoName.equals("frontierGreedy")) {
 			this.algo = new BreadthFirstPicking(lattice,dist);   
 		}else if (this.algoName.equals("greedy")) {
@@ -57,6 +66,8 @@ public class Experiment {
 			this.algo = new NaiveGreedyPicking(lattice, dist);
 		}else if (this.algoName.equals("exhaustive")) {
 			this.algo = new ExhaustivePicking(lattice, dist);
+		}else if (this.algoName.equals("multipleRandomWalk")) {
+			this.algo = new MultipleRandomWalk(this.maxCount, lattice, dist);
 		}
 		if (experiment_name!="") {
 			File directory = new File(experiment_name);
@@ -94,15 +105,10 @@ public class Experiment {
 	}
 	public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
 	{
-	   Experiment exp;
-	   ArrayList<String> all_dimensions = new ArrayList<String>(Arrays.asList("is_successful","is_multi_query","is_profile_query","is_event_query","has_impressions_tbl","has_clicks_tbl","has_actions_tbl","has_rtbids_tbl","has_engagement_evnets_tbl","has_viewability_tbl","has_prof_impressions_tbl","has_prof_clicks_tbl","has_prof_actions_tbl","has_prof_rtbids_tbl","has_prof_engagement_events_tbl","has_prof_data_tbl","has_prof_provider_user_ids_tbl","has_prof_container_tags_tbl","has_prof_segments_tbl","has_prof_viewability_tbl","has_distinct","has_count_distinct","has_sum_distinct","has_est_distinct","has_list_fn","has_corr_list_fn","has_list_has_fn","has_list_count_fn","has_list_sum_fn","has_list_min_fn","has_list_max_fn","has_list_sum_range_fn","has_list_max_range_fn","has_list_min_range_fn","has_where_clause","has_having_clause","has_order_by_clause"));
-	   ArrayList<String> all_measures = new ArrayList<String>(Arrays.asList("hdfs_bytes_read","hdfs_bytes_written","total_launched_maps","total_launched_reduces","map_input_records","map_output_records","reduce_input_records","reduce_input_groups","reduce_output_records","slots_millis_maps","slots_millis_reduces"));
-	   String [] algoList = {"frontierGreedy","naiveGreedy","greedy","exhaustive"};
-	   int numIterations = 10;
-	   int k =10;
-	   String aggFunc="SUM";
-	   experiment_name="../ipynb/dashboards/json/"+"baseline";
+
+	/*
 	   //Debugging Exhaustive
+	   
 	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("has_list_sum_range_fn","has_corr_list_fn","has_prof_clicks_tbl","has_est_distinct","has_list_sum_fn","has_impressions_tbl","is_profile_query","has_prof_engagement_events_tbl"));
 	   exp = new Experiment("turn", "has_prof_clicks_tbl", "hdfs_bytes_written",groupby,"SUM", k, "frontierGreedy", new Euclidean(),0,0.8);
 	   long duration = exp.timedRunOutput();
@@ -117,25 +123,36 @@ public class Experiment {
 	   duration = exp.timedRunOutput();
 	   System.out.println("Duration:"+duration);
 	   exp.algo.printMaxSubgraphSummary();
-	   
-//	   groupby = new ArrayList<String>(Arrays.asList( "is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
-//			   	"has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
-//	   exp = new Experiment("turn", "has_list_fn", "slots_millis_reduces",groupby,"SUM", 30, "frontierGreedy", new Euclidean(),0,0.1);
-//	   exp.runOutput();
-////	   int[] array = new int[exp.lattice.nodeList.size()];
-//	   ArrayList<Integer> list = new ArrayList<Integer>();
-//	   for (int i =0;i<50;i=i+2)
-//	   {
-//		   list.add(i);
-//	   }
-//	   VizOutput.dumpGenerateNodeDicFromNoHierarchia(99, exp.lattice,list); 
-////	   VizOutput.dumpGenerateNodeDicFromNoHierarchia(99, exp.lattice,exp.lattice.maxSubgraph);
-//	   System.out.println(exp.lattice.id2IDMap.get("#has_clicks_tbl$1#"));
-//	   System.out.println(exp.lattice.nodeList.get(exp.lattice.id2IDMap.get("#has_clicks_tbl$1#")).get_child_list());
-//	   for (int i: exp.lattice.nodeList.get(exp.lattice.id2IDMap.get("#has_clicks_tbl$1#")).get_child_list()) {
-//		   System.out.println(exp.lattice.nodeList.get(i).get_id());
-//	   }
-	   /*
+	*/
+	/*
+	   // Multiple Random Walk Experiemnt
+		PrintWriter writer = new PrintWriter("random_walk_scalability_experiment.csv", "UTF-8");
+	 	writer.println("iterations,total_time,total_utility");
+    		Euclidean ed = new Euclidean();
+    		Hierarchia h = new Hierarchia("turn","has_list_fn");
+    		ArrayList<String> groupby = new ArrayList<String>(Arrays.asList( "is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
+				   	"has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
+		Experiment exp = new Experiment("turn", "has_list_fn", "slots_millis_reduces",groupby,"SUM", 30, "multipleRandomWalk", new Euclidean(),0,0.1);
+    		int[] numIterationList= {1,10,100,1000,10000,100000,1000000};
+    		for (int iter : numIterationList) {
+    			System.out.println("numIteration:"+iter);
+    			for (int batch=0;batch<10;batch++) {
+    			    exp.setMaxCount(iter);
+    			    long duration = exp.timedRunOutput();
+    			    writer.println(iter+","+duration+","+exp.lattice.maxSubgraphUtility);
+        		}
+    		}
+    		writer.close();
+	  */ 
+
+	   Experiment exp;
+	   ArrayList<String> all_dimensions = new ArrayList<String>(Arrays.asList("is_successful","is_multi_query","is_profile_query","is_event_query","has_impressions_tbl","has_clicks_tbl","has_actions_tbl","has_rtbids_tbl","has_engagement_evnets_tbl","has_viewability_tbl","has_prof_impressions_tbl","has_prof_clicks_tbl","has_prof_actions_tbl","has_prof_rtbids_tbl","has_prof_engagement_events_tbl","has_prof_data_tbl","has_prof_provider_user_ids_tbl","has_prof_container_tags_tbl","has_prof_segments_tbl","has_prof_viewability_tbl","has_distinct","has_count_distinct","has_sum_distinct","has_est_distinct","has_list_fn","has_corr_list_fn","has_list_has_fn","has_list_count_fn","has_list_sum_fn","has_list_min_fn","has_list_max_fn","has_list_sum_range_fn","has_list_max_range_fn","has_list_min_range_fn","has_where_clause","has_having_clause","has_order_by_clause"));
+	   ArrayList<String> all_measures = new ArrayList<String>(Arrays.asList("hdfs_bytes_read","hdfs_bytes_written","total_launched_maps","total_launched_reduces","map_input_records","map_output_records","reduce_input_records","reduce_input_groups","reduce_output_records","slots_millis_maps","slots_millis_reduces"));
+	   String [] algoList = {"frontierGreedy","naiveGreedy","greedy","multipleRandomWalk"};//,"exhaustive"
+	   int numIterations = 50;
+	   int k =30;
+	   String aggFunc="SUM";
+	   experiment_name="../ipynb/dashboards/json/"+"baseline";
 	   // Baseline experiment
 	   PrintWriter writer = new PrintWriter("output.csv", "UTF-8");
 	   writer.println("xAxis,yAxis,algo,groupby,total_time,total_utility");
@@ -148,13 +165,25 @@ public class Experiment {
 		   //System.out.println(groupby);
 		   //System.out.println(xAxis+","+yAxis);
 		   for (String algo : algoList) {
-			   exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", k, algo, new Euclidean(),0,0.8);
-			   long duration = exp.timedRunOutput();
-			   writer.println(xAxis+","+yAxis+","+algo+",\"["+Database.arr2DelimitedStrings(groupby, ",")+"\"],"+duration+","+exp.lattice.maxSubgraphUtility);
+			   try {
+				   exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", k, algo, new Euclidean(),0,0.8);
+				   if (algo.equals("multipleRandomWalk")) {
+					   for (int iterations: new  int[] {1,10,1000,10000,100000,1000000}) {
+						   exp.setMaxCount(iterations);
+						   long duration = exp.timedRunOutput();
+						   writer.println(xAxis+","+yAxis+","+algo+iterations+",\"["+Database.arr2DelimitedStrings(groupby, ",")+"\"],"+duration+","+exp.lattice.maxSubgraphUtility);
+					   }
+				   }else {
+					   long duration = exp.timedRunOutput();
+					   writer.println(xAxis+","+yAxis+","+algo+",\"["+Database.arr2DelimitedStrings(groupby, ",")+"\"],"+duration+","+exp.lattice.maxSubgraphUtility);
+				   }
+			   }catch(Exception e) {
+				   System.out.println("Failed on:"+ xAxis+","+yAxis+","+algo+",\"["+Database.arr2DelimitedStrings(groupby, ",")+"\"]");
+			   }
 		   }
 	   }
 	   writer.close();
-	   */
+	   
 	   
 	   // Generating all possible outputs for frontend to use
 //	   Experiment exp;

@@ -1,5 +1,9 @@
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -14,6 +18,7 @@ public class MultipleRandomWalk extends Traversal{
 	}
 	
 	public void pickVisualizations(Integer k) {
+	   lattice.maxSubgraphUtility=0; // reset maxSubgraphUtility when picking
 	   System.out.println("---------------- Multiple Random Walk -----------------");
 	   int count =0;
 	   
@@ -53,7 +58,7 @@ public class MultipleRandomWalk extends Traversal{
 	                   }
 	               }
 	           }
-	           Random r = new Random();
+	           Random r = new Random(System.currentTimeMillis());
 	           int myRandomNumber = 0;
 	           myRandomNumber = r.nextInt(currentFrontier.size());
 	           dashboard.add(currentFrontier.get(myRandomNumber));
@@ -68,6 +73,11 @@ public class MultipleRandomWalk extends Traversal{
 	   printMaxSubgraphSummary();
    }
 	 public static void main (String[] args) throws SQLException {
+<<<<<<< HEAD
+	 	
+    		       
+    }
+=======
 		    /*    
 		    	ArrayList<Integer> pivot_children = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5));
 			int r = 3;
@@ -88,4 +98,5 @@ public class MultipleRandomWalk extends Traversal{
 	        tr = new BreadthFirstPicking(lattice,new Euclidean());
 	        tr.pickVisualizations(8);
 	    }
+>>>>>>> f8c167426554e681f2a1fc61f7a1267852203a0a
 }
