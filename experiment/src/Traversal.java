@@ -87,10 +87,14 @@ public abstract class Traversal {
 	 */
 	protected void updateSubGraphUtility() 
 	{
-		lattice.maxSubgraphUtility = 0;
+		lattice.maxSubgraphUtility =  computeSubGraphUtility(lattice.maxSubgraph);
+	}
+	
+	public double computeSubGraphUtility(ArrayList<Integer> subgraph) {
 		
+		double maxSubgraphUtility = 0;
 		HashMap<Integer,Float> nodeID2utility = new HashMap<>();
-		for(int nodeId : lattice.maxSubgraph)
+		for(int nodeId : subgraph)
 			nodeID2utility.put(nodeId, 0f);
 		
 		for(int i : nodeID2utility.keySet())
@@ -109,9 +113,9 @@ public abstract class Traversal {
 		}
 		
 		for(int nodeId : nodeID2utility.keySet())
-			lattice.maxSubgraphUtility += nodeID2utility.get(nodeId);
+			maxSubgraphUtility += nodeID2utility.get(nodeId);
+		return maxSubgraphUtility;
 	}
-	
 	/**
 	 * Calculate interestingness score between parent and child nodes
 	 */

@@ -8,7 +8,7 @@ import org.w3c.dom.NodeList;
 
 public class Hierarchia 
 {
-	private static String datasetName;
+	public static String datasetName;
 	public static Database db;
 	public static ArrayList<String> attribute_names;
 	public static HashMap<String, ArrayList<String>> uniqueAttributeKeyVals;
@@ -18,6 +18,13 @@ public class Hierarchia
 		Hierarchia.xAxis=xAxis;
 		Hierarchia.db =  new Database();
 		Hierarchia.attribute_names = get_attribute_names();
+		Hierarchia.uniqueAttributeKeyVals = populateUniqueAttributeKeyVals();
+	}
+	public static ArrayList<String> getAttribute_names() {
+		return attribute_names;
+	}
+	public static void setAttribute_names(ArrayList<String> attribute_names) throws SQLException {
+		Hierarchia.attribute_names = attribute_names;
 		Hierarchia.uniqueAttributeKeyVals = populateUniqueAttributeKeyVals();
 	}
 	public static HashMap<String, ArrayList<String>> populateUniqueAttributeKeyVals() throws SQLException{
@@ -167,20 +174,22 @@ public class Hierarchia
 	                                {
 	                                    ArrayList<Double> parent_visualization_measure_values = map_id_to_metric_values.get(visualization_key);
 	                                    double dist = compute_distance(current_visualization_measure_values, parent_visualization_measure_values);
+	                                    //System.out.println("dist criteria:"+min_distance/informative_criteria);
 	                                    if(dist*informative_criteria <= min_distance)
 	                                    {
 	                                        int parent_index = map_id_to_index.get(visualization_key);
 	                                        
 	                                        ArrayList<Integer> child_list = node_list.get(parent_index).get_child_list();
-	                                        child_list.add(node_list.size()-1);
+	                                        if (parent_index!=node_list.size()-1) {
+	                                        		child_list.add(node_list.size()-1);
+	                                        }
 	                                        node_list.get(parent_index).set_child_list(child_list);
-	                                        
 	                                        ArrayList<Double> dist_list = node_list.get(parent_index).get_dist_list();
 	                                        dist_list.add(dist);
-	                                        node_list.get(parent_index).set_child_list(child_list);
-	                                        //System.out.print("I");
-	                                        //System.out.println("Informative parent: "+visualization_key+" -- "+map_id_to_metric_values.get(visualization_key));
-	                                    }
+	                                        //System.out.println("Informative parent: "+visualization_key+" -- "+dist);
+	                                    }/*else {
+	                                    		System.out.println("Non-informative parent:"+visualization_key+" -- "+dist);
+	                                    }*/
 	                                }
 	                            }
 	                        }
@@ -193,9 +202,11 @@ public class Hierarchia
                         System.out.print(node_list.get(x).get_id()+" ");
                     }
                     System.out.println();
+                    */
+                    /*
                     for(int x = 0; x < node_list.size(); x++)
                     {
-                        System.out.println("Node: "+node_list.get(x).get_id());
+                        System.out.println("Node"+x+": "+node_list.get(x).get_id());
                         for(int y=0; y < node_list.get(x).get_child_list().size(); y++)
                         {
                             System.out.print(node_list.get(x).get_child_list().get(y)+" ");
@@ -221,7 +232,7 @@ public class Hierarchia
             System.out.println();
         }*/
         Lattice materialized_lattice = new Lattice(map_id_to_metric_values,node_list,map_id_to_index);
-        System.out.println("------------------------------------------------ ");
+        //System.out.println("------------------------------------------------ ");
         return materialized_lattice;
     }
     static ArrayList<String> get_attribute_names()
@@ -243,7 +254,7 @@ public class Hierarchia
         }
         catch(IOException e)
         {
-            System.out.println("Error");
+            System.out.println("Error in get_attribute_names()");
             System.out.println("attribute_names:"+attribute_names);
         }
         return attribute_names;
@@ -537,8 +548,17 @@ public class Hierarchia
 //    		compute_visualization(placeholderNode, new ArrayList<String>(Arrays.asList("pc_class")), 
 //    							new ArrayList<String>(Arrays.asList("3")));
 	   Euclidean ed = new Euclidean();
- 	   Hierarchia h = new Hierarchia("mushroom","cap_color");
+ 	   //Hierarchia h = new Hierarchia("mushroom","cap_color");
+ 	   Hierarchia h = new Hierarchia("titanic","survived");
+ 	   //Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0); // Fully materialized lattice
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
+       //Pick all nodes to put in maxSubgraph
+       for (int i=0;i<lattice.nodeList.size();i++) {
+    	   		lattice.maxSubgraph.add(i);
+       }
+       VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h, "COUNT");
+       String nodeDic = vo.generateNodeDic();
+       VizOutput.dumpString2File("test.json", nodeDic);
 //       System.out.println("# of nodes before merging:"+lattice.nodeList.size());
 //       mergeNodes(lattice);
 //       System.out.println("# of nodes after merging:"+lattice.nodeList.size());

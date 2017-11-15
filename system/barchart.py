@@ -44,7 +44,8 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
 
     ax.set_xlabel(xtitle, fontsize=14)
     ax.set_ylabel(ytitle, fontsize=14)
-    title = ax.set_title(title, fontsize=12)
+    ax.set_title(title, fontsize=10)
+    # ax.set_title("test", fontsize=12)
 
     # Left vertical title
     # title.set_position((1.1,0.9))

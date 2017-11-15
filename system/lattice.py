@@ -102,42 +102,38 @@ class Lattice:
         p.write_png('graph.png')
 
     def generateNode(self, node_dic):
-        node = []
-        nodes = list(node_dic.values())
-        barcharts = []
+        nodeList = []
+        nodes = sorted(list(node_dic.keys()))
+        # Traverse in the order of keys
         for i in nodes:
+            node = node_dic[i]
             yVals = []
-            for values in i:
+            for values in node:
                 try:
                     yVals.append(values['yAxis'])
                 except KeyError:
                     pass
             xAttrs = []
-            for values in i:
+            for values in node:
                 try:
                     xAttrs.append(values['xAxis'])
                 except KeyError:
                     pass
-            barcharts.append(bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", N=1, width=0.1))
-
-        barcharts_new = []
-        for i in barcharts:
-            barcharts_new.append(base64.b64encode(i))
-
-        for i in range(len(nodes)):
-            node.append(i+1)
-            node.append(barcharts_new[i])
-        return node
+            if values["filter"]=="#":
+                filterVal="root"
+            else:
+                filterVal = str(values["filter"][1:-1].replace("#",",\n").replace("$","="))
+            svgString = bar_chart(yVals, xAttrs, xtitle="", ytitle="", title=filterVal, top_right_text="", N=1, width=0.1)
+            nodeList.append({"id": int(i), "filterVal":filterVal,"image": "data:image/svg+xml;base64," + base64.b64encode(svgString), "shape": 'image'});
+        return nodeList
 
     def generateEdge(self, node_dic):
         edge = []
         if len(node_dic)>0:
             nBars = len(node_dic.values()[0])-1
-            for key in node_dic.keys():
-                # if len(node_dic[key][nBars])>2: #some childrenIndex might be empty (avoid indexing these otherwise keyerror)
-                for i in node_dic[key][nBars]['childrenIndex']: #index [3] need to generalize to things with more than 2 bars
-                    edge.append(key)
-                    edge.append(i)
+            for key in sorted(node_dic.keys()):
+                for i in node_dic[key][nBars]['childrenIndex']:
+                    edge.append({"from": int(key), "to": i, "length": 200, "arrows":'to'});
         return edge
 
     def generateSvg(self, node_dic):
