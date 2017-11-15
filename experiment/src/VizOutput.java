@@ -69,14 +69,14 @@ public class VizOutput {
 	   String datasetName = "titanic";
 	   String xAxisName = "survived";
 	   String yAxisName = "COUNT (id)";
-	   int k = 10;
+	   int k = 5;
 	   Distance dist = new Euclidean();
 	   String distName = dist.getDistName();
 	   double iceberg_ratio = 0.1; // [ic] % of root population size to keep as a node
 	   double informative_critera = 0.8; //[ip] % closeness to minDist to be regarded as informative parent
 	   Hierarchia h = new Hierarchia(datasetName,xAxisName);
 	   Lattice lattice = Hierarchia.generateFullyMaterializedLattice(dist,iceberg_ratio,informative_critera);
-       Traversal tr = new FrontierGreedyPicking(lattice,dist);
+       Traversal tr = new BreadthFirstPicking(lattice,dist);
        String algo = tr.getAlgoName().toLowerCase().replace(" ","");
 	   String fname = datasetName+"_"+xAxisName+"_"+algo+"_"+distName+"_ic"+iceberg_ratio+"_ip"+informative_critera+"_k"+k+".json"; 
 	   /////////////////////////////

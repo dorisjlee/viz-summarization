@@ -33,7 +33,7 @@ public class Experiment {
 		this.lattice = Hierarchia.generateFullyMaterializedLattice(dist,iceberg_ratio,informative_critera);
 		this.nbars = lattice.id2MetricMap.get("#").size();
 		if (this.algoName.equals("frontierGreedy")) {
-			this.algo = new FrontierGreedyPicking(lattice,dist);   
+			this.algo = new BreadthFirstPicking(lattice,dist);   
 		}else if (this.algoName.equals("greedy")) {
 			this.algo = new GreedyPicking(lattice,dist);
 		}else if (this.algoName.equals("naiveGreedy")) {

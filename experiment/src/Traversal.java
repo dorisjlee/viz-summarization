@@ -25,6 +25,8 @@ public abstract class Traversal {
 		this.lattice = lattice;
 		this.metric = metric;
 		this.algoName = algoName;
+		this.lattice.maxSubgraph.clear();
+		this.lattice.maxSubgraphUtility = 0;
 	}
 	
 	public String getAlgoName() {
@@ -62,10 +64,13 @@ public abstract class Traversal {
 		}
 		System.out.print("[");
 		for (int j =0 ; j< lattice.maxSubgraph.size();j++) {
+			Node n = lattice.nodeList.get(lattice.maxSubgraph.get(j));
+			ArrayList<Double> dist = lattice.id2MetricMap.get(n.get_id());
 			if (j==lattice.maxSubgraph.size()-1) {
-				System.out.print(lattice.nodeList.get(lattice.maxSubgraph.get(j)).get_id()+"]\n");
+				
+				System.out.print(lattice.nodeList.get(lattice.maxSubgraph.get(j)).get_id()+ dist + "]\n");
 			}else {
-				System.out.print(lattice.nodeList.get(lattice.maxSubgraph.get(j)).get_id()+",");
+				System.out.print(lattice.nodeList.get(lattice.maxSubgraph.get(j)).get_id()+ dist +",");
 			}
 		}
 		updateSubGraphUtility();
@@ -80,7 +85,7 @@ public abstract class Traversal {
 	 * the overall utility.
 	 * 
 	 */
-	private void updateSubGraphUtility() 
+	protected void updateSubGraphUtility() 
 	{
 		lattice.maxSubgraphUtility = 0;
 		
@@ -145,6 +150,7 @@ public abstract class Traversal {
 	   String[] datasets = {"turn", "titanic", "mushroom"};
 	   String[] xAxis = {"has_list_fn", "pc_class", "type"};
 	   int dataset_id = 2;
+	   int k = 20;
 	   
 	   Euclidean ed = new Euclidean();
 	   Hierarchia h = new Hierarchia(datasets[dataset_id], xAxis[dataset_id]);
@@ -154,12 +160,11 @@ public abstract class Traversal {
 	   
        Traversal tr; 
        //tr = new NaiveGreedyPicking(lattice,new Euclidean());
-       tr = new FrontierGreedyPicking(lattice,new Euclidean());
+       tr = new BreadthFirstPicking(lattice,new Euclidean());
+       tr.pickVisualizations(k);
        
-       tr.pickVisualizations(5);
-       
-       tr = new GreedyPicking(lattice,new Euclidean());
-       tr.pickVisualizations(5);
+       tr = new NaiveGreedyPicking(lattice,new Euclidean());
+       tr.pickVisualizations(k);
        
        //Hierarchia.print_map(lattice.id2MetricMap);
        //Hierarchia.print_map(lattice.id2IDMap);

@@ -10,9 +10,9 @@ import java.util.Map;
  * @param k
  * @author saarkuzi
  */
-public class FrontierGreedyPicking extends Traversal{
+public class BreadthFirstPicking extends Traversal{
 
-	public FrontierGreedyPicking(Lattice lattice, Distance metric) {
+	public BreadthFirstPicking(Lattice lattice, Distance metric) {
 		super(lattice, metric, "Frontier Greedy Picking");
 	}
 
@@ -26,11 +26,8 @@ public class FrontierGreedyPicking extends Traversal{
 	public void pickVisualizations(Integer k)
 	{
 		super.printAlgoName();
-		
-	    lattice.maxSubgraph.clear();
-	    lattice.maxSubgraphUtility = 0;
-	    
-		//a map in which keys are node IDs, and values are utilities (interestingness)
+			    
+		//a map in which keys are node IDs, and values are utilities (=interestingness)
 		HashMap<Integer,Float> localMaxSubgraph = new HashMap<>();
 
 		// first, we add the root
@@ -41,39 +38,66 @@ public class FrontierGreedyPicking extends Traversal{
 			return;
 		}
 		localMaxSubgraph.put(rootId, 0f);
-		HashMap<Integer,Float> frontierNodesUtility = expandFrontier(new HashMap<>(), rootId);
+		HashMap<Integer,Float> externalNodesUtility = updateExternal(new HashMap<>(), rootId);
 		
 		// In each iteration: choose node from frontier and then expand the frontier
 		for(int i = 0 ; i < k - 1 ; i++)
 		{
-			if(frontierNodesUtility.size() == 0) break;
-			Integer selectedNodeID = Collections.max(frontierNodesUtility.entrySet(), Map.Entry.comparingByValue()).getKey();
-			localMaxSubgraph.put(selectedNodeID, frontierNodesUtility.get(selectedNodeID));
+			if(externalNodesUtility.size() == 0) break;
+			Integer selectedNodeID = Collections.max(externalNodesUtility.entrySet(), Map.Entry.comparingByValue()).getKey();
+			localMaxSubgraph.put(selectedNodeID, externalNodesUtility.get(selectedNodeID));
 			localMaxSubgraph = updateUtilities(localMaxSubgraph, selectedNodeID);
-			frontierNodesUtility = expandFrontier(frontierNodesUtility, selectedNodeID);
-		}
+			externalNodesUtility = updateExternal(externalNodesUtility, selectedNodeID);
+		}			
 		
-//		for(Map.Entry<Integer, Float> entry : localMaxSubgraph.entrySet())
-//		{
-//			System.out.println(lattice.nodeList.get(entry.getKey()).get_id() + ":" + entry.getValue());
-//		}
-//		System.out.println("=================================================");
-//		for(Map.Entry<Integer, Float> entry : frontierNodesUtility.entrySet())
-//		{
-//			System.out.println(lattice.nodeList.get(entry.getKey()).get_id() + ":" + entry.getValue());
-//		}
+		// save the current result to a temporary array
+		ArrayList<Integer> maxSubgraphArray = new ArrayList<Integer>();
+		for(Integer nodeId : localMaxSubgraph.keySet())
+			maxSubgraphArray.add(nodeId);
 		
-		//System.out.println(frontierNodesUtility);
-		//System.out.println(localMaxSubgraph);
-		localMaxSubgraph = permuteLattice(localMaxSubgraph, frontierNodesUtility);
+		// improve the current solution by doing local changes
+		maxSubgraphArray = improveSubgraphLocally(maxSubgraphArray);
 		
-		for(int nodeId : localMaxSubgraph.keySet())
-		{
+		// updated the final solution
+		for(int nodeId : maxSubgraphArray)
 			lattice.maxSubgraph.add(nodeId);
-			lattice.maxSubgraphUtility += localMaxSubgraph.get(nodeId);
-		}
+		super.updateSubGraphUtility();
 		printMaxSubgraphSummary();
 	}
+	
+	/**
+	 * Take a subgraph and perform local changes that give added value
+	 * 
+	 * @param subgraph
+	 */
+	public ArrayList<Integer> improveSubgraphLocally(ArrayList<Integer> subgraph)
+	{
+		HashMap<Integer, Float> subgraphWithUtilities = new HashMap<>();
+		for(Integer nodeId : subgraph)
+			subgraphWithUtilities.put(nodeId, 0f);
+		
+		for(Integer nodeId : subgraph)
+			subgraphWithUtilities = updateUtilities(subgraphWithUtilities, nodeId);
+		
+		Float oldUtility = super.sumMapByValue(subgraphWithUtilities);
+		Float newUtility = oldUtility;
+		
+		do {
+			oldUtility = newUtility;
+			HashMap<Integer,Float> external = getExternal(subgraphWithUtilities);
+			subgraphWithUtilities = performMaximalLocalChange(subgraphWithUtilities, external);
+			newUtility = super.sumMapByValue(subgraphWithUtilities);
+		}
+		while(newUtility > oldUtility);
+			
+		subgraph.clear();
+		for(Integer nodeId : subgraphWithUtilities.keySet())
+			subgraph.add(nodeId);
+		
+		return subgraph;
+	}
+
+	
 	
 	/**
 	 * 
@@ -103,7 +127,7 @@ public class FrontierGreedyPicking extends Traversal{
 	 * 
 	 * @param currentFrontier, parentNodeId
 	 */
-	private HashMap<Integer, Float> expandFrontier(HashMap<Integer, Float> currentFrontier, Integer parentNodeId)
+	private HashMap<Integer, Float> updateExternal(HashMap<Integer, Float> currentFrontier, Integer parentNodeId)
 	{
 		currentFrontier.remove(parentNodeId);
 		for(Integer childId : lattice.nodeList.get(parentNodeId).get_child_list())
@@ -123,25 +147,24 @@ public class FrontierGreedyPicking extends Traversal{
 	 * 
 	 * @param currentSubgraph, frontierNodesUtility
 	 */
-	private HashMap<Integer,Float> permuteLattice(HashMap<Integer,Float> currentSubgraph, HashMap<Integer,Float> frontierNodes)
+	private HashMap<Integer,Float> performMaximalLocalChange(HashMap<Integer,Float> currentSubgraph, HashMap<Integer,Float> externalNodes)
 	{
 		Float maximalUtility = super.sumMapByValue(currentSubgraph);
-		int chosenFrontierNodeId = -1;
-		for(int frontierNodeId : frontierNodes.keySet())
+		int selectedExternalNodeId = -1;
+		for(int externalNodeId : externalNodes.keySet())
 		{
-			
-			HashMap<Integer,Float> tempMaxSubgraph = swapSingleNode(frontierNodeId, frontierNodes.get(frontierNodeId), currentSubgraph);
+			HashMap<Integer,Float> tempMaxSubgraph = swapSingleNode(externalNodeId, externalNodes.get(externalNodeId), currentSubgraph);
 			Float tempMaxUtility = super.sumMapByValue(tempMaxSubgraph);
 			if( tempMaxUtility > maximalUtility)
 			{
 				maximalUtility = tempMaxUtility;
 				currentSubgraph = tempMaxSubgraph;
-				chosenFrontierNodeId = frontierNodeId;
+				selectedExternalNodeId = externalNodeId;
 			}
 		}
 		
-		if(chosenFrontierNodeId > 0)
-			currentSubgraph = updateUtilities(currentSubgraph, chosenFrontierNodeId);
+		if(selectedExternalNodeId > 0)
+			currentSubgraph = updateUtilities(currentSubgraph, selectedExternalNodeId);
 		
 		return currentSubgraph;
 	}
@@ -213,5 +236,21 @@ public class FrontierGreedyPicking extends Traversal{
 			newMaxSubgraph.put(childId, newUtility);
 		}
 		return newMaxSubgraph;
+	}
+
+	/**
+	 * Get a list of nodes that can be added given a current subgraph.
+	 * The value in the map is the expected utility of adding this specific node.
+	 * 
+	 * @param localMaxSubgraph
+	 */
+	private HashMap<Integer,Float> getExternal(HashMap<Integer,Float> localMaxSubgraph)
+	{
+		HashMap<Integer,Float> externalNodesUtility = new HashMap<>();
+		for(Map.Entry<Integer, Float> e : localMaxSubgraph.entrySet())
+			externalNodesUtility = updateExternal(externalNodesUtility, e.getKey());
+		for(Map.Entry<Integer, Float> e : localMaxSubgraph.entrySet())
+			externalNodesUtility.remove(e.getKey());
+		return externalNodesUtility;
 	}
 }
