@@ -1,16 +1,8 @@
 package algorithms;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
-
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
-
 import distance.Distance;
 import distance.Euclidean;
 import lattice.Hierarchia;
@@ -154,6 +146,16 @@ public abstract class Traversal {
 			outputMap.put(entry.getKey(), entry.getValue());
 		}
 		return outputMap;
+	}
+	
+	public static ArrayList<Integer> getKeysList(HashMap<Integer, Float> inputMap)
+	{
+		ArrayList<Integer> outputList = new ArrayList<>();
+		for(Integer key : inputMap.keySet())
+		{
+			outputList.add(key);
+		}
+		return outputList;
 	}
 	
  	public static void main(String[] args) throws SQLException 

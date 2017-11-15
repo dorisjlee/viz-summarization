@@ -34,7 +34,7 @@ public class LocalGraphImprove extends BreadthFirstPicking{
 		
 		do {
 			oldUtility = newUtility;
-			HashMap<Integer,Float> external = getExternal(subgraphWithUtilities);
+			HashMap<Integer,Float> external = getExternal(Traversal.getKeysList(subgraphWithUtilities));
 			subgraphWithUtilities = performMaximalLocalChange(subgraphWithUtilities, external);
 			newUtility = Traversal.sumMapByValue(subgraphWithUtilities);
 		}
@@ -149,13 +149,36 @@ public class LocalGraphImprove extends BreadthFirstPicking{
 	 * 
 	 * @param localMaxSubgraph
 	 */
-	private HashMap<Integer,Float> getExternal(HashMap<Integer,Float> localMaxSubgraph)
+	private HashMap<Integer,Float> getExternal(ArrayList<Integer> localMaxSubgraph)
 	{
 		HashMap<Integer,Float> externalNodesUtility = new HashMap<>();
-		for(Map.Entry<Integer, Float> e : localMaxSubgraph.entrySet())
-			externalNodesUtility = updateExternal(localMaxSubgraph, externalNodesUtility, e.getKey());
-		for(Map.Entry<Integer, Float> e : localMaxSubgraph.entrySet())
-			externalNodesUtility.remove(e.getKey());
+		for(Integer node : localMaxSubgraph)
+			externalNodesUtility = updateExternal(localMaxSubgraph, externalNodesUtility, node);
+		for(Integer node : localMaxSubgraph)
+			externalNodesUtility.remove(node);
 		return externalNodesUtility;
+	}
+
+	/**
+	 * 
+	 * When adding a new node to the subgraph, we should check if it already has children
+	 * there (possible because node can have several informative parents).
+	 * If it is the case, then the utility of the node needs to be updated by using the most 
+	 * informative parent.
+	 * 
+	 * @param currentMaxSubgraph, nodeId
+	 */
+	private HashMap<Integer,Float> updateUtilities(HashMap<Integer,Float> currentMaxSubgraph, int nodeId)
+	{
+
+		Node currentNode = lattice.nodeList.get(nodeId);
+		for(int childId : currentNode.child_list)
+		{
+			if(!currentMaxSubgraph.containsKey(childId)) continue;
+			Double newUtility = super.calculateDistance(nodeId, childId, lattice, metric);
+			Float currentUtility = currentMaxSubgraph.get(childId);
+			currentMaxSubgraph.put(childId, (float) Math.max(currentUtility, newUtility));
+		}	
+		return currentMaxSubgraph;
 	}
 }
