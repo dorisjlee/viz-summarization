@@ -72,31 +72,5 @@ public class MultipleRandomWalk extends Traversal{
 	   }
 	   printMaxSubgraphSummary();
    }
-	 public static void main (String[] args) throws SQLException {
-<<<<<<< HEAD
-	 	
-    		       
-    }
-=======
-		    /*    
-		    	ArrayList<Integer> pivot_children = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5));
-			int r = 3;
-	        combination(pivot_children, r);
-	        */
-	    		Euclidean ed = new Euclidean();
-	    		Hierarchia h = new Hierarchia("mushroom","cap_surface");
-	    		//Hierarchia h = new Hierarchia("turn","has_list_fn");
-	    		//Hierarchia h = new Hierarchia("titanic","survived");
-	    		Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
-	        Traversal tr; 
-	        tr = new MultipleRandomWalk(10000000,lattice,new Euclidean());
-	        tr.pickVisualizations(8);
-	        
-	        tr = new GreedyPicking(lattice,new Euclidean());
-	        tr.pickVisualizations(8);
-	        
-	        tr = new BreadthFirstPicking(lattice,new Euclidean());
-	        tr.pickVisualizations(8);
-	    }
->>>>>>> f8c167426554e681f2a1fc61f7a1267852203a0a
+
 }
