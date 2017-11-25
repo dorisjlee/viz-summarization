@@ -13,13 +13,8 @@ import lattice.Hierarchia;
 import lattice.Lattice;
 import lattice.Node;
 import lattice.Tuple;
-
-/**
- * In each iteration we pick a node with the highest utility from a set of "frontier" nodes.
- * Then, the children of the picked node are added to the frontier.
- * 
- * @param k
- * @author saarkuzi
+/*
+ * Probabilistic Picking algorithm
  */
 public class ProbablisticPicking extends Traversal{
 

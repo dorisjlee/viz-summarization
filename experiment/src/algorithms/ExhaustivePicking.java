@@ -15,7 +15,7 @@ import lattice.Lattice;
 import lattice.Node;
 
 /**
- * 
+ * Exhaustive Picking Baseline
  * 
  * @param k
  * @author dorislee
