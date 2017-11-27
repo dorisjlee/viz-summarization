@@ -84,13 +84,41 @@ $("#all_tables").change(function (){
         populateOptions(data["k"],document.getElementById("k"));
     })
 })
-var slider = document.getElementById("myRange");
-var output = document.getElementById("demo");
-output.innerHTML = slider.value; // Display the default slider value
 
-// Update the current slider value (each time you drag the slider handle)
-slider.oninput = function() {
-    output.innerHTML = this.value;
+var values = [1,3,5,10,20,50,100];    //values for k
+var slider_k_input = document.getElementById('slider-k-input'),
+   slider_k_output = document.getElementById('slider-k-output');
+slider_k_input.oninput = function(){
+    slider_k_output.innerHTML = values[this.value];
+};
+slider_k_input.oninput();
+
+var values = [1,3,5,10,20,50,100];    //values for ic
+var slider_ic_input = document.getElementById('slider-ic-input'),
+   slider_ic_output = document.getElementById('slider-ic-output');
+slider_ic_input.oninput = function(){
+    slider_ic_output.innerHTML = values[this.value];
+};
+slider_ic_input.oninput();
+
+var values = [1,3,5,10,20,50,100];    //values for ip
+var slider_ip_input = document.getElementById('slider-ip-input'),
+   slider_ip_output = document.getElementById('slider-ip-output');
+slider_ip_input.oninput = function(){
+    slider_ip_output.innerHTML = values[this.value];
+};
+slider_ip_input.oninput();
+
+
+// When the user clicks on <div>, open the popup
+function mypop() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+
+}
+
+function mymenuicon(x) {
+    x.classList.toggle("change");
 }
 
 // $("#submit").click(constructQuery)

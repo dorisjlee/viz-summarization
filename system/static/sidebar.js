@@ -1,6 +1,6 @@
 // Filter Form
 var filters=[];
-
+var opened = false;
 $(function()
 {
     $(document).on('click', '.btn-add', function(e)
@@ -37,14 +37,18 @@ $("#filterSubmit").click( function(){
 });
 
 // Expandable menuItem (Not being used right now)
-function menuItem_open() {
-    document.getElementById("main").style.marginLeft = "25%";
-    document.getElementById("mySidebar").style.width = "25%";
-    document.getElementById("mySidebar").style.display = "block";
-}
-function menuItem_close() {
-    document.getElementById("main").style.marginLeft = "0%";
-    document.getElementById("mySidebar").style.display = "none";
+
+function menuItem_open_close() {
+    opened = !opened
+    if(opened){
+        document.getElementById("main").style.marginLeft = "25%";
+        document.getElementById("mySidebar").style.width = "25%";
+        document.getElementById("mySidebar").style.display = "block";
+    }
+    else{
+        document.getElementById("main").style.marginLeft = "0%";
+        document.getElementById("mySidebar").style.display = "none";
+    }
 }
 
 function menuItem_onclick(id) {

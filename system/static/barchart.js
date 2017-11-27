@@ -14,10 +14,11 @@ function draw(node,edge) {
     var options = {
         nodes: {
           borderWidth:2,
-          size:30,
+          size: 100,
           color: {
               border: '#A1BACB',
-              background: '#FFFFFF'
+              background: '#FFFFFF',
+
             },
           font:{color:'#0B131A',
                 size:8
@@ -35,9 +36,9 @@ function draw(node,edge) {
             improvedLayout:true,
             hierarchical: {
               enabled:true,
-              levelSeparation: 150,
-              nodeSpacing: 100,
-              treeSpacing: 200,
+              levelSeparation: 300,
+              nodeSpacing: 300,
+              treeSpacing: 600,
               blockShifting: true,
               edgeMinimization: true,
               parentCentralization: true,
@@ -46,6 +47,15 @@ function draw(node,edge) {
         }
     };
     network = new vis.Network(container, data, options);
+
+    network.on("click", function (params) {
+
+       params.event = "[original event]";
+       document.getElementById('eventSpan').innerHTML = '<h2>Click event:</h2>' + JSON.stringify(params, null, 4);
+       console.log('click event, getNodeAt returns: ' + this.getNodeAt(params.pointer.DOM));
+        //var temp = data.get(this.getNodeAt(params.pointer.DOM));
+        //params.nodes.update([{id:1, color:{background:'#0B131A'}}]);
+    });
     var div = document.createElement('div')
     div.innerHTML="<img src='resources/Eclipse.svg' id = 'loadingDashboard' style='display: none; position: relative; z-index: 10; width: 100%; height: 50%;'>"
     container.append(div.firstChild);
