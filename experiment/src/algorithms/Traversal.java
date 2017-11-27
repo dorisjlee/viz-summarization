@@ -176,9 +176,17 @@ public abstract class Traversal {
        tr = new BreadthFirstPicking(lattice,new Euclidean());
        tr.pickVisualizations(k);
        
-       tr = new TwoStepLookAheadalgorithm(lattice,new Euclidean());
+       tr = new TwoStepLookAheadalgorithm(lattice,new Euclidean(), "max");
        tr.pickVisualizations(k);
        
+       tr = new TwoStepLookAheadalgorithm(lattice,new Euclidean(), "sum");
+       tr.pickVisualizations(k);
+       
+       tr = new RecursiveBreadthFirstPicking(lattice, new Euclidean(), 2);
+       tr.pickVisualizations(k);
+       
+       tr = new RecursiveNaiveGreedyPicking(lattice, new Euclidean(), 2);
+       tr.pickVisualizations(k);
        
        tr = new NaiveGreedyPicking(lattice,new Euclidean());
        tr.pickVisualizations(k);

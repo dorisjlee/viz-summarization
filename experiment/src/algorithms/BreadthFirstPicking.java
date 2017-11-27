@@ -17,7 +17,7 @@ import lattice.Lattice;
 public class BreadthFirstPicking extends LookAheadPicking{
 
 	public BreadthFirstPicking(Lattice lattice, Distance metric) {
-		super(lattice, metric, "Frontier Greedy Picking");
+		super(lattice, metric, "Breadth First Picking");
 	}
 	
 	/**

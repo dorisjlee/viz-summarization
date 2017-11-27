@@ -22,13 +22,8 @@ public class LocalGraphImprove extends BreadthFirstPicking{
 	 */
 	public ArrayList<Integer> improveSubgraphLocally(ArrayList<Integer> subgraph)
 	{
-		HashMap<Integer, Float> subgraphWithUtilities = new HashMap<>();
-		for(Integer nodeId : subgraph)
-			subgraphWithUtilities.put(nodeId, 0f);
-		
-		for(Integer nodeId : subgraph)
-			subgraphWithUtilities = updateUtilities(subgraphWithUtilities, nodeId);
-		
+
+		HashMap<Integer, Float> subgraphWithUtilities = getSubgraphWithUtilities(subgraph);
 		Float oldUtility = Traversal.sumMapByValue(subgraphWithUtilities);
 		System.out.println("Utility before applying local changes:" + oldUtility);
 		Float newUtility = oldUtility;
@@ -179,7 +174,7 @@ public class LocalGraphImprove extends BreadthFirstPicking{
 	 * 
 	 * @param currentMaxSubgraph, nodeId
 	 */
-	private HashMap<Integer,Float> updateUtilities(HashMap<Integer,Float> currentMaxSubgraph, int nodeId)
+	public HashMap<Integer,Float> updateUtilities(HashMap<Integer,Float> currentMaxSubgraph, int nodeId)
 	{
 
 		Node currentNode = lattice.nodeList.get(nodeId);
@@ -192,4 +187,16 @@ public class LocalGraphImprove extends BreadthFirstPicking{
 		}	
 		return currentMaxSubgraph;
 	}
+	
+	public HashMap<Integer, Float> getSubgraphWithUtilities(ArrayList<Integer> subgraph)
+	{
+		HashMap<Integer, Float> subgraphWithUtilities = new HashMap<>();
+		for(Integer nodeId : subgraph)
+			subgraphWithUtilities.put(nodeId, 0f);
+		
+		for(Integer nodeId : subgraph)
+			subgraphWithUtilities = updateUtilities(subgraphWithUtilities, nodeId);
+		return subgraphWithUtilities;
+	}
+
 }
