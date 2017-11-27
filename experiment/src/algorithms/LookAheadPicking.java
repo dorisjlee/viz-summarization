@@ -37,7 +37,7 @@ public abstract class LookAheadPicking extends Traversal{
 			return;
 		}
 		localMaxSubgraph.add(rootId);
-		HashMap<Integer,Float> externalNodesUtility = updateExternal(localMaxSubgraph, new HashMap<>(), rootId);
+		HashMap<Integer,Float> externalNodesUtility = updateExternal(localMaxSubgraph, new HashMap<>(), rootId, k);
 		
 		// In each iteration: choose node from frontier and then expand the frontier
 		for(int i = 0 ; i < k - 1 ; i++)
@@ -45,7 +45,7 @@ public abstract class LookAheadPicking extends Traversal{
 			if(externalNodesUtility.size() == 0) break;
 			Integer selectedNodeID = Collections.max(externalNodesUtility.entrySet(), Map.Entry.comparingByValue()).getKey();
 			localMaxSubgraph.add(selectedNodeID);
-			externalNodesUtility = updateExternal(localMaxSubgraph, externalNodesUtility, selectedNodeID);
+			externalNodesUtility = updateExternal(localMaxSubgraph, externalNodesUtility, selectedNodeID, k);
 		}			
 		
 		// improve the current solution by doing local changes
@@ -67,5 +67,5 @@ public abstract class LookAheadPicking extends Traversal{
 	 * 
 	 * @param currentFrontier, parentNodeId
 	 */
-	protected abstract HashMap<Integer, Float> updateExternal(ArrayList<Integer> localMaxSubgraph, HashMap<Integer, Float> currentFrontier, Integer parentNodeId);
+	protected abstract HashMap<Integer, Float> updateExternal(ArrayList<Integer> localMaxSubgraph, HashMap<Integer, Float> currentFrontier, Integer parentNodeId, Integer k);
 }
