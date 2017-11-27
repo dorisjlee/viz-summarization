@@ -26,7 +26,7 @@ public class BreadthFirstPicking extends LookAheadPicking{
 	 * 
 	 * @param currentFrontier, parentNodeId
 	 */
-	protected HashMap<Integer, Float> updateExternal(ArrayList<Integer> localMaxSubgraph, HashMap<Integer, Float> currentFrontier, Integer parentNodeId)
+	protected HashMap<Integer, Float> updateExternal(ArrayList<Integer> localMaxSubgraph, HashMap<Integer, Float> currentFrontier, Integer parentNodeId, Integer k)
 	{
 		currentFrontier.remove(parentNodeId);
 		for(Integer childId : lattice.nodeList.get(parentNodeId).get_child_list())

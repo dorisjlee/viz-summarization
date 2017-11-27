@@ -30,6 +30,7 @@ public class LocalGraphImprove extends BreadthFirstPicking{
 			subgraphWithUtilities = updateUtilities(subgraphWithUtilities, nodeId);
 		
 		Float oldUtility = Traversal.sumMapByValue(subgraphWithUtilities);
+		System.out.println("Utility before applying local changes:" + oldUtility);
 		Float newUtility = oldUtility;
 		
 		do {
@@ -56,8 +57,10 @@ public class LocalGraphImprove extends BreadthFirstPicking{
 	{
 		Float maximalUtility = Traversal.sumMapByValue(currentSubgraph);
 		int selectedExternalNodeId = -1;
-		for(int externalNodeId : externalNodes.keySet())
+		while(externalNodes.size() > 0)
 		{
+			Integer externalNodeId = Collections.max(externalNodes.entrySet(), Map.Entry.comparingByValue()).getKey();
+
 			HashMap<Integer,Float> tempMaxSubgraph = insertSingleNode(externalNodeId, externalNodes.get(externalNodeId), currentSubgraph);
 			Float tempMaxUtility = Traversal.sumMapByValue(tempMaxSubgraph);
 			if( tempMaxUtility > maximalUtility)
@@ -65,6 +68,11 @@ public class LocalGraphImprove extends BreadthFirstPicking{
 				maximalUtility = tempMaxUtility;
 				currentSubgraph = tempMaxSubgraph;
 				selectedExternalNodeId = externalNodeId;
+				externalNodes = getExternal(super.getKeysList(currentSubgraph));
+			}
+			else
+			{
+				externalNodes.remove(externalNodeId);
 			}
 		}
 		
@@ -105,6 +113,7 @@ public class LocalGraphImprove extends BreadthFirstPicking{
 	 */
 	private HashMap<Integer,Float> swap2nodes(int outNodeId, int inNodeId, Float candidateUtility, HashMap<Integer,Float> originalMaxSubgraph)
 	{
+		
 		HashMap<Integer,Float> newMaxSubgraph = Traversal.cloneMap(originalMaxSubgraph);
 		newMaxSubgraph.put(inNodeId, candidateUtility);
 		newMaxSubgraph.remove(outNodeId);
@@ -118,6 +127,7 @@ public class LocalGraphImprove extends BreadthFirstPicking{
 		}
 		if(childrenInSubgraph.size() == 0) 
 			return newMaxSubgraph;
+
 		
 		// if the node has children, then maybe these children have several parents;
 		// so it will still be okay to remove the node
@@ -139,6 +149,7 @@ public class LocalGraphImprove extends BreadthFirstPicking{
 			Float newUtility = Collections.max(otherParents.entrySet(), Map.Entry.comparingByValue()).getValue();
 			newMaxSubgraph.remove(childId);
 			newMaxSubgraph.put(childId, newUtility);
+			
 		}
 		return newMaxSubgraph;
 	}
@@ -149,11 +160,11 @@ public class LocalGraphImprove extends BreadthFirstPicking{
 	 * 
 	 * @param localMaxSubgraph
 	 */
-	private HashMap<Integer,Float> getExternal(ArrayList<Integer> localMaxSubgraph)
+	public HashMap<Integer,Float> getExternal(ArrayList<Integer> localMaxSubgraph)
 	{
 		HashMap<Integer,Float> externalNodesUtility = new HashMap<>();
 		for(Integer node : localMaxSubgraph)
-			externalNodesUtility = updateExternal(localMaxSubgraph, externalNodesUtility, node);
+			externalNodesUtility = updateExternal(localMaxSubgraph, externalNodesUtility, node, 0);
 		for(Integer node : localMaxSubgraph)
 			externalNodesUtility.remove(node);
 		return externalNodesUtility;

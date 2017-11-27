@@ -424,7 +424,7 @@ public class Hierarchia
         return normalized_measure_values;
     }
     
-    static void print_map(Map mp) 
+    public static void print_map(Map mp) 
     {
         Iterator it = mp.entrySet().iterator();
         while (it.hasNext()) 

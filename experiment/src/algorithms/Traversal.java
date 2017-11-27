@@ -162,7 +162,7 @@ public abstract class Traversal {
     {
 	   String[] datasets = {"turn", "titanic", "mushroom"};
 	   String[] xAxis = {"has_list_fn", "pc_class", "type"};
-	   int dataset_id = 2;
+	   int dataset_id = 0;
 	   int k = 20;
 	   
 	   Euclidean ed = new Euclidean();
@@ -175,6 +175,10 @@ public abstract class Traversal {
        //tr = new NaiveGreedyPicking(lattice,new Euclidean());
        tr = new BreadthFirstPicking(lattice,new Euclidean());
        tr.pickVisualizations(k);
+       
+       tr = new TwoStepLookAheadalgorithm(lattice,new Euclidean());
+       tr.pickVisualizations(k);
+       
        
        tr = new NaiveGreedyPicking(lattice,new Euclidean());
        tr.pickVisualizations(k);
