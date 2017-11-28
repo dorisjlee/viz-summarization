@@ -74,6 +74,8 @@ public class Experiment {
 			this.algo = new NaiveGreedyPicking(lattice, dist);
 		}else if (this.algoName.equals("exhaustive")) {
 			this.algo = new ExhaustivePicking(lattice, dist);
+		}else if (this.algoName.equals("naiveExhaustive")) {
+			this.algo = new NaiveExhaustivePicking(lattice, dist);
 		}else if (this.algoName.equals("multipleRandomWalk")) {
 			this.algo = new MultipleRandomWalk(this.maxCount, lattice, dist);
 		}
@@ -114,26 +116,26 @@ public class Experiment {
 	public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
 	{
 
-	/*
-	   //Debugging Exhaustive
-	   
-	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("has_list_sum_range_fn","has_corr_list_fn","has_prof_clicks_tbl","has_est_distinct","has_list_sum_fn","has_impressions_tbl","is_profile_query","has_prof_engagement_events_tbl"));
-	   exp = new Experiment("turn", "has_prof_clicks_tbl", "hdfs_bytes_written",groupby,"SUM", k, "frontierGreedy", new Euclidean(),0,0.8);
-	   long duration = exp.timedRunOutput();
-	   System.out.println("Duration:"+duration);
-	   exp.algo.printMaxSubgraphSummary();
-	   exp = new Experiment("turn", "has_prof_clicks_tbl", "hdfs_bytes_written",groupby,"SUM", k, "greedy", new Euclidean(),0,0.8);
-	   duration = exp.timedRunOutput();
-	   System.out.println("Duration:"+duration);
-	   exp.algo.printMaxSubgraphSummary();
-	   
-	   exp = new Experiment("turn", "has_prof_clicks_tbl", "hdfs_bytes_written",groupby,"SUM", k, "exhaustive", new Euclidean(),0,0.8);
-	   duration = exp.timedRunOutput();
-	   System.out.println("Duration:"+duration);
-	   exp.algo.printMaxSubgraphSummary();
-	*/
-	
-	   // Multiple Random Walk Experiemnt
+		 Experiment exp;
+		 int k =5;
+		 //Debugging Exhaustive
+		 ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("has_list_sum_range_fn","has_corr_list_fn","has_prof_clicks_tbl","is_profile_query","has_impressions_tbl","has_prof_engagement_events_tbl"));
+		 //ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("has_list_sum_range_fn","has_corr_list_fn","has_prof_clicks_tbl","has_est_distinct","has_list_sum_fn","has_impressions_tbl","is_profile_query","has_prof_engagement_events_tbl"));
+		 exp = new Experiment("turn", "has_prof_clicks_tbl","hdfs_bytes_written",groupby,"SUM", k, "frontierGreedy", new Euclidean(),0,0.8);
+		 long duration = exp.timedRunOutput();
+		 System.out.println("Duration:"+duration);
+		 exp.algo.printMaxSubgraphSummary();
+		 exp = new Experiment("turn", "has_prof_clicks_tbl", "hdfs_bytes_written",groupby,"SUM", k, "greedy", new Euclidean(),0,0.8);
+		 duration = exp.timedRunOutput();
+		 System.out.println("Duration:"+duration);
+		 exp.algo.printMaxSubgraphSummary();
+		
+		 exp = new Experiment("turn", "has_prof_clicks_tbl","hdfs_bytes_written",groupby,"SUM", k, "naiveExhaustive", new Euclidean(),0,0.8);
+		 duration = exp.timedRunOutput();
+		 System.out.println("Duration:"+duration);
+		 exp.algo.printMaxSubgraphSummary();
+	  /*
+	   // Multiple Random Walk Experiment
 		PrintWriter writer = new PrintWriter("random_walk_scalability_experiment.csv", "UTF-8");
 	 	writer.println("iterations,total_time,total_utility");
     		Euclidean ed = new Euclidean();
@@ -151,6 +153,7 @@ public class Experiment {
         		}
     		}
     		writer.close();
+    	*/
 	/*
 	Euclidean ed = new Euclidean();
 	Hierarchia h = new Hierarchia("turn","has_list_fn");
