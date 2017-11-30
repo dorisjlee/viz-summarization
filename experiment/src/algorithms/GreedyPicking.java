@@ -12,7 +12,7 @@ import lattice.Lattice;
 public class GreedyPicking extends Traversal{
 	
 	public GreedyPicking(Lattice lattice, Distance metric) {
-		super(lattice, metric, "Naive Greedy Picking");
+		super(lattice, metric, "Greedy Picking");
 	}
 	
 	public void pickVisualizations(Integer k) {

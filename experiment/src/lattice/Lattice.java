@@ -16,4 +16,9 @@ public class Lattice {
 		this.maxSubgraph =new ArrayList<Integer>();
 		this.maxSubgraphUtility=0;
 	}
+	public Lattice() {
+		// Simply a container for subgraph (used in RW)
+		this.maxSubgraph =new ArrayList<Integer>();
+		this.maxSubgraphUtility=0;
+	}
 }

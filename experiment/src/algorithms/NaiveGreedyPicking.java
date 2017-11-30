@@ -20,9 +20,6 @@ public class NaiveGreedyPicking extends Traversal {
 		super(lattice, metric, "Naive Greedy Picking");
 	}
 	
-	
-	
-	
 	public void pickVisualizations(Integer k) {
 
 		super.printAlgoName();
@@ -53,7 +50,7 @@ public class NaiveGreedyPicking extends Traversal {
 			parentVal =  ArrayList2Array(lattice.id2MetricMap.get(parentNode.get_id()));
 		}
 		ArrayList<Integer> children = parentNode.get_child_list();
-		if (children.size()==0 || lattice.maxSubgraph.size()>k) {//|| maxSubgraph.size()>5 
+		if (children.size()==0 || lattice.maxSubgraph.size()>k) {
 			// Terminate when hit leaf nodes (with no children)
 			return ; 
 		}else {
