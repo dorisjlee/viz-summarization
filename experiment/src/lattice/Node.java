@@ -26,7 +26,7 @@ public class Node
 		this.merged_nodes_keys = merged_nodes_keys;
 	}
 	
-	Node(String id)
+	public Node(String id)
     {
         this.id = id; 
         child_list = new ArrayList<>();

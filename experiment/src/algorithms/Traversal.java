@@ -28,6 +28,16 @@ public abstract class Traversal {
 		this.lattice.maxSubgraphUtility = 0;
 	}
 	
+	public Traversal(Distance metric, double iceberg_ratio, double informative_criteria, String algoName) 
+	{
+		//Online Traversal Overridden method
+		this.lattice = null;
+		this.metric = metric;
+		this.algoName = algoName;
+		this.lattice.maxSubgraph.clear();
+		this.lattice.maxSubgraphUtility = 0;
+	}
+	
 	public String getAlgoName() {
 		return algoName;
 	}

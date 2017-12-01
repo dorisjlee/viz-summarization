@@ -296,7 +296,7 @@ public class Hierarchia
             generate_value_permutations(attribute_values, depth + 1, current_permutation, value_permutations);
         }
     }
-    static ArrayList<Double> compute_visualization(Node node, ArrayList<String> current_combination, ArrayList<String> current_permutation)
+    public static ArrayList<Double> compute_visualization(Node node, ArrayList<String> current_combination, ArrayList<String> current_permutation)
     {
     		int  numXaxis = uniqueAttributeKeyVals.get(xAxis).size();
     		//System.out.println("Attribute-Value Combination:"+current_combination+" -- "+current_permutation);
