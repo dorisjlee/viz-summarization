@@ -77,6 +77,11 @@ def getTables():
   session['tableList'] = tableList
   return tableList
 
+@app.route("/getInterested", methods=['POST'])
+def getInterested():
+    print "inside getInterested"
+    print str(request.form['interested'])
+    return ('', 204)
 @app.route("/postQuery", methods=['GET', 'POST'])
 def postQuery():
     

@@ -2,13 +2,18 @@ var network = null;
 var DIR = 'img/refresh-cl/';
 var LENGTH_MAIN = 150;
 var LENGTH_SUB = 50;
-
+var node_dataset = null;
 // Called when the Visualization API is loaded.
+var totalclick = null;
 function draw(node,edge) {
     // create a network
     var container = document.getElementById('mynetwork');
+
+    (totalclick = []).length = node.length;
+    totalclick.fill(0);
+    node_dataset = new vis.DataSet(node);
     var data = {
-        nodes: node,
+        nodes: node_dataset,
         edges: edge
     };
     var options = {
@@ -46,16 +51,53 @@ function draw(node,edge) {
             }
         }
     };
+
+
+    console.log(node_dataset);
     network = new vis.Network(container, data, options);
+    network.on("click", function(params) {
 
-    network.on("click", function (params) {
+        var nodeID = params['nodes']['0'];
 
+        totalclick[nodeID] = (totalclick[nodeID]+1)%3;
+        if(totalclick[nodeID]==0)
+            totalclick[nodeID] = 3;
+        var color;
+        if(totalclick[nodeID]==1)
+            color = 'grey';
+        else if(totalclick[nodeID]==2)
+            color = 'red';
+        else if(totalclick[nodeID]==3)
+            color = 'green';
+
+        if (nodeID) {
+            var clickedNode = node_dataset.get(nodeID);
+            node_dataset.remove(nodeID);
+            console.log(clickedNode);
+            if(color=='green')
+                clickedNode.borderWidth = 6;
+            else
+                clickedNode.borderWidth = 2;
+            clickedNode.color = {
+                border: color
+            }
+            node_dataset.update(clickedNode);
+            console.log(node_dataset);
+        }
+
+        $.post("/getInterested",{
+            "interested" : JSON.stringify(totalclick)
+        },'application/json')
+    });
+
+   /*network.on("click", function (params) {
+        console.log(params)
        params.event = "[original event]";
-       document.getElementById('eventSpan').innerHTML = '<h2>Click event:</h2>' + JSON.stringify(params, null, 4);
+       //document.getElementById('eventSpan').innerHTML = '<h2>Click event:</h2>' + JSON.stringify(params, null, 4);
        console.log('click event, getNodeAt returns: ' + this.getNodeAt(params.pointer.DOM));
         //var temp = data.get(this.getNodeAt(params.pointer.DOM));
         //params.nodes.update([{id:1, color:{background:'#0B131A'}}]);
-    });
+    });*/
     var div = document.createElement('div')
     div.innerHTML="<img src='resources/Eclipse.svg' id = 'loadingDashboard' style='display: none; position: relative; z-index: 10; width: 100%; height: 50%;'>"
     container.append(div.firstChild);

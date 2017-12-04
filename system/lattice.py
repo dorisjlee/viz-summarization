@@ -124,7 +124,7 @@ class Lattice:
             else:
                 filterVal = str(values["filter"][1:-1].replace("#",",\n").replace("$","="))
             svgString = bar_chart(yVals, xAttrs, xtitle="", ytitle="", title=filterVal, top_right_text="", N=1, width=0.1)
-            nodeList.append({"id": int(i), "filterVal":filterVal,"image": "data:image/svg+xml;base64," + base64.b64encode(svgString), "shape": 'image'});
+            nodeList.append({"id": int(i), "filterVal":filterVal,"image": "data:image/svg+xml;base64," + base64.b64encode(svgString), "shape": 'image', "color":{"border": "grey"} });
         return nodeList
 
     def generateEdge(self, node_dic):

@@ -110,12 +110,7 @@ slider_ip_input.oninput = function(){
 slider_ip_input.oninput();
 
 
-// When the user clicks on <div>, open the popup
-function mypop() {
-    var popup = document.getElementById("myPopup");
-    popup.classList.toggle("show");
 
-}
 
 function mymenuicon(x) {
     x.classList.toggle("change");
