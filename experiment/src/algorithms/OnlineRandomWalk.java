@@ -2,6 +2,8 @@ package algorithms;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 
 import distance.Distance;
@@ -22,7 +24,7 @@ public class OnlineRandomWalk extends Traversal{
 	}
 	
 	public void pickVisualizations(Integer k) {
-	   System.out.println("---------------- Random Walk -----------------");
+	   System.out.println("---------------- Online Random Walk -----------------");
        Lattice rwResult = onlineRW(k);
        lattice.maxSubgraph= rwResult.maxSubgraph; 
        lattice.maxSubgraphUtility=rwResult.maxSubgraphUtility;
@@ -42,12 +44,18 @@ public class OnlineRandomWalk extends Traversal{
         map_id_to_metric_values.put("#", root_measure_values);
         node_list.add(root);
         map_id_to_index.put("#", 0);
+        /*
         ArrayList <String> attribute_combination = new ArrayList<String>(); // List of attribute combination that excludes the xAxis item
-        attribute_combination.addAll(attribute_names); // Deep copy original attribute names
-        attribute_combination.remove(xAxis); // remove the xAxis item in the attribute list
-        int n = attribute_names.size();
-        
-        
+        attribute_combination.addAll(h.attribute_names); // Deep copy original attribute names
+        attribute_combination.remove(h.xAxis); // remove the xAxis item in the attribute list
+        int n = h.attribute_names.size();
+        */
+        // how to get_child_list in an online manner? 
+        //ArrayList<Node> children = deriveChildren(h,root);
+        ArrayList<Node> children = deriveChildren(h,new Node("#cap_color$b#cap_shape$b#"));
+        //ArrayList<Node> parents = deriveParents(h,root);
+        ArrayList<Node> parents = deriveParents(h,new Node("#cap_color$b#cap_shape$b#"));
+        /*
         Lattice lattice = new Lattice();
 		double total_utility =0;
         ArrayList<Integer> dashboard = new ArrayList<Integer>();
@@ -92,27 +100,73 @@ public class OnlineRandomWalk extends Traversal{
        rwResult.maxSubgraph= dashboard; 
        rwResult.maxSubgraphUtility=total_utility;
        return rwResult;
+       */
+       Lattice rwResult = new Lattice();
+       return rwResult;
+	}
+
+	private static ArrayList<Node> deriveParents(Hierarchia h, Node node) {
+		ArrayList<Node> parents = new ArrayList<Node>();
+		if (node.equals("#")) {
+			// Root has no parents 
+			return parents;
+		}else {
+			
+		}
+		System.out.println(node.id);
+		return null;
+	}
+
+	private static ArrayList<Node> deriveChildren(Hierarchia h, Node node) {
+		System.out.println("Children of: "+node.id);
+		ArrayList<Node> children = new ArrayList<Node>();
+		System.out.println("uniqueAttributeKeyVals:"+h.uniqueAttributeKeyVals);
+		System.out.println("attribute names:"+h.getAttribute_names());
+		System.out.println("Removed xAxis:"+h.xAxis);
+		h.uniqueAttributeKeyVals.remove(h.xAxis);// remove the xAxis item in the attribute list
+		// Remove the existing attributes in the node
+		for (String split_filter:node.id.split("#")) {
+			if (split_filter.indexOf("$")!=-1) {
+				String existing_attribute = split_filter.substring(0,split_filter.indexOf("$"));
+				System.out.println("Remove:"+existing_attribute);
+				h.uniqueAttributeKeyVals.remove(existing_attribute);
+			}
+		}
+		//combinable_attributes.remove(o)
+		Iterator it = h.uniqueAttributeKeyVals.entrySet().iterator();
+        int n = h.attribute_names.size();
+	    	while (it.hasNext()) {
+	        Map.Entry pair = (Map.Entry)it.next();
+	        for (String val: (ArrayList<String>) pair.getValue()) {
+	        		// A Child is the existing node values plus one additional filter.
+	        		System.out.println(node.id+pair.getKey()+"$"+val+"#");
+	        		Node child = new Node(node.id+pair.getKey()+"$"+val+"#");
+	        		children.add(child);
+	        }
+	    }
+		return children;
 	}
 
 	public static void main (String[] args) throws SQLException {
-		    /*    
-		    	ArrayList<Integer> pivot_children = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5));
-			int r = 3;
-	        combination(pivot_children, r);
-	        */
-	    		Euclidean ed = new Euclidean();
-	    		Hierarchia h = new Hierarchia("mushroom","cap_surface");
-	    		//Hierarchia h = new Hierarchia("turn","has_list_fn");
-	    		//Hierarchia h = new Hierarchia("titanic","survived");
-	    		Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
-	        Traversal tr; 
-	        tr = new OnlineRandomWalk(h,ed,0.001,0.8);
-	        tr.pickVisualizations(8);
-	        
-	        tr = new GreedyPicking(lattice,new Euclidean());
-	        tr.pickVisualizations(8);
-	        
-	        tr = new BreadthFirstPicking(lattice,new Euclidean());
-	        tr.pickVisualizations(8);
-	    }
+	    /*    
+	    	ArrayList<Integer> pivot_children = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5));
+		int r = 3;
+        combination(pivot_children, r);
+        */
+    		Euclidean ed = new Euclidean();
+    		Hierarchia h = new Hierarchia("mushroom","cap_surface");
+    		//Hierarchia h = new Hierarchia("turn","has_list_fn");
+    		//Hierarchia h = new Hierarchia("titanic","survived");
+    		//Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
+        Traversal tr; 
+        tr = new OnlineRandomWalk(h,ed,0.001,0.8);
+        tr.pickVisualizations(8);
+        /*
+        tr = new GreedyPicking(lattice,new Euclidean());
+        tr.pickVisualizations(8);
+        
+        tr = new BreadthFirstPicking(lattice,new Euclidean());
+        tr.pickVisualizations(8);
+        */
+    }
 }

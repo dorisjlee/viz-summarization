@@ -53,7 +53,7 @@ public class Hierarchia
     	    System.out.println("Informative parent defined as parents within "+informative_criteria*100+"% the minimum.");
         HashMap<String, ArrayList<Double>> map_id_to_metric_values = new HashMap<String, ArrayList<Double>>();
         ArrayList<Node> node_list = new ArrayList<Node>();// node_list: list of child indexes       
-        //System.out.println("uniqueAttributeKeyVals:"+uniqueAttributeKeyVals);
+        System.out.println("uniqueAttributeKeyVals:"+uniqueAttributeKeyVals);
         HashMap<String, Integer> map_id_to_index = new HashMap<String, Integer>();
         Node root = new Node("#");
         ArrayList<Double> root_measure_values = compute_visualization(root,new ArrayList<String>(),new ArrayList<String>());
@@ -485,6 +485,7 @@ public class Hierarchia
 	}
     public static void mergeNodesInLattice(Lattice lattice,ArrayList<String> nodes2merge) {
     		/* 
+    		 * INCOMPLETE STILL NEED DEBUGGING!!!
     		 * Given a list of nodes keys to merge, merge the nodes in the lattice
     		 */
 //    		System.out.println("--mergeNodesInLattice--");

@@ -126,17 +126,18 @@ public class VizOutput {
        tr.pickVisualizations(k);
        VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h,yAxisName);
        String nodeDic = vo.generateNodeDic();
+       dumpString2File("test.json", nodeDic);
        //dumpString2File("../ipynb/dashboards/json/"+fname, nodeDic);
        
 //       System.out.println(lattice.id2IDMap.get("#has_clicks_tbl$1#has_distinct$1#"));
-       System.out.println(lattice.id2IDMap.get("#is_profile_query$0#"));
-//       System.out.println(lattice.nodeList.get(lattice.id2IDMap.get("#is_profile_query$1#")+1).get_id());
-//       System.out.println(lattice.nodeList.get(lattice.id2IDMap.get("#is_profile_query$1#")-1).get_id());
-	   System.out.println(lattice.nodeList.get(lattice.id2IDMap.get("#is_profile_query$0#")).get_child_list());
-	   for (int i: lattice.nodeList.get(lattice.id2IDMap.get("#is_profile_query$0#")).get_child_list()) {
-		   System.out.println(lattice.nodeList.get(i).get_id());
-	   }
-       dumpString2File("test.json", nodeDic);
+//       System.out.println(lattice.id2IDMap.get("#is_profile_query$0#"));
+////       System.out.println(lattice.nodeList.get(lattice.id2IDMap.get("#is_profile_query$1#")+1).get_id());
+////       System.out.println(lattice.nodeList.get(lattice.id2IDMap.get("#is_profile_query$1#")-1).get_id());
+//	   System.out.println(lattice.nodeList.get(lattice.id2IDMap.get("#is_profile_query$0#")).get_child_list());
+//	   for (int i: lattice.nodeList.get(lattice.id2IDMap.get("#is_profile_query$0#")).get_child_list()) {
+//		   System.out.println(lattice.nodeList.get(i).get_id());
+//	   }
+       
 //       System.out.println("nodeDic:"+nodeDic);
 //       System.out.println("LatticeDic:"+vo.generateLatticeDic());
 //       System.out.println(h.uniqueAttributeKeyVals.keySet());
