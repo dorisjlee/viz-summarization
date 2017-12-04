@@ -1,6 +1,7 @@
 package algorithms;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -52,9 +53,9 @@ public class OnlineRandomWalk extends Traversal{
         */
         // how to get_child_list in an online manner? 
         //ArrayList<Node> children = deriveChildren(h,root);
-        ArrayList<Node> children = deriveChildren(h,new Node("#cap_color$b#cap_shape$b#"));
+        ArrayList<Node> children = deriveChildren(h,new Node("#cap_color$b#cap_shape$x#"));
         //ArrayList<Node> parents = deriveParents(h,root);
-        ArrayList<Node> parents = deriveParents(h,new Node("#cap_color$b#cap_shape$b#"));
+        ArrayList<Node> parents = deriveParents(h,new Node("#cap_color$b#cap_shape$x#type$e#"));
         /*
         Lattice lattice = new Lattice();
 		double total_utility =0;
@@ -106,19 +107,29 @@ public class OnlineRandomWalk extends Traversal{
 	}
 
 	private static ArrayList<Node> deriveParents(Hierarchia h, Node node) {
+		System.out.println("-------- Parents of: "+ node.id+"--------");
 		ArrayList<Node> parents = new ArrayList<Node>();
 		if (node.equals("#")) {
 			// Root has no parents 
 			return parents;
 		}else {
-			
+			String[] items = node.id.substring(1).split("#");
+		    ArrayList<String> split_filters = new ArrayList<String>(Arrays.asList(items));
+		    for (int i=1;i<split_filters.size();i++) {
+		    		ArrayList<ArrayList<String>> combo = Hierarchia.combination(split_filters, i);
+		    		// Loop through the generated i-item combination and save as parent
+		    		for (int j =0;j<combo.size();j++) {
+		    			Node parent = new Node(String.join("#",combo.get(j)));
+		    			System.out.println(parent.id);
+		        		parents.add(parent);
+		    		}
+		    }
 		}
-		System.out.println(node.id);
-		return null;
+		return parents;
 	}
 
 	private static ArrayList<Node> deriveChildren(Hierarchia h, Node node) {
-		System.out.println("Children of: "+node.id);
+		System.out.println("-------- Children of: "+node.id+"--------");
 		ArrayList<Node> children = new ArrayList<Node>();
 		System.out.println("uniqueAttributeKeyVals:"+h.uniqueAttributeKeyVals);
 		System.out.println("attribute names:"+h.getAttribute_names());
@@ -144,6 +155,7 @@ public class OnlineRandomWalk extends Traversal{
 	        		children.add(child);
 	        }
 	    }
+	    	//node.set_child_list(children); // ArrayList<Integer> not ArrayList<Node>
 		return children;
 	}
 

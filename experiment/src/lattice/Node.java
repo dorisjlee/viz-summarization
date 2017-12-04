@@ -7,7 +7,7 @@ import java.util.*;
 public class Node 
 {
     public String id; // Combined filter list with "#"
-    public ArrayList<String> filters; 
+    //public ArrayList<String> filters; 
     public ArrayList<Integer> child_list; // List of node IDs of the children
     public ArrayList<Double> dist_list; // edge weights (distance) of this node to all the children
     ArrayList<String> merged_nodes_keys;
