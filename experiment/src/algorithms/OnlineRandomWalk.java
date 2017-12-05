@@ -60,24 +60,25 @@ public class OnlineRandomWalk extends Traversal{
         Random r = new Random(System.currentTimeMillis());
         int myRandomNumber = r.nextInt(children.size());
         dashboard.add(children.get(myRandomNumber));
-        System.out.println(dashboard);
         // 	Stop when dashboard exceeds desired size k
-        while (dashboard.size()<k) {
+        while (dashboard.size()<k && dashboard.size() < lattice.nodeList.size()) {
         		ArrayList<Integer> currentFrontier = RandomWalk.getFrontier(lattice,dashboard);
-        		System.out.println(currentFrontier);
+        		System.out.println("nodeList.size:"+lattice.nodeList.size());
+        		System.out.println("dashboard:"+dashboard);
+        		System.out.println("currentFrontier:"+currentFrontier);
         		// Pick one from the given current frontier
+        		
         		int randInt =  r.nextInt(currentFrontier.size()-1);
         		int pickedNodeID = currentFrontier.get(randInt);
-        		
         		System.out.println("pickedNodeID:"+pickedNodeID);
         		Node pickedNode = lattice.nodeList.get(pickedNodeID);
         		ArrayList<Integer> parents = deriveParents(h, pickedNode, lattice.nodeList);
         		int informativeParentID = findInformativeParent(lattice,parents,pickedNode);
-        		if (informativeParentID!=-1) {
-        			dashboard.add(pickedNodeID);
-        			//Compute Utility
-        		}
-        		//dashboard.add(pickedNodeID);
+//        		if (informativeParentID!=-1) {
+//        			dashboard.add(pickedNodeID);
+//        			//Compute Utility
+//        		}
+        		dashboard.add(pickedNodeID);
         }
         lattice.maxSubgraph=dashboard;
         return lattice;
@@ -86,17 +87,21 @@ public class OnlineRandomWalk extends Traversal{
 	
 	private static int findInformativeParent(Lattice lattice,ArrayList<Integer> parents,Node pickedNodeID) {
 		System.out.println(tr.informative_critera);
-		try {
-			Experiment.computeVisualization(exp,"#pc_class$1#sexcode$0#");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for (int i=0;i<parents.size();i++) {
+			try {
+				Experiment.computeVisualization(exp,lattice.nodeList.get(parents.get(i)).id);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
+		
 		return 0;
 	}
 
 	private static ArrayList<Integer> deriveParents(Hierarchia h, Node node, ArrayList<Node> node_list) {
-		System.out.println("-------- Parents of: "+ node.id+"--------");
+		//System.out.println("-------- Parents of: "+ node.id+"--------");
 		ArrayList<Integer> parents = new ArrayList<Integer>();
 		if (node.equals("#")) {
 			// Root has no parents 
@@ -109,7 +114,7 @@ public class OnlineRandomWalk extends Traversal{
 		    		// Loop through the generated i-item combination and save as parent
 		    		for (int j =0;j<combo.size();j++) {
 		    			Node parent = new Node(String.join("#",combo.get(j)));
-		    			System.out.println(parent.id);
+		    			//System.out.println(parent.id);
 		    			node_list.add(parent);
 		        		parents.add(node_list.size());
 //		        		parents.add(parent);
@@ -120,17 +125,17 @@ public class OnlineRandomWalk extends Traversal{
 	}
 
 	private static ArrayList<Integer> deriveChildren(Hierarchia h, Node node, ArrayList<Node> node_list) {
-		System.out.println("-------- Children of: "+node.id+"--------");
+		//System.out.println("-------- Children of: "+node.id+"--------");
 		ArrayList<Integer> children = new ArrayList<Integer>();
-		System.out.println("uniqueAttributeKeyVals:"+h.uniqueAttributeKeyVals);
-		System.out.println("attribute names:"+h.getAttribute_names());
-		System.out.println("Removed xAxis:"+h.xAxis);
+		//System.out.println("uniqueAttributeKeyVals:"+h.uniqueAttributeKeyVals);
+		//System.out.println("attribute names:"+h.getAttribute_names());
+		//System.out.println("Removed xAxis:"+h.xAxis);
 		h.uniqueAttributeKeyVals.remove(h.xAxis);// remove the xAxis item in the attribute list
 		// Remove the existing attributes in the node
 		for (String split_filter:node.id.split("#")) {
 			if (split_filter.indexOf("$")!=-1) {
 				String existing_attribute = split_filter.substring(0,split_filter.indexOf("$"));
-				System.out.println("Remove:"+existing_attribute);
+				//System.out.println("Remove:"+existing_attribute);
 				h.uniqueAttributeKeyVals.remove(existing_attribute);
 			}
 		}
@@ -141,7 +146,7 @@ public class OnlineRandomWalk extends Traversal{
 	        Map.Entry pair = (Map.Entry)it.next();
 	        for (String val: (ArrayList<String>) pair.getValue()) {
 	        		// A Child is the existing node values plus one additional filter.
-	        		System.out.println(node.id+pair.getKey()+"$"+val+"#");
+	        		//System.out.println(node.id+pair.getKey()+"$"+val+"#");
 	        		Node child = new Node(node.id+pair.getKey()+"$"+val+"#");
 	        		node_list.add(child);
 	        		children.add(node_list.size());
@@ -156,16 +161,15 @@ public class OnlineRandomWalk extends Traversal{
 		//ArrayList<Node> parents = deriveParents(h,new Node("#cap_color$b#cap_shape$x#type$e#"));
         //ArrayList<Node> children = deriveChildren(h,new Node("#cap_color$b#cap_shape$x#"));
     		Euclidean ed = new Euclidean();
-    		Hierarchia h = new Hierarchia("mushroom","cap_surface");
-    		ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("survived","sexcode","pc_class"));
+    		//Hierarchia h = new Hierarchia("mushroom","cap_surface");
+    		ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("type","cap_shape", "cap_surface" , "cap_color" , "bruises" , "odor"));
     		Experiment exp = null;
 		try {
-			exp = new Experiment("titanic", "survived", "id",groupby, "COUNT", 10, "Online Random Walk", ed,0,0.8);
+			exp = new Experiment("mushroom","cap_surface","cap_surface",groupby, "COUNT", 10, "Online Random Walk", ed,0,0.8,true);
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
         tr = new OnlineRandomWalk(exp);
         tr.pickVisualizations(8);
         /*

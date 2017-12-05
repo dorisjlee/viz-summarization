@@ -45,7 +45,7 @@ public class Experiment {
 	public String aggFunc;
 	public static String experiment_name="../ipynb/dashboards/json/"+"vary_dataset_ip";
 	public Experiment(String datasetName, String xAxisName, String yAxisName, ArrayList<String> groupby, String aggFunc, int k, String algoName, Distance dist,
-			double iceberg_ratio, double informative_critera) throws SQLException, FileNotFoundException, UnsupportedEncodingException {
+			double iceberg_ratio, double informative_critera,boolean online) throws SQLException, FileNotFoundException, UnsupportedEncodingException {
 		super();
 		this.datasetName = datasetName;
 		this.xAxisName = xAxisName;
@@ -63,8 +63,12 @@ public class Experiment {
 		// Generate base table via group-by
 		ResultSet rs = Database.viz_query(this.datasetName, this.groupby, this.yAxisName, this.aggFunc, new ArrayList<String>(Arrays.asList()));
 		Database.resultSet2csv(rs,this.datasetName,this.groupby,this.aggFunc+"("+this.yAxisName+")");
-		this.lattice = Hierarchia.generateFullyMaterializedLattice(dist,iceberg_ratio,informative_critera);
-		this.nbars = lattice.id2MetricMap.get("#").size();
+		if (online) {
+			this.lattice = new Lattice();
+		}else {
+			this.lattice = Hierarchia.generateFullyMaterializedLattice(dist,iceberg_ratio,informative_critera);
+			this.nbars = lattice.id2MetricMap.get("#").size();
+		}
 		this.maxCount=0;
 		if (this.algoName.equals("frontierGreedy")) {
 			this.algo = new BreadthFirstPicking(lattice,dist);   
@@ -127,16 +131,15 @@ public class Experiment {
 		 //Debugging Exhaustive
 		 ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("has_list_sum_range_fn","has_corr_list_fn","has_prof_clicks_tbl","is_profile_query","has_impressions_tbl","has_prof_engagement_events_tbl"));
 		 //ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("has_list_sum_range_fn","has_corr_list_fn","has_prof_clicks_tbl","has_est_distinct","has_list_sum_fn","has_impressions_tbl","is_profile_query","has_prof_engagement_events_tbl"));
-		 exp = new Experiment("turn", "has_prof_clicks_tbl","hdfs_bytes_written",groupby,"SUM", k, "frontierGreedy", new Euclidean(),0,0.8);
+		 exp = new Experiment("turn", "has_prof_clicks_tbl","hdfs_bytes_written",groupby,"SUM", k, "frontierGreedy", new Euclidean(),0,0.8,false);
 		 long duration = exp.timedRunOutput();
 		 System.out.println("Duration:"+duration);
 		 exp.algo.printMaxSubgraphSummary();
-		 exp = new Experiment("turn", "has_prof_clicks_tbl", "hdfs_bytes_written",groupby,"SUM", k, "greedy", new Euclidean(),0,0.8);
+		 exp = new Experiment("turn", "has_prof_clicks_tbl", "hdfs_bytes_written",groupby,"SUM", k, "greedy", new Euclidean(),0,0.8,false);
 		 duration = exp.timedRunOutput();
 		 System.out.println("Duration:"+duration);
 		 exp.algo.printMaxSubgraphSummary();
-		
-		 exp = new Experiment("turn", "has_prof_clicks_tbl","hdfs_bytes_written",groupby,"SUM", k, "naiveExhaustive", new Euclidean(),0,0.8);
+		 exp = new Experiment("turn", "has_prof_clicks_tbl","hdfs_bytes_written",groupby,"SUM", k, "naiveExhaustive", new Euclidean(),0,0.8,false);
 		 duration = exp.timedRunOutput();
 		 System.out.println("Duration:"+duration);
 		 exp.algo.printMaxSubgraphSummary();
