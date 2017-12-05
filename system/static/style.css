@@ -1,6 +1,7 @@
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
     margin: 0;
     padding: 0;
+
 }
 
 table {
@@ -11,6 +12,7 @@ table {
 fieldset,
 img {
     border: 0;
+
 }
 address,caption,cite,code,dfn,em,strong,th,var {
     font-style: normal;
@@ -42,6 +44,7 @@ acronym {
 
 body {
     background: #fff;
+
 }
 /*Treant settings */
 
@@ -81,10 +84,12 @@ body {
     height: 100%;
 }
 #mynetwork {
-    width: 600px;
+    width: 75%;
     height: 600px;
     border: 1px solid lightgray;
     background-color:#eeeeee;
+    float:left;
+
 }
 /*Webpage Style settings */
 #chartid body {
@@ -273,24 +278,36 @@ input[type=range] {
     border-color: #555 transparent transparent transparent;
 }
 
-/* Toggle this class when clicking on the popup container (hide and show the popup) */
-.popup .show {
-    visibility: visible;
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s
+
+* {
+    box-sizing: border-box;
 }
 
-/* Add animation (fade in the popup) */
-@-webkit-keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+.column {
+    float: right;
+    padding: 5px;
+}
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+.menu {
+    width: 25%;
 }
 
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity:1 ;}
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
-input:checked {
-             height: 15px;
-             width: 15px;
-             }
+.menu li {
+    padding: 8px;
+    margin-bottom: 8px;
+    background-color: #33b5e5;
+    color: #ffffff;
+}
+.menu li:hover {
+    background-color: #0099cc;
+}
+
