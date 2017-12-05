@@ -88,6 +88,20 @@ function draw(node,edge) {
         $.post("/getInterested",{
             "interested" : JSON.stringify(totalclick)
         },'application/json')
+        document.getElementById('interested-in').innerHTML = '';
+        document.getElementById('not-interested-in').innerHTML = '';
+        for (i = 0; i < node_dataset.length; i++) {
+
+            if(totalclick[i]==3){
+                var currNode = node_dataset.get(i);
+                document.getElementById('interested-in').innerHTML+='<tr>'+'<td style="color:#368332">'+ currNode.id+'<td>'+ '<td style="padding-left:1cm;color:#368332"> '+currNode.filterVal+'<td> '+'<tr>';
+            }
+            else if (totalclick[i]==2){
+                var currNode = node_dataset.get(i);
+                document.getElementById('not-interested-in').innerHTML+='<tr>'+'<td style="color:#ff0000">'+ currNode.id+'<td>'+ '<td style="padding-left:1cm;color:#ff0000"> '+currNode.filterVal+'<td> '+'<tr>';
+            }
+        }
+
     });
 
    /*network.on("click", function (params) {
