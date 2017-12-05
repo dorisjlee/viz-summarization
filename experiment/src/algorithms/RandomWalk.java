@@ -20,57 +20,56 @@ public class RandomWalk extends Traversal{
 	
 	public void pickVisualizations(Integer k) {
 	   System.out.println("---------------- Random Walk -----------------");
-       Lattice rwResult = randomWalk(lattice,k);
-       lattice.maxSubgraph= rwResult.maxSubgraph; 
-       lattice.maxSubgraphUtility=rwResult.maxSubgraphUtility;
+	   ArrayList<Integer> rwResult = randomWalk(lattice,k);
+       lattice.maxSubgraph= rwResult; 
+       lattice.maxSubgraphUtility=computeSubGraphUtility(rwResult);
        printMaxSubgraphSummary();
    }
 	
-	public static Lattice randomWalk(Lattice lattice,Integer k) {
-		 double total_utility =0;
+	public static ArrayList<Integer> randomWalk(Lattice lattice,Integer k) {
 	       ArrayList<Integer> dashboard = new ArrayList<Integer>();
 	       dashboard.add(0); // Adding root
 	       // Stop when dashboard exceeds desired size k 
 	       while(dashboard.size()<k && dashboard.size() < lattice.nodeList.size())
 	       {	
-	       	   ArrayList<Integer> currentFrontier = new ArrayList<Integer>();
-	           //System.out.println("Dashboard Size: "+dashboard.size());
-	           int next = -1;
-	           for(int i = 0; i < dashboard.size(); i++)
-	           {
-	               //System.out.println("Children of: "+node_list.get(dashboard.get(i)).get_id());
-	        	       // Looping through all children indexes 
-	               for(int j = 0; j < lattice.nodeList.get(dashboard.get(i)).get_dist_list().size(); j++)
-	               {
-	            	   	   
-	                   int flag = 0;
-	                   //System.out.println("Current Node: "+node_list.get(dashboard.get(i)).get_child_list().get(j));
-	                   for(int sp = 0; sp < dashboard.size(); sp++)
-	                   {
-	                       // Check if the node to be added is already in the dashboard 
-	                       if(lattice.nodeList.get(dashboard.get(i)).get_child_list().get(j).equals(dashboard.get(sp)))
-	                       {
-	                           //System.out.println("Already in");
-	                           flag =1;
-	                           break;
-	                       }
-	                   }
-	                   if(flag == 0)
-	                   {
-	                       next = lattice.nodeList.get(dashboard.get(i)).get_child_list().get(j);
-	                       currentFrontier.add(next);
-	                   }
-	               }
-	           }
+	    	   	   ArrayList<Integer> currentFrontier = RandomWalk.getFrontier(lattice,dashboard);
 	           Random r = new Random(System.currentTimeMillis());
 	           int myRandomNumber = 0;
 	           myRandomNumber = r.nextInt(currentFrontier.size());
 	           dashboard.add(currentFrontier.get(myRandomNumber));
 	       }
-	       Lattice rwResult = new Lattice();
-	       rwResult.maxSubgraph= dashboard; 
-	       rwResult.maxSubgraphUtility=total_utility;
-	       return rwResult;
+	       return dashboard;
+	}
+	public static ArrayList<Integer> getFrontier(Lattice lattice,ArrayList<Integer> dashboard) {
+		ArrayList<Integer> currentFrontier = new ArrayList<Integer>();
+        //System.out.println("Dashboard Size: "+dashboard.size());
+        int next = -1;
+        for(int i = 0; i < dashboard.size(); i++)
+        {
+            //System.out.println("Children of: "+node_list.get(dashboard.get(i)).get_id());
+     	       // Looping through all children indexes 
+            for(int j = 0; j < lattice.nodeList.get(dashboard.get(i)).child_list.size(); j++)
+            { 
+                int flag = 0;
+                //System.out.println("Current Node: "+node_list.get(dashboard.get(i)).get_child_list().get(j));
+                for(int sp = 0; sp < dashboard.size(); sp++)
+                {
+                    // Check if the node to be added is already in the dashboard 
+                    if(lattice.nodeList.get(dashboard.get(i)).child_list.get(j).equals(dashboard.get(sp)))
+                    {
+                        //System.out.println("Already in");
+                        flag =1;
+                        break;
+                    }
+                }
+                if(flag == 0)
+                {
+                    next = lattice.nodeList.get(dashboard.get(i)).child_list.get(j);
+                    currentFrontier.add(next);
+                }
+            }
+        }
+		return currentFrontier;
 	}
 
 	public static void main (String[] args) throws SQLException {

@@ -29,11 +29,10 @@ public class MultipleRandomWalk extends Traversal{
 	   int count =0;
 	   
 	   while (count < maxCount) {
-		   
-	       Lattice rwResult = RandomWalk.randomWalk(lattice,k);
-	       double total_utility=computeSubGraphUtility(rwResult.maxSubgraph);
+		   ArrayList<Integer> rwResult = RandomWalk.randomWalk(lattice,k);
+	       double total_utility=computeSubGraphUtility(rwResult);
 	       if (total_utility>lattice.maxSubgraphUtility){
-		       lattice.maxSubgraph= rwResult.maxSubgraph; 
+		       lattice.maxSubgraph= rwResult; 
 		       lattice.maxSubgraphUtility=total_utility;
 	       }
 	       count+=1;
