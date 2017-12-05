@@ -74,8 +74,6 @@ public class Experiment {
 			this.algo = new BreadthFirstPicking(lattice,dist);   
 		}else if (this.algoName.equals("greedy")) {
 			this.algo = new GreedyPicking(lattice,dist);
-		}else if (this.algoName.equals("naiveGreedy")) {
-			this.algo = new NaiveGreedyPicking(lattice, dist);
 		}else if (this.algoName.equals("exhaustive")) {
 			this.algo = new ExhaustivePicking(lattice, dist);
 		}else if (this.algoName.equals("naiveExhaustive")) {
@@ -117,11 +115,10 @@ public class Experiment {
 	    Collections.shuffle(copy);
 	    return new ArrayList<String>(copy.subList(0, n));
 	}
-	public static double computeVisualization(Experiment exp,String filterStr) throws SQLException {
+	public static ArrayList<Double> computeVisualization(Experiment exp,String filterStr) throws SQLException {
 		String[] items = filterStr.substring(1).replace("$","=").split("#");
 	    ArrayList<String> split_filters = new ArrayList<String>(Arrays.asList(items));
-		System.out.println(Database.computeViz(exp.datasetName, exp.xAxisName,exp.groupby, exp.yAxisName, exp.aggFunc, split_filters));
-		return 0.;
+	    return Database.computeViz(exp.datasetName, exp.xAxisName,exp.groupby, exp.yAxisName, exp.aggFunc, split_filters);
 	}
 	public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
 	{

@@ -167,9 +167,7 @@ public static double computeSubGraphUtility(Lattice lattice) {
 	{
 		Node node1 = l.nodeList.get(nodeId1);
 		Node node2 = l.nodeList.get(nodeId2);
-		double[] node1Val = ArrayList2Array(l.id2MetricMap.get(node1.get_id()));
-		double[] node2Val = ArrayList2Array(l.id2MetricMap.get(node2.get_id()));
-		double utility = m.computeDistance(node1Val, node2Val);
+		double utility = m.computeDistance(l.id2MetricMap.get(node1.get_id()), l.id2MetricMap.get(node2.get_id()));
 		return utility;
 	}
 	
@@ -231,9 +229,6 @@ public static double computeSubGraphUtility(Lattice lattice) {
        tr.pickVisualizations(k);
        
        tr = new RecursiveNaiveGreedyPicking(lattice, new Euclidean(), 2);
-       tr.pickVisualizations(k);
-       
-       tr = new NaiveGreedyPicking(lattice,new Euclidean());
        tr.pickVisualizations(k);
        
        //Hierarchia.print_map(lattice.id2MetricMap);

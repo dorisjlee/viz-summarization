@@ -87,16 +87,38 @@ public class OnlineRandomWalk extends Traversal{
 	
 	private static int findInformativeParent(Lattice lattice,ArrayList<Integer> parents,Node pickedNodeID) {
 		System.out.println(tr.informative_critera);
-		for (int i=0;i<parents.size();i++) {
-			try {
-				Experiment.computeVisualization(exp,lattice.nodeList.get(parents.get(i)).id);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		try {
+			ArrayList<Double> current_visualization_measure_values = 
+				Experiment.computeVisualization(exp,pickedNodeID.id);
+			for (int i=0;i<parents.size();i++) {
+				ArrayList<Double> parent_visualization_measure_values  = 
+					Experiment.computeVisualization(exp,lattice.nodeList.get(parents.get(i)).id);
+				double dist = tr.metric.computeDistance(current_visualization_measure_values, parent_visualization_measure_values);
+                //System.out.println("dist criteria:"+min_distance/informative_criteria);
+				/*
+                if(dist*informative_criteria <= min_distance)
+                {
+                    int parent_index = map_id_to_index.get(visualization_key);
+                    
+                    ArrayList<Integer> child_list = node_list.get(parent_index).get_child_list();
+                    if (parent_index!=node_list.size()-1) {
+                    		child_list.add(node_list.size()-1);
+                    }
+                    node_list.get(parent_index).set_child_list(child_list);
+                    ArrayList<Double> dist_list = node_list.get(parent_index).get_dist_list();
+                    dist_list.add(dist);
+                    //System.out.println("Informative parent: "+visualization_key+" -- "+dist);
+                }*//*else {
+                		System.out.println("Non-informative parent:"+visualization_key+" -- "+dist);
+                }*/
+				
 			}
-			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
+	
+
 		return 0;
 	}
 
