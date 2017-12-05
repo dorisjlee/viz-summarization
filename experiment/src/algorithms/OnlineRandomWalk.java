@@ -1,4 +1,6 @@
 package algorithms;
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,10 +21,13 @@ import lattice.Node;
  * Stop until reach k nodes in dashboard
  */
 public class OnlineRandomWalk extends Traversal{
+	static Traversal tr; 
+	static Experiment exp;
 	static Hierarchia h;
-	public OnlineRandomWalk(Hierarchia h, Distance metric, double iceberg_ratio, double informative_criteria) {
-		super(metric, iceberg_ratio,informative_criteria, "Online Random Walk in Lattice");
-		this.h = h;
+	public OnlineRandomWalk(Experiment exp) {
+		super(exp, "Online Random Walk in Lattice");
+		this.exp = exp;
+		this.h = exp.h;
 	}
 	
 	public void pickVisualizations(Integer k) {
@@ -30,7 +35,7 @@ public class OnlineRandomWalk extends Traversal{
 	   Lattice rwResult = onlineRW(k);
        //lattice.maxSubgraphUtility=computeSubGraphUtility(rwResult);
        //printMaxSubgraphSummary();
-   }
+	}
 
 	public static Lattice onlineRW(Integer k) {
 		Lattice lattice = new Lattice();
@@ -61,15 +66,35 @@ public class OnlineRandomWalk extends Traversal{
         		ArrayList<Integer> currentFrontier = RandomWalk.getFrontier(lattice,dashboard);
         		System.out.println(currentFrontier);
         		// Pick one from the given current frontier
-        		int randInt =  r.nextInt(currentFrontier.size());
-        		dashboard.add(currentFrontier.get(randInt));
+        		int randInt =  r.nextInt(currentFrontier.size()-1);
+        		int pickedNodeID = currentFrontier.get(randInt);
+        		
+        		System.out.println("pickedNodeID:"+pickedNodeID);
+        		Node pickedNode = lattice.nodeList.get(pickedNodeID);
+        		ArrayList<Integer> parents = deriveParents(h, pickedNode, lattice.nodeList);
+        		int informativeParentID = findInformativeParent(lattice,parents,pickedNode);
+        		if (informativeParentID!=-1) {
+        			dashboard.add(pickedNodeID);
+        			//Compute Utility
+        		}
+        		//dashboard.add(pickedNodeID);
         }
         lattice.maxSubgraph=dashboard;
-        
         return lattice;
 	}
 
 	
+	private static int findInformativeParent(Lattice lattice,ArrayList<Integer> parents,Node pickedNodeID) {
+		System.out.println(tr.informative_critera);
+		try {
+			Experiment.computeVisualization(exp,"#pc_class$1#sexcode$0#");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
 	private static ArrayList<Integer> deriveParents(Hierarchia h, Node node, ArrayList<Node> node_list) {
 		System.out.println("-------- Parents of: "+ node.id+"--------");
 		ArrayList<Integer> parents = new ArrayList<Integer>();
@@ -132,10 +157,16 @@ public class OnlineRandomWalk extends Traversal{
         //ArrayList<Node> children = deriveChildren(h,new Node("#cap_color$b#cap_shape$x#"));
     		Euclidean ed = new Euclidean();
     		Hierarchia h = new Hierarchia("mushroom","cap_surface");
-    		//Hierarchia h = new Hierarchia("turn","has_list_fn");
-    		//Hierarchia h = new Hierarchia("titanic","survived");
-        Traversal tr; 
-        tr = new OnlineRandomWalk(h,ed,0.001,0.8);
+    		ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("survived","sexcode","pc_class"));
+    		Experiment exp = null;
+		try {
+			exp = new Experiment("titanic", "survived", "id",groupby, "COUNT", 10, "Online Random Walk", ed,0,0.8);
+		} catch (FileNotFoundException | UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+        tr = new OnlineRandomWalk(exp);
         tr.pickVisualizations(8);
         /*
         tr = new GreedyPicking(lattice,new Euclidean());

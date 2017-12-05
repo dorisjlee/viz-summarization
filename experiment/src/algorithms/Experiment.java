@@ -29,7 +29,7 @@ public class Experiment {
 	double iceberg_ratio;// [ic] % of root population size to keep as a node
 	double informative_critera; //[ip] % closeness to minDist to be regarded as informative parent
 	Lattice lattice;
-	Hierarchia h;
+	public Hierarchia h;
 	Traversal algo;
 	String fname;
 	int nbars;
@@ -41,8 +41,8 @@ public class Experiment {
 		this.maxCount = maxCount;
 		this.algo = new MultipleRandomWalk(this.maxCount, lattice, dist);
 	}
-	private ArrayList<String> groupby;
-	private String aggFunc;
+	public ArrayList<String> groupby;
+	public String aggFunc;
 	public static String experiment_name="../ipynb/dashboards/json/"+"vary_dataset_ip";
 	public Experiment(String datasetName, String xAxisName, String yAxisName, ArrayList<String> groupby, String aggFunc, int k, String algoName, Distance dist,
 			double iceberg_ratio, double informative_critera) throws SQLException, FileNotFoundException, UnsupportedEncodingException {
@@ -112,6 +112,12 @@ public class Experiment {
 		LinkedList<String> copy = new LinkedList<String>(lst);
 	    Collections.shuffle(copy);
 	    return new ArrayList<String>(copy.subList(0, n));
+	}
+	public static double computeVisualization(Experiment exp,String filterStr) throws SQLException {
+		String[] items = filterStr.substring(1).replace("$","=").split("#");
+	    ArrayList<String> split_filters = new ArrayList<String>(Arrays.asList(items));
+		System.out.println(Database.computeViz(exp.datasetName, exp.xAxisName,exp.groupby, exp.yAxisName, exp.aggFunc, split_filters));
+		return 0.;
 	}
 	public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
 	{

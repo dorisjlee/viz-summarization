@@ -94,7 +94,7 @@ public class Database {
 		}
 		return arrJoined;
 	}
-	public static  ResultSet viz_query(String tablename, ArrayList<String> x_attr,String y_attr,String agg_func, ArrayList<String> filters ) throws SQLException {
+	public static  ResultSet viz_query(String tablename, ArrayList<String> x_attr,String y_attr,String agg_func, ArrayList<String> filters) throws SQLException {
 		String xAttrJoined =arr2DelimitedStrings(x_attr, ",");
 		String query_stmt = "SELECT " + xAttrJoined + ", " +agg_func +"(" + y_attr + ")" + " FROM " + tablename;
 		if (filters.size()==0) {
@@ -104,6 +104,16 @@ public class Database {
 	        query_stmt +=" GROUP BY " + xAttrJoined +";";
 		}
 		ResultSet result = query(query_stmt);
+		return result;
+	}
+	public static ResultSet computeViz(String tablename, String x_attr, ArrayList<String> groupby,String y_attr,String agg_func, ArrayList<String> filters) throws SQLException {
+		String groupbyJoined =arr2DelimitedStrings(groupby, ",");
+		String query_stmt = "SELECT " + x_attr + ", " +agg_func +"(" + y_attr + ")" + " FROM " + tablename;
+		query_stmt += " WHERE "+ arr2DelimitedStrings(filters, "AND");
+        query_stmt +=" GROUP BY " + groupbyJoined +";";
+        System.out.println(query_stmt);
+		ResultSet result = query(query_stmt);
+		
 		return result;
 	}
 	public static ResultSet getColumns(String tablename) throws SQLException {

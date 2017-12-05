@@ -29,13 +29,13 @@ public abstract class Traversal {
 		this.lattice.maxSubgraphUtility = 0;
 	}
 	
-	public Traversal(Distance metric, double iceberg_ratio, double informative_criteria, String algoName) 
+	public Traversal(Experiment exp, String algoName) 
 	{
 		//Online Traversal Overridden method
 		this.lattice = new Lattice();
-		this.iceberg_ratio = iceberg_ratio;
-		this.informative_critera = informative_criteria;
-		this.metric = metric;
+		this.iceberg_ratio = exp.iceberg_ratio;
+		this.informative_critera = exp.informative_critera;
+		this.metric = exp.dist;
 		this.algoName = algoName;
 		this.lattice.maxSubgraphUtility = 0;
 	}
