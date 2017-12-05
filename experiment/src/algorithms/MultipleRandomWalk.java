@@ -44,13 +44,14 @@ public class MultipleRandomWalk extends Traversal{
     		Hierarchia h = new Hierarchia("mushroom","cap_surface");
     		Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
         Traversal tr; 
-        tr = new MultipleRandomWalk(1000000,lattice,new Euclidean());
-        tr.pickVisualizations(8);
+        //tr = new MultipleRandomWalk(1000000,lattice,new Euclidean());
+        tr = new MultipleRandomWalk(100000,lattice,new Euclidean());
+        tr.pickVisualizations(10);
         
         tr = new GreedyPicking(lattice,new Euclidean());
-        tr.pickVisualizations(8);
+        tr.pickVisualizations(10);
         
         tr = new BreadthFirstPicking(lattice,new Euclidean());
-        tr.pickVisualizations(8);
+        tr.pickVisualizations(10);
     }
 }

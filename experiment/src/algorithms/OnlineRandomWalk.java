@@ -27,10 +27,9 @@ public class OnlineRandomWalk extends Traversal{
 	
 	public void pickVisualizations(Integer k) {
 	   System.out.println("---------------- Online Random Walk -----------------");
-       Lattice rwResult = onlineRW(k);
-       lattice.maxSubgraph= rwResult.maxSubgraph; 
-       lattice.maxSubgraphUtility=rwResult.maxSubgraphUtility;
-       printMaxSubgraphSummary();
+	   Lattice rwResult = onlineRW(k);
+       //lattice.maxSubgraphUtility=computeSubGraphUtility(rwResult);
+       //printMaxSubgraphSummary();
    }
 
 	public static Lattice onlineRW(Integer k) {
@@ -65,11 +64,9 @@ public class OnlineRandomWalk extends Traversal{
         		int randInt =  r.nextInt(currentFrontier.size());
         		dashboard.add(currentFrontier.get(randInt));
         }
+        lattice.maxSubgraph=dashboard;
         
-        Lattice rwResult = new Lattice();
-        rwResult.maxSubgraph= dashboard; 
-        rwResult.maxSubgraphUtility=total_utility;
-        return rwResult;
+        return lattice;
 	}
 
 	

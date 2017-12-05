@@ -73,15 +73,23 @@ public abstract class Traversal {
 				System.out.print(Integer.toString(lattice.maxSubgraph.get(j))+",");
 			}
 		}
+		
+		
 		System.out.print("[");
 		for (int j =0 ; j< lattice.maxSubgraph.size();j++) {
 			Node n = lattice.nodeList.get(lattice.maxSubgraph.get(j));
 			ArrayList<Double> dist = lattice.id2MetricMap.get(n.get_id());
+			/*
+			// Printing Value of Each Node
 			if (j==lattice.maxSubgraph.size()-1) {
-				
 				System.out.print(lattice.nodeList.get(lattice.maxSubgraph.get(j)).get_id()+ dist + "]\n");
 			}else {
 				System.out.print(lattice.nodeList.get(lattice.maxSubgraph.get(j)).get_id()+ dist +",");
+			}*/
+			if (j==lattice.maxSubgraph.size()-1) {
+				System.out.print(lattice.nodeList.get(lattice.maxSubgraph.get(j)).get_id()+"]\n");
+			}else {
+				System.out.print(lattice.nodeList.get(lattice.maxSubgraph.get(j)).get_id()+",");
 			}
 		}
 		updateSubGraphUtility();
@@ -100,7 +108,32 @@ public abstract class Traversal {
 	{
 		lattice.maxSubgraphUtility =  computeSubGraphUtility(lattice.maxSubgraph);
 	}
-	
+public static double computeSubGraphUtility(Lattice lattice) {
+	    ArrayList<Integer> subgraph = lattice.maxSubgraph;
+		double maxSubgraphUtility = 0;
+		HashMap<Integer,Float> nodeID2utility = new HashMap<>();
+		for(int nodeId : subgraph)
+			nodeID2utility.put(nodeId, 0f);
+		
+		for(int i : nodeID2utility.keySet())
+		{	
+			Node currentNode = lattice.nodeList.get(i);
+			for(int j = 0; j < currentNode.child_list.size(); j++)
+			{
+				int childId = currentNode.child_list.get(j);
+				if(nodeID2utility.containsKey(childId))
+				{
+					double edgeWeight = currentNode.dist_list.get(j);
+					Float currentUtility = nodeID2utility.get(childId); 
+					nodeID2utility.put(childId, (float) Math.max(currentUtility, edgeWeight));
+				}
+			}
+		}
+		
+		for(int nodeId : nodeID2utility.keySet())
+			maxSubgraphUtility += nodeID2utility.get(nodeId);
+		return maxSubgraphUtility;
+	}
 	public double computeSubGraphUtility(ArrayList<Integer> subgraph) {
 		
 		double maxSubgraphUtility = 0;
@@ -109,7 +142,7 @@ public abstract class Traversal {
 			nodeID2utility.put(nodeId, 0f);
 		
 		for(int i : nodeID2utility.keySet())
-		{
+		{	
 			Node currentNode = lattice.nodeList.get(i);
 			for(int j = 0; j < currentNode.child_list.size(); j++)
 			{
