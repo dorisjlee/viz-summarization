@@ -53,7 +53,7 @@ public class Hierarchia
     	    System.out.println("Informative parent defined as parents within "+informative_criteria*100+"% the minimum.");
         HashMap<String, ArrayList<Double>> map_id_to_metric_values = new HashMap<String, ArrayList<Double>>();
         ArrayList<Node> node_list = new ArrayList<Node>();// node_list: list of child indexes       
-        //System.out.println("uniqueAttributeKeyVals:"+uniqueAttributeKeyVals);
+        System.out.println("uniqueAttributeKeyVals:"+uniqueAttributeKeyVals);
         HashMap<String, Integer> map_id_to_index = new HashMap<String, Integer>();
         Node root = new Node("#");
         ArrayList<Double> root_measure_values = compute_visualization(root,new ArrayList<String>(),new ArrayList<String>());
@@ -485,6 +485,7 @@ public class Hierarchia
 	}
     public static void mergeNodesInLattice(Lattice lattice,ArrayList<String> nodes2merge) {
     		/* 
+    		 * INCOMPLETE STILL NEED DEBUGGING!!!
     		 * Given a list of nodes keys to merge, merge the nodes in the lattice
     		 */
 //    		System.out.println("--mergeNodesInLattice--");
@@ -540,6 +541,42 @@ public class Hierarchia
 //		print_map(lattice.id2IDMap);
 //		System.out.println("id2IDMap size:"+lattice.id2IDMap.size());
     }
+    static void combinationUtil(ArrayList<ArrayList<String>> all_combo,ArrayList<String> arr, ArrayList<String> data, int start,
+            int end, int index, int r)
+	{
+		if (index == r){
+			ArrayList<String> combo = new ArrayList<String>();
+			for (int j=0; j<r; j++)
+			combo.add(data.get(j));
+			all_combo.add(combo);
+			return;
+		}
+		
+		for (int i=start; i<=end && end-i+1 >= r-index; i++){
+			data.set(index,arr.get(i)) ;
+			combinationUtil(all_combo, arr, data, i+1, end, index+1, r);
+		}
+	}
+
+	/* Create all possible combination of the children nodes of size r
+	* @param 
+	* r: number of children to pick in the combination
+	*/
+	public static ArrayList<ArrayList<String>> combination(ArrayList<String> arr,   int r)
+	{
+		ArrayList<ArrayList<String>> all_combo = new ArrayList<ArrayList<String>>(); 
+		// A temporary array to store all combination one by one
+		ArrayList<String> data = (ArrayList<String>) arr.clone();
+		combinationUtil(all_combo,arr, data, 0, arr.size()-1, 0, r);
+		// Print all combination
+		/*
+		for (int i =0;i<all_combo.size();i++) {
+			System.out.println(all_combo.get(i));
+		}
+		*/
+		return all_combo;
+	}
+    
     public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
     {
 //    		Hierarchia h = new Hierarchia("turn","has_list_fn");

@@ -18,7 +18,8 @@ public abstract class Traversal {
 	Lattice lattice;
 	Distance metric;
 	String algoName;
-	
+	static double iceberg_ratio;
+	static double informative_critera;
 	public Traversal(Lattice lattice,Distance metric, String algoName) 
 	{
 		this.lattice = lattice;
@@ -31,10 +32,11 @@ public abstract class Traversal {
 	public Traversal(Distance metric, double iceberg_ratio, double informative_criteria, String algoName) 
 	{
 		//Online Traversal Overridden method
-		this.lattice = null;
+		this.lattice = new Lattice();
+		this.iceberg_ratio = iceberg_ratio;
+		this.informative_critera = informative_criteria;
 		this.metric = metric;
 		this.algoName = algoName;
-		this.lattice.maxSubgraph.clear();
 		this.lattice.maxSubgraphUtility = 0;
 	}
 	
