@@ -86,7 +86,6 @@ public class OnlineRandomWalk extends Traversal{
 
 	
 	private static int findInformativeParent(Lattice lattice,ArrayList<Integer> parents,Node pickedNodeID) {
-		System.out.println(tr.informative_critera);
 		try {
 			ArrayList<Double> current_visualization_measure_values = 
 				Experiment.computeVisualization(exp,pickedNodeID.id);
@@ -94,9 +93,9 @@ public class OnlineRandomWalk extends Traversal{
 				ArrayList<Double> parent_visualization_measure_values  = 
 					Experiment.computeVisualization(exp,lattice.nodeList.get(parents.get(i)).id);
 				double dist = tr.metric.computeDistance(current_visualization_measure_values, parent_visualization_measure_values);
-                //System.out.println("dist criteria:"+min_distance/informative_criteria);
+                
 				/*
-                if(dist*informative_criteria <= min_distance)
+                if(dist*tr.informative_critera <= min_distance)
                 {
                     int parent_index = map_id_to_index.get(visualization_key);
                     
@@ -108,10 +107,11 @@ public class OnlineRandomWalk extends Traversal{
                     ArrayList<Double> dist_list = node_list.get(parent_index).get_dist_list();
                     dist_list.add(dist);
                     //System.out.println("Informative parent: "+visualization_key+" -- "+dist);
-                }*//*else {
-                		System.out.println("Non-informative parent:"+visualization_key+" -- "+dist);
-                }*/
-				
+                }
+                */
+//				else {
+//                		System.out.println("Non-informative parent:"+visualization_key+" -- "+dist);
+//                }
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

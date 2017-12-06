@@ -24,27 +24,20 @@ public class Experiment {
 	String yAxisName;
 	int k;
 	String algoName;
-	Distance dist ;
+	public Distance dist ;
 	String distName;
 	double iceberg_ratio;// [ic] % of root population size to keep as a node
 	double informative_critera; //[ip] % closeness to minDist to be regarded as informative parent
-	Lattice lattice;
+	public Lattice lattice;
 	public Hierarchia h;
 	Traversal algo;
 	String fname;
 	int nbars;
-	int maxCount;
-	public int getMaxCount() {
-		return maxCount;
-	}
-	public void setMaxCount(int maxCount) {
-		this.maxCount = maxCount;
-		this.algo = new MultipleRandomWalk(this.maxCount, lattice, dist);
-	}
+	
 	public ArrayList<String> groupby;
 	public String aggFunc;
 	public static String experiment_name="../ipynb/dashboards/json/"+"vary_dataset_ip";
-	public Experiment(String datasetName, String xAxisName, String yAxisName, ArrayList<String> groupby, String aggFunc, int k, String algoName, Distance dist,
+	public Experiment(String datasetName, String xAxisName, String yAxisName, ArrayList<String> groupby, String aggFunc, int k, Distance dist,
 			double iceberg_ratio, double informative_critera,boolean online) throws SQLException, FileNotFoundException, UnsupportedEncodingException {
 		super();
 		this.datasetName = datasetName;
@@ -53,7 +46,6 @@ public class Experiment {
 		this.groupby = groupby;
 		this.aggFunc = aggFunc.toUpperCase();
 		this.k = k;
-		this.algoName = algoName;
 		this.dist = dist;
 		this.iceberg_ratio = iceberg_ratio;
 		this.informative_critera = informative_critera;
@@ -69,17 +61,40 @@ public class Experiment {
 			this.lattice = Hierarchia.generateFullyMaterializedLattice(dist,iceberg_ratio,informative_critera);
 			this.nbars = lattice.id2MetricMap.get("#").size();
 		}
-		this.maxCount=0;
-		if (this.algoName.equals("frontierGreedy")) {
-			this.algo = new BreadthFirstPicking(lattice,dist);   
-		}else if (this.algoName.equals("greedy")) {
-			this.algo = new GreedyPicking(lattice,dist);
-		}else if (this.algoName.equals("exhaustive")) {
-			this.algo = new ExhaustivePicking(lattice, dist);
-		}else if (this.algoName.equals("naiveExhaustive")) {
-			this.algo = new NaiveExhaustivePicking(lattice, dist);
-		}else if (this.algoName.equals("multipleRandomWalk")) {
-			this.algo = new MultipleRandomWalk(this.maxCount, lattice, dist);
+		if (experiment_name!="") {
+			File directory = new File(experiment_name);
+		    if (! directory.exists()){
+		        directory.mkdir();
+		    }
+			this.fname = experiment_name+"/"+datasetName+"_"+xAxisName.replace("_","-")+"_"+algoName+"_"+distName+"_ic"+iceberg_ratio+"_ip"+informative_critera+"_k"+k+".json";
+		}else {
+			this.fname = datasetName+"_"+xAxisName.replace("_","-")+"_"+algoName+"_"+distName+"_ic"+iceberg_ratio+"_ip"+informative_critera+"_k"+k+".json";
+		}
+	}
+	public Experiment(String datasetName, String xAxisName, String yAxisName, ArrayList<String> groupby, String aggFunc, int k, Traversal algo, Distance dist,
+			double iceberg_ratio, double informative_critera,boolean online) throws SQLException, FileNotFoundException, UnsupportedEncodingException {
+		this.datasetName = datasetName;
+		this.xAxisName = xAxisName;
+		this.yAxisName = yAxisName;
+		this.groupby = groupby;
+		this.aggFunc = aggFunc.toUpperCase();
+		this.k = k;
+		this.algo = algo;
+		this.algoName = algo.getAlgoName();
+		this.dist = dist;
+		this.iceberg_ratio = iceberg_ratio;
+		this.informative_critera = informative_critera;
+		this.distName = dist.getDistName();
+		this.h = new Hierarchia(datasetName,xAxisName);
+		this.h.setAttribute_names(this.groupby);
+		// Generate base table via group-by
+		ResultSet rs = Database.viz_query(this.datasetName, this.groupby, this.yAxisName, this.aggFunc, new ArrayList<String>(Arrays.asList()));
+		Database.resultSet2csv(rs,this.datasetName,this.groupby,this.aggFunc+"("+this.yAxisName+")");
+		if (online) {
+			this.lattice = new Lattice();
+		}else {
+			this.lattice = Hierarchia.generateFullyMaterializedLattice(dist,iceberg_ratio,informative_critera);
+			this.nbars = lattice.id2MetricMap.get("#").size();
 		}
 		if (experiment_name!="") {
 			File directory = new File(experiment_name);
@@ -91,6 +106,7 @@ public class Experiment {
 			this.fname = datasetName+"_"+xAxisName.replace("_","-")+"_"+algoName+"_"+distName+"_ic"+iceberg_ratio+"_ip"+informative_critera+"_k"+k+".json";
 		}
 	}
+	
 	public void runOutput() throws SQLException {
 		h.db.c.close();
 		algo.pickVisualizations(k);
@@ -102,6 +118,7 @@ public class Experiment {
 	public long timedRunOutput() throws SQLException {
 		h.db.c.close();
 		long startTime = System.nanoTime();
+		System.out.println(algo);
 		algo.pickVisualizations(k);
 		long endTime = System.nanoTime();
 		VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h, yAxisName);
@@ -122,9 +139,10 @@ public class Experiment {
 	}
 	public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
 	{
-
+		
 		 Experiment exp;
 		 int k =5;
+		 /*
 		 //Debugging Exhaustive
 		 ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("has_list_sum_range_fn","has_corr_list_fn","has_prof_clicks_tbl","is_profile_query","has_impressions_tbl","has_prof_engagement_events_tbl"));
 		 //ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("has_list_sum_range_fn","has_corr_list_fn","has_prof_clicks_tbl","has_est_distinct","has_list_sum_fn","has_impressions_tbl","is_profile_query","has_prof_engagement_events_tbl"));
@@ -140,8 +158,9 @@ public class Experiment {
 		 duration = exp.timedRunOutput();
 		 System.out.println("Duration:"+duration);
 		 exp.algo.printMaxSubgraphSummary();
+		 */
 	  /*
-	   // Multiple Random Walk Experiment
+	   	// Multiple Random Walk Experiment
 		PrintWriter writer = new PrintWriter("random_walk_scalability_experiment.csv", "UTF-8");
 	 	writer.println("iterations,total_time,total_utility");
     		Euclidean ed = new Euclidean();
@@ -172,7 +191,7 @@ public class Experiment {
 	duration = exp.timedRunOutput();
 	System.out.println(duration+","+exp.lattice.maxSubgraphUtility);
 	*/
-	   /*
+	  /* 
 	   Experiment exp;
 	   ArrayList<String> all_dimensions = new ArrayList<String>(Arrays.asList("is_successful","is_multi_query","is_profile_query","is_event_query","has_impressions_tbl","has_clicks_tbl","has_actions_tbl","has_rtbids_tbl","has_engagement_evnets_tbl","has_viewability_tbl","has_prof_impressions_tbl","has_prof_clicks_tbl","has_prof_actions_tbl","has_prof_rtbids_tbl","has_prof_engagement_events_tbl","has_prof_data_tbl","has_prof_provider_user_ids_tbl","has_prof_container_tags_tbl","has_prof_segments_tbl","has_prof_viewability_tbl","has_distinct","has_count_distinct","has_sum_distinct","has_est_distinct","has_list_fn","has_corr_list_fn","has_list_has_fn","has_list_count_fn","has_list_sum_fn","has_list_min_fn","has_list_max_fn","has_list_sum_range_fn","has_list_max_range_fn","has_list_min_range_fn","has_where_clause","has_having_clause","has_order_by_clause"));
 	   ArrayList<String> all_measures = new ArrayList<String>(Arrays.asList("hdfs_bytes_read","hdfs_bytes_written","total_launched_maps","total_launched_reduces","map_input_records","map_output_records","reduce_input_records","reduce_input_groups","reduce_output_records","slots_millis_maps","slots_millis_reduces"));
@@ -194,7 +213,7 @@ public class Experiment {
 		   //System.out.println(xAxis+","+yAxis);
 		   for (String algo : algoList) {
 			   try {
-				   exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", k, algo, new Euclidean(),0,0.8);
+				   exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", k, algo, new Euclidean(),0,0.8,false);
 				   if (algo.equals("multipleRandomWalk")) {
 					   for (int iterations: new  int[] {1,10,1000,10000,100000,1000000}) {
 						   exp.setMaxCount(iterations);
