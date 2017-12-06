@@ -12,6 +12,8 @@ import pandas as pd
 import json
 import glob
 from ast import literal_eval
+import os 
+from datetime import datetime
 db = SQLAlchemy(app)
 
 @app.route("/getTreeJSON")
@@ -81,6 +83,13 @@ def getTables():
 def getInterested():
     print "inside getInterested"
     print str(request.form['interested'])
+    print str(request.form['fname'])
+    path = "user_study_"+datetime.strftime(datetime.now(),"%Y_%m_%d")+".log"
+    # if (not os.path.isfile(path)):
+    f = open(path,'a')
+    f.write(datetime.strftime(datetime.now(),"%Y-%m-%d-%H-%M-%S")+","+\
+            str(request.form['fname'])+","+str(request.form['interested'])+"\n")
+    f.close()
     return ('', 204)
 @app.route("/postQuery", methods=['GET', 'POST'])
 def postQuery():

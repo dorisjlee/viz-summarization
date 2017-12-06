@@ -158,9 +158,7 @@ public class Hierarchia
 	                                if(map_id_to_metric_values.get(visualization_key) != null)
 	                                {
 	                                    ArrayList<Double> parent_visualization_measure_values = map_id_to_metric_values.get(visualization_key);
-	                                    double [] cviz = Traversal.ArrayList2Array(current_visualization_measure_values);
-	                                		double [] pviz =  Traversal.ArrayList2Array(parent_visualization_measure_values);
-	                                    double dist = distance.computeDistance(cviz,pviz);
+	                                    double dist = distance.computeDistance(current_visualization_measure_values,parent_visualization_measure_values);
 	                                    if(dist < min_distance)
 	                                        min_distance = dist;
 	                                }
@@ -178,7 +176,7 @@ public class Hierarchia
 	                                if(map_id_to_metric_values.get(visualization_key) != null)
 	                                {
 	                                    ArrayList<Double> parent_visualization_measure_values = map_id_to_metric_values.get(visualization_key);
-	                                    double dist = compute_distance(current_visualization_measure_values, parent_visualization_measure_values);
+	                                    double dist = distance.computeDistance(current_visualization_measure_values, parent_visualization_measure_values);
 	                                    //System.out.println("dist criteria:"+min_distance/informative_criteria);
 	                                    if(dist*informative_criteria <= min_distance)
 	                                    {
@@ -432,19 +430,6 @@ public class Hierarchia
             Map.Entry pair = (Map.Entry)it.next();
             System.out.println(pair.getKey() + " = " + pair.getValue());
         }
-    }
-
-    
-    static double compute_distance(ArrayList<Double> l1, ArrayList<Double> l2)
-    {
-        double distance = 0;
-        for(int i=0; i < l1.size() && i < l2.size(); i++)
-        {
-            distance += (l1.get(i)-l2.get(i))*(l1.get(i)-l2.get(i));
-            //distance += Math.abs(l1.get(i)-l2.get(i));
-        }
-        return Math.sqrt(distance);
-//        return distance;
     }
     public static void mergeNodes(Lattice lattice) {
     		/**

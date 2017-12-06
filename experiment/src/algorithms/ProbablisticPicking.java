@@ -1,6 +1,8 @@
 package algorithms;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,6 +11,7 @@ import java.util.Random;
 
 import distance.Distance;
 import distance.Euclidean;
+import lattice.Database;
 import lattice.Hierarchia;
 import lattice.Lattice;
 import lattice.Node;
@@ -18,8 +21,8 @@ import lattice.Tuple;
  */
 public class ProbablisticPicking extends Traversal{
 
-	public ProbablisticPicking(Lattice lattice, Distance metric) {
-		super(lattice, metric, "Probabalistic Greedy Picking");
+	public ProbablisticPicking() {
+		super("Probabalistic Greedy Picking");
 	}
 
 	/**
@@ -29,10 +32,11 @@ public class ProbablisticPicking extends Traversal{
 	 * 
 	 * @param k
 	 */
-	public void pickVisualizations(Integer k)
+	public void pickVisualizations(Experiment exp,Integer k)
 	{
 		super.printAlgoName();
-		
+		this.exp = exp;
+		this.lattice = exp.lattice;
 	    lattice.maxSubgraph.clear();
 	    lattice.maxSubgraphUtility = 0;
 	    
@@ -151,7 +155,7 @@ public class ProbablisticPicking extends Traversal{
 		for(int childId : currentNode.child_list)
 		{
 			if(!currentMaxSubgraph.containsKey(childId)) continue;
-			Double newUtility = Traversal.calculateDistance(nodeId, childId,lattice, metric);
+			Double newUtility = Traversal.calculateDistance(nodeId, childId, exp);
 			Float currentUtility = currentMaxSubgraph.get(childId);
 			currentMaxSubgraph.put(childId, (float) Math.max(currentUtility, newUtility));
 		}	
@@ -170,7 +174,7 @@ public class ProbablisticPicking extends Traversal{
 		for(Integer childId : lattice.nodeList.get(parentNodeId).get_child_list())
 		{	
 			if(lattice.maxSubgraph.contains(childId)) continue;
-			double utility = Traversal.calculateDistance(parentNodeId, childId, lattice, metric);
+			double utility = Traversal.calculateDistance(parentNodeId, childId, exp);
 			if(currentFrontier.containsKey(childId))
 				currentFrontier.put(childId, (float) Math.max(currentFrontier.get(childId), utility));
 			else
@@ -262,7 +266,7 @@ public class ProbablisticPicking extends Traversal{
 				Node possibleParentNode = lattice.nodeList.get(possibleParentId);
 				if(possibleParentNode.child_list.contains(childId))
 				{
-					double dist = Traversal.calculateDistance(possibleParentId, childId, lattice, metric);
+					double dist = Traversal.calculateDistance(possibleParentId, childId, exp);
 					otherParents.put(possibleParentId, (float) dist);
 				}
 			}
@@ -275,27 +279,4 @@ public class ProbablisticPicking extends Traversal{
 		}
 		return newMaxSubgraph;
 	}
-	 public static void main (String[] args) throws SQLException {
-		    /*    
-		    	ArrayList<Integer> pivot_children = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5));
-			int r = 3;
-	        combination(pivot_children, r);
-	        */
-	    		Euclidean ed = new Euclidean();
-	    		Hierarchia h = new Hierarchia("mushroom","cap_surface");
-	    		//Hierarchia h = new Hierarchia("turn","has_list_fn");
-	    		//Hierarchia h = new Hierarchia("titanic","survived");
-	    		Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
-	        Traversal tr; 
-	        tr = new ProbablisticPicking(lattice,new Euclidean());
-	        tr.pickVisualizations(5);
-	        tr = new RandomWalk(lattice,new Euclidean());
-	        tr.pickVisualizations(5);
-	        
-	        tr = new GreedyPicking(lattice,new Euclidean());
-	        tr.pickVisualizations(5);
-	        
-	        tr = new BreadthFirstPicking(lattice,new Euclidean());
-	        tr.pickVisualizations(5);
-	 }
 }

@@ -1,4 +1,7 @@
 package distance;
+
+import java.util.ArrayList;
+
 public class MaxDiff implements Distance{
 	private double mdiff;
 	String distName = "maxdiff";
@@ -12,10 +15,10 @@ public class MaxDiff implements Distance{
 		this.distName = distName;
 	}
 	@Override
-	public double computeDistance(double [] viz1, double [] viz2) {
-		assert viz1.length==viz2.length;
-		for (int i =0; i<viz1.length;i++) {
-			double diff = Math.abs(viz1[i]-viz2[i]);
+	public double computeDistance(ArrayList<Double> viz1, ArrayList<Double> viz2) {
+		assert viz1.size()==viz2.size();
+		for (int i =0; i<viz1.size();i++) {
+			double diff = Math.abs(viz1.get(i)-viz2.get(i));
 			if (diff >mdiff){
 				mdiff = diff;
 			}

@@ -1,8 +1,11 @@
 package distance;
+
+import java.util.ArrayList;
+
 public interface Distance {
 	public String getDistName();
 	public void setDistName(String distName);
-	public double computeDistance(double [] viz1, double [] viz2);
 	//	Let viz1 be the parent and viz2 be the child 
 	// (Order matters for certain metrics such as KL divergence and EMD)
+	public double computeDistance(ArrayList<Double> viz1, ArrayList<Double> viz2);
 }

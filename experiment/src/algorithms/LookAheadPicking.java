@@ -16,40 +16,42 @@ import lattice.Lattice;
  */
 public abstract class LookAheadPicking extends Traversal{
 
-	public LookAheadPicking(Lattice lattice, Distance metric, String algoName) 
+	public LookAheadPicking(String algoName) 
 	{
-		super(lattice, metric, algoName);
+		super(algoName);
 	}
 
 	@Override
-	public void pickVisualizations(Integer k) 
+	public void pickVisualizations(Experiment exp,Integer k) 
 	{
+		System.out.println("look ahead");
+		this.exp = exp;
+		this.lattice=exp.lattice;
 		super.printAlgoName();
-
-		Integer rootId = lattice.id2IDMap.get("#");
-		HashMap<Integer, Float> localMaxSubgraphUtils = pickVisualizations(k, rootId);
+		Integer rootId = exp.lattice.id2IDMap.get("#");
+		HashMap<Integer, Float> localMaxSubgraphUtils = pickVisualizations(exp,k, rootId);
 		ArrayList<Integer> localMaxSubgraph = super.getKeysList(localMaxSubgraphUtils);
 		
 		// improve the current solution by doing local changes
-		LocalGraphImprove lgi = new LocalGraphImprove(lattice, metric);
+		LocalGraphImprove lgi = new LocalGraphImprove(exp);
 		localMaxSubgraph = lgi.improveSubgraphLocally(localMaxSubgraph);
 		
 		// updated the final solution
 		for(int nodeId : localMaxSubgraph)
-			lattice.maxSubgraph.add(nodeId);
+			exp.lattice.maxSubgraph.add(nodeId);
 		
 		super.updateSubGraphUtility();
 		printMaxSubgraphSummary();	
 	}
 	
-	public HashMap<Integer, Float> pickVisualizations(Integer k, Integer rootId)
+	public HashMap<Integer, Float> pickVisualizations(Experiment exp,Integer k, Integer rootId)
 	{
 		//a map in which keys are node IDs, and values are utilities (=interestingness)
 		ArrayList<Integer> localMaxSubgraph = new ArrayList<>();
 
 		// first, we add the root
 		localMaxSubgraph.add(rootId);
-		HashMap<Integer,Float> externalNodesUtility = updateExternal(localMaxSubgraph, new HashMap<>(), rootId, k);
+		HashMap<Integer,Float> externalNodesUtility = updateExternal(exp, localMaxSubgraph, new HashMap<>(), rootId, k);
 		
 		// In each iteration: choose node from frontier and then expand the frontier
 		for(int i = 0 ; i < k - 1 ; i++)
@@ -57,10 +59,10 @@ public abstract class LookAheadPicking extends Traversal{
 			if(externalNodesUtility.size() == 0) break;
 			Integer selectedNodeID = Collections.max(externalNodesUtility.entrySet(), Map.Entry.comparingByValue()).getKey();
 			localMaxSubgraph.add(selectedNodeID);
-			externalNodesUtility = updateExternal(localMaxSubgraph, externalNodesUtility, selectedNodeID, k);
+			externalNodesUtility = updateExternal(exp,localMaxSubgraph, externalNodesUtility, selectedNodeID, k);
 		}	
 		
-		LocalGraphImprove lgi = new LocalGraphImprove(lattice, metric);
+		LocalGraphImprove lgi = new LocalGraphImprove(exp);
 		HashMap<Integer, Float> subgraphWithUtilities = lgi.getSubgraphWithUtilities(localMaxSubgraph);
 		
 		return subgraphWithUtilities;
@@ -73,5 +75,5 @@ public abstract class LookAheadPicking extends Traversal{
 	 * 
 	 * @param currentFrontier, parentNodeId
 	 */
-	protected abstract HashMap<Integer, Float> updateExternal(ArrayList<Integer> localMaxSubgraph, HashMap<Integer, Float> currentFrontier, Integer parentNodeId, Integer k);
+	protected abstract HashMap<Integer, Float> updateExternal(Experiment exp,ArrayList<Integer> localMaxSubgraph, HashMap<Integer, Float> currentFrontier, Integer parentNodeId, Integer k);
 }

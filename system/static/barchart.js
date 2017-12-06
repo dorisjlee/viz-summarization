@@ -94,7 +94,8 @@ function draw(node,edge) {
         }
 
         $.post("/getInterested",{
-            "interested" : JSON.stringify(totalclick)
+            "interested" : JSON.stringify(totalclick),
+            "fname" : JSON.stringify(fname)
         },'application/json')
         document.getElementById('interested-in').innerHTML = '';
         document.getElementById('not-interested-in').innerHTML = '';
