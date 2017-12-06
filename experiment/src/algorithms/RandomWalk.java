@@ -14,11 +14,13 @@ import lattice.Lattice;
  */
 public class RandomWalk extends Traversal{
 	
-	public RandomWalk(Lattice lattice, Distance metric) {
-		super(lattice, metric, "Random Walk in Lattice");
+	public RandomWalk() {
+		super("Random Walk in Lattice");
 	}
 	
-	public void pickVisualizations(Integer k) {
+	public void pickVisualizations(Experiment exp,Integer k) {
+	   this.exp = exp;
+	   this.lattice = exp.lattice;
 	   System.out.println("---------------- Random Walk -----------------");
 	   ArrayList<Integer> rwResult = randomWalk(lattice,k);
        lattice.maxSubgraph= rwResult; 
@@ -78,6 +80,7 @@ public class RandomWalk extends Traversal{
 			int r = 3;
 	        combination(pivot_children, r);
 	        */
+			/*
 	    		Euclidean ed = new Euclidean();
 	    		Hierarchia h = new Hierarchia("mushroom","cap_surface");
 	    		//Hierarchia h = new Hierarchia("turn","has_list_fn");
@@ -92,5 +95,6 @@ public class RandomWalk extends Traversal{
 	        
 	        tr = new BreadthFirstPicking(lattice,new Euclidean());
 	        tr.pickVisualizations(8);
+	        */
 	    }
 }

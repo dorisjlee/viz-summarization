@@ -15,9 +15,9 @@ import lattice.Lattice;
  * @author saarkuzi
  */
 public class BreadthFirstPicking extends LookAheadPicking{
-
-	public BreadthFirstPicking(Lattice lattice, Distance metric) {
-		super(lattice, metric, "Breadth First Picking");
+	Experiment exp;
+	public BreadthFirstPicking() {
+		super("Breadth First Picking");
 	}
 	
 	/**
@@ -26,13 +26,15 @@ public class BreadthFirstPicking extends LookAheadPicking{
 	 * 
 	 * @param currentFrontier, parentNodeId
 	 */
-	protected HashMap<Integer, Float> updateExternal(ArrayList<Integer> localMaxSubgraph, HashMap<Integer, Float> currentFrontier, Integer parentNodeId, Integer k)
+	protected HashMap<Integer, Float> updateExternal(Experiment exp,ArrayList<Integer> localMaxSubgraph, HashMap<Integer, Float> currentFrontier, Integer parentNodeId, Integer k)
 	{
+		this.exp = exp;
+		this.lattice = exp.lattice;
 		currentFrontier.remove(parentNodeId);
-		for(Integer childId : lattice.nodeList.get(parentNodeId).get_child_list())
+		for(Integer childId : exp.lattice.nodeList.get(parentNodeId).get_child_list())
 		{	
 			if(localMaxSubgraph.contains(childId)) continue;
-			double utility = super.calculateDistance(parentNodeId, childId, lattice, metric);
+			double utility = super.calculateDistance(parentNodeId, childId, exp);
 			if(currentFrontier.containsKey(childId))
 				currentFrontier.put(childId, (float) Math.max(currentFrontier.get(childId), utility));
 			else
@@ -40,4 +42,6 @@ public class BreadthFirstPicking extends LookAheadPicking{
 		}
 		return currentFrontier;
 	}
+
+	 
 }

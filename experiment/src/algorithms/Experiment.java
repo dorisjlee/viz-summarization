@@ -107,21 +107,22 @@ public class Experiment {
 		}
 	}
 	
-	public void runOutput() throws SQLException {
+	public void runOutput(Experiment exp) throws SQLException {
 		h.db.c.close();
-		algo.pickVisualizations(k);
+		algo.pickVisualizations(exp,k);
 		VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h, yAxisName);
         String nodeDic = vo.generateNodeDic();
         VizOutput.dumpString2File(fname, nodeDic);
 	}
 	
-	public long timedRunOutput() throws SQLException {
+	public long timedRunOutput(Experiment exp) throws SQLException {
+//		System.out.println("tout:"+exp.lattice.nodeList);
 		h.db.c.close();
 		long startTime = System.nanoTime();
 		System.out.println(algo);
-		algo.pickVisualizations(k);
+		algo.pickVisualizations(exp,k);
 		long endTime = System.nanoTime();
-		VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h, yAxisName);
+		VizOutput vo = new VizOutput(exp.lattice, exp.lattice.maxSubgraph, exp.h, exp.yAxisName);
         String nodeDic = vo.generateNodeDic();
         VizOutput.dumpString2File(fname, nodeDic);
         long duration = (endTime - startTime);

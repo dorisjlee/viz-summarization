@@ -11,11 +11,13 @@ import lattice.Lattice;
  */
 public class GreedyPicking extends Traversal{
 	
-	public GreedyPicking(Lattice lattice, Distance metric) {
-		super(lattice, metric, "Greedy Picking");
+	public GreedyPicking() {
+		super("Greedy Picking");
 	}
 	
-	public void pickVisualizations(Integer k) {
+	public void pickVisualizations(Experiment exp, Integer k) {
+	   this.exp = exp;
+	   this.lattice=exp.lattice;
 	   System.out.println("---------------- Greedy Picking -----------------");
        double total_utility =0;
        ArrayList<Integer> dashboard = new ArrayList<Integer>();

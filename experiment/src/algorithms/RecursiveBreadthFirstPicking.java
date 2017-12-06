@@ -10,22 +10,22 @@ public class RecursiveBreadthFirstPicking extends LookAheadPicking
 {
 	private Integer numSteps;
 	
-	public RecursiveBreadthFirstPicking(Lattice lattice, Distance metric, Integer numSteps) {
-		super(lattice, metric, "Recursive Breadth First Picking");
+	public RecursiveBreadthFirstPicking(Integer numSteps) {
+		super("Recursive Breadth First Picking");
 		this.numSteps = numSteps;
 	}
 
 	@Override
-	protected HashMap<Integer, Float> updateExternal(ArrayList<Integer> localMaxSubgraph,
+	protected HashMap<Integer, Float> updateExternal(Experiment exp,ArrayList<Integer> localMaxSubgraph,
 			HashMap<Integer, Float> currentFrontier, Integer parentNodeId, Integer k) 
 	{
 		currentFrontier.remove(parentNodeId);
 		for(Integer childId : lattice.nodeList.get(parentNodeId).get_child_list())
 		{	
 			if(localMaxSubgraph.contains(childId)) continue;
-			double edgeUtility = super.calculateDistance(parentNodeId, childId, lattice, metric);
-			BreadthFirstPicking bfp = new BreadthFirstPicking(lattice, metric);
-			HashMap<Integer, Float> lookAheadSubgraph = bfp.pickVisualizations(Math.min(numSteps, k-localMaxSubgraph.size()), childId);
+			double edgeUtility = super.calculateDistance(parentNodeId, childId, exp);
+			BreadthFirstPicking bfp = new BreadthFirstPicking();
+			HashMap<Integer, Float> lookAheadSubgraph = bfp.pickVisualizations(exp,Math.min(numSteps, k-localMaxSubgraph.size()), childId);
 			double bfsUtility = Traversal.sumMapByValue(lookAheadSubgraph);
 			double utility = edgeUtility + bfsUtility;
 			

@@ -18,12 +18,14 @@ import lattice.Lattice;
  */
 public class MultipleRandomWalk extends Traversal{
 	int maxCount;
-	public MultipleRandomWalk(int maxCount,Lattice lattice, Distance metric) {
-		super(lattice, metric, "Multiple Random Walk in Lattice");
+	public MultipleRandomWalk(int maxCount) {
+		super("Multiple Random Walk in Lattice");
 		this.maxCount=maxCount;
 	}
 	
-	public void pickVisualizations(Integer k) {
+	public void pickVisualizations(Experiment exp, Integer k) {
+	   this.exp = exp;
+	   this.lattice = exp.lattice;
 	   lattice.maxSubgraphUtility=0; // reset maxSubgraphUtility when picking
 	   System.out.println("---------------- Multiple Random Walk -----------------");
 	   int count =0;
@@ -44,6 +46,7 @@ public class MultipleRandomWalk extends Traversal{
     		Hierarchia h = new Hierarchia("mushroom","cap_surface");
     		Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
         Traversal tr; 
+        /*
         //tr = new MultipleRandomWalk(1000000,lattice,new Euclidean());
         tr = new MultipleRandomWalk(100000,lattice,new Euclidean());
         tr.pickVisualizations(10);
@@ -53,5 +56,6 @@ public class MultipleRandomWalk extends Traversal{
         
         tr = new BreadthFirstPicking(lattice,new Euclidean());
         tr.pickVisualizations(10);
+        */
     }
 }

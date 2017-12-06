@@ -24,14 +24,16 @@ public class OnlineRandomWalk extends Traversal{
 	static Traversal tr; 
 	static Experiment exp;
 	static Hierarchia h;
-	public OnlineRandomWalk(Experiment exp) {
-		super(exp, "Online Random Walk in Lattice");
+	public OnlineRandomWalk() {
+		super("Online Random Walk in Lattice");
 		this.exp = exp;
 		this.h = exp.h;
 	}
 	
-	public void pickVisualizations(Integer k) {
+	public void pickVisualizations(Experiment exp,Integer k) {
 	   System.out.println("---------------- Online Random Walk -----------------");
+	   this.exp = exp;
+	   this.lattice = exp.lattice;
 	   Lattice rwResult = onlineRW(k);
        //lattice.maxSubgraphUtility=computeSubGraphUtility(rwResult);
        //printMaxSubgraphSummary();
@@ -186,14 +188,15 @@ public class OnlineRandomWalk extends Traversal{
     		//Hierarchia h = new Hierarchia("mushroom","cap_surface");
     		ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("type","cap_shape", "cap_surface" , "cap_color" , "bruises" , "odor"));
     		Experiment exp = null;
+    		tr = new OnlineRandomWalk();
 		try {
-			exp = new Experiment("mushroom","cap_surface","cap_surface",groupby, "COUNT", 10, "Online Random Walk", ed,0,0.8,true);
+			exp = new Experiment("mushroom","cap_surface","cap_surface",groupby, "COUNT", 10, tr, ed,0,0.8,true);
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        tr = new OnlineRandomWalk(exp);
-        tr.pickVisualizations(8);
+        tr.pickVisualizations(exp,8);
+        
         /*
         tr = new GreedyPicking(lattice,new Euclidean());
         tr.pickVisualizations(8);

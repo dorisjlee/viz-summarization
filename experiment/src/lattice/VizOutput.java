@@ -98,6 +98,7 @@ public class VizOutput {
 	}
 	public static void main(String[] args) throws SQLException 
     {
+	/*
 	   Euclidean ed = new Euclidean();
 	   /////////////////////////////
 //	   String datasetName = "titanic";
@@ -115,7 +116,8 @@ public class VizOutput {
 	   Lattice lattice = Hierarchia.generateFullyMaterializedLattice(dist,iceberg_ratio,informative_critera);
        Traversal tr = new BreadthFirstPicking(lattice,dist);
        String algo = tr.getAlgoName().toLowerCase().replace(" ","");
-	   String fname = datasetName+"_"+xAxisName+"_"+algo+"_"+distName+"_ic"+iceberg_ratio+"_ip"+informative_critera+"_k"+k+".json"; 
+	   String fname = datasetName+"_"+xAxisName+"_"+algo+"_"+distName+"_ic"+iceberg_ratio+"_ip"+informative_critera+"_k"+k+".json";
+	   
 	   /////////////////////////////
 	   //Hierarchia h = new Hierarchia("titanic","survived");
 	   //Hierarchia h = new Hierarchia("turn","has_list_fn");
@@ -143,5 +145,6 @@ public class VizOutput {
 //       System.out.println(h.uniqueAttributeKeyVals.keySet());
 //       System.out.println(h.uniqueAttributeKeyVals.values());
 //       System.out.println(h.uniqueAttributeKeyVals.size());
+ */
     }
 }

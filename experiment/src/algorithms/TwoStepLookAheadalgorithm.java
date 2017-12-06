@@ -12,18 +12,18 @@ public class TwoStepLookAheadalgorithm extends LookAheadPicking{
 	public static final String SUM_HEURISTIC = "sum";
 	public static final String BFS_HEURISTIC = "bfs";
 	
-	public TwoStepLookAheadalgorithm(Lattice lattice, Distance metric, String heuristic) {
-		super(lattice, metric, "Two Step Look Ahead Algorithm (" + heuristic + ")");
+	public TwoStepLookAheadalgorithm(String heuristic) {
+		super("Two Step Look Ahead Algorithm (" + heuristic + ")");
 		this.heuristic = heuristic;
 	}
 
 	@Override
-	protected HashMap<Integer, Float> updateExternal(ArrayList<Integer> localMaxSubgraph,
+	protected HashMap<Integer, Float> updateExternal(Experiment exp,ArrayList<Integer> localMaxSubgraph,
 			HashMap<Integer, Float> currentFrontier, Integer parentNodeId, Integer k) 
 	{
 		if(localMaxSubgraph.size() == k-1)
 		{
-			LocalGraphImprove lgi = new LocalGraphImprove(lattice, metric);
+			LocalGraphImprove lgi = new LocalGraphImprove(exp);
 			return lgi.getExternal(localMaxSubgraph);
 		}
 			
@@ -31,13 +31,13 @@ public class TwoStepLookAheadalgorithm extends LookAheadPicking{
 		for(Integer childId : lattice.nodeList.get(parentNodeId).get_child_list())
 		{	
 			if(localMaxSubgraph.contains(childId)) continue;
-			double edgeUtility = super.calculateDistance(parentNodeId, childId, lattice, metric);
+			double edgeUtility = super.calculateDistance(parentNodeId, childId,exp);
 			double maxUtility = 0;
 			double sumUtility = 0;
 			
 			for(Integer grandChildId : lattice.nodeList.get(childId).get_child_list())
 			{
-				double currUtility = super.calculateDistance(childId, grandChildId, lattice, metric);
+				double currUtility = super.calculateDistance(childId, grandChildId, exp);
 				if(localMaxSubgraph.contains(grandChildId)) continue;
 				
 				if(currUtility > maxUtility)
@@ -78,7 +78,7 @@ public class TwoStepLookAheadalgorithm extends LookAheadPicking{
 			for(Integer childId : lattice.nodeList.get(subgraphNodeId).get_child_list())
 			{
 				if(nodeId != childId) continue;
-				double currUtility = super.calculateDistance(subgraphNodeId, nodeId, lattice, metric);
+				double currUtility = super.calculateDistance(subgraphNodeId, nodeId, exp);
 				if(currUtility > utility)
 					utility = currUtility;
 			}

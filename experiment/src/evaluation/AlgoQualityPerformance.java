@@ -10,6 +10,7 @@ import java.util.Random;
 import algorithms.BreadthFirstPicking;
 import algorithms.ExhaustivePicking;
 import algorithms.Experiment;
+import algorithms.GreedyPicking;
 import algorithms.MultipleRandomWalk;
 import algorithms.RandomWalk;
 import algorithms.RecursiveBreadthFirstPicking;
@@ -44,20 +45,21 @@ public class AlgoQualityPerformance {
 	   String yAxis = "slots_millis_reduces";
 	   String xAxis = "has_list_fn";
 	   // All Algo Experiments:
-	   exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", k, dist,0,0.8,false);
-	   Traversal frontierGreedy = new BreadthFirstPicking(exp.lattice,exp.dist);
-	   Traversal exhaustive = new ExhaustivePicking(exp.lattice, exp.dist);
-	   Traversal SRW = new RandomWalk(exp.lattice, exp.dist);
-	   Traversal MRW = new MultipleRandomWalk(10000, exp.lattice, exp.dist);
-	   Traversal LA2max = new TwoStepLookAheadalgorithm(exp.lattice,exp.dist, "max");
-	   Traversal LA2sum = new TwoStepLookAheadalgorithm(exp.lattice,exp.dist, "sum");
-	   Traversal LA5 = new RecursiveBreadthFirstPicking(exp.lattice, exp.dist, 5);
-	   Traversal LA5_levelwise = new RecursiveNaiveGreedyPicking(exp.lattice, exp.dist, 5);
+	   //exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", k, dist,0,0.8,false);
+	   Traversal frontierGreedy = new BreadthFirstPicking();
+	   Traversal levelWiseGreedy = new GreedyPicking();
+	   Traversal exhaustive = new ExhaustivePicking();
+	   Traversal SRW = new RandomWalk();
+	   Traversal MRW = new MultipleRandomWalk(10000);
+	   Traversal LA2max = new TwoStepLookAheadalgorithm("max");
+	   Traversal LA2sum = new TwoStepLookAheadalgorithm("sum");
+	   Traversal LA5 = new RecursiveBreadthFirstPicking(5);
+	   Traversal LA5_levelwise = new RecursiveNaiveGreedyPicking(5);
 	   //String [] algoList = {"frontierGreedy","multipleRandomWalk","naiveExhaustive"};
 	   Traversal[] algoList= {frontierGreedy,SRW,MRW,LA2max,LA2sum,LA5,LA5_levelwise};//exhaustive,
 	   for (Traversal algo : algoList) {
 		   exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", k, algo, dist,0,0.8,false);
-		   long duration = exp.timedRunOutput();
+		   long duration = exp.timedRunOutput(exp);
 		   writer.println(xAxis+","+yAxis+","+algo.getAlgoName()+",\"["+Database.arr2DelimitedStrings(groupby, ",")+"\"],"+duration+","+exp.lattice.maxSubgraphUtility);
 	   }
 	   /*

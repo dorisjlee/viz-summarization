@@ -29,8 +29,8 @@ import lattice.Node;
  * @author dorislee
  */
 public class NaiveExhaustivePicking extends Traversal {
-	public NaiveExhaustivePicking(Lattice lattice, Distance metric) {
-		super(lattice, metric, "Naive Exhaustive Picking");
+	public NaiveExhaustivePicking() {
+		super("Naive Exhaustive Picking");
 	}
 
 	/**
@@ -40,10 +40,11 @@ public class NaiveExhaustivePicking extends Traversal {
 	 * 
 	 * @param k
 	 */
-	public void pickVisualizations(Integer k) {
+	public void pickVisualizations(Experiment exp,Integer k) {
 		boolean DEBUG = false;
 		super.printAlgoName();
-
+		this.exp = exp;
+		this.lattice = exp.lattice;
 		lattice.maxSubgraph.clear();
 		lattice.maxSubgraphUtility = 0;
 

@@ -22,9 +22,8 @@ import lattice.Node;
  */
 public class ExhaustivePicking extends Traversal{
 	static int numCompletedGraph=0;
-	public ExhaustivePicking(Lattice lattice, Distance metric) {
-		super(lattice, metric, "Exhaustive Picking");
-		
+	public ExhaustivePicking() {
+		super("Exhaustive Picking");
 	}
 
 	/**
@@ -34,8 +33,10 @@ public class ExhaustivePicking extends Traversal{
 	 * 
 	 * @param k
 	 */
-	public void pickVisualizations(Integer k)
+	public void pickVisualizations(Experiment exp, Integer k)
 	{
+		this.exp = exp;
+		this.lattice = exp.lattice;
 		super.printAlgoName();
 		
 	    lattice.maxSubgraph.clear();
@@ -171,6 +172,7 @@ public class ExhaustivePicking extends Traversal{
     		System.out.println(lattice.nodeList.get(4).id+":"+lattice.nodeList.get(4).child_list);
     		System.out.println(lattice.nodeList.get(5).id+":"+lattice.nodeList.get(5).child_list);
         Traversal tr; 
+        /*
         tr = new ExhaustivePicking(lattice,new Euclidean());
         tr.pickVisualizations(5);
         System.out.println(numCompletedGraph);
@@ -180,6 +182,7 @@ public class ExhaustivePicking extends Traversal{
         
         tr = new BreadthFirstPicking(lattice,new Euclidean());
         tr.pickVisualizations(5);
+        */
         
         
         

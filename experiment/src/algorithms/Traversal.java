@@ -15,29 +15,31 @@ import lattice.Node;
  */
 public abstract class Traversal {
 
+	Experiment exp;
 	Lattice lattice;
 	Distance metric;
 	String algoName;
 	static double iceberg_ratio;
 	static double informative_critera;
-	public Traversal(Lattice lattice,Distance metric, String algoName) 
-	{
-		this.lattice = lattice;
-		this.metric = metric;
-		this.algoName = algoName;
-		this.lattice.maxSubgraph.clear();
-		this.lattice.maxSubgraphUtility = 0;
-	}
-	
-	public Traversal(Experiment exp, String algoName) 
+//	public Traversal(Lattice lattice,Distance metric, String algoName) 
+//	{
+//		this.lattice = lattice;
+//		this.metric = metric;
+//		this.algoName = algoName;
+//		this.lattice.maxSubgraph.clear();
+//		this.lattice.maxSubgraphUtility = 0;
+//	}
+//	
+	public Traversal(String algoName) 
 	{
 		//Online Traversal Overridden method
-		this.lattice = new Lattice();
-		this.iceberg_ratio = exp.iceberg_ratio;
-		this.informative_critera = exp.informative_critera;
-		this.metric = exp.dist;
+//		this.exp = exp;
+//		this.lattice = exp.lattice;
+//		this.iceberg_ratio = exp.iceberg_ratio;
+//		this.informative_critera = exp.informative_critera;
+//		this.metric = exp.dist;
 		this.algoName = algoName;
-		this.lattice.maxSubgraphUtility = 0;
+//		this.lattice.maxSubgraphUtility = 0;
 	}
 	
 	public String getAlgoName() {
@@ -61,7 +63,7 @@ public abstract class Traversal {
 		return target;
 	}
 	
-	public abstract void pickVisualizations(Integer k);
+	public abstract void pickVisualizations(Experiment exp,Integer k);
 
 	public void printMaxSubgraphSummary() {
 		// Summary of maximum subgraph 
@@ -106,7 +108,7 @@ public abstract class Traversal {
 	 */
 	protected void updateSubGraphUtility() 
 	{
-		lattice.maxSubgraphUtility =  computeSubGraphUtility(lattice.maxSubgraph);
+		exp.lattice.maxSubgraphUtility =  computeSubGraphUtility(exp.lattice.maxSubgraph);
 	}
 public static double computeSubGraphUtility(Lattice lattice) {
 	    ArrayList<Integer> subgraph = lattice.maxSubgraph;
@@ -143,7 +145,7 @@ public static double computeSubGraphUtility(Lattice lattice) {
 		
 		for(int i : nodeID2utility.keySet())
 		{	
-			Node currentNode = lattice.nodeList.get(i);
+			Node currentNode = exp.lattice.nodeList.get(i);
 			for(int j = 0; j < currentNode.child_list.size(); j++)
 			{
 				int childId = currentNode.child_list.get(j);
@@ -163,11 +165,11 @@ public static double computeSubGraphUtility(Lattice lattice) {
 	/**
 	 * Calculate interestingness score between parent and child nodes
 	 */
-	public static double calculateDistance(int nodeId1, int nodeId2, Lattice l, Distance m)
+	public static double calculateDistance(int nodeId1, int nodeId2, Experiment exp)
 	{
-		Node node1 = l.nodeList.get(nodeId1);
-		Node node2 = l.nodeList.get(nodeId2);
-		double utility = m.computeDistance(l.id2MetricMap.get(node1.get_id()), l.id2MetricMap.get(node2.get_id()));
+		Node node1 = exp.lattice.nodeList.get(nodeId1);
+		Node node2 = exp.lattice.nodeList.get(nodeId2);
+		double utility = exp.dist.computeDistance(exp.lattice.id2MetricMap.get(node1.get_id()), exp.lattice.id2MetricMap.get(node2.get_id()));
 		return utility;
 	}
 	
@@ -213,7 +215,7 @@ public static double computeSubGraphUtility(Lattice lattice) {
 	   Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
        //Hierarchia.print_map(lattice.id2MetricMap);
        //Hierarchia.print_map(lattice.id2IDMap);
-	   
+	   /*
        Traversal tr; 
        //tr = new NaiveGreedyPicking(lattice,new Euclidean());
        tr = new BreadthFirstPicking(lattice,new Euclidean());
@@ -230,6 +232,7 @@ public static double computeSubGraphUtility(Lattice lattice) {
        
        tr = new RecursiveNaiveGreedyPicking(lattice, new Euclidean(), 2);
        tr.pickVisualizations(k);
+       */
        
        //Hierarchia.print_map(lattice.id2MetricMap);
        //Hierarchia.print_map(lattice.id2IDMap);
