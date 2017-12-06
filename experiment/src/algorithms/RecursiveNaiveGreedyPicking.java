@@ -14,7 +14,7 @@ public class RecursiveNaiveGreedyPicking extends LookAheadPicking{
 	private Integer numSteps;
 	
 	public RecursiveNaiveGreedyPicking(Integer numSteps) {
-		super("Recursive Naive Greedy Picking");
+		super("Recursive Naive Greedy Picking (N="+numSteps+")");
 		this.numSteps = numSteps;
 	}
 

@@ -19,7 +19,7 @@ import lattice.Lattice;
 public class MultipleRandomWalk extends Traversal{
 	int maxCount;
 	public MultipleRandomWalk(int maxCount) {
-		super("Multiple Random Walk in Lattice");
+		super("Multiple Random Walk("+maxCount+" iter)");
 		this.maxCount=maxCount;
 	}
 	

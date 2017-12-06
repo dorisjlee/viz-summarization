@@ -11,7 +11,7 @@ public class RecursiveBreadthFirstPicking extends LookAheadPicking
 	private Integer numSteps;
 	
 	public RecursiveBreadthFirstPicking(Integer numSteps) {
-		super("Recursive Breadth First Picking");
+		super("Recursive Breadth First Picking (N="+numSteps+")");
 		this.numSteps = numSteps;
 	}
 

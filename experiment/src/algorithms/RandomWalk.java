@@ -37,8 +37,12 @@ public class RandomWalk extends Traversal{
 	    	   	   ArrayList<Integer> currentFrontier = RandomWalk.getFrontier(lattice,dashboard);
 	           Random r = new Random(System.currentTimeMillis());
 	           int myRandomNumber = 0;
-	           myRandomNumber = r.nextInt(currentFrontier.size());
-	           dashboard.add(currentFrontier.get(myRandomNumber));
+	           if (currentFrontier.size()>0) {
+	        	   	   myRandomNumber = r.nextInt(currentFrontier.size());
+		           dashboard.add(currentFrontier.get(myRandomNumber));
+	           }else {
+	        	   	   break;
+	           }
 	       }
 	       return dashboard;
 	}
