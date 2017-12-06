@@ -1,6 +1,8 @@
 package algorithms;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,6 +11,7 @@ import java.util.Random;
 
 import distance.Distance;
 import distance.Euclidean;
+import lattice.Database;
 import lattice.Hierarchia;
 import lattice.Lattice;
 import lattice.Node;
@@ -276,29 +279,4 @@ public class ProbablisticPicking extends Traversal{
 		}
 		return newMaxSubgraph;
 	}
-	 public static void main (String[] args) throws SQLException {
-		    /*    
-		    	ArrayList<Integer> pivot_children = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5));
-			int r = 3;
-	        combination(pivot_children, r);
-	        */
-		 	/*
-	    		Euclidean ed = new Euclidean();
-	    		Hierarchia h = new Hierarchia("mushroom","cap_surface");
-	    		//Hierarchia h = new Hierarchia("turn","has_list_fn");
-	    		//Hierarchia h = new Hierarchia("titanic","survived");
-	    		Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
-	        Traversal tr; 
-	        tr = new ProbablisticPicking(lattice,new Euclidean());
-	        tr.pickVisualizations(5);
-	        tr = new RandomWalk(lattice,new Euclidean());
-	        tr.pickVisualizations(5);
-	        
-	        tr = new GreedyPicking(lattice,new Euclidean());
-	        tr.pickVisualizations(5);
-	        
-	        tr = new BreadthFirstPicking(lattice,new Euclidean());
-	        tr.pickVisualizations(5);
-	        */
-	 }
 }
