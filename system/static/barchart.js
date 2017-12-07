@@ -65,6 +65,7 @@ function draw(node,edge) {
     network.on("click", function(params) {
 
         var nodeID = params['nodes']['0'];
+        console.log(nodeID);
 
         totalclick[nodeID] = (totalclick[nodeID]+1)%3;
         if(totalclick[nodeID]==0)
@@ -79,7 +80,7 @@ function draw(node,edge) {
 
         if (nodeID>=0) {
             var clickedNode = node_dataset.get(nodeID);
-            node_dataset.remove(nodeID);
+            //node_dataset.remove(nodeID);
             console.log(clickedNode);
             console.log(totalclick);
             if(color=='green')
@@ -89,8 +90,11 @@ function draw(node,edge) {
             clickedNode.color = {
                 border: color
             }
+            //console.log("before: ")
+            //console.log(node_dataset);
             node_dataset.update(clickedNode);
-            console.log(node_dataset);
+            //console.log("after: ")
+            //console.log(node_dataset);
         }
 
         $.post("/getInterested",{
