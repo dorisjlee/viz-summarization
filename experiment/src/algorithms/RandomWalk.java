@@ -76,29 +76,5 @@ public class RandomWalk extends Traversal{
             }
         }
 		return currentFrontier;
-	}
-
-	public static void main (String[] args) throws SQLException {
-		    /*    
-		    	ArrayList<Integer> pivot_children = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5));
-			int r = 3;
-	        combination(pivot_children, r);
-	        */
-			/*
-	    		Euclidean ed = new Euclidean();
-	    		Hierarchia h = new Hierarchia("mushroom","cap_surface");
-	    		//Hierarchia h = new Hierarchia("turn","has_list_fn");
-	    		//Hierarchia h = new Hierarchia("titanic","survived");
-	    		Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
-	        Traversal tr; 
-	        tr = new RandomWalk(lattice,new Euclidean());
-	        tr.pickVisualizations(8);
-	        
-	        tr = new GreedyPicking(lattice,new Euclidean());
-	        tr.pickVisualizations(8);
-	        
-	        tr = new BreadthFirstPicking(lattice,new Euclidean());
-	        tr.pickVisualizations(8);
-	        */
-	    }
+	} 
 }

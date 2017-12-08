@@ -155,7 +155,7 @@ public class ProbablisticPicking extends Traversal{
 		for(int childId : currentNode.child_list)
 		{
 			if(!currentMaxSubgraph.containsKey(childId)) continue;
-			Double newUtility = Traversal.calculateDistance(nodeId, childId, exp);
+			Double newUtility = Traversal.calculateNormalizedDistance(nodeId, childId, exp);
 			Float currentUtility = currentMaxSubgraph.get(childId);
 			currentMaxSubgraph.put(childId, (float) Math.max(currentUtility, newUtility));
 		}	
