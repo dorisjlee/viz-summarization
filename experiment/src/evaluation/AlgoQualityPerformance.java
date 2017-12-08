@@ -53,7 +53,7 @@ public class AlgoQualityPerformance {
 	   Traversal LA5_levelwise = new RecursiveNaiveGreedyPicking(5);
 	   Traversal[] algoList= {SRW,MRW1000,MRW100000,frontierGreedy,LA2max,LA2sum,LA5,LA5_levelwise};//exhaustive,
 	   Distance [] distList = {new KLDivergence(),new MaxDiff(),new EarthMover(),new Euclidean()};
-	   /*
+	   
 	   // Single Turn Experiment k=10 and k=30 , vary algo, dist
 	   PrintWriter writer = new PrintWriter("output_all_dist_k30.csv", "UTF-8");
 	   writer.println("xAxis,yAxis,algo,groupby,dist,total_time,total_utility");
@@ -65,8 +65,8 @@ public class AlgoQualityPerformance {
 		   }		   
 	   }
 	   writer.close();
-	   */
 	   
+	   /*
 	   ArrayList<String> all_dimensions = new ArrayList<String>(Arrays.asList("is_successful","is_multi_query","is_profile_query","is_event_query","has_impressions_tbl","has_clicks_tbl","has_actions_tbl","has_rtbids_tbl","has_engagement_evnets_tbl","has_viewability_tbl","has_prof_impressions_tbl","has_prof_clicks_tbl","has_prof_actions_tbl","has_prof_rtbids_tbl","has_prof_engagement_events_tbl","has_prof_data_tbl","has_prof_provider_user_ids_tbl","has_prof_container_tags_tbl","has_prof_segments_tbl","has_prof_viewability_tbl","has_distinct","has_count_distinct","has_sum_distinct","has_est_distinct","has_list_fn","has_corr_list_fn","has_list_has_fn","has_list_count_fn","has_list_sum_fn","has_list_min_fn","has_list_max_fn","has_list_sum_range_fn","has_list_max_range_fn","has_list_min_range_fn","has_where_clause","has_having_clause","has_order_by_clause"));
 	   ArrayList<String> all_measures = new ArrayList<String>(Arrays.asList("hdfs_bytes_read","hdfs_bytes_written","total_launched_maps","total_launched_reduces","map_input_records","map_output_records","reduce_input_records","reduce_input_groups","reduce_output_records","slots_millis_maps","slots_millis_reduces"));
 	   int numIterations = 50;
@@ -93,7 +93,7 @@ public class AlgoQualityPerformance {
 		   }		   
 	   }
 	   writer.close();
-	    
+	   */
 	    
 	  	   
 	}
