@@ -3,6 +3,7 @@
 *.pdf
 ipynb/.ipynb_checkpoints/
 *.zip
+*.log
 /bin/
 2.17.3/
 ipynb/dashboards/

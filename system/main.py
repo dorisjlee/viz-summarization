@@ -88,12 +88,11 @@ def getInterested():
     # if (not os.path.isfile(path)):
     f = open(path,'a')
     f.write(datetime.strftime(datetime.now(),"%Y-%m-%d-%H-%M-%S")+","+\
-            str(request.form['fname'])+","+str(request.form['interested'])+"\n")
+            request.form['fname']+","+str(request.form['interested'])+"\n")
     f.close()
     return ('', 204)
 @app.route("/postQuery", methods=['GET', 'POST'])
 def postQuery():
-    
     dataset = request.form['dataset']
     xAxis = request.form['xAxis']
     yAxis = request.form['yAxis']
