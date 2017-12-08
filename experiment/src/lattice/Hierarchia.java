@@ -33,7 +33,7 @@ public class Hierarchia
 		Hierarchia.uniqueAttributeKeyVals = populateUniqueAttributeKeyVals();
 	}
 	public static HashMap<String, ArrayList<String>> populateUniqueAttributeKeyVals() throws SQLException{
-		HashMap<String, ArrayList<String>> uniqueAttributeKeyVals =new HashMap<String, ArrayList<String>>();
+		HashMap<String, ArrayList<String>> uniqueAttributeKeyVals = new HashMap<String, ArrayList<String>>();
 		for (int i=0;i<attribute_names.size();i++) {
 			String key = attribute_names.get(i);
 			ArrayList<String> attrVals = 
@@ -149,12 +149,14 @@ public class Hierarchia
 	                            for(int dr = 0; dr < k; dr++)
 	                            {
 	                                visualization_key = "#";
+	                                // Generate List of Potential Parents 
 	                                for(int sp = 0; sp < k; sp++)
 	                                {
 	                                    if(sp!=dr)
 	                                        visualization_key += current_combination.get(sp)+"$"+current_permutation.get(sp)+"#";
 	                                }
 	                                //System.out.println("Potential parent: "+visualization_key+" -- "+map_id_to_metric_values.get(visualization_key));
+	                                // Loop through all potential parents, find the min distance. 
 	                                if(map_id_to_metric_values.get(visualization_key) != null)
 	                                {
 	                                    ArrayList<Double> parent_visualization_measure_values = map_id_to_metric_values.get(visualization_key);

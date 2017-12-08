@@ -19,7 +19,7 @@ public class GreedyPicking extends Traversal{
 	   this.exp = exp;
 	   this.lattice=exp.lattice;
 	   System.out.println("---------------- Greedy Picking -----------------");
-       double total_utility =0;
+       double total_utility = 0;
        ArrayList<Integer> dashboard = new ArrayList<Integer>();
        dashboard.add(0); // Adding root
        // Stop when dashboard exceeds desired size k 

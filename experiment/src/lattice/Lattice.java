@@ -21,4 +21,9 @@ public class Lattice {
 		this.maxSubgraph =new ArrayList<Integer>();
 		this.maxSubgraphUtility=0;
 	}
+	public void add2Lattice(Node node, ArrayList<Double> measure_values, Integer ID) {
+		nodeList.add(node);
+		id2MetricMap.put(node.id,measure_values);
+        id2IDMap.put(node.id,ID);
+	}
 }
