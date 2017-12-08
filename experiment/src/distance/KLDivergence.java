@@ -25,4 +25,7 @@ public class KLDivergence implements Distance {
 		}
 		return kldiv;
 	}
+	public double computeNormalizedDistance(ArrayList<Double> viz1, ArrayList<Double> viz2, Integer parentSize, Integer childSize) {
+		return (double) childSize/(double) parentSize * computeDistance(viz1, viz2);
+	}
 }

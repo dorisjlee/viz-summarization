@@ -56,7 +56,7 @@ public class ProbablisticPickingTest extends LookAheadPicking{
 		    while (it.hasNext()) {
 		        Map.Entry pair = (Map.Entry)it.next();
 		        //System.out.println(pair.getKey() + " = " + pair.getValue());
-		        normVal = pair.getValue()/rollSum;
+		        normVal = (float) pair.getValue()/rollSum;
 		    }
 			Integer selectedNodeID = Collections.max(externalNodesUtility.entrySet(), Map.Entry.comparingByValue()).getKey();
 			localMaxSubgraph.add(selectedNodeID);
@@ -82,7 +82,7 @@ public class ProbablisticPickingTest extends LookAheadPicking{
 		for(Integer childId : exp.lattice.nodeList.get(parentNodeId).get_child_list())
 		{	
 			if(localMaxSubgraph.contains(childId)) continue;
-			double utility = super.calculateDistance(parentNodeId, childId, exp);
+			double utility = super.calculateNormalizedDistance(parentNodeId, childId, exp);
 			if(currentFrontier.containsKey(childId))
 				currentFrontier.put(childId, (float) Math.max(currentFrontier.get(childId), utility));
 			else

@@ -34,7 +34,7 @@ public class BreadthFirstPicking extends LookAheadPicking{
 		for(Integer childId : exp.lattice.nodeList.get(parentNodeId).get_child_list())
 		{	
 			if(localMaxSubgraph.contains(childId)) continue;
-			double utility = super.calculateDistance(parentNodeId, childId, exp);
+			double utility = super.calculateNormalizedDistance(parentNodeId, childId, exp);
 			if(currentFrontier.containsKey(childId))
 				currentFrontier.put(childId, (float) Math.max(currentFrontier.get(childId), utility));
 			else

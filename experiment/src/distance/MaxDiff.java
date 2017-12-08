@@ -25,4 +25,7 @@ public class MaxDiff implements Distance{
 		}
 		return mdiff;
 	}
+	public double computeNormalizedDistance(ArrayList<Double> viz1, ArrayList<Double> viz2, Integer parentSize, Integer childSize) {
+		return (double) childSize/(double) parentSize * computeDistance(viz1, viz2);
+	}
 }

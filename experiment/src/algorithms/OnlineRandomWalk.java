@@ -74,11 +74,15 @@ public class OnlineRandomWalk extends Traversal{
         		ArrayList<Integer> parents = deriveParents(lattice, pickedNode);
         		System.out.println("derivedParents:"+parents);
         		ArrayList<Integer> informativeParentID = findInformativeParent(lattice,parents,pickedNode);
-//        		if (informativeParentID!=-1) {
-//        			dashboard.add(pickedNodeID);
-//        			//Compute Utility
-//        		}
-        		dashboard.add(pickedNodeID);
+        		if (informativeParentID.size() > 0) {
+        			// If there are more than one informative parent
+        			dashboard.add(pickedNodeID);
+        			//Compute Utility
+        		}else {
+        			// If no informative parent, then abort.
+        			System.out.println("Can not find informative parent");
+        			continue;
+        		}
         }
         lattice.maxSubgraph=dashboard;
         return lattice;

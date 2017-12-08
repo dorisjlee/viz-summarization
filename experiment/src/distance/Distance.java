@@ -8,4 +8,5 @@ public interface Distance {
 	//	Let viz1 be the parent and viz2 be the child 
 	// (Order matters for certain metrics such as KL divergence and EMD)
 	public double computeDistance(ArrayList<Double> viz1, ArrayList<Double> viz2);
+	public double computeNormalizedDistance(ArrayList<Double> viz1, ArrayList<Double> viz2, Integer parentSize, Integer childSize);
 }

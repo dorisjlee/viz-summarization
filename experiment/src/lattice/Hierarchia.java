@@ -160,7 +160,10 @@ public class Hierarchia
 	                                if(map_id_to_metric_values.get(visualization_key) != null)
 	                                {
 	                                    ArrayList<Double> parent_visualization_measure_values = map_id_to_metric_values.get(visualization_key);
-	                                    double dist = distance.computeDistance(current_visualization_measure_values,parent_visualization_measure_values);
+	                                    Node parent = node_list.get(map_id_to_index.get(visualization_key));
+	                                    //System.out.println("populationSize:"+node.population_size);
+	                                    //System.out.println("parentSize:"+parent.population_size);
+	                                    double dist = distance.computeNormalizedDistance(current_visualization_measure_values,parent_visualization_measure_values,node.population_size,parent.population_size);
 	                                    if(dist < min_distance)
 	                                        min_distance = dist;
 	                                }
@@ -178,7 +181,8 @@ public class Hierarchia
 	                                if(map_id_to_metric_values.get(visualization_key) != null)
 	                                {
 	                                    ArrayList<Double> parent_visualization_measure_values = map_id_to_metric_values.get(visualization_key);
-	                                    double dist = distance.computeDistance(current_visualization_measure_values, parent_visualization_measure_values);
+	                                    Node parent = node_list.get(map_id_to_index.get(visualization_key));	                                    
+	                                    double dist = distance.computeNormalizedDistance(current_visualization_measure_values,parent_visualization_measure_values,node.population_size,parent.population_size);
 	                                    //System.out.println("dist criteria:"+min_distance/informative_criteria);
 	                                    if(dist*informative_criteria <= min_distance)
 	                                    {
@@ -406,7 +410,7 @@ public class Hierarchia
 //	    		ArrayList<String> attrVals = uniqueAttributeKeyVals.get(attribute_names.get(attribute_positions.get(i)));
 
 			
-        		long denominator = 0;
+        		int denominator = 0;
 	    		for (int j =0;j <numXaxis;j ++){
 	    			denominator += measure_values.get(j);
 	    		}
@@ -566,36 +570,9 @@ public class Hierarchia
     
     public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
     {
-//    		Hierarchia h = new Hierarchia("turn","has_list_fn");
-//    		Node placeholderNode = new Node("#");
-//    		compute_visualization(placeholderNode,new ArrayList<String>(Arrays.asList("has_impressions_tbl", "has_clicks_tbl","is_profile_query")), 
-//    							  new ArrayList<String>(Arrays.asList("0","0","1")));
-//    		h = new Hierarchia("mushroom","type");
-//    		compute_visualization(placeholderNode, new ArrayList<String>(Arrays.asList("cap_shape","cap_surface","cap_color")), 
-//    							new ArrayList<String>(Arrays.asList("f","s","g")));
-//    		h = new Hierarchia("titanic","survived");
-//    		compute_visualization(placeholderNode, new ArrayList<String>(Arrays.asList("pc_class")), 
-//    							new ArrayList<String>(Arrays.asList("3")));
 	   Euclidean ed = new Euclidean();
- 	   //Hierarchia h = new Hierarchia("mushroom","cap_color");
  	   Hierarchia h = new Hierarchia("titanic","survived");
- 	   //Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0); // Fully materialized lattice
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
-       //Pick all nodes to put in maxSubgraph
-       for (int i=0;i<lattice.nodeList.size();i++) {
-    	   		lattice.maxSubgraph.add(i);
-       }
-       VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h, "COUNT");
-       String nodeDic = vo.generateNodeDic();
-       VizOutput.dumpString2File("test.json", nodeDic);
-//       System.out.println("# of nodes before merging:"+lattice.nodeList.size());
-//       mergeNodes(lattice);
-//       System.out.println("# of nodes after merging:"+lattice.nodeList.size());
-       // For now, the traversal strategy doesn't work with merging yet, because it is not entirely clear how 
-       // we should pick merged nodes. Right now merged nodes has key as the original nodes with an additional 
-       // attribute merged_nodes_keys containing a list of keys for the merged nodes, traversal needs to account for this.
-       
-//       Traversal tr = new FrontierGreedyPicking(lattice,new Euclidean());
-//       tr.pickVisualizations(20);
+
     }
 }

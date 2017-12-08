@@ -11,12 +11,12 @@ public class Node
     public ArrayList<Integer> child_list; // List of node IDs of the children
     public ArrayList<Double> dist_list; // edge weights (distance) of this node to all the children
     ArrayList<String> merged_nodes_keys;
-    long population_size;
+    Integer population_size;
     
-    public long getPopulation_size() {
+    public Integer getPopulation_size() {
 		return population_size;
 	}
-	public void setPopulation_size(long population_size) {
+	public void setPopulation_size(Integer population_size) {
 		this.population_size = population_size;
 	}
 	

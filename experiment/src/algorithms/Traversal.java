@@ -173,6 +173,14 @@ public static double computeSubGraphUtility(Lattice lattice) {
 		return utility;
 	}
 	
+	public static double calculateNormalizedDistance(int nodeId1, int nodeId2, Experiment exp)
+	{
+		Node node1 = exp.lattice.nodeList.get(nodeId1);
+		Node node2 = exp.lattice.nodeList.get(nodeId2);
+		double utility = exp.dist.computeNormalizedDistance(exp.lattice.id2MetricMap.get(node1.get_id()), exp.lattice.id2MetricMap.get(node2.get_id()),node1.getPopulation_size(),node2.getPopulation_size());
+		return utility;
+	}
+	
 	public static Float sumMapByValue(HashMap<Integer,Float> map)
 	{
 		Float sum = 0f;
