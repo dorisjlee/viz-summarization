@@ -22,14 +22,14 @@ public abstract class LookAheadPicking extends Traversal{
 	}
 
 	@Override
-	public void pickVisualizations(Experiment exp,Integer k) 
+	public void pickVisualizations(Experiment exp) 
 	{
 		System.out.println("look ahead");
 		this.exp = exp;
 		this.lattice=exp.lattice;
 		super.printAlgoName();
 		Integer rootId = exp.lattice.id2IDMap.get("#");
-		HashMap<Integer, Float> localMaxSubgraphUtils = pickVisualizations(exp,k, rootId);
+		HashMap<Integer, Float> localMaxSubgraphUtils = pickVisualizations(exp,exp.k, rootId);
 		ArrayList<Integer> localMaxSubgraph = super.getKeysList(localMaxSubgraphUtils);
 		
 		// improve the current solution by doing local changes

@@ -33,7 +33,7 @@ public class ExhaustivePicking extends Traversal{
 	 * 
 	 * @param k
 	 */
-	public void pickVisualizations(Experiment exp, Integer k)
+	public void pickVisualizations(Experiment exp)
 	{
 		this.exp = exp;
 		this.lattice = exp.lattice;
@@ -54,7 +54,7 @@ public class ExhaustivePicking extends Traversal{
 		}
 		localMaxSubgraph.put(rootId, 0f);
 		ArrayList<Integer> rootSubgraph = new ArrayList<Integer>(Arrays.asList(rootId));
-		pickChildren(k, rootSubgraph, lattice.nodeList.get(rootId));
+		pickChildren(exp.k, rootSubgraph, lattice.nodeList.get(rootId));
 		printMaxSubgraphSummary();
 	}
 	

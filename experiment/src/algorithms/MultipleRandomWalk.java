@@ -23,7 +23,7 @@ public class MultipleRandomWalk extends Traversal{
 		this.maxCount=maxCount;
 	}
 	
-	public void pickVisualizations(Experiment exp, Integer k) {
+	public void pickVisualizations(Experiment exp) {
 	   this.exp = exp;
 	   this.lattice = exp.lattice;
 	   lattice.maxSubgraphUtility=0; // reset maxSubgraphUtility when picking
@@ -31,7 +31,7 @@ public class MultipleRandomWalk extends Traversal{
 	   int count =0;
 	   
 	   while (count < maxCount) {
-		   ArrayList<Integer> rwResult = RandomWalk.randomWalk(lattice,k);
+		   ArrayList<Integer> rwResult = RandomWalk.randomWalk(lattice,exp.k);
 	       double total_utility=computeSubGraphUtility(rwResult);
 	       if (total_utility>lattice.maxSubgraphUtility){
 		       lattice.maxSubgraph= rwResult; 
@@ -41,21 +41,4 @@ public class MultipleRandomWalk extends Traversal{
 	   }
 	   printMaxSubgraphSummary();
    }
-	public static void main (String[] args) throws SQLException {
-    		Euclidean ed = new Euclidean();
-    		Hierarchia h = new Hierarchia("mushroom","cap_surface");
-    		Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
-        Traversal tr; 
-        /*
-        //tr = new MultipleRandomWalk(1000000,lattice,new Euclidean());
-        tr = new MultipleRandomWalk(100000,lattice,new Euclidean());
-        tr.pickVisualizations(10);
-        
-        tr = new GreedyPicking(lattice,new Euclidean());
-        tr.pickVisualizations(10);
-        
-        tr = new BreadthFirstPicking(lattice,new Euclidean());
-        tr.pickVisualizations(10);
-        */
-    }
 }

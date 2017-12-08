@@ -29,18 +29,19 @@ public class topKApproxUpperBound extends Traversal{
 		super("Top K Approximated Upper Bound");
 	}
 	
-	public void pickVisualizations(Experiment exp,Integer k) {
+	public void pickVisualizations(Experiment exp) {
 	   this.exp = exp;
 	   this.lattice = exp.lattice;
 	   System.out.println("---------------- Top K Approximated Upper Bound -----------------");
 	   // Do BFS once to traverse through the graph and compute utilities, then find top k
 	   levelwiseBFS(0);
 	   // Get top k utilities
-	   List<Double> topkList = Ordering.natural().greatestOf(allUtilities.values(), k);
+	   List<Double> topkList = Ordering.natural().greatestOf(allUtilities.values(), exp.k);
+	   lattice.maxSubgraph=null;
 	   lattice.maxSubgraphUtility=0;
 	   // Print out and sum up the top k utilities
 	   System.out.println("Top k edges [parent --> child] (ignore duplicate values, printing artifact):");
-	   for (int i=0;i<k;i++) {
+	   for (int i=0;i< exp.k;i++) {
 		   for (Entry<Tuple,Double> entry:allUtilities.entrySet()) {
 			   lattice.maxSubgraphUtility+=entry.getValue();
 			   if (entry.getValue().equals(topkList.get(i))) {
@@ -58,7 +59,6 @@ public class topKApproxUpperBound extends Traversal{
 		if (parentIndex==0) { // Start from root (nodeID=0)
 			parentID = lattice.id2IDMap.get("#");
 			parentNode = lattice.nodeList.get(parentID);
-			lattice.maxSubgraph.add(parentID); // maxSubgraph must contain root
 			//levelwiseBFS(parentID);
 		} else {
 			// What was the best Child is now the new parent.
@@ -96,6 +96,6 @@ public class topKApproxUpperBound extends Traversal{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    tr.pickVisualizations(exp,8);
+	    tr.pickVisualizations(exp);
     }
 }

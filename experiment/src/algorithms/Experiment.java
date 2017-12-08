@@ -109,7 +109,7 @@ public class Experiment {
 	
 	public void runOutput(Experiment exp) throws SQLException {
 		h.db.c.close();
-		algo.pickVisualizations(exp,k);
+		algo.pickVisualizations(exp);
 		VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h, yAxisName);
         String nodeDic = vo.generateNodeDic();
         VizOutput.dumpString2File(fname, nodeDic);
@@ -120,7 +120,7 @@ public class Experiment {
 		h.db.c.close();
 		long startTime = System.nanoTime();
 		System.out.println(algo);
-		algo.pickVisualizations(exp,k);
+		algo.pickVisualizations(exp);
 		long endTime = System.nanoTime();
 		VizOutput vo = new VizOutput(exp.lattice, exp.lattice.maxSubgraph, exp.h, exp.yAxisName);
         String nodeDic = vo.generateNodeDic();

@@ -15,7 +15,7 @@ public class GreedyPicking extends Traversal{
 		super("Greedy Picking");
 	}
 	
-	public void pickVisualizations(Experiment exp, Integer k) {
+	public void pickVisualizations(Experiment exp) {
 	   this.exp = exp;
 	   this.lattice=exp.lattice;
 	   System.out.println("---------------- Greedy Picking -----------------");
@@ -23,7 +23,7 @@ public class GreedyPicking extends Traversal{
        ArrayList<Integer> dashboard = new ArrayList<Integer>();
        dashboard.add(0); // Adding root
        // Stop when dashboard exceeds desired size k 
-       while(dashboard.size()<k && dashboard.size() < lattice.nodeList.size())
+       while(dashboard.size()<exp.k && dashboard.size() < lattice.nodeList.size())
        {	
        	   double max_utility = 0;
            //System.out.println("Dashboard Size: "+dashboard.size());

@@ -29,12 +29,12 @@ public class OnlineRandomWalk extends Traversal{
 		this.exp = exp;
 	}
 	
-	public void pickVisualizations(Experiment exp,Integer k) {
+	public void pickVisualizations(Experiment exp) {
 	   System.out.println("---------------- Online Random Walk -----------------");
 	   this.exp = exp;
 	   this.lattice = exp.lattice;
 	   this.h = exp.h;
-	   Lattice rwResult = onlineRW(k);
+	   Lattice rwResult = onlineRW(exp.k);
        //lattice.maxSubgraphUtility=computeSubGraphUtility(rwResult);
        //printMaxSubgraphSummary();
 	}
@@ -224,6 +224,6 @@ public class OnlineRandomWalk extends Traversal{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    tr.pickVisualizations(exp,8);
+	    tr.pickVisualizations(exp);
     }
 }

@@ -40,7 +40,7 @@ public class NaiveExhaustivePicking extends Traversal {
 	 * 
 	 * @param k
 	 */
-	public void pickVisualizations(Experiment exp,Integer k) {
+	public void pickVisualizations(Experiment exp) {
 		boolean DEBUG = false;
 		super.printAlgoName();
 		this.exp = exp;
@@ -61,7 +61,7 @@ public class NaiveExhaustivePicking extends Traversal {
 		ArrayList<Integer> rootSubgraph = new ArrayList<Integer>(Arrays.asList(rootId));
 		// Compute all possible k-node combo of nodelist
 		if (DEBUG) System.out.println("nodelist size:" + lattice.nodeList.size());
-		ArrayList<ArrayList<Node>> all_combo=combination(lattice.nodeList, k);
+		ArrayList<ArrayList<Node>> all_combo=combination(lattice.nodeList, exp.k);
 		if (DEBUG) System.out.println("all_combo size:"+all_combo.size());
 		// Hashmap storing subgraph list of nodeIDs with values as total utility
 		HashMap<ArrayList<Integer>,Double> hmap = new HashMap<ArrayList<Integer>,Double>();

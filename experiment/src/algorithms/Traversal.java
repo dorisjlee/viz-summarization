@@ -63,7 +63,7 @@ public abstract class Traversal {
 		return target;
 	}
 	
-	public abstract void pickVisualizations(Experiment exp,Integer k);
+	public abstract void pickVisualizations(Experiment exp);
 
 	public void printMaxSubgraphSummary() {
 		// Summary of maximum subgraph 

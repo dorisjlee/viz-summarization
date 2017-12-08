@@ -32,7 +32,7 @@ public class ProbablisticPicking extends Traversal{
 	 * 
 	 * @param k
 	 */
-	public void pickVisualizations(Experiment exp,Integer k)
+	public void pickVisualizations(Experiment exp)
 	{
 		super.printAlgoName();
 		this.exp = exp;

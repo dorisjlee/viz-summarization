@@ -18,11 +18,11 @@ public class RandomWalk extends Traversal{
 		super("Random Walk in Lattice");
 	}
 	
-	public void pickVisualizations(Experiment exp,Integer k) {
+	public void pickVisualizations(Experiment exp) {
 	   this.exp = exp;
 	   this.lattice = exp.lattice;
 	   System.out.println("---------------- Random Walk -----------------");
-	   ArrayList<Integer> rwResult = randomWalk(lattice,k);
+	   ArrayList<Integer> rwResult = randomWalk(lattice,exp.k);
        lattice.maxSubgraph= rwResult; 
        lattice.maxSubgraphUtility=computeSubGraphUtility(rwResult);
        printMaxSubgraphSummary();
