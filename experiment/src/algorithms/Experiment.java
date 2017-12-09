@@ -38,7 +38,7 @@ public class Experiment {
 	public ArrayList<String> groupby;
 	public String aggFunc;
 	public static String experiment_name="../ipynb/dashboards/json/"+"vary_dataset_ip";
-	public Experiment(String datasetName, String xAxisName, String yAxisName, ArrayList<String> groupby, String aggFunc, int k, Distance dist,
+	/*public Experiment(String datasetName, String xAxisName, String yAxisName, ArrayList<String> groupby, String aggFunc, int k, Distance dist,
 			double iceberg_ratio, double informative_critera,boolean online) throws SQLException, FileNotFoundException, UnsupportedEncodingException {
 		super();
 		this.datasetName = datasetName;
@@ -71,7 +71,7 @@ public class Experiment {
 		}else {
 			this.fname = datasetName+"_"+xAxisName.replace("_","-")+"_"+algoName+"_"+distName+"_ic"+iceberg_ratio+"_ip"+informative_critera+"_k"+k+".json";
 		}
-	}
+	}*/
 	public Experiment(String datasetName, String xAxisName, String yAxisName, ArrayList<String> groupby, String aggFunc, int k, Traversal algo, Distance dist,
 			double iceberg_ratio, double informative_critera,boolean online) throws SQLException, FileNotFoundException, UnsupportedEncodingException {
 		this.datasetName = datasetName;
@@ -88,6 +88,7 @@ public class Experiment {
 		this.distName = dist.getDistName();
 		this.h = new Hierarchia(datasetName,xAxisName);
 		this.h.setAttribute_names(this.groupby);
+		
 		// Generate base table via group-by
 		ResultSet rs = Database.viz_query(this.datasetName, this.groupby, this.yAxisName, this.aggFunc, new ArrayList<String>(Arrays.asList()));
 		Database.resultSet2csv(rs,this.datasetName,this.groupby,this.aggFunc+"("+this.yAxisName+")");
@@ -106,6 +107,7 @@ public class Experiment {
 		}else {
 			this.fname = datasetName+"_"+xAxisName.replace("_","-")+"_"+algoName+"_"+distName+"_ic"+iceberg_ratio+"_ip"+informative_critera+"_k"+k+".json";
 		}
+		this.dashboard = new Dashboard(lattice);
 	}
 	
 	public void runOutput(Experiment exp) throws SQLException {
