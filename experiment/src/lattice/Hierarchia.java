@@ -33,7 +33,7 @@ public class Hierarchia
 		Hierarchia.uniqueAttributeKeyVals = populateUniqueAttributeKeyVals();
 	}
 	public static HashMap<String, ArrayList<String>> populateUniqueAttributeKeyVals() throws SQLException{
-		HashMap<String, ArrayList<String>> uniqueAttributeKeyVals =new HashMap<String, ArrayList<String>>();
+		HashMap<String, ArrayList<String>> uniqueAttributeKeyVals = new HashMap<String, ArrayList<String>>();
 		for (int i=0;i<attribute_names.size();i++) {
 			String key = attribute_names.get(i);
 			ArrayList<String> attrVals = 
@@ -149,18 +149,21 @@ public class Hierarchia
 	                            for(int dr = 0; dr < k; dr++)
 	                            {
 	                                visualization_key = "#";
+	                                // Generate List of Potential Parents 
 	                                for(int sp = 0; sp < k; sp++)
 	                                {
 	                                    if(sp!=dr)
 	                                        visualization_key += current_combination.get(sp)+"$"+current_permutation.get(sp)+"#";
 	                                }
 	                                //System.out.println("Potential parent: "+visualization_key+" -- "+map_id_to_metric_values.get(visualization_key));
+	                                // Loop through all potential parents, find the min distance. 
 	                                if(map_id_to_metric_values.get(visualization_key) != null)
 	                                {
 	                                    ArrayList<Double> parent_visualization_measure_values = map_id_to_metric_values.get(visualization_key);
-	                                    double [] cviz = Traversal.ArrayList2Array(current_visualization_measure_values);
-	                                		double [] pviz =  Traversal.ArrayList2Array(parent_visualization_measure_values);
-	                                    double dist = distance.computeDistance(cviz,pviz);
+	                                    Node parent = node_list.get(map_id_to_index.get(visualization_key));
+	                                    //System.out.println("populationSize:"+node.population_size);
+	                                    //System.out.println("parentSize:"+parent.population_size);
+	                                    double dist = distance.computeNormalizedDistance(current_visualization_measure_values,parent_visualization_measure_values,node.population_size,parent.population_size);
 	                                    if(dist < min_distance)
 	                                        min_distance = dist;
 	                                }
@@ -178,7 +181,8 @@ public class Hierarchia
 	                                if(map_id_to_metric_values.get(visualization_key) != null)
 	                                {
 	                                    ArrayList<Double> parent_visualization_measure_values = map_id_to_metric_values.get(visualization_key);
-	                                    double dist = compute_distance(current_visualization_measure_values, parent_visualization_measure_values);
+	                                    Node parent = node_list.get(map_id_to_index.get(visualization_key));	                                    
+	                                    double dist = distance.computeNormalizedDistance(current_visualization_measure_values,parent_visualization_measure_values,node.population_size,parent.population_size);
 	                                    //System.out.println("dist criteria:"+min_distance/informative_criteria);
 	                                    if(dist*informative_criteria <= min_distance)
 	                                    {
@@ -406,7 +410,7 @@ public class Hierarchia
 //	    		ArrayList<String> attrVals = uniqueAttributeKeyVals.get(attribute_names.get(attribute_positions.get(i)));
 
 			
-        		long denominator = 0;
+        		int denominator = 0;
 	    		for (int j =0;j <numXaxis;j ++){
 	    			denominator += measure_values.get(j);
 	    		}
@@ -433,114 +437,7 @@ public class Hierarchia
             System.out.println(pair.getKey() + " = " + pair.getValue());
         }
     }
-
-    
-    static double compute_distance(ArrayList<Double> l1, ArrayList<Double> l2)
-    {
-        double distance = 0;
-        for(int i=0; i < l1.size() && i < l2.size(); i++)
-        {
-            distance += (l1.get(i)-l2.get(i))*(l1.get(i)-l2.get(i));
-            //distance += Math.abs(l1.get(i)-l2.get(i));
-        }
-        return Math.sqrt(distance);
-//        return distance;
-    }
-    public static void mergeNodes(Lattice lattice) {
-    		/**
-    		 *  Merge nodes is a preprocessing step that is done after the lattice is generated
-    		 *  before the traversal. This resembles the compression of C-cube, where the cube 
-    		 *  has no cells with descendants that have the same measure values. This function merges
-    		 *  all the nodes that have identical values who are siblings into one node with concatenated.
-    		 */
-    	    System.out.println("---------------- Merging Nodes -----------------");
-		HashMap<ArrayList<Double>,ArrayList<String>> val2IDsMap=new HashMap<ArrayList<Double>,ArrayList<String>>();
-		for (Node node : lattice.nodeList) {
-			String id = node.get_id();
-			ArrayList<Double> value = lattice.id2MetricMap.get(node.get_id());
-			//System.out.println(value);
-			ArrayList<String> IDs = val2IDsMap.get(value);
-			if (IDs!=null) {
-				// exist previous entry, add to previous list
-				val2IDsMap.get(value).add(id);
-			}else {
-				// No previous entry, add new array list with that ID
-				val2IDsMap.put(value, new ArrayList<String>(Arrays.asList(id)));
-			}
-		}
-		//Hierarchia.print_map(val2IDsMap);
-		Iterator it = val2IDsMap.entrySet().iterator();
-	    while (it.hasNext()) {
-	        Map.Entry pair = (Map.Entry)it.next();
-	        ArrayList<Double> k = (ArrayList<Double>) pair.getKey();
-	        ArrayList<String> v = (ArrayList<String>) pair.getValue();
-	        if (v.size()>1) {
-	        		// Merge nodes which has more than one same-value node
-	        		ArrayList<String> nodes2merge = v; // Note later we will have better strategies for choosing which nodes to merge (e.g. only descendants, only siblings, etc)
-	        		mergeNodesInLattice(lattice,nodes2merge);
-	        }
-	        //System.out.println(k+ " =: " + v);
-	    }
-//	    System.out.println("---------------- Done Merging Nodes -----------------");
-	}
-    public static void mergeNodesInLattice(Lattice lattice,ArrayList<String> nodes2merge) {
-    		/* 
-    		 * INCOMPLETE STILL NEED DEBUGGING!!!
-    		 * Given a list of nodes keys to merge, merge the nodes in the lattice
-    		 */
-//    		System.out.println("--mergeNodesInLattice--");
-//    		System.out.println("nodes2merge:"+nodes2merge);
-    		
-    		int nonNullIdx = 0;
-    		while (lattice.id2IDMap.get(nodes2merge.get(nonNullIdx))==null) {
-    			nonNullIdx+=1;
-    		}
-//    		System.out.println("lattice.id2IDMap.get(nodes2merge.get(nonNullIdx)):"+lattice.id2IDMap.get(nodes2merge.get(nonNullIdx)));
-    		Node keepNode= lattice.nodeList.get(lattice.id2IDMap.get(nodes2merge.get(nonNullIdx)));
-    		ArrayList<String> nodes2remove = new ArrayList<String>();
-    		ArrayList<Integer> nodeIDs2remove = new ArrayList<Integer>();
-		for (int i =0; i<nodes2merge.size();i++) {
-			String nodeKey = nodes2merge.get(i);
-			int nodeID = lattice.id2IDMap.get(nodeKey);
-			if (i==nonNullIdx) {
-				keepNode = lattice.nodeList.get(nodeID);
-				// For each nodeKeys, chose the first one to retain and accumulate all the filter names
-				keepNode.setMerged_nodes_keys(new ArrayList<String>(Arrays.asList(nodeKey)));
-			}else {
-				keepNode.getMerged_nodes_keys().add(nodeKey);
-//				System.out.println("nodeID:"+nodeID);
-//				System.out.println("node:"+lattice.nodeList.get(nodeID));
-				keepNode.get_child_list().addAll(lattice.nodeList.get(nodeID).get_child_list());
-				keepNode.get_dist_list().addAll(lattice.nodeList.get(nodeID).get_dist_list());
-				//lattice.nodeList.remove(nodeID);
-				lattice.id2MetricMap.remove(nodeKey);
-				nodes2remove.add(nodeKey);
-				nodeIDs2remove.add(nodeID);
-			}
-		}
-//		System.out.println("Where is cap color =b:"+lattice.id2IDMap.get("#cap_color$b#"));
-		// 1. Remove elements in nodes2remove in nodeList
-//		System.out.println("Before:"+lattice.nodeList.size());
-//		System.out.println("nodeIDs2remove:"+nodeIDs2remove);
-//		System.out.println("nodes2remove:"+nodes2remove);
-		for(int x = nodeIDs2remove.size()-1 ; x > 0; x--)
-		{
-//			System.out.println("x:"+x);
-//			System.out.println(nodeIDs2remove.get(x));
-			lattice.nodeList.remove((int) nodeIDs2remove.get(x));// remove by index
-//			System.out.println("Removed:"+nodeIDs2remove.get(x));
-		}
-//		System.out.println("After:"+lattice.nodeList.size());
-//		System.out.println("Where is cap color =b:"+lattice.id2IDMap.get("#cap_color$b#"));
-		// 2. rebuild id2IDMap according to the new nodeList
-//		System.out.println("Before lattice.id2IDMap.size():"+lattice.id2IDMap.size());
-		lattice.id2IDMap.clear();
-		for (int i=0; i<lattice.nodeList.size();i++) {
-			lattice.id2IDMap.put(lattice.nodeList.get(i).get_id(),i);
-		}
-//		print_map(lattice.id2IDMap);
-//		System.out.println("id2IDMap size:"+lattice.id2IDMap.size());
-    }
+   
     static void combinationUtil(ArrayList<ArrayList<String>> all_combo,ArrayList<String> arr, ArrayList<String> data, int start,
             int end, int index, int r)
 	{
@@ -579,36 +476,9 @@ public class Hierarchia
     
     public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
     {
-//    		Hierarchia h = new Hierarchia("turn","has_list_fn");
-//    		Node placeholderNode = new Node("#");
-//    		compute_visualization(placeholderNode,new ArrayList<String>(Arrays.asList("has_impressions_tbl", "has_clicks_tbl","is_profile_query")), 
-//    							  new ArrayList<String>(Arrays.asList("0","0","1")));
-//    		h = new Hierarchia("mushroom","type");
-//    		compute_visualization(placeholderNode, new ArrayList<String>(Arrays.asList("cap_shape","cap_surface","cap_color")), 
-//    							new ArrayList<String>(Arrays.asList("f","s","g")));
-//    		h = new Hierarchia("titanic","survived");
-//    		compute_visualization(placeholderNode, new ArrayList<String>(Arrays.asList("pc_class")), 
-//    							new ArrayList<String>(Arrays.asList("3")));
 	   Euclidean ed = new Euclidean();
- 	   //Hierarchia h = new Hierarchia("mushroom","cap_color");
  	   Hierarchia h = new Hierarchia("titanic","survived");
- 	   //Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0); // Fully materialized lattice
        Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
-       //Pick all nodes to put in maxSubgraph
-       for (int i=0;i<lattice.nodeList.size();i++) {
-    	   		lattice.maxSubgraph.add(i);
-       }
-       VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h, "COUNT");
-       String nodeDic = vo.generateNodeDic();
-       VizOutput.dumpString2File("test.json", nodeDic);
-//       System.out.println("# of nodes before merging:"+lattice.nodeList.size());
-//       mergeNodes(lattice);
-//       System.out.println("# of nodes after merging:"+lattice.nodeList.size());
-       // For now, the traversal strategy doesn't work with merging yet, because it is not entirely clear how 
-       // we should pick merged nodes. Right now merged nodes has key as the original nodes with an additional 
-       // attribute merged_nodes_keys containing a list of keys for the merged nodes, traversal needs to account for this.
-       
-//       Traversal tr = new FrontierGreedyPicking(lattice,new Euclidean());
-//       tr.pickVisualizations(20);
+
     }
 }

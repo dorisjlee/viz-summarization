@@ -1,11 +1,9 @@
 package distance;
-import org.apache.commons.math3.ml.distance.EuclideanDistance;
-//http://java-ml.sourceforge.net/api/0.1.0/net/sf/javaml/distance/EuclideanDistance.html
+import java.util.ArrayList;
+
 public class Euclidean implements Distance{
-	private EuclideanDistance dobj;
 	String distName = "euclidean";
 	public Euclidean() {
-		dobj = new EuclideanDistance();
 	}
 	public String getDistName() {
 		return distName;
@@ -14,7 +12,16 @@ public class Euclidean implements Distance{
 		this.distName = distName;
 	}
 	@Override
-	public double computeDistance(double [] viz1, double [] viz2) {
-		return dobj.compute(viz1,viz2);
+	public double computeDistance(ArrayList<Double> viz1, ArrayList<Double> viz2)
+    {
+        double distance = 0;
+        for(int i=0; i < viz1.size() && i < viz2.size(); i++)
+        {
+            distance += (viz1.get(i)-viz2.get(i))*(viz1.get(i)-viz2.get(i));
+        }
+        return Math.sqrt(distance);
+    }
+	public double computeNormalizedDistance(ArrayList<Double> viz1, ArrayList<Double> viz2, Integer parentSize, Integer childSize) {
+		return (double) childSize/(double) parentSize * computeDistance(viz1, viz2);
 	}
 }

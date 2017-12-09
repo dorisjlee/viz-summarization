@@ -13,20 +13,20 @@ public class RecursiveNaiveGreedyPicking extends LookAheadPicking{
 
 	private Integer numSteps;
 	
-	public RecursiveNaiveGreedyPicking(Lattice lattice, Distance metric, Integer numSteps) {
-		super(lattice, metric, "Recursive Naive Greedy Picking");
+	public RecursiveNaiveGreedyPicking(Integer numSteps) {
+		super("Recursive Naive Greedy Picking (N="+numSteps+")");
 		this.numSteps = numSteps;
 	}
 
 	@Override
-	protected HashMap<Integer, Float> updateExternal(ArrayList<Integer> localMaxSubgraph,
+	protected HashMap<Integer, Float> updateExternal(Experiment exp, ArrayList<Integer> localMaxSubgraph,
 			HashMap<Integer, Float> currentFrontier, Integer parentNodeId, Integer k) 
 	{
 		currentFrontier.remove(parentNodeId);
 		for(Integer childId : lattice.nodeList.get(parentNodeId).get_child_list())
 		{	
 			if(localMaxSubgraph.contains(childId)) continue;
-			double edgeUtility = super.calculateDistance(parentNodeId, childId, lattice, metric);
+			double edgeUtility = super.calculateDistance(parentNodeId, childId, exp);
 			double greedyUtility = findMaximalPath(childId, Math.min(numSteps, k-localMaxSubgraph.size()));
 			double utility = edgeUtility + greedyUtility;
 			
@@ -50,7 +50,7 @@ public class RecursiveNaiveGreedyPicking extends LookAheadPicking{
 			double maxUtility = -1;
 			for (Integer childId : lattice.nodeList.get(parentId).get_child_list())
 			{
-				double utility = super.calculateDistance(parentId, childId, lattice, metric);
+				double utility = super.calculateDistance(parentId, childId, exp);
 				//System.out.println("parent:" + parentId + ", child:" + childId + " " + utility);
 
 				if(utility > maxUtility)
@@ -70,6 +70,7 @@ public class RecursiveNaiveGreedyPicking extends LookAheadPicking{
 
 	public static void main(String[] args) throws SQLException
 	{
+		/*
 		   String[] datasets = {"turn", "titanic", "mushroom"};
 		   String[] xAxis = {"has_list_fn", "pc_class", "type"};
 		   int dataset_id = 0;
@@ -84,5 +85,6 @@ public class RecursiveNaiveGreedyPicking extends LookAheadPicking{
 	       Traversal tr; 
 	       tr = new RecursiveNaiveGreedyPicking(lattice, new Euclidean(), 2);
 	       ((RecursiveNaiveGreedyPicking) tr).findMaximalPath(0, 5);
+	     */
 	}
 }

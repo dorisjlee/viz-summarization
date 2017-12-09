@@ -1,7 +1,10 @@
 package algorithms;
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -9,6 +12,7 @@ import java.util.Random;
 
 import distance.Distance;
 import distance.Euclidean;
+import lattice.Dashboard;
 import lattice.Hierarchia;
 import lattice.Lattice;
 import lattice.Node;
@@ -18,128 +22,159 @@ import lattice.Node;
  * Stop until reach k nodes in dashboard
  */
 public class OnlineRandomWalk extends Traversal{
+	static Traversal tr; 
+	static Experiment exp;
 	static Hierarchia h;
-	public OnlineRandomWalk(Hierarchia h, Distance metric, double iceberg_ratio, double informative_criteria) {
-		super(metric, iceberg_ratio,informative_criteria, "Online Random Walk in Lattice");
-		this.h = h;
+	public OnlineRandomWalk() {
+		super("Online Random Walk in Lattice");
+		this.exp = exp;
 	}
 	
-	public void pickVisualizations(Integer k) {
+	public void pickVisualizations(Experiment exp) {
 	   System.out.println("---------------- Online Random Walk -----------------");
-       Lattice rwResult = onlineRW(k);
-       lattice.maxSubgraph= rwResult.maxSubgraph; 
-       lattice.maxSubgraphUtility=rwResult.maxSubgraphUtility;
-       printMaxSubgraphSummary();
-   }
+	   this.exp = exp;
+	   this.lattice = exp.lattice;
+	   this.h = exp.h;
+	   Dashboard rwResult = onlineRW(exp.k);
+       rwResult.maxSubgraphUtility=rwResult.computeSubGraphUtility();
+       //printMaxSubgraphSummary();
+	}
 
-	public static Lattice onlineRW(Integer k) {
-		HashMap<String, ArrayList<Double>> map_id_to_metric_values = new HashMap<String, ArrayList<Double>>();
-        ArrayList<Node> node_list = new ArrayList<Node>();       
-        HashMap<String, Integer> map_id_to_index = new HashMap<String, Integer>();
+	public static Dashboard onlineRW(Integer k) {
+		Lattice lattice = new Lattice();
+		
         Node root = new Node("#");
         ArrayList<Double> root_measure_values = h.compute_visualization(root,new ArrayList<String>(),new ArrayList<String>());
         long rootSize = root.getPopulation_size();
         System.out.println("Root size:"+rootSize);
         double  min_iceberg_support = iceberg_ratio*rootSize;
 		System.out.println("Minimum Iceberg support:"+min_iceberg_support);
-        map_id_to_metric_values.put("#", root_measure_values);
-        node_list.add(root);
-        map_id_to_index.put("#", 0);
-        /*
-        ArrayList <String> attribute_combination = new ArrayList<String>(); // List of attribute combination that excludes the xAxis item
-        attribute_combination.addAll(h.attribute_names); // Deep copy original attribute names
-        attribute_combination.remove(h.xAxis); // remove the xAxis item in the attribute list
-        int n = h.attribute_names.size();
-        */
-        // how to get_child_list in an online manner? 
-        //ArrayList<Node> children = deriveChildren(h,root);
-        ArrayList<Node> children = deriveChildren(h,new Node("#cap_color$b#cap_shape$x#"));
-        //ArrayList<Node> parents = deriveParents(h,root);
-        ArrayList<Node> parents = deriveParents(h,new Node("#cap_color$b#cap_shape$x#type$e#"));
-        /*
-        Lattice lattice = new Lattice();
+		lattice.add2Lattice(root, root_measure_values, 0);
+        //At the root level, the current frontier is all children, pick random children from there
 		double total_utility =0;
+        ArrayList<Integer> children = deriveChildren(lattice,root);
         ArrayList<Integer> dashboard = new ArrayList<Integer>();
         dashboard.add(0); // Adding root
-	    // Stop when dashboard exceeds desired size k 
-        while(dashboard.size()<k ) // can not ensure this: //&& dashboard.size() < lattice.nodeList.size())
-        {	
-       	   ArrayList<Integer> currentFrontier = new ArrayList<Integer>();
-           //System.out.println("Dashboard Size: "+dashboard.size());
-           int next = -1;
-           for(int i = 0; i < dashboard.size(); i++)
-           {
-               //System.out.println("Children of: "+node_list.get(dashboard.get(i)).get_id());
-        	       // Looping through all children indexes 
-               for(int j = 0; j < lattice.nodeList.get(dashboard.get(i)).get_dist_list().size(); j++)
-               { 
-                   int flag = 0;
-                   //System.out.println("Current Node: "+node_list.get(dashboard.get(i)).get_child_list().get(j));
-                   for(int sp = 0; sp < dashboard.size(); sp++)
-                   {
-                       // Check if the node to be added is already in the dashboard 
-                       if(lattice.nodeList.get(dashboard.get(i)).get_child_list().get(j).equals(dashboard.get(sp)))
-                       {
-                           //System.out.println("Already in");
-                           flag =1;
-                           break;
-                       }
-                   }
-                   if(flag == 0)
-                   {
-                       next = lattice.nodeList.get(dashboard.get(i)).get_child_list().get(j);
-                       currentFrontier.add(next);
-                   }
-               }
-           }
-           Random r = new Random(System.currentTimeMillis());
-           int myRandomNumber = 0;
-           myRandomNumber = r.nextInt(currentFrontier.size());
-           dashboard.add(currentFrontier.get(myRandomNumber));
-       }
-       Lattice rwResult = new Lattice();
-       rwResult.maxSubgraph= dashboard; 
-       rwResult.maxSubgraphUtility=total_utility;
-       return rwResult;
-       */
-       Lattice rwResult = new Lattice();
-       return rwResult;
+        Random r = new Random(System.currentTimeMillis());
+        int myRandomNumber = r.nextInt(children.size());
+        dashboard.add(children.get(myRandomNumber));
+        // 	Stop when dashboard exceeds desired size k
+        while (dashboard.size()<k && dashboard.size() < lattice.nodeList.size()) {
+        		ArrayList<Integer> currentFrontier = RandomWalk.getFrontier(lattice,dashboard);
+        		System.out.println("nodeList.size:"+lattice.nodeList.size());
+        		System.out.println("dashboard:"+dashboard);
+        		System.out.println("currentFrontier:"+currentFrontier);
+        		// Pick one from the given current frontier
+        		
+        		int randInt =  r.nextInt(currentFrontier.size()-1);
+        		int pickedNodeID = currentFrontier.get(randInt);
+        		System.out.println("pickedNodeID:"+pickedNodeID);
+        		Node pickedNode = lattice.nodeList.get(pickedNodeID);
+        		ArrayList<Integer> parents = deriveParents(lattice, pickedNode);
+        		System.out.println("derivedParents:"+parents);
+        		ArrayList<Integer> informativeParentID = findInformativeParent(lattice,parents,pickedNode);
+        		if (informativeParentID.size() > 0) {
+        			// If there are more than one informative parent
+        			dashboard.add(pickedNodeID);
+        			//Compute Utility
+        		}else {
+        			// If no informative parent, then abort.
+        			System.out.println("Can not find informative parent");
+        			continue;
+        		}
+        }
+        Dashboard resultDashboard = new Dashboard(lattice);
+        resultDashboard.maxSubgraph=dashboard;
+        return resultDashboard;
 	}
 
-	private static ArrayList<Node> deriveParents(Hierarchia h, Node node) {
-		System.out.println("-------- Parents of: "+ node.id+"--------");
-		ArrayList<Node> parents = new ArrayList<Node>();
-		if (node.equals("#")) {
+	
+	private static ArrayList<Integer> findInformativeParent(Lattice lattice,ArrayList<Integer> parents,Node pickedNode) {
+		System.out.println("parents:"+parents);
+		ArrayList<Integer> informative_parents = new ArrayList<Integer> ();
+		if (parents.size()==1 && parents.get(0)==0) {
+			// The only parent is root, it has to be informative;
+			informative_parents.add(0);
+			return informative_parents;
+		}
+		
+		double min_distance = 1000000;
+		// Make one pass over all potential parents to find min distance
+		ArrayList<Double> dist_list = new ArrayList<Double>();
+		try { 
+			ArrayList<Double> current_visualization_measure_values = 
+					Experiment.computeVisualization(exp,pickedNode.id);
+			for (int i=0;i<parents.size();i++) {
+				ArrayList<Double> parent_visualization_measure_values  = 
+					Experiment.computeVisualization(exp,lattice.nodeList.get(parents.get(i)).id);
+				double dist = tr.metric.computeDistance(current_visualization_measure_values, parent_visualization_measure_values);
+				System.out.println("dist:"+dist);
+				dist_list.add(dist);
+				if(dist < min_distance)
+                    min_distance = dist;
+			}
+	        System.out.println("min_distance:"+min_distance);
+			
+	        ArrayList<Double> ip_dist_list = new ArrayList<Double>();
+	        
+	        for (int i=0;i<parents.size();i++) {
+	        		double dist = dist_list.get(i);
+	            if(dist*tr.informative_critera <= min_distance)
+	            {
+	            		ip_dist_list.add(dist);
+	            		informative_parents.add(parents.get(i));
+                		System.out.println("Informative parent: "+lattice.nodeList.get(parents.get(i))+" -- "+dist);
+	            }
+            }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return informative_parents;
+	}
+
+	private static ArrayList<Integer> deriveParents(Lattice lattice , Node node ) {
+		//System.out.println("-------- Parents of: "+ node.id+"--------");
+		ArrayList<Integer> parents = new ArrayList<Integer>();
+		System.out.println("node:"+node.id);
+		if (node.id.equals("#")) {
 			// Root has no parents 
 			return parents;
-		}else {
+		}else{
 			String[] items = node.id.substring(1).split("#");
 		    ArrayList<String> split_filters = new ArrayList<String>(Arrays.asList(items));
-		    for (int i=1;i<split_filters.size();i++) {
-		    		ArrayList<ArrayList<String>> combo = Hierarchia.combination(split_filters, i);
-		    		// Loop through the generated i-item combination and save as parent
-		    		for (int j =0;j<combo.size();j++) {
-		    			Node parent = new Node(String.join("#",combo.get(j)));
-		    			System.out.println(parent.id);
-		        		parents.add(parent);
-		    		}
+		    System.out.println("split_filters:"+split_filters);
+		    if (split_filters.size()==1) {
+		    		parents.add(0); // root is parent for all one-filter combos
+		    }else {
+			    for (int i=1;i<split_filters.size();i++) {
+			    		ArrayList<ArrayList<String>> combo = Hierarchia.combination(split_filters, i);
+			    		System.out.println("combo:"+combo);
+			    		// Loop through the generated i-item combination and save as parent
+			    		for (int j =0;j<combo.size();j++) {
+			    			Node parent = new Node(String.join("#",combo.get(j)));
+			    			System.out.println(parent.id); 
+			    			lattice.add2Lattice(parent, null, lattice.nodeList.size());
+			        		parents.add(lattice.nodeList.size());
+			    		}
+			    }
 		    }
 		}
 		return parents;
 	}
 
-	private static ArrayList<Node> deriveChildren(Hierarchia h, Node node) {
-		System.out.println("-------- Children of: "+node.id+"--------");
-		ArrayList<Node> children = new ArrayList<Node>();
-		System.out.println("uniqueAttributeKeyVals:"+h.uniqueAttributeKeyVals);
-		System.out.println("attribute names:"+h.getAttribute_names());
-		System.out.println("Removed xAxis:"+h.xAxis);
+	private static ArrayList<Integer> deriveChildren(Lattice lattice, Node node) {
+		//System.out.println("-------- Children of: "+node.id+"--------");
+		ArrayList<Integer> children = new ArrayList<Integer>();
+		//System.out.println("uniqueAttributeKeyVals:"+h.uniqueAttributeKeyVals);
+		//System.out.println("attribute names:"+h.getAttribute_names());
+		//System.out.println("Removed xAxis:"+h.xAxis);
 		h.uniqueAttributeKeyVals.remove(h.xAxis);// remove the xAxis item in the attribute list
 		// Remove the existing attributes in the node
 		for (String split_filter:node.id.split("#")) {
 			if (split_filter.indexOf("$")!=-1) {
 				String existing_attribute = split_filter.substring(0,split_filter.indexOf("$"));
-				System.out.println("Remove:"+existing_attribute);
+				//System.out.println("Remove:"+existing_attribute);
 				h.uniqueAttributeKeyVals.remove(existing_attribute);
 			}
 		}
@@ -150,35 +185,45 @@ public class OnlineRandomWalk extends Traversal{
 	        Map.Entry pair = (Map.Entry)it.next();
 	        for (String val: (ArrayList<String>) pair.getValue()) {
 	        		// A Child is the existing node values plus one additional filter.
-	        		System.out.println(node.id+pair.getKey()+"$"+val+"#");
+	        		//System.out.println(node.id+pair.getKey()+"$"+val+"#");
 	        		Node child = new Node(node.id+pair.getKey()+"$"+val+"#");
-	        		children.add(child);
+	        		lattice.add2Lattice(child, null, lattice.nodeList.size());
+	        		children.add(lattice.nodeList.size());
 	        }
 	    }
-	    	//node.set_child_list(children); // ArrayList<Integer> not ArrayList<Node>
+	    	node.set_child_list(children);
 		return children;
 	}
 
 	public static void main (String[] args) throws SQLException {
-	    /*    
-	    	ArrayList<Integer> pivot_children = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5));
-		int r = 3;
-        combination(pivot_children, r);
-        */
+	    // Testing
+		//ArrayList<Node> parents = deriveParents(h,new Node("#cap_color$b#cap_shape$x#type$e#"));
+        //ArrayList<Node> children = deriveChildren(h,new Node("#cap_color$b#cap_shape$x#"));
+		/*
     		Euclidean ed = new Euclidean();
-    		Hierarchia h = new Hierarchia("mushroom","cap_surface");
-    		//Hierarchia h = new Hierarchia("turn","has_list_fn");
-    		//Hierarchia h = new Hierarchia("titanic","survived");
-    		//Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
-        Traversal tr; 
-        tr = new OnlineRandomWalk(h,ed,0.001,0.8);
-        tr.pickVisualizations(8);
-        /*
-        tr = new GreedyPicking(lattice,new Euclidean());
-        tr.pickVisualizations(8);
-        
-        tr = new BreadthFirstPicking(lattice,new Euclidean());
-        tr.pickVisualizations(8);
-        */
+    		ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("type","cap_shape", "cap_surface" , "cap_color" , "bruises" , "odor"));
+    		Experiment exp = null;
+    		tr = new OnlineRandomWalk();
+		try {
+			exp = new Experiment("mushroom","cap_surface","cap_surface",groupby, "COUNT", 10, tr, ed,0,0.8,true);
+		} catch (FileNotFoundException | UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        tr.pickVisualizations(exp,8);*/
+		Euclidean ed = new Euclidean();
+		ArrayList<String> groupby = new ArrayList<String>(Arrays.asList( "is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
+			   	"has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
+	   String yAxis = "slots_millis_reduces";
+	   String xAxis = "has_list_fn";
+		Experiment exp = null;
+		tr = new OnlineRandomWalk();
+		try {
+			exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", 10,tr, ed,0,0.8,true);
+		} catch (FileNotFoundException | UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    tr.pickVisualizations(exp);
     }
 }

@@ -1,4 +1,6 @@
 package distance;
+import java.util.ArrayList;
+
 import net.sf.javaml.core.DenseInstance;
 import net.sf.javaml.core.Instance;
 import net.sf.javaml.distance.DistanceMeasure; 
@@ -18,7 +20,7 @@ public class LpNorm implements Distance{
 		lpObj = new NormDistance(power);
 	}
 	@Override
-	public double computeDistance(double [] viz1, double [] viz2) {
+	public double computeDistance(ArrayList<Double> viz1, ArrayList<Double> viz2)
 		Instance i1 = new DenseInstance(viz1,"viz1");
 		Instance i2 = new DenseInstance(viz2,"viz2");
 		return lpObj.measure(i1,i2);

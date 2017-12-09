@@ -29,8 +29,8 @@ import lattice.Node;
  * @author dorislee
  */
 public class NaiveExhaustivePicking extends Traversal {
-	public NaiveExhaustivePicking(Lattice lattice, Distance metric) {
-		super(lattice, metric, "Naive Exhaustive Picking");
+	public NaiveExhaustivePicking() {
+		super("Naive Exhaustive Picking");
 	}
 
 	/**
@@ -40,12 +40,13 @@ public class NaiveExhaustivePicking extends Traversal {
 	 * 
 	 * @param k
 	 */
-	public void pickVisualizations(Integer k) {
+	public void pickVisualizations(Experiment exp) {
 		boolean DEBUG = false;
 		super.printAlgoName();
-
-		lattice.maxSubgraph.clear();
-		lattice.maxSubgraphUtility = 0;
+		this.exp = exp;
+		this.lattice = exp.lattice;
+		exp.dashboard.maxSubgraph.clear();
+		exp.dashboard.maxSubgraphUtility = 0;
 
 		// a map in which keys are node IDs, and values are utilities (interestingness)
 		HashMap<Integer, Float> localMaxSubgraph = new HashMap<>();
@@ -60,7 +61,7 @@ public class NaiveExhaustivePicking extends Traversal {
 		ArrayList<Integer> rootSubgraph = new ArrayList<Integer>(Arrays.asList(rootId));
 		// Compute all possible k-node combo of nodelist
 		if (DEBUG) System.out.println("nodelist size:" + lattice.nodeList.size());
-		ArrayList<ArrayList<Node>> all_combo=combination(lattice.nodeList, k);
+		ArrayList<ArrayList<Node>> all_combo=combination(lattice.nodeList, exp.k);
 		if (DEBUG) System.out.println("all_combo size:"+all_combo.size());
 		// Hashmap storing subgraph list of nodeIDs with values as total utility
 		HashMap<ArrayList<Integer>,Double> hmap = new HashMap<ArrayList<Integer>,Double>();
@@ -97,7 +98,7 @@ public class NaiveExhaustivePicking extends Traversal {
 					if (DEBUG) System.out.println(lattice.id2IDMap.get(node.id));
 					subgraph.add(lattice.id2IDMap.get(node.id));
 				}
-				double total_utility = computeSubGraphUtility(subgraph);
+				double total_utility = exp.dashboard.computeSubGraphUtility(subgraph);
 				hmap.put(subgraph,total_utility);
 			}
 		}
@@ -120,9 +121,9 @@ public class NaiveExhaustivePicking extends Traversal {
 	        }
 	    }
 	    if (DEBUG) System.out.println("max:"+maxEntry);
-	    lattice.maxSubgraph = maxEntry.getKey();
-		lattice.maxSubgraphUtility = maxEntry.getValue();
-		printMaxSubgraphSummary();
+	    exp.dashboard.maxSubgraph = maxEntry.getKey();
+	    exp.dashboard.maxSubgraphUtility = maxEntry.getValue();
+	    exp.dashboard.printMaxSubgraphSummary();
 	}
 	
 	private boolean checkConnectedness(ArrayList<Node> combo,ArrayList<Integer> levels) {

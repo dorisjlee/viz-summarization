@@ -4,14 +4,21 @@ var LENGTH_MAIN = 150;
 var LENGTH_SUB = 50;
 var node_dataset = null;
 // Called when the Visualization API is loaded.
-var totalclick = null;
+var totalclick = {};
 function draw(node,edge) {
     // create a network
     var container = document.getElementById('mynetwork');
 
-    (totalclick = []).length = node.length;
-    totalclick.fill(0);
+    //(totalclick = []).length = node.length;
+    //totalclick.fill(0);
+
     node_dataset = new vis.DataSet(node);
+    for (i = 0; i < node.length; i++){
+
+            totalclick[node[i].id] = 0;
+
+    }
+    console.log(totalclick);
     var data = {
         nodes: node_dataset,
         edges: edge
@@ -58,6 +65,7 @@ function draw(node,edge) {
     network.on("click", function(params) {
 
         var nodeID = params['nodes']['0'];
+        console.log(nodeID);
 
         totalclick[nodeID] = (totalclick[nodeID]+1)%3;
         if(totalclick[nodeID]==0)
@@ -70,10 +78,11 @@ function draw(node,edge) {
         else if(totalclick[nodeID]==3)
             color = 'green';
 
-        if (nodeID) {
+        if (nodeID>=0) {
             var clickedNode = node_dataset.get(nodeID);
-            node_dataset.remove(nodeID);
+            //node_dataset.remove(nodeID);
             console.log(clickedNode);
+            console.log(totalclick);
             if(color=='green')
                 clickedNode.borderWidth = 6;
             else
@@ -81,13 +90,31 @@ function draw(node,edge) {
             clickedNode.color = {
                 border: color
             }
+            //console.log("before: ")
+            //console.log(node_dataset);
             node_dataset.update(clickedNode);
-            console.log(node_dataset);
+            //console.log("after: ")
+            //console.log(node_dataset);
         }
 
         $.post("/getInterested",{
-            "interested" : JSON.stringify(totalclick)
+            "interested" : JSON.stringify(totalclick),
+            "fname" : JSON.stringify(fname)
         },'application/json')
+        document.getElementById('interested-in').innerHTML = '';
+        document.getElementById('not-interested-in').innerHTML = '';
+        for (i = 0; i < node.length; i++) {
+
+            if(totalclick[node[i].id]==3){
+                //var currNode = node_dataset.get(i);
+                document.getElementById('interested-in').innerHTML+='<tr>'+'<td style="color:#368332">'+ node[i].id+'<td>'+ '<td style="padding-left:1cm;color:#368332"> '+node[i].filterVal+'<td> '+'<tr>';
+            }
+            else if (totalclick[node[i].id]==2){
+                //var currNode = node_dataset.get(i);
+                document.getElementById('not-interested-in').innerHTML+='<tr>'+'<td style="color:#ff0000">'+ node[i].id+'<td>'+ '<td style="padding-left:1cm;color:#ff0000"> '+node[i].filterVal+'<td> '+'<tr>';
+            }
+        }
+
     });
 
    /*network.on("click", function (params) {

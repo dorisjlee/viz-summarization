@@ -1,6 +1,5 @@
 package algorithms;
 import java.util.ArrayList;
-
 import distance.Distance;
 import lattice.Lattice;
 
@@ -11,17 +10,19 @@ import lattice.Lattice;
  */
 public class GreedyPicking extends Traversal{
 	
-	public GreedyPicking(Lattice lattice, Distance metric) {
-		super(lattice, metric, "Greedy Picking");
+	public GreedyPicking() {
+		super("Greedy Picking");
 	}
 	
-	public void pickVisualizations(Integer k) {
+	public void pickVisualizations(Experiment exp) {
+	   this.exp = exp;
+	   this.lattice=exp.lattice;
 	   System.out.println("---------------- Greedy Picking -----------------");
-       double total_utility =0;
+       double total_utility = 0;
        ArrayList<Integer> dashboard = new ArrayList<Integer>();
        dashboard.add(0); // Adding root
        // Stop when dashboard exceeds desired size k 
-       while(dashboard.size()<k && dashboard.size() < lattice.nodeList.size())
+       while(dashboard.size()<exp.k && dashboard.size() < lattice.nodeList.size())
        {	
        	   double max_utility = 0;
            //System.out.println("Dashboard Size: "+dashboard.size());
@@ -55,8 +56,8 @@ public class GreedyPicking extends Traversal{
            dashboard.add(next);
            total_utility+=max_utility;
        }
-       lattice.maxSubgraph= dashboard; 
-       lattice.maxSubgraphUtility=total_utility;
-       printMaxSubgraphSummary();
+       exp.dashboard.maxSubgraph= dashboard; 
+       exp.dashboard.maxSubgraphUtility=total_utility;
+       exp.dashboard.printMaxSubgraphSummary();
    }
 }

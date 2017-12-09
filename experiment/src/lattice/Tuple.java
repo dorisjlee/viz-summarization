@@ -1,8 +1,8 @@
 package lattice;
 public class Tuple {
 	public Integer x;
-	public Float y;
-	public Tuple(Integer x, Float y) {
+	public Integer y;
+	public Tuple(Integer x, Integer y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -12,10 +12,13 @@ public class Tuple {
 	public void setX(Integer x) {
 		this.x = x;
 	}
-	public Float getY() {
+	public Integer getY() {
 		return y;
 	}
-	public void setY(Float y) {
+	public void setY(Integer y) {
 		this.y = y;
+	}
+	public String toString() {
+	    return "[" +getX()+"-->"+getY()+"]";
 	}
 }

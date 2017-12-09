@@ -9,10 +9,11 @@ import lattice.Lattice;
 import lattice.Node;
 
 public class LocalGraphImprove extends BreadthFirstPicking{
-	
-	public LocalGraphImprove(Lattice lattice, Distance metric)
+	Experiment exp;
+	public LocalGraphImprove(Experiment exp)
 	{
-		super(lattice, metric);
+		super();
+		this.exp = exp;
 	}
 	
 	/**
@@ -115,7 +116,7 @@ public class LocalGraphImprove extends BreadthFirstPicking{
 		
 		// first, if the node has no children we can safely remove it
 		ArrayList<Integer> childrenInSubgraph = new ArrayList<>();
-		for(int childId : lattice.nodeList.get(outNodeId).child_list)
+		for(int childId : exp.lattice.nodeList.get(outNodeId).child_list)
 		{
 			if(newMaxSubgraph.containsKey(childId))
 				childrenInSubgraph.add(childId);
@@ -131,10 +132,10 @@ public class LocalGraphImprove extends BreadthFirstPicking{
 			HashMap<Integer,Float> otherParents = new HashMap<>();
 			for(int possibleParentId : newMaxSubgraph.keySet())
 			{
-				Node possibleParentNode = lattice.nodeList.get(possibleParentId);
+				Node possibleParentNode = exp.lattice.nodeList.get(possibleParentId);
 				if(possibleParentNode.child_list.contains(childId))
 				{
-					double dist = Traversal.calculateDistance(possibleParentId, childId, lattice, metric);
+					double dist = Traversal.calculateDistance(possibleParentId, childId, exp);
 					otherParents.put(possibleParentId, (float) dist);
 				}
 			}
@@ -159,7 +160,7 @@ public class LocalGraphImprove extends BreadthFirstPicking{
 	{
 		HashMap<Integer,Float> externalNodesUtility = new HashMap<>();
 		for(Integer node : localMaxSubgraph)
-			externalNodesUtility = updateExternal(localMaxSubgraph, externalNodesUtility, node, 0);
+			externalNodesUtility = updateExternal(exp,localMaxSubgraph, externalNodesUtility, node, 0);
 		for(Integer node : localMaxSubgraph)
 			externalNodesUtility.remove(node);
 		return externalNodesUtility;
@@ -176,12 +177,11 @@ public class LocalGraphImprove extends BreadthFirstPicking{
 	 */
 	public HashMap<Integer,Float> updateUtilities(HashMap<Integer,Float> currentMaxSubgraph, int nodeId)
 	{
-
-		Node currentNode = lattice.nodeList.get(nodeId);
+		Node currentNode = exp.lattice.nodeList.get(nodeId);
 		for(int childId : currentNode.child_list)
 		{
 			if(!currentMaxSubgraph.containsKey(childId)) continue;
-			Double newUtility = super.calculateDistance(nodeId, childId, lattice, metric);
+			Double newUtility = super.calculateDistance(nodeId, childId, exp);
 			Float currentUtility = currentMaxSubgraph.get(childId);
 			currentMaxSubgraph.put(childId, (float) Math.max(currentUtility, newUtility));
 		}	

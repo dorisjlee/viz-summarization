@@ -1,4 +1,7 @@
 package distance;
+
+import java.util.ArrayList;
+
 public class KLDivergence implements Distance {
 	private double kldiv;
 	String distName = "kldiv";
@@ -12,14 +15,17 @@ public class KLDivergence implements Distance {
 		this.distName = distName;
 	}
 	@Override
-	public double computeDistance(double [] viz1, double [] viz2) {
+	public double computeDistance(ArrayList<Double> viz1, ArrayList<Double> viz2) {
 		// Computing the KL divergence from Q to reference P
-		assert viz1.length==viz2.length;
-		for (int i=0; i<viz1.length;i++) {
-			if (viz1[i]!=0 & viz2[i]!=0) {
-				kldiv+=viz1[i]*(Math.log(viz1[i]/viz2[i])/Math.log(2));
+		assert viz1.size()==viz2.size();
+		for (int i=0; i<viz1.size();i++) {
+			if (viz1.get(i)!=0 & viz2.get(i)!=0) {
+				kldiv+=viz1.get(i)*(Math.log(viz1.get(i)/viz2.get(i))/Math.log(2));
 			}
 		}
 		return kldiv;
+	}
+	public double computeNormalizedDistance(ArrayList<Double> viz1, ArrayList<Double> viz2, Integer parentSize, Integer childSize) {
+		return (double) childSize/(double) parentSize * computeDistance(viz1, viz2);
 	}
 }

@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 import distance.Distance;
 import distance.Euclidean;
+import lattice.Dashboard;
 import lattice.Hierarchia;
 import lattice.Lattice;
 import lattice.Node;
@@ -22,9 +23,8 @@ import lattice.Node;
  */
 public class ExhaustivePicking extends Traversal{
 	static int numCompletedGraph=0;
-	public ExhaustivePicking(Lattice lattice, Distance metric) {
-		super(lattice, metric, "Exhaustive Picking");
-		
+	public ExhaustivePicking() {
+		super("Exhaustive Picking");
 	}
 
 	/**
@@ -34,13 +34,15 @@ public class ExhaustivePicking extends Traversal{
 	 * 
 	 * @param k
 	 */
-	public void pickVisualizations(Integer k)
+	public void pickVisualizations(Experiment exp)
 	{
+		
+		this.exp = exp;
+		this.lattice = exp.lattice;
 		super.printAlgoName();
 		
-	    lattice.maxSubgraph.clear();
-	    lattice.maxSubgraphUtility = 0;
-	    
+		Dashboard dashboard = new Dashboard(lattice);
+		
 		//a map in which keys are node IDs, and values are utilities (interestingness)
 		HashMap<Integer,Float> localMaxSubgraph = new HashMap<>();
 
@@ -53,8 +55,8 @@ public class ExhaustivePicking extends Traversal{
 		}
 		localMaxSubgraph.put(rootId, 0f);
 		ArrayList<Integer> rootSubgraph = new ArrayList<Integer>(Arrays.asList(rootId));
-		pickChildren(k, rootSubgraph, lattice.nodeList.get(rootId));
-		printMaxSubgraphSummary();
+		pickChildren(exp.k, rootSubgraph, lattice.nodeList.get(rootId));
+		exp.dashboard.printMaxSubgraphSummary();
 	}
 	
 	/*
@@ -83,7 +85,7 @@ public class ExhaustivePicking extends Traversal{
 				double totalUtility =0;
 				if (newG.size()==k) {
 					numCompletedGraph+=1;
-					totalUtility=computeSubGraphUtility(newG);
+					totalUtility=exp.dashboard.computeSubGraphUtility(newG);
 					System.out.println("newG:"+newG+":"+totalUtility);
 					for (int j=0; j<newG.size();j++) {
 						System.out.print(lattice.nodeList.get(newG.get(j)).id);
@@ -93,11 +95,11 @@ public class ExhaustivePicking extends Traversal{
 					/*if (newG.get(1)==14) {
 						System.out.println("newG:"+newG+":"+totalUtility);
 					}*/
-					if (totalUtility>lattice.maxSubgraphUtility) {
+					if (totalUtility>exp.dashboard.maxSubgraphUtility) {
 						//System.out.println("newG:"+newG);
 						//System.out.println("totalUtility:"+totalUtility);
-						lattice.maxSubgraph = newG;
-						lattice.maxSubgraphUtility = totalUtility;
+						exp.dashboard.maxSubgraph = newG;
+						exp.dashboard.maxSubgraphUtility = totalUtility;
 						//VizOutput.dumpGenerateNodeDicFromNoHierarchia(i, lattice, newG);
 					}
 				}
@@ -171,6 +173,7 @@ public class ExhaustivePicking extends Traversal{
     		System.out.println(lattice.nodeList.get(4).id+":"+lattice.nodeList.get(4).child_list);
     		System.out.println(lattice.nodeList.get(5).id+":"+lattice.nodeList.get(5).child_list);
         Traversal tr; 
+        /*
         tr = new ExhaustivePicking(lattice,new Euclidean());
         tr.pickVisualizations(5);
         System.out.println(numCompletedGraph);
@@ -180,6 +183,7 @@ public class ExhaustivePicking extends Traversal{
         
         tr = new BreadthFirstPicking(lattice,new Euclidean());
         tr.pickVisualizations(5);
+        */
         
         
         
