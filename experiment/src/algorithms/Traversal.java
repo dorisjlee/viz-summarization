@@ -175,7 +175,7 @@ public abstract class Traversal {
 	   String[] datasets = {"turn", "titanic", "mushroom"};
 	   String[] xAxis = {"has_list_fn", "pc_class", "type"};
 	   int dataset_id = 0;
-	   int k = 20;
+	   //int k = 20;
 	   
 	   Euclidean ed = new Euclidean();
 	   Hierarchia h = new Hierarchia(datasets[dataset_id], xAxis[dataset_id]);
@@ -185,23 +185,44 @@ public abstract class Traversal {
 	   
        Traversal tr; 
        //tr = new NaiveGreedyPicking(lattice,new Euclidean());
-       tr = new BreadthFirstPicking(lattice,new Euclidean());
-       tr.pickVisualizations(k);
        
-       tr = new TwoStepLookAheadalgorithm(lattice,new Euclidean(), "max");
-       tr.pickVisualizations(k);
+       for(int k=1; k<=20 ; k++)
+       {	
+    	   		System.out.println("steps:" + k);
+	       tr = new BreadthFirstPicking(lattice,new Euclidean());
+	       tr.pickVisualizations(k);
+       }
        
-       tr = new TwoStepLookAheadalgorithm(lattice,new Euclidean(), "sum");
-       tr.pickVisualizations(k);
+       for(int k=1; k<=20 ; k++)
+       {	
+    	   		System.out.println("steps:" + k);
+    	   		tr = new TwoStepLookAheadalgorithm(lattice,new Euclidean(), "max");
+    	   		tr.pickVisualizations(k);
+       }
        
-       tr = new RecursiveBreadthFirstPicking(lattice, new Euclidean(), 2);
-       tr.pickVisualizations(k);
+       for(int k=1; k<=20 ; k++)
+       {	
+    	   		System.out.println("steps:" + k);
+    	   		tr = new TwoStepLookAheadalgorithm(lattice,new Euclidean(), "sum");
+    	   		tr.pickVisualizations(k);
+       }
        
-       tr = new RecursiveNaiveGreedyPicking(lattice, new Euclidean(), 2);
-       tr.pickVisualizations(k);
+       for(int k=1; k<=20 ; k++)
+       {	
+    	   	   System.out.println("steps:" + k);
+	       tr = new RecursiveBreadthFirstPicking(lattice, new Euclidean(), k);
+	       tr.pickVisualizations(k);
+       }
        
-       tr = new NaiveGreedyPicking(lattice,new Euclidean());
-       tr.pickVisualizations(k);
+       for(int k=1; k<=20 ; k++)
+       {	
+	   	   System.out.println("steps:" + k);
+	       tr = new RecursiveNaiveGreedyPicking(lattice, new Euclidean(), k);
+	       tr.pickVisualizations(k);
+       }
+       
+       //tr = new NaiveGreedyPicking(lattice,new Euclidean());
+       //tr.pickVisualizations(k);
        
        //Hierarchia.print_map(lattice.id2MetricMap);
        //Hierarchia.print_map(lattice.id2IDMap);

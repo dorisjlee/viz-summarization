@@ -21,12 +21,6 @@ public class TwoStepLookAheadalgorithm extends LookAheadPicking{
 	protected HashMap<Integer, Float> updateExternal(ArrayList<Integer> localMaxSubgraph,
 			HashMap<Integer, Float> currentFrontier, Integer parentNodeId, Integer k) 
 	{
-		if(localMaxSubgraph.size() == k-1)
-		{
-			LocalGraphImprove lgi = new LocalGraphImprove(lattice, metric);
-			return lgi.getExternal(localMaxSubgraph);
-		}
-			
 		currentFrontier.remove(parentNodeId);
 		for(Integer childId : lattice.nodeList.get(parentNodeId).get_child_list())
 		{	
