@@ -21,11 +21,11 @@ import lattice.Tuple;
 
 /**
  * Pick Top-K edges to approximate upper bound for subgraph
- * Only Work for Offline Scenarioes
+ * Only Work for Offline Scenarios
  */
-public class topKApproxUpperBound extends Traversal{
+public class TopKApproxUpperBound extends Traversal{
 	public HashMap<Tuple,Double> allUtilities =new HashMap<Tuple,Double> ();
-	public topKApproxUpperBound() {
+	public TopKApproxUpperBound() {
 		super("Top K Approximated Upper Bound");
 	}
 	
@@ -37,20 +37,20 @@ public class topKApproxUpperBound extends Traversal{
 	   levelwiseBFS(0);
 	   // Get top k utilities
 	   List<Double> topkList = Ordering.natural().greatestOf(allUtilities.values(), exp.k);
-	   lattice.maxSubgraph=null;
-	   lattice.maxSubgraphUtility=0;
+	   exp.dashboard.maxSubgraph=null;
+	   exp.dashboard.maxSubgraphUtility=0;
 	   // Print out and sum up the top k utilities
 	   System.out.println("Top k edges [parent --> child] (ignore duplicate values, printing artifact):");
 	   for (int i=0;i< exp.k;i++) {
 		   for (Entry<Tuple,Double> entry:allUtilities.entrySet()) {
-			   lattice.maxSubgraphUtility+=entry.getValue();
+			   exp.dashboard.maxSubgraphUtility+=entry.getValue();
 			   if (entry.getValue().equals(topkList.get(i))) {
 				   System.out.print(entry.getKey()+",");
 			   }
 		   }
 	   }
 	   System.out.println("\nTop k utilities:"+topkList);
-    	   System.out.println("Upper Bound:"+lattice.maxSubgraphUtility);
+    	   System.out.println("Upper Bound:"+exp.dashboard.maxSubgraphUtility);
    }
 	public void levelwiseBFS(Integer parentIndex) {
 		Integer parentID;
@@ -89,7 +89,7 @@ public class topKApproxUpperBound extends Traversal{
 	    String yAxis = "slots_millis_reduces";
 	    String xAxis = "has_list_fn";
 		Experiment exp = null;
-		Traversal tr = new topKApproxUpperBound();
+		Traversal tr = new TopKApproxUpperBound();
 		try {
 			exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", 10,tr, ed,0,0.8,false);
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {

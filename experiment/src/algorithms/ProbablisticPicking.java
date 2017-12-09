@@ -37,8 +37,8 @@ public class ProbablisticPicking extends Traversal{
 		super.printAlgoName();
 		this.exp = exp;
 		this.lattice = exp.lattice;
-	    lattice.maxSubgraph.clear();
-	    lattice.maxSubgraphUtility = 0;
+		exp.dashboard.maxSubgraph.clear();
+		exp.dashboard.maxSubgraphUtility = 0;
 	    
 		//a map in which keys are node IDs, and values are utilities (interestingness)
 		HashMap<Integer,Float> localMaxSubgraph = new HashMap<>();
@@ -54,7 +54,7 @@ public class ProbablisticPicking extends Traversal{
 		HashMap<Integer,Float> frontierNodesUtility = expandFrontier(new HashMap<>(), rootId);
 		
 		// In each iteration: choose node from frontier and then expand the frontier
-		for(int i = 0 ; i < k - 1 ; i++)
+		for(int i = 0 ; i < exp.k - 1 ; i++)
 		{
 			if(frontierNodesUtility.size() == 0) break;
 //			Integer selectedNodeID = Collections.max(frontierNodesUtility.entrySet(), Map.Entry.comparingByValue()).getKey();
@@ -80,10 +80,10 @@ public class ProbablisticPicking extends Traversal{
 		
 		for(int nodeId : localMaxSubgraph.keySet())
 		{
-			lattice.maxSubgraph.add(nodeId);
-			lattice.maxSubgraphUtility += localMaxSubgraph.get(nodeId);
+			exp.dashboard.maxSubgraph.add(nodeId);
+			exp.dashboard.maxSubgraphUtility += localMaxSubgraph.get(nodeId);
 		}
-		printMaxSubgraphSummary();
+		exp.dashboard.printMaxSubgraphSummary();
 	}
 	
 	public Integer probablisticPickFromFrontier(HashMap <Integer,Float> frontier) {
@@ -173,7 +173,7 @@ public class ProbablisticPicking extends Traversal{
 		currentFrontier.remove(parentNodeId);
 		for(Integer childId : lattice.nodeList.get(parentNodeId).get_child_list())
 		{	
-			if(lattice.maxSubgraph.contains(childId)) continue;
+			if(exp.dashboard.maxSubgraph.contains(childId)) continue;
 			double utility = Traversal.calculateDistance(parentNodeId, childId, exp);
 			if(currentFrontier.containsKey(childId))
 				currentFrontier.put(childId, (float) Math.max(currentFrontier.get(childId), utility));

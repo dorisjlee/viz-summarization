@@ -1,6 +1,5 @@
 package algorithms;
 import java.util.ArrayList;
-
 import distance.Distance;
 import lattice.Lattice;
 
@@ -57,8 +56,8 @@ public class GreedyPicking extends Traversal{
            dashboard.add(next);
            total_utility+=max_utility;
        }
-       lattice.maxSubgraph= dashboard; 
-       lattice.maxSubgraphUtility=total_utility;
-       printMaxSubgraphSummary();
+       exp.dashboard.maxSubgraph= dashboard; 
+       exp.dashboard.maxSubgraphUtility=total_utility;
+       exp.dashboard.printMaxSubgraphSummary();
    }
 }

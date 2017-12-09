@@ -38,10 +38,10 @@ public abstract class LookAheadPicking extends Traversal{
 		
 		// updated the final solution
 		for(int nodeId : localMaxSubgraph)
-			exp.lattice.maxSubgraph.add(nodeId);
+			exp.dashboard.maxSubgraph.add(nodeId);
 		
-		super.updateSubGraphUtility();
-		printMaxSubgraphSummary();	
+		exp.dashboard.updateSubGraphUtility();
+		exp.dashboard.printMaxSubgraphSummary();	
 	}
 	
 	public HashMap<Integer, Float> pickVisualizations(Experiment exp,Integer k, Integer rootId)

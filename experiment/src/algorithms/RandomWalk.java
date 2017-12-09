@@ -23,9 +23,9 @@ public class RandomWalk extends Traversal{
 	   this.lattice = exp.lattice;
 	   System.out.println("---------------- Random Walk -----------------");
 	   ArrayList<Integer> rwResult = randomWalk(lattice,exp.k);
-       lattice.maxSubgraph= rwResult; 
-       lattice.maxSubgraphUtility=computeSubGraphUtility(rwResult);
-       printMaxSubgraphSummary();
+	   exp.dashboard.maxSubgraph= rwResult; 
+	   exp.dashboard.maxSubgraphUtility=exp.dashboard.computeSubGraphUtility(rwResult);
+	   exp.dashboard.printMaxSubgraphSummary();
    }
 	
 	public static ArrayList<Integer> randomWalk(Lattice lattice,Integer k) {

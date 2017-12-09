@@ -26,19 +26,19 @@ public class MultipleRandomWalk extends Traversal{
 	public void pickVisualizations(Experiment exp) {
 	   this.exp = exp;
 	   this.lattice = exp.lattice;
-	   lattice.maxSubgraphUtility=0; // reset maxSubgraphUtility when picking
+	   exp.dashboard.maxSubgraphUtility=0; // reset maxSubgraphUtility when picking
 	   System.out.println("---------------- Multiple Random Walk -----------------");
 	   int count =0;
 	   
 	   while (count < maxCount) {
 		   ArrayList<Integer> rwResult = RandomWalk.randomWalk(lattice,exp.k);
-	       double total_utility=computeSubGraphUtility(rwResult);
-	       if (total_utility>lattice.maxSubgraphUtility){
-		       lattice.maxSubgraph= rwResult; 
-		       lattice.maxSubgraphUtility=total_utility;
+	       double total_utility=exp.dashboard.computeSubGraphUtility(rwResult);
+	       if (total_utility>exp.dashboard.maxSubgraphUtility){
+	    	   		exp.dashboard.maxSubgraph= rwResult; 
+	    	   		exp.dashboard.maxSubgraphUtility=total_utility;
 	       }
 	       count+=1;
 	   }
-	   printMaxSubgraphSummary();
+	   exp.dashboard.printMaxSubgraphSummary();
    }
 }

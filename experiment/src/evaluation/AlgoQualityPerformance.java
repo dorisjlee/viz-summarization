@@ -61,7 +61,7 @@ public class AlgoQualityPerformance {
 		   for (Traversal algo : algoList) {
 			   exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", k, algo, dist,0,0.8,false);
 			   long duration = exp.timedRunOutput(exp);
-			   writer.println(xAxis+","+yAxis+","+algo.getAlgoName()+",\"["+Database.arr2DelimitedStrings(groupby, ",")+"\"],"+dist.getDistName()+","+duration+","+exp.lattice.maxSubgraphUtility);   
+			   writer.println(xAxis+","+yAxis+","+algo.getAlgoName()+",\"["+Database.arr2DelimitedStrings(groupby, ",")+"\"],"+dist.getDistName()+","+duration+","+exp.dashboard.maxSubgraphUtility);   
 		   }		   
 	   }
 	   writer.close();

@@ -45,8 +45,8 @@ public class NaiveExhaustivePicking extends Traversal {
 		super.printAlgoName();
 		this.exp = exp;
 		this.lattice = exp.lattice;
-		lattice.maxSubgraph.clear();
-		lattice.maxSubgraphUtility = 0;
+		exp.dashboard.maxSubgraph.clear();
+		exp.dashboard.maxSubgraphUtility = 0;
 
 		// a map in which keys are node IDs, and values are utilities (interestingness)
 		HashMap<Integer, Float> localMaxSubgraph = new HashMap<>();
@@ -98,7 +98,7 @@ public class NaiveExhaustivePicking extends Traversal {
 					if (DEBUG) System.out.println(lattice.id2IDMap.get(node.id));
 					subgraph.add(lattice.id2IDMap.get(node.id));
 				}
-				double total_utility = computeSubGraphUtility(subgraph);
+				double total_utility = exp.dashboard.computeSubGraphUtility(subgraph);
 				hmap.put(subgraph,total_utility);
 			}
 		}
@@ -121,9 +121,9 @@ public class NaiveExhaustivePicking extends Traversal {
 	        }
 	    }
 	    if (DEBUG) System.out.println("max:"+maxEntry);
-	    lattice.maxSubgraph = maxEntry.getKey();
-		lattice.maxSubgraphUtility = maxEntry.getValue();
-		printMaxSubgraphSummary();
+	    exp.dashboard.maxSubgraph = maxEntry.getKey();
+	    exp.dashboard.maxSubgraphUtility = maxEntry.getValue();
+	    exp.dashboard.printMaxSubgraphSummary();
 	}
 	
 	private boolean checkConnectedness(ArrayList<Node> combo,ArrayList<Integer> levels) {

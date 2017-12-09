@@ -13,6 +13,7 @@ import java.util.Random;
 
 import distance.Distance;
 import distance.Euclidean;
+import lattice.Dashboard;
 import lattice.Database;
 import lattice.Hierarchia;
 import lattice.Lattice;
@@ -33,7 +34,7 @@ public class Experiment {
 	Traversal algo;
 	String fname;
 	int nbars;
-	
+	public Dashboard dashboard;
 	public ArrayList<String> groupby;
 	public String aggFunc;
 	public static String experiment_name="../ipynb/dashboards/json/"+"vary_dataset_ip";
@@ -110,7 +111,7 @@ public class Experiment {
 	public void runOutput(Experiment exp) throws SQLException {
 		h.db.c.close();
 		algo.pickVisualizations(exp);
-		VizOutput vo = new VizOutput(lattice, lattice.maxSubgraph, h, yAxisName);
+		VizOutput vo = new VizOutput(exp.lattice, exp.dashboard.maxSubgraph, h, yAxisName);
         String nodeDic = vo.generateNodeDic();
         VizOutput.dumpString2File(fname, nodeDic);
 	}
@@ -122,7 +123,7 @@ public class Experiment {
 		System.out.println(algo);
 		algo.pickVisualizations(exp);
 		long endTime = System.nanoTime();
-		VizOutput vo = new VizOutput(exp.lattice, exp.lattice.maxSubgraph, exp.h, exp.yAxisName);
+		VizOutput vo = new VizOutput(exp.lattice, exp.dashboard.maxSubgraph, exp.h, exp.yAxisName);
         String nodeDic = vo.generateNodeDic();
         VizOutput.dumpString2File(fname, nodeDic);
         long duration = (endTime - startTime);

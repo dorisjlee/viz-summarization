@@ -12,6 +12,7 @@ import java.util.Random;
 
 import distance.Distance;
 import distance.Euclidean;
+import lattice.Dashboard;
 import lattice.Hierarchia;
 import lattice.Lattice;
 import lattice.Node;
@@ -34,16 +35,14 @@ public class OnlineRandomWalk extends Traversal{
 	   this.exp = exp;
 	   this.lattice = exp.lattice;
 	   this.h = exp.h;
-	   Lattice rwResult = onlineRW(exp.k);
-       //lattice.maxSubgraphUtility=computeSubGraphUtility(rwResult);
+	   Dashboard rwResult = onlineRW(exp.k);
+       rwResult.maxSubgraphUtility=rwResult.computeSubGraphUtility();
        //printMaxSubgraphSummary();
 	}
 
-	public static Lattice onlineRW(Integer k) {
+	public static Dashboard onlineRW(Integer k) {
 		Lattice lattice = new Lattice();
-		lattice.id2MetricMap= new HashMap<String, ArrayList<Double>>();
-        lattice.nodeList = new ArrayList<Node>();       
-        lattice.id2IDMap = new HashMap<String, Integer>();
+		
         Node root = new Node("#");
         ArrayList<Double> root_measure_values = h.compute_visualization(root,new ArrayList<String>(),new ArrayList<String>());
         long rootSize = root.getPopulation_size();
@@ -84,8 +83,9 @@ public class OnlineRandomWalk extends Traversal{
         			continue;
         		}
         }
-        lattice.maxSubgraph=dashboard;
-        return lattice;
+        Dashboard resultDashboard = new Dashboard(lattice);
+        resultDashboard.maxSubgraph=dashboard;
+        return resultDashboard;
 	}
 
 	
