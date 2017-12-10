@@ -1,48 +1,15 @@
 package lattice;
-/*
- * @author himeldev
- */
 import java.io.*;
-import java.sql.SQLException;
 import java.util.*;
-import org.w3c.dom.NodeList;
-
-import algorithms.Traversal;
 import distance.Distance;
-import distance.Euclidean;
 
 public class Hierarchia 
 {
-	public static String datasetName;
-	public static Database db;
-	public static ArrayList<String> attribute_names;
-	public static HashMap<String, ArrayList<String>> uniqueAttributeKeyVals;
-	public static String xAxis;
-	public Hierarchia(String datasetName, String xAxis) throws SQLException {
-		Hierarchia.datasetName = datasetName;
-		Hierarchia.xAxis=xAxis;
-		Hierarchia.db =  new Database();
-		Hierarchia.attribute_names = get_attribute_names();
-		Hierarchia.uniqueAttributeKeyVals = populateUniqueAttributeKeyVals();
-	}
-	public static ArrayList<String> getAttribute_names() {
-		return attribute_names;
-	}
-	public static void setAttribute_names(ArrayList<String> attribute_names) throws SQLException {
-		Hierarchia.attribute_names = attribute_names;
-		Hierarchia.uniqueAttributeKeyVals = populateUniqueAttributeKeyVals();
-	}
-	public static HashMap<String, ArrayList<String>> populateUniqueAttributeKeyVals() throws SQLException{
-		HashMap<String, ArrayList<String>> uniqueAttributeKeyVals = new HashMap<String, ArrayList<String>>();
-		for (int i=0;i<attribute_names.size();i++) {
-			String key = attribute_names.get(i);
-			ArrayList<String> attrVals = 
-					Database.resultSet2ArrayStr(Database.findDistinctAttrVal(key, datasetName));
-			uniqueAttributeKeyVals.put(key, attrVals);			
-		}
-		return uniqueAttributeKeyVals;
-	}
-    public static Lattice generateFullyMaterializedLattice(Distance distance, double iceberg_ratio, double informative_criteria){
+	/*
+	 * Offline methods for generating fully materialized lattice. 
+	 */
+    public static Lattice generateFullyMaterializedLattice(Distance distance, double iceberg_ratio,
+    		double informative_criteria,HashMap<String, ArrayList<String>> uniqueAttributeKeyVals,ArrayList<String> attribute_names,String xAxis,String datasetName){
     	/**
     	 * Fully Materialize Visualization Lattice by populating id2MetricMap, nodeList, id2IDMap 
     	 * @param distance: Distance function used for computing edge weights between parent & child
@@ -56,7 +23,7 @@ public class Hierarchia
         System.out.println("uniqueAttributeKeyVals:"+uniqueAttributeKeyVals);
         HashMap<String, Integer> map_id_to_index = new HashMap<String, Integer>();
         Node root = new Node("#");
-        ArrayList<Double> root_measure_values = compute_visualization(root,new ArrayList<String>(),new ArrayList<String>());
+        ArrayList<Double> root_measure_values = compute_visualization(root,new ArrayList<String>(),new ArrayList<String>(),uniqueAttributeKeyVals,attribute_names,xAxis,datasetName);
         //ArrayList<Double> root_measure_values = new ArrayList<Double>(); 
 		//root_measure_values.add(46.0);
 		//root_measure_values.add(64.0);
@@ -134,7 +101,7 @@ public class Hierarchia
                     
 //                    ArrayList<Double> measure_values = compute_visualization(new Node("#"),current_combination, current_permutation);
                     Node node = new Node(visualization_key);
-                    ArrayList<Double> current_visualization_measure_values = compute_visualization(node,current_combination, current_permutation);
+                    ArrayList<Double> current_visualization_measure_values = compute_visualization(node,current_combination, current_permutation,uniqueAttributeKeyVals,attribute_names,xAxis,datasetName);
                     
                     if (node.getPopulation_size()>= min_iceberg_support) {
 	                    	if(current_visualization_measure_values.get(0) > 0.0 || current_visualization_measure_values.get(1)> 0.0 )
@@ -244,30 +211,7 @@ public class Hierarchia
         //System.out.println("------------------------------------------------ ");
         return materialized_lattice;
     }
-    static ArrayList<String> get_attribute_names()
-    {
-        ArrayList<String> attribute_names = new ArrayList<String>();
-        try
-        {
-            BufferedReader reader = new BufferedReader(new FileReader(datasetName+".csv"));
-            String line = null;
-            if((line = reader.readLine()) != null) 
-            {
-                String [] names = line.split(",");
-                //System.out.println(Arrays.toString(names));
-                for(int i = 0; i < names.length-1; i++)
-                {
-                    attribute_names.add(names[i]);
-                }
-            }
-        }
-        catch(IOException e)
-        {
-            System.out.println("Error in get_attribute_names()");
-            System.out.println("attribute_names:"+attribute_names);
-        }
-        return attribute_names;
-    }
+    
     
     static void generate_k_combinations(ArrayList<String> attribute_names, int len, int start, ArrayList<String> current_combination, 
             ArrayList<ArrayList<String>> k_combination_list)
@@ -300,7 +244,8 @@ public class Hierarchia
             generate_value_permutations(attribute_values, depth + 1, current_permutation, value_permutations);
         }
     }
-    public static ArrayList<Double> compute_visualization(Node node, ArrayList<String> current_combination, ArrayList<String> current_permutation)
+    public static ArrayList<Double> compute_visualization(Node node, ArrayList<String> current_combination, ArrayList<String> current_permutation
+    						,HashMap<String, ArrayList<String>> uniqueAttributeKeyVals,ArrayList<String> attribute_names,String xAxis,String datasetName)
     {
     		int  numXaxis = uniqueAttributeKeyVals.get(xAxis).size();
     		//System.out.println("Attribute-Value Combination:"+current_combination+" -- "+current_permutation);
@@ -473,12 +418,5 @@ public class Hierarchia
 		*/
 		return all_combo;
 	}
-    
-    public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
-    {
-	   Euclidean ed = new Euclidean();
- 	   Hierarchia h = new Hierarchia("titanic","survived");
-       Lattice lattice = Hierarchia.generateFullyMaterializedLattice(ed,0.001,0.8);
 
-    }
 }

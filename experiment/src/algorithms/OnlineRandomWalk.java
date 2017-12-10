@@ -34,7 +34,6 @@ public class OnlineRandomWalk extends Traversal{
 	   System.out.println("---------------- Online Random Walk -----------------");
 	   this.exp = exp;
 	   this.lattice = exp.lattice;
-	   this.h = exp.h;
 	   Dashboard rwResult = onlineRW(exp.k);
        rwResult.maxSubgraphUtility=rwResult.computeSubGraphUtility();
        //printMaxSubgraphSummary();
@@ -44,7 +43,7 @@ public class OnlineRandomWalk extends Traversal{
 		Lattice lattice = new Lattice();
 		
         Node root = new Node("#");
-        ArrayList<Double> root_measure_values = h.compute_visualization(root,new ArrayList<String>(),new ArrayList<String>());
+        ArrayList<Double> root_measure_values = Hierarchia.compute_visualization(root,new ArrayList<String>(),new ArrayList<String>(),exp.uniqueAttributeKeyVals,exp.attribute_names,exp.xAxisName,exp.datasetName);
         long rootSize = root.getPopulation_size();
         System.out.println("Root size:"+rootSize);
         double  min_iceberg_support = iceberg_ratio*rootSize;
@@ -169,18 +168,18 @@ public class OnlineRandomWalk extends Traversal{
 		//System.out.println("uniqueAttributeKeyVals:"+h.uniqueAttributeKeyVals);
 		//System.out.println("attribute names:"+h.getAttribute_names());
 		//System.out.println("Removed xAxis:"+h.xAxis);
-		h.uniqueAttributeKeyVals.remove(h.xAxis);// remove the xAxis item in the attribute list
+		exp.uniqueAttributeKeyVals.remove(exp.xAxisName);// remove the xAxis item in the attribute list
 		// Remove the existing attributes in the node
 		for (String split_filter:node.id.split("#")) {
 			if (split_filter.indexOf("$")!=-1) {
 				String existing_attribute = split_filter.substring(0,split_filter.indexOf("$"));
 				//System.out.println("Remove:"+existing_attribute);
-				h.uniqueAttributeKeyVals.remove(existing_attribute);
+				exp.uniqueAttributeKeyVals.remove(existing_attribute);
 			}
 		}
 		//combinable_attributes.remove(o)
-		Iterator it = h.uniqueAttributeKeyVals.entrySet().iterator();
-        int n = h.attribute_names.size();
+		Iterator it = exp.uniqueAttributeKeyVals.entrySet().iterator();
+        int n = exp.attribute_names.size();
 	    	while (it.hasNext()) {
 	        Map.Entry pair = (Map.Entry)it.next();
 	        for (String val: (ArrayList<String>) pair.getValue()) {

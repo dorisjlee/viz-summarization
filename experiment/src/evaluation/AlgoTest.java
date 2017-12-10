@@ -28,8 +28,8 @@ import distance.KLDivergence;
 import distance.MaxDiff;
 
 public class AlgoTest {
-	//public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
-	//{
+//	public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
+//	{
 	@Test
 	public void test() throws FileNotFoundException, UnsupportedEncodingException, SQLException {
 		Experiment exp;
