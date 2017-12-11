@@ -256,7 +256,8 @@ public class OnlineRandomWalk extends Traversal{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        tr.pickVisualizations(exp,8);*/
+        tr.pickVisualizations(exp);
+		*/
 		Euclidean ed = new Euclidean();
 		ArrayList<String> groupby = new ArrayList<String>(Arrays.asList( "is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
 			   	"has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
@@ -271,5 +272,6 @@ public class OnlineRandomWalk extends Traversal{
 			e.printStackTrace();
 		}
 	    tr.pickVisualizations(exp);
+	    
     }
 }

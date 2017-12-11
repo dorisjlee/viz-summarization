@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 public class Database {
 	private String database = "summarization";
 	private String host = "jdbc:postgresql://localhost:5432/"+database;
@@ -106,12 +107,32 @@ public class Database {
 		ResultSet result = query(query_stmt);
 		return result;
 	}
+	public static boolean isNumeric(String s) {  
+	    return s != null && s.matches("[-+]?\\d*\\.?\\d+");  
+	}  
 	public static ArrayList<Double> computeViz(String tablename, String x_attr, ArrayList<String> groupby,String y_attr,String agg_func, ArrayList<String> filters) throws SQLException {
-		System.out.println(filters);
+		// When the filter variable are characters and not int/floats, need to insert single quotes. 
+		int startIdx = filters.get(0).indexOf("=");
+		ArrayList<String> newFilters = new ArrayList<String>();
+		if (!isNumeric(filters.get(0).substring(startIdx))) {
+			Iterator<String> iter = filters.iterator();
+			while (iter.hasNext()) {
+				String filter = iter.next();
+				newFilters.add(filter.replace("=", "='") +"'");
+				iter.remove();
+			}
+		}else {
+			newFilters = filters;
+		}
+		
+		System.out.println("newFilters:"+newFilters);
+		
 		String groupbyJoined =arr2DelimitedStrings(groupby, ",");
-		String query_stmt = "SELECT " + x_attr + ", " +agg_func +"(" + y_attr + ")" + " FROM " + tablename;
-		query_stmt += " WHERE "+ arr2DelimitedStrings(filters, "AND");
-        query_stmt +=" GROUP BY " + groupbyJoined +";";
+		String query_stmt ="SELECT sum(subquery.sum) FROM (";
+		query_stmt +="SELECT " + x_attr + ", " +agg_func +"(" + y_attr + ")" + " FROM " + tablename;
+		query_stmt += " WHERE "+ arr2DelimitedStrings(newFilters, "AND");
+        query_stmt +=" GROUP BY " + groupbyJoined; 
+        	query_stmt += ") subquery GROUP BY "+x_attr+";";
         System.out.println(query_stmt);
 		ResultSet rs = query(query_stmt);
 		ArrayList<Double> rsArr = new ArrayList<Double>();

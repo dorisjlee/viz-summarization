@@ -49,20 +49,18 @@ public class RandomWalk extends Traversal{
 	}
 	public static ArrayList<Integer> getFrontier(Lattice lattice,ArrayList<Integer> dashboard) {
 		ArrayList<Integer> currentFrontier = new ArrayList<Integer>();
-        System.out.println("Dashboard Size: "+dashboard.size());
+        //System.out.println("Dashboard Size: "+dashboard.size());
         int next = -1;
         for(int i = 0; i < dashboard.size(); i++)
         {
-             System.out.println("Children of: "+lattice.nodeList.get(dashboard.get(i)).get_id());
+             //System.out.println("Children of: "+lattice.nodeList.get(dashboard.get(i)).get_id());
      	       // Looping through all children indexes 
-             
-             int flag = 0;
-             Integer currentNodeID = dashboard.get(i);
-             Node currentNode = lattice.nodeList.get(currentNodeID);
-             System.out.println(currentNode.child_list.size()==0);
+            int flag = 0;
+            Integer currentNodeID = dashboard.get(i);
+            Node currentNode = lattice.nodeList.get(currentNodeID);
             for(int j = 0; j < currentNode.child_list.size(); j++)
             { 
-                System.out.println(j+"th Child: "+ lattice.nodeList.get(currentNode.get_child_list().get(j)).id);
+                //System.out.println(j+"th Child: "+ lattice.nodeList.get(currentNode.get_child_list().get(j)).id);
                 for(int sp = 0; sp < dashboard.size(); sp++)
                 {
                     // Check if the node to be added is already in the dashboard 
