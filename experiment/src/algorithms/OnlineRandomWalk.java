@@ -45,7 +45,7 @@ public class OnlineRandomWalk extends Traversal{
         ArrayList<Double> root_measure_values = Hierarchia.compute_visualization(root,new ArrayList<String>(),new ArrayList<String>(),exp.uniqueAttributeKeyVals,exp.attribute_names,exp.xAxisName,exp.datasetName);
         long rootSize = root.getPopulation_size();
         System.out.println("Root size:"+rootSize);
-        double  min_iceberg_support = iceberg_ratio*rootSize;
+        double  min_iceberg_support = exp.iceberg_ratio*rootSize;
 		System.out.println("Minimum Iceberg support:"+min_iceberg_support);
 		lattice.add2Lattice(root, root_measure_values, 0);
         //At the root level, the current frontier is all children, pick random children from there
@@ -98,20 +98,20 @@ public class OnlineRandomWalk extends Traversal{
         int next = -1;
         for(int i = 0; i < dashboard.size(); i++)
         {
-             System.out.println("Children of: "+lattice.nodeList.get(dashboard.get(i)).get_id());
+             //System.out.println("Children of: "+lattice.nodeList.get(dashboard.get(i)).get_id());
      	       // Looping through all children indexes 
              
              int flag = 0;
              Integer currentNodeID = dashboard.get(i);
              Node currentNode = lattice.nodeList.get(currentNodeID);
-             System.out.println(currentNode.child_list.size()==0);
+             
              if (currentNode.child_list.size()==0) {
             	  	// If child list is empty then populate child_list of the node with derived list of children; 
             	 	ArrayList<Integer> children  = deriveChildren(lattice,currentNode);
              }
             for(int j = 0; j < currentNode.child_list.size(); j++)
             { 
-                System.out.println(j+"th Child: "+ lattice.nodeList.get(currentNode.get_child_list().get(j)).id);
+                //System.out.println(j+"th Child: "+ lattice.nodeList.get(currentNode.get_child_list().get(j)).id);
                 for(int sp = 0; sp < dashboard.size(); sp++)
                 {
                     // Check if the node to be added is already in the dashboard 
@@ -145,32 +145,27 @@ public class OnlineRandomWalk extends Traversal{
 		// Make one pass over all potential parents to find min distance
 		ArrayList<Double> dist_list = new ArrayList<Double>();
 		try { 
-			System.out.println("compute current viz:");
 			ArrayList<Double> current_visualization_measure_values = 
 					Experiment.computeVisualization(exp,pickedNode.id);
-			System.out.println(current_visualization_measure_values);
 			for (int i=0;i<parents.size();i++) {
-				System.out.println("compute parent viz:");
 				ArrayList<Double> parent_visualization_measure_values  = 
 					Experiment.computeVisualization(exp,lattice.nodeList.get(parents.get(i)).id);
-				System.out.println(parent_visualization_measure_values);
-				double dist = tr.metric.computeDistance(current_visualization_measure_values, parent_visualization_measure_values);
-				System.out.println("dist:"+dist);
+				double dist = exp.dist.computeDistance(current_visualization_measure_values, parent_visualization_measure_values);
 				dist_list.add(dist);
 				if(dist < min_distance)
                     min_distance = dist;
 			}
-	        System.out.println("min_distance:"+min_distance);
+
 			
 	        ArrayList<Double> ip_dist_list = new ArrayList<Double>();
 	        
 	        for (int i=0;i<parents.size();i++) {
 	        		double dist = dist_list.get(i);
-	            if(dist*tr.informative_critera <= min_distance)
+	            if(dist*exp.informative_critera <= min_distance)
 	            {
 	            		ip_dist_list.add(dist);
 	            		informative_parents.add(parents.get(i));
-                		System.out.println("Informative parent: "+lattice.nodeList.get(parents.get(i))+" -- "+dist);
+                		//System.out.println("Informative parent: "+lattice.nodeList.get(parents.get(i))+" -- "+dist);
 	            }
             }
 		} catch (SQLException e) {
@@ -188,8 +183,14 @@ public class OnlineRandomWalk extends Traversal{
 			// Root has no parents 
 			return parents;
 		}else{
-			String[] items = node.id.substring(1).split("#");
+			String[] items = node.id.split("#");
+			System.out.println("items:"+items.toString());
+			System.out.println("substring:"+ node.id.substring(1).split("#"));
 		    ArrayList<String> split_filters = new ArrayList<String>(Arrays.asList(items));
+		    System.out.println("split_filters:"+split_filters);
+		    if (split_filters.get(0).equals("")) {
+		    		split_filters.remove(0);
+		    }
 		    System.out.println("split_filters:"+split_filters);
 		    if (split_filters.size()==1) {
 		    		parents.add(0); // root is parent for all one-filter combos

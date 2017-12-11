@@ -125,8 +125,6 @@ public class Database {
 			newFilters = filters;
 		}
 		
-		System.out.println("newFilters:"+newFilters);
-		
 		String groupbyJoined =arr2DelimitedStrings(groupby, ",");
 		String query_stmt ="SELECT sum(subquery.sum) FROM (";
 		query_stmt +="SELECT " + x_attr + ", " +agg_func +"(" + y_attr + ")" + " FROM " + tablename;

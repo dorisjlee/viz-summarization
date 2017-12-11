@@ -143,14 +143,18 @@ public class Experiment {
 		String[] items;
 		ArrayList<String> split_filters = new ArrayList<String>();
 		int hashCount = filterStr.length() - filterStr.replace("#", "").length();
-		System.out.println(hashCount);
-		if (hashCount>0) {
-			items = filterStr.substring(1).replace("$","=").split("#");
-			 split_filters = new ArrayList<String>(Arrays.asList(items));
+
+		if (hashCount>=1) {
+			if (filterStr.charAt(0)=='#') {
+				items = filterStr.substring(1).replace("$","=").split("#");
+			}else {
+				items = filterStr.replace("$","=").split("#");
+			}
+			split_filters = new ArrayList<String>(Arrays.asList(items));
 		}else {
 			split_filters.add(filterStr.replace("$","=")); 
 		}
-	    
+	    System.out.println("split_filters"+split_filters);
 	    return Database.computeViz(exp.datasetName, exp.xAxisName,exp.groupby, exp.yAxisName, exp.aggFunc, split_filters);
 	}
 	public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 

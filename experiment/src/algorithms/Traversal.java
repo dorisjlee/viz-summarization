@@ -17,29 +17,10 @@ public abstract class Traversal {
 
 	Experiment exp;
 	Lattice lattice;
-	Distance metric;
 	String algoName;
-	static double iceberg_ratio;
-	static double informative_critera;
-//	public Traversal(Lattice lattice,Distance metric, String algoName) 
-//	{
-//		this.lattice = lattice;
-//		this.metric = metric;
-//		this.algoName = algoName;
-//		this.lattice.maxSubgraph.clear();
-//		this.lattice.maxSubgraphUtility = 0;
-//	}
-//	
 	public Traversal(String algoName) 
 	{
-		//Online Traversal Overridden method
-//		this.exp = exp;
-//		this.lattice = exp.lattice;
-//		this.iceberg_ratio = exp.iceberg_ratio;
-//		this.informative_critera = exp.informative_critera;
-//		this.metric = exp.dist;
 		this.algoName = algoName;
-//		this.lattice.maxSubgraphUtility = 0;
 	}
 	
 	public String getAlgoName() {
