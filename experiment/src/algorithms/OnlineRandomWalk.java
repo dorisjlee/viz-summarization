@@ -27,7 +27,6 @@ public class OnlineRandomWalk extends Traversal{
 	static Hierarchia h;
 	public OnlineRandomWalk() {
 		super("Online Random Walk in Lattice");
-		this.exp = exp;
 	}
 	
 	public void pickVisualizations(Experiment exp) {
@@ -59,15 +58,22 @@ public class OnlineRandomWalk extends Traversal{
         dashboard.add(children.get(myRandomNumber));
         // 	Stop when dashboard exceeds desired size k
         while (dashboard.size()<k && dashboard.size() < lattice.nodeList.size()) {
-        		ArrayList<Integer> currentFrontier = RandomWalk.getFrontier(lattice,dashboard);
+        		ArrayList<Integer> currentFrontier = getFrontierOnline(lattice,dashboard);
         		System.out.println("nodeList.size:"+lattice.nodeList.size());
         		System.out.println("dashboard:"+dashboard);
         		System.out.println("currentFrontier:"+currentFrontier);
         		// Pick one from the given current frontier
-        		
-        		int randInt =  r.nextInt(currentFrontier.size()-1);
+        		System.out.println("currentFrontier.size:"+currentFrontier.size());
+        		int randInt;
+        		if (currentFrontier.size()==1) {
+        			System.out.println("here");
+        			randInt=  0;
+        		}else {
+        			randInt =  r.nextInt(currentFrontier.size()-1);
+        		}
         		int pickedNodeID = currentFrontier.get(randInt);
         		System.out.println("pickedNodeID:"+pickedNodeID);
+        		System.out.println("lattice.nodeList:"+lattice.nodeList);
         		Node pickedNode = lattice.nodeList.get(pickedNodeID);
         		ArrayList<Integer> parents = deriveParents(lattice, pickedNode);
         		System.out.println("derivedParents:"+parents);
@@ -86,7 +92,45 @@ public class OnlineRandomWalk extends Traversal{
         resultDashboard.maxSubgraph=dashboard;
         return resultDashboard;
 	}
-
+	public static ArrayList<Integer> getFrontierOnline(Lattice lattice,ArrayList<Integer> dashboard) {
+		ArrayList<Integer> currentFrontier = new ArrayList<Integer>();
+        System.out.println("Dashboard Size: "+dashboard.size());
+        int next = -1;
+        for(int i = 0; i < dashboard.size(); i++)
+        {
+             System.out.println("Children of: "+lattice.nodeList.get(dashboard.get(i)).get_id());
+     	       // Looping through all children indexes 
+             
+             int flag = 0;
+             Integer currentNodeID = dashboard.get(i);
+             Node currentNode = lattice.nodeList.get(currentNodeID);
+             System.out.println(currentNode.child_list.size()==0);
+             if (currentNode.child_list.size()==0) {
+            	  	// If child list is empty then populate child_list of the node with derived list of children; 
+            	 	ArrayList<Integer> children  = deriveChildren(lattice,currentNode);
+             }
+            for(int j = 0; j < currentNode.child_list.size(); j++)
+            { 
+                System.out.println(j+"th Child: "+ lattice.nodeList.get(currentNode.get_child_list().get(j)).id);
+                for(int sp = 0; sp < dashboard.size(); sp++)
+                {
+                    // Check if the node to be added is already in the dashboard 
+                    if(lattice.nodeList.get(dashboard.get(i)).child_list.get(j).equals(dashboard.get(sp)))
+                    {
+                        //System.out.println("Already in");
+                        flag =1;
+                        break;
+                    }
+                }
+                if(flag == 0)
+                {
+                    next = lattice.nodeList.get(dashboard.get(i)).child_list.get(j);
+                    currentFrontier.add(next);
+                }
+            }
+        }
+		return currentFrontier;
+	} 
 	
 	private static ArrayList<Integer> findInformativeParent(Lattice lattice,ArrayList<Integer> parents,Node pickedNode) {
 		System.out.println("parents:"+parents);
@@ -101,11 +145,15 @@ public class OnlineRandomWalk extends Traversal{
 		// Make one pass over all potential parents to find min distance
 		ArrayList<Double> dist_list = new ArrayList<Double>();
 		try { 
+			System.out.println("compute current viz:");
 			ArrayList<Double> current_visualization_measure_values = 
 					Experiment.computeVisualization(exp,pickedNode.id);
+			System.out.println(current_visualization_measure_values);
 			for (int i=0;i<parents.size();i++) {
+				System.out.println("compute parent viz:");
 				ArrayList<Double> parent_visualization_measure_values  = 
 					Experiment.computeVisualization(exp,lattice.nodeList.get(parents.get(i)).id);
+				System.out.println(parent_visualization_measure_values);
 				double dist = tr.metric.computeDistance(current_visualization_measure_values, parent_visualization_measure_values);
 				System.out.println("dist:"+dist);
 				dist_list.add(dist);
@@ -153,8 +201,8 @@ public class OnlineRandomWalk extends Traversal{
 			    		for (int j =0;j<combo.size();j++) {
 			    			Node parent = new Node(String.join("#",combo.get(j)));
 			    			System.out.println(parent.id); 
-			    			lattice.add2Lattice(parent, null, lattice.nodeList.size());
-			        		parents.add(lattice.nodeList.size());
+			    			lattice.add2Lattice(parent, null, lattice.nodeList.size()-1);
+			        		parents.add(lattice.nodeList.size()-1);
 			    		}
 			    }
 		    }
@@ -176,8 +224,7 @@ public class OnlineRandomWalk extends Traversal{
 				//System.out.println("Remove:"+existing_attribute);
 				exp.uniqueAttributeKeyVals.remove(existing_attribute);
 			}
-		}
-		//combinable_attributes.remove(o)
+		} 
 		Iterator it = exp.uniqueAttributeKeyVals.entrySet().iterator();
         int n = exp.attribute_names.size();
 	    	while (it.hasNext()) {
@@ -186,8 +233,8 @@ public class OnlineRandomWalk extends Traversal{
 	        		// A Child is the existing node values plus one additional filter.
 	        		//System.out.println(node.id+pair.getKey()+"$"+val+"#");
 	        		Node child = new Node(node.id+pair.getKey()+"$"+val+"#");
-	        		lattice.add2Lattice(child, null, lattice.nodeList.size());
-	        		children.add(lattice.nodeList.size());
+	        		lattice.add2Lattice(child, null, lattice.nodeList.size()-1);
+	        		children.add(lattice.nodeList.size()-1);
 	        }
 	    }
 	    	node.set_child_list(children);
@@ -218,7 +265,7 @@ public class OnlineRandomWalk extends Traversal{
 		Experiment exp = null;
 		tr = new OnlineRandomWalk();
 		try {
-			exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", 10,tr, ed,0,0.8,true);
+			exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", 15,tr, ed,0,0.8,true);
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

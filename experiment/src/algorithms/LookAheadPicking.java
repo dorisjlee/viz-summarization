@@ -24,7 +24,6 @@ public abstract class LookAheadPicking extends Traversal{
 	@Override
 	public void pickVisualizations(Experiment exp) 
 	{
-		System.out.println("look ahead");
 		this.exp = exp;
 		this.lattice=exp.lattice;
 		super.printAlgoName();

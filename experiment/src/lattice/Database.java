@@ -107,6 +107,7 @@ public class Database {
 		return result;
 	}
 	public static ArrayList<Double> computeViz(String tablename, String x_attr, ArrayList<String> groupby,String y_attr,String agg_func, ArrayList<String> filters) throws SQLException {
+		System.out.println(filters);
 		String groupbyJoined =arr2DelimitedStrings(groupby, ",");
 		String query_stmt = "SELECT " + x_attr + ", " +agg_func +"(" + y_attr + ")" + " FROM " + tablename;
 		query_stmt += " WHERE "+ arr2DelimitedStrings(filters, "AND");
