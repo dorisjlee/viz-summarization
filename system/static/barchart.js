@@ -5,6 +5,7 @@ var LENGTH_SUB = 50;
 var node_dataset = null;
 // Called when the Visualization API is loaded.
 var totalclick = {};
+var options;
 function draw(node,edge) {
     // create a network
     var container = document.getElementById('mynetwork');
@@ -23,14 +24,19 @@ function draw(node,edge) {
         nodes: node_dataset,
         edges: edge
     };
-    var options = {
+    options = {
+
+        interaction: {
+            selectable: true
+        },
         nodes: {
-          borderWidth:2,
+          chosen:false,
+          borderWidth:3,
           size: 100,
           color: {
               border: '#A1BACB',
               background: '#FFFFFF',
-
+              highlight: 'red',
             },
           font:{color:'#0B131A',
                 size:8
@@ -38,6 +44,7 @@ function draw(node,edge) {
           shapeProperties: {
               useBorderWithImage:true
             }
+
         },
         physics: {enabled: false},
         edges: {smooth: false,
@@ -83,13 +90,13 @@ function draw(node,edge) {
             //node_dataset.remove(nodeID);
             console.log(clickedNode);
             console.log(totalclick);
-            if(color=='green')
-                clickedNode.borderWidth = 6;
-            else
-                clickedNode.borderWidth = 2;
+
+
             clickedNode.color = {
-                border: color
+                border: color,
+                highlight:color
             }
+
             //console.log("before: ")
             //console.log(node_dataset);
             node_dataset.update(clickedNode);
