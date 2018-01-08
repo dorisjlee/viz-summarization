@@ -7,8 +7,10 @@ var node_dataset = null;
 var totalclick = {};
 var options;
 function draw(node,edge) {
+
     // create a network
     var container = document.getElementById('mynetwork');
+    container.removeChild(container.childNodes[0])
 
     //(totalclick = []).length = node.length;
     //totalclick.fill(0);
@@ -134,7 +136,7 @@ function draw(node,edge) {
     });*/
     var div = document.createElement('div')
     div.innerHTML="<img src='resources/Eclipse.svg' id = 'loadingDashboard' style='display: none; position: relative; z-index: 10; width: 100%; height: 50%;'>"
-    container.append(div.firstChild);
+    container.prepend(div.firstChild);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
