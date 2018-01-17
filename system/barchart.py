@@ -19,10 +19,11 @@ def get_cmap(n, name='hsv'):
     return plt.cm.get_cmap(name, n)
 
 
-def autolabel(rects, ax):
+def autolabel(rects, ax, font_size):
     # Get y-axis height to calculate label position from.
     (y_bottom, y_top) = ax.get_ylim()
     y_height = y_top - y_bottom
+
 
     for rect in rects:
         height = rect.get_height()
@@ -30,7 +31,7 @@ def autolabel(rects, ax):
 
         ax.text(rect.get_x() + rect.get_width() / 2., label_position - (height / 2),
                 '%.1f' % height,
-                ha='center', va='bottom', fontsize=11)
+                ha='center', va='bottom', fontsize=font_size)
 
 
 def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", N=1, width=0.1):
@@ -44,7 +45,12 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
 
     ax.set_xlabel(xtitle, fontsize=14)
     ax.set_ylabel(ytitle, fontsize=14)
-    ax.set_title(title, fontsize=10)
+
+    if title.count(',') < 3:
+        ax.set_title(title, fontsize=10)
+    else:
+        ax.set_title(title, fontsize=6)
+
     # ax.set_title("test", fontsize=12)
 
     # Left vertical title
@@ -62,9 +68,15 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
     ax.annotate(top_right_text, xy=(0.75, 0.85), xycoords='axes fraction')
     ax.set_xlim(xmin, xmax)
     ax.set_ylim((0, 100))
-
+    size = 0
     for rect in rects:
-        autolabel(rect, ax)
+        size += 1
+    if size < 3:
+        font_size = 11
+    else:
+        font_size = 7
+    for rect in rects:
+        autolabel(rect, ax, font_size)
     plt.tight_layout()
     # save as svg string
     imgdata = StringIO.StringIO()
