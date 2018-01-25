@@ -50,6 +50,7 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
         ax.set_title(title, fontsize=10)
     else:
         ax.set_title(title, fontsize=6)
+    # In case the font is too large for long titles
 
     # ax.set_title("test", fontsize=12)
 
@@ -75,6 +76,7 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
         font_size = 11
     else:
         font_size = 7
+    # In case the font is too large for long titles
     for rect in rects:
         autolabel(rect, ax, font_size)
     plt.tight_layout()

@@ -69,43 +69,39 @@ function populateOptions(list,selector)
 // $("#yaxis").change(constructQueryCallback)
 // $("input[name='aggFunc']").change(constructQueryCallback)
 var columns =[];
+var slider_k_input = document.getElementById('slider-k-input'),
+   slider_k_output = document.getElementById('slider-k-output');
+
+var availableDict;
 $("#all_tables").change(function (){
     $.post('/getAvailableFiles',{
         "tablename": $("#all_tables").val()
     },'application/json').success( function(data){
         console.log(data)
+        availableDict = data;
         populateOptions(data["xAxis"],document.getElementById("xaxis"));
         populateOptions(data["dist"],document.getElementById("metric"));
         populateOptions(data["algo"],document.getElementById("algorithm"));
-        populateOptions(data["ic"],document.getElementById("ic"));
-        populateOptions(data["ip"],document.getElementById("ip"));
-        populateOptions(data["k"],document.getElementById("k"));
+        populateSlider('k',data);
+        populateSlider('ic',data);
+        populateSlider('ip',data);
     })
 })
 
-var values = [1,3,5,10,20,50,100];    //values for k
-var slider_k_input = document.getElementById('slider-k-input'),
-   slider_k_output = document.getElementById('slider-k-output');
-slider_k_input.oninput = function(){
-    slider_k_output.innerHTML = values[this.value];
-};
-slider_k_input.oninput();
+function populateSlider(name,data){
+    var slider_input = document.getElementById('slider-'+name+'-input'),
+        slider_output = document.getElementById('slider-'+name+'-output');
+        slider_input.oninput = function(){
+            document.getElementById('slider-'+name+'-input').max=data[name].length - 1;
+            slider_output.innerHTML = data[name][this.value];
+        };
+        slider_input.oninput();
+}
 
-var values = [1,3,5,10,20,50,100];    //values for ic
-var slider_ic_input = document.getElementById('slider-ic-input'),
-   slider_ic_output = document.getElementById('slider-ic-output');
-slider_ic_input.oninput = function(){
-    slider_ic_output.innerHTML = values[this.value];
-};
-slider_ic_input.oninput();
+//var values = [1,3,5,10,20,50,100];    //values for k
+//var slider_k_input = document.getElementById('slider-k-input'),
+   //slider_k_output = document.getElementById('slider-k-output');
 
-var values = [1,3,5,10,20,50,100];    //values for ip
-var slider_ip_input = document.getElementById('slider-ip-input'),
-   slider_ip_output = document.getElementById('slider-ip-output');
-slider_ip_input.oninput = function(){
-    slider_ip_output.innerHTML = values[this.value];
-};
-slider_ip_input.oninput();
 
 
 

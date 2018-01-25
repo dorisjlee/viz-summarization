@@ -12,14 +12,13 @@
 <script src="resources/Treant.js"></script>
 <script src="resources/jquery.min.js"></script>
 <script src="resources/jquery.easing.js"></script>
-</head>
 <!-- <body onload="draw(node,edge)"> -->
-<body>
 
-<div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left" style="display:none" id="mySidebar">
+
+<div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left" style="display:none;width:25%" id="mySidebar">
 
 <br><br>
-<div class="btn-group" style ="margin-left: 20px;">
+<div class="btn-group" style ="margin-left: 20px">
   <h1>Preloaded Selections:</h1>
   <br>
   <a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true">Mushroom</a>
@@ -95,10 +94,7 @@
 <br>
 <form class="form-inline menu-item" class="form-inline">
   <h2 class = "title"><b>k</b></h2>
-    <div class="form-group">
-        <select name = "k"  id = "k" class="selectpicker form-control">
-        </select>
-    </div>
+
   <br>
 </form>
 <input id="slider-k-input" class="slider" type="range" min="0" value="0" max="6" step="1">
@@ -106,10 +102,7 @@
 <br>
 <form class="form-inline menu-item" class="form-inline">
   <h2 class = "title"><b>iceberg condition</b></h2>
-    <div class="form-group">
-        <select name = "ic"  id = "ic" class="selectpicker form-control">
-        </select>
-    </div>
+
   <br>
 </form>
 <input id="slider-ic-input" class="slider" type="range" min="0" value="0" max="6" step="1">
@@ -117,10 +110,7 @@
 <br>
 <form class="form-inline menu-item" class="form-inline">
   <h2 class = "title"><b>informative parent criterion</b></h2>
-    <div class="form-group">
-        <select name = "ip"  id = "ip" class="selectpicker form-control">
-        </select>
-    </div>
+
   <br>
 </form>
 <input id="slider-ip-input" class="slider" type="range" min="0" value="0" max="6" step="1">
@@ -164,13 +154,10 @@
 
 
 
-</div>
-
-
 <div zclass="w3-main" id="main">
 
 <div class="w3-teal">
-  <div class="iconcontainer" onclick="mymenuicon(this);menuItem_open_close();" />
+  <div class="iconcontainer" onclick="mymenuicon(this);menuItem_open_close();" >
 
   <div class="bar1"></div>
   <div class="bar2"></div>
@@ -186,7 +173,17 @@
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
-    <p style="color:black;text-align:center"><br>Some text in the Modal..</p>
+    <p style="color:grey;text-align:left">
+        <br>1. Press the options button <img src="resources/icon.png" height="20" width="20"> on the top left corner to reveal sidebar<br>
+        <br>2. Sidebar contains different pre-loaded datasets with customizable options<br>
+        <br>3. Click 'Submit' button to view the processed tree<br>
+        <br>4. For each node of the tree, click the graph to change border color<br>
+        <br>5. Red means not interested, green means interested and grey is not yet decided<br>
+        <br><img src="resources/red.png" height="60" width="60">
+        <img src="resources/green.png" height="60" width="60">
+        <br>
+        <br>6. The sidebar on the right will show your current selection of node(s) and their filter(s)<br>
+    </p>
   </div>
 
 </div>
