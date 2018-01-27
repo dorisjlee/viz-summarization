@@ -1,3 +1,17 @@
+function constructQueryWithArgs(dataset,xAxis,algorithm,metric,ic,ip,k){
+    query = {
+        "dataset": dataset,
+        "xAxis": xAxis,
+        "algorithm": algorithm,
+        "metric": metric,
+        "ic":ic,
+        "ip": ip,
+        "k": k,
+        "method": "query"
+    }
+    readDashboardOutput(query)
+    return query
+}
 function constructQuery(){
     query = {
         "dataset": $("#all_tables").val() || "",
@@ -89,10 +103,10 @@ $("#all_tables").change(function (){
 })
 
 function populateSlider(name,data){
-    var slider_input = document.getElementById('slider-'+name+'-input'),
-        slider_output = document.getElementById('slider-'+name+'-output');
+    var slider_input = document.getElementById(name),
+        slider_output = document.getElementById(name);
         slider_input.oninput = function(){
-            document.getElementById('slider-'+name+'-input').max=data[name].length - 1;
+            document.getElementById(name).max=data[name].length - 1;
             slider_output.innerHTML = data[name][this.value];
         };
         slider_input.oninput();
@@ -168,6 +182,19 @@ function IsJsonString(str) {
     }
     return true;
 }
+
+function toggleCanvas(element)
+{
+    if (element.checked){
+        document.getElementById('mynetwork').style.display = 'none';
+        document.getElementById('mynetwork2').style.display = '';
+    }
+    else{
+        document.getElementById('mynetwork').style.display = '';
+        document.getElementById('mynetwork2').style.display = 'none';
+    }
+}
+
 // Direct input graphDic submission form 
 $("#graphDicSubmit").click(function(){
     getNodeEdgeListThenDraw($("#graphDic").val());

@@ -82,14 +82,15 @@ function setIfNotAdd(selector_name,val){
 //     })
 // }
 function populateD1Query1(){
-    $("#all_tables").val("mushroom")
-    setIfNotAdd("#xaxis","type")
-    setIfNotAdd("#metric","euclidean")
-    setIfNotAdd("#algorithm","frontierGreedy")
-    setIfNotAdd("#k","20")
-    setIfNotAdd("#ic","0.2")
-    setIfNotAdd("#ip","0.1")
-    $("#submit").click();
+    constructQueryWithArgs("mushroom","type","frontierGreedy","euclidean",0.2,0.1,20)
+//    $("#all_tables").val("mushroom")
+//    setIfNotAdd("#xaxis","type")
+//    setIfNotAdd("#metric","euclidean")
+//    setIfNotAdd("#algorithm","frontierGreedy")
+//    setIfNotAdd("#k","20")
+//    setIfNotAdd("#ic","0.2")
+//    setIfNotAdd("#ip","0.1")
+//    $("#submit").click();
 }
 function populateD1Query2(){
     $("#all_tables").val("mushroom")

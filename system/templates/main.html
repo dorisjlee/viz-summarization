@@ -97,24 +97,24 @@
 
 
 </form>
-<input id="slider-k-input" class="slider" style ="margin-left: 20px" type="range" min="0" value="0" max="6" step="1">
-<div id="slider-k-output" style ="margin-left: 20px"></div>
+<input id="k" class="slider" style ="margin-left: 20px" type="range" min="0" value="0" max="6" step="1">
+<div id="k" style ="margin-left: 20px"></div>
 <br>
 <form class="form-inline menu-item" class="form-inline">
   <h2 class = "title"><b>iceberg condition</b></h2>
 
 
 </form>
-<input id="slider-ic-input" class="slider" style ="margin-left: 20px" type="range" min="0" value="0" max="6" step="1">
-<div id="slider-ic-output" style ="margin-left: 20px"></div>
+<input id="ic" class="slider" style ="margin-left: 20px" type="range" min="0" value="0" max="6" step="1">
+<div id="ic" style ="margin-left: 20px"></div>
 <br>
 <form class="form-inline menu-item" class="form-inline">
   <h2 class = "title"><b>informative parent criterion</b></h2>
 
 
 </form>
-<input id="slider-ip-input" class="slider" style ="margin-left: 20px" type="range" min="0" value="0" max="6" step="1">
-<div id="slider-ip-output" style ="margin-left: 20px"></div>
+<input id="ip" class="slider" style ="margin-left: 20px" type="range" min="0" value="0" max="6" step="1">
+<div id="ip" style ="margin-left: 20px"></div>
 <div id="additionalInfoPanel" style="margin-left: 10px; word-wrap: break-word;"></div>
 <!-- <form class="form-inline menu-item" class="form-inline" id = "agg_select" name = "agg_select">
   <h2 class = "title"><b>Aggregation function:</b></h2>
@@ -129,7 +129,7 @@
   <br>
 </form>
  --><br>
-<input type="submit" id="submit" onclick="constructQuery()" style = "background-color: #359EDA;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 10px 230px;cursor: pointer;" value="Submit">
+<input type="submit" id="submit" onclick="constructQuery()" style = "background-color: #359EDA;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 10px 60px;cursor: pointer;" value="Submit">
 <!-- <div class="container">
     <div class="row">
         <div class="control-group" id="fields">
@@ -148,6 +148,7 @@
             </div>
         </div>
     </div> -->
+<!-- Rectangular switch -->
 
     <!-- <input type="submit" id="filterSubmit" style = "background-color: #359EDA;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 100px 100px;cursor: pointer;right:40;" value="Submit"> -->
 </div>
@@ -195,6 +196,8 @@
             <!--<br> nodeDic: <input type="text" id="nodeDic" style="width: 30%;">-->
             <br> graphDic: <input type="text" id="graphDic" style="width: 30%;">
             <input type="submit" id="graphDicSubmit" style = "display: inline-block;font-size: 15px;">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <input id="newCanvas" type="checkbox" onchange="toggleCanvas(this)"> Toogle Canvas
         </div>
 <!--         <div id = "nodeDic" style ="display: block" treeContent = {{nodeDic}}>
                 {{nodeDic}}
@@ -217,9 +220,13 @@
         <div id="mynetwork" style="height:600px; width:75%; float:left">
             <img src="resources/Eclipse.svg" id = 'loadingDashboard' style="display: none; position: relative; z-index: 10; width: 100%; height: 50%;">
         </div>
+        <div id="mynetwork2" style="height:600px; width:75%; float:left;display:none">
+            This is canvas number 2
+        </div>
+
         <pre id="eventSpan"></pre>
 
-        <div id = "chart_container">
+<div id = "chart_container">
 
         <div style="visibility: hidden; display:inline; width: 0%; height: 0px" id="chartid">
             <div id="chartid2" style="width: 0px; height: 0px">
