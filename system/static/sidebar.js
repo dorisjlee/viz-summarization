@@ -93,16 +93,19 @@ function populateD1Query1(){
 //    $("#submit").click();
 }
 function populateD1Query2(){
-    $("#all_tables").val("mushroom")
+    constructQueryWithArgs("mushroom","cap-surface","frontierGreedy","euclidean",0.2,0.1,20)
+/*    $("#all_tables").val("mushroom")
     setIfNotAdd("#xaxis","cap-surface")
     setIfNotAdd("#metric","euclidean")
     setIfNotAdd("#algorithm","frontierGreedy")
     setIfNotAdd("#k","20")
     setIfNotAdd("#ic","0.2")
     setIfNotAdd("#ip","0.1")
-    $("#submit").click();
+    $("#submit").click();*/
 }
 function populateD2Query1(){
+    constructQueryWithArgs("turn","has-list-fn","frontierGreedy","euclidean",0.2,0.1,10)
+/*
     $("#all_tables").val("turn")
     setIfNotAdd("#xaxis","has-list-fn")
     setIfNotAdd("#metric","euclidean")
@@ -111,18 +114,22 @@ function populateD2Query1(){
     setIfNotAdd("#ic","0.2")
     setIfNotAdd("#ip","0.1")
     $("#submit").click();
+*/
 }
 function populateD2Query2(){
-    $("#all_tables").val("turn")
+    constructQueryWithArgs("turn","has-list-fn","frontierGreedy","euclidean",0.0,0.1,30)
+/*    $("#all_tables").val("turn")
     setIfNotAdd("#xaxis","has-list-fn")
     setIfNotAdd("#metric","euclidean")
     setIfNotAdd("#algorithm","frontierGreedy")
     setIfNotAdd("#k","30")
     setIfNotAdd("#ic","0")
     setIfNotAdd("#ip","0.1")
-    $("#submit").click();
+    $("#submit").click();*/
 }
 function populateD2Query1(){
+    constructQueryWithArgs("turn","has-list-fn","frontierGreedy","euclidean",0.0,0.1,15)
+/*
     $("#all_tables").val("turn")
     setIfNotAdd("#xaxis","has-list-fn")
     setIfNotAdd("#metric","euclidean")
@@ -131,18 +138,22 @@ function populateD2Query1(){
     setIfNotAdd("#ic","0")
     setIfNotAdd("#ip","0.1")
     $("#submit").click();
+*/
 }
 function populateD3Query1(){
-    $("#all_tables").val("titanic")
+    constructQueryWithArgs("titanic","survived","frontierGreedy","euclidean",0.0,0.1,15)
+/*    $("#all_tables").val("titanic")
     setIfNotAdd("#xaxis","survived")
     setIfNotAdd("#metric","euclidean")
     setIfNotAdd("#algorithm","frontierGreedy")
     setIfNotAdd("#k","15")
     setIfNotAdd("#ic","0")
     setIfNotAdd("#ip","0.1")
-    $("#submit").click();
+    $("#submit").click();*/
 }
 function populateD3Query2(){
+    constructQueryWithArgs("titanic","survived","frontierGreedy","kldiv",0.0,0.9,30)
+/*
     $("#all_tables").val("titanic")
     setIfNotAdd("#xaxis","survived")
     setIfNotAdd("#metric","kldiv")
@@ -151,4 +162,5 @@ function populateD3Query2(){
     setIfNotAdd("#ic","0")
     setIfNotAdd("#ip","0.9")
     $("#submit").click();
+*/
 }

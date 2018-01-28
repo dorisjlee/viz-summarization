@@ -4,7 +4,7 @@ function constructQueryWithArgs(dataset,xAxis,algorithm,metric,ic,ip,k){
         "xAxis": xAxis,
         "algorithm": algorithm,
         "metric": metric,
-        "ic":ic,
+        "ic":parseFloat($("#ic").val()).toFixed(1),
         "ip": ip,
         "k": k,
         "method": "query"
@@ -33,6 +33,7 @@ function readDashboardOutput(query){
     fname = query["dataset"]+"_"+query["xAxis"]+"_"+query["algorithm"]
             +"_"+query["metric"]+"_ic"+query["ic"]+"_ip"+query["ip"]+"_k"+query["k"]+".json"
     // Data Upload after options selection
+    console.log(fname)
     var nodeDic = ""
     var json_pathloc = "http://"+window.location.hostname+":"+window.location.port+"/generated_dashboards/"+fname
     $.ajax({
@@ -188,12 +189,17 @@ function toggleCanvas(element)
     if (element.checked){
         document.getElementById('mynetwork').style.display = 'none';
         document.getElementById('mynetwork2').style.display = '';
+        document.getElementById('right-sidebar').style.display = 'none';
+        document.getElementById('right-sidebar2').style.display = '';
     }
     else{
         document.getElementById('mynetwork').style.display = '';
         document.getElementById('mynetwork2').style.display = 'none';
+        document.getElementById('right-sidebar').style.display = '';
+        document.getElementById('right-sidebar2').style.display = 'none';
     }
 }
+
 
 // Direct input graphDic submission form 
 $("#graphDicSubmit").click(function(){
@@ -204,3 +210,23 @@ $("#graphDicSubmit").click(function(){
 // Titanic Default Example
 fname = "default"
 getNodeEdgeListThenDraw({"0": [{ "xAxis": "0", "yAxis":65.72734196496572},{ "xAxis": "1", "yAxis":34.27265803503427},{"childrenIndex":[1, 2, 3, 4, 5], "populationSize":1313, "filter":"#","yName":"id"}],"1": [{ "xAxis": "0", "yAxis":83.31374853113984},{ "xAxis": "1", "yAxis":16.686251468860164},{"childrenIndex":[6, 7, 8], "populationSize":851, "filter":"#sexcode$0#","yName":"id"}],"2": [{ "xAxis": "0", "yAxis":33.33333333333333},{ "xAxis": "1", "yAxis":66.66666666666666},{"childrenIndex":[9, 10, 11], "populationSize":462, "filter":"#sexcode$1#","yName":"id"}],"3": [{ "xAxis": "0", "yAxis":40.06211180124223},{ "xAxis": "1", "yAxis":59.93788819875776},{"childrenIndex":[6, 9], "populationSize":322, "filter":"#pc_class$1#","yName":"id"}],"4": [{ "xAxis": "0", "yAxis":57.49999999999999},{ "xAxis": "1", "yAxis":42.5},{"childrenIndex":[7, 10], "populationSize":280, "filter":"#pc_class$2#","yName":"id"}],"5": [{ "xAxis": "0", "yAxis":80.59071729957806},{ "xAxis": "1", "yAxis":19.40928270042194},{"childrenIndex":[8, 11], "populationSize":711, "filter":"#pc_class$3#","yName":"id"}],"6": [{ "xAxis": "0", "yAxis":67.0391061452514},{ "xAxis": "1", "yAxis":32.960893854748605},{"childrenIndex":[], "populationSize":179, "filter":"#sexcode$0#pc_class$1#","yName":"id"}],"7": [{ "xAxis": "0", "yAxis":85.54913294797689},{ "xAxis": "1", "yAxis":14.450867052023122},{"childrenIndex":[], "populationSize":173, "filter":"#sexcode$0#pc_class$2#","yName":"id"}],"8": [{ "xAxis": "0", "yAxis":88.37675350701403},{ "xAxis": "1", "yAxis":11.623246492985972},{"childrenIndex":[], "populationSize":499, "filter":"#sexcode$0#pc_class$3#","yName":"id"}],"9": [{ "xAxis": "0", "yAxis":6.293706293706294},{ "xAxis": "1", "yAxis":93.7062937062937},{"childrenIndex":[], "populationSize":143, "filter":"#sexcode$1#pc_class$1#","yName":"id"}],"10": [{ "xAxis": "0", "yAxis":12.149532710280374},{ "xAxis": "1", "yAxis":87.85046728971963},{"childrenIndex":[], "populationSize":107, "filter":"#sexcode$1#pc_class$2#","yName":"id"}],"11": [{ "xAxis": "0", "yAxis":62.264150943396224},{ "xAxis": "1", "yAxis":37.735849056603776},{"childrenIndex":[], "populationSize":212, "filter":"#sexcode$1#pc_class$3#","yName":"id"}]})
+
+
+//mode2 functions
+function CreateRow() {
+    var table = document.getElementById("FilterTable");
+    var rowCount = table.rows.length;
+    var row = table.insertRow(rowCount);
+    var cell1 = row.insertCell(0);
+
+    cell1.innerHTML = "NEW CELL1";
+
+}
+
+function DeleteRow() {
+	var table = document.getElementById("FilterTable");
+    var rowCount = table.rows.length;
+    table.deleteRow(rowCount-1);
+}
+
+
