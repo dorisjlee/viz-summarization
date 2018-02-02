@@ -1,0 +1,85 @@
+% THIS IS AN EXAMPLE DOCUMENT FOR VLDB 2012
+% based on ACM SIGPROC-SP.TEX VERSION 2.7
+% Modified by  Gerald Weber <gerald@cs.auckland.ac.nz>
+% Removed the requirement to include *bbl file in here. (AhmetSacan, Sep2012)
+% Fixed the equation on page 3 to prevent line overflow. (AhmetSacan, Sep2012)
+
+\documentclass{vldb}
+% \usepackage{amsthm}
+%\usepackage{booktabs} % For formal tables
+% My packages
+
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+\usepackage{fixltx2e}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand\notes[1]{\textcolor{red}{#1}}
+
+% Command for system name
+\newcommand{\system}{\textsc{Hierarchia}}
+%\newcommand{\system}{\textsc{VizDAG}}
+%\newcommand{\system}{\textsc{VizInNuce}}
+
+% Copyright
+%\setcopyright{none}
+%\setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+%\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+
+% DOI
+%\acmDOI{10.475/123_4}
+
+% ISBN
+%\acmISBN{123-4567-24-567/08/06}
+
+%Conference
+\iffalse 
+\acmConference[WOODSTOCK'97]{ACM Woodstock conference}{July 1997}{El
+  Paso, Texas USA} 
+\acmYear{1997}
+\fi
+
+%\copyrightyear{2016}
+
+%\acmPrice{15.00}
+
+
+\begin{document}
+\title{\system : Hierarchical Summary of Equivalent Visualizations across Data Subsets}
+\iffalse 
+\titlenote{Produces the permission block, and
+  copyright information}
+\subtitle{Extended Abstract}
+\subtitlenote{The full version of the author's guide is available as
+  \texttt{acmart.pdf} document}
+\fi
+\numberofauthors{4}
+\author{XYZ}
+%\author{X, Y, Z}
+% \affiliation{%
+%   \institution{Department  of Computer Science\\
+%   University of Illinois at Urbana-Chamapaign (UIUC)}
+%   %\streetaddress{P.O. Box 1212}
+%   %\city{Urbana-Champaign} 
+%   %\state{Illinois} 
+%   %\postcode{61820}
+% }
+%\email{xyz@illinois.edu}
+\maketitle
+\keywords{ACM proceedings, \LaTeX, text tagging}
+\input{0.Abstract}
+\input{2.ProblemFormulation}
+\input{3.AlgorithmsOptimizations}
+
+\bibliographystyle{abbrv}
+\bibliography{reference}
+
+\end{document}
