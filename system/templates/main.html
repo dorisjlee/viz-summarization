@@ -227,10 +227,12 @@
 
             </table>
             <script>
+                var rownum = 4;
+                var colnum = 5
                 var table = document.getElementById('charttable'), tr, td, row, cell;
-                for (row = 0; row < 4; row++) {
+                for (row = 0; row < rownum; row++) {
                     tr = document.createElement('tr');
-                    for (cell = 0; cell < 5; cell++) {
+                    for (cell = 0; cell < colnum; cell++) {
                         td = document.createElement('td');
                         tr.appendChild(td);
                         
@@ -259,7 +261,7 @@
             <li>You are interested in...</li>
             <table>
                 <th style="color:#368332;font-weight: bold ">nodes_ID</th>
-                <th style="padding-left:1.5cm; position: fixed;color:#368332;font-weight: bold;">filter</th>
+                <th style="padding-left:1.5cm; color:#368332;font-weight: bold;">filter</th>
                 <tbody id="interested-in">
 
                 </tbody>
@@ -270,7 +272,7 @@
           <li>You are not interested in...</li>
           <table>
               <th style="color:#ff0000;font-weight: bold ">nodes_ID</th>
-              <th style="padding-left:1.5cm; position: fixed; color:#ff0000;font-weight: bold ">filter</th>
+              <th style="padding-left:1.5cm;  color:#ff0000;font-weight: bold ">filter</th>
               <tbody id="not-interested-in">
 
               </tbody>
