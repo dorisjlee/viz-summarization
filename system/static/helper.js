@@ -4,11 +4,12 @@ function constructQueryWithArgs(dataset,xAxis,algorithm,metric,ic,ip,k){
         "xAxis": xAxis,
         "algorithm": algorithm,
         "metric": metric,
-        "ic":parseFloat($("#ic").val()).toFixed(1),
-        "ip": ip,
+        "ic":parseFloat(ic).toFixed(1),
+        "ip": parseFloat(ip).toFixed(1),
         "k": k,
         "method": "query"
     }
+    console.log(ic)
     readDashboardOutput(query)
     return query
 }

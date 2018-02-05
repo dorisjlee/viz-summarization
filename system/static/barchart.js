@@ -145,28 +145,31 @@ function draw(node,edge) {
 ///////////////////////////////////////////////////////////////////////////////////////////
 function render_chart(i, nodeDic){
 //    Dic = JSON.parse(nodeDic)
+
     Dic = nodeDic
-    dataset = Dic[i].slice(0, Dic[i].length-1)
+    dataset = Dic[i].slice(0,Dic[i].length-1)
     yAxis_name = Dic[i][Dic[i].length-1]["yName"]
     title = Dic[i][Dic[i].length-1]["filter"]
-
     //$("#title").html(title) 
     //alert(dataset[0][0].xAxis);
    
 
     // Dimensions for the chart: height, width, and space b/t the bars
-    var margins = {top: 30, right: 50, bottom: 30, left: 50}
-    var height = 300 - margins.left - margins.right,
-        width = 450 - margins.top - margins.bottom,
-        barPadding = 25
+    var margins = {top: 20, right: 50, bottom: 30, left: 50}
+    var height = 150 - margins.left - margins.right,
+        width = 120- margins.top - margins.bottom,
+        barPadding = 5
 
     // Create a scale for the y-axis based on data
     // >> Domain - min and max values in the dataset
     // >> Range - physical range of the scale (reversed)
+//    var yScale = d3.scale.linear()
+//      .domain([0, d3.max(dataset, function(d){
+//        return d.yAxis;
+//      })])
+//      .range([height, 0]);
     var yScale = d3.scale.linear()
-      .domain([0, d3.max(dataset, function(d){
-        return d.yAxis;
-      })])
+      .domain([0, 100])
       .range([height, 0]);
 
     // Implements the scale as an actual axis
@@ -193,7 +196,8 @@ function render_chart(i, nodeDic){
     // >> Select - grabs the empty <div> above this script
     // >> Append - places an <svg> wrapper inside the div
     // >> Attr - applies our height & width values from above
-    var chart = d3.select('#chart'+i)
+    current_cell = "#c"+i.toString();
+    var chart = d3.select(current_cell)
       .append('svg')
       .attr('width', width + margins.left + margins.right)
       .attr('height', height + margins.top + margins.bottom)
@@ -265,7 +269,7 @@ function render_chart(i, nodeDic){
         .style("font-size", "16px")
         .style("text-decoration", "underline")
         .text(title);
-
+    console.log(chart)
    return chart;
   }
   function handleMouseOver() {
@@ -282,7 +286,7 @@ function render_chart(i, nodeDic){
         $('#yAxis').html($(this).attr('id'));
       });
     }**/
-
+/*
     function test_chart(arrayDiv){
     // On document load, call the render() function to load the graph
 
@@ -293,4 +297,33 @@ function render_chart(i, nodeDic){
         arrayDiv[i].innerHTML = "<div id=chart"+i+"></div>"
         render_chart(i);
     }
-  }
+  }*/
+
+
+   function insertChart(){
+        var chartarray = JSON.parse('{\"0\": [{ \"xAxis\": \"0\", \"yAxis\":65.72734196496572},{ \"xAxis\": \"1\", \"yAxis\":34.27265803503427},{\"childrenIndex\":[1, 2, 3, 4, 5], \"populationSize\":1313, \"filter\":\"#\",\"yName\":\"id\"}],\"1\": [{ \"xAxis\": \"0\", \"yAxis\":83.31374853113984},{ \"xAxis\": \"1\", \"yAxis\":16.686251468860164},{\"childrenIndex\":[6, 7, 8], \"populationSize\":851, \"filter\":\"#sexcode$0#\",\"yName\":\"id\"}],\"2\": [{ \"xAxis\": \"0\", \"yAxis\":33.33333333333333},{ \"xAxis\": \"1\", \"yAxis\":66.66666666666666},{\"childrenIndex\":[9, 10, 11], \"populationSize\":462, \"filter\":\"#sexcode$1#\",\"yName\":\"id\"}],\"3\": [{ \"xAxis\": \"0\", \"yAxis\":40.06211180124223},{ \"xAxis\": \"1\", \"yAxis\":59.93788819875776},{\"childrenIndex\":[6, 9], \"populationSize\":322, \"filter\":\"#pc_class$1#\",\"yName\":\"id\"}],\"4\": [{ \"xAxis\": \"0\", \"yAxis\":57.49999999999999},{ \"xAxis\": \"1\", \"yAxis\":42.5},{\"childrenIndex\":[10], \"populationSize\":280, \"filter\":\"#pc_class$2#\",\"yName\":\"id\"}],\"5\": [{ \"xAxis\": \"0\", \"yAxis\":80.59071729957806},{ \"xAxis\": \"1\", \"yAxis\":19.40928270042194},{\"childrenIndex\":[8, 11], \"populationSize\":711, \"filter\":\"#pc_class$3#\",\"yName\":\"id\"}],\"6\": [{ \"xAxis\": \"0\", \"yAxis\":67.0391061452514},{ \"xAxis\": \"1\", \"yAxis\":32.960893854748605},{\"childrenIndex\":[], \"populationSize\":179, \"filter\":\"#sexcode$0#pc_class$1#\",\"yName\":\"id\"}],\"7\": [{ \"xAxis\": \"0\", \"yAxis\":88.37675350701403},{ \"xAxis\": \"1\", \"yAxis\":11.623246492985972},{\"childrenIndex\":[], \"populationSize\":499, \"filter\":\"#sexcode$0#pc_class$3#\",\"yName\":\"id\"}],\"8\": [{ \"xAxis\": \"0\", \"yAxis\":6.293706293706294},{ \"xAxis\": \"1\", \"yAxis\":93.7062937062937},{\"childrenIndex\":[], \"populationSize\":143, \"filter\":\"#sexcode$1#pc_class$1#\",\"yName\":\"id\"}],\"9\": [{ \"xAxis\": \"0\", \"yAxis\":12.149532710280374},{ \"xAxis\": \"1\", \"yAxis\":87.85046728971963},{\"childrenIndex\":[], \"populationSize\":107, \"filter\":\"#sexcode$1#pc_class$2#\",\"yName\":\"id\"}],\"10\": [{ \"xAxis\": \"0\", \"yAxis\":62.264150943396224},{ \"xAxis\": \"1\", \"yAxis\":37.735849056603776},{\"childrenIndex\":[], \"populationSize\":212, \"filter\":\"#sexcode$1#pc_class$3#\",\"yName\":\"id\"}]}');
+        console.log(chartarray)
+
+        var len = Object.keys(chartarray).length;
+        var table = document.getElementById("charttable");
+
+        var cell_idx = 0;
+        for(cell_idx = 0; cell_idx < 11; cell_idx++){
+            render_chart(cell_idx,chartarray)
+        }
+
+        /*while(row=table.rows[r++])
+        {
+            var c=0;
+            while(cell=row.cells[c++])
+            {
+                if (idx<len){
+
+                      cell.innerHTML=render_chart(idx,chartarray);
+                      idx++;
+                }
+
+            }
+        }*/
+    }
+
