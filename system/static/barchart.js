@@ -116,11 +116,11 @@ function draw(node,edge) {
 
             if(totalclick[node[i].id]==3){
                 //var currNode = node_dataset.get(i);
-                document.getElementById('interested-in').innerHTML+='<tr>'+'<td style="color:#368332">'+ node[i].id+'<td>'+ '<td style="padding-left:1cm;color:#368332"> '+node[i].filterVal+'<td> '+'<tr>';
+                document.getElementById('interested-in').innerHTML+='<tr>'+'<td style="color:#368332">'+ node[i].id+'<td>'+ '<td style="color:#368332"> '+node[i].filterVal+'<td> '+'<tr>';
             }
             else if (totalclick[node[i].id]==2){
                 //var currNode = node_dataset.get(i);
-                document.getElementById('not-interested-in').innerHTML+='<tr>'+'<td style="color:#ff0000">'+ node[i].id+'<td>'+ '<td style="padding-left:1cm;color:#ff0000"> '+node[i].filterVal+'<td> '+'<tr>';
+                document.getElementById('not-interested-in').innerHTML+='<tr>'+'<td style="color:#ff0000">'+ node[i].id+'<td>'+ '<td style="color:#ff0000"> '+node[i].filterVal+'<td> '+'<tr>';
             }
         }
 
@@ -150,6 +150,20 @@ function render_chart(i, nodeDic){
     dataset = Dic[i].slice(0,Dic[i].length-1)
     yAxis_name = Dic[i][Dic[i].length-1]["yName"]
     title = Dic[i][Dic[i].length-1]["filter"]
+    if (i==0){
+        title = "root";
+    }
+    else{
+        for(var j = 0; j<title.length;j++){
+            if(title[j] == "#"){
+                title = title.substr(0, j) + '\n' + title.substr(j + 1);
+            }
+            else if(title[j] == "$"){
+                title = title.substr(0, j) + '=' + title.substr(j + 1);
+            }
+        }
+    }
+
     //$("#title").html(title) 
     //alert(dataset[0][0].xAxis);
    
@@ -215,6 +229,7 @@ function render_chart(i, nodeDic){
       .data(dataset)
       .enter()
       .append('rect')
+
       // Step 2: X & Y
       // >> X - Places the bars in horizontal order, based on number of
       //        points & the width of the chart
@@ -225,6 +240,7 @@ function render_chart(i, nodeDic){
       .attr('y', function(d){
         return yScale(d.yAxis);
       })
+
 
       // Step 3: Height & Width
       // >> Width - Based on barpadding and number of points in dataset
@@ -266,7 +282,7 @@ function render_chart(i, nodeDic){
         .attr("x", (width / 2))
         .attr("y",  "-8px")
         .attr("text-anchor", "middle")
-        .style("font-size", "16px")
+        .style("font-size", "10px")
         .style("text-decoration", "underline")
         .text(title);
     console.log(chart)

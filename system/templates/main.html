@@ -230,13 +230,17 @@
                 var rownum = 4;
                 var colnum = 5
                 var table = document.getElementById('charttable'), tr, td, row, cell;
+                var tableChecked = [];
+                for (var i = 0; i < 20; i++){
+                    tableChecked.push(false);
+                }
                 for (row = 0; row < rownum; row++) {
                     tr = document.createElement('tr');
                     for (cell = 0; cell < colnum; cell++) {
                         td = document.createElement('td');
                         tr.appendChild(td);
                         
-                        td.innerHTML = '<div id="c' +(row * 5 + cell).toString()+'"></div>'
+                        td.innerHTML = '<div id="c' +(row * colnum + cell).toString()+'" style = "border-collapse: separate" onclick="showfilter(this)"></div>'
                     }
                     table.appendChild(tr);
                 }
@@ -283,27 +287,14 @@
   </div>
  </div>
 <div id="right-sidebar2" class="clearfix" style="background-color:LightGray;width:25%;height:100%; float:right;display:none">
-    This is right sidebar #2
-    <p>Click the buttons to create and delete row(s) for the table.</p>
 
-<table id="FilterTable" style = "  border-collapse: collapse;border: 1px solid blackcanvas">
-  <tr>
-    <td>Row1 cell1</td>
+   <div>
+            <li>You select...</li>
+            <div id="selected"> </div>
 
-  </tr>
-  <tr>
-    <td>Row2 cell1</td>
-
-  </tr>
-  <tr>
-    <td>Row3 cell1</td>
-
-  </tr>
-</table>
+        </div>
 <br>
 
-<button onclick="CreateRow()">Create row</button>
-<button onclick="DeleteRow()">Delete row</button>
 <button onclick="insertChart()">Insert chart</button>
 </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.20.1/vis.min.js"></script>
