@@ -238,7 +238,9 @@
                     tr = document.createElement('tr');
                     tr.style = "border: 1px solid LightGray;border-collapse: separate"
                     for (cell = 0; cell < colnum; cell++) {
+                        var tdId = 'td' + (row * colnum + cell).toString();
                         td = document.createElement('td');
+                        td.setAttribute('id',tdId);
                         tr.appendChild(td);
                         td.style = "border: 1px solid black;border-collapse: separate"
                         td.innerHTML = '<div id="c' +(row * colnum + cell).toString()+'" style = "border-collapse: separate" onclick="showfilter(this)"></div>'

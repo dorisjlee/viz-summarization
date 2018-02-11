@@ -263,12 +263,13 @@ function showfilter(cell){
             tableChecked[i] = 3;
         var color;
         if(tableChecked[i]==1)
-            color = 'grey';
+            color = '#d9d9d9';
         else if(tableChecked[i]==2)
-            color = 'red';
+            color = '#ff9999';
         else if(tableChecked[i]==3)
-            color = 'green';
-   
+            color =  '#bbff99';
+    var tdid = 'td' + i.toString();
+    document.getElementById(tdid).style.backgroundColor = color
     document.getElementById('selected').innerHTML=""
     document.getElementById('notselected').innerHTML=""
 
