@@ -232,14 +232,15 @@
                 var table = document.getElementById('charttable'), tr, td, row, cell;
                 var tableChecked = [];
                 for (var i = 0; i < 20; i++){
-                    tableChecked.push(false);
+                    tableChecked.push(0);
                 }
                 for (row = 0; row < rownum; row++) {
                     tr = document.createElement('tr');
+                    tr.style = "border: 1px solid LightGray;border-collapse: separate"
                     for (cell = 0; cell < colnum; cell++) {
                         td = document.createElement('td');
                         tr.appendChild(td);
-                        
+                        td.style = "border: 1px solid black;border-collapse: separate"
                         td.innerHTML = '<div id="c' +(row * colnum + cell).toString()+'" style = "border-collapse: separate" onclick="showfilter(this)"></div>'
                     }
                     table.appendChild(tr);
@@ -289,10 +290,25 @@
 <div id="right-sidebar2" class="clearfix" style="background-color:LightGray;width:25%;height:100%; float:right;display:none">
 
    <div>
-            <li>You select...</li>
-            <div id="selected"> </div>
+            <li>You are interested in...</li>
+            <table>
 
+                <tbody id="selected">
+
+                </tbody>
+            </table>
         </div>
+
+      <div >
+          <li>You are not interested in...</li>
+          <table>
+
+              <tbody id="notselected">
+
+              </tbody>
+          </table>
+
+      </div>
 <br>
 
 <button onclick="insertChart()">Insert chart</button>
