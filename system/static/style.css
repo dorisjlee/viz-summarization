@@ -316,3 +316,9 @@ input[type=range] {
     cursor: pointer;
 }
 
+.sidebar-menu li {
+    padding: 8px;
+    margin-bottom: 8px;
+    background-color: #33b5e5;
+    color: #ffffff;
+}
