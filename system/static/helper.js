@@ -50,7 +50,7 @@ function readDashboardOutput(query){
                 //console.log(data)
                 chartarray = JSON.parse(data)
 
-                //console.log(chartarray.length)
+                console.log(chartarray)
 
                 var len = Object.keys(chartarray).length;
                 var rownum = len/5 ;
@@ -70,7 +70,7 @@ function readDashboardOutput(query){
                         td.setAttribute('id',tdId);
                         tr.appendChild(td);
                         td.style = "border: 1px solid grey;border-collapse: separate"
-                        td.innerHTML = '<p>'+(row * colnum + cell).toString()+'</p><div id="c' +(row * colnum + cell).toString()+'" style = "border-collapse: separate" onclick="showfilter(this)"></div>'
+                        td.innerHTML = '<p style = "font-size:10px;color:#787878">'+(row * colnum + cell).toString()+'</p><div id="c' +(row * colnum + cell).toString()+'" style = "border-collapse: separate" onclick="showfilter(this)"></div>'
                     }
                     table.appendChild(tr);
                 }
