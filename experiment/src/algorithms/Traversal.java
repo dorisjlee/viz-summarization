@@ -96,6 +96,28 @@ public abstract class Traversal {
 		return outputList;
 	}
 	
+	public static <T,S extends Comparable<S>> T getKeyWithMaxVal(HashMap<T,S> map)
+	{
+		HashMap.Entry<T, S> maxEntry = null;
+
+		for (HashMap.Entry<T, S> entry : map.entrySet())
+		{
+		    if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0)
+		    {
+		        maxEntry = entry;
+		    }
+		}
+		return maxEntry.getKey();
+	}
+	
+	public static ArrayList<Integer> cloneArray(ArrayList<Integer> input)
+	{
+		ArrayList<Integer> output = new ArrayList<>();
+		for(Integer val : input)
+			output.add(val);
+		return output;
+	}
+	
  	public static void main(String[] args) throws SQLException 
     {
     }
