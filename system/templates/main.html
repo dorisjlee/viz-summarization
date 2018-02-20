@@ -226,29 +226,6 @@
             <table id="charttable" style="width:100%; height:100%;border: 1px solid black;border-collapse: separate">
 
             </table>
-            <script>
-                var rownum = 4;
-                var colnum = 5
-                var table = document.getElementById('charttable'), tr, td, row, cell;
-                var tableChecked = [];
-                for (var i = 0; i < 20; i++){
-                    tableChecked.push(0);
-                }
-                for (row = 0; row < rownum; row++) {
-                    tr = document.createElement('tr');
-                    tr.style = "border: 1px solid LightGray;border-collapse: separate"
-                    for (cell = 0; cell < colnum; cell++) {
-                        var tdId = 'td' + (row * colnum + cell).toString();
-                        td = document.createElement('td');
-                        td.setAttribute('id',tdId);
-                        tr.appendChild(td);
-                        td.style = "border: 1px solid black;border-collapse: separate"
-                        td.innerHTML = '<div id="c' +(row * colnum + cell).toString()+'" style = "border-collapse: separate" onclick="showfilter(this)"></div>'
-                    }
-                    table.appendChild(tr);
-                }
-
-            </script>
         </div>
 
         <pre id="eventSpan"></pre>
@@ -313,7 +290,7 @@
       </div></div>
 <br>
 
-<button onclick="insertChart()">Insert chart</button>
+
 </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.20.1/vis.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.20.1/vis.min.css" rel="stylesheet" type="text/css" />

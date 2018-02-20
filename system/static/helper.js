@@ -30,23 +30,77 @@ function constructQuery(){
     readDashboardOutput(query)
     return query
 }
+var tableChecked = [];
+var chartarray;
 function readDashboardOutput(query){
     fname = query["dataset"]+"_"+query["xAxis"]+"_"+query["algorithm"]
             +"_"+query["metric"]+"_ic"+query["ic"]+"_ip"+query["ip"]+"_k"+query["k"]+".json"
+    //Determine which canvas is currently on
+    if(document.getElementById("newCanvas").checked){
+        console.log(fname)
+        var nodeDic = ""
+        var json_pathloc = "http://"+window.location.hostname+":"+window.location.port+"/generated_dashboards/"+fname
+        $.ajax({
+            url: json_pathloc,
+            type: "GET",
+            dataType: "text",
+            success: function(data) {
+                data = data.replace(/\\"/g, '"')
+
+                //console.log(data)
+                chartarray = JSON.parse(data)
+
+                console.log(chartarray)
+
+                var len = Object.keys(chartarray).length;
+                var rownum = len/5 ;
+                var colnum = 5
+                var table = document.getElementById('charttable'), tr, td, row, cell;
+                table.innerHTML = ''
+                tableChecked = [];
+                for (var i = 0; i < 20; i++){
+                    tableChecked.push(0);
+                }
+                for (row = 0; row < rownum; row++) {
+                    tr = document.createElement('tr');
+                    tr.style = "border: 1px solid LightGray;border-collapse: separate"
+                    for (cell = 0; cell < colnum; cell++) {
+                        var tdId = 'td' + (row * colnum + cell).toString();
+                        td = document.createElement('td');
+                        td.setAttribute('id',tdId);
+                        tr.appendChild(td);
+                        td.style = "border: 1px solid grey;border-collapse: separate"
+                        td.innerHTML = '<p style = "font-size:10px;color:#787878">'+(row * colnum + cell).toString()+'</p><div id="c' +(row * colnum + cell).toString()+'" style = "border-collapse: separate" onclick="showfilter(this)"></div>'
+                    }
+                    table.appendChild(tr);
+                }
+                console.log(len)
+                var table = document.getElementById("charttable");
+
+                var cell_idx = 0;
+                for(cell_idx = 0; cell_idx < len; cell_idx++){
+                    render_chart(cell_idx,chartarray)
+                }
+            }
+        })
+    }
     // Data Upload after options selection
-    console.log(fname)
-    var nodeDic = ""
-    var json_pathloc = "http://"+window.location.hostname+":"+window.location.port+"/generated_dashboards/"+fname
-    $.ajax({
-        url: json_pathloc,
-        type: "GET",
-        dataType: "text",
-        success: function(data) {
-            getNodeEdgeListThenDraw(data);
-        }
-    })
-    var div = document.getElementById("additionalInfoPanel")
-    div.innerHTML = "<a href=\""+json_pathloc+"\">"+"filename:"+fname+"</a>"
+    else{
+        console.log(fname)
+        var nodeDic = ""
+        var json_pathloc = "http://"+window.location.hostname+":"+window.location.port+"/generated_dashboards/"+fname
+        $.ajax({
+            url: json_pathloc,
+            type: "GET",
+            dataType: "text",
+            success: function(data) {
+                getNodeEdgeListThenDraw(data);
+            }
+        })
+        var div = document.getElementById("additionalInfoPanel")
+        div.innerHTML = "<a href=\""+json_pathloc+"\">"+"filename:"+fname+"</a>"
+    }
+
 }
 // function constructQueryCallback(){
 //     var query = constructQuery();
@@ -234,7 +288,7 @@ function showfilter(cell){
 
      //var Dic = JSON.parse('{\"0\": [{ \"xAxis\": \"0\", \"yAxis\":65.72734196496572},{ \"xAxis\": \"1\", \"yAxis\":34.27265803503427},{\"childrenIndex\":[1, 2, 3, 4, 5], \"populationSize\":1313, \"filter\":\"#\",\"yName\":\"id\"}],\"1\": [{ \"xAxis\": \"0\", \"yAxis\":83.31374853113984},{ \"xAxis\": \"1\", \"yAxis\":16.686251468860164},{\"childrenIndex\":[6, 7, 8], \"populationSize\":851, \"filter\":\"#sexcode$0#\",\"yName\":\"id\"}],\"2\": [{ \"xAxis\": \"0\", \"yAxis\":33.33333333333333},{ \"xAxis\": \"1\", \"yAxis\":66.66666666666666},{\"childrenIndex\":[9, 10, 11], \"populationSize\":462, \"filter\":\"#sexcode$1#\",\"yName\":\"id\"}],\"3\": [{ \"xAxis\": \"0\", \"yAxis\":40.06211180124223},{ \"xAxis\": \"1\", \"yAxis\":59.93788819875776},{\"childrenIndex\":[6, 9], \"populationSize\":322, \"filter\":\"#pc_class$1#\",\"yName\":\"id\"}],\"4\": [{ \"xAxis\": \"0\", \"yAxis\":57.49999999999999},{ \"xAxis\": \"1\", \"yAxis\":42.5},{\"childrenIndex\":[10], \"populationSize\":280, \"filter\":\"#pc_class$2#\",\"yName\":\"id\"}],\"5\": [{ \"xAxis\": \"0\", \"yAxis\":80.59071729957806},{ \"xAxis\": \"1\", \"yAxis\":19.40928270042194},{\"childrenIndex\":[8, 11], \"populationSize\":711, \"filter\":\"#pc_class$3#\",\"yName\":\"id\"}],\"6\": [{ \"xAxis\": \"0\", \"yAxis\":67.0391061452514},{ \"xAxis\": \"1\", \"yAxis\":32.960893854748605},{\"childrenIndex\":[], \"populationSize\":179, \"filter\":\"#sexcode$0#pc_class$1#\",\"yName\":\"id\"}],\"7\": [{ \"xAxis\": \"0\", \"yAxis\":88.37675350701403},{ \"xAxis\": \"1\", \"yAxis\":11.623246492985972},{\"childrenIndex\":[], \"populationSize\":499, \"filter\":\"#sexcode$0#pc_class$3#\",\"yName\":\"id\"}],\"8\": [{ \"xAxis\": \"0\", \"yAxis\":6.293706293706294},{ \"xAxis\": \"1\", \"yAxis\":93.7062937062937},{\"childrenIndex\":[], \"populationSize\":143, \"filter\":\"#sexcode$1#pc_class$1#\",\"yName\":\"id\"}],\"9\": [{ \"xAxis\": \"0\", \"yAxis\":12.149532710280374},{ \"xAxis\": \"1\", \"yAxis\":87.85046728971963},{\"childrenIndex\":[], \"populationSize\":107, \"filter\":\"#sexcode$1#pc_class$2#\",\"yName\":\"id\"}],\"10\": [{ \"xAxis\": \"0\", \"yAxis\":62.264150943396224},{ \"xAxis\": \"1\", \"yAxis\":37.735849056603776},{\"childrenIndex\":[], \"populationSize\":212, \"filter\":\"#sexcode$1#pc_class$3#\",\"yName\":\"id\"}]}');
     //var Dic = JSON.parse('{\"0\": [{ \"xAxis\": \"y\", \"yAxis\":39.931068439192515},{ \"xAxis\": \"s\", \"yAxis\":31.462333825701627},{ \"xAxis\": \"f\", \"yAxis\":28.55736090595766},{ \"xAxis\": \"g\", \"yAxis\":0.04923682914820286},{\"childrenIndex\":[1, 2, 3, 4, 5, 6, 7, 8, 9, 10], \"populationSize\":8124, \"filter\":\"#\",\"yName\":\"cap_surface\"}],\"1\": [{ \"xAxis\": \"y\", \"yAxis\":44.43309499489275},{ \"xAxis\": \"s\", \"yAxis\":36.057201225740556},{ \"xAxis\": \"f\", \"yAxis\":19.40755873340143},{ \"xAxis\": \"g\", \"yAxis\":0.10214504596527069},{\"childrenIndex\":[11, 13], \"populationSize\":3916, \"filter\":\"#type$p#\",\"yName\":\"cap_surface\"}],\"2\": [{ \"xAxis\": \"y\", \"yAxis\":35.741444866920155},{ \"xAxis\": \"s\", \"yAxis\":27.186311787072242},{ \"xAxis\": \"f\", \"yAxis\":37.0722433460076},{ \"xAxis\": \"g\", \"yAxis\":0.0},{\"childrenIndex\":[12, 14, 16], \"populationSize\":4208, \"filter\":\"#type$e#\",\"yName\":\"cap_surface\"}],\"3\": [{ \"xAxis\": \"y\", \"yAxis\":41.71954314720812},{ \"xAxis\": \"s\", \"yAxis\":26.015228426395936},{ \"xAxis\": \"f\", \"yAxis\":32.233502538071065},{ \"xAxis\": \"g\", \"yAxis\":0.031725888324873094},{\"childrenIndex\":[18], \"populationSize\":3152, \"filter\":\"#cap_shape$f#\",\"yName\":\"cap_surface\"}],\"4\": [{ \"xAxis\": \"y\", \"yAxis\":41.5061295971979},{ \"xAxis\": \"s\", \"yAxis\":37.3029772329247},{ \"xAxis\": \"f\", \"yAxis\":21.19089316987741},{ \"xAxis\": \"g\", \"yAxis\":0.0},{\"childrenIndex\":[], \"populationSize\":2284, \"filter\":\"#cap_color$n#\",\"yName\":\"cap_surface\"}]}')
-    var Dic = JSON.parse('{\"0\": [{ \"xAxis\": \"p\", \"yAxis\":48.20285573609059},{ \"xAxis\": \"e\", \"yAxis\":51.7971442639094},{\"childrenIndex\":[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], \"populationSize\":8124, \"filter\":\"#\",\"yName\":\"type\"}],\"1\": [{ \"xAxis\": \"p\", \"yAxis\":46.71772428884026},{ \"xAxis\": \"e\", \"yAxis\":53.282275711159734},{\"childrenIndex\":[], \"populationSize\":3656, \"filter\":\"#cap_shape$x#\",\"yName\":\"type\"}],\"2\": [{ \"xAxis\": \"p\", \"yAxis\":49.36548223350254},{ \"xAxis\": \"e\", \"yAxis\":50.63451776649747},{\"childrenIndex\":[], \"populationSize\":3152, \"filter\":\"#cap_shape$f#\",\"yName\":\"type\"}],\"3\": [{ \"xAxis\": \"p\", \"yAxis\":53.637484586929716},{ \"xAxis\": \"e\", \"yAxis\":46.362515413070284},{\"childrenIndex\":[14], \"populationSize\":3244, \"filter\":\"#cap_surface$y#\",\"yName\":\"type\"}],\"4\": [{ \"xAxis\": \"p\", \"yAxis\":55.24256651017214},{ \"xAxis\": \"e\", \"yAxis\":44.75743348982786},{\"childrenIndex\":[15], \"populationSize\":2556, \"filter\":\"#cap_surface$s#\",\"yName\":\"type\"}],\"5\": [{ \"xAxis\": \"p\", \"yAxis\":32.758620689655174},{ \"xAxis\": \"e\", \"yAxis\":67.24137931034483},{\"childrenIndex\":[], \"populationSize\":2320, \"filter\":\"#cap_surface$f#\",\"yName\":\"type\"}],\"6\": [{ \"xAxis\": \"p\", \"yAxis\":44.65849387040281},{ \"xAxis\": \"e\", \"yAxis\":55.34150612959719},{\"childrenIndex\":[], \"populationSize\":2284, \"filter\":\"#cap_color$n#\",\"yName\":\"type\"}],\"7\": [{ \"xAxis\": \"p\", \"yAxis\":43.913043478260875},{ \"xAxis\": \"e\", \"yAxis\":56.086956521739125},{\"childrenIndex\":[], \"populationSize\":1840, \"filter\":\"#cap_color$g#\",\"yName\":\"type\"}],\"8\": [{ \"xAxis\": \"p\", \"yAxis\":18.48341232227488},{ \"xAxis\": \"e\", \"yAxis\":81.51658767772511},{\"childrenIndex\":[], \"populationSize\":3376, \"filter\":\"#bruises$t#\",\"yName\":\"type\"}],\"9\": [{ \"xAxis\": \"p\", \"yAxis\":69.33445661331086},{ \"xAxis\": \"e\", \"yAxis\":30.66554338668913},{\"childrenIndex\":[12, 13, 14, 15], \"populationSize\":4748, \"filter\":\"#bruises$f#\",\"yName\":\"type\"}],\"10\": [{ \"xAxis\": \"p\", \"yAxis\":3.4013605442176873},{ \"xAxis\": \"e\", \"yAxis\":96.5986394557823},{\"childrenIndex\":[16], \"populationSize\":3528, \"filter\":\"#odor$n#\",\"yName\":\"type\"}],\"11\": [{ \"xAxis\": \"p\", \"yAxis\":100.0},{ \"xAxis\": \"e\", \"yAxis\":0.0},{\"childrenIndex\":[17], \"populationSize\":2160, \"filter\":\"#odor$f#\",\"yName\":\"type\"}],\"12\": [{ \"xAxis\": \"p\", \"yAxis\":70.3921568627451},{ \"xAxis\": \"e\", \"yAxis\":29.607843137254903},{\"childrenIndex\":[], \"populationSize\":2040, \"filter\":\"#cap_shape$x#bruises$f#\",\"yName\":\"type\"}],\"13\": [{ \"xAxis\": \"p\", \"yAxis\":71.0376282782212},{ \"xAxis\": \"e\", \"yAxis\":28.96237172177879},{\"childrenIndex\":[], \"populationSize\":1754, \"filter\":\"#cap_shape$f#bruises$f#\",\"yName\":\"type\"}],\"14\": [{ \"xAxis\": \"p\", \"yAxis\":95.15738498789347},{ \"xAxis\": \"e\", \"yAxis\":4.842615012106537},{\"childrenIndex\":[], \"populationSize\":1652, \"filter\":\"#cap_surface$y#bruises$f#\",\"yName\":\"type\"}],\"15\": [{ \"xAxis\": \"p\", \"yAxis\":56.872037914691944},{ \"xAxis\": \"e\", \"yAxis\":43.127962085308056},{\"childrenIndex\":[], \"populationSize\":1688, \"filter\":\"#cap_surface$s#bruises$f#\",\"yName\":\"type\"}],\"16\": [{ \"xAxis\": \"p\", \"yAxis\":3.937007874015748},{ \"xAxis\": \"e\", \"yAxis\":96.06299212598425},{\"childrenIndex\":[], \"populationSize\":2032, \"filter\":\"#bruises$t#odor$n#\",\"yName\":\"type\"}],\"17\": [{ \"xAxis\": \"p\", \"yAxis\":100.0},{ \"xAxis\": \"e\", \"yAxis\":0.0},{\"childrenIndex\":[], \"populationSize\":1872, \"filter\":\"#bruises$f#odor$f#\",\"yName\":\"type\"}],\"18\": [{ \"xAxis\": \"p\", \"yAxis\":3.937007874015748},{ \"xAxis\": \"e\", \"yAxis\":96.06299212598425},{\"childrenIndex\":[], \"populationSize\":2032, \"filter\":\"#bruises$t#odor$n#\",\"yName\":\"type\"}],\"19\": [{ \"xAxis\": \"p\", \"yAxis\":100.0},{ \"xAxis\": \"e\", \"yAxis\":0.0},{\"childrenIndex\":[], \"populationSize\":1872, \"filter\":\"#bruises$f#odor$f#\",\"yName\":\"type\"}]}')
+    var Dic = chartarray;
     var title = [];
     var idx = 0
     Object.keys(Dic).forEach(function(key){
@@ -263,7 +317,7 @@ function showfilter(cell){
             tableChecked[i] = 3;
         var color;
         if(tableChecked[i]==1)
-            color = '#d9d9d9';
+            color = 'white';
         else if(tableChecked[i]==2)
             color = '#ff9999';
         else if(tableChecked[i]==3)
