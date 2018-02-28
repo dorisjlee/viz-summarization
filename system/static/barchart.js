@@ -158,7 +158,7 @@ function render_chart(i, nodeDic){
         for(var j = 0; j<title.length;j++){
             if(title[j] == "#"){
                 if(j!=0 || j!=title.length-1)
-                    title = title.substr(0, j) + '&' + title.substr(j + 1);
+                    title = title.substr(0, j) + '\n' + title.substr(j + 1);
             }
             else if(title[j] == "$"){
                 title = title.substr(0, j) + '=' + title.substr(j + 1);
@@ -171,9 +171,9 @@ function render_chart(i, nodeDic){
    
 
     // Dimensions for the chart: height, width, and space b/t the bars
-    var margins = {top: 20, right: 50, bottom: 20, left: 50}
-    var height = 150 - margins.left - margins.right,
-        width = 120- margins.top - margins.bottom,
+    var margins = {top: 30, right: 50, bottom: 30, left: 40}
+    var height = 180 - margins.left - margins.right,
+        width = 140- margins.top - margins.bottom,
         barPadding = 5
 
     // Create a scale for the y-axis based on data
@@ -194,7 +194,7 @@ function render_chart(i, nodeDic){
     var yAxis = d3.svg.axis()
       .scale(yScale)
       .orient('left')
-      .ticks(5);
+      .ticks(4);
 
     // Creates a scale for the x-axis based on city names
     var xScale = d3.scale.ordinal()
@@ -284,8 +284,8 @@ function render_chart(i, nodeDic){
     .enter()
     .append("text")
     .attr("class", "textlabel")
-    .attr("x", function(d){ return xScale(d.xAxis)-50; })
-    .attr("y", function(d){ return yScale(d.yAxis)-20; })
+    .attr("x", function(d){ return xScale(d.xAxis)-40; })
+    .attr("y", function(d){ return yScale(d.yAxis)-30; })
     .text(function(d){ return Math.round((d.yAxis) * 100) / 100; })
      .style({"font-family":"Arial", "font-weight":"300"});
 

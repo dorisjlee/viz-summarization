@@ -42,12 +42,21 @@ function menuItem_open_close() {
     opened = !opened
     if(opened){
         document.getElementById("main").style.marginLeft = "25%";
-        document.getElementById("mySidebar").style.width = "25%";
-        document.getElementById("mySidebar").style.display = "block";
+        if(document.getElementById("newCanvas").checked){
+            document.getElementById("mySidebar2").style.width = "25%";
+            document.getElementById("mySidebar2").style.display = "block";
+            document.getElementById("mySidebar").style.display = "none";
+        }
+        else{
+            document.getElementById("mySidebar").style.width = "25%";
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("mySidebar2").style.display = "none";
+        }
     }
     else{
         document.getElementById("main").style.marginLeft = "0%";
         document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("mySidebar2").style.display = "none";
     }
 }
 

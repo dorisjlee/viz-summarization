@@ -68,9 +68,11 @@ function readDashboardOutput(query){
                         var tdId = 'td' + (row * colnum + cell).toString();
                         td = document.createElement('td');
                         td.setAttribute('id',tdId);
+                        //td.setAttribute('height', 20%);
                         tr.appendChild(td);
-                        td.style = "border: 1px solid grey;border-collapse: separate"
-                        td.innerHTML = '<p style = "font-size:10px;color:#787878">'+(row * colnum + cell).toString()+'</p><div id="c' +(row * colnum + cell).toString()+'" style = "border-collapse: separate" onclick="showfilter(this)"></div>'
+                        td.style = "border: 3px solid grey;border-collapse: separate; align='center' "
+
+                        td.innerHTML = '<p style = "font-size:10px;color:#787878">'+(row * colnum + cell).toString()+'</p><div id="c' +(row * colnum + cell).toString()+'" style = "border-collapse: separate;" onclick="showfilter(this)"></div>'
                     }
                     table.appendChild(tr);
                 }
@@ -79,9 +81,15 @@ function readDashboardOutput(query){
 
                 var cell_idx = 0;
                 for(cell_idx = 0; cell_idx < len; cell_idx++){
-                    render_chart(cell_idx,chartarray)
+                    //render_chart(cell_idx,chartarray)
+                    var svgString = generateSVG(cell_idx,chartarray)
+                    var cellid = 'c'+ cell_idx.toString();
+                    var currentcell = document.getElementById(cellid);
+                    //console.log(svgString)
+                    currentcell.innerHTML = svgString
+                    }
                 }
-            }
+
         })
     }
     // Data Upload after options selection
@@ -244,12 +252,22 @@ function toggleCanvas(element)
     if (element.checked){
         document.getElementById('mynetwork').style.display = 'none';
         document.getElementById('mynetwork2').style.display = '';
+        if(opened){
+            document.getElementById("mySidebar2").style.width = "25%";
+            document.getElementById("mySidebar2").style.display = "block";
+            document.getElementById("mySidebar").style.display = "none";
+        }
         document.getElementById('right-sidebar').style.display = 'none';
         document.getElementById('right-sidebar2').style.display = '';
     }
     else{
         document.getElementById('mynetwork').style.display = '';
         document.getElementById('mynetwork2').style.display = 'none';
+        if(opened){
+            document.getElementById("mySidebar").style.width = "25%";
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("mySidebar2").style.display = "none";
+        }
         document.getElementById('right-sidebar').style.display = '';
         document.getElementById('right-sidebar2').style.display = 'none';
     }
@@ -317,13 +335,13 @@ function showfilter(cell){
             tableChecked[i] = 3;
         var color;
         if(tableChecked[i]==1)
-            color = 'white';
+            color = 'grey';
         else if(tableChecked[i]==2)
-            color = '#ff9999';
+            color = 'red';
         else if(tableChecked[i]==3)
-            color =  '#bbff99';
+            color =  'green';
     var tdid = 'td' + i.toString();
-    document.getElementById(tdid).style.backgroundColor = color
+    document.getElementById(tdid).style.borderColor = color
     document.getElementById('selected').innerHTML=""
     document.getElementById('notselected').innerHTML=""
 
@@ -331,10 +349,10 @@ function showfilter(cell){
 
         if(tableChecked[key]==3){
 
-            document.getElementById('selected').innerHTML+=  key +":  "+ title[key] + "<br />";
+            document.getElementById('selected').innerHTML+=  '<tr>'+'<td style="color:green">'+ key+'<td>'+ '<td style="color:green"> '+title[key]+'<td> '+'<tr>';
         }
         else if(tableChecked[key]==2){
-            document.getElementById('notselected').innerHTML+=  key +":  "+ title[key] + "<br />";
+            document.getElementById('notselected').innerHTML+=  '<tr>'+'<td style="color:red">'+ key+'<td>'+ '<td style="color:red"> '+title[key]+'<td> '+'<tr>';
         }
     });
 
@@ -343,4 +361,52 @@ function showfilter(cell){
     
 }
 
+function generateSVG(cell_idx, chartarray) {
+	var svgString = ''
+	var l = chartarray[cell_idx].length-1
+    var yVals = []
+    var xAttrs = []
+    var dataset = chartarray[cell_idx].slice(0,l)
 
+    for(i=0; i<l; i++){
+        yVals.push(dataset[i]['yAxis']);
+        xAttrs.push(dataset[i]['xAxis'])
+        var t = chartarray[cell_idx][l]["filter"]
+        if (t=="#")
+              t="root"
+        else{
+             for(var j = 0; j<t.length;j++){
+                   if(t[j] == "#"){
+                        t = t.substr(0, j) + '\n' + t.substr(j + 1);
+                   }
+                   else if(t[j] == "$"){
+                        t = t.substr(0, j) + '=' + t.substr(j + 1);
+                   }
+             }
+             }
+    }
+    $.ajax({
+        type: "POST",
+        url: "/getBarchart",
+        async: false,
+        data: {
+            "yVals" : JSON.stringify(yVals),
+            "xAttrs" : JSON.stringify(xAttrs),
+            "title" : JSON.stringify(t)
+        },
+        success: function(data){
+            svgString = data
+
+        }
+    })
+    return svgString
+//    $.post("/getBarchart",{
+//            "yVals" : JSON.stringify(yVals),
+//            "xAttrs" : JSON.stringify(xAttrs),
+//            "title" : JSON.stringify(t)
+//        },'application/json').success(function(data){
+//            //console.log(data)
+//            svgString = data
+//            svgString = "data:image/svg+xml;base64," + svgString
+//        })
+}

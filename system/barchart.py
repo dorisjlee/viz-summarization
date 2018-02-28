@@ -2,6 +2,7 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 import StringIO
+import seaborn as sns
 
 def millify(n):
     n = float(n)
@@ -79,6 +80,7 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
     # In case the font is too large for long titles
     for rect in rects:
         autolabel(rect, ax, font_size)
+    sns.set()
     plt.tight_layout()
     # save as svg string
     imgdata = StringIO.StringIO()

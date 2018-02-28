@@ -1,8 +1,9 @@
-
+import seaborn as sns
 import networkx as nx
 import json
 from barchart import *
 import base64
+
 # 	Lattice is a DAG (graph) of Node objects
 class Lattice:
 

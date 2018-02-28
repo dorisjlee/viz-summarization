@@ -91,6 +91,19 @@ def getInterested():
             request.form['fname']+","+str(request.form['interested'])+"\n")
     f.close()
     return ('', 204)
+
+@app.route("/getBarchart", methods=['POST'])
+def getBarchart():
+    yVals = request.form['yVals']
+    xAttrs = request.form['xAttrs']
+    title = request.form['title']
+    yVals = yVals.replace('[','').replace(']','')
+    yVals = [float(s) for s in yVals.split(',')]
+    xAttrs = xAttrs.replace('[', '').replace(']', '').replace('"','')
+    xAttrs = [s for s in xAttrs.split(',')]
+    return bar_chart(yVals, xAttrs, xtitle="", ytitle="", title=title, top_right_text="", N=1, width=0.1)
+
+
 @app.route("/postQuery", methods=['GET', 'POST'])
 def postQuery():
     dataset = request.form['dataset']
