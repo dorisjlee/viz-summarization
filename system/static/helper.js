@@ -339,7 +339,7 @@ function showfilter(cell){
         else if(tableChecked[i]==2)
             color = 'red';
         else if(tableChecked[i]==3)
-            color =  'green';
+            color =  '#339933';
     var tdid = 'td' + i.toString();
     document.getElementById(tdid).style.borderColor = color
     document.getElementById('selected').innerHTML=""
