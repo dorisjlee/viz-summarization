@@ -121,9 +121,16 @@ public class Experiment {
         db.c.close();
 	}
 	
+	public void runTableLayoutOutput(Experiment exp) throws SQLException {
+		algo.pickVisualizations(exp);
+		VizOutput vo = new VizOutput(exp);
+        String nodeDic = vo.generateOrderedNodeDic();
+        VizOutput.dumpString2File(fname, nodeDic);
+        db.c.close();
+	}
+	
 	public long timedRunOutput(Experiment exp) throws SQLException {
 		long startTime = System.nanoTime();
-		System.out.println(algo);
 		algo.pickVisualizations(exp);
 		long endTime = System.nanoTime();
 		VizOutput vo = new VizOutput(exp);

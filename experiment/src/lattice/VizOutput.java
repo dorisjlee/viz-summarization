@@ -56,6 +56,28 @@ public class VizOutput {
 		//System.out.println(nodeDic);
 		return nodeDic;
 	}
+	public String generateOrderedNodeDic() {
+		// Generating node dictionary where keys are all sequentially ordered (for table layout)
+		ArrayList<String> xAttr = exp.uniqueAttributeKeyVals.get(exp.xAxisName);
+		String nodeDic = "{";
+		for (int i=0; i< exp.dashboard.maxSubgraph.size();i++) {
+			int selectedNodeID = exp.dashboard.maxSubgraph.get(i);
+			nodeDic+= "\\\""+i+"\\\": [";
+			Node selectedNode = exp.lattice.nodeList.get(selectedNodeID);
+			ArrayList<Double> nodeVal = exp.lattice.id2MetricMap.get(selectedNode.id);
+			for (int ix=0; ix<xAttr.size();ix++) {
+				nodeDic+="{ \\\"xAxis\\\": \\\""+xAttr.get(ix)+"\\\", \\\"yAxis\\\":"+ nodeVal.get(ix) +"},";
+			}
+			nodeDic+="{\\\"childrenIndex\\\":"+selectedNode.get_child_list()+
+					", \\\"populationSize\\\":"+selectedNode.getPopulation_size()+
+				    ", \\\"filter\\\":\\\""+selectedNode.get_id() +"\\\",\\\"yName\\\":\\\""+exp.yAxisName+"\\\"}]";
+			if (i!=exp.dashboard.maxSubgraph.size()-1) {
+				nodeDic+=',';
+			}
+		}
+		nodeDic+="}"; 
+		return nodeDic;
+	}
 	
 	public static void dumpGenerateNodeDicFromNoHierarchia(int idx,Lattice lattice,ArrayList<Integer> selectedNodes) {
 		String nodeDic = "{";
