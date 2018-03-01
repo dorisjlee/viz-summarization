@@ -18,18 +18,18 @@ import net.sf.javaml.clustering.*;
  * Stop until reach k nodes in dashboard
  */
 public class BaselineKmeans extends Traversal{
-	
+	Experiment exp;
 	public BaselineKmeans() {
-		super("Random Walk in Lattice");
+		super("KMeans");
 	}
 	
 	public void pickVisualizations(Experiment exp) {
 	   this.exp = exp;
 	   this.lattice = exp.lattice;
 	   System.out.println("---------------- Shape Clustering -----------------");
-	   ArrayList<Integer> rwResult = kmeans(lattice,exp.k);
-	   exp.dashboard.maxSubgraph= rwResult; 
-	   exp.dashboard.maxSubgraphUtility=exp.dashboard.computeSubGraphUtility(rwResult);
+	   ArrayList<Integer> result = kmeans(lattice,exp.k);
+	   exp.dashboard.maxSubgraph= result; 
+	   exp.dashboard.maxSubgraphUtility=exp.dashboard.computeSubGraphUtility(result);
 	   exp.dashboard.printMaxSubgraphSummary();
    }
 	
@@ -42,7 +42,7 @@ public class BaselineKmeans extends Traversal{
 	       while(it < lattice.nodeList.size())
 	       {
 	    	   //System.out.println(lattice.ID2idMap.get(it));
-	    	   ArrayList<Double> value_list = lattice.id2MetricMap.get(lattice.ID2idMap.get(it));
+	    	   ArrayList<Double> value_list = lattice.id2MetricMap.get(lattice.id2IDMap.get(it));
 	    	   //System.out.println(value_list);
 	    	   double[] values = new double[value_list.size()];
 	    	  
@@ -55,7 +55,7 @@ public class BaselineKmeans extends Traversal{
 	    	   it++;
 	       }
 	       
-	       Clusterer km = new KMeans(2);
+	       Clusterer km = new KMeans(k);
 		    /*
 		     * Cluster the data, it will be returned as an array of data sets, with
 		     * each dataset representing a cluster

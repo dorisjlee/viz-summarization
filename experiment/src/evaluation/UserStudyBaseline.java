@@ -7,21 +7,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import algorithms.BaselineKmeans;
 import algorithms.BreadthFirstPicking;
-import algorithms.ExhaustivePicking;
 import algorithms.Experiment;
-import algorithms.GreedyPicking;
 import algorithms.MultipleRandomWalk;
 import algorithms.RandomWalk;
-import algorithms.RecursiveBreadthFirstPicking;
-import algorithms.RecursiveNaiveGreedyPicking;
 import algorithms.Traversal;
-import algorithms.TwoStepLookAheadalgorithm;
 import distance.Distance;
-import distance.EarthMover;
 import distance.Euclidean;
-import distance.KLDivergence;
-import distance.MaxDiff;
 import lattice.Database;
 
 public class UserStudyBaseline {
@@ -36,12 +29,12 @@ public class UserStudyBaseline {
 			   	"has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
 	   String yAxis = "slots_millis_reduces";
 	   String xAxis = "has_list_fn";
-	   // All Algo Experiments:
-	   Traversal frontierGreedy = new BreadthFirstPicking();
-	   Traversal cluster = new Kmeans();
-       Traversal[] algoList= {frontierGreedy};
-	   Distance dist = new Euclidean();
 	   
+	   // All Algo Experiments:
+	   Traversal BFS = new RandomWalk();
+	   Traversal clustering = new BaselineKmeans();
+       Traversal[] algoList= {BFS, clustering};
+	   Distance dist = new Euclidean();
 	   
 	   for (Traversal algo : algoList) {
 		   exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", k, algo, dist,0,0.8,false);
