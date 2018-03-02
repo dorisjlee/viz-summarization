@@ -15,7 +15,7 @@ import lattice.Database;
 import lattice.Hierarchia;
 import lattice.Lattice;
 import lattice.Node;
-import lattice.Tuple;
+import lattice.PairIntFloat;
 /*
  * Probabilistic Picking algorithm
  */
@@ -59,6 +59,7 @@ public class ProbablisticPicking extends Traversal{
 			if(frontierNodesUtility.size() == 0) break;
 //			Integer selectedNodeID = Collections.max(frontierNodesUtility.entrySet(), Map.Entry.comparingByValue()).getKey();
 			Integer selectedNodeID = probablisticPickFromFrontier(frontierNodesUtility);
+			//System.out.println(selectedNodeID+" "+ frontierNodesUtility.get(selectedNodeID));
 			localMaxSubgraph.put(selectedNodeID, frontierNodesUtility.get(selectedNodeID));
 			localMaxSubgraph = updateUtilities(localMaxSubgraph, selectedNodeID);
 			frontierNodesUtility = expandFrontier(frontierNodesUtility, selectedNodeID);
@@ -88,18 +89,19 @@ public class ProbablisticPicking extends Traversal{
 	
 	public Integer probablisticPickFromFrontier(HashMap <Integer,Float> frontier) {
 		Iterator it = frontier.entrySet().iterator();
-		ArrayList<Tuple> frontierList = new ArrayList<Tuple>();
+		ArrayList<PairIntFloat> frontierList = new ArrayList<PairIntFloat>();
 		Float sum =0f;
 		int i=0;
 	    while (it.hasNext()) {
 	        Map.Entry pair = (Map.Entry)it.next();
-	        System.out.println(pair.getKey() + " = " + pair.getValue());
-	        Float x = logistic(0.02,(Float) pair.getValue());
+	        //System.out.println(pair.getKey() + " = " + pair.getValue());
+	        Float x = logistic(0.0001,(Float) pair.getValue());
 	        sum += x;
-	        frontierList.add(new Tuple((Integer) pair.getKey(),x));
-	        System.out.println(frontierList.get(i).getX()+","+frontierList.get(i).getY());
+	        frontierList.add(new PairIntFloat((Integer) pair.getKey(),x));
+	        //System.out.println(frontierList.get(i).getX()+","+frontierList.get(i).getY());
 	        i++;
 	    }
+	    //System.out.println("SUM: "+sum);
 	    for (int j=0;j<frontierList.size();j++) {
 	    		frontierList.get(j).setY(frontierList.get(j).getY()/sum);
 	    }
@@ -107,9 +109,9 @@ public class ProbablisticPicking extends Traversal{
 	    for (int k=0; k<frontierList.size();k++) {
 	    		rollSum+=frontierList.get(k).getY();
 	    		frontierList.get(k).setY(rollSum);
-	    		System.out.println(rollSum);
+	    		//System.out.println(rollSum);
 	    }
-//	    System.out.println(sum);
+	    //System.out.println("DONE");
 
 	    Random rand = new Random();
 	    Float floatThres = rand.nextFloat();
@@ -117,10 +119,11 @@ public class ProbablisticPicking extends Traversal{
 	    		floatThres=frontierList.get(frontierList.size()-1).getY()-0.000001f;
 	    }
 	    
-	    int picked =-1;
+	    int picked = -1;
+	    
 	    if(floatThres >= 0 && floatThres < frontierList.get(0).getY())
 	    {
-	    		picked = 0;
+	    		picked = frontierList.get(0).getX();
 	    	
 	    }
 	    for(int j = 1; j<frontierList.size(); j++)
@@ -128,17 +131,17 @@ public class ProbablisticPicking extends Traversal{
 	    		if(floatThres >= frontierList.get(j-1).getY() &&
 	    				floatThres < frontierList.get(j).getY())
 	    		{
-	    			picked = j;
+	    			picked = frontierList.get(j).getX();
 	    			break;
 	    		}
 	    }
-	    System.out.println(floatThres);
-	    System.out.println(picked);
+	    //System.out.println("Threshold: "+floatThres);
+	    //System.out.println(picked);
 	    return picked;
 	}
 	public Float logistic (double a, Float x) {
-//		return (float) (1./(1+Math.exp(-a*x)));
-		return (float) Math.exp(a*x);
+		return (float) (1./(1+Math.exp(-a*x)));
+		//return (float) Math.exp(a*x);
 	}
 	/**
 	 * 
