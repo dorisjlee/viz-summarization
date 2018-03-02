@@ -46,7 +46,10 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
 
     ax.set_xlabel(xtitle, fontsize=14)
     ax.set_ylabel(ytitle, fontsize=14)
-
+    title = title.replace('"','')
+    title = title.replace("#", ",\n")
+    if title[0] == ',':
+        title = title[2:-2]
     if title.count(',') < 3:
         ax.set_title(title, fontsize=10)
     else:
@@ -80,7 +83,10 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
     # In case the font is too large for long titles
     for rect in rects:
         autolabel(rect, ax, font_size)
-    sns.set()
+
+    sns.set(palette="dark",color_codes=True)
+    sns.set_style("whitegrid")
+    sns.set_palette("Reds")
     plt.tight_layout()
     # save as svg string
     imgdata = StringIO.StringIO()
