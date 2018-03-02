@@ -276,7 +276,54 @@ function toggleCanvas(element)
 
 // Direct input graphDic submission form 
 $("#graphDicSubmit").click(function(){
-    getNodeEdgeListThenDraw($("#graphDic").val());
+    if(document.getElementById('newCanvas').checked){
+        var nodeDic = $("#graphDic").val()
+        nodeDic = nodeDic.replace(/\\"/g, '"')
+        chartarray = JSON.parse(nodeDic)
+        console.log(chartarray)
+
+        var len = Object.keys(chartarray).length;
+        var rownum = len/5 ;
+        var colnum = 5
+        var table = document.getElementById('charttable'), tr, td, row, cell;
+        table.innerHTML = ''
+        tableChecked = [];
+        for (var i = 0; i < 20; i++){
+            tableChecked.push(0);
+        }
+        for (row = 0; row < rownum; row++) {
+            tr = document.createElement('tr');
+            tr.style = "border: 1px solid LightGray;border-collapse: separate"
+            for (cell = 0; cell < colnum; cell++) {
+                var tdId = 'td' + (row * colnum + cell).toString();
+                td = document.createElement('td');
+                td.setAttribute('id',tdId);
+                //td.setAttribute('height', 20%);
+                tr.appendChild(td);
+                td.style = "border: 3px solid grey;border-collapse: separate; align='center' "
+
+                td.innerHTML = '<p style = "font-size:10px;color:#787878">'+(row * colnum + cell).toString()+'</p><div id="c' +(row * colnum + cell).toString()+'" style = "border-collapse: separate;" onclick="showfilter(this)"></div>'
+            }
+            table.appendChild(tr);
+        }
+        console.log(len)
+        var table = document.getElementById("charttable");
+
+        var cell_idx = 0;
+        for(cell_idx = 0; cell_idx < len; cell_idx++){
+            //render_chart(cell_idx,chartarray)
+            var svgString = generateSVG(cell_idx,chartarray)
+            var cellid = 'c'+ cell_idx.toString();
+            var currentcell = document.getElementById(cellid);
+            //console.log(svgString)
+            currentcell.innerHTML = svgString
+            }
+        }
+
+    else{
+        getNodeEdgeListThenDraw($("#graphDic").val());
+    }
+
 })
 // Trump Clinton example (display by default, on startup)
 // getNodeEdgeListThenDraw({'1': [{'xAxis': 'Clinton', 'yAxis': 48}, {'xAxis': 'Trump', 'yAxis': 46}, {'xAxis': 'Others', 'yAxis': 6}, {'filter': 'All', 'childrenIndex': [2, 3], 'yName': '% of vote'}], '2': [{'xAxis': 'Clinton', 'yAxis': 31}, {'xAxis': 'Trump', 'yAxis': 62}, {'xAxis': 'Others', 'yAxis': 7}, {'filter': 'Race = White', 'childrenIndex': [4, 5], 'yName': '% of vote'}], '3': [{'xAxis': 'Clinton', 'yAxis': 21}, {'xAxis': 'Trump', 'yAxis': 70}, {'xAxis': 'Others', 'yAxis': 9}, {'filter': 'Gender = F', 'childrenIndex': [], 'yName': '% of vote'}], '4': [{'xAxis': 'Clinton', 'yAxis': 21}, {'xAxis': 'Trump', 'yAxis': 52}, {'xAxis': 'Others', 'yAxis': 27}, {'filter': 'Color = Blue', 'childrenIndex': [5], 'yName': '% of vote'}], '5': [{'xAxis': 'Clinton', 'yAxis': 20}, {'xAxis': 'Trump', 'yAxis': 30}, {'xAxis': 'Others', 'yAxis': 50}, {'filter': 'Job = Student', 'childrenIndex': [], 'yName': '% of vote'}]})
@@ -376,10 +423,7 @@ function generateSVG(cell_idx, chartarray) {
               t="root"
         else{
              for(var j = 0; j<t.length;j++){
-                   if(t[j] == "#"){
-                        t = t.substr(0, j) + '\n' + t.substr(j + 1);
-                   }
-                   else if(t[j] == "$"){
+                   if(t[j] == "$"){
                         t = t.substr(0, j) + '=' + t.substr(j + 1);
                    }
              }
