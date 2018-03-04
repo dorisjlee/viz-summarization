@@ -5,11 +5,14 @@ import java.util.Arrays;
 
 import algorithms.BreadthFirstPicking;
 import algorithms.Experiment;
+import algorithms.RandomWalk;
 import algorithms.Traversal;
 import distance.Distance;
 import distance.Euclidean;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 public class VizOutput {
@@ -34,6 +37,7 @@ public class VizOutput {
 		*/
 		ArrayList<String> xAttr = exp.uniqueAttributeKeyVals.get(exp.xAxisName);
 		String nodeDic = "{";
+		nodeDic+="\\\"label\\\":[{\\\"xLabel\\\":\\\""+exp.xAxisName+"\\\",\\\"yLabel\\\":\\\""+exp.aggFunc+"("+exp.yAxisName+")"+"\\\"}],";
 		for (int i=0; i< exp.dashboard.maxSubgraph.size();i++) {
 			int selectedNodeID = exp.dashboard.maxSubgraph.get(i);
 			//System.out.println("i="+i+",nodeID:"+selectedNodeID);
@@ -110,5 +114,23 @@ public class VizOutput {
         } catch (IOException e) {
             e.printStackTrace();
         }
+	}
+	public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
+	{
+	   Experiment exp;
+	   int k =10;
+	   Experiment.experiment_name="../ipynb/dashboards/json/UserStudyBaseline";
+	   // Dataset #1  
+	   String dataset_name = "turn";
+	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList( "is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
+			   	"has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
+	   String yAxis = "slots_millis_reduces";
+	   String xAxis = "has_list_fn";
+	   String aggType = "SUM";
+	   Distance dist = new Euclidean();
+	   Traversal BFS = new RandomWalk();
+	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, BFS, dist,0,0.8,false);
+	   exp.runOutput(exp);
+//	   exp.runTableLayoutOutput(exp);   
 	}
 }

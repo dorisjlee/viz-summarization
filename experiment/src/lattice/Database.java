@@ -104,6 +104,7 @@ public class Database {
 			query_stmt += " WHERE "+ arr2DelimitedStrings(filters, "AND");
 	        query_stmt +=" GROUP BY " + xAttrJoined +";";
 		}
+//		System.out.println(query_stmt);
 		ResultSet result = query(query_stmt);
 		return result;
 	}
