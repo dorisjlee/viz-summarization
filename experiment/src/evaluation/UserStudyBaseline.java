@@ -38,9 +38,9 @@ public class UserStudyBaseline {
 	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList(
 		"state", "driver_gender", "driver_race", "search_conducted",
 		"contraband_found", "is_arrested", "stop_duration", 
-		"stop_time_of_day", "driver_age_category"));
-	   //, "speeding_violations", 
-		//"other_violations", "registration_plates_violations", "moving_violation", "cell_phone_violations"));
+		"stop_time_of_day", "driver_age_category", "speeding_violations", 
+		"other_violations"));
+	   //"registration_plates_violations", "moving_violation","cell_phone_violations"
 	   //"stop_outcome", 
 	   
 	   // Generate ct_police_stop.csv 
