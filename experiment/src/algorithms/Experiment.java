@@ -13,6 +13,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
+
+import javax.swing.GroupLayout.SequentialGroup;
+
 import distance.Distance;
 import distance.Euclidean;
 import lattice.Dashboard;
@@ -42,7 +45,7 @@ public class Experiment {
 	public static ArrayList<String> attribute_names;
 	public static HashMap<String, ArrayList<String>> uniqueAttributeKeyVals;
 
-	public Experiment(String datasetName, String xAxisName, String yAxisName, ArrayList<String> groupby, String aggFunc, int k, Traversal algo, Distance dist,
+	public Experiment(String datasetName, String xAxisName, String yAxisName, ArrayList<String> groupby, String aggFunc, int k, Distance dist,
 			double iceberg_ratio, double informative_critera,boolean online) throws SQLException, FileNotFoundException, UnsupportedEncodingException {
 		db = new Database();
 		this.datasetName = datasetName;
@@ -51,7 +54,6 @@ public class Experiment {
 		this.groupby = groupby;
 		this.aggFunc = aggFunc.toUpperCase();
 		this.k = k;
-		this.algo = algo;
 		this.dist = dist;
 		this.iceberg_ratio = iceberg_ratio;
 		this.informative_critera = informative_critera;
@@ -67,6 +69,10 @@ public class Experiment {
 							informative_critera,uniqueAttributeKeyVals,attribute_names,xAxisName,datasetName);
 			this.nbars = lattice.id2MetricMap.get("#").size();
 		}
+	}
+	public void setAlgo(Traversal algo) {
+		this.algo = algo;
+		dashboard = new Dashboard(lattice);
 		if (experiment_name!="") {
 			File directory = new File(experiment_name);
 		    if (! directory.exists()){
@@ -76,8 +82,6 @@ public class Experiment {
 		}else {
 			this.fname = datasetName+"_"+xAxisName.replace("_","-")+"_"+algo.algoName+"_"+dist.getDistName()+"_ic"+iceberg_ratio+"_ip"+informative_critera+"_k"+k+".json";
 		}
-		this.dashboard = new Dashboard(lattice);
-		
 	}
 	public static HashMap<String, ArrayList<String>> populateUniqueAttributeKeyVals() throws SQLException{
 		HashMap<String, ArrayList<String>> uniqueAttributeKeyVals = new HashMap<String, ArrayList<String>>();

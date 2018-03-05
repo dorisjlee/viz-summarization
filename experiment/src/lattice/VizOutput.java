@@ -134,8 +134,9 @@ public class VizOutput {
 	   String aggType = "SUM";
 	   Distance dist = new Euclidean();
 	   Traversal BFS = new RandomWalk();
-	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, BFS, dist,0,0.8,false);
+	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.8,false);
+	   exp.setAlgo(BFS);
 	   exp.runOutput(exp);
-//	   exp.runTableLayoutOutput(exp);   
+	   exp.runTableLayoutOutput(exp);   
 	}
 }

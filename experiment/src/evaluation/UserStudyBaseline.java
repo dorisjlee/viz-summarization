@@ -39,8 +39,8 @@ public class UserStudyBaseline {
 	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList(
 		"state", "driver_gender", "driver_race", "search_conducted",
 		"contraband_found", "is_arrested", "stop_duration", 
-		"stop_time_of_day", "driver_age_category", "speeding_violations", 
-		"other_violations"));
+		"stop_time_of_day", "driver_age_category"));
+	   // "speeding_violations", "other_violations"
 	   //"registration_plates_violations", "moving_violation","cell_phone_violations"
 	   //"stop_outcome", 
 	   
@@ -54,26 +54,24 @@ public class UserStudyBaseline {
 	   String xAxis = "is_arrested";//"stop_outcome", 
 	   String aggType = "COUNT";
 	   Distance dist = new Euclidean();
-	   
-//	   Traversal BFS = new RandomWalk();
-//	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, BFS, dist,0,0.1,false);
-//	   exp.runTableLayoutOutput(exp);   
-	   
-//	   Traversal ourAlgo = new BreadthFirstPicking();
-//	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, ourAlgo, dist,0,0.8,false);
-//	   exp.runOutput(exp);
+	   	   
+	   Traversal ourAlgo = new BreadthFirstPicking();
+	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.8,false);
+	   exp.setAlgo(ourAlgo);
+	   exp.runOutput(exp);
 	   
 	   Traversal clustering = new BaselineKmeans();
-	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, clustering, dist,0,0.001,false);
+	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.001,false);
+	   exp.setAlgo(clustering);
 	   exp.runTableLayoutOutput(exp);   
 	   
 	   Traversal BBFS = new BaselineBFS();
-	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, BBFS, dist,0,0.001,false);
+	   exp.setAlgo(BBFS);
 	   exp.runTableLayoutOutput(exp);   
 	   
-//	   Traversal ourAlgo = new ExhaustivePicking();
-//	   exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", k, ourAlgo, dist,0,0.8,false);
-//	   exp.runOutput(exp);
+	   Traversal randWalk = new RandomWalk();
+	   exp.setAlgo(randWalk);
+	   exp.runTableLayoutOutput(exp);   
 	   
 	}
 }
