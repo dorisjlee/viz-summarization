@@ -66,7 +66,7 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
 
     xmin = -0.05
     xmax = 0.25 + 0.1 * (len(yVals) - 2)
-    xtickpos = [np.abs(xmin - xmax) / (len(yVals) + 2) * (i + 0.7) for i in range(len(yVals))]
+    xtickpos = [np.abs(xmin - xmax) / (len(yVals) + 1.5) * (i + 0.7) for i in range(len(yVals))]
     ax.set_xticks(xtickpos)
     ax.set_xticklabels(xAttrs, fontsize=12)
     # ax.set_xlabel(xtitle,fontsize=12)

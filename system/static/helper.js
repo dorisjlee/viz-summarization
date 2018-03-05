@@ -184,6 +184,7 @@ function IsJsonString(str) {
     }
     return true;
 }
+var newCanvas = false;
 var userChanged = false;
 var treeDrawn = false;
 var tableDrawn = false;
@@ -194,7 +195,7 @@ function changeUser(){
 }
 
 function drawTree(){
-
+    newCanvas = false;
     document.getElementById('mynetwork').style.display = '';
     document.getElementById('mynetwork2').style.display = 'none';
 
@@ -208,7 +209,7 @@ function drawTree(){
     userChanged = false;
 }
 function drawTable(){
-
+    newCanvas = true;
     document.getElementById('mynetwork').style.display = 'none';
     document.getElementById('mynetwork2').style.display = '';
 
@@ -305,7 +306,7 @@ function drawTable(){
 
 // Direct input graphDic submission form 
 $("#graphDicSubmit").click(function(){
-    if(document.getElementById('newCanvas').checked){
+    if(newCanvas){
         var nodeDic = $("#graphDic").val()
         nodeDic = nodeDic.replace(/\\"/g, '"')
         chartarray = JSON.parse(nodeDic)
