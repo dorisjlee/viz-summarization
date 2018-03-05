@@ -66,8 +66,8 @@ public class AlgoQualityPerformance {
 	   Distance [] distList = {new Euclidean()};
 	   
 	   // Single Turn Experiment k=10 and k=30 , vary algo, dist
-	   PrintWriter writer = new PrintWriter("output_all_dist_k30.csv", "UTF-8");
-	   writer.println("xAxis,yAxis,algo,groupby,dist,total_time,total_utility");
+//	   PrintWriter writer = new PrintWriter("output_all_dist_k30.csv", "UTF-8");
+//	   writer.println("xAxis,yAxis,algo,groupby,dist,total_time,total_utility");
 	   
 	   /*
 	   for (Distance dist: distList) {
@@ -83,25 +83,23 @@ public class AlgoQualityPerformance {
 	   // This is the baseline Random Walk algorithm
 	   System.out.println("***************This is baseline Random Walk algorithm***************");
 	   Distance euclid = new Euclidean();
-	   exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", k, SRW, euclid,0,0.001,false);
-	   long duration = exp.timedRunOutput(exp);
-	   writer.println(xAxis+","+yAxis+","+SRW.getAlgoName()+",\"["+Database.arr2DelimitedStrings(groupby, ",")+"\"],"+euclid.getDistName()+","+duration+","+exp.dashboard.maxSubgraphUtility);   
+	   exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", k, euclid,0,0.001,false);
+	   exp.setAlgo(SRW);
+	   long duration = exp.timedRunOutput(exp);   
 	   
 	   // This is the baseline Kmeans Clustering algorithm
 	   Traversal BK = new BaselineKmeans();
 	   System.out.println("***************This is baseline Kmeans Clustering algorithm***************");
-	   exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", k, BK, euclid,0,0.001,false);
-	   duration = exp.timedRunOutput(exp);
-	   writer.println(xAxis+","+yAxis+","+BK.getAlgoName()+",\"["+Database.arr2DelimitedStrings(groupby, ",")+"\"],"+euclid.getDistName()+","+duration+","+exp.dashboard.maxSubgraphUtility);   
+	   exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", k, euclid,0,0.001,false);
+	   exp.setAlgo(BK);
+	   duration = exp.timedRunOutput(exp);   
 	   
 	   // This is the baseline BFS algorithm
 	   Traversal BBFS = new BaselineBFS();
 	   System.out.println("***************This is baseline BFS algorithm***************");
-	   exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", k, BBFS, euclid,0,0.001,false);
+	   exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", k, euclid,0,0.001,false);
+	   exp.setAlgo(BBFS);
 	   duration = exp.timedRunOutput(exp);
-	   writer.println(xAxis+","+yAxis+","+BBFS.getAlgoName()+",\"["+Database.arr2DelimitedStrings(groupby, ",")+"\"],"+euclid.getDistName()+","+duration+","+exp.dashboard.maxSubgraphUtility);   
-	   
-	   writer.close();
 	   
 	   
 	   
