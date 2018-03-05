@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import algorithms.BaselineBFS;
 import algorithms.BaselineKmeans;
 import algorithms.BreadthFirstPicking;
 import algorithms.ExhaustivePicking;
@@ -58,13 +59,17 @@ public class UserStudyBaseline {
 //	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, BFS, dist,0,0.1,false);
 //	   exp.runTableLayoutOutput(exp);   
 	   
-	   Traversal ourAlgo = new BreadthFirstPicking();
-	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, ourAlgo, dist,0,0.8,false);
-	   exp.runOutput(exp);
+//	   Traversal ourAlgo = new BreadthFirstPicking();
+//	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, ourAlgo, dist,0,0.8,false);
+//	   exp.runOutput(exp);
 	   
-//	   Traversal clustering = new BaselineKmeans();
-//	   exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", k, clustering, dist,0,0.1,false);
-//	   exp.runTableLayoutOutput(exp);   
+	   Traversal clustering = new BaselineKmeans();
+	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, clustering, dist,0,0.001,false);
+	   exp.runTableLayoutOutput(exp);   
+	   
+	   Traversal BBFS = new BaselineBFS();
+	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, BBFS, dist,0,0.001,false);
+	   exp.runTableLayoutOutput(exp);   
 	   
 //	   Traversal ourAlgo = new ExhaustivePicking();
 //	   exp = new Experiment("turn", xAxis, yAxis,groupby,"SUM", k, ourAlgo, dist,0,0.8,false);
