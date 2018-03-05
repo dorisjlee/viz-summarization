@@ -41,11 +41,13 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
     cmap = get_cmap(len(yVals) + 1)
     rects = []
     for i in range(len(yVals)):
-        rect = ax.bar(ind + i * width, yVals[i], width, color=cmap(i), ecolor="black")
+        rect = ax.bar(ind + (i+0.5) * width, yVals[i], width, color=cmap(i), ecolor="black")
         rects.append(rect)
 
-    ax.set_xlabel(xtitle, fontsize=14)
-    ax.set_ylabel(ytitle, fontsize=14)
+    xtitle = xtitle.replace('"', '')
+    ytitle = ytitle.replace('"', '')
+    ax.set_xlabel(xtitle, fontsize=9)
+    ax.set_ylabel(ytitle, fontsize=9)
     title = title.replace('"','')
     title = title.replace("#", ",\n")
     if title[0] == ',':

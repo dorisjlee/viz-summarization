@@ -97,11 +97,13 @@ def getBarchart():
     yVals = request.form['yVals']
     xAttrs = request.form['xAttrs']
     title = request.form['title']
+    yName = request.form['yName']
+    xName = request.form['xName']
     yVals = yVals.replace('[','').replace(']','')
     yVals = [float(s) for s in yVals.split(',')]
     xAttrs = xAttrs.replace('[', '').replace(']', '').replace('"','')
     xAttrs = [s for s in xAttrs.split(',')]
-    return bar_chart(yVals, xAttrs, xtitle="", ytitle="", title=title, top_right_text="", N=1, width=0.1)
+    return bar_chart(yVals, xAttrs, xtitle=xName, ytitle=yName, title=title, top_right_text="", N=1, width=0.1)
 
 
 @app.route("/postQuery", methods=['GET', 'POST'])

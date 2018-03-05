@@ -43,20 +43,20 @@ function menuItem_open_close() {
     if(opened){
         document.getElementById("main").style.marginLeft = "25%";
         if(document.getElementById("newCanvas").checked){
-            document.getElementById("mySidebar2").style.width = "25%";
-            document.getElementById("mySidebar2").style.display = "block";
+            //document.getElementById("mySidebar2").style.width = "25%";
+            //document.getElementById("mySidebar2").style.display = "block";
             document.getElementById("mySidebar").style.display = "none";
         }
         else{
             document.getElementById("mySidebar").style.width = "25%";
             document.getElementById("mySidebar").style.display = "block";
-            document.getElementById("mySidebar2").style.display = "none";
+            ///document.getElementById("mySidebar2").style.display = "none";
         }
     }
     else{
         document.getElementById("main").style.marginLeft = "0%";
         document.getElementById("mySidebar").style.display = "none";
-        document.getElementById("mySidebar2").style.display = "none";
+        //document.getElementById("mySidebar2").style.display = "none";
     }
 }
 
@@ -101,6 +101,7 @@ function populateD1Query1(){
 //    setIfNotAdd("#ip","0.1")
 //    $("#submit").click();
 }
+
 function populateD1Query2(){
     constructQueryWithArgs("mushroom","cap-surface","frontierGreedy","euclidean",0.2,0.1,20)
 /*    $("#all_tables").val("mushroom")
