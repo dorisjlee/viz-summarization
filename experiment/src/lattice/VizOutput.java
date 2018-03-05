@@ -37,7 +37,7 @@ public class VizOutput {
 		*/
 		ArrayList<String> xAttr = exp.uniqueAttributeKeyVals.get(exp.xAxisName);
 		String nodeDic = "{";
-		nodeDic+="\\\"label\\\":[{\\\"xLabel\\\":\\\""+exp.xAxisName+"\\\",\\\"yLabel\\\":\\\""+exp.aggFunc+"("+exp.yAxisName+")"+"\\\"}],";
+		//nodeDic+="\\\"label\\\":[{\\\"xName\\\":\\\""+exp.xAxisName+"\\\",\\\"yName\\\":\\\""+exp.aggFunc+"("+exp.yAxisName+")"+"\\\"}],";
 		for (int i=0; i< exp.dashboard.maxSubgraph.size();i++) {
 			int selectedNodeID = exp.dashboard.maxSubgraph.get(i);
 			//System.out.println("i="+i+",nodeID:"+selectedNodeID);
@@ -49,7 +49,8 @@ public class VizOutput {
 			}
 			nodeDic+="{\\\"childrenIndex\\\":"+selectedNode.get_child_list()+
 					", \\\"populationSize\\\":"+selectedNode.getPopulation_size()+
-				    ", \\\"filter\\\":\\\""+selectedNode.get_id() +"\\\",\\\"yName\\\":\\\""+exp.yAxisName+"\\\"}]";
+				    ", \\\"filter\\\":\\\""+selectedNode.get_id() +"\\\",\\\"yName\\\":\\\""+exp.aggFunc+"("+exp.yAxisName+")"+
+				    "\\\",\\\"xName\\\":\\\""+exp.xAxisName+"\\\"}]";
 			if (i!=exp.dashboard.maxSubgraph.size()-1) {
 				nodeDic+=',';
 			}
@@ -64,9 +65,11 @@ public class VizOutput {
 		// Generating node dictionary where keys are all sequentially ordered (for table layout)
 		ArrayList<String> xAttr = exp.uniqueAttributeKeyVals.get(exp.xAxisName);
 		String nodeDic = "{";
+		//nodeDic+="\\\"label\\\":[{\\\"xName\\\":\\\""+exp.xAxisName+"\\\",\\\"yName\\\":\\\""+exp.aggFunc+"("+exp.yAxisName+")"+"\\\"}],";
 		for (int i=0; i< exp.dashboard.maxSubgraph.size();i++) {
 			int selectedNodeID = exp.dashboard.maxSubgraph.get(i);
-			nodeDic+= "\\\""+i+"\\\": [";
+			//System.out.println("i="+i+",nodeID:"+selectedNodeID);
+			nodeDic+= "\\\""+(selectedNodeID)+"\\\": [";
 			Node selectedNode = exp.lattice.nodeList.get(selectedNodeID);
 			ArrayList<Double> nodeVal = exp.lattice.id2MetricMap.get(selectedNode.id);
 			for (int ix=0; ix<xAttr.size();ix++) {
@@ -74,10 +77,12 @@ public class VizOutput {
 			}
 			nodeDic+="{\\\"childrenIndex\\\":"+selectedNode.get_child_list()+
 					", \\\"populationSize\\\":"+selectedNode.getPopulation_size()+
-				    ", \\\"filter\\\":\\\""+selectedNode.get_id() +"\\\",\\\"yName\\\":\\\""+exp.yAxisName+"\\\"}]";
+				    ", \\\"filter\\\":\\\""+selectedNode.get_id() +"\\\",\\\"yName\\\":\\\""+exp.aggFunc+"("+exp.yAxisName+")"+
+				    "\\\",\\\"xName\\\":\\\""+exp.xAxisName+"\\\"}]";
 			if (i!=exp.dashboard.maxSubgraph.size()-1) {
 				nodeDic+=',';
 			}
+			//System.out.println(selectedNode.get_id()+" : "+selectedNode.get_child_list());
 		}
 		nodeDic+="}"; 
 		return nodeDic;
@@ -129,8 +134,9 @@ public class VizOutput {
 	   String aggType = "SUM";
 	   Distance dist = new Euclidean();
 	   Traversal BFS = new RandomWalk();
-	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, BFS, dist,0,0.8,false);
+	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.8,false);
+	   exp.setAlgo(BFS);
 	   exp.runOutput(exp);
-//	   exp.runTableLayoutOutput(exp);   
+	   exp.runTableLayoutOutput(exp);   
 	}
 }
