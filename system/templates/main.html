@@ -15,164 +15,165 @@
 <!-- <body onload="draw(node,edge)"> -->
 
 
+<!--<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">-->
+
+<!--<br><br>-->
+<!--<div class="btn-group" style ="margin-left: 20px">-->
+  <!--<h1>Preloaded Selections:</h1>-->
+  <!--<br>-->
+  <!--<a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true">Mushroom</a>-->
+            <!--<button type="button" name="D1Q1" onclick="populateD1Query1()" aria-pressed="false" class="btn btn-default btn-xs">Q1</button>-->
+            <!--<button type="button" name="D1Q2" onclick="populateD1Query2()" aria-pressed="false" class="btn btn-default btn-xs">Q2</button>-->
+            <!--&lt;!&ndash; <button type="button" name="query3" onclick="populateQuery3()" aria-pressed="false" class="btn btn-default btn-xs">Q3</button> &ndash;&gt;-->
+  <!--<br>-->
+  <!--<a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true">Turn</a>-->
+            <!--<button type="button" name="D2Q1" onclick="populateD2Query1()" aria-pressed="false" class="btn btn-default btn-xs">Q1</button>-->
+            <!--<button type="button" name="D2Q2" onclick="populateD2Query2()" aria-pressed="false" class="btn btn-default btn-xs">Q2</button>-->
+            <!--&lt;!&ndash; <button type="button" name="query6" onclick="populateQuery6()" aria-pressed="false" class="btn btn-default btn-xs">Q6</button> &ndash;&gt;-->
+   <!--<br>-->
+   <!--<a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true">Titanic</a>-->
+            <!--<button type="button" name="D3Q1" onclick="populateD3Query1()" aria-pressed="false" class="btn btn-default btn-xs">Q1</button>-->
+            <!--<button type="button" name="D3Q2" onclick="populateD3Query2()" aria-pressed="false" class="btn btn-default btn-xs">Q2</button>-->
+            <!--&lt;!&ndash; <button type="button" name="query6" onclick="populateQuery6()" aria-pressed="false" class="btn btn-default btn-xs">Q6</button> &ndash;&gt;-->
+<!--</div>-->
+<!--<br><br>-->
+<!--<form class="form-inline menu-item">-->
+  <!--<h1>Dashboard Options:</h1>-->
+  <!--<br>-->
+  <!--<h2 class = "title"><b>Dataset</b></h2>-->
+  <!--<div class="form-group">-->
+        <!--<select name="table_selected" id = "all_tables" class="selectpicker form-control">-->
+            <!--<option selected="true" value = "None">None</option>-->
+            <!--{% for dataset in all_tables %}-->
+                <!--<option value= {{dataset}} >{{dataset}}</option>-->
+<!--​            {% endfor %}-->
+        <!--</select>-->
+  <!--</div>-->
+<!--</form>-->
+<!--<br>-->
+<!--<form class="form-inline menu-item">-->
+   <!--<h2 class = "title"><b>X-Axis</b></h2>-->
+  <!--<div class="form-group">-->
+         <!--<select name = "xaxis_select" id = "xaxis" class="selectpicker form-control">-->
+        <!--</select>-->
+    <!--</div>-->
+<!--</form>-->
+<!--&lt;!&ndash; <br>-->
+<!--<form class="form-inline menu-item">-->
+    <!--<h2 class = "title"><b>Y-Axis</b></h2>-->
+    <!--<div class="form-group">-->
+        <!--<select name = "yaxis_select"  id = "yaxis" class="selectpicker form-control">-->
+            <!--<option selected="true" value = "None"> None</option>-->
+        <!--</select>-->
+    <!--</div>-->
+<!--</form> &ndash;&gt;-->
+<!--<br>-->
+<!--<form class="form-inline menu-item" class="form-inline">-->
+  <!--<h2 class = "title"><b>Metric</b></h2>-->
+    <!--<div class="form-group">-->
+        <!--<select name = "metric"  id = "metric" class="selectpicker form-control">-->
+            <!--<option value= "euclidean">Euclidean</option>-->
+            <!--<option value= "kldiv">KL Divergence</option>-->
+            <!--<option value= "maxdiff">MaxDiff</option>-->
+            <!--<option value= "emd">Earth Mover</option>-->
+        <!--</select>-->
+    <!--</div>-->
+  <!--<br>-->
+<!--</form>-->
+<!--<br>-->
+<!--<form class="form-inline menu-item" class="form-inline">-->
+  <!--<h2 class = "title"><b>Algorithm</b></h2>-->
+    <!--<div class="form-group">-->
+        <!--<select name = "algorithm"  id = "algorithm" class="selectpicker form-control">-->
+            <!--<option value= "frontierGreedy">Frontier Greedy</option>-->
+            <!--<option value= "greedy">Greedy</option>-->
+        <!--</select>-->
+    <!--</div>-->
+  <!--<br>-->
+<!--</form>-->
+<!--<br>-->
+<!--<form class="form-inline menu-item" class="form-inline">-->
+  <!--<h2 class = "title"><b>k</b></h2>-->
+
+
+<!--</form>-->
+<!--<input id="k" class="slider" style ="margin-left: 20px" type="range" min="0" value="0" max="6" step="1">-->
+<!--<div id="k" style ="margin-left: 20px"></div>-->
+<!--<br>-->
+<!--<form class="form-inline menu-item" class="form-inline">-->
+  <!--<h2 class = "title"><b>iceberg condition</b></h2>-->
+
+
+<!--</form>-->
+<!--<input id="ic" class="slider" style ="margin-left: 20px" type="range" min="0" value="0" max="6" step="1">-->
+<!--<div id="ic" style ="margin-left: 20px"></div>-->
+<!--<br>-->
+<!--<form class="form-inline menu-item" class="form-inline">-->
+  <!--<h2 class = "title"><b>informative parent criterion</b></h2>-->
+
+
+<!--</form>-->
+<!--<input id="ip" class="slider" style ="margin-left: 20px" type="range" min="0" value="0" max="6" step="1">-->
+<!--<div id="ip" style ="margin-left: 20px"></div>-->
+<!--<div id="additionalInfoPanel" style="margin-left: 10px; word-wrap: break-word;"></div>-->
+<!--&lt;!&ndash; <form class="form-inline menu-item" class="form-inline" id = "agg_select" name = "agg_select">-->
+  <!--<h2 class = "title"><b>Aggregation function:</b></h2>-->
+    <!--<div class="form-group">-->
+        <!--<select name = "AggFunc"  id = "AggFunc" class="selectpicker form-control">-->
+            <!--<option selected="true" value = "None"> None</option>-->
+            <!--<option value= "SUM">SUM</option>-->
+            <!--<option value= "AVERAGE">AVERAGE</option>-->
+            <!--<option value= "COUNT">COUNT</option>-->
+        <!--</select>-->
+    <!--</div>-->
+  <!--<br>-->
+<!--</form>-->
+ <!--&ndash;&gt;<br>-->
+<!--<input type="submit" id="submit" onclick="constructQuery()" style = "background-color: #359EDA;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 10px 60px;cursor: pointer;" value="Submit">-->
+<!--&lt;!&ndash; <div class="container">-->
+    <!--<div class="row">-->
+        <!--<div class="control-group" id="fields">-->
+            <!--<div class="controls">-->
+                <!--<form role="form" class="menu-item" autocomplete="off" name = "filter_select">-->
+                    <!--<h2 class = "title"><b>Filters</b></h2>-->
+                    <!--<div class="entry input-group col-xs-3">-->
+                        <!--<input class="filter form-control" style = "left:2px" type="text" />-->
+                        <!--<span class="input-group-btn">-->
+                            <!--<button class="btn btn-success btn-add" type="button">-->
+                                <!--<span class="glyphicon glyphicon-plus"></span>-->
+                            <!--</button>-->
+                        <!--</span>-->
+                    <!--</div>-->
+                <!--</form>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div> &ndash;&gt;-->
+<!--&lt;!&ndash; Rectangular switch &ndash;&gt;-->
+
+    <!--&lt;!&ndash; <input type="submit" id="filterSubmit" style = "background-color: #359EDA;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 100px 100px;cursor: pointer;right:40;" value="Submit"> &ndash;&gt;-->
+<!--</div>-->
+
 <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
-
-<br><br>
-<div class="btn-group" style ="margin-left: 20px">
-  <h1>Preloaded Selections:</h1>
-  <br>
-  <a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true">Mushroom</a>
-            <button type="button" name="D1Q1" onclick="populateD1Query1()" aria-pressed="false" class="btn btn-default btn-xs">Q1</button>
-            <button type="button" name="D1Q2" onclick="populateD1Query2()" aria-pressed="false" class="btn btn-default btn-xs">Q2</button>
-            <!-- <button type="button" name="query3" onclick="populateQuery3()" aria-pressed="false" class="btn btn-default btn-xs">Q3</button> -->
-  <br>
-  <a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true">Turn</a>
-            <button type="button" name="D2Q1" onclick="populateD2Query1()" aria-pressed="false" class="btn btn-default btn-xs">Q1</button>
-            <button type="button" name="D2Q2" onclick="populateD2Query2()" aria-pressed="false" class="btn btn-default btn-xs">Q2</button>
-            <!-- <button type="button" name="query6" onclick="populateQuery6()" aria-pressed="false" class="btn btn-default btn-xs">Q6</button> -->
-   <br>
-   <a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true">Titanic</a>
-            <button type="button" name="D3Q1" onclick="populateD3Query1()" aria-pressed="false" class="btn btn-default btn-xs">Q1</button>
-            <button type="button" name="D3Q2" onclick="populateD3Query2()" aria-pressed="false" class="btn btn-default btn-xs">Q2</button>
-            <!-- <button type="button" name="query6" onclick="populateQuery6()" aria-pressed="false" class="btn btn-default btn-xs">Q6</button> -->
-</div>
-<br><br>
-<form class="form-inline menu-item">
-  <h1>Dashboard Options:</h1>
-  <br>
-  <h2 class = "title"><b>Dataset</b></h2>
-  <div class="form-group">
-        <select name="table_selected" id = "all_tables" class="selectpicker form-control">
-            <option selected="true" value = "None">None</option>
-            {% for dataset in all_tables %}
-                <option value= {{dataset}} >{{dataset}}</option>
-​            {% endfor %}
-        </select>
-  </div>
-</form>
-<br>
-<form class="form-inline menu-item">
-   <h2 class = "title"><b>X-Axis</b></h2>
-  <div class="form-group">
-         <select name = "xaxis_select" id = "xaxis" class="selectpicker form-control">
-        </select>
-    </div>
-</form>
-<!-- <br>
-<form class="form-inline menu-item">
-    <h2 class = "title"><b>Y-Axis</b></h2>
-    <div class="form-group">
-        <select name = "yaxis_select"  id = "yaxis" class="selectpicker form-control">
-            <option selected="true" value = "None"> None</option>
-        </select>
-    </div>
-</form> -->
-<br>
-<form class="form-inline menu-item" class="form-inline">
-  <h2 class = "title"><b>Metric</b></h2>
-    <div class="form-group">
-        <select name = "metric"  id = "metric" class="selectpicker form-control">
-            <option value= "euclidean">Euclidean</option>
-            <option value= "kldiv">KL Divergence</option>
-            <option value= "maxdiff">MaxDiff</option>
-            <option value= "emd">Earth Mover</option>
-        </select>
-    </div>
-  <br>
-</form>
-<br>
-<form class="form-inline menu-item" class="form-inline">
-  <h2 class = "title"><b>Algorithm</b></h2>
-    <div class="form-group">
-        <select name = "algorithm"  id = "algorithm" class="selectpicker form-control">
-            <option value= "frontierGreedy">Frontier Greedy</option>
-            <option value= "greedy">Greedy</option>
-        </select>
-    </div>
-  <br>
-</form>
-<br>
-<form class="form-inline menu-item" class="form-inline">
-  <h2 class = "title"><b>k</b></h2>
-
-
-</form>
-<input id="k" class="slider" style ="margin-left: 20px" type="range" min="0" value="0" max="6" step="1">
-<div id="k" style ="margin-left: 20px"></div>
-<br>
-<form class="form-inline menu-item" class="form-inline">
-  <h2 class = "title"><b>iceberg condition</b></h2>
-
-
-</form>
-<input id="ic" class="slider" style ="margin-left: 20px" type="range" min="0" value="0" max="6" step="1">
-<div id="ic" style ="margin-left: 20px"></div>
-<br>
-<form class="form-inline menu-item" class="form-inline">
-  <h2 class = "title"><b>informative parent criterion</b></h2>
-
-
-</form>
-<input id="ip" class="slider" style ="margin-left: 20px" type="range" min="0" value="0" max="6" step="1">
-<div id="ip" style ="margin-left: 20px"></div>
-<div id="additionalInfoPanel" style="margin-left: 10px; word-wrap: break-word;"></div>
-<!-- <form class="form-inline menu-item" class="form-inline" id = "agg_select" name = "agg_select">
-  <h2 class = "title"><b>Aggregation function:</b></h2>
-    <div class="form-group">
-        <select name = "AggFunc"  id = "AggFunc" class="selectpicker form-control">
-            <option selected="true" value = "None"> None</option>
-            <option value= "SUM">SUM</option>
-            <option value= "AVERAGE">AVERAGE</option>
-            <option value= "COUNT">COUNT</option>
-        </select>
-    </div>
-  <br>
-</form>
- --><br>
-<input type="submit" id="submit" onclick="constructQuery()" style = "background-color: #359EDA;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 10px 60px;cursor: pointer;" value="Submit">
-<!-- <div class="container">
-    <div class="row">
-        <div class="control-group" id="fields">
-            <div class="controls">
-                <form role="form" class="menu-item" autocomplete="off" name = "filter_select">
-                    <h2 class = "title"><b>Filters</b></h2>
-                    <div class="entry input-group col-xs-3">
-                        <input class="filter form-control" style = "left:2px" type="text" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-success btn-add" type="button">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button>
-                        </span>
-                    </div>
-                </form>
-            </div>
+    <br><br>
+    <h1 for="sel1">Select a User :</h1>
+    <br>
+      <form>
+        <div class="form-group">
+          <select class="form-control" id="user" onchange="changeUser()" >
+            <script>
+                var num = 16;
+                var options = "";
+                for(var i = 1; i<=16; i++){
+                      options += "<option>"+ "user"+i +"</option>";
+                }
+                document.getElementById("user").innerHTML = options;
+            </script>
+          </select>
+          <br>
         </div>
-    </div> -->
-<!-- Rectangular switch -->
-
-    <!-- <input type="submit" id="filterSubmit" style = "background-color: #359EDA;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 100px 100px;cursor: pointer;right:40;" value="Submit"> -->
-</div>
-
-<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar2">
-<br><br>
-<div class="btn-group" style ="margin-left: 20px">
-  <h1>Preloaded Selections:</h1>
-  <br>
-  <a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true">Mushroom</a>
-            <button type="button" name="D1Q1" onclick="populateD1Query1()" aria-pressed="false" class="btn btn-default btn-xs">Q1</button>
-            <button type="button" name="D1Q2" onclick="populateD1Query2()" aria-pressed="false" class="btn btn-default btn-xs">Q2</button>
-            <!-- <button type="button" name="query3" onclick="populateQuery3()" aria-pressed="false" class="btn btn-default btn-xs">Q3</button> -->
-  <br>
-  <a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true">Turn</a>
-            <button type="button" name="D2Q1" onclick="populateD2Query1()" aria-pressed="false" class="btn btn-default btn-xs">Q1</button>
-            <button type="button" name="D2Q2" onclick="populateD2Query2()" aria-pressed="false" class="btn btn-default btn-xs">Q2</button>
-            <!-- <button type="button" name="query6" onclick="populateQuery6()" aria-pressed="false" class="btn btn-default btn-xs">Q6</button> -->
-   <br>
-   <a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true">Titanic</a>
-            <button type="button" name="D3Q1" onclick="populateD3Query1()" aria-pressed="false" class="btn btn-default btn-xs">Q1</button>
-            <button type="button" name="D3Q2" onclick="populateD3Query2()" aria-pressed="false" class="btn btn-default btn-xs">Q2</button>
-            <!-- <button type="button" name="query6" onclick="populateQuery6()" aria-pressed="false" class="btn btn-default btn-xs">Q6</button> -->
-</div>
+      </form>
+    <button type="button" name="drawTree" onclick="drawTree()" aria-pressed="false" class="btn btn-default btn-xs">Tree</button>
+    <button type="button" name="drawTable" onclick="drawTable()" aria-pressed="false" class="btn btn-default btn-xs">Table</button>
 </div>
 
 
@@ -203,7 +204,7 @@
         <br>5. Red means not interested, green means interested and grey is not yet decided<br>
         <br><img src="resources/red.png" height="60" width="60">
         <img src="resources/green.png" height="60" width="60">
-        <img alt="" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIKICAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPCEtLSBDcmVhdGVkIHdpdGggbWF0cGxvdGxpYiAoaHR0cDovL21hdHBsb3RsaWIub3JnLykgLS0+CjxzdmcgaGVpZ2h0PSIxNDRwdCIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMTQ0IDE0NCIgd2lkdGg9IjE0NHB0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KIDxkZWZzPgogIDxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cip7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46cm91bmQ7fQogIDwvc3R5bGU+CiA8L2RlZnM+CiA8ZyBpZD0iZmlndXJlXzEiPgogIDxnIGlkPSJwYXRjaF8xIj4KICAgPHBhdGggZD0iTSAwIDE0NCAKTCAxNDQgMTQ0IApMIDE0NCAwIApMIDAgMCAKegoiIHN0eWxlPSJmaWxsOiNmZmZmZmY7Ii8+CiAgPC9nPgogIDxnIGlkPSJheGVzXzEiPgogICA8ZyBpZD0icGF0Y2hfMiI+CiAgICA8cGF0aCBkPSJNIDM2Ljc5IDExMy4yNCAKTCAxMzAuNjggMTEzLjI0IApMIDEzMC42OCAzNi4zODQgCkwgMzYuNzkgMzYuMzg0IAp6CiIgc3R5bGU9ImZpbGw6I2ZmZmZmZjsiLz4KICAgPC9nPgogICA8ZyBpZD0icGF0Y2hfMyI+CiAgICA8cGF0aCBjbGlwLXBhdGg9InVybCgjcDQzNDc0YWFjNzApIiBkPSJNIDM2Ljc5IDExMy4yNCAKTCA2OC4wODY2NjcgMTEzLjI0IApMIDY4LjA4NjY2NyAxMDguNDAyOTA5IApMIDM2Ljc5IDEwOC40MDI5MDkgCnoKIiBzdHlsZT0iZmlsbDojZmYwMDAwOyIvPgogICA8L2c+CiAgIDxnIGlkPSJwYXRjaF80Ij4KICAgIDxwYXRoIGNsaXAtcGF0aD0idXJsKCNwNDM0NzRhYWM3MCkiIGQ9Ik0gNjguMDg2NjY3IDExMy4yNCAKTCA5OS4zODMzMzMgMTEzLjI0IApMIDk5LjM4MzMzMyA0MS4yMjEwOTEgCkwgNjguMDg2NjY3IDQxLjIyMTA5MSAKegoiIHN0eWxlPSJmaWxsOiMwMGZmZjM7Ii8+CiAgIDwvZz4KICAgPGcgaWQ9Im1hdHBsb3RsaWIuYXhpc18xIj4KICAgIDxnIGlkPSJ4dGlja18xIj4KICAgICA8ZyBpZD0ibGluZTJkXzEiPgogICAgICA8ZGVmcz4KICAgICAgIDxwYXRoIGQ9Ik0gMCAwIApMIDAgMy41IAoiIGlkPSJtNTMxZTJlOTU2MyIgc3R5bGU9InN0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDowLjg7Ii8+CiAgICAgIDwvZGVmcz4KICAgICAgPGc+CiAgICAgICA8dXNlIHN0eWxlPSJzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC44OyIgeD0iNjguODY5MDgzIiB4bGluazpocmVmPSIjbTUzMWUyZTk1NjMiIHk9IjExMy4yNCIvPgogICAgICA8L2c+CiAgICAgPC9nPgogICAgIDxnIGlkPSJ0ZXh0XzEiPgogICAgICA8IS0tIDAgLS0+CiAgICAgIDxkZWZzPgogICAgICAgPHBhdGggZD0iTSAzMS43ODEyNSA2Ni40MDYyNSAKUSAyNC4xNzE4NzUgNjYuNDA2MjUgMjAuMzI4MTI1IDU4LjkwNjI1IApRIDE2LjUgNTEuNDIxODc1IDE2LjUgMzYuMzc1IApRIDE2LjUgMjEuMzkwNjI1IDIwLjMyODEyNSAxMy44OTA2MjUgClEgMjQuMTcxODc1IDYuMzkwNjI1IDMxLjc4MTI1IDYuMzkwNjI1IApRIDM5LjQ1MzEyNSA2LjM5MDYyNSA0My4yODEyNSAxMy44OTA2MjUgClEgNDcuMTI1IDIxLjM5MDYyNSA0Ny4xMjUgMzYuMzc1IApRIDQ3LjEyNSA1MS40MjE4NzUgNDMuMjgxMjUgNTguOTA2MjUgClEgMzkuNDUzMTI1IDY2LjQwNjI1IDMxLjc4MTI1IDY2LjQwNjI1IAp6Ck0gMzEuNzgxMjUgNzQuMjE4NzUgClEgNDQuMDQ2ODc1IDc0LjIxODc1IDUwLjUxNTYyNSA2NC41MTU2MjUgClEgNTYuOTg0Mzc1IDU0LjgyODEyNSA1Ni45ODQzNzUgMzYuMzc1IApRIDU2Ljk4NDM3NSAxNy45Njg3NSA1MC41MTU2MjUgOC4yNjU2MjUgClEgNDQuMDQ2ODc1IC0xLjQyMTg3NSAzMS43ODEyNSAtMS40MjE4NzUgClEgMTkuNTMxMjUgLTEuNDIxODc1IDEzLjA2MjUgOC4yNjU2MjUgClEgNi41OTM3NSAxNy45Njg3NSA2LjU5Mzc1IDM2LjM3NSAKUSA2LjU5Mzc1IDU0LjgyODEyNSAxMy4wNjI1IDY0LjUxNTYyNSAKUSAxOS41MzEyNSA3NC4yMTg3NSAzMS43ODEyNSA3NC4yMTg3NSAKegoiIGlkPSJEZWphVnVTYW5zLTMwIi8+CiAgICAgIDwvZGVmcz4KICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjUuMDUxNTgzIDEyOS4zNTgxMjUpc2NhbGUoMC4xMiAtMC4xMikiPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMCIvPgogICAgICA8L2c+CiAgICAgPC9nPgogICAgPC9nPgogICAgPGcgaWQ9Inh0aWNrXzIiPgogICAgIDxnIGlkPSJsaW5lMmRfMiI+CiAgICAgIDxnPgogICAgICAgPHVzZSBzdHlsZT0ic3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuODsiIHg9IjkyLjM0MTU4MyIgeGxpbms6aHJlZj0iI201MzFlMmU5NTYzIiB5PSIxMTMuMjQiLz4KICAgICAgPC9nPgogICAgIDwvZz4KICAgICA8ZyBpZD0idGV4dF8yIj4KICAgICAgPCEtLSAxIC0tPgogICAgICA8ZGVmcz4KICAgICAgIDxwYXRoIGQ9Ik0gMTIuNDA2MjUgOC4yOTY4NzUgCkwgMjguNTE1NjI1IDguMjk2ODc1IApMIDI4LjUxNTYyNSA2My45MjE4NzUgCkwgMTAuOTg0Mzc1IDYwLjQwNjI1IApMIDEwLjk4NDM3NSA2OS4zOTA2MjUgCkwgMjguNDIxODc1IDcyLjkwNjI1IApMIDM4LjI4MTI1IDcyLjkwNjI1IApMIDM4LjI4MTI1IDguMjk2ODc1IApMIDU0LjM5MDYyNSA4LjI5Njg3NSAKTCA1NC4zOTA2MjUgMCAKTCAxMi40MDYyNSAwIAp6CiIgaWQ9IkRlamFWdVNhbnMtMzEiLz4KICAgICAgPC9kZWZzPgogICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4OC41MjQwODMgMTI5LjM1ODEyNSlzY2FsZSgwLjEyIC0wLjEyKSI+CiAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTMxIi8+CiAgICAgIDwvZz4KICAgICA8L2c+CiAgICA8L2c+CiAgIDwvZz4KICAgPGcgaWQ9Im1hdHBsb3RsaWIuYXhpc18yIj4KICAgIDxnIGlkPSJ5dGlja18xIj4KICAgICA8ZyBpZD0ibGluZTJkXzMiPgogICAgICA8ZGVmcz4KICAgICAgIDxwYXRoIGQ9Ik0gMCAwIApMIC0zLjUgMCAKIiBpZD0ibThmZmUwYjdlZWYiIHN0eWxlPSJzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC44OyIvPgogICAgICA8L2RlZnM+CiAgICAgIDxnPgogICAgICAgPHVzZSBzdHlsZT0ic3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuODsiIHg9IjM2Ljc5IiB4bGluazpocmVmPSIjbThmZmUwYjdlZWYiIHk9IjExMy4yNCIvPgogICAgICA8L2c+CiAgICAgPC9nPgogICAgIDxnIGlkPSJ0ZXh0XzMiPgogICAgICA8IS0tIDAgLS0+CiAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIzLjQyNzUgMTE3LjAzOTIxOSlzY2FsZSgwLjEgLTAuMSkiPgogICAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMCIvPgogICAgICA8L2c+CiAgICAgPC9nPgogICAgPC9nPgogICAgPGcgaWQ9Inl0aWNrXzIiPgogICAgIDxnIGlkPSJsaW5lMmRfNCI+CiAgICAgIDxnPgogICAgICAgPHVzZSBzdHlsZT0ic3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuODsiIHg9IjM2Ljc5IiB4bGluazpocmVmPSIjbThmZmUwYjdlZWYiIHk9Ijc0LjgxMiIvPgogICAgICA8L2c+CiAgICAgPC9nPgogICAgIDxnIGlkPSJ0ZXh0XzQiPgogICAgICA8IS0tIDUwIC0tPgogICAgICA8ZGVmcz4KICAgICAgIDxwYXRoIGQ9Ik0gMTAuNzk2ODc1IDcyLjkwNjI1IApMIDQ5LjUxNTYyNSA3Mi45MDYyNSAKTCA0OS41MTU2MjUgNjQuNTkzNzUgCkwgMTkuODI4MTI1IDY0LjU5Mzc1IApMIDE5LjgyODEyNSA0Ni43MzQzNzUgClEgMjEuOTY4NzUgNDcuNDY4NzUgMjQuMTA5Mzc1IDQ3LjgyODEyNSAKUSAyNi4yNjU2MjUgNDguMTg3NSAyOC40MjE4NzUgNDguMTg3NSAKUSA0MC42MjUgNDguMTg3NSA0Ny43NSA0MS41IApRIDU0Ljg5MDYyNSAzNC44MTI1IDU0Ljg5MDYyNSAyMy4zOTA2MjUgClEgNTQuODkwNjI1IDExLjYyNSA0Ny41NjI1IDUuMDkzNzUgClEgNDAuMjM0Mzc1IC0xLjQyMTg3NSAyNi45MDYyNSAtMS40MjE4NzUgClEgMjIuMzEyNSAtMS40MjE4NzUgMTcuNTQ2ODc1IC0wLjY0MDYyNSAKUSAxMi43OTY4NzUgMC4xNDA2MjUgNy43MTg3NSAxLjcwMzEyNSAKTCA3LjcxODc1IDExLjYyNSAKUSAxMi4xMDkzNzUgOS4yMzQzNzUgMTYuNzk2ODc1IDguMDYyNSAKUSAyMS40ODQzNzUgNi44OTA2MjUgMjYuNzAzMTI1IDYuODkwNjI1IApRIDM1LjE1NjI1IDYuODkwNjI1IDQwLjA3ODEyNSAxMS4zMjgxMjUgClEgNDUuMDE1NjI1IDE1Ljc2NTYyNSA0NS4wMTU2MjUgMjMuMzkwNjI1IApRIDQ1LjAxNTYyNSAzMSA0MC4wNzgxMjUgMzUuNDM3NSAKUSAzNS4xNTYyNSAzOS44OTA2MjUgMjYuNzAzMTI1IDM5Ljg5MDYyNSAKUSAyMi43NSAzOS44OTA2MjUgMTguODEyNSAzOS4wMTU2MjUgClEgMTQuODkwNjI1IDM4LjE0MDYyNSAxMC43OTY4NzUgMzYuMjgxMjUgCnoKIiBpZD0iRGVqYVZ1U2Fucy0zNSIvPgogICAgICA8L2RlZnM+CiAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE3LjA2NSA3OC42MTEyMTkpc2NhbGUoMC4xIC0wLjEpIj4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzUiLz4KICAgICAgIDx1c2UgeD0iNjMuNjIzMDQ3IiB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMCIvPgogICAgICA8L2c+CiAgICAgPC9nPgogICAgPC9nPgogICAgPGcgaWQ9Inl0aWNrXzMiPgogICAgIDxnIGlkPSJsaW5lMmRfNSI+CiAgICAgIDxnPgogICAgICAgPHVzZSBzdHlsZT0ic3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuODsiIHg9IjM2Ljc5IiB4bGluazpocmVmPSIjbThmZmUwYjdlZWYiIHk9IjM2LjM4NCIvPgogICAgICA8L2c+CiAgICAgPC9nPgogICAgIDxnIGlkPSJ0ZXh0XzUiPgogICAgICA8IS0tIDEwMCAtLT4KICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTAuNzAyNSA0MC4xODMyMTkpc2NhbGUoMC4xIC0wLjEpIj4KICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzEiLz4KICAgICAgIDx1c2UgeD0iNjMuNjIzMDQ3IiB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMCIvPgogICAgICAgPHVzZSB4PSIxMjcuMjQ2MDk0IiB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMCIvPgogICAgICA8L2c+CiAgICAgPC9nPgogICAgPC9nPgogICA8L2c+CiAgIDxnIGlkPSJwYXRjaF81Ij4KICAgIDxwYXRoIGQ9Ik0gMzYuNzkgMTEzLjI0IApMIDM2Ljc5IDM2LjM4NCAKIiBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS1saW5lY2FwOnNxdWFyZTtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlLXdpZHRoOjAuODsiLz4KICAgPC9nPgogICA8ZyBpZD0icGF0Y2hfNiI+CiAgICA8cGF0aCBkPSJNIDEzMC42OCAxMTMuMjQgCkwgMTMwLjY4IDM2LjM4NCAKIiBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS1saW5lY2FwOnNxdWFyZTtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlLXdpZHRoOjAuODsiLz4KICAgPC9nPgogICA8ZyBpZD0icGF0Y2hfNyI+CiAgICA8cGF0aCBkPSJNIDM2Ljc5IDExMy4yNCAKTCAxMzAuNjggMTEzLjI0IAoiIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLWxpbmVjYXA6c3F1YXJlO3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2Utd2lkdGg6MC44OyIvPgogICA8L2c+CiAgIDxnIGlkPSJwYXRjaF84Ij4KICAgIDxwYXRoIGQ9Ik0gMzYuNzkgMzYuMzg0IApMIDEzMC42OCAzNi4zODQgCiIgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzAwMDAwMDtzdHJva2UtbGluZWNhcDpzcXVhcmU7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZS13aWR0aDowLjg7Ii8+CiAgIDwvZz4KICAgPGcgaWQ9InRleHRfNiI+CiAgICA8IS0tIDYuMyAtLT4KICAgIDxkZWZzPgogICAgIDxwYXRoIGQ9Ik0gMzMuMDE1NjI1IDQwLjM3NSAKUSAyNi4zNzUgNDAuMzc1IDIyLjQ4NDM3NSAzNS44MjgxMjUgClEgMTguNjA5Mzc1IDMxLjI5Njg3NSAxOC42MDkzNzUgMjMuMzkwNjI1IApRIDE4LjYwOTM3NSAxNS41MzEyNSAyMi40ODQzNzUgMTAuOTUzMTI1IApRIDI2LjM3NSA2LjM5MDYyNSAzMy4wMTU2MjUgNi4zOTA2MjUgClEgMzkuNjU2MjUgNi4zOTA2MjUgNDMuNTMxMjUgMTAuOTUzMTI1IApRIDQ3LjQwNjI1IDE1LjUzMTI1IDQ3LjQwNjI1IDIzLjM5MDYyNSAKUSA0Ny40MDYyNSAzMS4yOTY4NzUgNDMuNTMxMjUgMzUuODI4MTI1IApRIDM5LjY1NjI1IDQwLjM3NSAzMy4wMTU2MjUgNDAuMzc1IAp6Ck0gNTIuNTkzNzUgNzEuMjk2ODc1IApMIDUyLjU5Mzc1IDYyLjMxMjUgClEgNDguODc1IDY0LjA2MjUgNDUuMDkzNzUgNjQuOTg0Mzc1IApRIDQxLjMxMjUgNjUuOTIxODc1IDM3LjU5Mzc1IDY1LjkyMTg3NSAKUSAyNy44MjgxMjUgNjUuOTIxODc1IDIyLjY3MTg3NSA1OS4zMjgxMjUgClEgMTcuNTMxMjUgNTIuNzM0Mzc1IDE2Ljc5Njg3NSAzOS40MDYyNSAKUSAxOS42NzE4NzUgNDMuNjU2MjUgMjQuMDE1NjI1IDQ1LjkyMTg3NSAKUSAyOC4zNzUgNDguMTg3NSAzMy41OTM3NSA0OC4xODc1IApRIDQ0LjU3ODEyNSA0OC4xODc1IDUwLjk1MzEyNSA0MS41MTU2MjUgClEgNTcuMzI4MTI1IDM0Ljg1OTM3NSA1Ny4zMjgxMjUgMjMuMzkwNjI1IApRIDU3LjMyODEyNSAxMi4xNTYyNSA1MC42ODc1IDUuMzU5Mzc1IApRIDQ0LjA0Njg3NSAtMS40MjE4NzUgMzMuMDE1NjI1IC0xLjQyMTg3NSAKUSAyMC4zNTkzNzUgLTEuNDIxODc1IDEzLjY3MTg3NSA4LjI2NTYyNSAKUSA2Ljk4NDM3NSAxNy45Njg3NSA2Ljk4NDM3NSAzNi4zNzUgClEgNi45ODQzNzUgNTMuNjU2MjUgMTUuMTg3NSA2My45Mzc1IApRIDIzLjM5MDYyNSA3NC4yMTg3NSAzNy4yMDMxMjUgNzQuMjE4NzUgClEgNDAuOTIxODc1IDc0LjIxODc1IDQ0LjcwMzEyNSA3My40ODQzNzUgClEgNDguNDg0Mzc1IDcyLjc1IDUyLjU5Mzc1IDcxLjI5Njg3NSAKegoiIGlkPSJEZWphVnVTYW5zLTM2Ii8+CiAgICAgPHBhdGggZD0iTSAxMC42ODc1IDEyLjQwNjI1IApMIDIxIDEyLjQwNjI1IApMIDIxIDAgCkwgMTAuNjg3NSAwIAp6CiIgaWQ9IkRlamFWdVNhbnMtMmUiLz4KICAgICA8cGF0aCBkPSJNIDQwLjU3ODEyNSAzOS4zMTI1IApRIDQ3LjY1NjI1IDM3Ljc5Njg3NSA1MS42MjUgMzMgClEgNTUuNjA5Mzc1IDI4LjIxODc1IDU1LjYwOTM3NSAyMS4xODc1IApRIDU1LjYwOTM3NSAxMC40MDYyNSA0OC4xODc1IDQuNDg0Mzc1IApRIDQwLjc2NTYyNSAtMS40MjE4NzUgMjcuMDkzNzUgLTEuNDIxODc1IApRIDIyLjUxNTYyNSAtMS40MjE4NzUgMTcuNjU2MjUgLTAuNTE1NjI1IApRIDEyLjc5Njg3NSAwLjM5MDYyNSA3LjYyNSAyLjIwMzEyNSAKTCA3LjYyNSAxMS43MTg3NSAKUSAxMS43MTg3NSA5LjMyODEyNSAxNi41OTM3NSA4LjEwOTM3NSAKUSAyMS40ODQzNzUgNi44OTA2MjUgMjYuODEyNSA2Ljg5MDYyNSAKUSAzNi4wNzgxMjUgNi44OTA2MjUgNDAuOTM3NSAxMC41NDY4NzUgClEgNDUuNzk2ODc1IDE0LjIwMzEyNSA0NS43OTY4NzUgMjEuMTg3NSAKUSA0NS43OTY4NzUgMjcuNjQwNjI1IDQxLjI4MTI1IDMxLjI2NTYyNSAKUSAzNi43NjU2MjUgMzQuOTA2MjUgMjguNzE4NzUgMzQuOTA2MjUgCkwgMjAuMjE4NzUgMzQuOTA2MjUgCkwgMjAuMjE4NzUgNDMuMDE1NjI1IApMIDI5LjEwOTM3NSA0My4wMTU2MjUgClEgMzYuMzc1IDQzLjAxNTYyNSA0MC4yMzQzNzUgNDUuOTIxODc1IApRIDQ0LjA5Mzc1IDQ4LjgyODEyNSA0NC4wOTM3NSA1NC4yOTY4NzUgClEgNDQuMDkzNzUgNTkuOTA2MjUgNDAuMTA5Mzc1IDYyLjkwNjI1IApRIDM2LjE0MDYyNSA2NS45MjE4NzUgMjguNzE4NzUgNjUuOTIxODc1IApRIDI0LjY1NjI1IDY1LjkyMTg3NSAyMC4wMTU2MjUgNjUuMDMxMjUgClEgMTUuMzc1IDY0LjE1NjI1IDkuODEyNSA2Mi4zMTI1IApMIDkuODEyNSA3MS4wOTM3NSAKUSAxNS40Mzc1IDcyLjY1NjI1IDIwLjM0Mzc1IDczLjQzNzUgClEgMjUuMjUgNzQuMjE4NzUgMjkuNTkzNzUgNzQuMjE4NzUgClEgNDAuODI4MTI1IDc0LjIxODc1IDQ3LjM1OTM3NSA2OS4xMDkzNzUgClEgNTMuOTA2MjUgNjQuMDE1NjI1IDUzLjkwNjI1IDU1LjMyODEyNSAKUSA1My45MDYyNSA0OS4yNjU2MjUgNTAuNDM3NSA0NS4wOTM3NSAKUSA0Ni45Njg3NSA0MC45MjE4NzUgNDAuNTc4MTI1IDM5LjMxMjUgCnoKIiBpZD0iRGVqYVZ1U2Fucy0zMyIvPgogICAgPC9kZWZzPgogICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDMuNjkxNjE1IDEwNy43NjUyMzgpc2NhbGUoMC4xMSAtMC4xMSkiPgogICAgIDx1c2UgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzYiLz4KICAgICA8dXNlIHg9IjYzLjYyMzA0NyIgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMmUiLz4KICAgICA8dXNlIHg9Ijk1LjQxMDE1NiIgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzMiLz4KICAgIDwvZz4KICAgPC9nPgogICA8ZyBpZD0idGV4dF83Ij4KICAgIDwhLS0gOTMuNyAtLT4KICAgIDxkZWZzPgogICAgIDxwYXRoIGQ9Ik0gMTAuOTg0Mzc1IDEuNTE1NjI1IApMIDEwLjk4NDM3NSAxMC41IApRIDE0LjcwMzEyNSA4LjczNDM3NSAxOC41IDcuODEyNSAKUSAyMi4zMTI1IDYuODkwNjI1IDI1Ljk4NDM3NSA2Ljg5MDYyNSAKUSAzNS43NSA2Ljg5MDYyNSA0MC44OTA2MjUgMTMuNDUzMTI1IApRIDQ2LjA0Njg3NSAyMC4wMTU2MjUgNDYuNzgxMjUgMzMuNDA2MjUgClEgNDMuOTUzMTI1IDI5LjIwMzEyNSAzOS41OTM3NSAyNi45NTMxMjUgClEgMzUuMjUgMjQuNzAzMTI1IDI5Ljk4NDM3NSAyNC43MDMxMjUgClEgMTkuMDQ2ODc1IDI0LjcwMzEyNSAxMi42NzE4NzUgMzEuMzEyNSAKUSA2LjI5Njg3NSAzNy45Mzc1IDYuMjk2ODc1IDQ5LjQyMTg3NSAKUSA2LjI5Njg3NSA2MC42NDA2MjUgMTIuOTM3NSA2Ny40MjE4NzUgClEgMTkuNTc4MTI1IDc0LjIxODc1IDMwLjYwOTM3NSA3NC4yMTg3NSAKUSA0My4yNjU2MjUgNzQuMjE4NzUgNDkuOTIxODc1IDY0LjUxNTYyNSAKUSA1Ni41OTM3NSA1NC44MjgxMjUgNTYuNTkzNzUgMzYuMzc1IApRIDU2LjU5Mzc1IDE5LjE0MDYyNSA0OC40MDYyNSA4Ljg1OTM3NSAKUSA0MC4yMzQzNzUgLTEuNDIxODc1IDI2LjQyMTg3NSAtMS40MjE4NzUgClEgMjIuNzAzMTI1IC0xLjQyMTg3NSAxOC44OTA2MjUgLTAuNjg3NSAKUSAxNS4wOTM3NSAwLjA0Njg3NSAxMC45ODQzNzUgMS41MTU2MjUgCnoKTSAzMC42MDkzNzUgMzIuNDIxODc1IApRIDM3LjI1IDMyLjQyMTg3NSA0MS4xMjUgMzYuOTUzMTI1IApRIDQ1LjAxNTYyNSA0MS41IDQ1LjAxNTYyNSA0OS40MjE4NzUgClEgNDUuMDE1NjI1IDU3LjI4MTI1IDQxLjEyNSA2MS44NDM3NSAKUSAzNy4yNSA2Ni40MDYyNSAzMC42MDkzNzUgNjYuNDA2MjUgClEgMjMuOTY4NzUgNjYuNDA2MjUgMjAuMDkzNzUgNjEuODQzNzUgClEgMTYuMjE4NzUgNTcuMjgxMjUgMTYuMjE4NzUgNDkuNDIxODc1IApRIDE2LjIxODc1IDQxLjUgMjAuMDkzNzUgMzYuOTUzMTI1IApRIDIzLjk2ODc1IDMyLjQyMTg3NSAzMC42MDkzNzUgMzIuNDIxODc1IAp6CiIgaWQ9IkRlamFWdVNhbnMtMzkiLz4KICAgICA8cGF0aCBkPSJNIDguMjAzMTI1IDcyLjkwNjI1IApMIDU1LjA3ODEyNSA3Mi45MDYyNSAKTCA1NS4wNzgxMjUgNjguNzAzMTI1IApMIDI4LjYwOTM3NSAwIApMIDE4LjMxMjUgMCAKTCA0My4yMTg3NSA2NC41OTM3NSAKTCA4LjIwMzEyNSA2NC41OTM3NSAKegoiIGlkPSJEZWphVnVTYW5zLTM3Ii8+CiAgICA8L2RlZnM+CiAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3MS40ODg5MDYgNzQuMTc0MzI5KXNjYWxlKDAuMTEgLTAuMTEpIj4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTM5Ii8+CiAgICAgPHVzZSB4PSI2My42MjMwNDciIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTMzIi8+CiAgICAgPHVzZSB4PSIxMjcuMjQ2MDk0IiB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0yZSIvPgogICAgIDx1c2UgeD0iMTU5LjAzMzIwMyIgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzciLz4KICAgIDwvZz4KICAgPC9nPgogICA8ZyBpZD0idGV4dF84Ij4KICAgIDwhLS0gc2V4Y29kZT0xLCAtLT4KICAgIDxkZWZzPgogICAgIDxwYXRoIGQ9Ik0gNDQuMjgxMjUgNTMuMDc4MTI1IApMIDQ0LjI4MTI1IDQ0LjU3ODEyNSAKUSA0MC40ODQzNzUgNDYuNTMxMjUgMzYuMzc1IDQ3LjUgClEgMzIuMjgxMjUgNDguNDg0Mzc1IDI3Ljg3NSA0OC40ODQzNzUgClEgMjEuMTg3NSA0OC40ODQzNzUgMTcuODQzNzUgNDYuNDM3NSAKUSAxNC41IDQ0LjM5MDYyNSAxNC41IDQwLjI4MTI1IApRIDE0LjUgMzcuMTU2MjUgMTYuODkwNjI1IDM1LjM3NSAKUSAxOS4yODEyNSAzMy41OTM3NSAyNi41MTU2MjUgMzEuOTg0Mzc1IApMIDI5LjU5Mzc1IDMxLjI5Njg3NSAKUSAzOS4xNTYyNSAyOS4yNSA0My4xODc1IDI1LjUxNTYyNSAKUSA0Ny4yMTg3NSAyMS43ODEyNSA0Ny4yMTg3NSAxNS4wOTM3NSAKUSA0Ny4yMTg3NSA3LjQ2ODc1IDQxLjE4NzUgMy4wMTU2MjUgClEgMzUuMTU2MjUgLTEuNDIxODc1IDI0LjYwOTM3NSAtMS40MjE4NzUgClEgMjAuMjE4NzUgLTEuNDIxODc1IDE1LjQ1MzEyNSAtMC41NjI1IApRIDEwLjY4NzUgMC4yOTY4NzUgNS40MjE4NzUgMiAKTCA1LjQyMTg3NSAxMS4yODEyNSAKUSAxMC40MDYyNSA4LjY4NzUgMTUuMjM0Mzc1IDcuMzkwNjI1IApRIDIwLjA2MjUgNi4xMDkzNzUgMjQuODEyNSA2LjEwOTM3NSAKUSAzMS4xNTYyNSA2LjEwOTM3NSAzNC41NjI1IDguMjgxMjUgClEgMzcuOTg0Mzc1IDEwLjQ1MzEyNSAzNy45ODQzNzUgMTQuNDA2MjUgClEgMzcuOTg0Mzc1IDE4LjA2MjUgMzUuNTE1NjI1IDIwLjAxNTYyNSAKUSAzMy4wNjI1IDIxLjk2ODc1IDI0LjcwMzEyNSAyMy43ODEyNSAKTCAyMS41NzgxMjUgMjQuNTE1NjI1IApRIDEzLjIzNDM3NSAyNi4yNjU2MjUgOS41MTU2MjUgMjkuOTA2MjUgClEgNS44MTI1IDMzLjU0Njg3NSA1LjgxMjUgMzkuODkwNjI1IApRIDUuODEyNSA0Ny42MDkzNzUgMTEuMjgxMjUgNTEuNzk2ODc1IApRIDE2Ljc1IDU2IDI2LjgxMjUgNTYgClEgMzEuNzgxMjUgNTYgMzYuMTcxODc1IDU1LjI2NTYyNSAKUSA0MC41NzgxMjUgNTQuNTQ2ODc1IDQ0LjI4MTI1IDUzLjA3ODEyNSAKegoiIGlkPSJEZWphVnVTYW5zLTczIi8+CiAgICAgPHBhdGggZD0iTSA1Ni4yMDMxMjUgMjkuNTkzNzUgCkwgNTYuMjAzMTI1IDI1LjIwMzEyNSAKTCAxNC44OTA2MjUgMjUuMjAzMTI1IApRIDE1LjQ4NDM3NSAxNS45MjE4NzUgMjAuNDg0Mzc1IDExLjA2MjUgClEgMjUuNDg0Mzc1IDYuMjAzMTI1IDM0LjQyMTg3NSA2LjIwMzEyNSAKUSAzOS41OTM3NSA2LjIwMzEyNSA0NC40NTMxMjUgNy40Njg3NSAKUSA0OS4zMTI1IDguNzM0Mzc1IDU0LjEwOTM3NSAxMS4yODEyNSAKTCA1NC4xMDkzNzUgMi43ODEyNSAKUSA0OS4yNjU2MjUgMC43MzQzNzUgNDQuMTg3NSAtMC4zNDM3NSAKUSAzOS4xMDkzNzUgLTEuNDIxODc1IDMzLjg5MDYyNSAtMS40MjE4NzUgClEgMjAuNzk2ODc1IC0xLjQyMTg3NSAxMy4xNTYyNSA2LjE4NzUgClEgNS41MTU2MjUgMTMuODEyNSA1LjUxNTYyNSAyNi44MTI1IApRIDUuNTE1NjI1IDQwLjIzNDM3NSAxMi43NjU2MjUgNDguMTA5Mzc1IApRIDIwLjAxNTYyNSA1NiAzMi4zMjgxMjUgNTYgClEgNDMuMzU5Mzc1IDU2IDQ5Ljc4MTI1IDQ4Ljg5MDYyNSAKUSA1Ni4yMDMxMjUgNDEuNzk2ODc1IDU2LjIwMzEyNSAyOS41OTM3NSAKegpNIDQ3LjIxODc1IDMyLjIzNDM3NSAKUSA0Ny4xMjUgMzkuNTkzNzUgNDMuMDkzNzUgNDMuOTg0Mzc1IApRIDM5LjA2MjUgNDguMzkwNjI1IDMyLjQyMTg3NSA0OC4zOTA2MjUgClEgMjQuOTA2MjUgNDguMzkwNjI1IDIwLjM5MDYyNSA0NC4xNDA2MjUgClEgMTUuODc1IDM5Ljg5MDYyNSAxNS4xODc1IDMyLjE3MTg3NSAKegoiIGlkPSJEZWphVnVTYW5zLTY1Ii8+CiAgICAgPHBhdGggZD0iTSA1NC44OTA2MjUgNTQuNjg3NSAKTCAzNS4xMDkzNzUgMjguMDc4MTI1IApMIDU1LjkwNjI1IDAgCkwgNDUuMzEyNSAwIApMIDI5LjM5MDYyNSAyMS40ODQzNzUgCkwgMTMuNDg0Mzc1IDAgCkwgMi44NzUgMCAKTCAyNC4xMjUgMjguNjA5Mzc1IApMIDQuNjg3NSA1NC42ODc1IApMIDE1LjI4MTI1IDU0LjY4NzUgCkwgMjkuNzgxMjUgMzUuMjAzMTI1IApMIDQ0LjI4MTI1IDU0LjY4NzUgCnoKIiBpZD0iRGVqYVZ1U2Fucy03OCIvPgogICAgIDxwYXRoIGQ9Ik0gNDguNzgxMjUgNTIuNTkzNzUgCkwgNDguNzgxMjUgNDQuMTg3NSAKUSA0NC45Njg3NSA0Ni4yOTY4NzUgNDEuMTQwNjI1IDQ3LjM0Mzc1IApRIDM3LjMxMjUgNDguMzkwNjI1IDMzLjQwNjI1IDQ4LjM5MDYyNSAKUSAyNC42NTYyNSA0OC4zOTA2MjUgMTkuODEyNSA0Mi44NDM3NSAKUSAxNC45ODQzNzUgMzcuMzEyNSAxNC45ODQzNzUgMjcuMjk2ODc1IApRIDE0Ljk4NDM3NSAxNy4yODEyNSAxOS44MTI1IDExLjczNDM3NSAKUSAyNC42NTYyNSA2LjIwMzEyNSAzMy40MDYyNSA2LjIwMzEyNSAKUSAzNy4zMTI1IDYuMjAzMTI1IDQxLjE0MDYyNSA3LjI1IApRIDQ0Ljk2ODc1IDguMjk2ODc1IDQ4Ljc4MTI1IDEwLjQwNjI1IApMIDQ4Ljc4MTI1IDIuMDkzNzUgClEgNDUuMDE1NjI1IDAuMzQzNzUgNDAuOTg0Mzc1IC0wLjUzMTI1IApRIDM2Ljk2ODc1IC0xLjQyMTg3NSAzMi40MjE4NzUgLTEuNDIxODc1IApRIDIwLjA2MjUgLTEuNDIxODc1IDEyLjc4MTI1IDYuMzQzNzUgClEgNS41MTU2MjUgMTQuMTA5Mzc1IDUuNTE1NjI1IDI3LjI5Njg3NSAKUSA1LjUxNTYyNSA0MC42NzE4NzUgMTIuODU5Mzc1IDQ4LjMyODEyNSAKUSAyMC4yMTg3NSA1NiAzMy4wMTU2MjUgNTYgClEgMzcuMTU2MjUgNTYgNDEuMTA5Mzc1IDU1LjE0MDYyNSAKUSA0NS4wNjI1IDU0LjI5Njg3NSA0OC43ODEyNSA1Mi41OTM3NSAKegoiIGlkPSJEZWphVnVTYW5zLTYzIi8+CiAgICAgPHBhdGggZD0iTSAzMC42MDkzNzUgNDguMzkwNjI1IApRIDIzLjM5MDYyNSA0OC4zOTA2MjUgMTkuMTg3NSA0Mi43NSAKUSAxNC45ODQzNzUgMzcuMTA5Mzc1IDE0Ljk4NDM3NSAyNy4yOTY4NzUgClEgMTQuOTg0Mzc1IDE3LjQ4NDM3NSAxOS4xNTYyNSAxMS44NDM3NSAKUSAyMy4zNDM3NSA2LjIwMzEyNSAzMC42MDkzNzUgNi4yMDMxMjUgClEgMzcuNzk2ODc1IDYuMjAzMTI1IDQxLjk4NDM3NSAxMS44NTkzNzUgClEgNDYuMTg3NSAxNy41MzEyNSA0Ni4xODc1IDI3LjI5Njg3NSAKUSA0Ni4xODc1IDM3LjAxNTYyNSA0MS45ODQzNzUgNDIuNzAzMTI1IApRIDM3Ljc5Njg3NSA0OC4zOTA2MjUgMzAuNjA5Mzc1IDQ4LjM5MDYyNSAKegpNIDMwLjYwOTM3NSA1NiAKUSA0Mi4zMjgxMjUgNTYgNDkuMDE1NjI1IDQ4LjM3NSAKUSA1NS43MTg3NSA0MC43NjU2MjUgNTUuNzE4NzUgMjcuMjk2ODc1IApRIDU1LjcxODc1IDEzLjg3NSA0OS4wMTU2MjUgNi4yMTg3NSAKUSA0Mi4zMjgxMjUgLTEuNDIxODc1IDMwLjYwOTM3NSAtMS40MjE4NzUgClEgMTguODQzNzUgLTEuNDIxODc1IDEyLjE3MTg3NSA2LjIxODc1IApRIDUuNTE1NjI1IDEzLjg3NSA1LjUxNTYyNSAyNy4yOTY4NzUgClEgNS41MTU2MjUgNDAuNzY1NjI1IDEyLjE3MTg3NSA0OC4zNzUgClEgMTguODQzNzUgNTYgMzAuNjA5Mzc1IDU2IAp6CiIgaWQ9IkRlamFWdVNhbnMtNmYiLz4KICAgICA8cGF0aCBkPSJNIDQ1LjQwNjI1IDQ2LjM5MDYyNSAKTCA0NS40MDYyNSA3NS45ODQzNzUgCkwgNTQuMzkwNjI1IDc1Ljk4NDM3NSAKTCA1NC4zOTA2MjUgMCAKTCA0NS40MDYyNSAwIApMIDQ1LjQwNjI1IDguMjAzMTI1IApRIDQyLjU3ODEyNSAzLjMyODEyNSAzOC4yNSAwLjk1MzEyNSAKUSAzMy45Mzc1IC0xLjQyMTg3NSAyNy44NzUgLTEuNDIxODc1IApRIDE3Ljk2ODc1IC0xLjQyMTg3NSAxMS43MzQzNzUgNi40ODQzNzUgClEgNS41MTU2MjUgMTQuNDA2MjUgNS41MTU2MjUgMjcuMjk2ODc1IApRIDUuNTE1NjI1IDQwLjE4NzUgMTEuNzM0Mzc1IDQ4LjA5Mzc1IApRIDE3Ljk2ODc1IDU2IDI3Ljg3NSA1NiAKUSAzMy45Mzc1IDU2IDM4LjI1IDUzLjYyNSAKUSA0Mi41NzgxMjUgNTEuMjY1NjI1IDQ1LjQwNjI1IDQ2LjM5MDYyNSAKegpNIDE0Ljc5Njg3NSAyNy4yOTY4NzUgClEgMTQuNzk2ODc1IDE3LjM5MDYyNSAxOC44NzUgMTEuNzUgClEgMjIuOTUzMTI1IDYuMTA5Mzc1IDMwLjA3ODEyNSA2LjEwOTM3NSAKUSAzNy4yMDMxMjUgNi4xMDkzNzUgNDEuMjk2ODc1IDExLjc1IApRIDQ1LjQwNjI1IDE3LjM5MDYyNSA0NS40MDYyNSAyNy4yOTY4NzUgClEgNDUuNDA2MjUgMzcuMjAzMTI1IDQxLjI5Njg3NSA0Mi44NDM3NSAKUSAzNy4yMDMxMjUgNDguNDg0Mzc1IDMwLjA3ODEyNSA0OC40ODQzNzUgClEgMjIuOTUzMTI1IDQ4LjQ4NDM3NSAxOC44NzUgNDIuODQzNzUgClEgMTQuNzk2ODc1IDM3LjIwMzEyNSAxNC43OTY4NzUgMjcuMjk2ODc1IAp6CiIgaWQ9IkRlamFWdVNhbnMtNjQiLz4KICAgICA8cGF0aCBkPSJNIDEwLjU5Mzc1IDQ1LjQwNjI1IApMIDczLjE4NzUgNDUuNDA2MjUgCkwgNzMuMTg3NSAzNy4yMDMxMjUgCkwgMTAuNTkzNzUgMzcuMjAzMTI1IAp6Ck0gMTAuNTkzNzUgMjUuNDg0Mzc1IApMIDczLjE4NzUgMjUuNDg0Mzc1IApMIDczLjE4NzUgMTcuMTg3NSAKTCAxMC41OTM3NSAxNy4xODc1IAp6CiIgaWQ9IkRlamFWdVNhbnMtM2QiLz4KICAgICA8cGF0aCBkPSJNIDExLjcxODc1IDEyLjQwNjI1IApMIDIyLjAxNTYyNSAxMi40MDYyNSAKTCAyMi4wMTU2MjUgNCAKTCAxNC4wMTU2MjUgLTExLjYyNSAKTCA3LjcxODc1IC0xMS42MjUgCkwgMTEuNzE4NzUgNCAKegoiIGlkPSJEZWphVnVTYW5zLTJjIi8+CiAgICA8L2RlZnM+CiAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1NC4wNzY0MDYgMTguOTA4MDYyKXNjYWxlKDAuMSAtMC4xKSI+CiAgICAgPHVzZSB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy03MyIvPgogICAgIDx1c2UgeD0iNTIuMDk5NjA5IiB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy02NSIvPgogICAgIDx1c2UgeD0iMTEzLjYwNzQyMiIgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtNzgiLz4KICAgICA8dXNlIHg9IjE3Mi43NzE0ODQiIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTYzIi8+CiAgICAgPHVzZSB4PSIyMjcuNzUxOTUzIiB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy02ZiIvPgogICAgIDx1c2UgeD0iMjg4LjkzMzU5NCIgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtNjQiLz4KICAgICA8dXNlIHg9IjM1Mi40MTAxNTYiIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTY1Ii8+CiAgICAgPHVzZSB4PSI0MTMuOTMzNTk0IiB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zZCIvPgogICAgIDx1c2UgeD0iNDk3LjcyMjY1NiIgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtMzEiLz4KICAgICA8dXNlIHg9IjU2MS4zNDU3MDMiIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTJjIi8+CiAgICA8L2c+CiAgICA8IS0tIHBjX2NsYXNzPTEgLS0+CiAgICA8ZGVmcz4KICAgICA8cGF0aCBkPSJNIDE4LjEwOTM3NSA4LjIwMzEyNSAKTCAxOC4xMDkzNzUgLTIwLjc5Njg3NSAKTCA5LjA3ODEyNSAtMjAuNzk2ODc1IApMIDkuMDc4MTI1IDU0LjY4NzUgCkwgMTguMTA5Mzc1IDU0LjY4NzUgCkwgMTguMTA5Mzc1IDQ2LjM5MDYyNSAKUSAyMC45NTMxMjUgNTEuMjY1NjI1IDI1LjI2NTYyNSA1My42MjUgClEgMjkuNTkzNzUgNTYgMzUuNTkzNzUgNTYgClEgNDUuNTYyNSA1NiA1MS43ODEyNSA0OC4wOTM3NSAKUSA1OC4wMTU2MjUgNDAuMTg3NSA1OC4wMTU2MjUgMjcuMjk2ODc1IApRIDU4LjAxNTYyNSAxNC40MDYyNSA1MS43ODEyNSA2LjQ4NDM3NSAKUSA0NS41NjI1IC0xLjQyMTg3NSAzNS41OTM3NSAtMS40MjE4NzUgClEgMjkuNTkzNzUgLTEuNDIxODc1IDI1LjI2NTYyNSAwLjk1MzEyNSAKUSAyMC45NTMxMjUgMy4zMjgxMjUgMTguMTA5Mzc1IDguMjAzMTI1IAp6Ck0gNDguNjg3NSAyNy4yOTY4NzUgClEgNDguNjg3NSAzNy4yMDMxMjUgNDQuNjA5Mzc1IDQyLjg0Mzc1IApRIDQwLjUzMTI1IDQ4LjQ4NDM3NSAzMy40MDYyNSA0OC40ODQzNzUgClEgMjYuMjY1NjI1IDQ4LjQ4NDM3NSAyMi4xODc1IDQyLjg0Mzc1IApRIDE4LjEwOTM3NSAzNy4yMDMxMjUgMTguMTA5Mzc1IDI3LjI5Njg3NSAKUSAxOC4xMDkzNzUgMTcuMzkwNjI1IDIyLjE4NzUgMTEuNzUgClEgMjYuMjY1NjI1IDYuMTA5Mzc1IDMzLjQwNjI1IDYuMTA5Mzc1IApRIDQwLjUzMTI1IDYuMTA5Mzc1IDQ0LjYwOTM3NSAxMS43NSAKUSA0OC42ODc1IDE3LjM5MDYyNSA0OC42ODc1IDI3LjI5Njg3NSAKegoiIGlkPSJEZWphVnVTYW5zLTcwIi8+CiAgICAgPHBhdGggZD0iTSA1MC45ODQzNzUgLTE2LjYwOTM3NSAKTCA1MC45ODQzNzUgLTIzLjU3ODEyNSAKTCAtMC45ODQzNzUgLTIzLjU3ODEyNSAKTCAtMC45ODQzNzUgLTE2LjYwOTM3NSAKegoiIGlkPSJEZWphVnVTYW5zLTVmIi8+CiAgICAgPHBhdGggZD0iTSA5LjQyMTg3NSA3NS45ODQzNzUgCkwgMTguNDA2MjUgNzUuOTg0Mzc1IApMIDE4LjQwNjI1IDAgCkwgOS40MjE4NzUgMCAKegoiIGlkPSJEZWphVnVTYW5zLTZjIi8+CiAgICAgPHBhdGggZD0iTSAzNC4yODEyNSAyNy40ODQzNzUgClEgMjMuMzkwNjI1IDI3LjQ4NDM3NSAxOS4xODc1IDI1IApRIDE0Ljk4NDM3NSAyMi41MTU2MjUgMTQuOTg0Mzc1IDE2LjUgClEgMTQuOTg0Mzc1IDExLjcxODc1IDE4LjE0MDYyNSA4LjkwNjI1IApRIDIxLjI5Njg3NSA2LjEwOTM3NSAyNi43MDMxMjUgNi4xMDkzNzUgClEgMzQuMTg3NSA2LjEwOTM3NSAzOC43MDMxMjUgMTEuNDA2MjUgClEgNDMuMjE4NzUgMTYuNzAzMTI1IDQzLjIxODc1IDI1LjQ4NDM3NSAKTCA0My4yMTg3NSAyNy40ODQzNzUgCnoKTSA1Mi4yMDMxMjUgMzEuMjAzMTI1IApMIDUyLjIwMzEyNSAwIApMIDQzLjIxODc1IDAgCkwgNDMuMjE4NzUgOC4yOTY4NzUgClEgNDAuMTQwNjI1IDMuMzI4MTI1IDM1LjU0Njg3NSAwLjk1MzEyNSAKUSAzMC45NTMxMjUgLTEuNDIxODc1IDI0LjMxMjUgLTEuNDIxODc1IApRIDE1LjkyMTg3NSAtMS40MjE4NzUgMTAuOTUzMTI1IDMuMjk2ODc1IApRIDYgOC4wMTU2MjUgNiAxNS45MjE4NzUgClEgNiAyNS4xNDA2MjUgMTIuMTcxODc1IDI5LjgyODEyNSAKUSAxOC4zNTkzNzUgMzQuNTE1NjI1IDMwLjYwOTM3NSAzNC41MTU2MjUgCkwgNDMuMjE4NzUgMzQuNTE1NjI1IApMIDQzLjIxODc1IDM1LjQwNjI1IApRIDQzLjIxODc1IDQxLjYwOTM3NSAzOS4xNDA2MjUgNDUgClEgMzUuMDYyNSA0OC4zOTA2MjUgMjcuNjg3NSA0OC4zOTA2MjUgClEgMjMgNDguMzkwNjI1IDE4LjU0Njg3NSA0Ny4yNjU2MjUgClEgMTQuMTA5Mzc1IDQ2LjE0MDYyNSAxMC4wMTU2MjUgNDMuODkwNjI1IApMIDEwLjAxNTYyNSA1Mi4yMDMxMjUgClEgMTQuOTM3NSA1NC4xMDkzNzUgMTkuNTc4MTI1IDU1LjA0Njg3NSAKUSAyNC4yMTg3NSA1NiAyOC42MDkzNzUgNTYgClEgNDAuNDg0Mzc1IDU2IDQ2LjM0Mzc1IDQ5Ljg0Mzc1IApRIDUyLjIwMzEyNSA0My43MDMxMjUgNTIuMjAzMTI1IDMxLjIwMzEyNSAKegoiIGlkPSJEZWphVnVTYW5zLTYxIi8+CiAgICA8L2RlZnM+CiAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1NS41Mjg3NSAzMC4xMDU4NzUpc2NhbGUoMC4xIC0wLjEpIj4KICAgICA8dXNlIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTcwIi8+CiAgICAgPHVzZSB4PSI2My40NzY1NjIiIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTYzIi8+CiAgICAgPHVzZSB4PSIxMTguNDU3MDMxIiB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy01ZiIvPgogICAgIDx1c2UgeD0iMTY4LjQ1NzAzMSIgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtNjMiLz4KICAgICA8dXNlIHg9IjIyMy40Mzc1IiB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy02YyIvPgogICAgIDx1c2UgeD0iMjUxLjIyMDcwMyIgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtNjEiLz4KICAgICA8dXNlIHg9IjMxMi41IiB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy03MyIvPgogICAgIDx1c2UgeD0iMzY0LjU5OTYwOSIgeGxpbms6aHJlZj0iI0RlamFWdVNhbnMtNzMiLz4KICAgICA8dXNlIHg9IjQxNi42OTkyMTkiIHhsaW5rOmhyZWY9IiNEZWphVnVTYW5zLTNkIi8+CiAgICAgPHVzZSB4PSI1MDAuNDg4MjgxIiB4bGluazpocmVmPSIjRGVqYVZ1U2Fucy0zMSIvPgogICAgPC9nPgogICA8L2c+CiAgPC9nPgogPC9nPgogPGRlZnM+CiAgPGNsaXBQYXRoIGlkPSJwNDM0NzRhYWM3MCI+CiAgIDxyZWN0IGhlaWdodD0iNzYuODU2IiB3aWR0aD0iOTMuODkiIHg9IjM2Ljc5IiB5PSIzNi4zODQiLz4KICA8L2NsaXBQYXRoPgogPC9kZWZzPgo8L3N2Zz4K">
+
 
         <br>
         <br>6. The sidebar on the right will show your current selection of node(s) and their filter(s)<br>
@@ -222,7 +223,7 @@
             <br> graphDic: <input type="text" id="graphDic" style="width: 30%;">
             <input type="submit" id="graphDicSubmit" style = "display: inline-block;font-size: 15px;">
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <input id="newCanvas" type="checkbox" onchange="toggleCanvas(this)"> Toogle Canvas
+            <input id="newCanvas" type="checkbox" onchange="toggleCanvas(this)" style="display:none">
         </div>
 <!--         <div id = "nodeDic" style ="display: block" treeContent = {{nodeDic}}>
                 {{nodeDic}}

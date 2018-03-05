@@ -33,93 +33,31 @@ function constructQuery(){
 var tableChecked = [];
 var chartarray;
 function readDashboardOutput(query){
-    fname = query["dataset"]+"_"+query["xAxis"]+"_"+query["algorithm"]
-            +"_"+query["metric"]+"_ic"+query["ic"]+"_ip"+query["ip"]+"_k"+query["k"]+".json"
-    //Determine which canvas is currently on
-    if(document.getElementById("newCanvas").checked){
-        console.log(fname)
-        var nodeDic = ""
-        var json_pathloc = "http://"+window.location.hostname+":"+window.location.port+"/generated_dashboards/"+fname
-        $.ajax({
-            url: json_pathloc,
-            type: "GET",
-            dataType: "text",
-            success: function(data) {
-                data = data.replace(/\\"/g, '"')
+    var fname = 'mushroom_type_frontierGreedy_euclidean_ic0.2_ip0.1_k20.json'
+    console.log(fname)
+    var nodeDic = ""
+    var json_pathloc = "http://"+window.location.hostname+":"+window.location.port+"/generated_dashboards/"+fname
+    $.ajax({
+        url: json_pathloc,
+        type: "GET",
+        dataType: "text",
+        success: function(data) {
+            getNodeEdgeListThenDraw(data);
+        }
+    })
 
-                //console.log(data)
-                chartarray = JSON.parse(data)
-
-                console.log(chartarray)
-
-                var len = Object.keys(chartarray).length;
-                var rownum = len/5 ;
-                var colnum = 5
-                var table = document.getElementById('charttable'), tr, td, row, cell;
-                table.innerHTML = ''
-                tableChecked = [];
-                for (var i = 0; i < 20; i++){
-                    tableChecked.push(0);
-                }
-                for (row = 0; row < rownum; row++) {
-                    tr = document.createElement('tr');
-                    tr.style = "border: 1px solid LightGray;border-collapse: separate"
-                    for (cell = 0; cell < colnum; cell++) {
-                        var tdId = 'td' + (row * colnum + cell).toString();
-                        td = document.createElement('td');
-                        td.setAttribute('id',tdId);
-                        //td.setAttribute('height', 20%);
-                        tr.appendChild(td);
-                        td.style = "border: 3px solid grey;border-collapse: separate; align='center' "
-
-                        td.innerHTML = '<p style = "font-size:10px;color:#787878">'+(row * colnum + cell).toString()+'</p><div id="c' +(row * colnum + cell).toString()+'" style = "border-collapse: separate;" onclick="showfilter(this)"></div>'
-                    }
-                    table.appendChild(tr);
-                }
-                console.log(len)
-                var table = document.getElementById("charttable");
-
-                var cell_idx = 0;
-                for(cell_idx = 0; cell_idx < len; cell_idx++){
-                    //render_chart(cell_idx,chartarray)
-                    var svgString = generateSVG(cell_idx,chartarray)
-                    var cellid = 'c'+ cell_idx.toString();
-                    var currentcell = document.getElementById(cellid);
-                    //console.log(svgString)
-                    currentcell.innerHTML = svgString
-                    }
-                }
-
-        })
-    }
-    // Data Upload after options selection
-    else{
-        console.log(fname)
-        var nodeDic = ""
-        var json_pathloc = "http://"+window.location.hostname+":"+window.location.port+"/generated_dashboards/"+fname
-        $.ajax({
-            url: json_pathloc,
-            type: "GET",
-            dataType: "text",
-            success: function(data) {
-                getNodeEdgeListThenDraw(data);
-            }
-        })
-        var div = document.getElementById("additionalInfoPanel")
-        div.innerHTML = "<a href=\""+json_pathloc+"\">"+"filename:"+fname+"</a>"
-    }
 
 }
-// function constructQueryCallback(){
-//     var query = constructQuery();
-//     $.post('/postQuery', query ,'application/json')
-//     .success(
-//         function(data){
-//             // results = JSON.parse(data);
-//             console.log(data)
-//             // Do stuff 
-//     })
-// }
+ function constructQueryCallback(){
+     var query = constructQuery();
+     $.post('/postQuery', query ,'application/json')
+     .success(
+         function(data){
+             // results = JSON.parse(data);
+             console.log(data)
+             // Do stuff
+     })
+ }
 
 function populateOptions(list,selector)
 {
@@ -246,32 +184,123 @@ function IsJsonString(str) {
     }
     return true;
 }
-
-function toggleCanvas(element)
-{
-    if (element.checked){
-        document.getElementById('mynetwork').style.display = 'none';
-        document.getElementById('mynetwork2').style.display = '';
-        if(opened){
-            document.getElementById("mySidebar2").style.width = "25%";
-            document.getElementById("mySidebar2").style.display = "block";
-            document.getElementById("mySidebar").style.display = "none";
-        }
-        document.getElementById('right-sidebar').style.display = 'none';
-        document.getElementById('right-sidebar2').style.display = '';
-    }
-    else{
-        document.getElementById('mynetwork').style.display = '';
-        document.getElementById('mynetwork2').style.display = 'none';
-        if(opened){
-            document.getElementById("mySidebar").style.width = "25%";
-            document.getElementById("mySidebar").style.display = "block";
-            document.getElementById("mySidebar2").style.display = "none";
-        }
-        document.getElementById('right-sidebar').style.display = '';
-        document.getElementById('right-sidebar2').style.display = 'none';
-    }
+var userChanged = false;
+var treeDrawn = false;
+var tableDrawn = false;
+function changeUser(){
+    userChanged = true;
+    treeDrawn = false;
+    tableDrawn = false;
 }
+
+function drawTree(){
+
+    document.getElementById('mynetwork').style.display = '';
+    document.getElementById('mynetwork2').style.display = 'none';
+
+    document.getElementById('right-sidebar').style.display = '';
+    document.getElementById('right-sidebar2').style.display = 'none';
+    if ((!userChanged)&treeDrawn) return;
+    document.getElementById('interested-in').innerHTML = '';
+    document.getElementById('not-interested-in').innerHTML = '';
+    constructQueryWithArgs("mushroom","type","frontierGreedy","euclidean",0.2,0.1,20)
+    treeDrawn = true;
+    userChanged = false;
+}
+function drawTable(){
+
+    document.getElementById('mynetwork').style.display = 'none';
+    document.getElementById('mynetwork2').style.display = '';
+
+    document.getElementById('right-sidebar').style.display = 'none';
+    document.getElementById('right-sidebar2').style.display = '';
+    if ((!userChanged)&tableDrawn) return;
+    document.getElementById('selected').innerHTML = '';
+    document.getElementById('notselected').innerHTML = '';
+    fname = 'mushroom_type_frontierGreedy_euclidean_ic0.2_ip0.1_k20.json'
+    console.log(fname)
+        var nodeDic = ""
+        var json_pathloc = "http://"+window.location.hostname+":"+window.location.port+"/generated_dashboards/"+fname
+        $.ajax({
+            url: json_pathloc,
+            type: "GET",
+            dataType: "text",
+            success: function(data) {
+                data = data.replace(/\\"/g, '"')
+
+                //console.log(data)
+                data = ('{\"0\": [{ \"xAxis\": \"0\", \"yAxis\":65.72734196496572},{ \"xAxis\": \"1\", \"yAxis\":34.27265803503427},{\"childrenIndex\":[1, 2, 3, 4, 5], \"populationSize\":1313, \"filter\":\"#\",\"yName\":\"slots_millis_reduces\",\"xName\":\"has_list_fn\"}],\"1\": [{ \"xAxis\": \"0\", \"yAxis\":83.31374853113984},{ \"xAxis\": \"1\", \"yAxis\":16.686251468860164},{\"childrenIndex\":[6, 7, 8], \"populationSize\":851, \"filter\":\"#sexcode$0#\",\"yName\":\"slots_millis_reduces\",\"xName\":\"has_list_fn\"}],\"2\": [{ \"xAxis\": \"0\", \"yAxis\":33.33333333333333},{ \"xAxis\": \"1\", \"yAxis\":66.66666666666666},{\"childrenIndex\":[9, 10, 11], \"populationSize\":462, \"filter\":\"#sexcode$1#\",\"yName\":\"slots_millis_reduces\",\"xName\":\"has_list_fn\"}],\"3\": [{ \"xAxis\": \"0\", \"yAxis\":65.72734196496572},{ \"xAxis\": \"1\", \"yAxis\":34.27265803503427},{\"childrenIndex\":[1, 2, 3, 4, 5], \"populationSize\":1313, \"filter\":\"#\",\"yName\":\"slots_millis_reduces\",\"xName\":\"has_list_fn\"}],\"4\": [{ \"xAxis\": \"0\", \"yAxis\":83.31374853113984},{ \"xAxis\": \"1\", \"yAxis\":16.686251468860164},{\"childrenIndex\":[6, 7, 8], \"populationSize\":851, \"filter\":\"#sexcode$0#\",\"yName\":\"slots_millis_reduces\",\"xName\":\"has_list_fn\"}],\"5\": [{ \"xAxis\": \"0\", \"yAxis\":33.33333333333333},{ \"xAxis\": \"1\", \"yAxis\":66.66666666666666},{\"childrenIndex\":[9, 10, 11], \"populationSize\":462, \"filter\":\"#sexcode$1#\",\"yName\":\"slots_millis_reduces\",\"xName\":\"has_list_fn\"}]}')
+                chartarray = JSON.parse(data)
+
+                console.log(chartarray)
+
+                var len = Object.keys(chartarray).length;
+                var rownum = len/5 ;
+                var colnum = 5
+                var table = document.getElementById('charttable'), tr, td, row, cell;
+                table.innerHTML = ''
+                tableChecked = [];
+                for (var i = 0; i < 20; i++){
+                    tableChecked.push(0);
+                }
+                for (row = 0; row < rownum; row++) {
+                    tr = document.createElement('tr');
+                    tr.style = "border: 1px solid LightGray;border-collapse: separate"
+                    for (cell = 0; cell < colnum; cell++) {
+                        var tdId = 'td' + (row * colnum + cell).toString();
+                        td = document.createElement('td');
+                        td.setAttribute('id',tdId);
+                        //td.setAttribute('height', 20%);
+                        tr.appendChild(td);
+                        td.style = "border: 3px solid grey;border-collapse: separate; align='center' "
+
+                        td.innerHTML = /*'<p style = "font-size:10px;color:#787878">'+(row * colnum + cell).toString()+'</p>'*/'<div id="c' +(row * colnum + cell).toString()+'" style = "border-collapse: separate;" onclick="showfilter(this)"></div>'
+                    }
+                    table.appendChild(tr);
+                }
+                console.log(len)
+                var table = document.getElementById("charttable");
+
+                var cell_idx = 0;
+                for(cell_idx = 0; cell_idx < len; cell_idx++){
+                    //render_chart(cell_idx,chartarray)
+                    var svgString = generateSVG(cell_idx,chartarray)
+                    var cellid = 'c'+ cell_idx.toString();
+                    var currentcell = document.getElementById(cellid);
+                    //console.log(svgString)
+                    currentcell.innerHTML = svgString
+                    }
+                }
+
+        })
+    tableDrawn = true;
+    userChanged = false;
+}
+//function toggleCanvas(element)
+//{
+//    if (element.checked){
+//        document.getElementById('mynetwork').style.display = 'none';
+//        document.getElementById('mynetwork2').style.display = '';
+//        if(opened){
+//            document.getElementById("mySidebar2").style.width = "25%";
+//            document.getElementById("mySidebar2").style.display = "block";
+//            document.getElementById("mySidebar").style.display = "none";
+//        }
+//        document.getElementById('right-sidebar').style.display = 'none';
+//        document.getElementById('right-sidebar2').style.display = '';
+//    }
+//    else{
+//        document.getElementById('mynetwork').style.display = '';
+//        document.getElementById('mynetwork2').style.display = 'none';
+//        if(opened){
+//            document.getElementById("mySidebar").style.width = "25%";
+//            document.getElementById("mySidebar").style.display = "block";
+//            document.getElementById("mySidebar2").style.display = "none";
+//        }
+//        document.getElementById('right-sidebar').style.display = '';
+//        document.getElementById('right-sidebar2').style.display = 'none';
+//    }
+//}
 
 
 // Direct input graphDic submission form 
@@ -283,6 +312,7 @@ $("#graphDicSubmit").click(function(){
         console.log(chartarray)
 
         var len = Object.keys(chartarray).length;
+
         var rownum = len/5 ;
         var colnum = 5
         var table = document.getElementById('charttable'), tr, td, row, cell;
@@ -310,9 +340,11 @@ $("#graphDicSubmit").click(function(){
         var table = document.getElementById("charttable");
 
         var cell_idx = 0;
+
         for(cell_idx = 0; cell_idx < len; cell_idx++){
             //render_chart(cell_idx,chartarray)
-            var svgString = generateSVG(cell_idx,chartarray)
+
+            var svgString = generateSVG(cell_idx,chartarray/*, xLabel, yLabel*/);
             var cellid = 'c'+ cell_idx.toString();
             var currentcell = document.getElementById(cellid);
             //console.log(svgString)
@@ -408,7 +440,7 @@ function showfilter(cell){
     
 }
 
-function generateSVG(cell_idx, chartarray) {
+function generateSVG(cell_idx, chartarray/*, xLabel, yLabel*/) {
 	var svgString = ''
 	var l = chartarray[cell_idx].length-1
     var yVals = []
@@ -419,6 +451,9 @@ function generateSVG(cell_idx, chartarray) {
         yVals.push(dataset[i]['yAxis']);
         xAttrs.push(dataset[i]['xAxis'])
         var t = chartarray[cell_idx][l]["filter"]
+        var yName = chartarray[cell_idx][l]["yName"]
+        var xName = chartarray[cell_idx][l]["xName"]
+
         if (t=="#")
               t="root"
         else{
@@ -436,7 +471,9 @@ function generateSVG(cell_idx, chartarray) {
         data: {
             "yVals" : JSON.stringify(yVals),
             "xAttrs" : JSON.stringify(xAttrs),
-            "title" : JSON.stringify(t)
+            "title" : JSON.stringify(t),
+            "yName" : JSON.stringify(yName),
+            "xName" : JSON.stringify(xName)
         },
         success: function(data){
             svgString = data
