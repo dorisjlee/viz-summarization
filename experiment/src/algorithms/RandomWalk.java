@@ -16,7 +16,7 @@ import lattice.Node;
 public class RandomWalk extends Traversal{
 	
 	public RandomWalk() {
-		super("Random Walk in Lattice");
+		super("random_walk");
 	}
 	
 	public void pickVisualizations(Experiment exp) {

@@ -28,46 +28,44 @@ public class UserStudyBaseline {
 	   Experiment exp;
 	   int k =10;
 	   Experiment.experiment_name="../ipynb/dashboards/json/UserStudyBaseline";
-	   //String dataset_name="Turn";
-	   // Dataset #1 : Turn
-//	   String dataset_name = "turn";
-//	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList( "is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
-//			   															"has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
-//	   String yAxis = "slots_millis_reduces";
-//	   String xAxis = "has_list_fn";
-//	   String aggType = "SUM";
-//	   Distance dist = new Euclidean();
-	   
-//	   // Dataset #2 : Police Stop
-//	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList(
-//		"driver_gender", "driver_race", "search_conducted",
-//		"contraband_found", "is_arrested", "stop_duration", 
-//		"stop_time_of_day", "driver_age_category"));
-//	   // "speeding_violations", "other_violations"
-//	   //"registration_plates_violations", "moving_violation","cell_phone_violations"
-//	   //"stop_outcome", 
-//	   String dataset_name = "ct_police_stop";
-//	   String yAxis = "id";
-//	   String xAxis = "is_arrested";//"stop_outcome", 
-//	   String aggType = "COUNT";
-//	   Distance dist = new Euclidean();
-	   
-	   // Dataset #3 : Mushroom 
-	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("type","cap_shape", "cap_surface" , "cap_color" , "bruises" , "odor"));
-	   String dataset_name = "mushroom";
-	   String yAxis = "type";
-	   String xAxis = "type";//"cap_surface"; 
-	   String aggType = "COUNT";
+	   String dataset_name="titanic";
+	   ArrayList<String> groupby = null;
+	   String yAxis = null;
+	   String xAxis = null; 
+	   String aggType = null;
 	   Distance dist = new Euclidean();
-	   
-	   // Dataset #3 : Titanic 
-//	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("survived","sexcode","pc_class"));
-//	   String dataset_name = "titanic";
-//	   String yAxis = "id";
-//	   String xAxis = "survived"; 
-//	   String aggType = "COUNT";
-//	   Distance dist = new Euclidean();
-	   
+	   // Dataset #1 : Turn
+	   if (dataset_name.equals("turn")){
+		   	groupby = new ArrayList<String>(Arrays.asList( "is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
+				"has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
+			yAxis = "slots_millis_reduces";
+			xAxis = "has_list_fn";
+			aggType = "SUM";
+	   }else if (dataset_name.equals("ct_police_stop")) {
+		   // Dataset #2 : Police Stop
+		   groupby = new ArrayList<String>(Arrays.asList(
+			"driver_gender", "driver_race", "search_conducted",
+			"contraband_found", "is_arrested", "stop_duration", 
+			"stop_time_of_day", "driver_age_category"));
+		   // "speeding_violations", "other_violations"
+		   //"registration_plates_violations", "moving_violation","cell_phone_violations"
+		   //"stop_outcome", 
+		   yAxis = "id";
+		   xAxis = "is_arrested";//"stop_outcome", 
+		   aggType = "COUNT";
+	   }else if (dataset_name.equals("mushroom")) {
+		   // Dataset #3 : Mushroom 
+		   groupby = new ArrayList<String>(Arrays.asList("type","cap_shape", "cap_surface" , "cap_color" , "bruises" , "odor"));
+		   yAxis = "type";
+		   xAxis = "type";//"cap_surface"; 
+		   aggType = "COUNT";
+	   }else if (dataset_name.equals("titanic")) {
+		   // Dataset #3 : Titanic 
+		   groupby = new ArrayList<String>(Arrays.asList("survived","sexcode","pc_class"));
+		   yAxis = "id";
+		   xAxis = "survived"; 
+		   aggType = "COUNT";
+	   }
 	   	   
 	   Traversal ourAlgo = new BreadthFirstPicking();
 	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.9,false);

@@ -23,7 +23,7 @@ public class BaselineKmeans extends Traversal
 {
 	public BaselineKmeans() 
 	{
-		super("Kmeans Clutering");
+		super("kmeans");
 	}
 	
 	public void pickVisualizations(Experiment exp) 

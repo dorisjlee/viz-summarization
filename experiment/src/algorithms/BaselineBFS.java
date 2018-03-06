@@ -19,7 +19,7 @@ public class BaselineBFS extends Traversal
 {
 	public BaselineBFS() 
 	{
-		super("Breadth First Search");
+		super("levelwiseBFS");
 	}
 	
 	public void pickVisualizations(Experiment exp) 

@@ -65,11 +65,9 @@ public class VizOutput {
 		// Generating node dictionary where keys are all sequentially ordered (for table layout)
 		ArrayList<String> xAttr = exp.uniqueAttributeKeyVals.get(exp.xAxisName);
 		String nodeDic = "{";
-		//nodeDic+="\\\"label\\\":[{\\\"xName\\\":\\\""+exp.xAxisName+"\\\",\\\"yName\\\":\\\""+exp.aggFunc+"("+exp.yAxisName+")"+"\\\"}],";
 		for (int i=0; i< exp.dashboard.maxSubgraph.size();i++) {
 			int selectedNodeID = exp.dashboard.maxSubgraph.get(i);
-			//System.out.println("i="+i+",nodeID:"+selectedNodeID);
-			nodeDic+= "\\\""+(selectedNodeID)+"\\\": [";
+			nodeDic+= "\\\""+(i)+"\\\": [";
 			Node selectedNode = exp.lattice.nodeList.get(selectedNodeID);
 			ArrayList<Double> nodeVal = exp.lattice.id2MetricMap.get(selectedNode.id);
 			for (int ix=0; ix<xAttr.size();ix++) {

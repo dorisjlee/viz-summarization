@@ -17,7 +17,7 @@ import lattice.Lattice;
 public class BreadthFirstPicking extends LookAheadPicking{
 	Experiment exp;
 	public BreadthFirstPicking() {
-		super("Breadth First Picking");
+		super("breadth_first_picking");
 	}
 	
 	/**
