@@ -38,30 +38,40 @@ public class BaselineBFS extends Traversal
 	       ArrayList<Integer> dashboard = new ArrayList<Integer>();
 	       dashboard.add(0); // Adding root
 	       // Stop when dashboard exceeds desired size k 
+//	       System.out.println("lattice.nodelist.size():"+lattice.nodeList.size());
 	       while(dashboard.size()<k && dashboard.size() < lattice.nodeList.size())
 	       {
-	    	   ArrayList<Integer> currentFrontier = RandomWalk.getFrontier(lattice, dashboard);
-	          
-	           if (currentFrontier.size() >= k) 
+		    	   ArrayList<Integer> currentFrontier = RandomWalk.getFrontier(lattice, dashboard);
+//		    	   System.out.print("currentFrontier.size():");
+//		    	   System.out.println(currentFrontier.size());
+	           if (currentFrontier.size() >= k-dashboard.size()) 
 	           {
-	        	   for(int it = 0; it < k; it++)
-	        	   {
-	        		   dashboard.add(currentFrontier.get(it));
-	        	   }
+//	        	   		System.out.println("Case 1");
+//	        	   		System.out.println(k);
+//	        	   		System.out.println(k-dashboard.size());
+		        	   for(int it = 0; it < k-dashboard.size(); it++)
+		        	   {
+		        		   //System.out.println("it:"+it);
+		        		   dashboard.add(currentFrontier.get(it));
+		        		   //System.out.println("dashboardsize:"+dashboard.size());
+		        	   }
 	           }
 	           else
 	           {
-	        	   for(int it = 0; it < currentFrontier.size(); it++)
-	        	   {
-	        		   dashboard.add(currentFrontier.get(it));
-	        	   }
+	        	   		//System.out.println("Case 2");
+		        	   for(int it = 0; it < currentFrontier.size(); it++)
+		        	   {
+		        		   dashboard.add(currentFrontier.get(it));
+		        	   }
 	           }
+//	           System.out.print("dashboard.size():");
+//	    	   	   System.out.println(dashboard.size());
+//	    	   	   System.out.println("------------");
 	       }
-//	       for(int i =0; i < dashboard.size(); i++)
-//	       {
-//	    	   System.out.println(dashboard.get(i));
-//	       }
-	       
+	       for(int i =0; i < dashboard.size(); i++)
+	       {
+	    	   		System.out.println(dashboard.get(i));
+	       }
 	       return dashboard;
 	}
 	public static ArrayList<Integer> getFrontier(Lattice lattice,ArrayList<Integer> dashboard) 
