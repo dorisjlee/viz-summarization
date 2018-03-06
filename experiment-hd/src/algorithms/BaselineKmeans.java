@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
+import java.lang.*;
 
 import distance.Distance;
 import distance.Euclidean;
@@ -67,28 +68,38 @@ public class BaselineKmeans extends Traversal
 		
 		Dataset[] clusters = km.cluster(data);
 		int[] ids = new int[k];
-		
-		for (Map.Entry<ArrayList<Double>, String> entry : lattice.Metric2idMap.entrySet())
+		int[] mins = new int[k];
+		for(it = 0; it < k; it++)
 		{
-			ArrayList<Double> key = entry.getKey();
-			String value = entry.getValue();
-			
-			for(it = 0; it <clusters.length; it++)
+			mins[it] = 1000000;
+		}
+		
+		for(it = 0; it <clusters.length; it++)
+		{
+			for(int ip = 0; ip < clusters[it].size(); ip++)
 			{
-				Instance x = clusters[it].instance(0);
+				Instance x = clusters[it].instance(ip);
+				for (Map.Entry<ArrayList<Double>, String> entry: lattice.Metric2idMap.entrySet())
+				{
+					ArrayList<Double> key = entry.getKey();
+					String value = entry.getValue();
+					double[] target = new double[key.size()];
+					for (int sd = 0; sd < target.length; sd++) 
+					{
+					    target[sd] = key.get(sd);
+					}
+					Instance y = new DenseInstance(target);
+					EuclideanDistance euclid = new EuclideanDistance();
+					double dist = euclid.calculateDistance(x, y);
+					int count = value.length() - value.replace("#", "").length();
+					if(dist < 1.0 && count < mins[it])
+					{
+						ids[it] = lattice.id2IDMap.get(value);
+						mins[it] = count;
+					}
+				}
 				
-				double[] target = new double[key.size()];
-				for (int sd = 0; sd < target.length; sd++) 
-				{
-				    target[sd] = key.get(sd);
-				}
-				Instance y = new DenseInstance(target);
-				EuclideanDistance euclid = new EuclideanDistance();
-				double dist = euclid.calculateDistance(x, y);
-				if(dist < 1.0)
-				{
-					ids[it] = lattice.id2IDMap.get(value);
-				}
+				
 			}
 		}
 		
