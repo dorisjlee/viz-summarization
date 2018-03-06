@@ -57,10 +57,10 @@ public class BaselineBFS extends Traversal
 	        	   }
 	           }
 	       }
-	       for(int i =0; i < dashboard.size(); i++)
-	       {
-	    	   System.out.println(dashboard.get(i));
-	       }
+//	       for(int i =0; i < dashboard.size(); i++)
+//	       {
+//	    	   System.out.println(dashboard.get(i));
+//	       }
 	       
 	       return dashboard;
 	}

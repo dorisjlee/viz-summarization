@@ -28,15 +28,17 @@ public class UserStudyBaseline {
 	   Experiment exp;
 	   int k =10;
 	   Experiment.experiment_name="../ipynb/dashboards/json/UserStudyBaseline";
+	   //String dataset_name="Turn";
 	   // Dataset #1 : Turn
-	   String dataset_name = "turn";
-	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList( "is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
-			   	"has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
-	   String yAxis = "slots_millis_reduces";
-	   String xAxis = "has_list_fn";
-	   String aggType = "SUM";
-	   Distance dist = new Euclidean();
-	   // Dataset #2 : Police Stop
+//	   String dataset_name = "turn";
+//	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList( "is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
+//			   															"has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
+//	   String yAxis = "slots_millis_reduces";
+//	   String xAxis = "has_list_fn";
+//	   String aggType = "SUM";
+//	   Distance dist = new Euclidean();
+	   
+//	   // Dataset #2 : Police Stop
 //	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList(
 //		"driver_gender", "driver_race", "search_conducted",
 //		"contraband_found", "is_arrested", "stop_duration", 
@@ -51,12 +53,12 @@ public class UserStudyBaseline {
 //	   Distance dist = new Euclidean();
 	   
 	   // Dataset #3 : Mushroom 
-//	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("type","cap_shape", "cap_surface" , "cap_color" , "bruises" , "odor"));
-//	   String dataset_name = "mushroom";
-//	   String yAxis = "type";
-//	   String xAxis = "cap_surface"; 
-//	   String aggType = "COUNT";
-//	   Distance dist = new Euclidean();
+	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("type","cap_shape", "cap_surface" , "cap_color" , "bruises" , "odor"));
+	   String dataset_name = "mushroom";
+	   String yAxis = "type";
+	   String xAxis = "type";//"cap_surface"; 
+	   String aggType = "COUNT";
+	   Distance dist = new Euclidean();
 	   
 	   // Dataset #3 : Titanic 
 //	   ArrayList<String> groupby = new ArrayList<String>(Arrays.asList("survived","sexcode","pc_class"));
