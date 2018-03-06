@@ -21,7 +21,7 @@ public class Euclidean implements Distance{
         }
         return Math.sqrt(distance);
     }
-	public double computeNormalizedDistance(ArrayList<Double> viz1, ArrayList<Double> viz2, Integer parentSize, Integer childSize) {
+	public double computeNormalizedDistance(ArrayList<Double> viz1, ArrayList<Double> viz2, Double parentSize, Double childSize) {
 		return (double) childSize/(double) parentSize * computeDistance(viz1, viz2);
 	}
 }

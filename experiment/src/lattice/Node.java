@@ -10,12 +10,12 @@ public class Node
     //public ArrayList<String> filters; 
     public ArrayList<Integer> child_list; // List of node IDs of the children
     public ArrayList<Double> dist_list; // edge weights (distance) of this node to all the children
-    Integer population_size;
+    Double population_size;
     
-    public Integer getPopulation_size() {
+    public Double getPopulation_size() {
 		return population_size;
 	}
-	public void setPopulation_size(Integer population_size) {
+	public void setPopulation_size(Double population_size) {
 		this.population_size = population_size;
 	}
 		

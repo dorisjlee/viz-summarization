@@ -26,7 +26,7 @@ public class BaselineBFS extends Traversal
 	{
 		this.exp = exp;
 		this.lattice = exp.lattice;
-		System.out.println("---------------- Breadth First Search -----------------");
+		System.out.println("---------------- Levelwise Breadth First Search -----------------");
 		ArrayList<Integer> rwResult = bfs(lattice, exp.k);
 		exp.dashboard.maxSubgraph= rwResult;
 		exp.dashboard.maxSubgraphUtility=exp.dashboard.computeSubGraphUtility(rwResult);
@@ -68,10 +68,10 @@ public class BaselineBFS extends Traversal
 //	    	   	   System.out.println(dashboard.size());
 //	    	   	   System.out.println("------------");
 	       }
-	       for(int i =0; i < dashboard.size(); i++)
-	       {
-	    	   		System.out.println(dashboard.get(i));
-	       }
+//	       for(int i =0; i < dashboard.size(); i++)
+//	       {
+//	    	   		System.out.println(dashboard.get(i));
+//	       }
 	       return dashboard;
 	}
 	public static ArrayList<Integer> getFrontier(Lattice lattice,ArrayList<Integer> dashboard) 
