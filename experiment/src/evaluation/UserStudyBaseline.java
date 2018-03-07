@@ -27,7 +27,7 @@ public class UserStudyBaseline {
 	   Experiment exp;
 	   int k =10;
 	   Experiment.experiment_name="../ipynb/dashboards/json/UserStudyBaseline";
-	   String dataset_name="ct_police_stop";
+	   String dataset_name="mushroom";
 	   ArrayList<String> groupby = null;
 	   String yAxis = null;
 	   String xAxis = null; 
@@ -68,18 +68,18 @@ public class UserStudyBaseline {
 	   exp.setAlgo(ourAlgo);
 	   exp.runOutput(exp);
 	   
-//	   Traversal clustering = new BaselineKmeans();
-//	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.001,false);
-//	   exp.setAlgo(clustering);
-//	   exp.runTableLayoutOutput(exp);   
-//	   
-//	   Traversal BBFS = new BaselineBFS();
-//	   exp.setAlgo(BBFS);
-//	   exp.runTableLayoutOutput(exp);   
-//	   
-//	   Traversal randWalk = new RandomWalk();
-//	   exp.setAlgo(randWalk);
-//	   exp.runTableLayoutOutput(exp);   
+	   Traversal clustering = new BaselineKmeans();
+	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.001,false);
+	   exp.setAlgo(clustering);
+	   exp.runTableLayoutOutput(exp);   
+	   
+	   Traversal BBFS = new BaselineBFS();
+	   exp.setAlgo(BBFS);
+	   exp.runTableLayoutOutput(exp);   
+	   
+	   Traversal randWalk = new RandomWalk();
+	   exp.setAlgo(randWalk);
+	   exp.runTableLayoutOutput(exp);   
 	   
 	}
 }
