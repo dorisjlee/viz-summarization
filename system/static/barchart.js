@@ -116,11 +116,11 @@ function draw(node,edge) {
 
             if(totalclick[node[i].id]==3){
                 //var currNode = node_dataset.get(i);
-                document.getElementById('interested-in').innerHTML+='<tr>'+'<td style="color:#368332">'+ node[i].id+'<td>'+ '<td style="color:#368332"> '+node[i].filterVal+'<td> '+'<tr>';
+                document.getElementById('interested-in').innerHTML+='<tr>'+'<td style="color:#368332"> '+node[i].filterVal+'<td> '+'<tr>';
             }
             else if (totalclick[node[i].id]==2){
                 //var currNode = node_dataset.get(i);
-                document.getElementById('not-interested-in').innerHTML+='<tr>'+'<td style="color:#ff0000">'+ node[i].id+'<td>'+ '<td style="color:#ff0000"> '+node[i].filterVal+'<td> '+'<tr>';
+                document.getElementById('not-interested-in').innerHTML+='<tr>'+'<td style="color:#ff0000"> '+node[i].filterVal+'<td> '+'<tr>';
             }
         }
 

@@ -60,6 +60,7 @@ def getNodeEdgeList():
     nodeDic = json.loads(request.form['nodeDic'])
     
   G = Lattice()
+
   node = G.generateNode(nodeDic)
   edge = G.generateEdge(nodeDic)
   return jsonify(edge,node)
@@ -139,9 +140,9 @@ def index():
     print "ret: "
     '''
     all_tables = getTables()
-    # dummy example 
-    nodeDic, node, edge= getTreeJSON()
-    
+    # dummy example
+    #nodeDic, node, edge= getTreeJSON()
+
     # column_name = [""]
     # select_table_name = str(request.form.get('table_select'))
     # session['select_table_name'] = select_table_name

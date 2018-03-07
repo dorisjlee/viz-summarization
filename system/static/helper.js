@@ -5,7 +5,7 @@ function constructQueryWithArgs(dataset,xAxis,algorithm,metric,ic,ip,k){
         "algorithm": algorithm,
         "metric": metric,
         "ic":parseFloat(ic).toFixed(1),
-        "ip": parseFloat(ip).toFixed(1),
+        "ip": ip,
         "k": k,
         "method": "query"
     }
@@ -33,19 +33,93 @@ function constructQuery(){
 var tableChecked = [];
 var chartarray;
 function readDashboardOutput(query){
-    var fname = 'mushroom_type_frontierGreedy_euclidean_ic0.2_ip0.1_k20.json'
+    fname = query["dataset"]+"_"+query["xAxis"]+"_"+query["algorithm"]
+            +"_"+query["metric"]+"_ic"+query["ic"]+"_ip"+query["ip"]+"_k"+query["k"]+".json"
+    //Determine which canvas is currently on
     console.log(fname)
-    var nodeDic = ""
-    var json_pathloc = "http://"+window.location.hostname+":"+window.location.port+"/generated_dashboards/"+fname
-    $.ajax({
-        url: json_pathloc,
-        type: "GET",
-        dataType: "text",
-        success: function(data) {
-            getNodeEdgeListThenDraw(data);
-        }
-    })
+    if(newCanvas == true){
 
+        document.getElementById('mynetwork').style.display = 'none';
+        document.getElementById('mynetwork2').style.display = '';
+
+        document.getElementById('right-sidebar').style.display = 'none';
+        document.getElementById('right-sidebar2').style.display = '';
+        if ((!userChanged)&tableDrawn) return;
+        document.getElementById('selected').innerHTML = '';
+        document.getElementById('notselected').innerHTML = '';
+        console.log(fname)
+        var nodeDic = ""
+        var json_pathloc = "http://"+window.location.hostname+":"+window.location.port+"/generated_dashboards/"+fname
+        $.ajax({
+            url: json_pathloc,
+            type: "GET",
+            dataType: "text",
+            success: function(data) {
+                data = data.replace(/\\"/g, '"')
+
+                //console.log(data)
+                //data = ('{\"0\": [{ \"xAxis\": \"0\", \"yAxis\":8901.330244122693},{ \"xAxis\": \"1\", \"yAxis\":11982.699453217303},{\"childrenIndex\":[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], \"populationSize\":2147483647, \"filter\":\"#\",\"yName\":\"SUM(slots_millis_reduces)\",\"xName\":\"has_list_fn\"}],\"1\": [{ \"xAxis\": \"0\", \"yAxis\":2617.150014320924},{ \"xAxis\": \"1\", \"yAxis\":24.329102935422725},{\"childrenIndex\":[15, 17, 39, 41, 45, 49, 53, 54], \"populationSize\":2147483647, \"filter\":\"#is_profile_query$0#\",\"yName\":\"SUM(slots_millis_reduces)\",\"xName\":\"has_list_fn\"}],\"2\": [{ \"xAxis\": \"0\", \"yAxis\":2522.4267606727904},{ \"xAxis\": \"1\", \"yAxis\":6.6490602244851456},{\"childrenIndex\":[225], \"populationSize\":2147483647, \"filter\":\"#is_profile_query$0#has_distinct$0#\",\"yName\":\"SUM(slots_millis_reduces)\",\"xName\":\"has_list_fn\"}],\"3\": [{ \"xAxis\": \"0\", \"yAxis\":2209.5112668860293},{ \"xAxis\": \"1\", \"yAxis\":10.67315699098313},{\"childrenIndex\":[97, 125], \"populationSize\":2147483647, \"filter\":\"#is_multi_query$0#is_profile_query$0#\",\"yName\":\"SUM(slots_millis_reduces)\",\"xName\":\"has_list_fn\"}],\"4\": [{ \"xAxis\": \"0\", \"yAxis\":2209.5112668860293},{ \"xAxis\": \"1\", \"yAxis\":10.67315699098313},{\"childrenIndex\":[], \"populationSize\":2147483647, \"filter\":\"#is_multi_query$0#is_profile_query$0#is_event_query$1#\",\"yName\":\"SUM(slots_millis_reduces)\",\"xName\":\"has_list_fn\"}],\"5\": [{ \"xAxis\": \"0\", \"yAxis\":2522.4267606727904},{ \"xAxis\": \"1\", \"yAxis\":6.6490602244851456},{\"childrenIndex\":[], \"populationSize\":2147483647, \"filter\":\"#is_profile_query$0#is_event_query$1#has_distinct$0#\",\"yName\":\"SUM(slots_millis_reduces)\",\"xName\":\"has_list_fn\"}],\"6\": [{ \"xAxis\": \"0\", \"yAxis\":1024.4670902958453},{ \"xAxis\": \"1\", \"yAxis\":2487.6941747440464},{\"childrenIndex\":[17, 18, 21, 22, 25, 29, 33, 37, 38], \"populationSize\":2147483647, \"filter\":\"#is_multi_query$1#\",\"yName\":\"SUM(slots_millis_reduces)\",\"xName\":\"has_list_fn\"}],\"7\": [{ \"xAxis\": \"0\", \"yAxis\":459.1386720813525},{ \"xAxis\": \"1\", \"yAxis\":95.66689422152325},{\"childrenIndex\":[131, 161, 185, 201, 209], \"populationSize\":2147483647, \"filter\":\"#is_multi_query$1#has_distinct$0#\",\"yName\":\"SUM(slots_millis_reduces)\",\"xName\":\"has_list_fn\"}],\"8\": [{ \"xAxis\": \"0\", \"yAxis\":7876.863153826848},{ \"xAxis\": \"1\", \"yAxis\":9495.005278473256},{\"childrenIndex\":[16, 19, 23, 27, 31], \"populationSize\":2147483647, \"filter\":\"#is_multi_query$0#\",\"yName\":\"SUM(slots_millis_reduces)\",\"xName\":\"has_list_fn\"}],\"9\": [{ \"xAxis\": \"0\", \"yAxis\":407.6387474348949},{ \"xAxis\": \"1\", \"yAxis\":13.655945944439596},{\"childrenIndex\":[99, 105, 113, 121, 129], \"populationSize\":2147483647, \"filter\":\"#is_multi_query$1#is_profile_query$0#\",\"yName\":\"SUM(slots_millis_reduces)\",\"xName\":\"has_list_fn\"}]}')
+                chartarray = JSON.parse(data)
+
+                console.log(chartarray)
+
+                var len = Object.keys(chartarray).length;
+                var rownum = len/5 ;
+                var colnum = 5
+                var table = document.getElementById('charttable'), tr, td, row, cell;
+                table.innerHTML = ''
+                tableChecked = [];
+                for (var i = 0; i < 20; i++){
+                    tableChecked.push(0);
+                }
+                for (row = 0; row < rownum; row++) {
+                    tr = document.createElement('tr');
+                    tr.style = "border: 1px solid LightGray;border-collapse: separate"
+                    for (cell = 0; cell < colnum; cell++) {
+                        var tdId = 'td' + (row * colnum + cell).toString();
+                        td = document.createElement('td');
+                        td.setAttribute('id',tdId);
+                        //td.setAttribute('height', 20%);
+                        tr.appendChild(td);
+                        td.style = "border: 3px solid grey;border-collapse: separate; align='center' "
+
+                        td.innerHTML = /*'<p style = "font-size:10px;color:#787878">'+(row * colnum + cell).toString()+'</p>'*/'<div id="c' +(row * colnum + cell).toString()+'" style = "border-collapse: separate;" onclick="showfilter(this)"></div>'
+                    }
+                    table.appendChild(tr);
+                }
+                console.log(len)
+                var table = document.getElementById("charttable");
+
+                var cell_idx = 0;
+                for(cell_idx = 0; cell_idx < len; cell_idx++){
+                    //render_chart(cell_idx,chartarray)
+                    var svgString = generateSVG(cell_idx,chartarray)
+                    var cellid = 'c'+ cell_idx.toString();
+                    var currentcell = document.getElementById(cellid);
+                    //console.log(svgString)
+                    currentcell.innerHTML = svgString
+                    }
+                }
+
+        })
+        tableDrawn = true;
+        userChanged = false;
+    }
+    // Data Upload after options selection
+    else{
+        console.log(fname)
+        var nodeDic = ""
+        var json_pathloc = "http://"+window.location.hostname+":"+window.location.port+"/generated_dashboards/"+fname
+        $.ajax({
+            url: json_pathloc,
+            type: "GET",
+            dataType: "text",
+            success: function(data) {
+                getNodeEdgeListThenDraw(data);
+            }
+        })
+
+    }
 
 }
  function constructQueryCallback(){
@@ -193,8 +267,7 @@ function changeUser(){
     treeDrawn = false;
     tableDrawn = false;
 }
-
-function drawTree(){
+function populateA1(){
     newCanvas = false;
     document.getElementById('mynetwork').style.display = '';
     document.getElementById('mynetwork2').style.display = 'none';
@@ -204,10 +277,52 @@ function drawTree(){
     if ((!userChanged)&treeDrawn) return;
     document.getElementById('interested-in').innerHTML = '';
     document.getElementById('not-interested-in').innerHTML = '';
-    constructQueryWithArgs("mushroom","type","frontierGreedy","euclidean",0.2,0.1,20)
+
+    constructQueryWithArgs("mushroom","cap-surface","Breadth First Search","euclidean",0.0,0.001,10)
     treeDrawn = true;
     userChanged = false;
 }
+
+function populateB1(){
+    newCanvas = false;
+    document.getElementById('mynetwork').style.display = '';
+    document.getElementById('mynetwork2').style.display = 'none';
+
+    document.getElementById('right-sidebar').style.display = '';
+    document.getElementById('right-sidebar2').style.display = 'none';
+    if ((!userChanged)&treeDrawn) return;
+    document.getElementById('interested-in').innerHTML = '';
+    document.getElementById('not-interested-in').innerHTML = '';
+
+    constructQueryWithArgs("mushroom","type","Breadth First Picking","euclidean",0.0,0.9,10)
+    treeDrawn = true;
+    userChanged = false;
+}
+
+function populateA2(){
+    newCanvas = true;
+    console.log(newCanvas)
+    constructQueryWithArgs("mushroom","type","Random Walk in Lattice","euclidean",0.0,0.001,10)
+}
+
+function populateA3(){
+    newCanvas = true;
+    console.log(newCanvas)
+    constructQueryWithArgs("mushroom","cap-surface","Kmeans Clutering","euclidean",0.0,0.001,10)
+}
+
+function populateB2(){
+    newCanvas = true;
+    console.log(newCanvas)
+    constructQueryWithArgs("mushroom","type","Kmeans Clutering","euclidean",0.0,0.001,10)
+}
+
+function populateB3(){
+    newCanvas = true;
+    console.log(newCanvas)
+    constructQueryWithArgs("mushroom","cap-surface","Random Walk in Lattice","euclidean",0.0,0.001,10)
+}
+/*
 function drawTable(){
     newCanvas = true;
     document.getElementById('mynetwork').style.display = 'none';
@@ -255,7 +370,7 @@ function drawTable(){
                         tr.appendChild(td);
                         td.style = "border: 3px solid grey;border-collapse: separate; align='center' "
 
-                        td.innerHTML = /*'<p style = "font-size:10px;color:#787878">'+(row * colnum + cell).toString()+'</p>'*/'<div id="c' +(row * colnum + cell).toString()+'" style = "border-collapse: separate;" onclick="showfilter(this)"></div>'
+                        td.innerHTML = *//*'<p style = "font-size:10px;color:#787878">'+(row * colnum + cell).toString()+'</p>'*//*'<div id="c' +(row * colnum + cell).toString()+'" style = "border-collapse: separate;" onclick="showfilter(this)"></div>'
                     }
                     table.appendChild(tr);
                 }
@@ -276,7 +391,7 @@ function drawTable(){
         })
     tableDrawn = true;
     userChanged = false;
-}
+}*/
 //function toggleCanvas(element)
 //{
 //    if (element.checked){
@@ -362,7 +477,7 @@ $("#graphDicSubmit").click(function(){
 // getNodeEdgeListThenDraw({'1': [{'xAxis': 'Clinton', 'yAxis': 48}, {'xAxis': 'Trump', 'yAxis': 46}, {'xAxis': 'Others', 'yAxis': 6}, {'filter': 'All', 'childrenIndex': [2, 3], 'yName': '% of vote'}], '2': [{'xAxis': 'Clinton', 'yAxis': 31}, {'xAxis': 'Trump', 'yAxis': 62}, {'xAxis': 'Others', 'yAxis': 7}, {'filter': 'Race = White', 'childrenIndex': [4, 5], 'yName': '% of vote'}], '3': [{'xAxis': 'Clinton', 'yAxis': 21}, {'xAxis': 'Trump', 'yAxis': 70}, {'xAxis': 'Others', 'yAxis': 9}, {'filter': 'Gender = F', 'childrenIndex': [], 'yName': '% of vote'}], '4': [{'xAxis': 'Clinton', 'yAxis': 21}, {'xAxis': 'Trump', 'yAxis': 52}, {'xAxis': 'Others', 'yAxis': 27}, {'filter': 'Color = Blue', 'childrenIndex': [5], 'yName': '% of vote'}], '5': [{'xAxis': 'Clinton', 'yAxis': 20}, {'xAxis': 'Trump', 'yAxis': 30}, {'xAxis': 'Others', 'yAxis': 50}, {'filter': 'Job = Student', 'childrenIndex': [], 'yName': '% of vote'}]})
 // Titanic Default Example
 fname = "default"
-getNodeEdgeListThenDraw({"0": [{ "xAxis": "0", "yAxis":65.72734196496572},{ "xAxis": "1", "yAxis":34.27265803503427},{"childrenIndex":[1, 2, 3, 4, 5], "populationSize":1313, "filter":"#","yName":"id"}],"1": [{ "xAxis": "0", "yAxis":83.31374853113984},{ "xAxis": "1", "yAxis":16.686251468860164},{"childrenIndex":[6, 7, 8], "populationSize":851, "filter":"#sexcode$0#","yName":"id"}],"2": [{ "xAxis": "0", "yAxis":33.33333333333333},{ "xAxis": "1", "yAxis":66.66666666666666},{"childrenIndex":[9, 10, 11], "populationSize":462, "filter":"#sexcode$1#","yName":"id"}],"3": [{ "xAxis": "0", "yAxis":40.06211180124223},{ "xAxis": "1", "yAxis":59.93788819875776},{"childrenIndex":[6, 9], "populationSize":322, "filter":"#pc_class$1#","yName":"id"}],"4": [{ "xAxis": "0", "yAxis":57.49999999999999},{ "xAxis": "1", "yAxis":42.5},{"childrenIndex":[7, 10], "populationSize":280, "filter":"#pc_class$2#","yName":"id"}],"5": [{ "xAxis": "0", "yAxis":80.59071729957806},{ "xAxis": "1", "yAxis":19.40928270042194},{"childrenIndex":[8, 11], "populationSize":711, "filter":"#pc_class$3#","yName":"id"}],"6": [{ "xAxis": "0", "yAxis":67.0391061452514},{ "xAxis": "1", "yAxis":32.960893854748605},{"childrenIndex":[], "populationSize":179, "filter":"#sexcode$0#pc_class$1#","yName":"id"}],"7": [{ "xAxis": "0", "yAxis":85.54913294797689},{ "xAxis": "1", "yAxis":14.450867052023122},{"childrenIndex":[], "populationSize":173, "filter":"#sexcode$0#pc_class$2#","yName":"id"}],"8": [{ "xAxis": "0", "yAxis":88.37675350701403},{ "xAxis": "1", "yAxis":11.623246492985972},{"childrenIndex":[], "populationSize":499, "filter":"#sexcode$0#pc_class$3#","yName":"id"}],"9": [{ "xAxis": "0", "yAxis":6.293706293706294},{ "xAxis": "1", "yAxis":93.7062937062937},{"childrenIndex":[], "populationSize":143, "filter":"#sexcode$1#pc_class$1#","yName":"id"}],"10": [{ "xAxis": "0", "yAxis":12.149532710280374},{ "xAxis": "1", "yAxis":87.85046728971963},{"childrenIndex":[], "populationSize":107, "filter":"#sexcode$1#pc_class$2#","yName":"id"}],"11": [{ "xAxis": "0", "yAxis":62.264150943396224},{ "xAxis": "1", "yAxis":37.735849056603776},{"childrenIndex":[], "populationSize":212, "filter":"#sexcode$1#pc_class$3#","yName":"id"}]})
+//getNodeEdgeListThenDraw({"0": [{ "xAxis": "0", "yAxis":65.72734196496572},{ "xAxis": "1", "yAxis":34.27265803503427},{"childrenIndex":[1, 2, 3, 4, 5], "populationSize":1313, "filter":"#","yName":"id"}],"1": [{ "xAxis": "0", "yAxis":83.31374853113984},{ "xAxis": "1", "yAxis":16.686251468860164},{"childrenIndex":[6, 7, 8], "populationSize":851, "filter":"#sexcode$0#","yName":"id"}],"2": [{ "xAxis": "0", "yAxis":33.33333333333333},{ "xAxis": "1", "yAxis":66.66666666666666},{"childrenIndex":[9, 10, 11], "populationSize":462, "filter":"#sexcode$1#","yName":"id"}],"3": [{ "xAxis": "0", "yAxis":40.06211180124223},{ "xAxis": "1", "yAxis":59.93788819875776},{"childrenIndex":[6, 9], "populationSize":322, "filter":"#pc_class$1#","yName":"id"}],"4": [{ "xAxis": "0", "yAxis":57.49999999999999},{ "xAxis": "1", "yAxis":42.5},{"childrenIndex":[7, 10], "populationSize":280, "filter":"#pc_class$2#","yName":"id"}],"5": [{ "xAxis": "0", "yAxis":80.59071729957806},{ "xAxis": "1", "yAxis":19.40928270042194},{"childrenIndex":[8, 11], "populationSize":711, "filter":"#pc_class$3#","yName":"id"}],"6": [{ "xAxis": "0", "yAxis":67.0391061452514},{ "xAxis": "1", "yAxis":32.960893854748605},{"childrenIndex":[], "populationSize":179, "filter":"#sexcode$0#pc_class$1#","yName":"id"}],"7": [{ "xAxis": "0", "yAxis":85.54913294797689},{ "xAxis": "1", "yAxis":14.450867052023122},{"childrenIndex":[], "populationSize":173, "filter":"#sexcode$0#pc_class$2#","yName":"id"}],"8": [{ "xAxis": "0", "yAxis":88.37675350701403},{ "xAxis": "1", "yAxis":11.623246492985972},{"childrenIndex":[], "populationSize":499, "filter":"#sexcode$0#pc_class$3#","yName":"id"}],"9": [{ "xAxis": "0", "yAxis":6.293706293706294},{ "xAxis": "1", "yAxis":93.7062937062937},{"childrenIndex":[], "populationSize":143, "filter":"#sexcode$1#pc_class$1#","yName":"id"}],"10": [{ "xAxis": "0", "yAxis":12.149532710280374},{ "xAxis": "1", "yAxis":87.85046728971963},{"childrenIndex":[], "populationSize":107, "filter":"#sexcode$1#pc_class$2#","yName":"id"}],"11": [{ "xAxis": "0", "yAxis":62.264150943396224},{ "xAxis": "1", "yAxis":37.735849056603776},{"childrenIndex":[], "populationSize":212, "filter":"#sexcode$1#pc_class$3#","yName":"id"}]})
 
 
 //mode2 functions
@@ -429,10 +544,10 @@ function showfilter(cell){
 
         if(tableChecked[key]==3){
 
-            document.getElementById('selected').innerHTML+=  '<tr>'+'<td style="color:green">'+ key+'<td>'+ '<td style="color:green"> '+title[key]+'<td> '+'<tr>';
+            document.getElementById('selected').innerHTML+=  '<tr>'+ '<td style="color:green"> '+title[key]+'<td> '+'<tr>';
         }
         else if(tableChecked[key]==2){
-            document.getElementById('notselected').innerHTML+=  '<tr>'+'<td style="color:red">'+ key+'<td>'+ '<td style="color:red"> '+title[key]+'<td> '+'<tr>';
+            document.getElementById('notselected').innerHTML+=  '<tr>'+ '<td style="color:red"> '+title[key]+'<td> '+'<tr>';
         }
     });
 

@@ -18,24 +18,7 @@
 <!--<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">-->
 
 <!--<br><br>-->
-<!--<div class="btn-group" style ="margin-left: 20px">-->
-  <!--<h1>Preloaded Selections:</h1>-->
-  <!--<br>-->
-  <!--<a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true">Mushroom</a>-->
-            <!--<button type="button" name="D1Q1" onclick="populateD1Query1()" aria-pressed="false" class="btn btn-default btn-xs">Q1</button>-->
-            <!--<button type="button" name="D1Q2" onclick="populateD1Query2()" aria-pressed="false" class="btn btn-default btn-xs">Q2</button>-->
-            <!--&lt;!&ndash; <button type="button" name="query3" onclick="populateQuery3()" aria-pressed="false" class="btn btn-default btn-xs">Q3</button> &ndash;&gt;-->
-  <!--<br>-->
-  <!--<a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true">Turn</a>-->
-            <!--<button type="button" name="D2Q1" onclick="populateD2Query1()" aria-pressed="false" class="btn btn-default btn-xs">Q1</button>-->
-            <!--<button type="button" name="D2Q2" onclick="populateD2Query2()" aria-pressed="false" class="btn btn-default btn-xs">Q2</button>-->
-            <!--&lt;!&ndash; <button type="button" name="query6" onclick="populateQuery6()" aria-pressed="false" class="btn btn-default btn-xs">Q6</button> &ndash;&gt;-->
-   <!--<br>-->
-   <!--<a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true">Titanic</a>-->
-            <!--<button type="button" name="D3Q1" onclick="populateD3Query1()" aria-pressed="false" class="btn btn-default btn-xs">Q1</button>-->
-            <!--<button type="button" name="D3Q2" onclick="populateD3Query2()" aria-pressed="false" class="btn btn-default btn-xs">Q2</button>-->
-            <!--&lt;!&ndash; <button type="button" name="query6" onclick="populateQuery6()" aria-pressed="false" class="btn btn-default btn-xs">Q6</button> &ndash;&gt;-->
-<!--</div>-->
+
 <!--<br><br>-->
 <!--<form class="form-inline menu-item">-->
   <!--<h1>Dashboard Options:</h1>-->
@@ -153,9 +136,9 @@
     <!--&lt;!&ndash; <input type="submit" id="filterSubmit" style = "background-color: #359EDA;border: none;color: white;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;margin: 100px 100px;cursor: pointer;right:40;" value="Submit"> &ndash;&gt;-->
 <!--</div>-->
 
-<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
+<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none;" id="mySidebar">
     <br><br>
-    <h1 for="sel1">Select a User :</h1>
+    <h1 for="sel1">Select a User</h1>
     <br>
       <form>
         <div class="form-group">
@@ -172,8 +155,29 @@
           <br>
         </div>
       </form>
-    <button type="button" name="drawTree" onclick="drawTree()" aria-pressed="false" class="btn btn-default btn-xs">Tree</button>
-    <button type="button" name="drawTable" onclick="drawTable()" aria-pressed="false" class="btn btn-default btn-xs">Table</button>
+   <!-- <button type="button" name="drawTree" onclick="drawTree()" aria-pressed="false" class="btn btn-default btn-xs">Task1</button>
+    <button type="button" name="drawTable" onclick="drawTable()" aria-pressed="false" class="btn btn-default btn-xs">Task2</button>
+-->
+
+    <h1>Select your tasks</h1>
+            <button type="button" name="D1Q1" onclick="populateA1()" aria-pressed="false" class="btn btn-default btn-xs">A1</button>
+            <button type="button" name="D1Q2" onclick="populateA2()" aria-pressed="false" class="btn btn-default btn-xs">A2</button>
+            <button type="button" name="D2Q1" onclick="populateA3()" aria-pressed="false" class="btn btn-default btn-xs">A3</button>
+            <!-- <button type="button" name="query3" onclick="populateQuery3()" aria-pressed="false" class="btn btn-default btn-xs">Q3</button> -->
+  <br>
+            <button type="button" name="D1Q1" onclick="populateB1()" aria-pressed="false" class="btn btn-default btn-xs">B1</button>
+            <button type="button" name="D1Q2" onclick="populateB2()" aria-pressed="false" class="btn btn-default btn-xs">B2</button>
+            <button type="button" name="D2Q1" onclick="populateB3()" aria-pressed="false" class="btn btn-default btn-xs">B3</button>
+  <!--<a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true"></a>
+            <button type="button" name="D2Q1" onclick="populateD2Query1()" aria-pressed="false" class="btn btn-default btn-xs">A3</button>
+            <button type="button" name="D2Q2" onclick="populateD2Query2()" aria-pressed="false" class="btn btn-default btn-xs">B1</button>
+            &lt;!&ndash; <button type="button" name="query6" onclick="populateQuery6()" aria-pressed="false" class="btn btn-default btn-xs">Q6</button> &ndash;&gt;
+   <br>
+   <a href="#" class="btn btn-primary btn-xs disabled" role="button" aria-disabled="true"></a>
+            <button type="button" name="D3Q1" onclick="populateD3Query1()" aria-pressed="false" class="btn btn-default btn-xs">B2</button>
+            <button type="button" name="D3Q2" onclick="populateD3Query2()" aria-pressed="false" class="btn btn-default btn-xs">B3</button>
+            &lt;!&ndash; <button type="button" name="query6" onclick="populateQuery6()" aria-pressed="false" class="btn btn-default btn-xs">Q6</button> &ndash;&gt;
+-->
 </div>
 
 
@@ -237,16 +241,15 @@
                 {{edge}}
         </div>
  -->
-        <script type="text/javascript" src="lattice.js"></script>
 
         <!--<div class = "chart" id = "tree_container" style="height:100%; width:100%;"></div>-->
 
 
 </div>
-        <div id="mynetwork" style="height:100%; width:75%; float:left">
+        <div id="mynetwork" style="height:100%; width:80%; float:left">
             <img src="resources/Eclipse.svg" id = 'loadingDashboard' style="display: none; position: relative; z-index: 10; width: 100%; height: 50%;">
         </div>
-        <div id="mynetwork2" style="height:100%; width:75%; float:left;display:none;background-color:#eff0f2; ">
+        <div id="mynetwork2" style="height:100%; width:80%; float:left;display:none;background-color:#eff0f2; ">
             <table id="charttable" style="border-spacing: 5px 12px;width:100%; height:100%;border: 1px solid black;border-collapse: separate;">
 
             </table>
@@ -262,14 +265,14 @@
         </div>
 </div>
 
- <div id="right-sidebar" class="clearfix" style="width:25%; float:right">
+ <div id="right-sidebar" class="clearfix" style="width:20%; float:right">
   <div class="column menu" style="width:100%">
     <ul>
         <div>
             <li>You are interested in...</li>
             <table>
-                <th style="color:#368332;font-weight: bold ">nodes_ID</th>
-                <th style="padding-left:1.5cm; color:#368332;font-weight: bold;">filter</th>
+
+                <th style=" color:#368332;font-weight: bold;">filter</th>
                 <tbody id="interested-in">
 
                 </tbody>
@@ -279,8 +282,8 @@
       <div >
           <li>You are not interested in...</li>
           <table>
-              <th style="color:#ff0000;font-weight: bold ">nodes_ID</th>
-              <th style="padding-left:1.5cm;  color:#ff0000;font-weight: bold ">filter</th>
+
+              <th style="color:#ff0000;font-weight: bold ">filter</th>
               <tbody id="not-interested-in">
 
               </tbody>
@@ -290,13 +293,13 @@
     </ul>
   </div>
  </div>
-<div id="right-sidebar2" class="clearfix" style="background-color:White;width:25%;height:100%; float:right;display:none">
+<div id="right-sidebar2" class="clearfix" style="background-color:White;width:20%;height:100%; float:right;display:none">
 <div class="sidebar-menu" style="width:100%">
    <div>
             <li>You are interested in...</li>
             <table>
-                <th style="color:#368332;font-weight: bold ">nodes_ID</th>
-                <th style="padding-left:1.5cm; color:#368332;font-weight: bold;">filter</th>
+
+                <th style="color:#368332;font-weight: bold;">filter</th>
                 <tbody id="selected">
 
                 </tbody>
@@ -306,8 +309,8 @@
       <div >
           <li>You are not interested in...</li>
           <table>
-              <th style="color:#ff0000;font-weight: bold ">nodes_ID</th>
-              <th style="padding-left:1.5cm;  color:#ff0000;font-weight: bold ">filter</th>
+
+              <th style=" color:#ff0000;font-weight: bold ">filter</th>
               <tbody id="notselected">
 
               </tbody>
@@ -331,3 +334,5 @@
 <script type="text/javascript" src="sidebar.js"></script>
 <script type="text/javascript" src="helper.js"></script>
 <script type="text/javascript" src="barchart.js"></script>
+</div>
+</div>
