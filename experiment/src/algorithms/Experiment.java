@@ -58,6 +58,8 @@ public class Experiment {
 		this.iceberg_ratio = iceberg_ratio;
 		this.informative_critera = informative_critera;
 		this.attribute_names = get_attribute_names();
+//		this.attribute_names = Database.resultSet2ArrayStr(Database.getColumns(this.datasetName));
+//		this.attribute_names.remove("id");
 		this.uniqueAttributeKeyVals = populateUniqueAttributeKeyVals();
 		// Generate base table via group-by
 		ResultSet rs = Database.viz_query(this.datasetName, this.groupby, this.yAxisName, this.aggFunc, new ArrayList<String>(Arrays.asList()));

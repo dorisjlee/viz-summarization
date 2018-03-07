@@ -24,11 +24,10 @@ import lattice.Database;
 public class UserStudyBaseline {
 	public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
 	{
-		
 	   Experiment exp;
-	   int k =30;
+	   int k =10;
 	   Experiment.experiment_name="../ipynb/dashboards/json/UserStudyBaseline";
-	   String dataset_name="mushroom";
+	   String dataset_name="ct_police_stop";
 	   ArrayList<String> groupby = null;
 	   String yAxis = null;
 	   String xAxis = null; 
@@ -58,7 +57,7 @@ public class UserStudyBaseline {
 		   aggType = "COUNT";
 	   }else if (dataset_name.equals("titanic")) {
 		   // Dataset #3 : Titanic 
-		   groupby = new ArrayList<String>(Arrays.asList("survived","sexcode","pc_class"));
+		   groupby = new ArrayList<String>(Arrays.asList("survived","gender","pc_class"));
 		   yAxis = "id";
 		   xAxis = "survived"; 
 		   aggType = "COUNT";
