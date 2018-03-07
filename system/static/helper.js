@@ -508,7 +508,7 @@ function showfilter(cell){
 
         title[idx] = Dic[idx][Dic[idx].length-1]["filter"]
             if (idx==0){
-                    title[idx] = "root";
+                    title[idx] = "overall";
                 }
                 else{
                     for(var j = 0; j<title[idx].length;j++){

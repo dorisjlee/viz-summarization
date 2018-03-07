@@ -50,6 +50,7 @@ df = df.drop(["stop_date","stop_time","location_raw","county_name",'county_fips'
 # cols = ['id', 'driver_gender', 'driver_race', 'search_conducted', 'contraband_found', 'stop_outcome', 'is_arrested', 'stop_duration', 'stop_time_of_day', 'driver_age_category']
 # df = df[cols]
 df =df.dropna()
+df = df.rename(index=str,columns={"stop_time_of_day":"stop_time","driver_age_category":"driver_age","stop_duration":"duration"})
 df.to_csv("CT_police_stop.csv")
 #Upload to database:
 from sqlalchemy import create_engine

@@ -152,7 +152,7 @@ function render_chart(i, nodeDic){
     yAxis_name = Dic[i][Dic[i].length-1]["yName"]
     title = Dic[i][Dic[i].length-1]["filter"]
     if (i==0){
-        title = "root";
+        title = "overall";
     }
     else{
         for(var j = 0; j<title.length;j++){

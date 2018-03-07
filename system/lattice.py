@@ -124,7 +124,7 @@ class Lattice:
                 except KeyError:
                     pass
             if values["filter"]=="#":
-                filterVal="root"
+                filterVal="overall"
             else:
                 filterVal = str(values["filter"][1:-1].replace("#",",\n").replace("$","="))
             yname = values["yName"]

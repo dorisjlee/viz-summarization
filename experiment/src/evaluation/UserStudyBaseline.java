@@ -26,9 +26,9 @@ public class UserStudyBaseline {
 	{
 		
 	   Experiment exp;
-	   int k =10;
+	   int k =30;
 	   Experiment.experiment_name="../ipynb/dashboards/json/UserStudyBaseline";
-	   String dataset_name="turn";
+	   String dataset_name="mushroom";
 	   ArrayList<String> groupby = null;
 	   String yAxis = null;
 	   String xAxis = null; 
@@ -36,7 +36,7 @@ public class UserStudyBaseline {
 	   Distance dist = new Euclidean();
 	   // Dataset #1 : Turn
 	   if (dataset_name.equals("turn")){
-		   	groupby = new ArrayList<String>(Arrays.asList( "is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
+		   	groupby = new ArrayList<String>(Arrays.asList("is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
 				"has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
 			yAxis = "slots_millis_reduces";
 			xAxis = "has_list_fn";
@@ -45,11 +45,8 @@ public class UserStudyBaseline {
 		   // Dataset #2 : Police Stop
 		   groupby = new ArrayList<String>(Arrays.asList(
 			"driver_gender", "driver_race", "search_conducted",
-			"contraband_found", "is_arrested", "stop_duration", 
-			"stop_time_of_day", "driver_age_category"));
-		   // "speeding_violations", "other_violations"
-		   //"registration_plates_violations", "moving_violation","cell_phone_violations"
-		   //"stop_outcome", 
+			"contraband_found", "is_arrested", "duration", 
+			"stop_time", "driver_age"));
 		   yAxis = "id";
 		   xAxis = "is_arrested";//"stop_outcome", 
 		   aggType = "COUNT";
@@ -72,18 +69,18 @@ public class UserStudyBaseline {
 	   exp.setAlgo(ourAlgo);
 	   exp.runOutput(exp);
 	   
-	   Traversal clustering = new BaselineKmeans();
-	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.001,false);
-	   exp.setAlgo(clustering);
-	   exp.runTableLayoutOutput(exp);   
-	   
-	   Traversal BBFS = new BaselineBFS();
-	   exp.setAlgo(BBFS);
-	   exp.runTableLayoutOutput(exp);   
-	   
-	   Traversal randWalk = new RandomWalk();
-	   exp.setAlgo(randWalk);
-	   exp.runTableLayoutOutput(exp);   
+//	   Traversal clustering = new BaselineKmeans();
+//	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.001,false);
+//	   exp.setAlgo(clustering);
+//	   exp.runTableLayoutOutput(exp);   
+//	   
+//	   Traversal BBFS = new BaselineBFS();
+//	   exp.setAlgo(BBFS);
+//	   exp.runTableLayoutOutput(exp);   
+//	   
+//	   Traversal randWalk = new RandomWalk();
+//	   exp.setAlgo(randWalk);
+//	   exp.runTableLayoutOutput(exp);   
 	   
 	}
 }
