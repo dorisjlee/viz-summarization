@@ -571,7 +571,7 @@ function generateSVG(cell_idx, chartarray/*, xLabel, yLabel*/) {
         var xName = chartarray[cell_idx][l]["xName"]
 
         if (t=="#")
-              t="root"
+              t="overall"
         else{
              for(var j = 0; j<t.length;j++){
                    if(t[j] == "$"){
