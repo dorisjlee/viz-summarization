@@ -1,80 +1,219 @@
-% THIS IS AN EXAMPLE DOCUMENT FOR VLDB 2012
-% based on ACM SIGPROC-SP.TEX VERSION 2.7
-% Modified by  Gerald Weber <gerald@cs.auckland.ac.nz>
-% Removed the requirement to include *bbl file in here. (AhmetSacan, Sep2012)
-% Fixed the equation on page 3 to prevent line overflow. (AhmetSacan, Sep2012)
+\documentclass[journal]{vgtc}                % final (journal style)
+%\documentclass[review,journal]{vgtc}         % review (journal style)
+%\documentclass[widereview]{vgtc}             % wide-spaced review
+%\documentclass[preprint,journal]{vgtc}       % preprint (journal style)
 
-\documentclass{vldb}
-% \usepackage{amsthm}
-%\usepackage{booktabs} % For formal tables
-% My packages
+\pagenumbering{arabic}
 
-\usepackage{graphicx}
+% Section Numbering, remove this in submission 
+% \setcounter{tocdepth}{4}
+% \setcounter{secnumdepth}{4}
+
+\makeatletter
+\def\@copyrightspace{\relax}
+\makeatother
+
+% Load basic packages
+\usepackage{balance}  % to better equalize the last page
+\usepackage{graphics} % for EPS, load graphicx instead 
+\usepackage[T1]{fontenc}
+% \usepackage{txfonts}
+% \usepackage{mathptmx}
+\usepackage[pdftex]{hyperref}
+\usepackage{color}
 \usepackage{xcolor}
-
+\usepackage{booktabs}
+\usepackage{textcomp}
+\usepackage{xspace}
+\usepackage{setspace}
+\usepackage[textsize=tiny]{todonotes}
+% Some optional stuff you might like/need.
+\usepackage{microtype} % Improved Tracking and Kerning
+% \usepackage[all]{hypcap}  % Fixes bug in hyperref caption linking
+\usepackage{ccicons}  % Cite your images correctly!
+% \usepackage[utf8]{inputenc} % for a UTF8 editor only
+\usepackage{verbatim}
+\usepackage{relsize}
+\usepackage{etoolbox}
+\usepackage{lipsum}   % for filler text
+\usepackage{setspace} % for \onehalfspacing and \singlespacing macros
+\usepackage[normalem]{ulem}
+\usepackage[sort,nocompress]{cite}
+\usepackage{xcolor}
 \usepackage{fixltx2e}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{microtype}                 % use micro-typography (slightly more compact, better to read)
+\PassOptionsToPackage{warn}{textcomp}  % to address font issues with \textrightarrow
+\usepackage{times}                     % we use Times as the main font
+\renewcommand*\ttdefault{txtt}         % a nicer typewriter font
+\usepackage{cite}                      % needed to automatically sort the references
+\usepackage{tabu}                      % only used for the table example
+\usepackage{booktabs}                  % only used for the table example
 
 \DeclareMathOperator*{\argmax}{arg\,max}
+% llt: Define a global style for URLs, rather that the default one
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{
+    \def\UrlFont{\sf}
+  }{
+    \def\UrlFont{\small\bf\ttfamily}
+  }}
+\makeatother
 
-\newcommand\notes[1]{\textcolor{red}{#1}}
+\newenvironment{denselist}{
+    \begin{list}{\small{$\bullet$}}%
+    {\setlength{\itemsep}{0ex} \setlength{\topsep}{0ex}
+    \setlength{\parsep}{0pt} \setlength{\itemindent}{0pt}
+    \setlength{\leftmargin}{1.5em}
+    \setlength{\partopsep}{0pt}}}%
+    {\end{list}}
 
-% Command for system name
+\newcommand{\squishlist}{
+   \begin{list}{$\bullet$}
+    { \setlength{\itemsep}{0pt}
+      \setlength{\parsep}{2pt}
+      \setlength{\topsep}{0pt}
+      \setlength{\partopsep}{0pt}
+      \leftmargin=25pt
+\rightmargin=0pt
+\labelsep=5pt
+\labelwidth=10pt
+\itemindent=0pt
+\listparindent=0pt
+\itemsep=\parsep
+    }
+}
+\newcommand{\squishend}{\end{list}}
+
+% use extensively to toggle between paper and TR
+\newcommand{\eat}[1]{}
+% \newcommand{\papertext}[1]{{\leavevmode\color{blue}{#1}}}
+% \newcommand{\techreport}[1]{{\leavevmode\color{red}{#1}}}
+\newcommand{\papertext}[1]{#1}
+\newcommand{\techreport}[1]{#1}
+\newcommand{\nonannon}[1]{#1}
+\newcommand{\annon}[1]{}
+\newcommand{\boldpara}[1]{\textbf{\paragraph{#1}}}
+% de-facto paragraph format
+\newcommand{\stitle}[1]{\noindent\textbf{#1}}
+\newcommand{\tvcg}[1]{{\leavevmode\color{blue}{#1}}}
+\newcommand{\cut}[1]{{\leavevmode\color{lightgray}{#1}}}
+\newcommand{\ccut}[1]{} %confirmed cut
 \newcommand{\system}{\textsc{Hierarchia}}
-%\newcommand{\system}{\textsc{VizDAG}}
-%\newcommand{\system}{\textsc{VizInNuce}}
+\def\plaintitle{\system : Hierarchical Summary of Equivalent Visualizations across Data Subsets}
+\def\plainauthor{Doris Jung-Lin Lee*, Himel Dev*, Huizi Hu, Saar Kuzi, Hazem Elmeleegy, Aditya Parameswaran}
+\def\emptyauthor{} 
+\def\plainkeywords{Data visualization, exploratory data analysis, visual query, scientific data.}
+\def\plaingeneralterms{Documentation, Standardization}
 
-% Copyright
-%\setcopyright{none}
-%\setcopyright{acmcopyright}
-%\setcopyright{acmlicensed}
-%\setcopyright{rightsretained}
-%\setcopyright{usgov}
-%\setcopyright{usgovmixed}
-%\setcopyright{cagov}
-%\setcopyright{cagovmixed}
+\newcommand{\agp}[1]{\textcolor{blue}{Aditya: #1}}
+\newcommand{\dor}[1]{\textcolor{green}{Doris: #1}} 
+\newcommand{\hdev}[1]{\textcolor{magenta}{Himel: #1}}
+\newcommand\notes[1]{\textcolor{red}{#1}}
+\urlstyle{leo}
+
+% To make various LaTeX processors do the right thing with page size.
+\def\pprw{8.5in}
+\def\pprh{11in}
+\special{papersize=\pprw,\pprh}
+\setlength{\paperwidth}{\pprw}
+\setlength{\paperheight}{\pprh}
+\setlength{\pdfpagewidth}{\pprw}
+\setlength{\pdfpageheight}{\pprh}
+
+% Make sure hyperref comes last of your loaded packages, to give it a
+% fighting chance of not being over-written, since its job is to
+% redefine many LaTeX commands.
+\definecolor{linkColor}{RGB}{6,125,233}
+\hypersetup{%
+  pdftitle={\plaintitle},
+% Use \plainauthor for final version.
+%  pdfauthor={\plainauthor},
+  pdfauthor={\emptyauthor},
+  pdfkeywords={\plainkeywords},
+  bookmarksnumbered,
+  pdfstartview={FitH},
+  colorlinks,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=linkColor,
+  breaklinks=true}
 
 
-% DOI
-%\acmDOI{10.475/123_4}
+% Get rid of gaps between sections, subsections and subsubsections
+% \usepackage{titlesec}
+% \titlespacing*{\section}
+% {0pt}{0pt}{0pt}
+% \titlespacing*{\subsection}
+% {0pt}{0pt}{0pt}
+% \titlespacing*{\subsubsection}
+% {0pt}{0pt}{0pt}
+% End of preamble. Here it comes the document.
 
-% ISBN
-%\acmISBN{123-4567-24-567/08/06}
+\ifpdf%                                % if we use pdflatex
+  \pdfoutput=1\relax                   % create PDFs from pdfLaTeX
+  \pdfcompresslevel=9                  % PDF Compression
+  \pdfoptionpdfminorversion=7          % create PDF 1.7
+  \ExecuteOptions{pdftex}
+  \usepackage{graphicx}                % allow us to embed graphics files
+  \DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg} % for pdflatex we expect .pdf, .png, or .jpg files
+\else%                                 % else we use pure latex
+  \ExecuteOptions{dvips}
+  \usepackage{graphicx}                % allow us to embed graphics files
+  \DeclareGraphicsExtensions{.eps}     % for  pure latex we expect eps files
+\fi%
 
-%Conference
-\iffalse 
-\acmConference[WOODSTOCK'97]{ACM Woodstock conference}{July 1997}{El
-  Paso, Texas USA} 
-\acmYear{1997}
-\fi
+%% it is recomended to use ``\autoref{sec:bla}'' instead of ``Figure ~\ref{sec:bla}''
+\graphicspath{{figures/}{pictures/}{images/}{./}} % where to search for the images
 
-%\copyrightyear{2016}
 
-%\acmPrice{15.00}
+%% In preprint mode you may define your own headline.
+%\preprinttext{To appear in IEEE Transactions on Visualization and Computer Graphics.}
 
+%% If you are submitting a paper to a conference for review with a double
+%% blind reviewing process, please replace the value ``0'' below with your
+%% OnlineID. Otherwise, you may safely leave it at ``0''.
+\onlineid{0}
+
+%% declare the category of your paper, only shown in review mode
+\vgtccategory{Research}
+%% please declare the paper type of your paper to help reviewers, only shown in review mode
+%% choices:
+%% * algorithm/technique
+%% * application/design study
+%% * evaluation
+%% * system
+%% * theory/model
+\vgtcpapertype{system}
+
+
+\title{\system : Hierarchical Summary of Equivalent Visualizations across Data Subsets}
+
+
+
+%% Abstract section.
+\abstract{Abstract} % end of abstract
+
+\keywords{exploratory data analysis, visualization recommendation.}
+
+\vgtcinsertpkg
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% START OF THE PAPER %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\title{\system : Hierarchical Summary of Equivalent Visualizations across Data Subsets}
-\iffalse 
-\titlenote{Produces the permission block, and
-  copyright information}
-\subtitle{Extended Abstract}
-\subtitlenote{The full version of the author's guide is available as
-  \texttt{acmart.pdf} document}
-\fi
-\numberofauthors{4}
-\author{XYZ}
-%\author{X, Y, Z}
-% \affiliation{%
-%   \institution{Department  of Computer Science\\
-%   University of Illinois at Urbana-Chamapaign (UIUC)}
-%   %\streetaddress{P.O. Box 1212}
-%   %\city{Urbana-Champaign} 
-%   %\state{Illinois} 
-%   %\postcode{61820}
-% }
-%\email{xyz@illinois.edu}
+\title{\plaintitle}
+\author{\plainauthor}
+\authorfooter{
+\item
+ The authors are with University of Illinois, Urbana-Champaign. Hazem Elmeleegy is with Amobee Inc.
+ \\ E-mail: jlee782, hdev3, huizihu2, skuzi2, adityagp@illinois.edu. hazem.elmeleegy@turn.com.
+}
 \maketitle
-\keywords{ACM proceedings, \LaTeX, text tagging}
 \input{0.Abstract}
 \input{1.Introduction}
 \input{2.ProblemFormulation}
@@ -82,9 +221,10 @@
 \input{4.PerformanceExperiments}
 \input{5.UserStudyEvaluation}
 \input{6.Discussion}
-%\input{7.RelatedWorks}
+\input{7.RelatedWorks}
 \input{8.Conclusion}
-\bibliographystyle{abbrv}
+% \bibliographystyle{abbrv}
+\bibliographystyle{abbrv-doi}
 \bibliography{reference}
 
 \end{document}

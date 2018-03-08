@@ -24,9 +24,8 @@ import lattice.Database;
 public class UserStudyBaseline {
 	public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
 	{
-		
 	   Experiment exp;
-	   int k =30;
+	   int k =10;
 	   Experiment.experiment_name="../ipynb/dashboards/json/UserStudyBaseline";
 	   String dataset_name="mushroom";
 	   ArrayList<String> groupby = null;
@@ -58,7 +57,7 @@ public class UserStudyBaseline {
 		   aggType = "COUNT";
 	   }else if (dataset_name.equals("titanic")) {
 		   // Dataset #3 : Titanic 
-		   groupby = new ArrayList<String>(Arrays.asList("survived","sexcode","pc_class"));
+		   groupby = new ArrayList<String>(Arrays.asList("survived","gender","pc_class"));
 		   yAxis = "id";
 		   xAxis = "survived"; 
 		   aggType = "COUNT";
@@ -69,18 +68,18 @@ public class UserStudyBaseline {
 	   exp.setAlgo(ourAlgo);
 	   exp.runOutput(exp);
 	   
-//	   Traversal clustering = new BaselineKmeans();
-//	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.001,false);
-//	   exp.setAlgo(clustering);
-//	   exp.runTableLayoutOutput(exp);   
-//	   
-//	   Traversal BBFS = new BaselineBFS();
-//	   exp.setAlgo(BBFS);
-//	   exp.runTableLayoutOutput(exp);   
-//	   
-//	   Traversal randWalk = new RandomWalk();
-//	   exp.setAlgo(randWalk);
-//	   exp.runTableLayoutOutput(exp);   
+	   Traversal clustering = new BaselineKmeans();
+	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.001,false);
+	   exp.setAlgo(clustering);
+	   exp.runTableLayoutOutput(exp);   
+	   
+	   Traversal BBFS = new BaselineBFS();
+	   exp.setAlgo(BBFS);
+	   exp.runTableLayoutOutput(exp);   
+	   
+	   Traversal randWalk = new RandomWalk();
+	   exp.setAlgo(randWalk);
+	   exp.runTableLayoutOutput(exp);   
 	   
 	}
 }
