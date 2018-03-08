@@ -40,14 +40,14 @@ function readDashboardOutput(query){
     readDashboardFile(fname)
 }
 function readDashboardFile(fname){
-        if(newCanvas == true){
+    if(newCanvas == true){
 
         document.getElementById('mynetwork').style.display = 'none';
         document.getElementById('mynetwork2').style.display = '';
 
         document.getElementById('right-sidebar').style.display = 'none';
         document.getElementById('right-sidebar2').style.display = '';
-        if ((!userChanged)&tableDrawn) return;
+
         document.getElementById('selected').innerHTML = '';
         document.getElementById('notselected').innerHTML = '';
         console.log(fname)
@@ -106,7 +106,6 @@ function readDashboardFile(fname){
 
         })
         tableDrawn = true;
-        userChanged = false;
     }
     // Data Upload after options selection
     else{
@@ -261,69 +260,89 @@ function IsJsonString(str) {
     return true;
 }
 var newCanvas = false;
-var userChanged = false;
 var treeDrawn = false;
 var tableDrawn = false;
-function changeUser(){
-    userChanged = true;
-    treeDrawn = false;
-    tableDrawn = false;
-}
+var currentQuery = "";
+
 function populateA1(){
     newCanvas = false;
-    document.getElementById('mynetwork').style.display = '';
-    document.getElementById('mynetwork2').style.display = 'none';
+    document.getElementById('mynetwork').style.display = 'none';
+    document.getElementById('mynetwork2').style.display = '';
 
-    document.getElementById('right-sidebar').style.display = '';
-    document.getElementById('right-sidebar2').style.display = 'none';
-    if ((!userChanged)&treeDrawn) return;
-    document.getElementById('interested-in').innerHTML = '';
-    document.getElementById('not-interested-in').innerHTML = '';
-
-    //constructQueryWithArgs("mushroom","cap-surface","Breadth First Search","euclidean",0.0,0.001,10)
-    readDashboardFile("mushroom_cap-surface_Breadth First Search_euclidean_ic0.0_ip0.001_k10.json")
+    document.getElementById('right-sidebar').style.display = 'none';
+    document.getElementById('right-sidebar2').style.display = '';
+    
+    document.getElementById('selected').innerHTML = '';
+    document.getElementById('notselected').innerHTML = '';
     treeDrawn = true;
-    userChanged = false;
-}
-
-function populateB1(){
-    newCanvas = false;
-    document.getElementById('mynetwork').style.display = '';
-    document.getElementById('mynetwork2').style.display = 'none';
-
-    document.getElementById('right-sidebar').style.display = '';
-    document.getElementById('right-sidebar2').style.display = 'none';
-    if ((!userChanged)&treeDrawn) return;
-    document.getElementById('interested-in').innerHTML = '';
-    document.getElementById('not-interested-in').innerHTML = '';
-
-    constructQueryWithArgs("mushroom","type","Breadth First Picking","euclidean",0.0,0.9,10)
-    treeDrawn = true;
-    userChanged = false;
+    fname = "ct_police_stop_is-arrested_breadth_first_picking_euclidean_ic0.0_ip0.9_k10.json"
+    readDashboardFile(fname)
+    
+    currentQuery = "A1"
 }
 
 function populateA2(){
     newCanvas = true;
     console.log(newCanvas)
-    constructQueryWithArgs("mushroom","type","Random Walk in Lattice","euclidean",0.0,0.001,10)
+    fname = "ct_police_stop_is-arrested_kmeans_euclidean_ic0.0_ip0.001_k10.json"
+    readDashboardFile(fname)
+    treeDrawn = false;
+    currentQuery = "A2"
 }
 
 function populateA3(){
     newCanvas = true;
-    console.log(newCanvas)
-    constructQueryWithArgs("mushroom","cap-surface","Kmeans Clutering","euclidean",0.0,0.001,10)
+    fname = "ct_police_stop_is-arrested_levelwiseBFS_euclidean_ic0.0_ip0.001_k10.json"
+    readDashboardFile(fname)
+    treeDrawn = false;
+    currentQuery = "A3"
+}
+
+function populateB1(){
+    newCanvas = false;
+    fname = "mushroom_type_breadth_first_picking_euclidean_ic0.0_ip0.9_k10.json"
+    readDashboardFile(fname)
+    treeDrawn = true;
+    currentQuery = "B1"
 }
 
 function populateB2(){
     newCanvas = true;
-    console.log(newCanvas)
-    constructQueryWithArgs("mushroom","type","Kmeans Clutering","euclidean",0.0,0.001,10)
+    fname = "mushroom_type_kmeans_euclidean_ic0.0_ip0.001_k10.json"
+    readDashboardFile(fname)
+    treeDrawn = false;
+    currentQuery = "B2"
 }
 
 function populateB3(){
     newCanvas = true;
-    console.log(newCanvas)
-    constructQueryWithArgs("mushroom","cap-surface","Random Walk in Lattice","euclidean",0.0,0.001,10)
+    fname  = "mushroom_type_levelwiseBFS_euclidean_ic0.0_ip0.001_k10.json"
+    readDashboardFile(fname)
+    treeDrawn = false;
+    currentQuery = "B3"
+}
+
+function populateT1(){
+    newCanvas = false;
+    fname = "titanic_survived_breadth_first_picking_euclidean_ic0.0_ip0.9_k10.json"
+    readDashboardFile(fname)
+    treeDrawn = true;
+    currentQuery = "T1"
+}
+
+function populateT2(){
+    newCanvas = true;
+    readDashboardFile("titanic_survived_kmeans_euclidean_ic0.0_ip0.001_k10.json")
+    treeDrawn = false;
+    currentQuery = "T2"
+}
+
+function populateT3(){
+    newCanvas = true;
+    fname = "titanic_survived_levelwiseBFS_euclidean_ic0.0_ip0.001_k10.json"
+    readDashboardFile(fname)
+    treeDrawn = false;
+    currentQuery = "T3"
 }
 /*
 function drawTable(){

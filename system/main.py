@@ -82,13 +82,10 @@ def getTables():
 
 @app.route("/getInterested", methods=['POST'])
 def getInterested():
-    print "inside getInterested"
-    print str(request.form['interested'])
-    print str(request.form['fname'])
     path = "user_study_"+datetime.strftime(datetime.now(),"%Y_%m_%d")+".log"
-    # if (not os.path.isfile(path)):
     f = open(path,'a')
     f.write(datetime.strftime(datetime.now(),"%Y-%m-%d-%H-%M-%S")+","+\
+            str(request.form['user'])+","+request.form['task']+","+\
             request.form['fname']+","+str(request.form['interested'])+"\n")
     f.close()
     return ('', 204)
@@ -139,7 +136,7 @@ def index():
 
     print "ret: "
     '''
-    all_tables = getTables()
+    # all_tables = getTables()
     # dummy example
     #nodeDic, node, edge= getTreeJSON()
 
@@ -157,7 +154,7 @@ def index():
     #                         column = json.loads(column_name), nodeDic = nodeDic)
     #return render_template("main.html", treeTreant2 = treeTreant, all_tables = all_tables,\
     #                        nodeDic = nodeDic)
-    return render_template("main.html", all_tables = all_tables)#, nodeDic = nodeDic, node = node, edge = edge)
+    return render_template("main.html")#, all_tables = all_tables)#, nodeDic = nodeDic, node = node, edge = edge)
 
 if __name__ == "__main__":
 
