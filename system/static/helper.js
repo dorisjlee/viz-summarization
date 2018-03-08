@@ -37,7 +37,10 @@ function readDashboardOutput(query){
             +"_"+query["metric"]+"_ic"+query["ic"]+"_ip"+query["ip"]+"_k"+query["k"]+".json"
     //Determine which canvas is currently on
     console.log(fname)
-    if(newCanvas == true){
+    readDashboardFile(fname)
+}
+function readDashboardFile(fname){
+        if(newCanvas == true){
 
         document.getElementById('mynetwork').style.display = 'none';
         document.getElementById('mynetwork2').style.display = '';
@@ -120,7 +123,6 @@ function readDashboardOutput(query){
         })
 
     }
-
 }
  function constructQueryCallback(){
      var query = constructQuery();
@@ -278,7 +280,8 @@ function populateA1(){
     document.getElementById('interested-in').innerHTML = '';
     document.getElementById('not-interested-in').innerHTML = '';
 
-    constructQueryWithArgs("mushroom","cap-surface","Breadth First Search","euclidean",0.0,0.001,10)
+    //constructQueryWithArgs("mushroom","cap-surface","Breadth First Search","euclidean",0.0,0.001,10)
+    readDashboardFile("mushroom_cap-surface_Breadth First Search_euclidean_ic0.0_ip0.001_k10.json")
     treeDrawn = true;
     userChanged = false;
 }
@@ -571,7 +574,7 @@ function generateSVG(cell_idx, chartarray/*, xLabel, yLabel*/) {
         var xName = chartarray[cell_idx][l]["xName"]
 
         if (t=="#")
-              t="root"
+              t="overall"
         else{
              for(var j = 0; j<t.length;j++){
                    if(t[j] == "$"){
