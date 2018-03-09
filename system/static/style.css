@@ -12,7 +12,6 @@ charttable {
 fieldset,
 img {
     border: 0;
-
 }
 address,caption,cite,code,dfn,em,strong,th,var {
     font-style: normal;
@@ -121,7 +120,12 @@ select {
 }
 
 
-
+.btn-xs {
+    padding: 10px 10px;
+    font-size: 30px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
 .title h2 {
   left:40px; 
   font-family:Verdana,sans-serif; 

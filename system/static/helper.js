@@ -40,19 +40,18 @@ function readDashboardOutput(query){
     readDashboardFile(fname)
 }
 function readDashboardFile(fname){
-    if(newCanvas == true){
+    
+    document.getElementById('right-sidebar').style.display = 'none';
+    document.getElementById('right-sidebar2').style.display = '';
 
+    document.getElementById('selected').innerHTML = '';
+    document.getElementById('notselected').innerHTML = '';
+    var nodeDic = ""
+    var json_pathloc = "http://"+window.location.hostname+":"+window.location.port+"/generated_dashboards/"+fname
+    if(layout=="table"){
         document.getElementById('mynetwork').style.display = 'none';
         document.getElementById('mynetwork2').style.display = '';
-
-        document.getElementById('right-sidebar').style.display = 'none';
-        document.getElementById('right-sidebar2').style.display = '';
-
-        document.getElementById('selected').innerHTML = '';
-        document.getElementById('notselected').innerHTML = '';
-        console.log(fname)
-        var nodeDic = ""
-        var json_pathloc = "http://"+window.location.hostname+":"+window.location.port+"/generated_dashboards/"+fname
+        document.getElementById('charttable').style.display = '';
         $.ajax({
             url: json_pathloc,
             type: "GET",
@@ -103,15 +102,11 @@ function readDashboardFile(fname){
                     currentcell.innerHTML = svgString
                     }
                 }
-
         })
-        tableDrawn = true;
     }
-    // Data Upload after options selection
     else{
-        console.log(fname)
-        var nodeDic = ""
-        var json_pathloc = "http://"+window.location.hostname+":"+window.location.port+"/generated_dashboards/"+fname
+        document.getElementById('mynetwork').style.display = '';
+        document.getElementById('charttable').style.display = 'none';
         $.ajax({
             url: json_pathloc,
             type: "GET",
@@ -120,7 +115,6 @@ function readDashboardFile(fname){
                 getNodeEdgeListThenDraw(data);
             }
         })
-
     }
 }
  function constructQueryCallback(){
@@ -259,90 +253,69 @@ function IsJsonString(str) {
     }
     return true;
 }
-var newCanvas = false;
-var treeDrawn = false;
-var tableDrawn = false;
+var layout = "table";
 var currentQuery = "";
 
 function populateA1(){
-    newCanvas = false;
-    document.getElementById('mynetwork').style.display = 'none';
-    document.getElementById('mynetwork2').style.display = '';
-
-    document.getElementById('right-sidebar').style.display = 'none';
-    document.getElementById('right-sidebar2').style.display = '';
-    
-    document.getElementById('selected').innerHTML = '';
-    document.getElementById('notselected').innerHTML = '';
-    treeDrawn = true;
+    currentQuery = "A1"
+    layout = "graph"
     fname = "ct_police_stop_is-arrested_breadth_first_picking_euclidean_ic0.0_ip0.9_k10.json"
     readDashboardFile(fname)
-    
-    currentQuery = "A1"
 }
 
 function populateA2(){
-    newCanvas = true;
-    console.log(newCanvas)
+    layout = "table"
+    currentQuery = "A2"
     fname = "ct_police_stop_is-arrested_kmeans_euclidean_ic0.0_ip0.001_k10.json"
     readDashboardFile(fname)
-    treeDrawn = false;
-    currentQuery = "A2"
 }
 
 function populateA3(){
-    newCanvas = true;
+    layout = "table"
+    currentQuery = "A3"
     fname = "ct_police_stop_is-arrested_levelwiseBFS_euclidean_ic0.0_ip0.001_k10.json"
     readDashboardFile(fname)
-    treeDrawn = false;
-    currentQuery = "A3"
 }
 
 function populateB1(){
-    newCanvas = false;
+    layout="graph";
+    currentQuery = "B1"
     fname = "mushroom_type_breadth_first_picking_euclidean_ic0.0_ip0.9_k10.json"
     readDashboardFile(fname)
-    treeDrawn = true;
-    currentQuery = "B1"
 }
 
 function populateB2(){
-    newCanvas = true;
+    layout = "table"
+    currentQuery = "B2"
     fname = "mushroom_type_kmeans_euclidean_ic0.0_ip0.001_k10.json"
     readDashboardFile(fname)
-    treeDrawn = false;
-    currentQuery = "B2"
 }
 
 function populateB3(){
-    newCanvas = true;
+    layout = "table"
+    currentQuery = "B3"
     fname  = "mushroom_type_levelwiseBFS_euclidean_ic0.0_ip0.001_k10.json"
     readDashboardFile(fname)
-    treeDrawn = false;
-    currentQuery = "B3"
 }
 
 function populateT1(){
-    newCanvas = false;
+    layout = "graph"
+    currentQuery = "T1"
     fname = "titanic_survived_breadth_first_picking_euclidean_ic0.0_ip0.9_k10.json"
     readDashboardFile(fname)
-    treeDrawn = true;
-    currentQuery = "T1"
 }
 
 function populateT2(){
-    newCanvas = true;
-    readDashboardFile("titanic_survived_kmeans_euclidean_ic0.0_ip0.001_k10.json")
-    treeDrawn = false;
+    layout = "table"
     currentQuery = "T2"
+    readDashboardFile("titanic_survived_kmeans_euclidean_ic0.0_ip0.001_k10.json")
 }
 
 function populateT3(){
-    newCanvas = true;
+    layout = "table"
+    currentQuery = "T3"
     fname = "titanic_survived_levelwiseBFS_euclidean_ic0.0_ip0.001_k10.json"
     readDashboardFile(fname)
-    treeDrawn = false;
-    currentQuery = "T3"
 }
 /*
 function drawTable(){
@@ -443,7 +416,7 @@ function drawTable(){
 
 // Direct input graphDic submission form 
 $("#graphDicSubmit").click(function(){
-    if(newCanvas){
+    if(layout=="table"){
         var nodeDic = $("#graphDic").val()
         nodeDic = nodeDic.replace(/\\"/g, '"')
         chartarray = JSON.parse(nodeDic)
