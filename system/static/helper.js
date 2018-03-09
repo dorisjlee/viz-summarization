@@ -30,7 +30,7 @@ function constructQuery(){
     readDashboardOutput(query)
     return query
 }
-var tableChecked = [];
+var tableChecked = {};
 var chartarray;
 function readDashboardOutput(query){
     fname = query["dataset"]+"_"+query["xAxis"]+"_"+query["algorithm"]
@@ -70,9 +70,9 @@ function readDashboardFile(fname){
                 var colnum = 5
                 var table = document.getElementById('charttable'), tr, td, row, cell;
                 table.innerHTML = ''
-                tableChecked = [];
-                for (var i = 0; i < 20; i++){
-                    tableChecked.push(0);
+                tableChecked = {};
+                for (var i = 0; i < len; i++){
+                    tableChecked[i] = 0;
                 }
                 for (row = 0; row < rownum; row++) {
                     tr = document.createElement('tr');
@@ -435,9 +435,9 @@ $("#graphDicSubmit").click(function(){
         var colnum = 5
         var table = document.getElementById('charttable'), tr, td, row, cell;
         table.innerHTML = ''
-        tableChecked = [];
-        for (var i = 0; i < 20; i++){
-            tableChecked.push(0);
+        tableChecked = {};
+        for (var i = 0; i < len; i++){
+            tableChecked[i]=0;
         }
         for (row = 0; row < rownum; row++) {
             tr = document.createElement('tr');
