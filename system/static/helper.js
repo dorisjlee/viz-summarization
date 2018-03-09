@@ -40,18 +40,18 @@ function readDashboardOutput(query){
     readDashboardFile(fname)
 }
 function readDashboardFile(fname){
-    
-    document.getElementById('right-sidebar').style.display = 'none';
-    document.getElementById('right-sidebar2').style.display = '';
-
-    document.getElementById('selected').innerHTML = '';
-    document.getElementById('notselected').innerHTML = '';
     var nodeDic = ""
     var json_pathloc = "http://"+window.location.hostname+":"+window.location.port+"/generated_dashboards/"+fname
     if(layout=="table"){
-        document.getElementById('mynetwork').style.display = 'none';
-        document.getElementById('mynetwork2').style.display = '';
+        document.getElementById('canvas-graph').style.display = 'none';
+        document.getElementById('canvas-table').style.display = '';
         document.getElementById('charttable').style.display = '';
+
+        document.getElementById('right-sidebar-graph').style.display = 'none';
+        document.getElementById('right-sidebar-table').style.display = '';
+
+        document.getElementById('selected').innerHTML = '';
+        document.getElementById('notselected').innerHTML = '';
         $.ajax({
             url: json_pathloc,
             type: "GET",
@@ -105,8 +105,15 @@ function readDashboardFile(fname){
         })
     }
     else{
-        document.getElementById('mynetwork').style.display = '';
+        document.getElementById('canvas-graph').style.display = '';
+        document.getElementById('canvas-table').style.display = 'none';
         document.getElementById('charttable').style.display = 'none';
+
+        document.getElementById('right-sidebar-graph').style.display = '';
+        document.getElementById('right-sidebar-table').style.display = 'none';
+
+        document.getElementById('selected').innerHTML = '';
+        document.getElementById('notselected').innerHTML = '';
         $.ajax({
             url: json_pathloc,
             type: "GET",
@@ -320,11 +327,11 @@ function populateT3(){
 /*
 function drawTable(){
     newCanvas = true;
-    document.getElementById('mynetwork').style.display = 'none';
-    document.getElementById('mynetwork2').style.display = '';
+    document.getElementById('canvas-graph').style.display = 'none';
+    document.getElementById('canvas-table').style.display = '';
 
-    document.getElementById('right-sidebar').style.display = 'none';
-    document.getElementById('right-sidebar2').style.display = '';
+    document.getElementById('right-sidebar-graph').style.display = 'none';
+    document.getElementById('right-sidebar-table').style.display = '';
     if ((!userChanged)&tableDrawn) return;
     document.getElementById('selected').innerHTML = '';
     document.getElementById('notselected').innerHTML = '';
@@ -390,26 +397,26 @@ function drawTable(){
 //function toggleCanvas(element)
 //{
 //    if (element.checked){
-//        document.getElementById('mynetwork').style.display = 'none';
-//        document.getElementById('mynetwork2').style.display = '';
+//        document.getElementById('canvas-graph').style.display = 'none';
+//        document.getElementById('canvas-table').style.display = '';
 //        if(opened){
 //            document.getElementById("mySidebar2").style.width = "25%";
 //            document.getElementById("mySidebar2").style.display = "block";
 //            document.getElementById("mySidebar").style.display = "none";
 //        }
-//        document.getElementById('right-sidebar').style.display = 'none';
-//        document.getElementById('right-sidebar2').style.display = '';
+//        document.getElementById('right-sidebar-graph').style.display = 'none';
+//        document.getElementById('right-sidebar-table').style.display = '';
 //    }
 //    else{
-//        document.getElementById('mynetwork').style.display = '';
-//        document.getElementById('mynetwork2').style.display = 'none';
+//        document.getElementById('canvas-graph').style.display = '';
+//        document.getElementById('canvas-table').style.display = 'none';
 //        if(opened){
 //            document.getElementById("mySidebar").style.width = "25%";
 //            document.getElementById("mySidebar").style.display = "block";
 //            document.getElementById("mySidebar2").style.display = "none";
 //        }
-//        document.getElementById('right-sidebar').style.display = '';
-//        document.getElementById('right-sidebar2').style.display = 'none';
+//        document.getElementById('right-sidebar-graph').style.display = '';
+//        document.getElementById('right-sidebar-table').style.display = 'none';
 //    }
 //}
 

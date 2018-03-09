@@ -9,7 +9,7 @@ var options;
 function draw(node,edge) {
 
     // create a network
-    var container = document.getElementById('mynetwork');
+    var container = document.getElementById('canvas-graph');
     container.removeChild(container.childNodes[0])
 
     //(totalclick = []).length = node.length;
