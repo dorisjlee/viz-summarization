@@ -538,6 +538,13 @@ function showfilter(cell){
         else if(tableChecked[i]==3)
             color =  'red';
     var tdid = 'td' + i.toString();
+    var user = $("#user").find(":selected").text();
+        $.post("/getInterested",{
+            "user" : JSON.stringify(user),
+            "task" : JSON.stringify(currentQuery),
+            "interested" : JSON.stringify(tableChecked),
+            "fname" : JSON.stringify(fname)
+        },'application/json')
     document.getElementById(tdid).style.borderColor = color
     document.getElementById('selected').innerHTML=""
     document.getElementById('notselected').innerHTML=""

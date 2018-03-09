@@ -9,14 +9,17 @@ sns.set_context(
    rc={
        "lines.linewidth": 2,
        #"text.usetex": True,
-       #"font.family": 'serif',
-       #"font.serif": ['Palatino'],
-       "font.size": 18
+       "font.family": 'serif',
+       "font.serif": ['Palatino'],
+       "font.size": 20
    })
 sns.set_style('white')
-sns.despine(trim = True, offset = 10)
+two_colors = ["#fc9272", "#9ecae1"]
+sns.set_palette(sns.color_palette(two_colors))
 
-
+from matplotlib import rc
+font = {'family': 'serif', 'serif': ['Palatino'], 'size': 20}
+rc('font', **font)
 
 plt.rcParams["figure.figsize"] = (4, 4)
 plt.rcParams["figure.max_open_warning"]=500
@@ -110,13 +113,14 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
     #font = {'family': 'serif', 'serif': ['Palatino'], 'size': 18}
     #sns.set(palette="dark",color_codes=True)
 
-
+    sns.despine(top=True, right=True)
     # save as svg string
     imgdata = StringIO.StringIO()
     plt.tight_layout()
     fig.savefig(imgdata, format='svg')
     imgdata.seek(0)  # rewind the data
     svg_str = imgdata.buf  # this is svg data
+
     return svg_str
 
 
