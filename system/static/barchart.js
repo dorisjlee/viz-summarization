@@ -105,8 +105,10 @@ function draw(node,edge) {
             //console.log("after: ")
             //console.log(node_dataset);
         }
-
+        var user = $("#user").find(":selected").text();
         $.post("/getInterested",{
+            "user" : JSON.stringify(user),
+            "task" : JSON.stringify(currentQuery),
             "interested" : JSON.stringify(totalclick),
             "fname" : JSON.stringify(fname)
         },'application/json')

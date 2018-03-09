@@ -40,19 +40,18 @@ function readDashboardOutput(query){
     readDashboardFile(fname)
 }
 function readDashboardFile(fname){
-        if(newCanvas == true){
+    
+    document.getElementById('right-sidebar').style.display = 'none';
+    document.getElementById('right-sidebar2').style.display = '';
 
+    document.getElementById('selected').innerHTML = '';
+    document.getElementById('notselected').innerHTML = '';
+    var nodeDic = ""
+    var json_pathloc = "http://"+window.location.hostname+":"+window.location.port+"/generated_dashboards/"+fname
+    if(layout=="table"){
         document.getElementById('mynetwork').style.display = 'none';
         document.getElementById('mynetwork2').style.display = '';
-
-        document.getElementById('right-sidebar').style.display = 'none';
-        document.getElementById('right-sidebar2').style.display = '';
-        if ((!userChanged)&tableDrawn) return;
-        document.getElementById('selected').innerHTML = '';
-        document.getElementById('notselected').innerHTML = '';
-        console.log(fname)
-        var nodeDic = ""
-        var json_pathloc = "http://"+window.location.hostname+":"+window.location.port+"/generated_dashboards/"+fname
+        document.getElementById('charttable').style.display = '';
         $.ajax({
             url: json_pathloc,
             type: "GET",
@@ -103,16 +102,11 @@ function readDashboardFile(fname){
                     currentcell.innerHTML = svgString
                     }
                 }
-
         })
-        tableDrawn = true;
-        userChanged = false;
     }
-    // Data Upload after options selection
     else{
-        console.log(fname)
-        var nodeDic = ""
-        var json_pathloc = "http://"+window.location.hostname+":"+window.location.port+"/generated_dashboards/"+fname
+        document.getElementById('mynetwork').style.display = '';
+        document.getElementById('charttable').style.display = 'none';
         $.ajax({
             url: json_pathloc,
             type: "GET",
@@ -121,7 +115,6 @@ function readDashboardFile(fname){
                 getNodeEdgeListThenDraw(data);
             }
         })
-
     }
 }
  function constructQueryCallback(){
@@ -260,70 +253,69 @@ function IsJsonString(str) {
     }
     return true;
 }
-var newCanvas = false;
-var userChanged = false;
-var treeDrawn = false;
-var tableDrawn = false;
-function changeUser(){
-    userChanged = true;
-    treeDrawn = false;
-    tableDrawn = false;
-}
+var layout = "table";
+var currentQuery = "";
+
 function populateA1(){
-    newCanvas = false;
-    document.getElementById('mynetwork').style.display = '';
-    document.getElementById('mynetwork2').style.display = 'none';
-
-    document.getElementById('right-sidebar').style.display = '';
-    document.getElementById('right-sidebar2').style.display = 'none';
-    if ((!userChanged)&treeDrawn) return;
-    document.getElementById('interested-in').innerHTML = '';
-    document.getElementById('not-interested-in').innerHTML = '';
-
-    //constructQueryWithArgs("mushroom","cap-surface","Breadth First Search","euclidean",0.0,0.001,10)
-    readDashboardFile("mushroom_cap-surface_Breadth First Search_euclidean_ic0.0_ip0.001_k10.json")
-    treeDrawn = true;
-    userChanged = false;
-}
-
-function populateB1(){
-    newCanvas = false;
-    document.getElementById('mynetwork').style.display = '';
-    document.getElementById('mynetwork2').style.display = 'none';
-
-    document.getElementById('right-sidebar').style.display = '';
-    document.getElementById('right-sidebar2').style.display = 'none';
-    if ((!userChanged)&treeDrawn) return;
-    document.getElementById('interested-in').innerHTML = '';
-    document.getElementById('not-interested-in').innerHTML = '';
-
-    constructQueryWithArgs("mushroom","type","Breadth First Picking","euclidean",0.0,0.9,10)
-    treeDrawn = true;
-    userChanged = false;
+    currentQuery = "A1"
+    layout = "graph"
+    fname = "ct_police_stop_is-arrested_breadth_first_picking_euclidean_ic0.0_ip0.9_k10.json"
+    readDashboardFile(fname)
 }
 
 function populateA2(){
-    newCanvas = true;
-    console.log(newCanvas)
-    constructQueryWithArgs("mushroom","type","Random Walk in Lattice","euclidean",0.0,0.001,10)
+    layout = "table"
+    currentQuery = "A2"
+    fname = "ct_police_stop_is-arrested_kmeans_euclidean_ic0.0_ip0.001_k10.json"
+    readDashboardFile(fname)
 }
 
 function populateA3(){
-    newCanvas = true;
-    console.log(newCanvas)
-    constructQueryWithArgs("mushroom","cap-surface","Kmeans Clutering","euclidean",0.0,0.001,10)
+    layout = "table"
+    currentQuery = "A3"
+    fname = "ct_police_stop_is-arrested_levelwiseBFS_euclidean_ic0.0_ip0.001_k10.json"
+    readDashboardFile(fname)
+}
+
+function populateB1(){
+    layout="graph";
+    currentQuery = "B1"
+    fname = "mushroom_type_breadth_first_picking_euclidean_ic0.0_ip0.9_k10.json"
+    readDashboardFile(fname)
 }
 
 function populateB2(){
-    newCanvas = true;
-    console.log(newCanvas)
-    constructQueryWithArgs("mushroom","type","Kmeans Clutering","euclidean",0.0,0.001,10)
+    layout = "table"
+    currentQuery = "B2"
+    fname = "mushroom_type_kmeans_euclidean_ic0.0_ip0.001_k10.json"
+    readDashboardFile(fname)
 }
 
 function populateB3(){
-    newCanvas = true;
-    console.log(newCanvas)
-    constructQueryWithArgs("mushroom","cap-surface","Random Walk in Lattice","euclidean",0.0,0.001,10)
+    layout = "table"
+    currentQuery = "B3"
+    fname  = "mushroom_type_levelwiseBFS_euclidean_ic0.0_ip0.001_k10.json"
+    readDashboardFile(fname)
+}
+
+function populateT1(){
+    layout = "graph"
+    currentQuery = "T1"
+    fname = "titanic_survived_breadth_first_picking_euclidean_ic0.0_ip0.9_k10.json"
+    readDashboardFile(fname)
+}
+
+function populateT2(){
+    layout = "table"
+    currentQuery = "T2"
+    readDashboardFile("titanic_survived_kmeans_euclidean_ic0.0_ip0.001_k10.json")
+}
+
+function populateT3(){
+    layout = "table"
+    currentQuery = "T3"
+    fname = "titanic_survived_levelwiseBFS_euclidean_ic0.0_ip0.001_k10.json"
+    readDashboardFile(fname)
 }
 /*
 function drawTable(){
@@ -424,7 +416,7 @@ function drawTable(){
 
 // Direct input graphDic submission form 
 $("#graphDicSubmit").click(function(){
-    if(newCanvas){
+    if(layout=="table"){
         var nodeDic = $("#graphDic").val()
         nodeDic = nodeDic.replace(/\\"/g, '"')
         chartarray = JSON.parse(nodeDic)

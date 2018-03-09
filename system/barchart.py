@@ -19,7 +19,7 @@ sns.despine(trim = True, offset = 10)
 
 
 plt.rcParams["figure.figsize"] = (4, 4)
-
+plt.rcParams["figure.max_open_warning"]=500
 
 def millify(n):
     n = float(n)
