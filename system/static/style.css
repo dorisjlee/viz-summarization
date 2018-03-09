@@ -1,4 +1,4 @@
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
+body,div,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
     margin: 0;
     padding: 0;
 
@@ -262,17 +262,17 @@ input[type=range] {
 }
 
 .menu ul {
-    list-style-type: none;
+    list-style-type:circle;
     margin: 0;
     padding: 0;
 }
-.menu li {
+.panel {
     padding: 8px;
     margin-bottom: 8px;
     background-color: #33b5e5;
     color: #ffffff;
 }
-.menu li:hover {
+.panel:hover {
     background-color: #0099cc;
 }
 
@@ -316,9 +316,3 @@ input[type=range] {
     cursor: pointer;
 }
 
-.sidebar-menu li {
-    padding: 8px;
-    margin-bottom: 8px;
-    background-color: #33b5e5;
-    color: #ffffff;
-}

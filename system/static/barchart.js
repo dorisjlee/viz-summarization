@@ -83,9 +83,9 @@ function draw(node,edge) {
         if(totalclick[nodeID]==1)
             color = 'grey';
         else if(totalclick[nodeID]==2)
-            color = 'red';
-        else if(totalclick[nodeID]==3)
             color = 'green';
+        else if(totalclick[nodeID]==3)
+            color = 'red';
 
         if (nodeID>=0) {
             var clickedNode = node_dataset.get(nodeID);
@@ -114,13 +114,13 @@ function draw(node,edge) {
         document.getElementById('not-interested-in').innerHTML = '';
         for (i = 0; i < node.length; i++) {
 
-            if(totalclick[node[i].id]==3){
+            if(totalclick[node[i].id]==2){
                 //var currNode = node_dataset.get(i);
-                document.getElementById('interested-in').innerHTML+='<tr>'+'<td style="color:#368332"> '+node[i].filterVal+'<td> '+'<tr>';
+                document.getElementById('interested-in').innerHTML+='<li type="square" style="color:green">'+node[i].filterVal+'</li>';
             }
-            else if (totalclick[node[i].id]==2){
+            else if (totalclick[node[i].id]==3){
                 //var currNode = node_dataset.get(i);
-                document.getElementById('not-interested-in').innerHTML+='<tr>'+'<td style="color:#ff0000"> '+node[i].filterVal+'<td> '+'<tr>';
+                document.getElementById('not-interested-in').innerHTML+='<li type="square" style="color:red">'+node[i].filterVal+'</li>';
             }
         }
 

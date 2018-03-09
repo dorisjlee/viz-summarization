@@ -535,9 +535,9 @@ function showfilter(cell){
         if(tableChecked[i]==1)
             color = 'grey';
         else if(tableChecked[i]==2)
-            color = 'red';
+            color = '#339933';
         else if(tableChecked[i]==3)
-            color =  '#339933';
+            color =  'red';
     var tdid = 'td' + i.toString();
     document.getElementById(tdid).style.borderColor = color
     document.getElementById('selected').innerHTML=""
@@ -545,12 +545,12 @@ function showfilter(cell){
 
     Object.keys(tableChecked).forEach(function(key) {
 
-        if(tableChecked[key]==3){
+        if(tableChecked[key]==2){
 
-            document.getElementById('selected').innerHTML+=  '<tr>'+ '<td style="color:green"> '+title[key]+'<td> '+'<tr>';
+            document.getElementById('selected').innerHTML+=  '<li type="square" style="color:green">'+title[key]+'</li>';
         }
-        else if(tableChecked[key]==2){
-            document.getElementById('notselected').innerHTML+=  '<tr>'+ '<td style="color:red"> '+title[key]+'<td> '+'<tr>';
+        else if(tableChecked[key]==3){
+            document.getElementById('notselected').innerHTML+= '<li type="square" style="color:red">'+title[key]+'</li>';
         }
     });
 
