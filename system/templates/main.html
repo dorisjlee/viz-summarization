@@ -250,10 +250,29 @@
 
 
 </div>
+    <script>
+        $(document).ready(function(){
+        $('#charttable').bind('wheel mousewheel', function(e){
+            var delta;
+
+            if (e.originalEvent.wheelDelta !== undefined)
+                delta = e.originalEvent.wheelDelta;
+            else
+                delta = e.originalEvent.deltaY * -1;
+
+                if(delta > 0) {
+                    $("#charttable").css("zoom", "+=0.1");
+                }
+                else{
+                    $("#canvas-table").css("width", "-=0.1");
+                }
+            });
+        });
+    </script>
         <div id="canvas-graph" style="height:100%; width:80%; float:left; background-color: rgb(239, 240, 242);">
             <img src="resources/Eclipse.svg" id = 'loadingDashboard' style="display: none; position: relative; z-index: 10; width: 100%; height: 50%;">
         </div>
-        <div id="canvas-table" style="height:100%; width:80%; float:left;display:none;background-color:#eff0f2; ">
+        <div id="canvas-table" style="zoom:100%;height:100%; width:80%; float:left;display:none;background-color:#eff0f2; ">
             <table id="charttable" style="border-spacing: 5px 12px;width:100%; height:100%;border: 1px solid black;border-collapse: separate;">
 
             </table>
