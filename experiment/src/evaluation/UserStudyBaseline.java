@@ -14,6 +14,7 @@ import algorithms.BaselineKmeans;
 import algorithms.BreadthFirstPicking;
 import algorithms.ExhaustivePicking;
 import algorithms.Experiment;
+import algorithms.GreedyPicking;
 import algorithms.MultipleRandomWalk;
 import algorithms.RandomWalk;
 import algorithms.Traversal;
@@ -27,7 +28,8 @@ public class UserStudyBaseline {
 	   Experiment exp;
 	   int k =10;
 	   Experiment.experiment_name="../ipynb/dashboards/json/UserStudyBaseline";
-	   String dataset_name="ct_police_stop";
+	   //String dataset_name="ct_police_stop";
+	   String dataset_name="mushroom";
 	   ArrayList<String> groupby = null;
 	   String yAxis = null;
 	   String xAxis = null; 
@@ -62,24 +64,29 @@ public class UserStudyBaseline {
 		   xAxis = "survived"; 
 		   aggType = "COUNT";
 	   }
-	   	   
-	   Traversal ourAlgo = new BreadthFirstPicking();
-	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.9,false);
-	   exp.setAlgo(ourAlgo);
-	   exp.runOutput(exp);
 	   
-	   Traversal clustering = new BaselineKmeans();
+//	   Traversal ourAlgo = new GreedyPicking();
+//	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.8,false);
+//	   exp.setAlgo(ourAlgo);
+//	   exp.runOutput(exp);
+//	   Traversal ourAlgo = new BreadthFirstPicking();
+//	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.9,false);
+//	   exp.setAlgo(ourAlgo);
+//	   exp.runOutput(exp);
+//
 	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.001,false);
-	   exp.setAlgo(clustering);
-	   exp.runTableLayoutOutput(exp);   
+//	   Traversal clustering = new BaselineKmeans();
+
+//	   exp.setAlgo(clustering);
+//	   exp.runTableLayoutOutput(exp);   
 	   
 	   Traversal BBFS = new BaselineBFS();
 	   exp.setAlgo(BBFS);
 	   exp.runTableLayoutOutput(exp);   
 	   
-	   Traversal randWalk = new RandomWalk();
-	   exp.setAlgo(randWalk);
-	   exp.runTableLayoutOutput(exp);   
+//	   Traversal randWalk = new RandomWalk();
+//	   exp.setAlgo(randWalk);
+//	   exp.runTableLayoutOutput(exp);   
 	   
 	}
 }
