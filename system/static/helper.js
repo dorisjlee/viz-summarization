@@ -83,7 +83,7 @@ function readDashboardFile(fname){
                         td.setAttribute('id',tdId);
                         //td.setAttribute('height', 20%);
                         tr.appendChild(td);
-                        td.style = "border: 3px solid grey;border-collapse: separate; align='center' "
+                        td.style = "border: 5px solid grey;border-collapse: separate; align='center' "
 
                         td.innerHTML = /*'<p style = "font-size:10px;color:#787878">'+(row * colnum + cell).toString()+'</p>'*/'<div id="c' +(row * colnum + cell).toString()+'" style = "border-collapse: separate;" onclick="showfilter(this)"></div>'
                     }
@@ -315,7 +315,8 @@ function populateT1(){
 function populateT2(){
     layout = "table"
     currentQuery = "T2"
-    readDashboardFile("titanic_survived_kmeans_euclidean_ic0.0_ip0.001_k10.json")
+    fname = "titanic_survived_kmeans_euclidean_ic0.0_ip0.001_k10.json"
+    readDashboardFile(fname)
 }
 
 function populateT3(){
