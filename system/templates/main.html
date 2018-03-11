@@ -11,6 +11,7 @@
 <script src="resources/raphael.js"></script>
 <script src="resources/Treant.js"></script>
 <script src="resources/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="resources/jquery.easing.js"></script>
 <!-- <body onload="draw(node,edge)"> -->
 
@@ -188,13 +189,11 @@
 <div zclass="w3-main" id="main">
 
 <div class="w3-teal">
-  <div class="iconcontainer" onclick="mymenuicon(this);menuItem_open_close();" >
-
+  <div class="iconcontainer" style="margin-left: 10px;" onclick="mymenuicon(this);menuItem_open_close();" >
   <div class="bar1"></div>
   <div class="bar2"></div>
   <div class="bar3"></div>
 </div>
-
 
     <button id="helpmsg" style="float:right;width:3%;height:5.65%;text-align:center;font-size:20px;color:#009688;font-weight: bold">?</button>
 
@@ -226,11 +225,11 @@
 <div class="w3-container">
     <div id="testbar">
     </div>
-        <div>
-            <!--<br> nodeDic: <input type="text" id="nodeDic" style="width: 30%;">-->
-            <br> graphDic: <input type="text" id="graphDic" style="width: 30%;">
+        <!--<br> nodeDic: <input type="text" id="nodeDic" style="width: 30%;">-->
+        <div>    
+            <!-- <br> graphDic: <input type="text" id="graphDic" style="width: 30%;">
             <input type="submit" id="graphDicSubmit" style = "display: inline-block;font-size: 15px;">
-            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp; -->
             <input id="newCanvas" type="checkbox" onchange="toggleCanvas(this)" style="display:none">
         </div>
 <!--         <div id = "nodeDic" style ="display: block" treeContent = {{nodeDic}}>
@@ -251,9 +250,11 @@
 
 </div>
     <script>
-        // $("#charttable").draggable()
+        $( function() {
+          $( "#charttable" ).draggable({ containment: '#canvas-table', scroll: false });
+        });
         $(document).ready(function(){
-            $('#charttable').bind('wheel mousewheel', function(e){
+            $('#canvas-table').bind('wheel mousewheel', function(e){
             var delta;
             if (e.originalEvent.wheelDelta !== undefined)
                 delta = e.originalEvent.wheelDelta;
@@ -274,7 +275,7 @@
             <img src="resources/Eclipse.svg" id = 'loadingDashboard' style="display: none; position: relative; z-index: 10; width: 100%; height: 50%;">
         </div>
         <div id="canvas-table" style="zoom:100%;height:100%; width:80%; float:left;display:none;background-color:#eff0f2; ">
-            <table id="charttable" style="border-spacing: 5px 12px;border: 1px solid black;border-collapse: separate;">
+            <table id="charttable" style="border-spacing: 5px 12px; border-collapse: separate; ">
 
             </table>
         </div>
@@ -289,7 +290,7 @@
         </div>
 </div>
 
- <div id="right-sidebar-graph" class="clearfix" style="width:20%; float:right">
+ <div id="right-sidebar-graph" class="clearfix" style="width:20%; float:right; z-index: 1; position: relative;">
   <div class="column menu" style="width:100%">
 
         <div>
@@ -315,7 +316,7 @@
 
   </div>
  </div>
-<div id="right-sidebar-table" class="clearfix" style="background-color:White;width:20%;height:100%; float:right;display:none">
+<div id="right-sidebar-table" class="clearfix" style="background-color:White;width:20%;height:100%; float:right;display:none; z-index: 1; position: relative;" >
 <div class="sidebar-menu" style="width:100%">
    <div>
             <li class="panel">You are interested in...</li>
