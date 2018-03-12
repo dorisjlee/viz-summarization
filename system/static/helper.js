@@ -516,12 +516,13 @@ function showfilter(cell){
                 else{
                     for(var j = 0; j<title[idx].length;j++){
                         if(title[idx][j] == "#"){
-                            title[idx] = title[idx].substr(0, j) + '\n' + title[idx].substr(j + 1);
+                            title[idx] = title[idx].substr(0, j) + ',\n' + title[idx].substr(j + 1);
                         }
                         else if(title[idx][j] == "$"){
                             title[idx] = title[idx].substr(0, j) + '=' + title[idx].substr(j + 1);
                         }
                     }
+                    title[idx] = title[idx].slice(1,-2)
                 }
 
          idx+=1;
