@@ -41,7 +41,7 @@ public class BaselineBFS extends Traversal
 //	       System.out.println("lattice.nodelist.size():"+lattice.nodeList.size());
 	       while(dashboard.size()<k && dashboard.size() < lattice.nodeList.size())
 	       {
-		    	   ArrayList<Integer> currentFrontier = RandomWalk.getFrontier(lattice, dashboard);
+		    	   ArrayList<Integer> currentFrontier = BaselineBFS.getFrontier(lattice, dashboard);
 //		    	   System.out.print("currentFrontier.size():");
 //		    	   System.out.println(currentFrontier.size());
 	           if (currentFrontier.size() >= k-dashboard.size()) 
@@ -83,11 +83,11 @@ public class BaselineBFS extends Traversal
      {
           //System.out.println("Children of: "+lattice.nodeList.get(dashboard.get(i)).get_id());
   	       // Looping through all children indexes 
-         int flag = 0;
          Integer currentNodeID = dashboard.get(i);
          Node currentNode = lattice.nodeList.get(currentNodeID);
          for(int j = 0; j < currentNode.child_list.size(); j++)
-         { 
+         { 		
+        	 	int flag = 0;
              //System.out.println(j+"th Child: "+ lattice.nodeList.get(currentNode.get_child_list().get(j)).id);
              for(int sp = 0; sp < dashboard.size(); sp++)
              {
