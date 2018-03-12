@@ -14,8 +14,6 @@ sns.set_context(
        "font.size": 20
    })
 sns.set_style('white')
-two_colors = ["#fc9272", "#9ecae1"]
-sns.set_palette(sns.color_palette(two_colors))
 
 from matplotlib import rc
 font = {'family': 'serif', 'serif': ['Palatino'], 'size': 20}
@@ -58,6 +56,12 @@ def autolabel(rects, ax):
 def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", N=1, width=0.1):
 
     ind = np.arange(N)  # the x locations for the groups
+    if len(yVals)==2:
+        colors = ["#fc9272","#9ecae1"]
+        sns.set_palette(sns.color_palette(colors))
+    else:
+        colors = ["#9ecae1","#99e699","#fc9272"]
+        sns.set_palette(sns.color_palette(colors))
     fig, ax = plt.subplots()
     #cmap = get_cmap(len(yVals) + 1)
     rects = []

@@ -266,49 +266,49 @@ var currentQuery = "";
 function populateA1(){
     currentQuery = "A1"
     layout = "graph"
-    fname = "ct_police_stop_is-arrested_breadth_first_picking_euclidean_ic0.0_ip0.9_k10.json"
+    fname = "ct_police_stop_stop-outcome_greedy_picking_euclidean_ic0.0_ip0.9_k10.json"
     readDashboardFile(fname)
 }
 
 function populateA2(){
     layout = "table"
     currentQuery = "A2"
-    fname = "ct_police_stop_is-arrested_kmeans_euclidean_ic0.0_ip0.001_k10.json"
+    fname = "ct_police_stop_stop-outcome_kmeans_euclidean_ic0.0_ip0.001_k10.json"
     readDashboardFile(fname)
 }
 
 function populateA3(){
     layout = "table"
     currentQuery = "A3"
-    fname = "ct_police_stop_is-arrested_levelwiseBFS_euclidean_ic0.0_ip0.001_k10.json"
+    fname = "ct_police_stop_stop-outcome_levelwiseBFS_euclidean_ic0.0_ip0.001_k10.json"
     readDashboardFile(fname)
 }
 
 function populateB1(){
     layout="graph";
     currentQuery = "B1"
-    fname = "mushroom_type_breadth_first_picking_euclidean_ic0.0_ip0.9_k10.json"
+    fname = "autism_autism_greedy_picking_euclidean_ic0.0_ip0.9_k10.json"
     readDashboardFile(fname)
 }
 
 function populateB2(){
     layout = "table"
     currentQuery = "B2"
-    fname = "mushroom_type_kmeans_euclidean_ic0.0_ip0.001_k10.json"
+    fname = "autism_autism_kmeans_euclidean_ic0.0_ip0.001_k10.json"
     readDashboardFile(fname)
 }
 
 function populateB3(){
     layout = "table"
     currentQuery = "B3"
-    fname  = "mushroom_type_levelwiseBFS_euclidean_ic0.0_ip0.001_k10.json"
+    fname  = "autism_autism_levelwiseBFS_euclidean_ic0.0_ip0.001_k10.json"
     readDashboardFile(fname)
 }
 
 function populateT1(){
     layout = "graph"
     currentQuery = "T1"
-    fname = "titanic_survived_breadth_first_picking_euclidean_ic0.0_ip0.9_k10.json"
+    fname = "titanic_survived_greedy_picking_euclidean_ic0.0_ip0.9_k10.json"
     readDashboardFile(fname)
 }
 

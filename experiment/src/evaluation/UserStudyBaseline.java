@@ -28,8 +28,8 @@ public class UserStudyBaseline {
 	   Experiment exp;
 	   int k =10;
 	   Experiment.experiment_name="../ipynb/dashboards/json/UserStudyBaseline";
-	   //String dataset_name="ct_police_stop";
-	   String dataset_name="mushroom";
+	   String dataset_name="titanic";
+	   //String dataset_name="mushroom";
 	   ArrayList<String> groupby = null;
 	   String yAxis = null;
 	   String xAxis = null; 
@@ -39,17 +39,17 @@ public class UserStudyBaseline {
 	   if (dataset_name.equals("turn")){
 		   	groupby = new ArrayList<String>(Arrays.asList("is_multi_query","is_profile_query","is_event_query","has_impressions_tbl",
 				"has_clicks_tbl","has_actions_tbl","has_distinct","has_list_fn"));
-			yAxis = "slots_millis_reduces";
-			xAxis = "has_list_fn";
-			aggType = "SUM";
+			yAxis = "job_id";
+			xAxis = "is_multi_query";//"has_list_fn";
+			aggType = "COUNT";
 	   }else if (dataset_name.equals("ct_police_stop")) {
 		   // Dataset #2 : Police Stop
 		   groupby = new ArrayList<String>(Arrays.asList(
 			"driver_gender", "driver_race", "search_conducted",
-			"contraband_found", "is_arrested", "duration", 
-			"stop_time", "driver_age"));
+			"contraband_found",  "duration", "stop_outcome",
+			"stop_time", "driver_age"));//"is_arrested",
 		   yAxis = "id";
-		   xAxis = "is_arrested";//"stop_outcome", 
+		   xAxis = "stop_outcome";//"is_arrested";  
 		   aggType = "COUNT";
 	   }else if (dataset_name.equals("mushroom")) {
 		   // Dataset #3 : Mushroom 
@@ -63,22 +63,28 @@ public class UserStudyBaseline {
 		   yAxis = "id";
 		   xAxis = "survived"; 
 		   aggType = "COUNT";
+	   }else if (dataset_name.equals("autism")) {
+		   // Dataset #2 : Autism
+		   groupby = new ArrayList<String>(Arrays.asList("autism", "a1_score", "a2_score", "a3_score", "a4_score", "a5_score", "a6_score", "a7_score","a8_score", "a9_score", "a10_score"));
+				   //,"gender", "jaundice", "pdd_family"
+		   yAxis = "*";
+		   xAxis = "autism";  
+		   aggType = "COUNT";
 	   }
 	   
-//	   Traversal ourAlgo = new GreedyPicking();
-//	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.8,false);
-//	   exp.setAlgo(ourAlgo);
-//	   exp.runOutput(exp);
+	   Traversal ourAlgo = new GreedyPicking();
+	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.9,false);
+	   exp.setAlgo(ourAlgo);
+	   exp.runOutput(exp);
 //	   Traversal ourAlgo = new BreadthFirstPicking();
 //	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.9,false);
 //	   exp.setAlgo(ourAlgo);
 //	   exp.runOutput(exp);
 //
 	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.001,false);
-//	   Traversal clustering = new BaselineKmeans();
-
-//	   exp.setAlgo(clustering);
-//	   exp.runTableLayoutOutput(exp);   
+	   Traversal clustering = new BaselineKmeans();
+	   exp.setAlgo(clustering);
+	   exp.runTableLayoutOutput(exp);   
 	   
 	   Traversal BBFS = new BaselineBFS();
 	   exp.setAlgo(BBFS);
