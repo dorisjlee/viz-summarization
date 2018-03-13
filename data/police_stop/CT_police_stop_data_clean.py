@@ -31,9 +31,9 @@ df.loc[(df["stop_outcome"]=="Verbal Warning")|(df["stop_outcome"]=="Written Warn
 # Merging Asians with Others
 df.loc[(df["driver_race"]=="Asian")|(df["driver_race"]=="Other"),"driver_race"]="Others"
 #renaming stop outcome to abbrev x axis
-df.loc[df["stop_outcome"]=="Ticket","stop_outcome"]="T"
-df.loc[df["stop_outcome"]=="Verbal/Written Warning","stop_outcome"]="W"
-df.loc[df["stop_outcome"]=="Arrest/Summons","stop_outcome"]="A"
+df.loc[df["stop_outcome"]=="Ticket","stop_outcome"]="ticket"
+df.loc[df["stop_outcome"]=="Verbal/Written Warning","stop_outcome"]="warn"
+df.loc[df["stop_outcome"]=="Arrest/Summons","stop_outcome"]="arrest"
 # Making the top 5 common violations into 5 binary attributes
 df = df[~df["violation"].isnull()] 
 top5violations= list(df["violation"].value_counts()[:5].keys()) 

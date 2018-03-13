@@ -1,20 +1,12 @@
 package algorithms;
-import java.sql.SQLException;
-
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Random;
-import java.lang.*;
 
-import distance.Distance;
-import distance.Euclidean;
-import lattice.Hierarchia;
 import lattice.Lattice;
-import lattice.Node;
-
-import net.sf.javaml.core.*; 
 import net.sf.javaml.clustering.*;
+import net.sf.javaml.core.*; 
 import net.sf.javaml.distance.*;
+import algorithms.KMeans;
 
 /**
  * XYZ
@@ -92,16 +84,20 @@ public class BaselineKmeans extends Traversal
 					EuclideanDistance euclid = new EuclideanDistance();
 					double dist = euclid.calculateDistance(x, y);
 					int count = value.length() - value.replace("#", "").length();
-					if(dist < 1.0 && count < mins[it])
+					if(dist < 0.0001 && count < mins[it])
 					{
 						ids[it] = lattice.id2IDMap.get(value);
 						mins[it] = count;
+						//System.out.println(it+":"+ids[it]+","+mins[it]+","+value);
+						break;
 					}
+					
 				}
-				
-				
 			}
 		}
+//		for (int i=0;i<k;i++) {
+//			System.out.println("mins:"+mins[i]+","+ids[i]);
+//		}
 		
 		for(int i = 0; i < k; i++)
 		{

@@ -29,7 +29,6 @@ public class UserStudyBaseline {
 	   int k =10;
 	   Experiment.experiment_name="../ipynb/dashboards/json/UserStudyBaseline";
 	   String dataset_name="titanic";
-	   //String dataset_name="mushroom";
 	   ArrayList<String> groupby = null;
 	   String yAxis = null;
 	   String xAxis = null; 
