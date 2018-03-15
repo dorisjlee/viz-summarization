@@ -28,8 +28,8 @@ df.loc[(df["driver_age"]>=60),"driver_age_category"]="60 and over"
 df.loc[(df["stop_outcome"]=="Arrest")|(df["stop_outcome"]=="Summons"),"stop_outcome"]="Arrest/Summons"
 # Merging Verbal and Written Summons
 df.loc[(df["stop_outcome"]=="Verbal Warning")|(df["stop_outcome"]=="Written Warning"),"stop_outcome"]="Verbal/Written Warning"
-# Merging Asians with Others
-df.loc[(df["driver_race"]=="Asian")|(df["driver_race"]=="Other"),"driver_race"]="Others"
+# # Merging Asians with Others
+# df.loc[(df["driver_race"]=="Asian")|(df["driver_race"]=="Other"),"driver_race"]="Others"
 #renaming stop outcome to abbrev x axis
 df.loc[df["stop_outcome"]=="Ticket","stop_outcome"]="ticket"
 df.loc[df["stop_outcome"]=="Verbal/Written Warning","stop_outcome"]="warn"
