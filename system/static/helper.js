@@ -510,7 +510,7 @@ function showfilter(cell){
     Object.keys(Dic).forEach(function(key){
 
         title[idx] = Dic[idx][Dic[idx].length-1]["filter"]
-            if (idx==0){
+            if (title[idx] == "#"){
                     title[idx] = "overall";
                 }
                 else{
