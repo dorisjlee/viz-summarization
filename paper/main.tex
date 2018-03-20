@@ -50,6 +50,7 @@
 \usepackage{cite}                      % needed to automatically sort the references
 \usepackage{tabu}                      % only used for the table example
 \usepackage{booktabs}                  % only used for the table example
+\usepackage{tikz}
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 % llt: Define a global style for URLs, rather that the default one
@@ -103,7 +104,7 @@
 \newcommand{\ccut}[1]{} %confirmed cut
 \newcommand{\system}{\textsc{Hierarchia}}
 \def\plaintitle{\system : Hierarchical Summary of Equivalent Visualizations across Data Subsets}
-\def\plainauthor{Doris Jung-Lin Lee*, Himel Dev*, Huizi Hu, Saar Kuzi, Hazem Elmeleegy, Aditya Parameswaran}
+\def\plainauthor{Doris Jung-Lin Lee*, Himel Dev*, Huizi Hu, Hazem Elmeleegy, Aditya Parameswaran}
 \def\emptyauthor{} 
 \def\plainkeywords{Data visualization, exploratory data analysis, visual query, scientific data.}
 \def\plaingeneralterms{Documentation, Standardization}
@@ -195,7 +196,7 @@
 
 
 %% Abstract section.
-\abstract{We present \system, an interactive visualization recommendation system to summarize equivalent visualizations across data subsets: given a relational dataset and attributes to be studied, \system\ intelligently explores the lattice of equivalent visualizations across data subsets, evaluates the trends of these visualizations with respect to their predecessors in the lattice, and recommends those it deems \lq\lq informative\rq\rq\ and \lq\lq interesting\rq\rq. Motivated by collaborations with domain scientists who search for patterns or trends in hundreds of subsets of data, \system\ automatically recommends appropriate visualizations based on \lq\lq informativeness\rq\rq\ and  \lq\lq interestingness\rq\rq, and adopts a hierarchical structure to organize the recommended visualizations into an interactive visual dashboard.} % end of abstract
+\abstract{Abstract} % end of abstract
 
 \keywords{exploratory data analysis, visualization recommendation.}
 
@@ -214,6 +215,7 @@
  \\ E-mail: jlee782, hdev3, huizihu2, skuzi2, adityagp@illinois.edu. hazem.elmeleegy@turn.com.
 }
 \maketitle
+\input{0.Abstract}
 \input{1.Introduction}
 \input{2.ProblemFormulation}
 \input{3.AlgorithmsOptimizations}
