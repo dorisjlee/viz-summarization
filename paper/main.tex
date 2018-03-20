@@ -51,6 +51,7 @@
 \usepackage{tabu}                      % only used for the table example
 \usepackage{booktabs}                  % only used for the table example
 \usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 % llt: Define a global style for URLs, rather that the default one
@@ -102,7 +103,7 @@
 \newcommand{\tvcg}[1]{{\leavevmode\color{blue}{#1}}}
 \newcommand{\cut}[1]{{\leavevmode\color{lightgray}{#1}}}
 \newcommand{\ccut}[1]{} %confirmed cut
-\newcommand{\system}{\textsc{Hierarchia}}
+\newcommand{\system}{\textsc{Storyboard}}
 \def\plaintitle{\system : Hierarchical Summary of Equivalent Visualizations across Data Subsets}
 \def\plainauthor{Doris Jung-Lin Lee*, Himel Dev*, Huizi Hu, Hazem Elmeleegy, Aditya Parameswaran}
 \def\emptyauthor{} 
@@ -191,12 +192,9 @@
 \vgtcpapertype{system}
 
 
-\title{\system : Hierarchical Summary of Equivalent Visualizations across Data Subsets}
-
-
-
+\title{\system : Hierarchical Summary Visualizations across Data Subsets}
 %% Abstract section.
-\abstract{Abstract} % end of abstract
+\input{0.Abstract} % end of abstract
 
 \keywords{exploratory data analysis, visualization recommendation.}
 
@@ -215,15 +213,13 @@
  \\ E-mail: jlee782, hdev3, huizihu2, skuzi2, adityagp@illinois.edu. hazem.elmeleegy@turn.com.
 }
 \maketitle
-\input{0.Abstract}
 \input{1.Introduction}
-\input{2.ProblemFormulation}
-\input{3.AlgorithmsOptimizations}
-\input{4.PerformanceExperiments}
+\input{2.RelatedWorks}
+\input{3.ProblemFormulation}
+\input{4.System}
 \input{5.UserStudyEvaluation}
 \input{6.Discussion}
-\input{7.RelatedWorks}
-\input{8.Conclusion}
+\input{7.Conclusion}
 % \bibliographystyle{abbrv}
 \bibliographystyle{abbrv-doi}
 \bibliography{reference}
