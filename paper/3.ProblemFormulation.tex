@@ -2,9 +2,8 @@
 %In this section, we first describe the data model, and the supported visualization types. We then introduce two visualization spaces, and propose a user expectation model to traverse these spaces. Finally, we formally define the problem.
 
 In this section, we first describe our data model by reporting our data, visualization and query setup, and the underlying lattice of data subsets. We then introduce our user model to traverse the lattice and justify its efficacy. Finally, we present our problem of finding informative and interesting visualizations from the lattice.
-
+\par \dor{added section on formative study, we need to put this somewhere} Our problem formulation is motivated by a formative study, where we asked participants to predict the value of a visualization after seeing a parent of the visualization to be predicted. In this between-group study, one group of participants were shown the informative parent, whereas another group of participants was shown the uninformative parents. Our main findings are : 1) it is natural for users to use the informative parent and 2) in the absence of informative parents, the users can be misled to have false expectations on the data.
 %\subsection{Visualizations and Queries}
-
 \subsection{Data Model}
 We start by discussing the data, visualization and query setup.
 
@@ -77,8 +76,8 @@ We now extend the concept of parent dimension combination to introduce the idea 
 \fi
 
 \subsection{User Expectation Model}
-In order to understand which visualizations a user would deem ``informative" and ``interesting" , we consider how analysts explore their data through OLAP operations (drill-down and roll-ups), and model the effective utility of displaying an unseen visualization to a user in the context of other seen visualizations. 
-
+In order to understand which visualizations a user would deem ``informative" and ``interesting" , we consider how analysts explore their data through OLAP operations, and model the effective utility of displaying an unseen visualization to a user in the context of other seen visualizations. 
+ 
 \textbf{Top Down Traversal.} We observe that, while exploring a dataset, users first look at the top level visualizations before looking at the next level. Further, the data distributions learnt from the top level visualizations set user expectation for the next level. Based on these two observations, we model user expectation $\hat{V_i}$ corresponding to an unseen visualization $V_i$ based on its seen/observed parents, $P(V_i) = \{V_i^1, \ldots, V_i^\lambda\}$. Specifically, we model two aspects of each unseen-visualization and observed-parent relationship, namely informativeness and interestingness. 
 
 \textbf{Informativeness.} To model the informativeness of an observed parent in the context of an unseen visualization, we characterize the capability of the parent in predicting the unseen visualization. For an unseen visualization, the observed parents whose data distributions accurately predict the data distribution of the unseen are \emph{informative}. Specifically, we formulate the informativeness of an observed parent $V_i^j$ ($V_i^j \in P(V_i)$) of an unseen visualization $V_i$ as the similarity between their data distributions using a similarity function $S(V_i, V_i^j)$. The most informative parents $V_i^*$ of an unseen visualization $V_i$ are the ones whose data distributions have highest similarity with that of the unseen.
