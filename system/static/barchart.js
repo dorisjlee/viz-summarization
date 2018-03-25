@@ -29,7 +29,8 @@ function draw(node,edge) {
     options = {
 
         interaction: {
-            selectable: true
+            selectable: true,
+            hover: true
         },
         nodes: {
           chosen:false,
@@ -125,7 +126,14 @@ function draw(node,edge) {
                 document.getElementById('not-interested-in').innerHTML+='<li type="square" style="color:red">'+node[i].filterVal+'</li>';
             }
         }
-
+        selection = params.nodes
+        if (nodeID != undefined) {
+          showJQueryDialog(params, nodeID, selection);
+          //showPopover()
+        }
+        else{
+            clearJQueryDialog(params, nodeID, selection);
+        }
     });
 
    /*network.on("click", function (params) {
@@ -140,6 +148,24 @@ function draw(node,edge) {
     div.innerHTML="<img src='resources/Eclipse.svg' id = 'loadingDashboard' style='display: none; position: relative; z-index: 10; width: 100%; height: 50%;'>"
     container.prepend(div.firstChild);
 }
+function showJQueryDialog(params, nodeID, selection) {
+
+    title = "You clicked Node " + nodeID;
+    var d = document.getElementById('dlg_text');
+    var input = ',&nbsp;K =<input type="text" size="1" name="lastname" value="0">&nbsp;<input type="submit" style="border-radius: 5px;" value="Submit">'
+    d.innerHTML = title + input;
+    d.style.position = "fixed";
+    d.style.display = "inline";
+    d.style.left = params.pointer.DOM.x+40+'px';
+    d.style.top = params.pointer.DOM.y+'px';
+
+}
+function clearJQueryDialog(params, node_dataset, selection) {
+
+
+    var d = document.getElementById('dlg_text');
+    d.style.display = 'none';
+    }
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 ////////                   D3 implementation                                       ////////
