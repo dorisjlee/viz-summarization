@@ -27,10 +27,11 @@ function draw(node,edge) {
         edges: edge
     };
     options = {
-
         interaction: {
             selectable: true,
-            hover: true
+            hover: true,
+            navigationButtons: true,
+            keyboard: true
         },
         nodes: {
           chosen:false,

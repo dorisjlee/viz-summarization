@@ -72,6 +72,9 @@ public class Experiment {
 			this.nbars = lattice.id2MetricMap.get("#").size();
 		}
 	}
+	public void setK(int k) {
+		this.k = k;
+	}
 	public void setAlgo(Traversal algo) {
 		this.algo = algo;
 		dashboard = new Dashboard(lattice);
