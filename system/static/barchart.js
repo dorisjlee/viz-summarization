@@ -73,6 +73,25 @@ function draw(node,edge) {
 
     console.log(node_dataset);
     network = new vis.Network(container, data, options);
+    network.on("hoverNode", function (params) {
+        //console.log('hoverNode Event:', params);
+        var nodeID = params.node;
+        //console.log(nodeID)
+        var hoveredNode = node_dataset.get(nodeID);
+        if(hoveredNode.collapse.length > 0)
+            //console.log(hoveredNode)
+            hoveredNode.title = ""
+            for(i = 0; i < hoveredNode.collapse.length; i++){
+                var coltitle = hoveredNode.collapse[i];
+                coltitle = coltitle.toString().replace(/#/g, ' ');
+                coltitle = coltitle.toString().split('$').join('=');
+                hoveredNode.title += coltitle ;
+            }
+
+            //console.log(hoveredNode)
+
+            node_dataset.update(hoveredNode);
+    });
     network.on("click", function(params) {
 
         var nodeID = params['nodes']['0'];

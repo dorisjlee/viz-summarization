@@ -125,13 +125,21 @@ class Lattice:
                     pass
             if values["filter"]=="#":
                 filterVal="overall"
+            elif values["filter"]=="collapsed":
+                filterVal="collapsed"
             else:
                 filterVal = str(values["filter"][1:-1].replace("#",",\n").replace("$","="))
             yname = values["yName"]
             xname = values["xName"]
             svgString = bar_chart(yVals, xAttrs, xtitle=xname, ytitle=yname, title=filterVal, top_right_text="", N=1, width=0.1)
-
-            nodeList.append({"id": int(i), "filterVal":filterVal,"image": "data:image/svg+xml;base64," + base64.b64encode(svgString), "shape": 'image', "color":{"border": "grey"} });
+            collapse = []
+            for values in node:
+                try:
+                    collapse.append(values['collapse'])
+                    # print("found collapse node")
+                except KeyError:
+                    pass
+            nodeList.append({"id": int(i), "filterVal":filterVal,"collapse":collapse,"image": "data:image/svg+xml;base64," + base64.b64encode(svgString), "shape": 'image', "color":{"border": "grey"} });
         return nodeList
 
     def generateEdge(self, node_dic):
