@@ -83,9 +83,12 @@ function draw(node,edge) {
             hoveredNode.title = ""
             for(i = 0; i < hoveredNode.collapse.length; i++){
                 var coltitle = hoveredNode.collapse[i];
-                coltitle = coltitle.toString().replace(/#/g, ' ');
+                coltitle = coltitle.toString().replace(/#,#/g, ' ');
                 coltitle = coltitle.toString().split('$').join('=');
-                hoveredNode.title += coltitle ;
+                coltitle = coltitle.toString().split('#').join(',');
+                coltitle = coltitle.slice(1,-1);
+                //coltitle = coltitle.split(" ").join("\n");
+                hoveredNode.title += coltitle + "&#10" ;
             }
 
             //console.log(hoveredNode)
@@ -106,7 +109,7 @@ function draw(node,edge) {
         else if(totalclick[nodeID]==2)
             color = 'green';
         else if(totalclick[nodeID]==3)
-            color = 'red';
+            color = '#ff9933';
 
         if (nodeID>=0) {
             var clickedNode = node_dataset.get(nodeID);

@@ -78,7 +78,7 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
     title = title.replace('"','')
     title = title.replace("#", ",\n")
     if title == "collapsed":
-        title = "collapsed"
+        title = " "
     elif title[0] == ',':
         title = title[2:-2]
     if title.count(',') < 3:
