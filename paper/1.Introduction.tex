@@ -1,9 +1,48 @@
-\newpage
+%!TEX root = main.tex
 \section{Introduction}
-\par The task of navigating through a large, multidimensional dataset is a common challenge in data analytics. For example, a data scientist may want to examine the bar charts summarizing \% of sales for different user populations from different demographic groups such as states, gender, and age group\dor{we need to prolonged example in the intro and throughout}, but is not sure about \textit{what} subset of the data would be interesting to visualize. His struggle is not unjustified: a simple dataset with 10 attributes (with an average of 4 possible values per attributes) can yield up to ---- possible combinations. Not only is manual drill-down and roll-ups tedious and inefficient for the analyst, but even with all the information given, currently there is also no systematic and effective way for an analyst to make sense of and navigate through the large space of possible visualizations. 
-\par Our work was motivated by storyboards commonly used in the development of movies or animations. Storyboards are a sequence of rough sketches that outline the plot of the story to encourage discussions among directors, storywriters and film crews, iterate on the storyline, and details of each scene are filled in. Similarly, in the context of exploratory data analysis, we wanted to see whether it was possible to algorithmically generate dashboards that could serve as an informative starting point to provoke further exploration.
-\par <discuss spurious correlation, paradoxes, motivate why its important to look at visualizations within context>
+\par The task of navigating through a large, multidimensional dataset is a common challenge in data analytics. %For example, a data scientist may want to examine bar charts summarizing \% of sales for different user populations from different demographics, such as states, gender, and age group, but is not sure about \textit{what} subset of the data would be interesting to visualize. His struggle is not unjustified: a simple dataset with 10 attributes (with an average of 4 possible values per attributes) can yield up to ---- possible combinations. Not only is manual drill-down and roll-ups tedious and inefficient for the analyst, but even with all the information given, currently there is also no systematic and effective way for an analyst to make sense of and navigate through the large space of possible visualizations. 
+- discuss why context is important 
+\subsection{Usage Scenario}
+\par To illustrate the present challenges in data subset exploration, we describe a series of common data analytic tasks using the popular titanic dataset, commonly used for introducing novices to the classification problem in machine learning \footnote{\url{https://www.kaggle.com/c/titanic}}.
 
+\textbf{Comparisons across Data Subsets:} In many data analytics scenarios, analysts have an $X$ and $Y$ axis of interest and want explore different data subsets compared of different filter criteria. For example, the titanic dataset contains dimensional attributes (ticket classes, age, and gender) for predicting whether a passengers survives or not survive the titanic shipwreck. The analyst would have to compare across different data subset by iteratively changing the filter criterion of a visualization to understand how the relationship between the $X$ and $Y$ variables change across data subsets.
+Clearly, without knowing \textit{what} subset of the data would be interesting to visualize, the manual drill-down and roll-ups on all possible filter combinations can be tedious and inefficient for the analyst. And even if the analyst had plotted visualizations for all possible data subsets, currently there is no systematic and effective way for an analyst to make sense of and navigate through the large space of possible visualizations to draw meaningful insights. \cite{anand} is one example of a visualization dashboard demonstrating the insights from exploring through different facets.
+%This is a routine exercise for---learning the possible relationships between $X$ and $Y$ across different data subsets---identifying the interesting relationships between $X$ and $Y$---understanding how the relationship between $X$ and $Y$ change as one iteratively adds filer criterion to visit a particular path in concept hierarchy---and comparing/contrasting different paths in concept hierarchy.
+
+% Analysts have extensively studied the concept hierarchy of \lq titanic\rq\ dataset, creating visualizations for examining trends in different data subsets. While most analysts concentrated on survival prediction task, and therefore examined \lq survival rate\rq\ across data subsets; many studied other interesting relations, say between \lq age\rq\ and \lq passenger class\rq , for the purpose of finding interesting insights. 
+% <discuss spurious correlation, paradoxes, motivate why its important to look at visualizations within context>
+\textbf{Preventing Fallacies in Causal Inference:} Drawing causal inference from observations is important for discovering causal relationships that supports or refutes a hypothesis, as well as generalizing the prediction for unseen data. During exploratory analysis, causal inference based on the incomplete, seen information can result in Simpson's paradox, whereby an observed relationship between variables changes when conditioned upon a third unseen variable.  
+\par One example of Simpson's paradox in the Titanic dataset is the survival rate of passengers for third-class passengers versus crew members. Overall, the survival rate of third-class passengers is slightly higher (24.08\%) than crews (23.95\%). However, when we examine the survival rate of the two classes conditioned on gender as shown in Table.\ref{tab:t2}. We find that for both genders, the survival rate of the crews is higher than third-class passengers.  
+\begin{table}[thb]
+	\caption{Survival Rate by Gender and Two Classes}
+    \label{tab:t2}
+	\begin{center}    
+	\begin{tabular}{ccccc}
+	\toprule
+	Gender & Class & Survived & Lost & Survival\\
+	& & & & Rate\\
+	\midrule
+	M & Third & 75 & 387 & 16.23\%\\ 
+	M & Crew & 192 & 670 & 22.27\%\\ 
+	\bottomrule
+    F & Third & 76 & 89 & 46.06\%\\ 
+	F & Crew & 20 & 3 & 86.96\%\\ 
+	\bottomrule
+	\end{tabular}
+    \end{center}
+\end{table}
+In this case, Simpson's paradox arises because the gender distribution for each passenger class was not shown, therefore, the readers were misguided into thinking that survival rates of third-class passengers should be equal or slightly higher than crews.
+In \system, we define the notion of an ``informative parent'' to prevent the dashboard in selecting visualizations that could misguide the users to such fallacies. 
+
+\textbf{Feature Selection for Machine Learning:} Data scientists often create visualizations to uncover the relationship between their chosen attributes and the prediction variable to identify attributes that are relevant to the prediction task. Feature selection is a non-trivial problem: analysts seek attribute combinations that are highly discriminative, but generalize enough to prevent overfitting and increase the interpretability of the model. While existing classification algorithms such as decision trees highlights some of such case, as their end-goal is to improve classification score, the reductionist view does not showcase the complex interactions where trends may be changing when additional attributes are added. As described in the paper, the non-monotonic path-based stories selected by the context-dependent objective in \system can help users make more informative judgments about feature importance in the given datasets. 
+
+\textbf{Contextual Outlier Detection and Interpretation.} In many data-driven applications, outlier detection plays an important role in identifying instances that are different from the majority. Interpretation is becoming increasingly important in outlier detction to help people trust and evaluate the developed models through providing intrinsic reasons why certain outliers are chosen. In particular, the concept of contextual attributes that are not directly related to the anomalous behavior, but provide useful information on contexts for outlier detection has become useful. 
+
+In Table 2, the contextual outliers are female crews, whose high survival rate is different from that of both female and crews (from Table 3 and Table 1). In contrast, the relatively high survival rate of female third class passengers can be explained using the general observations regarding female.
+
+%The survival prediction task for \lq titanic\rq\ dataset urged many data scientists to explore the attribute space to identify important prediction attributes. Many analysts have successfully identified important prediction attributes by observing trends in different data subsets. The most prominent of these attributes is \lq gender\rq\ that explains the survival of many passengers.
+\subsection{Contribution}
+\par Our work was motivated by storyboards commonly used in the development of movies or animations. Storyboards are a sequence of rough sketches that outline the plot of the story to encourage discussions among directors, storywriters and film crews, iterate on the storyline, and details of each scene are filled in. Similarly, in the context of exploratory data analysis, we wanted to see whether it was possible to algorithmically generate dashboards that could serve as an informative starting point to provoke further exploration.
 \par The contribution of this paper include: 
 \begin{itemize}
 \item Proposing a novel problem of identifying a set of informatively connected interesting visualizations,

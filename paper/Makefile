@@ -14,5 +14,5 @@ all :
 
 figs :
 	mkdir -p figs
-clean: 
+clean:  
 	rm -f $(ALL) *.bbl *.blg *.log *.aux *.out *.run.xml
