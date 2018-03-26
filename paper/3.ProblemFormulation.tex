@@ -1,9 +1,11 @@
+%!TEX root = main.tex
 \section{Preliminaries: Data and User Models} 
 %In this section, we first describe the data model, and the supported visualization types. We then introduce two visualization spaces, and propose a user expectation model to traverse these spaces. Finally, we formally define the problem.
 
-In this section, we first describe our data model by reporting our data, visualization and query setup, and the underlying lattice of data subsets. We then introduce our user model to traverse the lattice and justify its efficacy. Finally, we present our problem of finding informative and interesting visualizations from the lattice.
-\par \dor{added section on formative study, we need to put this somewhere} Our problem formulation is motivated by a formative study, where we asked participants to predict the value of a visualization after seeing a parent of the visualization to be predicted. In this between-group study, one group of participants were shown the informative parent, whereas another group of participants was shown the uninformative parents. Our main findings are : 1) it is natural for users to use the informative parent and 2) in the absence of informative parents, the users can be misled to have false expectations on the data.
+In this section, we first describe our data model by reporting our data, visualization and query setup, and the underlying hierarchy of data subsets. We then introduce our user model to traverse the hierarchy and justify its efficacy through a user study. Finally, we present our problem of finding informative and interesting visualizations from the hierarchy.
+%\par \dor{added section on formative study, we need to put this somewhere} Our problem formulation is motivated by a formative study, where we asked participants to predict the value of a visualization after seeing a parent of the visualization to be predicted. In this between-group study, one group of participants were shown the informative parent, whereas another group of participants was shown the uninformative parents. Our main findings are : 1) it is natural for users to use the informative parent and 2) in the absence of informative parents, the users can be misled to have false expectations on the data.
 %\subsection{Visualizations and Queries}
+
 \subsection{Data Model}
 We start by discussing the data, visualization and query setup.
 
@@ -15,14 +17,13 @@ We start by discussing the data, visualization and query setup.
 
 \textbf{Visualization.} We define the notion of a visualization for our problem. In our setup, a visualization can be defined using five main components: (i) the x-axis attributes, (ii) the y-axis attribute, (iii) the subset of data used, (iv) the binning and aggregation functions for the x- and y- axes, and (v) the type of visualization, e.g., bar chart.
 
-
 \textbf{Query.} Our query setup applies to all visualization types that can be defined in terms of the aforementioned components, including common visualization types such as bar charts, trend lines, and scatter plots. Visualizations of these types can be translated into the following \textsc{SQL} query: {\tt SELECT X, A(Y) FROM R WHERE C(Z) GROUP BY X}. Here, $X$ refers to the x-axis attribute(s), $Y$ to the y-axis attribute, $A(Y)$ to the aggregation function on $Y$, $Z$ to the attribute(s) used in specifying the data subset, and $C(Z)$ to the constraints or filters that specify the data subset.
 
-Now, we discuss the set-theory-based \emph{containment} relationships for data subsets, and based on the relationships define our lattice.
+Now, we discuss the set-theory-based \emph{containment} relationships for data subsets, and based on the relationships define our hierarchy.
 
 \textbf{Containment.} Given a data subset defined by a set of constraints $C = \{z_1, \ldots, z_n\}$, expanding $C$ by adding one or more new constraints will generate a new data subset that is contained within the former subset. An ancestor-descendant relationship exists between these data subsets. Specifically, a data subset defined by constraints $C_a$ is an ancestor of a data subset defined by constraints $C_b$, if and only if $C_b \subsetneqq C_a$. Further, a data subset defined by constraints $C_a$ is a parent of a data subset defined by constraints $C_b$, if and only if $C_b \subsetneqq C_a \land \mid C_a \mid - \mid C_b \mid = 1$. For example, given a dataset with three binary attributes {\tt \{P, Q, R\}}, the data subset defined by constraints {\tt \{P = 0,Q = 1\}} has two parents--- the data subset defined by constraint {\tt \{P = 0\}} and the data subset defined by constraint {\tt \{Q = 1\}}.
 
-\textbf{Lattice.} Based on the containment relationship, we can organize the data subsets of a given dataset to form a lattice. This lattice of data subsets is in fact a hierarchy, which is contained within the lattice of attribute combinations. In data cube literature, attribute combinations are called cuboids, and the data subsets are called cells. In Figure 1 we show the lattice of data subsets for a dataset with three binary attributes {\tt \{P, Q, R\}}, where data subsets that belong to the same attribute combination are highlighted with same color. For example, all data subsets with three filters (at the lowest level of hierarchy) belong to the same attribute combination {\tt \{P, Q, R\}}. 
+\textbf{Hierarchy.} Based on the containment relationship, we can organize the data subsets of a given dataset to form a hierarchy. This hierarchy of data subsets is contained within the lattice of attribute combinations. In data cube literature, attribute combinations are called cuboids, and the data subsets are called cells. In Figure 1 we show the hierarchy of data subsets for a dataset with three binary attributes {\tt \{P, Q, R\}}, where data subsets that belong to the same attribute combination are highlighted with same color. For example, all data subsets with three filters (at the lowest level of hierarchy) belong to the same attribute combination {\tt \{P, Q, R\}}. 
 
 \begin{figure}[htb]
 \begin{tikzpicture}[scale=0.75, every node/.style={scale=0.75}]
@@ -35,23 +36,23 @@ Now, we discuss the set-theory-based \emph{containment} relationships for data s
   \node[fill={rgb:blue,1;white,4}] (16) at (4.0,3) {\tt \{R = 1\}};
   \node[fill={rgb:yellow,1;white,4}]  (21) at (-4,1.5) {\tt \{P = 0,Q = 0\}};
   \node[fill={rgb:yellow,1;white,4}]  (22) at (-1.5,1.5) {\tt \{P = 0,Q = 1\}};
-  \node (2f) at (0,1.5) {$\ldots$};
+  \node (2f) at (0,1.5) {\textbf{. . .}};
   \node[fill={rgb:cyan,1;white,4}] (23) at (1.5,1.5) {\tt \{Q = 1,R = 0\}};
   \node[fill={rgb:cyan,1;white,4}] (24) at (4,1.5) {\tt \{Q = 1,R = 1\}};
   \node[fill={rgb:black,1;white,4}] (31) at (-4,0) {\tt \{P = 0,Q = 0,R = 0\}};
-  \node (3f) at (0,0) {$\ldots$};
+  \node (3f) at (0,0) {\textbf{. . .}};
   \node[fill={rgb:black,1;white,4}] (32) at (4,0) {\tt \{P = 1,Q = 1,R = 1\}};
   \draw (max) -- (11) (max) -- (12) (max) -- (13) (max) -- (14) (max) -- (15) (max) -- (16)
   (11) -- (21) (13) -- (21) (11) -- (22) (14) -- (22) (14) -- (23) (15) -- (23) (14) -- (24) (16) -- (24)
   (21) -- (31) (24) -- (32);
 \end{tikzpicture}
-\caption{Lattice of data subsets for a dataset with three binary attributes {\tt \{P, Q, R\}}. The data subsets (called cells in datacubes) that belong to the same attribute combination (cuboid) are highlighted with same color.}
+\caption{Hierarchy of data subsets for a dataset with three binary attributes {\tt \{P, Q, R\}}. The data subsets (called cells in datacubes) that belong to the same attribute combination (cuboid) are highlighted with same color.}
 \label{fig:lattice}
 \end{figure}
 
 We now extend the concept of \emph{containment} relationships (of data subsets) for visualizations defined according to our setup. 
 
-\textbf{Viz Containment.} Let $V$ be the set of visualizations (of same type) that show the same $X$ and $Y$ for different $C(Z)$. Given a visualization $V_i \in V$, parent of $V_i$, $V_i^j$ ($V_i^j\in V$) is a visualization that corresponds to a parent data subset of the former. In Figure 2 we present three visualizations that show the average price of products bought by male and female customers for three data subsets: (i) US citizens, (ii) people who buy products in Jan, (iii) US citizens who buy products in Jan. As per the parent-child relationship among the data subsets, the visualizations corresponding to (i) and (ii) are parents of the visualization corresponding to (iii). \hdev{Figure 2 example to be replaced with an example from Titanic. All three plots will be in the same row, with annotation (i), (ii), (iii).}
+\textbf{Viz Containment.} Let $V$ be the set of visualizations (of same type) that show the same $X$ and $Y$ for different $C(Z)$. Given a visualization $V_i \in V$, parent of $V_i$, $V_i^j$ ($V_i^j\in V$) is a visualization that corresponds to a parent data subset of the former. In Figure 2 we present three visualizations that show the average price of products bought by male and female customers for three data subsets: (i) US citizens, (ii) people who buy products in Jan, (iii) US citizens who buy products in Jan. As per the parent-child relationship among the data subsets, the visualizations corresponding to (i) and (ii) are parents of the visualization corresponding to (iii). %\hdev{Figure 2 example to be replaced with an example from Titanic. All three plots will be in the same row, with annotation (i), (ii), (iii).}
 
 \begin{figure}[bht]
 \label{example}
@@ -60,7 +61,7 @@ We now extend the concept of \emph{containment} relationships (of data subsets) 
 \caption{Parent-child relationship amongst visualizations that show the average price of products bought by male and female customers for three data subsets: (i) US citizens, (ii) people who buy products in Jan, (iii) US citizens who buy products in Jan.}
 \end{figure}
 
-\textbf{Viz Lattice.} Based on the containment relationship of visualizations, we can organize the visualizations from $V$ to form a lattice. This lattice contains all visualizations (of same type, e.g., bar charts) that show the same x- and y- axes, for different data subsets.
+\textbf{Viz Hierarchy.} Based on the containment relationship of visualizations, we can organize the visualizations from $V$ to form a hierarchy. This hierarchy contains all visualizations (of same type, e.g., bar charts) that show the same x- and y- axes for different data subsets, and arranges them as per the parent-child relationships between data subsets. Our goal is to traverse this hierarchy of visualizations, and identify informative and interesting visualizations.
 
 \iffalse
 \begin{figure}[bht]
@@ -70,9 +71,9 @@ We now extend the concept of \emph{containment} relationships (of data subsets) 
 \caption{Parent Child Relationship in Dimension Combination Space}
 \end{figure}
 
-\textbf{Dimension Combination Space.} Given a combination of dimension attributes $X = \{X_1, \ldots, X_n\}$, adding one or more new dimensions in $X$ will generate a new combination.  An ancestor-descendant relationship exists between these dimension combinations. Specifically, a dimension combination $X_a$ is an ancestor of a dimension combination $X_b$, if and only if $X_b \subsetneqq X_a$. Further,  a dimension combination $X_a$ is a parent of a dimension combination $X_b$, if and only if $X_b \subsetneqq X_a \land \mid X_a \mid - \mid X_b \mid = 1$. Notice that, a dimension combination can have multiple parent combinations. For example, given a sales dataset with four attributes {\tt\{Country, Gender, Month, Price\}}, the dimension combination {\tt\{Country, Month\}} has two parent combinations--- {\tt\{Country\}} and {\tt\{Month\}}. 
+%\textbf{Dimension Combination Space.} Given a combination of dimension attributes $X = \{X_1, \ldots, X_n\}$, adding one or more new dimensions in $X$ will generate a new combination.  An ancestor-descendant relationship exists between these dimension combinations. Specifically, a dimension combination $X_a$ is an ancestor of a dimension combination $X_b$, if and only if $X_b \subsetneqq X_a$. Further,  a dimension combination $X_a$ is a parent of a dimension combination $X_b$, if and only if $X_b \subsetneqq X_a \land \mid X_a \mid - \mid X_b \mid = 1$. Notice that, a dimension combination can have multiple parent combinations. For example, given a sales dataset with four attributes {\tt\{Country, Gender, Month, Price\}}, the dimension combination {\tt\{Country, Month\}} has two parent combinations--- {\tt\{Country\}} and {\tt\{Month\}}. 
 
-We now extend the concept of parent dimension combination to introduce the idea of parent visualization. Let $U$ be the set of visualizations (of same type) that show the same $Y$ and $C(Z)$ for different $X$. Given a visualization $V_i \in U$, parent of $V_i$, $V_i^j$ ($V_i^j\in U$) is a visualization that corresponds to a parent dimension combination of the former. Analogous to a dimension combination, a visualization $V_i \in U$ can have multiple parents. Figure 2 presents three visualizations that show the average price of products for three different dimension combinations: (i) US citizens/non-citizens, (ii) males/females, (iii) males/females who are US citizens/non-citizens. As per the parent-child relationship between the dimension combinations, the visualizations corresponding to (i) and (ii) are parents of the visualization corresponding to (iii).
+%We now extend the concept of parent dimension combination to introduce the idea of parent visualization. Let $U$ be the set of visualizations (of same type) that show the same $Y$ and $C(Z)$ for different $X$. Given a visualization $V_i \in U$, parent of $V_i$, $V_i^j$ ($V_i^j\in U$) is a visualization that corresponds to a parent dimension combination of the former. Analogous to a dimension combination, a visualization $V_i \in U$ can have multiple parents. Figure 2 presents three visualizations that show the average price of products for three different dimension combinations: (i) US citizens/non-citizens, (ii) males/females, (iii) males/females who are US citizens/non-citizens. As per the parent-child relationship between the dimension combinations, the visualizations corresponding to (i) and (ii) are parents of the visualization corresponding to (iii).
 \fi
 
 \subsection{User Expectation Model}
