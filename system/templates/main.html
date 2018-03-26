@@ -297,7 +297,76 @@
 </div>
 
  <div id="right-sidebar-graph" class="clearfix" style="width:20%; float:right; z-index: 1; position: relative;">
-  <div class="column menu" style="width:100%">
+<br><br>
+<form class="form-inline menu-item">
+  <h1>Dashboard Options:</h1>
+  <br>
+  <h2 class = "title"><b>Dataset</b></h2>
+  <div class="form-group">
+        <select name="table_selected" id = "all_tables" class="selectpicker form-control">
+            <option selected="true" value = "None">None</option>
+            {% for dataset in all_tables %}
+                <option value= {{dataset}} >{{dataset}}</option>
+​            {% endfor %}
+        </select>
+  </div>
+</form>
+<br><br>
+<form class="form-inline menu-item">
+   <h2 class = "title"><b>X-Axis</b></h2>
+  <div class="form-group">
+         <select name = "xaxis_select" id = "xaxis" class="selectpicker form-control">
+        </select>
+    </div>
+</form>
+<br><br>
+<form class="form-inline menu-item">
+    <h2 class = "title"><b>Y-Axis</b></h2>
+    <div class="form-group">
+        <select name = "yaxis_select"  id = "yaxis" class="selectpicker form-control">
+            <option selected="true" value = "None"> None</option>
+        </select>
+    </div>
+</form>
+<br><br>
+<form class="form-inline menu-item" class="form-inline" id = "agg_select" name = "agg_select">
+  <h2 class = "title"><b>Aggregation function:</b></h2>
+    <div class="form-group">
+        <select name = "AggFunc"  id = "AggFunc" class="selectpicker form-control">
+            <option selected="true" value = "None"> None</option>
+            <option value= "SUM">SUM</option>
+            <option value= "AVERAGE">AVERAGE</option>
+            <option value= "COUNT">COUNT</option>
+        </select>
+    </div>
+  <br>
+</form>
+<br><br>
+
+<form class="form-inline menu-item" class="form-inline">
+  <h2 class = "title"><b>k</b></h2>
+</form>
+<input id="k" class="slider" style ="margin-left: 20px" type="range" min="0" value="0" max="6" step="1">
+<div id="k" style ="margin-left: 20px"></div>
+<br>
+<form class="form-inline menu-item" class="form-inline">
+  <h2 class = "title"><b>iceberg condition</b></h2>
+
+
+</form>
+<input id="ic" class="slider" style ="margin-left: 20px" type="range" min="0" value="0" max="6" step="1">
+<div id="ic" style ="margin-left: 20px"></div>
+<br>
+<form class="form-inline menu-item" class="form-inline">
+  <h2 class = "title"><b>informative parent criterion</b></h2>
+
+
+</form>
+<input id="ip" class="slider" style ="margin-left: 20px" type="range" min="0" value="0" max="6" step="1">
+<div id="ip" style ="margin-left: 20px"></div>
+<div id="additionalInfoPanel" style="margin-left: 10px; word-wrap: break-word;"></div>
+
+ <!--  <div class="column menu" style="width:100%">
 
         <div>
             <li class="panel">You are interested in...</li>
@@ -319,7 +388,7 @@
           </table>
 
       </div>
-
+ -->
 
 
   </div>
