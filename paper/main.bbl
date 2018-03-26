@@ -1,4 +1,15 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{Alipourfard2018}
+N.~Alipourfard, P.~G. Fennell, and K.~Lerman.
+\newblock {Can you Trust the Trend?}
+\newblock {\em Proceedings of the Eleventh ACM International Conference on Web
+  Search and Data Mining - WSDM '18}, pp. 19--27, 2018. doi: {{%
+10\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}1145\discretionary{/}{%
+}{/}3159652\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}3159684}}
+
 
 \bibitem{anand}
 Anand.
@@ -13,6 +24,48 @@ A.~Anand and J.~Talbot.
 }{/}TVCG\hspace{.1pt}\discretionary{.}{%
 }{.}\hspace{.4pt}2015\hspace{.1pt}\discretionary{.}{%
 }{.}\hspace{.4pt}2467323}}
+
+
+\bibitem{Boy2015}
+J.~Boy, F.~Detinenne, and J.-D. Fekete.
+\newblock {Storytelling in Information Visualizations : Does it Engage Users to
+  Explore Data ?}
+\newblock {\em CHI 2015}, pp. 1449--1458, 2015.
+
+\bibitem{Guo2017}
+Y.~Guo, C.~Binnig, T.~Kraska, and T.~U. Darmstadt.
+\newblock {What you see is not what you get ! Detecting Simpson ' s Paradoxes
+  during Data Exploration}.
+\newblock {\em HILDA 2017 - Proceedings of the Workshop on Human-In-the-Loop
+  Data Analytics}, 2017.
+
+\bibitem{Hullman2013}
+J.~Hullman, S.~Drucker, N.~{Henry Riche}, B.~Lee, D.~Fisher, and E.~Adar.
+\newblock {A deeper understanding of sequence in narrative visualization}.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  19(12):2406--2415, 2013. doi: {{%
+10\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}1109\discretionary{/}{%
+}{/}TVCG\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}2013\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}119}}
+
+
+\bibitem{Hullman2017}
+J.~Hullman, R.~Kosara, and H.~Lam.
+\newblock {Finding a Clear Path : Structuring Strategies for Visualization
+  Sequences}.
+\newblock 36(3), 2017.
+
+\bibitem{Kim2017}
+Y.~Kim, K.~Wongsuphasawat, J.~Hullman, and J.~Heer.
+\newblock {GraphScape: A Model for Automated Reasoning about Visualization
+  Similarity and Sequencing}.
+\newblock {\em Proc. of ACM CHI 2017}, 2017. doi: {{%
+10\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}1145\discretionary{/}{%
+}{/}3025453\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}3025866}}
 
 
 \bibitem{Sarawagi1999}
@@ -32,6 +85,18 @@ S.~Sarawagi, R.~Agrawal, N.~Megiddo, G.~V. A.~V. {Univ Politecn Valencia}, and
 \newblock {Discovery-driven exploration of OLAP data cubes}.
 \newblock {\em 6th International Conference on Extending Database Technology
   (EDBT 98)}, pp. 168--182, 1998.
+
+\bibitem{Segel2010}
+E.~Segel and J.~Heer.
+\newblock {Narrative visualization: Telling stories with data}.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  16(6):1139--1148, 2010. doi: {{%
+10\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}1109\discretionary{/}{%
+}{/}TVCG\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}2010\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}179}}
+
 
 \bibitem{Vartak2015}
 M.~Vartak, S.~Rahman, S.~Madden, A.~Parameswaran, and N.~Polyzotis.
