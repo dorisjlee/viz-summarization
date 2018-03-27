@@ -53,35 +53,30 @@ Now, we discuss the set-theory based \emph{containment} relationships for data s
 
 We now extend the concept of \emph{containment} relationships (of data subsets) for visualizations defined according to our setup. 
 
-\textbf{Viz Containment.} Let $V$ be the set of visualizations (of same type) that show the same $X$ and $Y$ for different $C(Z)$. Given a visualization $V_i \in V$, parent of $V_i$, $V_i^j$ ($V_i^j\in V$) is a visualization that corresponds to a parent data subset of the former. In Figure 2 we present three visualizations that show the average price of products bought by male and female customers for three data subsets: (i) US citizens, (ii) people who buy products in Jan, (iii) US citizens who buy products in Jan. As per the parent-child relationship among the data subsets, the visualizations corresponding to (i) and (ii) are parents of the visualization corresponding to (iii). %\hdev{Figure 2 example to be replaced with an example from Titanic. All three plots will be in the same row, with annotation (i), (ii), (iii).}
+\textbf{Viz Containment.} Let $V$ be the set of visualizations (of same type) that show the same $X$ and $Y$ for different $C(Z)$. Given a visualization $V_i \in V$, parent of $V_i$, $V_i^j$ ($V_i^j\in V$) is a visualization that corresponds to a parent data subset of the former. In Figure 2 we present three visualizations that show the survival rate of titanic passengers for three data subsets: (i) 3rd class passengers, (ii) female Passengers (3rd class and crew combined), (iii) 3rd class female passengers. As per the parent-child relationship among the data subsets, the visualizations corresponding to (i) and (ii) are parents of the visualization corresponding to (iii). %\hdev{Figure 2 example to be replaced with an example from Titanic. All three plots will be in the same row, with annotation (i), (ii), (iii).}
 
 \begin{figure}[bht]
 \label{example}
 \centering
-\includegraphics[scale=0.5]{figures/SubsetRelation.pdf}
-\caption{Parent-child relationship amongst visualizations that show the average price of products bought by male and female customers for three data subsets: (i) US citizens, (ii) people who buy products in Jan, (iii) US citizens who buy products in Jan.}
+\includegraphics[scale=0.4]{figures/Parent_Viz.pdf}
+\caption{Parent-child relationship amongst visualizations that show the survival rate of titanic passengers for three data subsets: (i) 3rd class passengers, (ii) female Passengers (3rd class and crew combined), (iii) 3rd class female passengers.}
 \end{figure}
 
 \textbf{Viz Hierarchy.} Based on the containment relationship of visualizations, we can organize the visualizations from $V$ to form a hierarchy. This hierarchy contains all visualizations (of same type, e.g., bar charts) that show the same x- and y- axes for different data subsets, and arranges them as per the parent-child relationships between data subsets. Our goal is to traverse this hierarchy of visualizations, and identify informative and interesting visualizations.
 
-\iffalse
-\begin{figure}[bht]
-\label{example}
-\centering
-\includegraphics[scale=0.5]{figures/DimensionRelation.pdf}
-\caption{Parent Child Relationship in Dimension Combination Space}
-\end{figure}
-
-%\textbf{Dimension Combination Space.} Given a combination of dimension attributes $X = \{X_1, \ldots, X_n\}$, adding one or more new dimensions in $X$ will generate a new combination.  An ancestor-descendant relationship exists between these dimension combinations. Specifically, a dimension combination $X_a$ is an ancestor of a dimension combination $X_b$, if and only if $X_b \subsetneqq X_a$. Further,  a dimension combination $X_a$ is a parent of a dimension combination $X_b$, if and only if $X_b \subsetneqq X_a \land \mid X_a \mid - \mid X_b \mid = 1$. Notice that, a dimension combination can have multiple parent combinations. For example, given a sales dataset with four attributes {\tt\{Country, Gender, Month, Price\}}, the dimension combination {\tt\{Country, Month\}} has two parent combinations--- {\tt\{Country\}} and {\tt\{Month\}}. 
-
-%We now extend the concept of parent dimension combination to introduce the idea of parent visualization. Let $U$ be the set of visualizations (of same type) that show the same $Y$ and $C(Z)$ for different $X$. Given a visualization $V_i \in U$, parent of $V_i$, $V_i^j$ ($V_i^j\in U$) is a visualization that corresponds to a parent dimension combination of the former. Analogous to a dimension combination, a visualization $V_i \in U$ can have multiple parents. Figure 2 presents three visualizations that show the average price of products for three different dimension combinations: (i) US citizens/non-citizens, (ii) males/females, (iii) males/females who are US citizens/non-citizens. As per the parent-child relationship between the dimension combinations, the visualizations corresponding to (i) and (ii) are parents of the visualization corresponding to (iii).
-\fi
-
 \subsection{User Expectation Model}
 In order to understand which visualizations a user would deem ``informative" and ``interesting" , we consider how analysts explore their data through OLAP operations, and model the effective utility of displaying an unseen visualization to a user in the context of other seen visualizations. 
  
-\textbf{Top Down Traversal.} We observe that, while exploring a dataset, users first look at the top level visualizations before looking at the next level. Further, the data distributions learnt from the top level visualizations set user expectation for the next level. Based on these two observations, we model user expectation $\hat{V_i}$ corresponding to an unseen visualization $V_i$ based on its seen/observed parents, $P(V_i) = \{V_i^1, \ldots, V_i^\lambda\}$. Specifically, we model two aspects of each unseen-visualization and observed-parent relationship, namely informativeness and interestingness. 
+\textbf{Top Down Traversal.} We observe that, while exploring a dataset, users first look at the top level visualizations before looking at the next level. Further, the data distributions learnt from the top level visualizations set user expectation for the next level. Based on these two observations, we aim to model user expectation $\hat{V_i}$ corresponding to an unseen visualization $V_i$ based on its seen/observed parents, $P(V_i) = \{V_i^1, \ldots, V_i^\lambda\}$. 
 
+\textbf{Formative User Study.} To better understand how an observed parent visualization can affect a user's expectation for an unseen child visualization, we conduct a user study. In this study, we asked participants to predict the value of a visualization after seeing a parent of the visualization to be predicted. In this between-group study, one group of participants were shown the informative parent, whereas another group of participants was shown the uninformative parents. Our main findings are : 1) it is natural for users to use the informative parent and 2) in the absence of informative parents, the users can be misled to have false expectations on the data.
+\begin{figure}[bht]
+\label{example}
+\includegraphics[scale=0.28]{figures/Evaluation_1.pdf}
+\caption{Caption.}
+\end{figure}
+
+We model two aspects of each unseen-visualization and observed-parent relationship, namely informativeness and interestingness. 
 \textbf{Informativeness.} To model the informativeness of an observed parent in the context of an unseen visualization, we characterize the capability of the parent in predicting the unseen visualization. For an unseen visualization, the observed parents whose data distributions accurately predict the data distribution of the unseen are \emph{informative}. Specifically, we formulate the informativeness of an observed parent $V_i^j$ ($V_i^j \in P(V_i)$) of an unseen visualization $V_i$ as the similarity between their data distributions using a similarity function $S(V_i, V_i^j)$. The most informative parents $V_i^*$ of an unseen visualization $V_i$ are the ones whose data distributions have highest similarity with that of the unseen.
 
 \begin{equation}
