@@ -22,9 +22,32 @@ We give an overview of the traversal algorithms to generate the visualization hi
 
 
 \subsection{User Interaction}
+\begin{figure}[ht!]
+\label{overview}
+\centering
+\includegraphics[width=\linewidth]{figures/overview2.jpeg}
+\caption{Overview interface}
+\end{figure}
 - chosing a x and y axis of interest 
-
+iterative view refinement [?]
+%Figure for expanding refinement
 \subsection{Assistive tools for visualizing large lattices}
 Due to the amount of space occupied by the hierarchical layout when the number of visualizations gets large, we have developed tools to help users navigate through difference parts of the dashboard interactively. 
-\textbf{Navigation Tools:} As shown in Figure ---, the system provides toolbar buttons with keyboard binding for zooming in, out, and extent, as well as moving around the canvas. Alternatively, participants can also zoom and pan with mouse click and scroll. When the user zooms in on the dashboard, an overview mini-map is shown on the upper right-hand side of the canvas to help users identify which region of the dashboard they are exploring, as shown in Figure ---. 
-\textbf{Collapsed visualizations:} One observation that we found across several datasets was that many of the visualization attributes resulted in identical distributions. Apart from their attribute name, these visualizations are not very informative for the users, therefore, we offer an option to collapse these visualization. A visualization can be collapsed if it has a redundant sibling and it does not have children.
+\par \textbf{Navigation Tools:} As shown in Figure ---, the system provides toolbar buttons with keyboard binding for zooming in, out, and extent, as well as moving around the canvas. Alternatively, participants can also zoom and pan with mouse click and scroll. When the user zooms in on the dashboard, an overview mini-map is shown on the upper right-hand side of the canvas to help users identify which region of the dashboard they are exploring, as shown in Figure \ref{hover_minimap}. 
+\par \textbf{Collapsed visualizations:} 
+One observation that we found across several datasets was that many of the visualization attributes resulted in identical distributions. Apart from their attribute name, these visualizations are not very informative for the users, therefore, we offer an option to collapse these visualization, as demonstrated in Figure \ref{collapse_demo}. A visualization can be collapsed if it has more than one redundant sibling and does not have any children. As shown in Figure \ref{hover_minimap}, collapsed nodes can be easily identified by an orange border and the details of which visualizations are in the collapsed node are displayed when the user hovers over the visualization.
+\begin{figure}[ht!]
+\label{collapse_demo}
+\centering
+\includegraphics[width=\linewidth]{figures/k50_original.jpeg}
+\noindent\makebox[\linewidth]{\rule{\linewidth}{0.4pt}}
+\includegraphics[width=\linewidth]{figures/k50_collapsed.jpeg}
+\caption{An example of the k=50 dashboard for the mushroom dataset, which contains type =\{ posionous, edible\} on the x-axis. The collapsed dashboard (bottom) removed 16 redundant visualizations from the original dashboard (top). }
+\end{figure}
+
+\begin{figure}[ht!]
+\label{hover_minimap}
+\centering
+\includegraphics[width=\linewidth]{figures/hoverLabel_minimap.jpg}
+\caption{Zoomed-in version of Figure \ref{collapse_demo} showing the labels of a collapsed visualization. The navigation minimap is shown in the top-right to help users navigate through the a large dashboard.}
+\end{figure}

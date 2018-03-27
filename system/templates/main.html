@@ -304,10 +304,11 @@
   <h2 class = "title"><b>Dataset</b></h2>
   <div class="form-group">
         <select name="table_selected" id = "all_tables" class="selectpicker form-control">
-            <option selected="true" value = "None">None</option>
-            {% for dataset in all_tables %}
+            <option selected="true" value = "Police">Police</option>
+            <!-- <option selected="true" value = "None">None</option> -->
+            <!-- {% for dataset in all_tables %}
                 <option value= {{dataset}} >{{dataset}}</option>
-​            {% endfor %}
+​            {% endfor %} -->
         </select>
   </div>
 </form>
@@ -315,8 +316,9 @@
 <form class="form-inline menu-item">
    <h2 class = "title"><b>X-Axis</b></h2>
   <div class="form-group">
-         <select name = "xaxis_select" id = "xaxis" class="selectpicker form-control">
-        </select>
+      <select name = "xaxis_select" id = "xaxis" class="selectpicker form-control">
+        <option selected="true" value = "None">stop_outcome</option>
+      </select>
     </div>
 </form>
 <br><br>
@@ -324,7 +326,7 @@
     <h2 class = "title"><b>Y-Axis</b></h2>
     <div class="form-group">
         <select name = "yaxis_select"  id = "yaxis" class="selectpicker form-control">
-            <option selected="true" value = "None"> None</option>
+            <option selected="true" value = "None">id</option>
         </select>
     </div>
 </form>
@@ -370,7 +372,7 @@
 </form>
 <input id="ip" class="slider" style ="margin-left: 20px" type="range" min="0" value="0" max="6" step="1">
 <div id="ip" style ="margin-left: 20px"></div>
-<p style = "margin-left:60px">0.9</p>
+<p style = "margin-left:135px">0.9</p>
 <div id="additionalInfoPanel" style="margin-left: 10px; word-wrap: break-word;"></div>
 
  <!--  <div class="column menu" style="width:100%">
