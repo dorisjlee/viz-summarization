@@ -78,7 +78,7 @@ function draw(node,edge) {
         var nodeID = params.node;
         //console.log(nodeID)
         var hoveredNode = node_dataset.get(nodeID);
-        if(hoveredNode.collapse.length > 0)
+        if(hoveredNode.collapse.length > 0){
             //console.log(hoveredNode)
             hoveredNode.title = ""
             for(i = 0; i < hoveredNode.collapse.length; i++){
@@ -92,8 +92,11 @@ function draw(node,edge) {
             }
 
             //console.log(hoveredNode)
-
+            hoveredNode.color = {
+                border: '#ff9933'
+            }
             node_dataset.update(hoveredNode);
+        }
     });
     network.on("click", function(params) {
 
