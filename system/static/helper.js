@@ -514,7 +514,7 @@ function showfilter(cell){
                     title[idx] = "overall";
                 }
             else if (title[idx]=="collapsed"){
-                  title[idx]= "collapsed"
+                  title[idx]= ""
             }
 
             else{
@@ -588,7 +588,7 @@ function generateSVG(cell_idx, chartarray/*, xLabel, yLabel*/) {
         if (t=="#")
               t="overall"
         else if (t=="collapsed")
-              t= "collapsed"
+              t= ""
         else{
              for(var j = 0; j<t.length;j++){
                    if(t[j] == "$"){
