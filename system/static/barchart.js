@@ -41,6 +41,7 @@ function draw(node,edge) {
               border: '#A1BACB',
               background: '#FFFFFF',
               highlight: 'red',
+              hover: '#ff9933'
             },
           font:{color:'#0B131A',
                 size:8
