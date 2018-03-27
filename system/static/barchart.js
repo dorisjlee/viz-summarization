@@ -71,6 +71,18 @@ function draw(node,edge) {
         }
     };
 
+    //hightlight collapsed node
+    for (i = 0; i < node.length; i++) {
+        var currNode = node_dataset.get(node[i].id);
+        if(currNode.collapse.length > 0){
+            currNode.color = {
+                border: '#ff9933',
+                highlight: '#ff9933'
+            }
+            node_dataset.update(currNode);
+
+        }
+    }
 
     console.log(node_dataset);
     network = new vis.Network(container, data, options);
@@ -140,17 +152,17 @@ function draw(node,edge) {
             "interested" : JSON.stringify(totalclick),
             "fname" : JSON.stringify(fname)
         },'application/json')
-        document.getElementById('interested-in').innerHTML = '';
-        document.getElementById('not-interested-in').innerHTML = '';
+        //document.getElementById('interested-in').innerHTML = '';
+        //document.getElementById('not-interested-in').innerHTML = '';
         for (i = 0; i < node.length; i++) {
 
             if(totalclick[node[i].id]==2){
                 //var currNode = node_dataset.get(i);
-                document.getElementById('interested-in').innerHTML+='<li type="square" style="color:green">'+node[i].filterVal+'</li>';
+                //document.getElementById('interested-in').innerHTML+='<li type="square" style="color:green">'+node[i].filterVal+'</li>';
             }
             else if (totalclick[node[i].id]==3){
                 //var currNode = node_dataset.get(i);
-                document.getElementById('not-interested-in').innerHTML+='<li type="square" style="color:red">'+node[i].filterVal+'</li>';
+                //document.getElementById('not-interested-in').innerHTML+='<li type="square" style="color:red">'+node[i].filterVal+'</li>';
             }
         }
         selection = params.nodes
@@ -177,10 +189,10 @@ function draw(node,edge) {
 }
 function showJQueryDialog(params, nodeID, selection) {
 
-    title = "You clicked Node " + nodeID;
+    title = "Expanding Node " + nodeID + " with ";
     var d = document.getElementById('dlg_text');
-    var input = ',&nbsp;K =<input type="text" size="1" name="lastname" value="0">&nbsp;<input type="submit" style="border-radius: 5px;" value="Submit">'
-    d.innerHTML = title + input;
+    var input = '&nbsp;<input type="text" size="1" name="lastname" value="0"> additional visualizations &nbsp;<input type="submit" style="border-radius: 5px;" value="Submit">'
+    d.innerHTML = title + input ;
     d.style.position = "fixed";
     d.style.display = "inline";
     d.style.left = params.pointer.DOM.x+40+'px';
