@@ -7,7 +7,7 @@ SRCS := $(wildcard *.tex) $(BIB) $(FIGS) Makefile
 ALL := $(DOC).pdf
 
 all : 
-	$(TEX) $(DOC).tex
+	$(TEX) $(DOC).tex 
 	$(BIBTEX) $(DOC)
 	$(TEX) $(DOC)
 	$(TEX) $(DOC)

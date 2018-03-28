@@ -189,7 +189,7 @@ function draw(node,edge) {
 }
 function showJQueryDialog(params, nodeID, selection) {
 
-    title = "Expanding Node " + nodeID + " with ";
+    title = "Expanding " + node_dataset._data[nodeID]["filterVal"] + "<br> with ";
     var d = document.getElementById('dlg_text');
     var input = '&nbsp;<input type="text" size="1" name="lastname" value="0"> additional visualizations &nbsp;<input type="submit" style="border-radius: 5px;" value="Submit">'
     d.innerHTML = title + input ;

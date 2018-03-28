@@ -39,6 +39,19 @@ Y.~Guo, C.~Binnig, T.~Kraska, and T.~U. Darmstadt.
 \newblock {\em HILDA 2017 - Proceedings of the Workshop on Human-In-the-Loop
   Data Analytics}, 2017.
 
+\bibitem{Hoque2017}
+E.~Hoque, V.~Setlur, M.~Tory, and I.~Dykeman.
+\newblock {Applying Pragmatics Principles for Interaction with Visual
+  Analytics}.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics}, (c),
+  2017. doi: {{%
+10\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}1109\discretionary{/}{%
+}{/}TVCG\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}2017\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}2744684}}
+
+
 \bibitem{Hullman2013}
 J.~Hullman, S.~Drucker, N.~{Henry Riche}, B.~Lee, D.~Fisher, and E.~Adar.
 \newblock {A deeper understanding of sequence in narrative visualization}.
