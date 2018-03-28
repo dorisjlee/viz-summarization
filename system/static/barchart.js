@@ -123,7 +123,7 @@ function draw(node,edge) {
         if(totalclick[nodeID]==1)
             color = 'grey';
         else if(totalclick[nodeID]==2)
-            color = 'green';
+            color = '#cc66ff';
         else if(totalclick[nodeID]==3)
             color = '#ff9933';
 
