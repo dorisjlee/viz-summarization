@@ -53,7 +53,7 @@ def autolabel(rects, ax):
                 ha='center', va='bottom')
 
 
-def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", N=1, width=0.1,autolabel_flag =True,fixed_ylim=True):
+def bar_chart(yVals, xAttrs, yErrs = [], xtitle="", ytitle="", title="", top_right_text="", N=1, width=0.1,autolabel_flag =True,fixed_ylim=True):
 
     ind = np.arange(N)  # the x locations for the groups
     if len(yVals)==2:
@@ -62,11 +62,16 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
     else:
         colors = ["#9ecae1","#99e699","#fc9272"]
         sns.set_palette(sns.color_palette(colors))
+
     fig, ax = plt.subplots()
     #cmap = get_cmap(len(yVals) + 1)
     rects = []
+    error_kw=dict(lw=1, capsize=5, capthick=1)
     for i in range(len(yVals)):
-        rect = ax.bar(ind + (i+0.5) * width, yVals[i], width, ecolor="black")
+    	if yErrs==[]:
+    		rect = ax.bar(ind + (i+0.5) * width, yVals[i], width)
+    	else:
+        	rect = ax.bar(ind + (i+0.5) * width, yVals[i], width, ecolor="black",yerr=yErrs[i],error_kw=error_kw)
         rects.append(rect)
 
     xtitle = xtitle.replace('"', '')

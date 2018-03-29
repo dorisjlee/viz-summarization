@@ -16,7 +16,7 @@ We start by discussing the data, visualization and query setup.
 
 %\textbf{Visualization.} We define the notion of a visualization for our problem. There are different visualization types such as bar charts, scatter plots, and trend lines, but across all types, a visualization can be defined using five main components: (i) the x-axis attribute(s), (ii) the y-axis attribute, (iii) the subset of data used, (iv) the binning and aggregation functions for the x- and y- axes, and (v) the type of visualization (e.g., bar chart, scatter plot).
 
-\textbf{Visualization.} We define the notion of a visualization for our problem. In our setup, a visualization can be defined using five main components: (i) the x-axis attributes, (ii) the y-axis attribute, (iii) the subset of data used, (iv) the binning and aggregation functions for the x- and y- axes, and (v) the type of visualization, e.g., bar chart.
+\textbf{Visualization.} We define the notion of a visualization for our problem. In our setup, a visualization can be defined using five main components: (i) the x-axis attributes, (ii) the y-axis attribute, (iii) the subset of data used (filter combination), (iv) the aggregation function for the y- axis, and (v) visualization type, e.g., bar chart.
 
 \textbf{Query.} Our query setup applies to all visualization types that can be defined in terms of the aforementioned components, including common visualization types such as bar charts, trend lines, and scatter plots. Visualizations of these types can be translated into the following \textsc{SQL} query: {\tt SELECT X, A(Y) FROM R WHERE C(Z) GROUP BY X}. Here, $X$ refers to the x-axis attribute(s), $Y$ to the y-axis attribute, $A(Y)$ to the aggregation function on $Y$, $Z$ to the attribute(s) used in specifying the data subset, and $C(Z)$ to the constraints or filters that specify the data subset.
 
@@ -58,26 +58,27 @@ We now extend the concept of \emph{containment} relationships (of data subsets) 
 \begin{figure}[bht]
 \label{example}
 \centering
-\includegraphics[scale=0.4]{figures/Parent_Viz.pdf}
+\includegraphics[scale=0.4]{figures/Titanic_Parent_Child.pdf}
 \caption{Parent-child relationship amongst visualizations that show the survival rate of titanic passengers for three data subsets: (i) 3rd class passengers, (ii) female Passengers (3rd class and crew combined), (iii) 3rd class female passengers.}
 \end{figure}
 
 \textbf{Viz Hierarchy.} Based on the containment relationship of visualizations, we can organize the visualizations from $V$ to form a hierarchy. This hierarchy contains all visualizations (of same type, e.g., bar charts) that show the same x- and y- axes for different data subsets, and arranges them as per the parent-child relationships between data subsets. Our goal is to traverse this hierarchy of visualizations, and identify informative and interesting visualizations.
 
 \subsection{User Expectation Model}
-In order to identify which visualizations a user would deem ``informative" and ``interesting", we first reveal how analysts explore the visualization hierarchy through a user study, and then model the effective utility of displaying an unseen visualization to a user in the context of other seen visualizations. 
+In order to identify which visualizations a user would deem informative and interesting, we first reveal how analysts explore the visualization hierarchy through a user study, and then model the effective utility of displaying an unseen visualization to a user in the context of other seen visualizations. 
  
-\textbf{Top Down Traversal.} We observe that, while exploring a dataset, users first look at the top level visualizations before looking at the next level. Further, the data distributions learnt from the top level visualizations induce user expectation for the next level. Based on these two observations, we model user expectation $\hat{V_i}$ corresponding to an unseen visualization $V_i$ based on its seen/observed parents $P(V_i) = \{V_i^1, \ldots, V_i^\lambda\}$ in the visualization hierarchy. 
+\textbf{Top Down Traversal.} We observe that, while exploring a dataset, users first look at the top level visualizations before looking at the next level \cite{Kim2017, Hullman2013}. Further, the data distributions learnt from the top level visualizations induce user expectation for the next level. Based on these two observations, we model user expectation $\hat{V_i}$ corresponding to an unseen visualization $V_i$ based on its seen/observed parents $P(V_i) = \{V_i^1, \ldots, V_i^\lambda\}$ in the visualization hierarchy. 
 
-\textbf{Formative User Study.} We conducted a user study to understand how a user's perception of an unseen visualization is affected by one or more of its observed parents. In this study, we recruited 9 participants to predict the distribution of an unseen visualization (with two filters), after showing them its parents (two parents, each with one filter). This is a between-group study, where one group of participants were shown the first parent followed by the second parent, whereas another group of participants were shown the second parent followed by the first parent. Note that the two parent visualizations have different data distributions---the first parent well describes the unseen visualization, and the second parent differs from the unseen visualization. We examined how users form their expectation in presence of these observed parents. Our main findings are : (1) it is natural for users to use one or more observed parents to form their expectation of an unseen visualization, (2) seeing an informative parent (that well describes the unseen visualization) leads to a better approximation of the unseen; (3) in absence of an informative parent, a user can be misled to form an inaccurate expectation; (4) in presence of multiple parents, the variance of expectation increases.
+\textbf{Formative User Study.} We conducted a user study to understand how a user's perception of an unseen visualization is affected by one or more of its observed parents. We recruited 9 participants to predict the distribution of an unseen visualization (with two filters), after showing them its two parents (each with one filter) one-by-one. In this between-group study, one group of participants (G1) were shown the first parent followed by the second parent, whereas another group of participants (G2) were shown the second parent followed by the first parent. Note that the two parent visualizations have different data distributions---the first parent well describes the unseen visualization, and the second parent differs from the unseen visualization. We examined how users form their expectation in presence of these observed parents. We summarize the results in Figure 2. Our main findings are : (1) it is natural for users to use one or more observed parents to form their expectation of an unseen visualization, (2) seeing an ``informative'' parent (that well describes the unseen visualization) leads to a better approximation of the unseen; (3) in absence of an informative parent, a user can be misled to form an inaccurate expectation; (4) in presence of multiple parents, the variance of expectation increases.
 
 \begin{figure}[bht]
 \label{example}
-\includegraphics[scale=0.28]{figures/Evaluation_1.pdf}
-\caption{Results of the formative user study. The V1 participants were shown the uninformative parent first, followed by the informative parent; whereas V2 participants were shown the informative parent first, followed by the uninformative parent. The V2 participants closely approximated the unseen visualization immediately after seeing the informative parent.}
+\centering
+\includegraphics[scale=0.3]{figures/Formative_Study.pdf}
+\caption{Results of the formative user study. The G1 participants were shown the informative parent first, followed by the uninformative parent; whereas G2 participants were shown the uninformative parent first, followed by the informative parent. The G1 participants closely approximated the unseen visualization immediately after seeing the informative parent.}
 \end{figure}
 
-Based on the findings of our study, we model two aspects of the unseen-visualization and observed-parent relationship, namely informativeness and interestingness. 
+Based on these findings, we model two aspects of the unseen-visualization and observed-parent relationship, namely informativeness and interestingness. 
 
 \textbf{Informativeness.} To model the informativeness of an observed parent in the context of an unseen visualization, we characterize the capability of the parent in predicting the unseen visualization. For an unseen visualization, the observed parents whose data distributions well describe the data distribution of the unseen are \emph{informative}. Specifically, we formulate the informativeness of an observed parent $V_i^j$ ($V_i^j \in P(V_i)$) of an unseen visualization $V_i$ as the similarity between their data distributions using a similarity function $S(V_i, V_i^j)$. The most informative parents $V_i^*$ of an unseen visualization $V_i$ are the ones whose data distributions have highest similarity with that of the unseen.
 
@@ -85,7 +86,7 @@ Based on the findings of our study, we model two aspects of the unseen-visualiza
     V_i^*=\underset{V_i^j}{argmax}\ S(V_i, V_i^j)
 \end{equation}
 
-Since declaring a parent as informative can vary depending on its similarity with the unseen compared to other parents, we allow the user to specify a threshold $\theta$, which we expect to be close to 1.0, such that the similarity score $S(V_i, V_i^{*, \theta})$ corresponding to the informative parents $V_i^{*, \theta}$ are at least $\theta$ fraction of that of the most informative parents'.
+Since declaring a parent as informative can vary depending on its similarity with the unseen compared to other parents, we allow the user to specify a threshold $\theta$, which we expect to be close to 1.0, such that the similarity score $S(V_i, V_i^{*, \theta})$ corresponding to the informative parents $V_i^{*, \theta}$ are at least $\theta\%$ of that of the most informative parents'. For example, if $\theta = 0.8$, all parents of $V_i$ whose similarity scores are at least 80\% of that compared to $V_i^*$ are deemed as informative. 
 
 \begin{equation}
     V_i^{*, \theta} = \{V_i^j : \frac{S(V_i, V_i^j)}{S(V_i, V_i^*)} \ge \theta\}

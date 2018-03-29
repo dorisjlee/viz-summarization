@@ -3,7 +3,7 @@
 \section{System}
 \subsection{System Architecture}
 
-We have implemented \system\ as a web-based tool on top of a PostgreSQL database. In Figure X we present the system architecture of \system\ , which consists of three core modules: the traversal module, the query module, and the stats module. The traversal module contains several alternative algorithms for traversing the visualization hierarchy. These algorithms are responsible for both generating the visualization hierarchy and identifying the solution (dashboard) from the hierarchy. For generating the visualization hierarchy, the traversal module passes the list of visualizations to be generated to the query module. The query module translates these visualizations into queries, and then optimizes (by grouping) and executes the queries. The stats module is an optional module that allows the traversal module to prune low-utility visualizations without actually generating them. Specifically, it generates coarse statistics for the unexplored visualizations based on the current list of explored visualizations. 
+We have implemented \system\ as a web-based tool on top of a PostgreSQL database. In Figure X we present the system architecture of \system, which consists of three core modules: the traversal module, the query module, and the stats module. The traversal module contains several alternative algorithms for traversing the visualization hierarchy. These algorithms are responsible for both generating the visualization hierarchy and identifying the solution (dashboard) from the hierarchy. For generating the visualization hierarchy, the traversal module passes the list of visualizations to be generated to the query module. The query module translates these visualizations into queries, and then optimizes (by grouping) and executes the queries. The statistics module is an optional module that allows the traversal module to prune low-utility visualizations without actually generating them. Specifically, it generates coarse statistics for the unexplored visualizations based on the current list of explored visualizations. 
 
 \begin{center}
 \begin{tikzpicture}
@@ -19,7 +19,40 @@ We have implemented \system\ as a web-based tool on top of a PostgreSQL database
 \end{center}
 
 \subsection{Algorithms}
-We give an overview of the traversal algorithms to generate the visualization hierarchy and identify visualizations from this hierarchy. We start with offline approach where we first generate the complete hierarchy of visualizations, and then work towards identifying the maximum utility solution. Then, we present our online algorithms to identify a solution in a single phase. 
+We give an overview of our algorithms by first discussing the approaches to generate the visualization hierarchy, and then presenting a high-level overview of our traversal algorithms.
+
+\textbf{Hierarchy Generation.} Our system supports two variants of traversal algorithms based on the hierarchy generation procedure---offline variants that first generate the complete hierarchy and then work towards identifying the maximum utility solution, online variants that incrementally generate the hierarchy and simultaneously identify the solution. The offline variants are appropriate for datasets with a small number of low-cardinality attributes, where we can generate the entire hierarchy in a reasonable time; whereas the online variants are appropriate for datasets with large number of high-cardinality attributes, where we incrementally generate a partial hierarchy. 
+
+%In most cases, the hierarchy contains a large number of visualizations due to the presence of many attributes or high-cardinality attributes in the dataset. In such cases finding an optimal solution is computationally challenging.
+
+\textbf{Hierarchy Traversal.} Note that the objective of our traversal is to find the maximum utility connected subgraph. This problem is NP-Complete, via a reduction from the \textsc{Clique Problem}. Therefore, we focus on devising heuristic algorithms to acquire a locally optimal solution. We devised two classes of heuristics algorithms, namely, frontier based algorithms, and path merging algorithms. These algorithms are guaranteed to find a solution that satisfies the constraints of our problem, except for the optimality. 
+
+The frontier based algorithms traverse the hierarchy from root to downwards, incrementally adding new nodes (visualizations) to the current solution (dashboard) till it reaches the maximum capacity $k$. To achieve this, the algorithms maintain a list of candidate nodes---called \textit{frontier} nodes---any of which can be added to the current solution since their informative parent is already present in the solution. At each step, the algorithms add a node from frontier to the current solution, and update the frontier accordingly.  The frontier based algorithms can be further categorized into three types based on their node selection strategy (from frontier), namely greedy algorithm, random walk algorithm, and probabilistic algorithm. The greedy algorithm picks the current best node from frontier (thus concentrates on exploitation), random walk algorithm picks a random node (thus concentrates on exploration), and probabilistic algorithm picks a random high-utility node (thus trades off between exploration and exploitation).
+
+The path merging algorithm first generate the informative paths from root to every candidate node. Then, it greedily merges the paths with high-utility to create a subgraph whose size is less than or equal to maximum capacity $k$.
+
+
+
+\iffalse
+\begin{algorithm}
+    \SetKwInOut{Input}{Input}
+    \SetKwInOut{Output}{Output}
+    \Input{}
+    \Output{}
+    \eIf{$b=0$}
+      {
+        return $a$\;
+      }
+      {
+        return Euclid$(b,a\mod b)$\;
+      }
+    \caption{Frontier Based Algorithm}
+\end{algorithm}
+\fi
+
+%\textbf{Greedy Algorithms:} Greedy algorithms select the locally optimal node to be added to the frontier. 
+
+%A specific implementation would need to specify a scoring function to nodes in frontier that is used to pop out the next node in each iteration. One can design a scoring function based on the trade-off between performance and complexity. In the most simple case, we can use the edge weights to score nodes in the frontier. That is, at each point we add a node with the highest interestingness value. We note that this is quite a greedy approach. Specifically, we might miss visualizations with high utility that are in deeper levels of the graph. Thus, another approach would be to extent the horizon for which we calculate a nodes utility. We denote such approach as a look-ahead approach. With a free parameter $n$, we would like to assign a score to each frontier node the corresponds to the expected utility of adding this node and $n-1$ more nodes who are its descendants. For example, we can run BFP for each node in frontier treating it as a root. 
 
 
 \subsection{User Interaction}
@@ -57,6 +90,6 @@ One observation that we found across several datasets was that many of the visua
 \begin{figure}[ht!]
 \label{hover_minimap}
 \centering
-\includegraphics[width=\linewidth]{figures/hoverLabel_minimap.jpg}
-\caption{Zoomed-in version of Figure \ref{collapse_demo} showing the labels of a collapsed visualization. The navigation minimap is shown in the top-right to help users navigate through the a large dashboard.}
+\includegraphics[width=\linewidth]{figures/minimap_cropped.pdf}
+\caption{Zoomed-in version of Figure \ref{collapse_demo} showing the labels of a collapsed visualization when user hovers over the visualization. The navigation minimap is shown in the top-left to help users navigate through the a large dashboard.}
 \end{figure}
