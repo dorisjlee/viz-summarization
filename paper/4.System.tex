@@ -33,9 +33,9 @@ We give an overview of the traversal algorithms to generate the visualization hi
 \par After browsing through the visualizations the dashboard, users may be interested in getting more information about a particular node. \system supports a mechanism for users to request additional summarizations based on a chosen node of interest. As shown in Figure \ref{altroot_expansion}, the analysts starts with a k=5 visualization. He learns that for the drivers who had contraband found in the vehicle, the arrest rate for drivers who are 60 and over is surprisingly higher than usual, whereas for Asian drivers the arrest rate is lower. Apart from the contraband found stories, he is interested in learning more about the other factor that contribute to high arrest rate: duration=30+min. He clicks on the corresponding visualization and requests for 2 additional visualizations. The system uses the same models and algorithms as discussed earlier to generate the expansion dashboard, with the only difference that the starting node is now the selected visualization, rather than the overall visualization. This node expansion capability is similarly motivated by the idea of \textit{iterative view refinement} in other visual analytics system\cite{Wongsuphasawat2016,Hoque2017}, which is essential for the users to iterate on and explore different hypotheses. 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=0.46\linewidth]{figures/before_expansion.jpeg}
-\includegraphics[width=0.05\linewidth]{figures/arrow_right.jpeg}
-\includegraphics[width=0.46\linewidth]{figures/after_expansion.jpeg}
+\includegraphics[width=0.43\linewidth]{figures/before_expansion2.png}
+\raisebox{5\height}{\includegraphics[width=0.05\linewidth]{figures/arrow_right.jpeg}}
+\includegraphics[width=0.49\linewidth]{figures/after_expansion3.png}
 \caption{Left: Original k=5 dashboard with the duration=30+min visualization clicked. A pop-up is displayed to submit the request for additional summary visualizations to be generated. Right: Resulting dashboard after requesting for 2 more visualizations based on the visualization of interest.}
 \label{altroot_expansion}
 \end{figure}
@@ -51,7 +51,7 @@ One observation that we found across several datasets was that many of the visua
 % \noindent\makebox[\linewidth]{\rule{\linewidth}{0.4pt}}
 \includegraphics[width=0.05\linewidth]{figures/arrow_down.png}
 \includegraphics[width=\linewidth]{figures/k50_collapsed.jpeg}
-\caption{An example of the k=50 dashboard for the mushroom dataset, which contains type =\{ posionous, edible\} on the x-axis. The collapsed dashboard (bottom) removed 16 redundant visualizations from the original dashboard (top). }
+\caption{An example of the k=50 dashboard for the mushroom dataset, which contains type =\{ posionous, edible\} on the x-axis. The collapsed dashboard (bottom) removed 16 redundant visualizations from the original dashboard (top).}
 \end{figure}
 
 \begin{figure}[ht!]
