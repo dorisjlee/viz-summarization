@@ -42,8 +42,7 @@ def autolabel(rects, ax):
     # Get y-axis height to calculate label position from.
     (y_bottom, y_top) = ax.get_ylim()
     y_height = y_top - y_bottom
-
-
+    
     for rect in rects:
         height = rect.get_height()
         label_position = height + (y_height * 0.01)
@@ -53,7 +52,7 @@ def autolabel(rects, ax):
                 ha='center', va='bottom')
 
 
-def bar_chart(yVals, xAttrs, yErrs = [], xtitle="", ytitle="", title="", top_right_text="", N=1, width=0.1,autolabel_flag =True,fixed_ylim=True):
+def bar_chart(yVals, xAttrs, yErrs = [], xtitle="", ytitle="", title="", top_right_text="", N=1, width=0.1,autolabel_flag =True,fixed_ylim=True,rotation="",filename=""):
 
     ind = np.arange(N)  # the x locations for the groups
     if len(yVals)==2:
@@ -102,6 +101,8 @@ def bar_chart(yVals, xAttrs, yErrs = [], xtitle="", ytitle="", title="", top_rig
     xtickpos = [np.abs(xmin - xmax) / (len(yVals) + 1.5) * (i + 0.7) for i in range(len(yVals))]
     ax.set_xticks(xtickpos)
     ax.set_xticklabels(xAttrs)
+    if rotation!="":
+        plt.xticks(rotation=rotation)
     # ax.set_xlabel(xtitle,fontsize=12)
 
     # ax.legend((rects1[0], rects2[0]), xAttrs)
@@ -131,4 +132,6 @@ def bar_chart(yVals, xAttrs, yErrs = [], xtitle="", ytitle="", title="", top_rig
 #     imgdata.seek(0)  # rewind the data
 #     svg_str = imgdata.buf  # this is svg data
 #    return svg_str
+    if filename!="":
+        plt.savefig(filename+".pdf")
     plt.show()
