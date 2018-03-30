@@ -36,7 +36,7 @@ The second dataset in the study is the Autism dataset\footnote{\url{https://arch
 In order to evaluate the efficacy of our system against the two baselines, we will first examine the quantitative results and then discuss the qualitative findings.
 
 \par \textbf{Retrieval:} Using the click-stream data logged from the user study, we record whether each user is interested, not interested, or have not selected a visualization in the dashboard. %Since we do not have objective ground truths of which visualization is interesting or not, we use the participant's consensus to come up with a score for each visualization. In this scoring scheme, if visualization is marked as interesting, that visualization receives a score of 1; if a visualization is marked as uninteresting, the visualization incurs a penalty of -0.5\footnote{The reason why we chose a lower penalty score for disinterested clicks than the interested click reward is that some of the participants did not chose to mark visualizations that they thought were uninteresting as disinterested explicitly and chose to simply keep them unselected.}; no score is assigned if the visualization is unselected, then the scores are summed over all users who have seen the visualization. Each user is then assigned a score based on the product of their retrieval score and the consensus score (i.e. user would receive a higher score if selected visualization was highly ranked by consensus). 
-Since we do not have a objective ground truth on which visualization is interesting or not interesting, we devise a voting-based measure (Eq.\ref{weighting,vote}) that measures how interesting is a visualization amongst all participants. Here i is the index of the visualization and j is the user.
+Since we do not have a objective ground truth on which visualization is interesting or not interesting, we devise a voting-based measure (Eq.\ref{weighting},\ref{vote}) that measures how interesting is a visualization amongst all participants. Here i is the index of the visualization and j is the user.
 \begin{equation}\label{weighting}
 	\delta_{ij}= \left\{\begin{matrix}
 	 1& \textrm{interested}
@@ -47,30 +47,30 @@ Since we do not have a objective ground truth on which visualization is interest
 \begin{equation}\label{vote}
 \textrm{consensus}(V_i) =\sum_{j\in user} V_{ij}
 \end{equation}
-As shown in Eq.\ref{rank}, using the consensus score for each visualization, the rating score (which measures how good the user's particular rating is) is the product of consensus score (how popularly is a visualization regarded as interesting?) and the rated value.
+As shown in Eq.\ref{rank}, using the consensus score for each visualization, the rating score (which measures how good the user's particular rating is) is the product of consensus score (how popularly is a visualization regarded as interesting?) and the rated value ($\delta_{ij}$).
 \begin{equation}\label{rank}
 \textrm{rating score}(V_{ij}) =votes(V_i) \cdot \delta_{ij}
 \end{equation}
-Finally, we average over each task that the user performed to obtain the results in Table \ref{interesting_score}. 
-
-\begin{table}
+Table \ref{interesting_score} shows the results of rating scores averaged over the tasks that the user performed.
+\begin{table}[ht!]
 	\centering
 	\begin{tabular}{lrrr}
-	\hline
-	 Dataset   &   \system &   Cluster &   BFS \\
-	\hline
-	 Police    &           49 &        20 &    48 \\
-	 Autism    &          169 &       101 &    46 \\
-	\hline
+		\hline
+		 Dataset   &   \system &   Cluster &   BFS \\
+		\hline
+		 Police    &        62 &        52 &    99 \\
+		 Autism    &       213 &       180 &   114 \\
+		\hline
 	\end{tabular}
 	\caption{Average consensus-agreement score for different algorithm and datasets.}
 	\label{interesting_score}
 \end{table}
-
-Participants who used \system\ found more visualizations of interest that corresponded to the consensus, indicating that the visualizations that there are more interesting visualizations shown by the generated dashboard.  
+%Even though participants were asked to --- daily experiences to answer the question, b
+\par Due to the highly subjective nature of the retrieval task, the interestingness selection for the Police dataset was biased by participant's priors and intuition about the attributes. For example, while all participants who have seen the visualization "duration=30+min" verbally noted that stop duration is a crucial factor that leads to arrest, only 4 users marked it as interesting. 5 participants marked the visualization as not interesting and 4 left it unselected, because the visualization was not very surprising as it agreed with their intuition that if the police stop is taking a long time, something has probably gone wrong.
+\par Since the attributes in the Autism dataset are simply question numbers, participants could not associate any priors to their interestingness selection. In this prior-agnostic case, participants who used \system\ found more visualizations of interest that corresponded to the consensus, indicating that there are more interesting visualizations picked out by \system\ than compared to the two baseline-generated dashboard.  
 \par \textbf{Attribute Ranking:} 
-To determine attribute importance ranking for a dataset, we computed the Cramer's V statistics between attributes to be ranked and the attribute of interest. Cramer's V test makes use of the chi-square statistics to determines the strength of association between attributes. Using the ranks determined by sorting by Cramer's V as ground truth, we compute the normalized discounted cumulative gain (NDCG) of each participant's ranking at various cutoffs and average over all tasks. As shown in Table \ref{ndcg_ranking_result}, \system\ performs better for NDCG@10. Attribute ranking tasks are common in feature selection and other data science tasks, our results indicate that using \system, users gain a better understanding of variable influence and correlation. 
-\begin{table}
+To determine attribute importance ranking for a dataset, we computed the Cramer's V statistics between attributes to be ranked and the attribute of interest. Cramer's V test makes use of the chi-square statistics to determine the strength of association between attributes. Using the ranks determined by Cramer's V as ground truth, we compute the normalized discounted cumulative gain (NDCG@k)\footnote{Since participants are asked to examine all attributes, the k for NDCG@k corresponds to total number of attributes in that dataset.} of each participant's ranking average over all tasks, as detailed in Table \ref{ndcg_ranking_result}. 
+\begin{table}[ht!]
 	\centering
 	\begin{tabular}{lrrr}
 	\hline
@@ -83,6 +83,8 @@ To determine attribute importance ranking for a dataset, we computed the Cramer'
 	\end{tabular}
 	\caption{NDCG@10 scores for the attribute ranking task.}
 \end{table}
+We see that \system\ performs better than clustering in both cases. Since clustering seeks for a set of visualization that exhibits diversity in the shape of the data distribution, it results in visualizations with many filter combination, which is hard interpret without appropriate context to compare against. BFS performs better than \system in the Police dataset, but in not the Autism dataset. BFS may have performed better than \system\ in the Police dataset for a combination of two reasons: 1) as discussed earlier, some participants had priors on the data attribute which influenced their ranking and 2) since BFS exhaustively displays all attributes sequentially, for the police dataset it happened to display one of the important attribute in the first 10 visualization. However, with a budget of k=10, only visualizations regarding questions 1\~5 fit in the dashboard for the autism dataset, so the poor ranking behavior for BFS is a result of the important attributes (questions 6 and 9) not being present in the generated dashboard. 
+\par Attribute ranking tasks are common in feature selection and other data science tasks, in general, our results indicate that using \system, users gain a better understanding of variable influence and correlation. 
 \par \textbf{Prediction:}
 In order to understand how accurate participant's decisions are, we computed Euclidean distance between the ground truth data distribution with the predicted distribution drawn by the user. 
 
@@ -102,3 +104,5 @@ Note that in the second
 Figure ---- low variance 
 
 Understanding how prediction is -----
+\subsection{Qualitative results}
+through an open coding process by two of the authors.

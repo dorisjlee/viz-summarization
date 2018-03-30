@@ -18,7 +18,7 @@ We have implemented \system\ as a web-based tool on top of a PostgreSQL database
 \end{tikzpicture}
 \end{center}
 
-\subsection{Algorithms}
+\subsection{Algorithms\label{algorithms}}
 We give an overview of our algorithms by first discussing the approaches to generate the visualization hierarchy, and then presenting a high-level overview of our traversal algorithms.
 
 \textbf{Hierarchy Generation.} Our system supports two variants of traversal algorithms based on the hierarchy generation procedure---offline variants that first generate the complete hierarchy and then work towards identifying the maximum utility solution, online variants that incrementally generate the hierarchy and simultaneously identify the solution. The offline variants are appropriate for datasets with a small number of low-cardinality attributes, where we can generate the entire hierarchy in a reasonable time; whereas the online variants are appropriate for datasets with large number of high-cardinality attributes, where we incrementally generate a partial hierarchy. 
@@ -30,8 +30,6 @@ We give an overview of our algorithms by first discussing the approaches to gene
 The frontier based algorithms traverse the hierarchy from root to downwards, incrementally adding new nodes (visualizations) to the current solution (dashboard) till it reaches the maximum capacity $k$. To achieve this, the algorithms maintain a list of candidate nodes---called \textit{frontier} nodes---any of which can be added to the current solution since their informative parent is already present in the solution. At each step, the algorithms add a node from frontier to the current solution, and update the frontier accordingly.  The frontier based algorithms can be further categorized into three types based on their node selection strategy (from frontier), namely greedy algorithm, random walk algorithm, and probabilistic algorithm. The greedy algorithm picks the current best node from frontier (thus concentrates on exploitation), random walk algorithm picks a random node (thus concentrates on exploration), and probabilistic algorithm picks a random high-utility node (thus trades off between exploration and exploitation).
 
 The path merging algorithm first generate the informative paths from root to every candidate node. Then, it greedily merges the paths with high-utility to create a subgraph whose size is less than or equal to maximum capacity $k$.
-
-
 
 \iffalse
 \begin{algorithm}
