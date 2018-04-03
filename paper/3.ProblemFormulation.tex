@@ -47,10 +47,10 @@ Now, we discuss the set-theory based \emph{containment} relationships for data s
   (11) -- (21) (13) -- (21) (11) -- (22) (14) -- (22) (14) -- (23) (15) -- (23) (14) -- (24) (16) -- (24)
   (21) -- (31) (24) -- (32);
 \end{tikzpicture}
-\caption{Hierarchy of data subsets for a dataset with three binary attributes {\tt \{P, Q, R\}}. The data subsets (called cells in datacubes) that belong to the same attribute combination (cuboid) are highlighted with same color.\hazem{Perhaps we can show another figure here (1a and 1b) of the lattice with the attributes only (no values) and same color scheme.}}
+\caption{Hierarchy of data subsets for a dataset with three binary attributes {\tt \{P, Q, R\}}. The data subsets (called cells in datacubes) that belong to the same attribute combination (cuboid) are highlighted with same color.}
 \label{fig:lattice}
 \end{figure}
-
+\haz{Perhaps we can show another figure here (1a and 1b) of the lattice with the attributes only (no values) and same color scheme.}
 We now extend the concept of \emph{containment} relationships (of data subsets) for visualizations defined according to our setup. 
 
 \textbf{Viz Containment.} Let $V$ be the set of visualizations (of same type) that show the same $X$ and $Y$ for different $C(Z)$. Given a visualization $V_i \in V$, parent of $V_i$, $V_i^j$ ($V_i^j\in V$) is a visualization that corresponds to a parent data subset of the former. In Figure 2 we present three visualizations that show the survival rate of titanic passengers for three data subsets: (i) 3rd class passengers, (ii) female Passengers (3rd class and crew combined), (iii) 3rd class female passengers. As per the parent-child relationship among the data subsets, the visualizations corresponding to (i) and (ii) are parents of the visualization corresponding to (iii). %\hdev{Figure 2 example to be replaced with an example from Titanic. All three plots will be in the same row, with annotation (i), (ii), (iii).}
