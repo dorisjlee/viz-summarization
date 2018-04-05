@@ -26,27 +26,28 @@ Now, we discuss the set-theory based \emph{containment} relationships for data s
 
 \textbf{Hierarchy.} Based on the containment relationship, we can organize the data subsets of a given dataset to form a hierarchy. This hierarchy of data subsets is overlaid on top of the lattice of attribute combinations. In data cube literature, the attribute combinations are called cuboids, and the data subsets are called cells. In Figure 1 we show the hierarchy of data subsets for a dataset with three binary attributes {\tt \{P, Q, R\}}, where we highlight the data subsets that belong to the same attribute combination with the same color. For example, all data subsets with three filters (at the lowest level of hierarchy) belong to the same attribute combination {\tt \{P, Q, R\}}, and are highlighted in dark gray. 
 
-\begin{figure}[htb]
-\begin{tikzpicture}[scale=0.75, every node/.style={scale=0.75}]
-  \node[fill={rgb:black,1;white,14}] (max) at (0,4.5) {\tt \{P = ?,Q = ?,R = ?\}};
-  \node[fill={rgb:red,1;white,4}] (11) at (-4.0,3) {\tt \{P = 0\}};
-  \node[fill={rgb:red,1;white,4}] (12) at (-2.4,3) {\tt \{P = 1\}};
-  \node[fill={rgb:green,1;white,4}] (13) at (-0.8,3) {\tt \{Q = 0\}};
-  \node[fill={rgb:green,1;white,4}] (14) at (0.8,3) {\tt \{Q = 1\}};
-  \node[fill={rgb:blue,1;white,4}] (15) at (2.4,3) {\tt \{R = 0\}};
-  \node[fill={rgb:blue,1;white,4}] (16) at (4.0,3) {\tt \{R = 1\}};
-  \node[fill={rgb:yellow,1;white,4}]  (21) at (-4,1.5) {\tt \{P = 0,Q = 0\}};
-  \node[fill={rgb:yellow,1;white,4}]  (22) at (-1.5,1.5) {\tt \{P = 0,Q = 1\}};
-  \node (2f) at (0,1.5) {\textbf{. . .}};
-  \node[fill={rgb:cyan,1;white,4}] (23) at (1.5,1.5) {\tt \{Q = 1,R = 0\}};
-  \node[fill={rgb:cyan,1;white,4}] (24) at (4,1.5) {\tt \{Q = 1,R = 1\}};
-  \node[fill={rgb:black,1;white,4}] (31) at (-4,0) {\tt \{P = 0,Q = 0,R = 0\}};
-  \node (3f) at (0,0) {\textbf{. . .}};
-  \node[fill={rgb:black,1;white,4}] (32) at (4,0) {\tt \{P = 1,Q = 1,R = 1\}};
-  \draw (max) -- (11) (max) -- (12) (max) -- (13) (max) -- (14) (max) -- (15) (max) -- (16)
-  (11) -- (21) (13) -- (21) (11) -- (22) (14) -- (22) (14) -- (23) (15) -- (23) (14) -- (24) (16) -- (24)
-  (21) -- (31) (24) -- (32);
-\end{tikzpicture}
+\begin{figure}[ht!]
+% \begin{tikzpicture}[scale=0.75, every node/.style={scale=0.75}]
+%   \node[fill={rgb:black,1;white,14}] (max) at (0,4.5) {\tt \{P = ?,Q = ?,R = ?\}};
+%   \node[fill={rgb:red,1;white,4}] (11) at (-4.0,3) {\tt \{P = 0\}};
+%   \node[fill={rgb:red,1;white,4}] (12) at (-2.4,3) {\tt \{P = 1\}};
+%   \node[fill={rgb:green,1;white,4}] (13) at (-0.8,3) {\tt \{Q = 0\}};
+%   \node[fill={rgb:green,1;white,4}] (14) at (0.8,3) {\tt \{Q = 1\}};
+%   \node[fill={rgb:blue,1;white,4}] (15) at (2.4,3) {\tt \{R = 0\}};
+%   \node[fill={rgb:blue,1;white,4}] (16) at (4.0,3) {\tt \{R = 1\}};
+%   \node[fill={rgb:yellow,1;white,4}]  (21) at (-4,1.5) {\tt \{P = 0,Q = 0\}};
+%   \node[fill={rgb:yellow,1;white,4}]  (22) at (-1.5,1.5) {\tt \{P = 0,Q = 1\}};
+%   \node (2f) at (0,1.5) {\textbf{. . .}};
+%   \node[fill={rgb:cyan,1;white,4}] (23) at (1.5,1.5) {\tt \{Q = 1,R = 0\}};
+%   \node[fill={rgb:cyan,1;white,4}] (24) at (4,1.5) {\tt \{Q = 1,R = 1\}};
+%   \node[fill={rgb:black,1;white,4}] (31) at (-4,0) {\tt \{P = 0,Q = 0,R = 0\}};
+%   \node (3f) at (0,0) {\textbf{. . .}};
+%   \node[fill={rgb:black,1;white,4}] (32) at (4,0) {\tt \{P = 1,Q = 1,R = 1\}};
+%   \draw (max) -- (11) (max) -- (12) (max) -- (13) (max) -- (14) (max) -- (15) (max) -- (16)
+%   (11) -- (21) (13) -- (21) (11) -- (22) (14) -- (22) (14) -- (23) (15) -- (23) (14) -- (24) (16) -- (24)
+%   (21) -- (31) (24) -- (32);
+% \end{tikzpicture}
+\includegraphics[width=\linewidth]{figures/lattice_formal.pdf}
 \caption{Hierarchy of data subsets for a dataset with three binary attributes {\tt \{P, Q, R\}}. The data subsets (called cells in datacubes) that belong to the same attribute combination (cuboid) are highlighted with same color.}
 \label{fig:lattice}
 \end{figure}
