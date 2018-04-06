@@ -1,18 +1,13 @@
-%!TEX root = main.tex
 \section{Preliminaries: Data and User Models} 
-%In this section, we first describe the data model, and the supported visualization types. We then introduce two visualization spaces, and propose a user expectation model to traverse these spaces. Finally, we formally define the problem.
 
 In this section, we first describe our data model by reporting our data, visualization and query setup, and the underlying hierarchy of data subsets. We then discuss how analysts explore the hierarchy through a formative user study, and introduce our user model based on the findings of this study. Finally, we present our problem of finding an informative-and-interesting set of visualizations from the hierarchy.
 
-%\par \dor{added section on formative study, we need to put this somewhere} Our problem formulation is motivated by a formative study, where we asked participants to predict the value of a visualization after seeing a parent of the visualization to be predicted. In this between-group study, one group of participants were shown the informative parent, whereas another group of participants was shown the uninformative parents. Our main findings are : 1) it is natural for users to use the informative parent and 2) in the absence of informative parents, the users can be misled to have false expectations on the data.
-%\subsection{Visualizations and Queries}
+%dor{added section on formative study, we need to put this somewhere} Our problem formulation is motivated by a formative study, where we asked participants to predict the value of a visualization after seeing a parent of the visualization to be predicted. In this between-group study, one group of participants were shown the informative parent, whereas another group of participants was shown the uninformative parents. Our main findings are : 1) it is natural for users to use the informative parent and 2) in the absence of informative parents, the users can be misled to have false expectations on the data.
 
 \subsection{Data Model}
 We start by discussing the data, visualization and query setup.
 
 \textbf{Data.} We assume that we are operating on a dataset consisting of a single relational table $R$ with dimensions and measure attributes. Our approach also generalizes to multiple tables obeying a star or a snowflake schema, but we focus on the single table case for ease of presentation.
-
-%\notes{[It seems that the visualization types that can be supported by our framework/system is similar to \textsc{Zenvisage}. In fact, we can use either \textsc{SQL} or \textsc{ZQL} as back-end.]} 
 
 %\textbf{Visualization.} We define the notion of a visualization for our problem. There are different visualization types such as bar charts, scatter plots, and trend lines, but across all types, a visualization can be defined using five main components: (i) the x-axis attribute(s), (ii) the y-axis attribute, (iii) the subset of data used, (iv) the binning and aggregation functions for the x- and y- axes, and (v) the type of visualization (e.g., bar chart, scatter plot).
 
@@ -72,12 +67,12 @@ In order to identify which visualizations a user would deem informative and inte
 
 \textbf{Formative User Study.} We conducted a user study to understand how a user's perception of an unseen visualization is affected by one or more of its observed parents. We recruited 9 participants to predict the distribution of an unseen visualization with two filters. Participants were asked to make a prediction regarding the unseen visualization after seeing the first parent displayed and subsequently after seeing the second parent displayed. In this between-group study, one group of participants (G1) were shown the first parent followed by the second parent, whereas another group of participants (G2) were shown the second parent followed by the first parent. Note that the two parent visualizations have different data distributions---the first parent well describes the unseen visualization, and the second parent differs from the unseen visualization. We examined how users form their expectation in presence of these observed parents. We summarize the results in Figure 2. Our main findings are : (1) it is natural for users to use one or more observed parents to form their expectation of an unseen visualization, (2) seeing an ``informative'' parent (that well describes the unseen visualization) leads to a better approximation of the unseen; (3) in absence of an informative parent, a user can be misled to form an inaccurate expectation; (4) in presence of multiple parents, the variance of expectation increases.
 \dor{What about the surprisingness result? Should we discuss it here?}
-\begin{figure*}[bht]
+\begin{figure}[bht]
 \label{example}
 \centering
-\includegraphics[scale=0.55]{figures/Formative_Study.pdf}
+\includegraphics[scale=0.28]{figures/Formative_Study.pdf}
 \caption{Results of the formative user study. The G1 participants were shown the informative parent first, followed by the uninformative parent; whereas G2 participants were shown the uninformative parent first, followed by the informative parent. The G1 participants closely approximated the unseen visualization immediately after seeing the informative parent.}
-\end{figure*}
+\end{figure}
 
 Based on these findings, we model two aspects of the unseen-visualization and observed-parent relationship, namely informativeness and interestingness. 
 

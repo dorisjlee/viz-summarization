@@ -85,10 +85,6 @@ public class UserStudyBaseline {
 	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.9,false);
 	   exp.setAlgo(ourAlgo);
 	   exp.runOutput(exp);
-//	   exp.setK(20);
-//	   exp.runOutput(exp);
-//	   exp.setK(25);
-//	   exp.runOutput(exp);
 //	   Traversal ourAlgo = new BreadthFirstPicking();
 //	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.9,false);
 //	   exp.setAlgo(ourAlgo);
