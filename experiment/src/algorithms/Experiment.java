@@ -14,8 +14,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import javax.swing.GroupLayout.SequentialGroup;
-
 import distance.Distance;
 import distance.Euclidean;
 import lattice.Dashboard;
@@ -57,18 +55,20 @@ public class Experiment {
 		this.dist = dist;
 		this.iceberg_ratio = iceberg_ratio;
 		this.informative_critera = informative_critera;
-		this.attribute_names = get_attribute_names();
+		this.attribute_names = get_attribute_names();//read the csv file to get attribute names
 //		this.attribute_names = Database.resultSet2ArrayStr(Database.getColumns(this.datasetName));
 //		this.attribute_names.remove("id");
 		this.uniqueAttributeKeyVals = populateUniqueAttributeKeyVals();
 		// Generate base table via group-by
 		ResultSet rs = Database.viz_query(this.datasetName, this.groupby, this.yAxisName, this.aggFunc, new ArrayList<String>(Arrays.asList()));
-		Database.resultSet2csv(rs,this.datasetName,this.groupby,this.aggFunc+"("+this.yAxisName+")");
+		Database.resultSet2csv(rs,this.datasetName,this.groupby,this.aggFunc+"("+this.yAxisName+")"); //generate csv file
 		if (online) {
 			this.lattice = new Lattice();
 		}else {
+			//generate the lattice for this experiment
 			this.lattice = Hierarchia.generateFullyMaterializedLattice(dist,iceberg_ratio,
 							informative_critera,uniqueAttributeKeyVals,attribute_names,xAxisName,datasetName);
+			//get the number of filters
 			this.nbars = lattice.id2MetricMap.get("#").size();
 		}
 	}
