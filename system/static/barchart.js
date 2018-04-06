@@ -102,7 +102,7 @@ function draw(node,edge) {
                 coltitle = coltitle.toString().split(' ').join("<br>");
                 coltitle = coltitle.slice(1,-1);
                 //coltitle = coltitle.split(" ").join("\n");
-                hoveredNode.title += coltitle + "<br>" ;
+                hoveredNode.title += '<div><font size="4">'+coltitle+'</font></div>';
             }
 
             //console.log(hoveredNode)
