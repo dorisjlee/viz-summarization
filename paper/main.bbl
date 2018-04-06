@@ -1,5 +1,8 @@
 \begin{thebibliography}{10}
 
+\bibitem{titanic}
+Titanic: Machine learning from disaster.
+
 \bibitem{Alipourfard2018}
 N.~Alipourfard, P.~G. Fennell, and K.~Lerman.
 \newblock {Can you Trust the Trend?}
@@ -9,6 +12,20 @@ N.~Alipourfard, P.~G. Fennell, and K.~Lerman.
 }{.}\hspace{.4pt}1145\discretionary{/}{%
 }{/}3159652\hspace{.1pt}\discretionary{.}{%
 }{.}\hspace{.4pt}3159684}}
+
+
+\bibitem{ErnstAlthaus2009}
+E.~Althaus, M.~Blumenstock, A.~Disterhoft, A.~Hildebrandt, and M.~Krupp.
+\newblock {Algorithms for the Maximum Weight Connected k-Induced Subgraph
+  Problem}.
+\newblock 5573:313--321, 2009. doi: {{%
+10\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}1007\discretionary{/}{%
+}{/}978\discretionary{%
+}{-}{-}3\discretionary{%
+}{-}{-}642\discretionary{%
+}{-}{-}02026\discretionary{%
+}{-}{-}1}}
 
 
 \bibitem{anand}
@@ -31,6 +48,11 @@ J.~Boy, F.~Detinenne, and J.-D. Fekete.
 \newblock {Storytelling in Information Visualizations : Does it Engage Users to
   Explore Data ?}
 \newblock {\em CHI 2015}, pp. 1449--1458, 2015.
+
+\bibitem{autism}
+F.~Fayez~Thabtah.
+\newblock Autism screening adult data set. {UCI} machine learning repository,
+  2017.
 
 \bibitem{Guo2017}
 Y.~Guo, C.~Binnig, T.~Kraska, and T.~U. Darmstadt.
@@ -81,6 +103,12 @@ Y.~Kim, K.~Wongsuphasawat, J.~Hullman, and J.~Heer.
 }{.}\hspace{.4pt}3025866}}
 
 
+\bibitem{police}
+E.~Pierson, C.~Simoiu, J.~Overgoor, S.~Corbett-Davies, V.~Ramachandran,
+  C.~Phillips, and S.~Goel.
+\newblock A large-scale analysis of racial disparities in police stops across
+  the united states, 2017.
+
 \bibitem{Sarawagi1999}
 S.~Sarawagi.
 \newblock {Explaining differences in multidimensional aggregates}.
@@ -98,6 +126,10 @@ S.~Sarawagi, R.~Agrawal, N.~Megiddo, G.~V. A.~V. {Univ Politecn Valencia}, and
 \newblock {Discovery-driven exploration of OLAP data cubes}.
 \newblock {\em 6th International Conference on Extending Database Technology
   (EDBT 98)}, pp. 168--182, 1998.
+
+\bibitem{mushroom}
+J.~Schlimmer.
+\newblock Mushroom data set. {UCI} machine learning repository, 1987.
 
 \bibitem{Segel2010}
 E.~Segel and J.~Heer.

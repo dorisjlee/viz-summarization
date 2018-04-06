@@ -27,7 +27,7 @@ public class UserStudyBaseline {
 	public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
 	{
 	   Experiment exp;
-	   int k =4;
+	   int k =15;
 	   Experiment.experiment_name="../ipynb/dashboards/json/UserInterface";
 	   String dataset_name="ct_police_stop";
 	   ArrayList<String> groupby = null;
@@ -72,20 +72,19 @@ public class UserStudyBaseline {
 		   aggType = "COUNT";
 	   }
 	   
-	   Traversal ourAlgo = new GreedyPicking();
-	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.9,false);
-	   exp.setK(5);
-	   exp.setAlgo(ourAlgo);
-	   exp.runOutput(exp);
-	   Traversal algo = new GreedyPickingAlternativeRoot(exp.dashboard.maxSubgraph,"#duration$30+ min#");
-	   exp.setK(3);
-	   exp.setAlgo(algo);
-	   exp.runOutput(exp);
 //	   Traversal ourAlgo = new GreedyPicking();
 //	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.9,false);
+//	   exp.setK(5);
 //	   exp.setAlgo(ourAlgo);
 //	   exp.runOutput(exp);
-
+//	   Traversal algo = new GreedyPickingAlternativeRoot(exp.dashboard.maxSubgraph,"#duration$30+ min#");
+//	   exp.setK(3);
+//	   exp.setAlgo(algo);
+//	   exp.runOutput(exp);
+	   Traversal ourAlgo = new GreedyPicking();
+	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.9,false);
+	   exp.setAlgo(ourAlgo);
+	   exp.runOutput(exp);
 //	   Traversal ourAlgo = new BreadthFirstPicking();
 //	   exp = new Experiment(dataset_name, xAxis, yAxis,groupby,aggType, k, dist,0,0.9,false);
 //	   exp.setAlgo(ourAlgo);
