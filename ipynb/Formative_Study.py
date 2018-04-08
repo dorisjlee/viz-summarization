@@ -90,7 +90,7 @@ for i, ax in enumerate(g.axes[-2, :]):
 
 
 #sns.despine(bottom = True)
-sns.plt.tight_layout()
+plt.tight_layout()
 plt.savefig('Formative_Study.pdf', bbox_inches='tight')
 plt.close()
 
