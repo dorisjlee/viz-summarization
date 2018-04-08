@@ -1,0 +1,165 @@
+\begin{thebibliography}{10}
+
+\bibitem{titanic}
+Titanic: Machine learning from disaster.
+
+\bibitem{Alipourfard2018}
+N.~Alipourfard, P.~G. Fennell, and K.~Lerman.
+\newblock {Can you Trust the Trend?}
+\newblock {\em Proceedings of the Eleventh ACM International Conference on Web
+  Search and Data Mining - WSDM '18}, pp. 19--27, 2018. doi: {{%
+10\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}1145\discretionary{/}{%
+}{/}3159652\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}3159684}}
+
+
+\bibitem{ErnstAlthaus2009}
+E.~Althaus, M.~Blumenstock, A.~Disterhoft, A.~Hildebrandt, and M.~Krupp.
+\newblock {Algorithms for the Maximum Weight Connected k-Induced Subgraph
+  Problem}.
+\newblock 5573:313--321, 2009. doi: {{%
+10\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}1007\discretionary{/}{%
+}{/}978\discretionary{%
+}{-}{-}3\discretionary{%
+}{-}{-}642\discretionary{%
+}{-}{-}02026\discretionary{%
+}{-}{-}1}}
+
+
+\bibitem{anand}
+Anand.
+
+\bibitem{Anand2015}
+A.~Anand and J.~Talbot.
+\newblock {Automatic Selection of Partitioning Variables for Small Multiple
+  Displays}.
+\newblock 2626(c), 2015. doi: {{%
+10\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}1109\discretionary{/}{%
+}{/}TVCG\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}2015\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}2467323}}
+
+
+\bibitem{Boy2015}
+J.~Boy, F.~Detinenne, and J.-D. Fekete.
+\newblock {Storytelling in Information Visualizations : Does it Engage Users to
+  Explore Data ?}
+\newblock {\em CHI 2015}, pp. 1449--1458, 2015.
+
+\bibitem{autism}
+F.~Fayez~Thabtah.
+\newblock Autism screening adult data set. {UCI} machine learning repository,
+  2017.
+
+\bibitem{Guo2017}
+Y.~Guo, C.~Binnig, T.~Kraska, and T.~U. Darmstadt.
+\newblock {What you see is not what you get ! Detecting Simpson ' s Paradoxes
+  during Data Exploration}.
+\newblock {\em HILDA 2017 - Proceedings of the Workshop on Human-In-the-Loop
+  Data Analytics}, 2017.
+
+\bibitem{Hoque2017}
+E.~Hoque, V.~Setlur, M.~Tory, and I.~Dykeman.
+\newblock {Applying Pragmatics Principles for Interaction with Visual
+  Analytics}.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics}, (c),
+  2017. doi: {{%
+10\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}1109\discretionary{/}{%
+}{/}TVCG\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}2017\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}2744684}}
+
+
+\bibitem{Hullman2013}
+J.~Hullman, S.~Drucker, N.~{Henry Riche}, B.~Lee, D.~Fisher, and E.~Adar.
+\newblock {A deeper understanding of sequence in narrative visualization}.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  19(12):2406--2415, 2013. doi: {{%
+10\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}1109\discretionary{/}{%
+}{/}TVCG\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}2013\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}119}}
+
+
+\bibitem{Hullman2017}
+J.~Hullman, R.~Kosara, and H.~Lam.
+\newblock {Finding a Clear Path : Structuring Strategies for Visualization
+  Sequences}.
+\newblock 36(3), 2017.
+
+\bibitem{Kim2017}
+Y.~Kim, K.~Wongsuphasawat, J.~Hullman, and J.~Heer.
+\newblock {GraphScape: A Model for Automated Reasoning about Visualization
+  Similarity and Sequencing}.
+\newblock {\em Proc. of ACM CHI 2017}, 2017. doi: {{%
+10\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}1145\discretionary{/}{%
+}{/}3025453\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}3025866}}
+
+
+\bibitem{police}
+E.~Pierson, C.~Simoiu, J.~Overgoor, S.~Corbett-Davies, V.~Ramachandran,
+  C.~Phillips, and S.~Goel.
+\newblock A large-scale analysis of racial disparities in police stops across
+  the united states, 2017.
+
+\bibitem{Sarawagi1999}
+S.~Sarawagi.
+\newblock {Explaining differences in multidimensional aggregates}.
+\newblock {\em Vldb}, pp. 42--53, 1999.
+
+\bibitem{Sarawagi2000}
+S.~Sarawagi.
+\newblock {User-adaptive exploration of multidimensional data}.
+\newblock {\em Proc of the 26th Intl Conference on Very Large}, pp. 307--316,
+  2000.
+
+\bibitem{Sarawagi1998}
+S.~Sarawagi, R.~Agrawal, N.~Megiddo, G.~V. A.~V. {Univ Politecn Valencia}, and
+  E.~T. H. Z. O. S. S.~I. {Edbt Fdn}.
+\newblock {Discovery-driven exploration of OLAP data cubes}.
+\newblock {\em 6th International Conference on Extending Database Technology
+  (EDBT 98)}, pp. 168--182, 1998.
+
+\bibitem{mushroom}
+J.~Schlimmer.
+\newblock Mushroom data set. {UCI} machine learning repository, 1987.
+
+\bibitem{Segel2010}
+E.~Segel and J.~Heer.
+\newblock {Narrative visualization: Telling stories with data}.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  16(6):1139--1148, 2010. doi: {{%
+10\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}1109\discretionary{/}{%
+}{/}TVCG\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}2010\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}179}}
+
+
+\bibitem{Vartak2015}
+M.~Vartak, S.~Rahman, S.~Madden, A.~Parameswaran, and N.~Polyzotis.
+\newblock {SEEDB : Efficient Data-Driven Visualization Recommendations to
+  Support Visual Analytics}.
+\newblock 2015.
+
+\bibitem{Wongsuphasawat2016}
+K.~Wongsuphasawat, D.~Moritz, A.~Anand, J.~Mackinlay, B.~Howe, and J.~Heer.
+\newblock {Voyager: Exploratory Analysis via Faceted Browsing of Visualization
+  Recommendations}.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  22(1):649--658, 2016. doi: {{%
+10\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}1109\discretionary{/}{%
+}{/}TVCG\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}2015\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}2467191}}
+
+
+\end{thebibliography}

@@ -1,18 +1,17 @@
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
+body,div,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
     margin: 0;
     padding: 0;
 
 }
 
-table {
+charttable {
     border-collapse: collapse;
-    border-spacing: 0;
+    border:1px solid black;
 }
 
 fieldset,
 img {
     border: 0;
-
 }
 address,caption,cite,code,dfn,em,strong,th,var {
     font-style: normal;
@@ -121,7 +120,12 @@ select {
 }
 
 
-
+.btn-xs {
+    padding: 10px 10px;
+    font-size: 30px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
 .title h2 {
   left:40px; 
   font-family:Verdana,sans-serif; 
@@ -262,17 +266,17 @@ input[type=range] {
 }
 
 .menu ul {
-    list-style-type: none;
+    list-style-type:circle;
     margin: 0;
     padding: 0;
 }
-.menu li {
+.panel {
     padding: 8px;
     margin-bottom: 8px;
     background-color: #33b5e5;
     color: #ffffff;
 }
-.menu li:hover {
+.panel:hover {
     background-color: #0099cc;
 }
 
@@ -298,7 +302,7 @@ input[type=range] {
     padding: 20px;
     border: 1px solid #888;
     width: 50%; /* Full width */
-    height: 60%;
+    height: 70%;
 }
 
 /* The Close Button */

@@ -2,6 +2,25 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 import StringIO
+import seaborn as sns
+sns.set_context(
+   "talk",
+   font_scale=1,
+   rc={
+       "lines.linewidth": 2,
+       #"text.usetex": True,
+       "font.family": 'serif',
+       "font.serif": ['Palatino'],
+       "font.size": 20
+   })
+sns.set_style('white')
+
+from matplotlib import rc
+font = {'family': 'serif', 'serif': ['Palatino'], 'size': 20}
+rc('font', **font)
+
+plt.rcParams["figure.figsize"] = (4, 4)
+plt.rcParams["figure.max_open_warning"]=500
 
 def millify(n):
     n = float(n)
@@ -19,7 +38,7 @@ def get_cmap(n, name='hsv'):
     return plt.cm.get_cmap(name, n)
 
 
-def autolabel(rects, ax, font_size):
+def autolabel(rects, ax):
     # Get y-axis height to calculate label position from.
     (y_bottom, y_top) = ax.get_ylim()
     y_height = y_top - y_bottom
@@ -31,25 +50,41 @@ def autolabel(rects, ax, font_size):
 
         ax.text(rect.get_x() + rect.get_width() / 2., label_position - (height / 2),
                 '%.1f' % height,
-                ha='center', va='bottom', fontsize=font_size)
+                ha='center', va='bottom')
 
 
 def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", N=1, width=0.1):
+
     ind = np.arange(N)  # the x locations for the groups
-    fig, ax = plt.subplots(figsize=(2, 2))
-    cmap = get_cmap(len(yVals) + 1)
+    if len(yVals)==2:
+        colors = ["#fc9272","#9ecae1"]
+        sns.set_palette(sns.color_palette(colors))
+    else:
+        colors = ["#9ecae1","#99e699","#fc9272"]
+        sns.set_palette(sns.color_palette(colors))
+    fig, ax = plt.subplots()
+    #cmap = get_cmap(len(yVals) + 1)
     rects = []
     for i in range(len(yVals)):
-        rect = ax.bar(ind + i * width, yVals[i], width, color=cmap(i), ecolor="black")
+        rect = ax.bar(ind + (i+0.5) * width, yVals[i], width, ecolor="black")
         rects.append(rect)
 
-    ax.set_xlabel(xtitle, fontsize=14)
-    ax.set_ylabel(ytitle, fontsize=14)
-
+    xtitle = xtitle.replace('"', '')
+    ytitle = ytitle.replace('"', '')
+    #ax.set_xlabel(xtitle, fontsize=9)
+    #ax.set_ylabel(ytitle, fontsize=9)
+    ax.set_xlabel(xtitle)
+    ax.set_ylabel(ytitle)
+    title = title.replace('"','')
+    title = title.replace("#", ",\n")
+    if title == "collapsed":
+        title = " "
+    elif title[0] == ',':
+        title = title[2:-2]
     if title.count(',') < 3:
-        ax.set_title(title, fontsize=10)
+        ax.set_title(title)
     else:
-        ax.set_title(title, fontsize=6)
+        ax.set_title(title)
     # In case the font is too large for long titles
 
     # ax.set_title("test", fontsize=12)
@@ -60,9 +95,9 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
 
     xmin = -0.05
     xmax = 0.25 + 0.1 * (len(yVals) - 2)
-    xtickpos = [np.abs(xmin - xmax) / (len(yVals) + 2) * (i + 0.7) for i in range(len(yVals))]
+    xtickpos = [np.abs(xmin - xmax) / (len(yVals) + 1.5) * (i + 0.7) for i in range(len(yVals))]
     ax.set_xticks(xtickpos)
-    ax.set_xticklabels(xAttrs, fontsize=12)
+    ax.set_xticklabels(xAttrs)
     # ax.set_xlabel(xtitle,fontsize=12)
 
     # ax.legend((rects1[0], rects2[0]), xAttrs)
@@ -72,19 +107,26 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
     size = 0
     for rect in rects:
         size += 1
-    if size < 3:
-        font_size = 11
-    else:
-        font_size = 7
+    #if size < 3:
+    #    font_size = 11
+    #else:
+    #    font_size = 7
     # In case the font is too large for long titles
     for rect in rects:
-        autolabel(rect, ax, font_size)
-    plt.tight_layout()
+        autolabel(rect, ax)
+
+
+    #font = {'family': 'serif', 'serif': ['Palatino'], 'size': 18}
+    #sns.set(palette="dark",color_codes=True)
+
+    sns.despine(top=True, right=True)
     # save as svg string
     imgdata = StringIO.StringIO()
+    plt.tight_layout()
     fig.savefig(imgdata, format='svg')
     imgdata.seek(0)  # rewind the data
     svg_str = imgdata.buf  # this is svg data
+
     return svg_str
 
 

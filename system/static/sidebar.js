@@ -42,12 +42,21 @@ function menuItem_open_close() {
     opened = !opened
     if(opened){
         document.getElementById("main").style.marginLeft = "25%";
-        document.getElementById("mySidebar").style.width = "25%";
-        document.getElementById("mySidebar").style.display = "block";
+        if(document.getElementById("newCanvas").checked){
+            //document.getElementById("mySidebar2").style.width = "25%";
+            //document.getElementById("mySidebar2").style.display = "block";
+            document.getElementById("mySidebar").style.display = "none";
+        }
+        else{
+            document.getElementById("mySidebar").style.width = "25%";
+            document.getElementById("mySidebar").style.display = "block";
+            ///document.getElementById("mySidebar2").style.display = "none";
+        }
     }
     else{
         document.getElementById("main").style.marginLeft = "0%";
         document.getElementById("mySidebar").style.display = "none";
+        //document.getElementById("mySidebar2").style.display = "none";
     }
 }
 
@@ -81,28 +90,30 @@ function setIfNotAdd(selector_name,val){
 //         event.stopPropagation();
 //     })
 // }
-function populateD1Query1(){
-    constructQueryWithArgs("mushroom","type","frontierGreedy","euclidean",0.2,0.1,20)
-//    $("#all_tables").val("mushroom")
-//    setIfNotAdd("#xaxis","type")
-//    setIfNotAdd("#metric","euclidean")
-//    setIfNotAdd("#algorithm","frontierGreedy")
-//    setIfNotAdd("#k","20")
-//    setIfNotAdd("#ic","0.2")
-//    setIfNotAdd("#ip","0.1")
-//    $("#submit").click();
-}
-function populateD1Query2(){
-    constructQueryWithArgs("mushroom","cap-surface","frontierGreedy","euclidean",0.2,0.1,20)
-/*    $("#all_tables").val("mushroom")
+
+//function populateA1(){
+//    constructQueryWithArgs("mushroom","cap-surface","Breadth First Search","euclidean",0.0,0.001,10)
+////    $("#all_tables").val("mushroom")
+////    setIfNotAdd("#xaxis","type")
+////    setIfNotAdd("#metric","euclidean")
+////    setIfNotAdd("#algorithm","frontierGreedy")
+////    setIfNotAdd("#k","20")
+////    setIfNotAdd("#ic","0.2")
+////    setIfNotAdd("#ip","0.1")
+////    $("#submit").click();
+//}
+//mushroom_type_Breadth First Picking_euclidean_ic0.0_ip0.9_k10.json
+/*function populateB1(){
+    constructQueryWithArgs("mushroom","type","Breadth First Picking","euclidean",0.0,0.9,10)
+*//*    $("#all_tables").val("mushroom")
     setIfNotAdd("#xaxis","cap-surface")
     setIfNotAdd("#metric","euclidean")
     setIfNotAdd("#algorithm","frontierGreedy")
     setIfNotAdd("#k","20")
     setIfNotAdd("#ic","0.2")
     setIfNotAdd("#ip","0.1")
-    $("#submit").click();*/
-}
+    $("#submit").click();*//*
+}*/
 function populateD2Query1(){
     constructQueryWithArgs("turn","has-list-fn","frontierGreedy","euclidean",0.2,0.1,10)
 /*

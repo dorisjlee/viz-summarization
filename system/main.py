@@ -60,6 +60,7 @@ def getNodeEdgeList():
     nodeDic = json.loads(request.form['nodeDic'])
     
   G = Lattice()
+
   node = G.generateNode(nodeDic)
   edge = G.generateEdge(nodeDic)
   return jsonify(edge,node)
@@ -81,16 +82,28 @@ def getTables():
 
 @app.route("/getInterested", methods=['POST'])
 def getInterested():
-    print "inside getInterested"
-    print str(request.form['interested'])
-    print str(request.form['fname'])
     path = "user_study_"+datetime.strftime(datetime.now(),"%Y_%m_%d")+".log"
-    # if (not os.path.isfile(path)):
     f = open(path,'a')
     f.write(datetime.strftime(datetime.now(),"%Y-%m-%d-%H-%M-%S")+","+\
+            str(request.form['user'])+","+request.form['task']+","+\
             request.form['fname']+","+str(request.form['interested'])+"\n")
     f.close()
     return ('', 204)
+
+@app.route("/getBarchart", methods=['POST'])
+def getBarchart():
+    yVals = request.form['yVals']
+    xAttrs = request.form['xAttrs']
+    title = request.form['title']
+    yName = request.form['yName']
+    xName = request.form['xName']
+    yVals = yVals.replace('[','').replace(']','')
+    yVals = [float(s) for s in yVals.split(',')]
+    xAttrs = xAttrs.replace('[', '').replace(']', '').replace('"','')
+    xAttrs = [s for s in xAttrs.split(',')]
+    return bar_chart(yVals, xAttrs, xtitle=xName, ytitle=yName, title=title, top_right_text="", N=1, width=0.1)
+
+
 @app.route("/postQuery", methods=['GET', 'POST'])
 def postQuery():
     dataset = request.form['dataset']
@@ -123,10 +136,10 @@ def index():
 
     print "ret: "
     '''
-    all_tables = getTables()
-    # dummy example 
-    nodeDic, node, edge= getTreeJSON()
-    
+    # all_tables = getTables()
+    # dummy example
+    #nodeDic, node, edge= getTreeJSON()
+
     # column_name = [""]
     # select_table_name = str(request.form.get('table_select'))
     # session['select_table_name'] = select_table_name
@@ -141,7 +154,7 @@ def index():
     #                         column = json.loads(column_name), nodeDic = nodeDic)
     #return render_template("main.html", treeTreant2 = treeTreant, all_tables = all_tables,\
     #                        nodeDic = nodeDic)
-    return render_template("main.html", all_tables = all_tables)#, nodeDic = nodeDic, node = node, edge = edge)
+    return render_template("main.html")#, all_tables = all_tables)#, nodeDic = nodeDic, node = node, edge = edge)
 
 if __name__ == "__main__":
 

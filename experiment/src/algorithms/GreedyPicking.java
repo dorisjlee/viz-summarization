@@ -11,7 +11,7 @@ import lattice.Lattice;
 public class GreedyPicking extends Traversal{
 	
 	public GreedyPicking() {
-		super("Greedy Picking");
+		super("greedy_picking");
 	}
 	
 	public void pickVisualizations(Experiment exp) {

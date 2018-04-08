@@ -9,7 +9,7 @@ var options;
 function draw(node,edge) {
 
     // create a network
-    var container = document.getElementById('mynetwork');
+    var container = document.getElementById('canvas-graph');
     container.removeChild(container.childNodes[0])
 
     //(totalclick = []).length = node.length;
@@ -27,9 +27,11 @@ function draw(node,edge) {
         edges: edge
     };
     options = {
-
         interaction: {
-            selectable: true
+            selectable: true,
+            hover: true,
+            navigationButtons: true,
+            keyboard: true
         },
         nodes: {
           chosen:false,
@@ -39,6 +41,7 @@ function draw(node,edge) {
               border: '#A1BACB',
               background: '#FFFFFF',
               highlight: 'red',
+              hover: '#ff9933'
             },
           font:{color:'#0B131A',
                 size:8
@@ -68,9 +71,47 @@ function draw(node,edge) {
         }
     };
 
+    //hightlight collapsed node
+    for (i = 0; i < node.length; i++) {
+        var currNode = node_dataset.get(node[i].id);
+        if(currNode.collapse.length > 0){
+            currNode.color = {
+                border: '#ff9933',
+                highlight: '#ff9933'
+            }
+            node_dataset.update(currNode);
+
+        }
+    }
 
     console.log(node_dataset);
     network = new vis.Network(container, data, options);
+    network.on("hoverNode", function (params) {
+        //console.log('hoverNode Event:', params);
+        var nodeID = params.node;
+        //console.log(nodeID)
+        var hoveredNode = node_dataset.get(nodeID);
+        if(hoveredNode.collapse.length > 0){
+            //console.log(hoveredNode)
+            hoveredNode.title = ""
+            for(i = 0; i < hoveredNode.collapse.length; i++){
+                var coltitle = hoveredNode.collapse[i];
+                coltitle = coltitle.toString().replace(/#,#/g, ' ');
+                coltitle = coltitle.toString().split('$').join('=');
+                coltitle = coltitle.toString().split('#').join(',');
+                coltitle = coltitle.toString().split(' ').join("<br>");
+                coltitle = coltitle.slice(1,-1);
+                //coltitle = coltitle.split(" ").join("\n");
+                hoveredNode.title += '<div><font size="4">'+coltitle+'</font></div>';
+            }
+
+            //console.log(hoveredNode)
+            hoveredNode.color = {
+                border: '#ff9933'
+            }
+            node_dataset.update(hoveredNode);
+        }
+    });
     network.on("click", function(params) {
 
         var nodeID = params['nodes']['0'];
@@ -83,9 +124,9 @@ function draw(node,edge) {
         if(totalclick[nodeID]==1)
             color = 'grey';
         else if(totalclick[nodeID]==2)
-            color = 'red';
+            color = '#cc66ff';
         else if(totalclick[nodeID]==3)
-            color = 'green';
+            color = '#ff9933';
 
         if (nodeID>=0) {
             var clickedNode = node_dataset.get(nodeID);
@@ -105,25 +146,34 @@ function draw(node,edge) {
             //console.log("after: ")
             //console.log(node_dataset);
         }
-
+        var user = $("#user").find(":selected").text();
         $.post("/getInterested",{
+            "user" : JSON.stringify(user),
+            "task" : JSON.stringify(currentQuery),
             "interested" : JSON.stringify(totalclick),
             "fname" : JSON.stringify(fname)
         },'application/json')
-        document.getElementById('interested-in').innerHTML = '';
-        document.getElementById('not-interested-in').innerHTML = '';
+        //document.getElementById('interested-in').innerHTML = '';
+        //document.getElementById('not-interested-in').innerHTML = '';
         for (i = 0; i < node.length; i++) {
 
-            if(totalclick[node[i].id]==3){
+            if(totalclick[node[i].id]==2){
                 //var currNode = node_dataset.get(i);
-                document.getElementById('interested-in').innerHTML+='<tr>'+'<td style="color:#368332">'+ node[i].id+'<td>'+ '<td style="padding-left:1cm;color:#368332"> '+node[i].filterVal+'<td> '+'<tr>';
+                //document.getElementById('interested-in').innerHTML+='<li type="square" style="color:green">'+node[i].filterVal+'</li>';
             }
-            else if (totalclick[node[i].id]==2){
+            else if (totalclick[node[i].id]==3){
                 //var currNode = node_dataset.get(i);
-                document.getElementById('not-interested-in').innerHTML+='<tr>'+'<td style="color:#ff0000">'+ node[i].id+'<td>'+ '<td style="padding-left:1cm;color:#ff0000"> '+node[i].filterVal+'<td> '+'<tr>';
+                //document.getElementById('not-interested-in').innerHTML+='<li type="square" style="color:red">'+node[i].filterVal+'</li>';
             }
         }
-
+        selection = params.nodes
+        if (nodeID != undefined) {
+          showJQueryDialog(params, nodeID, selection);
+          //showPopover()
+        }
+        else{
+            clearJQueryDialog(params, nodeID, selection);
+        }
     });
 
    /*network.on("click", function (params) {
@@ -138,6 +188,24 @@ function draw(node,edge) {
     div.innerHTML="<img src='resources/Eclipse.svg' id = 'loadingDashboard' style='display: none; position: relative; z-index: 10; width: 100%; height: 50%;'>"
     container.prepend(div.firstChild);
 }
+function showJQueryDialog(params, nodeID, selection) {
+
+    title = "Expanding " + node_dataset._data[nodeID]["filterVal"] + "<br> with ";
+    var d = document.getElementById('dlg_text');
+    var input = '&nbsp;<input type="text" size="1" name="lastname" value="0"> additional visualizations &nbsp;<input type="submit" style="border-radius: 5px;" value="Submit">'
+    d.innerHTML = title + input ;
+    d.style.position = "fixed";
+    d.style.display = "inline";
+    d.style.left = params.pointer.DOM.x+40+'px';
+    d.style.top = params.pointer.DOM.y+'px';
+
+}
+function clearJQueryDialog(params, node_dataset, selection) {
+
+
+    var d = document.getElementById('dlg_text');
+    d.style.display = 'none';
+    }
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 ////////                   D3 implementation                                       ////////
@@ -145,28 +213,47 @@ function draw(node,edge) {
 ///////////////////////////////////////////////////////////////////////////////////////////
 function render_chart(i, nodeDic){
 //    Dic = JSON.parse(nodeDic)
+
     Dic = nodeDic
-    dataset = Dic[i].slice(0, Dic[i].length-1)
+    dataset = Dic[i].slice(0,Dic[i].length-1)
+    console.log(dataset)
     yAxis_name = Dic[i][Dic[i].length-1]["yName"]
     title = Dic[i][Dic[i].length-1]["filter"]
+    if (i==0){
+        title = "overall";
+    }
+    else{
+        for(var j = 0; j<title.length;j++){
+            if(title[j] == "#"){
+                if(j!=0 || j!=title.length-1)
+                    title = title.substr(0, j) + '\n' + title.substr(j + 1);
+            }
+            else if(title[j] == "$"){
+                title = title.substr(0, j) + '=' + title.substr(j + 1);
+            }
+        }
+    }
 
     //$("#title").html(title) 
     //alert(dataset[0][0].xAxis);
    
 
     // Dimensions for the chart: height, width, and space b/t the bars
-    var margins = {top: 30, right: 50, bottom: 30, left: 50}
-    var height = 300 - margins.left - margins.right,
-        width = 450 - margins.top - margins.bottom,
-        barPadding = 25
+    var margins = {top: 30, right: 50, bottom: 30, left: 40}
+    var height = 180 - margins.left - margins.right,
+        width = 140- margins.top - margins.bottom,
+        barPadding = 5
 
     // Create a scale for the y-axis based on data
     // >> Domain - min and max values in the dataset
     // >> Range - physical range of the scale (reversed)
+//    var yScale = d3.scale.linear()
+//      .domain([0, d3.max(dataset, function(d){
+//        return d.yAxis;
+//      })])
+//      .range([height, 0]);
     var yScale = d3.scale.linear()
-      .domain([0, d3.max(dataset, function(d){
-        return d.yAxis;
-      })])
+      .domain([0, 100])
       .range([height, 0]);
 
     // Implements the scale as an actual axis
@@ -175,7 +262,7 @@ function render_chart(i, nodeDic){
     var yAxis = d3.svg.axis()
       .scale(yScale)
       .orient('left')
-      .ticks(5);
+      .ticks(4);
 
     // Creates a scale for the x-axis based on city names
     var xScale = d3.scale.ordinal()
@@ -193,7 +280,8 @@ function render_chart(i, nodeDic){
     // >> Select - grabs the empty <div> above this script
     // >> Append - places an <svg> wrapper inside the div
     // >> Attr - applies our height & width values from above
-    var chart = d3.select('#chart'+i)
+    current_cell = "#c"+i.toString();
+    var chart = d3.select(current_cell)
       .append('svg')
       .attr('width', width + margins.left + margins.right)
       .attr('height', height + margins.top + margins.bottom)
@@ -211,6 +299,7 @@ function render_chart(i, nodeDic){
       .data(dataset)
       .enter()
       .append('rect')
+
       // Step 2: X & Y
       // >> X - Places the bars in horizontal order, based on number of
       //        points & the width of the chart
@@ -221,6 +310,7 @@ function render_chart(i, nodeDic){
       .attr('y', function(d){
         return yScale(d.yAxis);
       })
+
 
       // Step 3: Height & Width
       // >> Width - Based on barpadding and number of points in dataset
@@ -253,16 +343,26 @@ function render_chart(i, nodeDic){
       .call(xAxis);
 
     // Adds yAxis title
-    chart.append('text')
-      .text(yAxis_name)
-      .attr('transform', 'translate(-30, -20)');
+
+
+    chart.append("g")
+    .attr("transform", "translate(" + margins.left + "," + margins.top + ")")
+    .selectAll(".textlabel")
+    .data(dataset)
+    .enter()
+    .append("text")
+    .attr("class", "textlabel")
+    .attr("x", function(d){ return xScale(d.xAxis)-40; })
+    .attr("y", function(d){ return yScale(d.yAxis)-30; })
+    .text(function(d){ return Math.round((d.yAxis) * 100) / 100; })
+     .style({"font-family":"Arial", "font-weight":"300"});
 
     // add bar chart title
     chart.append("text")
         .attr("x", (width / 2))
-        .attr("y",  "-8px")
+        .attr("y",  "-12px")
         .attr("text-anchor", "middle")
-        .style("font-size", "16px")
+        .style("font-size", "10px")
         .style("text-decoration", "underline")
         .text(title);
 
@@ -282,7 +382,7 @@ function render_chart(i, nodeDic){
         $('#yAxis').html($(this).attr('id'));
       });
     }**/
-
+/*
     function test_chart(arrayDiv){
     // On document load, call the render() function to load the graph
 
@@ -293,4 +393,6 @@ function render_chart(i, nodeDic){
         arrayDiv[i].innerHTML = "<div id=chart"+i+"></div>"
         render_chart(i);
     }
-  }
+  }*/
+
+

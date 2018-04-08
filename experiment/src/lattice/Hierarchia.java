@@ -28,7 +28,7 @@ public class Hierarchia
 		//root_measure_values.add(46.0);
 		//root_measure_values.add(64.0);
         System.out.println("Root measure:"+root_measure_values);
-        long rootSize = root.getPopulation_size();
+        Double rootSize = root.getPopulation_size();
         System.out.println("Root size:"+rootSize);
         double  min_iceberg_support = iceberg_ratio*rootSize;
 		System.out.println("Minimum Iceberg support:"+min_iceberg_support);
@@ -355,7 +355,7 @@ public class Hierarchia
 //	    		ArrayList<String> attrVals = uniqueAttributeKeyVals.get(attribute_names.get(attribute_positions.get(i)));
 
 			
-        		int denominator = 0;
+        		double denominator = 0;
 	    		for (int j =0;j <numXaxis;j ++){
 	    			denominator += measure_values.get(j);
 	    		}

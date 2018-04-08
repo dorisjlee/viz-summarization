@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
+
 import distance.Distance;
 import distance.Euclidean;
 import lattice.Dashboard;
@@ -42,7 +43,7 @@ public class Experiment {
 	public static ArrayList<String> attribute_names;
 	public static HashMap<String, ArrayList<String>> uniqueAttributeKeyVals;
 
-	public Experiment(String datasetName, String xAxisName, String yAxisName, ArrayList<String> groupby, String aggFunc, int k, Traversal algo, Distance dist,
+	public Experiment(String datasetName, String xAxisName, String yAxisName, ArrayList<String> groupby, String aggFunc, int k, Distance dist,
 			double iceberg_ratio, double informative_critera,boolean online) throws SQLException, FileNotFoundException, UnsupportedEncodingException {
 		db = new Database();
 		this.datasetName = datasetName;
@@ -51,22 +52,32 @@ public class Experiment {
 		this.groupby = groupby;
 		this.aggFunc = aggFunc.toUpperCase();
 		this.k = k;
-		this.algo = algo;
 		this.dist = dist;
 		this.iceberg_ratio = iceberg_ratio;
 		this.informative_critera = informative_critera;
-		this.attribute_names = get_attribute_names();
+		this.attribute_names = get_attribute_names();//read the csv file to get attribute names
+//		this.attribute_names = Database.resultSet2ArrayStr(Database.getColumns(this.datasetName));
+//		this.attribute_names.remove("id");
 		this.uniqueAttributeKeyVals = populateUniqueAttributeKeyVals();
 		// Generate base table via group-by
 		ResultSet rs = Database.viz_query(this.datasetName, this.groupby, this.yAxisName, this.aggFunc, new ArrayList<String>(Arrays.asList()));
-		Database.resultSet2csv(rs,this.datasetName,this.groupby,this.aggFunc+"("+this.yAxisName+")");
+		Database.resultSet2csv(rs,this.datasetName,this.groupby,this.aggFunc+"("+this.yAxisName+")"); //generate csv file
 		if (online) {
 			this.lattice = new Lattice();
 		}else {
+			//generate the lattice for this experiment
 			this.lattice = Hierarchia.generateFullyMaterializedLattice(dist,iceberg_ratio,
 							informative_critera,uniqueAttributeKeyVals,attribute_names,xAxisName,datasetName);
+			//get the number of filters
 			this.nbars = lattice.id2MetricMap.get("#").size();
 		}
+	}
+	public void setK(int k) {
+		this.k = k;
+	}
+	public void setAlgo(Traversal algo) {
+		this.algo = algo;
+		dashboard = new Dashboard(lattice);
 		if (experiment_name!="") {
 			File directory = new File(experiment_name);
 		    if (! directory.exists()){
@@ -76,8 +87,6 @@ public class Experiment {
 		}else {
 			this.fname = datasetName+"_"+xAxisName.replace("_","-")+"_"+algo.algoName+"_"+dist.getDistName()+"_ic"+iceberg_ratio+"_ip"+informative_critera+"_k"+k+".json";
 		}
-		this.dashboard = new Dashboard(lattice);
-		
 	}
 	public static HashMap<String, ArrayList<String>> populateUniqueAttributeKeyVals() throws SQLException{
 		HashMap<String, ArrayList<String>> uniqueAttributeKeyVals = new HashMap<String, ArrayList<String>>();
@@ -121,9 +130,16 @@ public class Experiment {
         db.c.close();
 	}
 	
+	public void runTableLayoutOutput(Experiment exp) throws SQLException {
+		algo.pickVisualizations(exp);
+		VizOutput vo = new VizOutput(exp);
+        String nodeDic = vo.generateOrderedNodeDic();
+        VizOutput.dumpString2File(fname, nodeDic);
+        db.c.close();
+	}
+	
 	public long timedRunOutput(Experiment exp) throws SQLException {
 		long startTime = System.nanoTime();
-		System.out.println(algo);
 		algo.pickVisualizations(exp);
 		long endTime = System.nanoTime();
 		VizOutput vo = new VizOutput(exp);

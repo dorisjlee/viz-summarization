@@ -1,8 +1,9 @@
-
+import seaborn as sns
 import networkx as nx
 import json
 from barchart import *
 import base64
+
 # 	Lattice is a DAG (graph) of Node objects
 class Lattice:
 
@@ -84,6 +85,7 @@ class Lattice:
         # containing index and node object: {0: node0, 1: node2}
         node_dic = {}
         for node in self.getNodes():
+
             each = []
             viz = node.get_viz()
             # current = viz[0]
@@ -102,11 +104,13 @@ class Lattice:
         p.write_png('graph.png')
 
     def generateNode(self, node_dic):
+
         nodeList = []
         nodes = sorted(list(node_dic.keys()))
         # Traverse in the order of keys
         for i in nodes:
             node = node_dic[i]
+
             yVals = []
             for values in node:
                 try:
@@ -120,11 +124,22 @@ class Lattice:
                 except KeyError:
                     pass
             if values["filter"]=="#":
-                filterVal="root"
+                filterVal="overall"
+            elif values["filter"]=="collapsed":
+                filterVal="collapsed"
             else:
                 filterVal = str(values["filter"][1:-1].replace("#",",\n").replace("$","="))
-            svgString = bar_chart(yVals, xAttrs, xtitle="", ytitle="", title=filterVal, top_right_text="", N=1, width=0.1)
-            nodeList.append({"id": int(i), "filterVal":filterVal,"image": "data:image/svg+xml;base64," + base64.b64encode(svgString), "shape": 'image', "color":{"border": "grey"} });
+            yname = values["yName"]
+            xname = values["xName"]
+            svgString = bar_chart(yVals, xAttrs, xtitle=xname, ytitle=yname, title=filterVal, top_right_text="", N=1, width=0.1)
+            collapse = []
+            for values in node:
+                try:
+                    collapse.append(values['collapse'])
+                    # print("found collapse node")
+                except KeyError:
+                    pass
+            nodeList.append({"id": int(i), "filterVal":filterVal,"collapse":collapse,"image": "data:image/svg+xml;base64," + base64.b64encode(svgString), "shape": 'image', "color":{"border": "grey"} });
         return nodeList
 
     def generateEdge(self, node_dic):

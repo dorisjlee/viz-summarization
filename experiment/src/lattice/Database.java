@@ -104,6 +104,7 @@ public class Database {
 			query_stmt += " WHERE "+ arr2DelimitedStrings(filters, "AND");
 	        query_stmt +=" GROUP BY " + xAttrJoined +";";
 		}
+//		System.out.println(query_stmt);
 		ResultSet result = query(query_stmt);
 		return result;
 	}
@@ -170,7 +171,8 @@ public class Database {
 
 	public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
     {
-		Database db = new Database();
+//		Database db = new Database();
+//		
 //		ResultSet rs = db.query("SELECT id, name FROM titanic LIMIT 5;");
 //		System.out.println(rs);
 //		ArrayList<Double> rsArr = printResultSet(rs);
@@ -191,9 +193,9 @@ public class Database {
 //		resultSet2csv(rs,"mushroom",colArrs,"COUNT(type)");
 		
 		// Small Mushroom example
-		ArrayList<String> colArrs = new ArrayList<String>(Arrays.asList("type","cap_shape", "cap_surface" , "cap_color" , "bruises" , "odor"));
-		ResultSet rs = Database.viz_query("mushroom", colArrs, "type", "COUNT", new ArrayList<String>(Arrays.asList()));
-		resultSet2csv(rs,"mushroom",colArrs,"COUNT(type)");
+//		ArrayList<String> colArrs = new ArrayList<String>(Arrays.asList("type","cap_shape", "cap_surface" , "cap_color" , "bruises" , "odor"));
+//		ResultSet rs = Database.viz_query("mushroom", colArrs, "type", "COUNT", new ArrayList<String>(Arrays.asList()));
+//		resultSet2csv(rs,"mushroom",colArrs,"COUNT(type)");
 		// All mushroom attributes example 
 //		ArrayList<String> colArrs = new ArrayList<String>(Arrays.asList("type","cap_shape",  "cap_color" , "bruises" , "odor","gill_size","gill_color","habitat"));
 //		ResultSet rs = Database.viz_query("mushroom", colArrs, "type", "COUNT", new ArrayList<String>(Arrays.asList()));
