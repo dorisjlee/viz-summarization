@@ -56,7 +56,7 @@ As shown in Equation \ref{rank}, using the consensus score for each visualizatio
 \begin{equation}\label{rank}
 \textrm{rating score}(V_{ij}) =votes(V_i) \cdot \delta_{ij}
 \end{equation}
-Table \ref{interesting_score} shows the results of rating scores averaged over the tasks that the user performed.
+Table~\ref{table:interesting_score} shows the results of rating scores averaged over the tasks that the user performed.
 \begin{table}[ht!]
 	\centering
 	\begin{tabular}{lrrr}
@@ -68,14 +68,14 @@ Table \ref{interesting_score} shows the results of rating scores averaged over t
 		\hline
 	\end{tabular}
 	\caption{Average consensus-agreement score for different algorithm and datasets.\agp{breakdown by interested and not interested}}
-	\label{interesting_score}
+	\label{table:interesting_score}
 \end{table}
 %Even though participants were asked to --- daily experiences to answer the question, b
 \par Due to the highly subjective nature of the retrieval task, the interestingness selection for the Police dataset was biased by participant's priors and intuition about the attributes. For example, while all participants who have seen the visualization "duration=30+min" verbally noted that stop duration is a crucial factor that leads to arrest, only 4 users marked it as interesting. 5 participants marked the visualization as not interesting and 4 left it unselected, because the visualization was not very surprising as it agreed with their intuition that if the police stop is taking a long time, something has probably gone wrong.
 \par Since the attributes in the Autism dataset are simply question numbers, participants could not associate any priors to their interestingness selection. In this prior-agnostic case, participants who used \system\ found more visualizations of interest that corresponded to the consensus, indicating that there are more interesting visualizations picked out by \system\ than compared to the two baseline-generated dashboard.  
 
 \stitle{Attribute Ranking:} 
-To determine attribute importance ranking for a dataset, we computed the Cramer's V statistics between attributes to be ranked and the attribute of interest. Cramer's V test makes use of the chi-square statistics to determine the strength of association between attributes. Using the ranks determined by Cramer's V as ground truth, we compute the normalized discounted cumulative gain (NDCG@k)\footnote{Since participants are asked to examine all attributes, the k for NDCG@k corresponds to total number of attributes in that dataset.} of each participant's ranking average over all tasks, as detailed in Table \ref{ndcg_ranking_result}. 
+To determine attribute importance ranking for a dataset, we computed the Cramer's V statistics between attributes to be ranked and the attribute of interest. Cramer's V test makes use of the chi-square statistics to determine the strength of association between attributes. Using the ranks determined by Cramer's V as ground truth, we compute the normalized discounted cumulative gain (NDCG@k)\footnote{Since participants are asked to examine all attributes, the k for NDCG@k corresponds to total number of attributes in that dataset.} of each participant's ranking average over all tasks, as detailed in Table \ref{table:ndcg_ranking_result}. 
 \begin{table}[ht!]
 	\centering
 	\begin{tabular}{lrrr}
@@ -85,7 +85,7 @@ To determine attribute importance ranking for a dataset, we computed the Cramer'
 	 Police    &      0.63 &      0.45 &  0.84 \\
 	 Autism    &      0.50 &      0.30 &  0.24 \\
 	\hline
-	\label{ndcg_ranking_result}
+	\label{table:ndcg_ranking_result}
 	\end{tabular}
 	\caption{NDCG@10 scores for the attribute ranking task.}
 \end{table}
@@ -96,30 +96,69 @@ We see that \system\ performs better than clustering in both cases. Since cluste
 \par \system\ did not perform as well compared to the baselines for the Autism deep prediction task. One plausible reason for this is due to the fact that the shallow and deep prediction task for the Autism dataset was correlated. Therefore, after learning about the insights that answering 1 on question 9 results a very high probability for an autism diagnosis, some participants made use of that information when answering the subseqeunt deep prediction task. By discussing with the baseline participants on how they obtained the prediction estimates, they described how since they were very surprised by the finding in the shallow prediction (Figure\ref{surprising}), they adjusted the autism diagnosis values to be higher to compensate for their mistake in the deep prediction task. 
 \par Consistent with the deviation finding, in general, we find that participants who used \system\ were less surprised when the unseen visualization is revealed, which again indicates that participants had a more accurate mental model of prediction 
 \par We also compute the mean and standard deviation of the participant's prediction aggregated across the same task. In this case, low variance implies that any user who reads the dashboard is able to provide consistent predictions, whereas high variance implies participants have relied on different priors or guessing to perform the prediction, often due to the lack of a clear data-driven picture given by the dashboard. These trends can be observed in Figure \ref{actual_predictions}, where the prediction variance amongst participants who used \system\ is much lower than the variance from the baselines.
-\begin{figure}[bht]
+\begin{figure*}[bht]
 \label{distance}
 \centering
-\includegraphics[scale=0.4]{figures/Police1.pdf}
-\includegraphics[scale=0.4]{figures/Police2.pdf}
-\includegraphics[scale=0.4]{figures/Autism1.pdf}
-\includegraphics[scale=0.4]{figures/Autism2.pdf}
-\caption{Euclidean distance between predicted and ground truth.}
-\end{figure}
+\includegraphics[width=\linewidth]{figures/Devation_Surprisingness.pdf}
+\caption{Top: Euclidean distance between predicted and ground truth. Bottom: Surprisingness rating reported by users after seeing the actual visualizations on a Likert scale of 10.}
+\end{figure*}
 \subsection{Qualitative results}
-through an open coding process by two of the authors.
+We analyzed the transcriptions of the study recordings through an open coding process by two of the authors. For each task performed by the participants, the code have binary values indicating whether the participant engaged in the particular event (action or thought process) or not. We will refer to participants engaging in a dashboard created by algorithm=\{1,2,3\}=\{\system, Cluster, BFS\} on dataset =\{A,B\}=\{Police,Autism\} with the notation [Participant.DatasetAlgorithm].
+\stitle{\system promotes distribution-awareness by provoking more comparisons against more informative contextual references.}
+We first examined the thematic codes regarding how participants understood the context of the visualization distribution. In particular, we were interested in the types of visualizations that participants compared against in order to form their expectations regarding how other visualizations should be distributed. We define this property of visualization understanding as \textit{distribution-awareness} and the visualizations that are compared against as the \textit{contextual reference}. Via the thematic coding, we uncovered four main classes of contextual references using the example visualization \texttt{gender=F, race=White, age=21-30}:
+\begin{enumerate}
+	\item Overall : Comparison against the overall distribution
+	\item Parent : Comparison against a visualization with one filter criterion removed (e.g. \texttt{gender=F, race=White})
+	\item Siblings : Comparison against a visualization that share the same parent. In other words, the filter types are the same, but with one criterion that inherit a different value. (e.g. \texttt{gender=M, race=White, age=21-30})
+	\item Relatives : Comparison against a visualization that share some common ancestor (excluding overall), but not necessarily the same parent. In other words, these visualizations share at least one common filter type, but with more than one criterion that inherit a different value. (e.g. \texttt{gender=F, race=White, age=60+, search conducted=T})
+\end{enumerate}
+Studying participants' use of contextual reference reveals inherent challenges in dashboard selection through BFS and KMeans. As shown in Table \ref{table:contextual_reference_count}, participants mainly compared against relatives and the overall. Since KMeans optimizes for diversity of shape distributions amongst the visualization, the selected visualization had up to 4 filters and were disconnected from each other.%despite our modification to KMeans which picks the visualizations with the least number of filters to show in the dashboard for improving interpretability
+For this reason, in many cases participants could only rely on relatives and overall as contextual references to gain distribution-awareness. For example, [P4.A2] dislike how ``A lot of [the visualizations] are far too specific, [Pointing at visualization consisting of 4 filters with a 100\% bar for warning] this is not very helpful. You can’t really hypothesize that all people are going to be warned, because it is such a specific category, it might just be one person, you need to have a bigger dataset. And that category will not really give you such extremes to make it more credible''. He further explained how he ``would like to see each of the races, each of the ages and each of the gender. I would not want to see the intersections at first, I would want to see all the base (one variable at a time) then dig in from there.'' In addition, the lack of informative contextual reference is reflected in the high variance and deviation of the predicted visualization results.
+%These themes are drawn from user's explanations of how they obtained certain insights or ---- that --different tasks or while interpreting the dashboards. 4 categories : 
+\begin{table}[h!]
+\centering
+	\begin{tabular}{l|rrrr|r}
+	\hline
+	 Algorithm   &   Overall &   Parent &   Sibling &   Relative &   Total \\
+	\hline
+	 \system     &        11 &       12 &         8 &          0 &      31 \\
+	 Cluster     &         8 &        4 &         0 &          7 &      19 \\
+	 BFS         &         8 &        0 &         5 &          1 &      14 \\
+	\hline
+	\end{tabular}
+\label{table:contextual_reference_count}
+\caption{Number of participants who made use of each contextual parents, summed across the two datasets. Participant behavior shows a similar trend in individual datasets.}
+\end{table}
+\par For BFS, most comparisons were among overall and siblings. Due to the sequential, level-wise picking approach, in all cases for the BFS dashboard generated, the overall corresponded to the immediate parent, so they are not explicitly recorded as parent. While the overall and sibling comparisons can be informative, due to the limited budget $k$, the dashboard did not contain all siblings. These incomplete comparisons can result in flawed reasoning, as observed in the Autism example described earlier. In contrast, for \system, users mainly compared against the overall and parents, while some also compared between siblings. We also find that more participants make comparisons in total using \system than compared to Cluster and BFS.
+
+\stitle{Hierarchical layout leads to more natural contextual comparisons compared to table layout.}
+As alluded to in the previous section, ---- contextual reference in \system, participants cited the hierarchical layout as one of the key reasons why ---- . Based on the hierarchical layout in \system, users were able to easily interpret the meaning of the dashboard, even though they were never explicitly told what the edge connections between the visualizations meant. For example, [P1.A1] stated that ``This one works for me, and part of it is the hierarchical nature, it’s a very natural flow...so when you are comparing, you don’t have to be making those comparisons in your head, visually that is very pleasing and easy to follow.''. %Likewise, [P8.A1] also stated that ``I like the different levels, it makes it very visually easy to figure out what you want to look at, if you want to look at the overall data, it’s right there at the top for you, if you want to get more specific, you just follow a branch downwards, which I think is very intuitive.'' 
+Likewise, P9 described how the hierarchical layout she saw for the autism dataset was a lot easier to follow than the police dataset shown in the table layout.
+\begin{quote}
+If I had to look at this dataset in the format of the other one, this would be much more difficult. It was pretty hard for me to tell in the other one how to organize the tree, if there was even a tree to be organized. I like this layout much better, I think this layout allows me to approach it in a more meaningful way. I can decide, what do I think matters more: the overall trend? or the super detailed trends? and I know where to look to start, in the other one, every time I go back to it, I would say, where's the top level, where's the second level. I mentally did this. Like when you asked me that first question, it took much longer to find it, because I literally have to put every chart in a space in my head and that took a lot longer than knowing how to look at it.
+\end{quote}
+At the end of the study, some participants for the BFS and KMeans drew out and explained how they would like the layout of the visualizations to be done. Participants expressed that they wanted ``groupings'' or layouts that arranged visualizations with the same attribute together. Other participants advocate for isolating the overall visualization outside of the dashboard table for facilitating easier comparisons. Both of these provides further motivation for our hierarchical layout and the idea of the collapsed visualizations as described in Section \label{interaction}.
+\par Since we did not inform the participants how the dashboards were generated, it was also interesting to note that some participants thought that the dashboards were hand-picked by a human analyst and described what this person's intentions were. (e.g. ``It seems like the person who put together this dashboard was specifically looking at people of Asian descent and people who are 60 or older'') We encoded this phenomenon by looking at instances where a participant either explicitly referring to a person who picked out the dashboard or implicitly described their intentions through personal pronouns. A total of 5 different participants referred to the dashboard generated by \system as generated by a human, whereas there was only 1 participant for KMeans and none for Cluster had the same observation. At the end of the study, many were surprised to learn that the \system dashboard was actually picked out by an algorithm.
+\stitle{Improper contextual reference can lead to misleading insights.}
+
+\stitle{Limitations of \system}
+
+2 of the users  were confused that the middle path and rightmost path had different ‰ÛÏsplits‰Û on variables (age/race) v.s. different races
 
 
-- Reference of Comparison
-- Interpretability: 
-	- misled understnading subpopulation size
-		- for autism, it is important to see if they compare to overall because if not they would think high skew to NO is important whereas its actually pretty close to overall.
-	- trouble interpreting filter combination
+% - Reference of Comparison
+% - Layout naturally lends itself for comparison: 
+% 	- describe ordering layout, how participants naturally follow the flow
+% 	- emph that we did not tell them what the edge connections mean and how they were computed but the users naturally figured it out, that it means adding an additional filter.
+% 	- hierarchical interpretable nature (quotes)
+% 	- compared to other baselines 
+% 	- describe dashboard by human (count)
+% - Misleading insights v.s. True insight discovery rates 
+% 	- Interpretability: 
+% 	- misled understanding subpopulation size
+% 		- for autism, it is important to see if they compare to overall because if not they would think high skew to NO is important whereas its actually pretty close to overall.
+% 	- trouble interpreting filter combination
 
-- Misleading insights v.s. True insight discovery rates 
-- Users describe \system as : 
-	- describe ordering layout, how partcipants naturally follow the flow
-	- emph that we did not tell them what the edge connections mean and how they were computed but the users naturally figured it out, that it means adding an additional filter.
-	- hierarchical interpretable nature (quotes)
-	- compared to other baselines 
-	- describe dashboard by human (count)
+
+
 
