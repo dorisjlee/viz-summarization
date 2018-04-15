@@ -103,6 +103,11 @@ Y.~Kim, K.~Wongsuphasawat, J.~Hullman, and J.~Heer.
 }{.}\hspace{.4pt}3025866}}
 
 
+\bibitem{levene2003snowflake}
+M.~Levene and G.~Loizou.
+\newblock Why is the snowflake schema a good data warehouse design?
+\newblock {\em Information Systems}, 28(3):225--240, 2003.
+
 \bibitem{police}
 E.~Pierson, C.~Simoiu, J.~Overgoor, S.~Corbett-Davies, V.~Ramachandran,
   C.~Phillips, and S.~Goel.
