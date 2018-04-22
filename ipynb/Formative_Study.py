@@ -5,6 +5,9 @@ import matplotlib.pyplot as plt
 import matplotlib
 
 import seaborn as sns
+from matplotlib.offsetbox import (TextArea, DrawingArea, OffsetImage,
+                                  AnnotationBbox)
+
 sns.set_context(
     "talk",
     font_scale=1,
@@ -42,7 +45,7 @@ df = pd.DataFrame(
 
 colors = ["#9ecae1", "#fc9272", "#a1d99b"]
 
-g = sns.FacetGrid(df, col ='P', row = 'V', sharey = False, sharex = False)
+g = sns.FacetGrid(df, col ='P', row = 'V', sharey = False, sharex = False)#, gridspec_kws={"wspace":1})
 g.map(sns.barplot, 'X', 'Y', errwidth = 1.0, capsize = 0.1, palette=sns.color_palette(colors))
 
 g.fig.subplots_adjust(wspace = 0, hspace = 0)
@@ -77,7 +80,19 @@ for i, ax in enumerate(g.axes[-1, :]):
         ax.plot([0.6, 1.4], [49.2, 49.2], 'k--',  dashes=(3, 5), linewidth = 0.9)
     ax.set_yticks(major_yticks)
     ax.set_yticks(minor_yticks, minor = True)
+# # Add right arrow image 
+# arr_img = plt.imread("rightarrow.png", format='png')
+# imagebox = OffsetImage(arr_img, zoom=0.2)
+# imagebox.image.axes = ax
+# xy=(-0.8, 30)
+# ab = AnnotationBbox(imagebox, xy,
+#                     xybox=xy,
+#                     xycoords='data',
+#                     boxcoords="offset points",
+#                     pad=0.5)
 
+# ax.add_artist(ab)
+# plt.subplots_adjust(hspace=1)
 for i, ax in enumerate(g.axes[-2, :]):
     rects = ax.patches
     for j, rect in enumerate(rects):
@@ -87,7 +102,19 @@ for i, ax in enumerate(g.axes[-2, :]):
         ax.plot([0.6, 1.4], [49.2, 49.2], 'k--', dashes=(3, 5), linewidth = 0.9)
     ax.set_yticks(major_yticks)
     ax.set_yticks(minor_yticks, minor = True)
+# plt.subplots_adjust(hspace=1)
+# Add right arrow image 
+# arr_img = plt.imread("rightarrow.png", format='png')
+# imagebox = OffsetImage(arr_img, zoom=0.2)
+# imagebox.image.axes = ax
+# xy=(-0.5, 40)
+# ab = AnnotationBbox(imagebox, xy,
+#                     xybox=xy,
+#                     xycoords='data',
+#                     boxcoords="offset points",
+#                     pad=0.5)
 
+# ax.add_artist(ab)
 
 #sns.despine(bottom = True)
 plt.tight_layout()
