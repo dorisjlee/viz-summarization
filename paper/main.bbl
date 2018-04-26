@@ -43,6 +43,11 @@ A.~Anand and J.~Talbot.
 }{.}\hspace{.4pt}2467323}}
 
 
+\bibitem{Binnig2017}
+C.~Binnig and L.~D. Stefani.
+\newblock {Towards Sustainable Insights or why polygamy is bad for you}.
+\newblock {\em Cidr}, 2017.
+
 \bibitem{Boy2015}
 J.~Boy, F.~Detinenne, and J.-D. Fekete.
 \newblock {Storytelling in Information Visualizations : Does it Engage Users to
@@ -160,6 +165,19 @@ K.~Wongsuphasawat, D.~Moritz, A.~Anand, J.~Mackinlay, B.~Howe, and J.~Heer.
 }{/}TVCG\hspace{.1pt}\discretionary{.}{%
 }{.}\hspace{.4pt}2015\hspace{.1pt}\discretionary{.}{%
 }{.}\hspace{.4pt}2467191}}
+
+
+\bibitem{Xin2007}
+D.~Xin, J.~Han, X.~Li, Z.~Shao, and B.~W. Wah.
+\newblock {Computing iceberg cubes by top-down and bottom-up integration: The
+  starcubing approach}.
+\newblock {\em IEEE Transactions on Knowledge and Data Engineering},
+  19(1):111--126, 2007. doi: {{%
+10\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}1109\discretionary{/}{%
+}{/}TKDE\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}2007\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}250589}}
 
 
 \end{thebibliography}
