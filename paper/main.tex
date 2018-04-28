@@ -37,8 +37,10 @@
 \usepackage{cite}                      % needed to automatically sort the references
 \usepackage{tabu}                      % only used for the table example
 \usepackage{booktabs}                  % only used for the table example
-\usepackage{amsmath}
-\usepackage[linesnumbered,ruled]{algorithm2e}
+% \usepackage[linesnumbered,ruled]{algorithm2e}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
 
@@ -84,13 +86,15 @@
 % \newcommand{\techreport}[1]{{\leavevmode\color{red}{#1}}}
 \newcommand{\papertext}[1]{#1}
 \newcommand{\techreport}[1]{}
-\newcommand{\boldpara}[1]{\textbf{\paragraph{#1}}}
+\newcommand{\boldpara}[1]{\textbf{\paragraph{#1}}}  
 % de-facto paragraph format
-\newcommand{\stitle}[1]{\noindent\textbf{#1}}
+\newcommand{\stitle}[1]{\noindent\par\textbf{#1}}
 \newcommand{\tvcg}[1]{{\leavevmode\color{blue}{#1}}}
 \newcommand{\cut}[1]{{\leavevmode\color{lightgray}{#1}}}
 \newcommand{\ccut}[1]{} %confirmed cut
 \newcommand{\system}{\textsc{Storyboard}\xspace}
+\newcommand{\cluster}{\textsc{Cluster}\xspace}
+\newcommand{\BFS}{\textsc{BFS}\xspace}
 \def\plaintitle{\system : Hierarchical Summary of Equivalent Visualizations across Data Subsets}
 \def\plainauthor{Doris Jung-Lin Lee*, Himel Dev*, Huizi Hu, Hazem Elmeleegy, Aditya Parameswaran}
 \def\emptyauthor{} 
