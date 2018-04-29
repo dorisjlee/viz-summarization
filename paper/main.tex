@@ -88,7 +88,7 @@
 \newcommand{\techreport}[1]{}
 \newcommand{\boldpara}[1]{\textbf{\paragraph{#1}}}  
 % de-facto paragraph format
-\newcommand{\stitle}[1]{\noindent\par\textbf{#1}}
+\newcommand{\stitle}[1]{\par\noindent\textbf{#1}}
 \newcommand{\tvcg}[1]{{\leavevmode\color{blue}{#1}}}
 \newcommand{\cut}[1]{{\leavevmode\color{lightgray}{#1}}}
 \newcommand{\ccut}[1]{} %confirmed cut
@@ -107,7 +107,7 @@
 \newcommand{\haz}[1]{\textcolor{orange}{Hazem: #1}}
 \newcommand\notes[1]{\textcolor{red}{#1}}
 \urlstyle{leo}
-
+\AtBeginEnvironment{quote}{\small}
 % To make various LaTeX processors do the right thing with page size.
 \def\pprw{8.5in}
 \def\pprh{11in}

@@ -1,7 +1,7 @@
 \begin{thebibliography}{10}
 
 \bibitem{titanic}
-Titanic: Machine learning from disaster.
+Titanic: Machine learning from disaster. kaggle.
 
 \bibitem{Alipourfard2018}
 N.~Alipourfard, P.~G. Fennell, and K.~Lerman.
@@ -30,6 +30,7 @@ E.~Althaus, M.~Blumenstock, A.~Disterhoft, A.~Hildebrandt, and M.~Krupp.
 
 \bibitem{anand}
 Anand.
+\newblock Tableau public: Insights from kaggle's titanic dataset.
 
 \bibitem{Anand2015}
 A.~Anand and J.~Talbot.
@@ -129,7 +130,7 @@ E.~Pierson, C.~Simoiu, J.~Overgoor, S.~Corbett-Davies, V.~Ramachandran,
 \bibitem{Sarawagi1999}
 S.~Sarawagi.
 \newblock {Explaining differences in multidimensional aggregates}.
-\newblock {\em Vldb}, pp. 42--53, 1999.
+\newblock {\em Proceedings of the VLDB Endowment}, pp. 42--53, 1999.
 
 \bibitem{Sarawagi2000}
 S.~Sarawagi.
@@ -165,6 +166,13 @@ M.~Vartak, S.~Rahman, S.~Madden, A.~Parameswaran, and N.~Polyzotis.
 \newblock {SEEDB : Efficient Data-Driven Visualization Recommendations to
   Support Visual Analytics}.
 \newblock 2015.
+
+\bibitem{Wall2017}
+E.~Wall, L.~M. Blaha, L.~Franklin, and A.~Endert.
+\newblock {Warning, Bias May Occur: A Proposed Approach to Detecting Cognitive
+  Bias in Interactive Visual Analytics}.
+\newblock {\em 2017 IEEE Conference on Visual Analytics Science and Technology
+  (VAST)}, 2017.
 
 \bibitem{Wongsuphasawat2016}
 K.~Wongsuphasawat, D.~Moritz, A.~Anand, J.~Mackinlay, B.~Howe, and J.~Heer.
