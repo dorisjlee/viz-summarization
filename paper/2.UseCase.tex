@@ -1,10 +1,18 @@
 %!TEX root = main.tex
 \section{Distributional awareness and its applications\label{sec:distributionaware}}
-To illustrate the use cases of our informatively interesting objective, we describe a series of common data analytic tasks using the popular Titanic dataset, commonly used for introducing novices to the classification problem in machine learning\cite{titanic}.
+The idea of picking a small set of visualizations to summarize the dataset is motivated by the observation that most of the data distributions in a dataset can be explained by a much smaller set of visualization instances\footnote{This principle is more generally known as the 80-20 rule in economics, e.g. 80\% of the wealth (effect) is held by approximately 20\% of the population (cause).}. 
+
+The goal of visualization summarization is to find key visualizations that can help analysts become distributionally aware of other possible perspectives in the dataset.
 
 
+An analyst is distributionally aware of the dataset if she can predict the values of -----
+ur goal is to find visualizations that are 
 
-we motivate our objective with an example
+In addition to the use case of accelerating the process of manual comparisons across different data subsets described in the introduction, we illustrate a series of common data analytic tasks using the popular Titanic dataset, commonly used for introducing novices to the classification problem in machine learning\cite{titanic}.
+
+r In this paper, we present \system, an interactive visualization summarization system that algorithmically generate dashboards of visualizations.  For example, ----\% of all visualizations with x=candidate and y=\% of votes have distributions similar to White within (some delta ---\%) as shown in Figure 1--, while the rest of -----. When analysts inspect informative visualizations that cover these insights, they associate particular sets of attributes to typical trends and observed patterns. We define this notion of dataset understanding as \emph{distribution awareness}. Since human analysts have limited memory and attention, it is often impossible to visualize all possible data subsets. An ideal summarization system should display visualizations that enables users to gain maximal distribution awareness of the typical trends within a dataset. 
+
+  
 %\npar \footnote{\cite{anand} is one example of a visualization dashboard demonstrating the insights from exploring through different facets in the Titanic dataset.}
 
 %Discovering the appropriate set of visualizations that can lead to such insights has been the subject of study for recent work on visual storytelling \cite{Kim2017,Hullman2017,Segel2010,Hullman2013} and visualization recommendation \cite{Vartak2015,Wongsuphasawat2016,Anand2015}. 
