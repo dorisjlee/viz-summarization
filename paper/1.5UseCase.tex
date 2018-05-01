@@ -1,0 +1,74 @@
+%!TEX root = main.tex
+\section{Distributional awareness and its applications\label{sec:distributionaware}}
+To illustrate the use cases of our informatively interesting objective, we describe a series of common data analytic tasks using the popular Titanic dataset, commonly used for introducing novices to the classification problem in machine learning\cite{titanic}.
+
+
+
+we motivate our objective with an example
+%\npar \footnote{\cite{anand} is one example of a visualization dashboard demonstrating the insights from exploring through different facets in the Titanic dataset.}
+
+%Discovering the appropriate set of visualizations that can lead to such insights has been the subject of study for recent work on visual storytelling \cite{Kim2017,Hullman2017,Segel2010,Hullman2013} and visualization recommendation \cite{Vartak2015,Wongsuphasawat2016,Anand2015}. 
+
+%\par Choosing the appropriate visualizations that can lead to insights is a challenging problem. For example, a data scientist may want to examine bar charts summarizing the percentage of sales for different user populations from different demographics, such as states, gender, and age group, but is not sure about \textit{what} subset of the data would be interesting to visualize. His struggle is not unjustified: a simple dataset with 10 attributes (with an average of 4 possible values per attributes) can yield up to 9,765,625 possible combinations. Apart from manual drill-down and roll-ups, there are no current systematic and effective way for an analyst to make sense of and navigate through this large space of possible visualizations. %exploratory visual analysis 
+
+% - Discuss distribution awareness and contextual understanding important for understanding dataset 
+% - prior work in visualization recommendation based on statistical (CITE Voyager) and perceptual (CITE APT)
+% - context is important 
+% - specifically, we look at : 
+% 	Unlike prior work that defines interestingness based on distributional deviation, we argue that a visualization is \emph{actually} interesting when it deviates and can not be explained by \emph{even} its most informative reference. 
+% - we motivate our objective with an example
+% In this paper, we address the problem of automatically identifying \emph{informatively interesting} visualizations for visual analysis. We argue that both informativeness and interestingness are required properties for finding meaningful insights from data. There are two key challenges to this. First, informativeness and interestingness are subjective properties that depend on a variety of factors. Second, the two properties can lead to conflicting evaluation objectives. In this paper, we adopt a deviation based criteria to determine the informatively interesting visualizations: \emph{a visualization is interesting if it displays large deviation from a reference, whereas the reference ``itself" is informative if it closely approximates the visualization compared to other potential references.} 
+
+% To demonstrate the merit of our informatively interesting criteria, we present the following illustrative example: 
+
+% \par \textbf{Example 1:} Consider a journalist performing research for a news article about the 2016 US Election.\dor{Himel cite source in footnote.} The journalist is interested in investigating the voting patterns in different demographic groups. He uses the data from the 2016 Election polls to conduct his analysis comparing black female voters to female voters. To his surprise, he finds that the voting pattern of black females is drastically different from the voting pattern of general female population. Voila! Next day, the newspaper headline reads---``The Curious Case of Black Females: Defying Feminine Trends". 
+
+% While black females do defy the trends of general females, this observation provides an incomplete and potentially uninteresting story. The key premise of this story and potentially many others is that the trend in a group of data is different from the trend in a reference group. However, in many cases, the reason why the trends differ is due to the selection of a potentially uninformative reference. For example, in the aforementioned scenario, the female population is an uninformative reference for the black females. The informative and more meaningful reference for black females is the voting patterns of general black population, which it closely approximates.
+
+% This notion of informative interestingness can guide an analyst towards more meaningful stories for further investigation. To illustrate the use cases of our informatively interesting objective, we describe a series of common data analytic tasks using the popular Titanic dataset, commonly used for introducing novices to the classification problem in machine learning\cite{titanic}.
+
+%In Figure 1 we present a set of visualizations from the 2016 Election polls. These visualizations show the percentage of votes for three candidates (Donald Trump, Hilary Clinton, and Others) in different demographic groups (based on race and gender).
+
+%Now, consider an analysts who is interested in identifying . If a user sees the visualization at any of the intermediate time points, they may make incorrect decisions
+
+%\par In this paper, we present \system, an interactive visualization recommendation system that helps guide analysts by recommending interesting and informative visualization stories for exploratory data analysis. Our work was motivated by storyboards commonly used in the development of movies or animations. Storyboards are a sequence of rough sketches that outline the plot of the story to encourage discussions among storywriters and film crews, iterate on the storyline, and details of each scene are filled in. Similarly, in the context of exploratory data analysis, our goal was to algorithmically generate dashboards that could serve as an informative starting point to provoke further exploration.
+%\par Given a dataset and the x and y axes of interest, \system automatically identifies k connected visualizations that summarizes the interesting and informative trends in the dataset to the user by exploring the lattice of equivalent visualizations across data subsets and evaluating the utility of a visualization based on an intuitive user-expectation model. The recommended visualizations are then displayed in an interactive dashboard, where the visualizations are organized into a hierarchical layout. Our user study evaluation shows that visualization dashboards generated by \system are more interpretable and leads to higher performance in data analytic tasks compared to the competing baselines.
+%Not only is manual drill-down and roll-ups tedious and inefficient for the analyst, but even with all the information given, currently there is also no systematic and effective way for an analyst to make sense of and navigate through the large space of possible visualizations. 
+%only arises when groups of related visualizations are viewed in context of each other wherein the facts ----- Insights  and ----- multiple -----rich complex insights --- combination of these facts in ---- , higher level inference.  
+
+%The task of navigating through a large, multidimensional dataset is a common challenge in data analytics. %For example, a data scientist may want to examine bar charts summarizing \% of sales for different user populations from different demographics, such as states, gender, and age group, but is not sure about \textit{what} subset of the data would be interesting to visualize. His struggle is not unjustified: a simple dataset with 10 attributes (with an average of 4 possible values per attributes) can yield up to ---- possible combinations. Not only is manual drill-down and roll-ups tedious and inefficient for the analyst, but even with all the information given, currently there is also no systematic and effective way for an analyst to make sense of and navigate through the large space of possible visualizations. 
+
+%\par To illustrate the present challenges in data subset exploration, we describe a series of common data analytic tasks using the popular Titanic dataset, commonly used for introducing novices to the classification problem in machine learning \footnote{\url{https://www.kaggle.com/c/Titanic}}.
+\npar \textbf{Comparisons across Data Subsets:} In many data analytics scenarios, analysts have an x and y axis of interest and want to explore data subsets corresponding to different filtering criteria. For example, the Titanic dataset contains dimensional attributes (ticket classes, age, and gender) for predicting whether a passenger survives or not survive the shipwreck. The analyst would have to compare across different data subsets by iteratively changing the filter criterion of a visualization to understand how the relationship between the x and y variables change across data subsets.
+\npar Without knowing \textit{what} subset of the data would be interesting to visualize, the manual drill-down and roll-ups on all possible filter combinations can be tedious and inefficient for the analyst. And even if the analyst had plotted visualizations for all possible data subsets, currently there is no systematic and effective way for an analyst to make sense of and navigate through the large space of possible visualizations to draw meaningful insights. \footnote{\cite{anand} is one example of a visualization dashboard demonstrating the insights from exploring through different facets in the Titanic dataset.}
+%This is a routine exercise for---learning the possible relationships between $X$ and $Y$ across different data subsets---identifying the interesting relationships between $X$ and $Y$---understanding how the relationship between $X$ and $Y$ change as one iteratively adds filer criterion to visit a particular path in concept hierarchy---and comparing/contrasting different paths in concept hierarchy.
+
+% Analysts have extensively studied the concept hierarchy of \lq Titanic\rq\ dataset, creating visualizations for examining trends in different data subsets. While most analysts concentrated on survival prediction task, and therefore examined \lq survival rate\rq\ across data subsets; many studied other interesting relations, say between \lq age\rq\ and \lq passenger class\rq , for the purpose of finding interesting insights. 
+% <discuss spurious correlation, paradoxes, motivate why its important to look at visualizations within context>
+\npar \textbf{Preventing Fallacies in Causal Inference:} Drawing inference from observations is important for discovering causal relationships that support or refute a hypothesis, as well as generalizing predictions for unseen data. During exploratory analysis, causal inference based on the incomplete, aggregate information can result in Simpson's paradox~\cite{Guo2017}, whereby an observed trend between variables reverses when conditioned upon an unseen variable. 
+\npar One example of Simpson's paradox in the Titanic dataset is the survival rate of passengers for third-class passengers versus crew members. Overall, the survival rate of third-class passengers is slightly higher (24.08\%) than crews (23.95\%). However, when we examine the survival rate of the two classes conditioned on gender as shown in Table.\ref{tab:t2}. We find that for both genders, the survival rate of the crews is higher than third-class passengers.  
+\begin{table}[thb]
+	\caption{Survival Rate by Gender and Two Classes}
+    \label{tab:t2}
+	\begin{center}    
+	\begin{tabular}{ccccc}
+	\toprule
+	Gender & Class & Survived & Lost & Survival\\
+	& & & & Rate\\
+	\midrule
+	M & Third & 75 & 387 & 16.23\%\\ 
+	M & Crew & 192 & 670 & 22.27\%\\ 
+	\bottomrule
+    F & Third & 76 & 89 & 46.06\%\\ 
+	F & Crew & 20 & 3 & 86.96\%\\ 
+	\bottomrule
+	\end{tabular}
+    \end{center}
+\end{table}
+In this case, Simpson's paradox arises because the gender distribution for each passenger class was not shown, so analysts may be misguided into thinking that survival rates of third-class passengers should be equal or slightly higher than crews.
+As studied by \cite{Alipourfard2018,Guo2017}, identification of Simpson's paradox is important as it reveals interesting subgroups which differ from their expected behavior--so much that their aggregated trends are reversed. While the goal of \system is not the identification of Simpon's paradox, we define the notion of an ``informative parent''\dor{TODO: correspond to earlier terminology} to prevent the dashboard from including visualizations that could misguide the users into such fallacies. 
+
+\npar \textbf{Feature Selection for Machine Learning:} Data scientists often create visualizations to uncover the relationship between their chosen attributes and potential influencer variables to identify attributes that are relevant to the prediction task. Feature selection is a non-trivial problem: analysts seek attribute combinations that are highly discriminative, yet general enough to prevent overfitting and increase model interpretability. While existing classification algorithms such as decision trees highlight some of such cases, as their end-goal is to improve classification score, the reductionist view does not showcase the complex interactions where trends may be changing when additional attributes are added. As described in the paper, the non-monotonic story paths selected by the context-dependent objective in \system can help users make more informative judgments about feature importance in the given datasets \dor{need more info here and correspond to earlier terminology}. 
+
+\npar \textbf{Contextual Outlier Detection and Interpretation.} In many data-driven applications, outlier detection plays an important role in identifying groups of instances that are different from the majority. Interpreting \textit{why} a particular outlier was chosen is essential for analysts to reason about the underlying phenomenon resulting in the outlier. Female crew member in the Titanic dataset is one example of such outliers, whose high survival rate is different from that of both female (51.06\%) and crews (23.95\%), whereas the female third class passengers can be explained using the general observations regarding female. Such outliers may be of interest to the analyst as they indicate the presence of unseen confounds that influence the variables of interest.
+%The survival prediction task for \lq Titanic\rq\ dataset urged many data scientists to explore the attribute space to identify important prediction attributes. Many analysts have successfully identified important prediction attributes by observing trends in different data subsets. The most prominent of these attributes is \lq gender\rq\ that explains the survival of many passengers.

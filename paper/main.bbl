@@ -1,19 +1,5 @@
 \begin{thebibliography}{10}
 
-\bibitem{titanic}
-Titanic: Machine learning from disaster. kaggle.
-
-\bibitem{Alipourfard2018}
-N.~Alipourfard, P.~G. Fennell, and K.~Lerman.
-\newblock {Can you Trust the Trend?}
-\newblock {\em Proceedings of the Eleventh ACM International Conference on Web
-  Search and Data Mining - WSDM '18}, pp. 19--27, 2018. doi: {{%
-10\hspace{.1pt}\discretionary{.}{%
-}{.}\hspace{.4pt}1145\discretionary{/}{%
-}{/}3159652\hspace{.1pt}\discretionary{.}{%
-}{.}\hspace{.4pt}3159684}}
-
-
 \bibitem{ErnstAlthaus2009}
 E.~Althaus, M.~Blumenstock, A.~Disterhoft, A.~Hildebrandt, and M.~Krupp.
 \newblock {Algorithms for the Maximum Weight Connected k-Induced Subgraph
@@ -27,10 +13,6 @@ E.~Althaus, M.~Blumenstock, A.~Disterhoft, A.~Hildebrandt, and M.~Krupp.
 }{-}{-}02026\discretionary{%
 }{-}{-}1}}
 
-
-\bibitem{anand}
-Anand.
-\newblock Tableau public: Insights from kaggle's titanic dataset.
 
 \bibitem{Anand2015}
 A.~Anand and J.~Talbot.
@@ -59,13 +41,6 @@ J.~Boy, F.~Detinenne, and J.-D. Fekete.
 F.~Fayez~Thabtah.
 \newblock Autism screening adult data set. {UCI} machine learning repository,
   2017.
-
-\bibitem{Guo2017}
-Y.~Guo, C.~Binnig, T.~Kraska, and T.~U. Darmstadt.
-\newblock {What you see is not what you get ! Detecting Simpson ' s Paradoxes
-  during Data Exploration}.
-\newblock {\em HILDA 2017 - Proceedings of the Workshop on Human-In-the-Loop
-  Data Analytics}, 2017.
 
 \bibitem{Hoque2017}
 E.~Hoque, V.~Setlur, M.~Tory, and I.~Dykeman.
