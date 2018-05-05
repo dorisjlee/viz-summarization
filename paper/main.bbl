@@ -153,6 +153,18 @@ S.~Sarawagi, R.~Agrawal, N.~Megiddo, G.~V. A.~V. {Univ Politecn Valencia}, and
 \newblock {\em 6th International Conference on Extending Database Technology
   (EDBT 98)}, pp. 168--182, 1998.
 
+\bibitem{Sarvghad2017}
+A.~Sarvghad, M.~Tory, and N.~Mahyar.
+\newblock {Visualizing Dimension Coverage to Support Exploratory Analysis}.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  23(1):21--30, 2017. doi: {{%
+10\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}1109\discretionary{/}{%
+}{/}TVCG\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}2016\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}2598466}}
+
+
 \bibitem{mushroom}
 J.~Schlimmer.
 \newblock Mushroom data set. {UCI} machine learning repository, 1987.
