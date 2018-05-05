@@ -1,7 +1,7 @@
 \documentclass[10pt,journal,compsoc]{IEEEtran}
 % Load basic packages
 \usepackage{balance}  % to better equalize the last page
-\usepackage{graphics} % for EPS, load graphicx instead 
+\usepackage{graphics} % for EPS, load graphicx instead
 \usepackage[T1]{fontenc}
 % \usepackage{txfonts}
 % \usepackage{mathptmx}
@@ -43,6 +43,10 @@
 
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
+\usepackage{subfig}
+\captionsetup{belowskip=-5pt,aboveskip=5pt}
+% \BeforeBeginEnvironment{table}{\vskip-1ex}
+% \AfterEndEnvironment{table}{\vskip-1ex}
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 % llt: Define a global style for URLs, rather that the default one
@@ -86,7 +90,7 @@
 % \newcommand{\techreport}[1]{{\leavevmode\color{red}{#1}}}
 \newcommand{\papertext}[1]{#1}
 \newcommand{\techreport}[1]{}
-\newcommand{\boldpara}[1]{\textbf{\paragraph{#1}}}  
+\newcommand{\boldpara}[1]{\textbf{\paragraph{#1}}}
 % de-facto paragraph format
 \newcommand{\stitle}[1]{\par\noindent\textbf{#1}}
 \newcommand{\tvcg}[1]{{\leavevmode\color{blue}{#1}}}
@@ -97,12 +101,12 @@
 \newcommand{\BFS}{\textsc{BFS}\xspace}
 \def\plaintitle{\system : Hierarchical Summary of Equivalent Visualizations across Data Subsets}
 \def\plainauthor{Doris Jung-Lin Lee*, Himel Dev*, Huizi Hu, Hazem Elmeleegy, Aditya Parameswaran}
-\def\emptyauthor{} 
+\def\emptyauthor{}
 \def\plainkeywords{Data visualization, exploratory data analysis, visual query, scientific data.}
 \def\plaingeneralterms{Documentation, Standardization}
 
 \newcommand{\agp}[1]{\textcolor{blue}{Aditya: #1}}
-\newcommand{\dor}[1]{\textcolor{green}{Doris: #1}} 
+\newcommand{\dor}[1]{\textcolor{green}{Doris: #1}}
 \newcommand{\hdev}[1]{\textcolor{magenta}{Himel: #1}}
 \newcommand{\haz}[1]{\textcolor{orange}{Hazem: #1}}
 \newcommand\notes[1]{\textcolor{red}{#1}}
@@ -175,7 +179,7 @@
 % }
 \IEEEtitleabstractindextext{%
 \begin{abstract}
-\input{0.Abstract} 
+\input{0.Abstract}
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -189,8 +193,8 @@ exploratory data analysis, visualization recommendation.
 % To allow for easy dual compilation without having to reenter the
 % abstract/keywords data, the \IEEEtitleabstractindextext text will
 % not be used in maketitle, but will appear (i.e., to be "transported")
-% here as \IEEEdisplaynontitleabstractindextext when the compsoc 
-% or transmag modes are not selected <OR> if conference mode is selected 
+% here as \IEEEdisplaynontitleabstractindextext when the compsoc
+% or transmag modes are not selected <OR> if conference mode is selected
 % - because all conference papers position the abstract like regular
 % papers do.
 \IEEEdisplaynontitleabstractindextext
@@ -212,8 +216,9 @@ exploratory data analysis, visualization recommendation.
 \input{5.Interactions}
 \input{6.UserStudyEvaluation}
 \input{7.Discussion}
-\input{8.Conclusion}
-\input{9.RelatedWorks}
+\input{8.RelatedWorks}
+\input{9.Conclusion}
+
 % \bibliographystyle{abbrv}
 \bibliographystyle{abbrv-doi}
 \bibliography{reference}

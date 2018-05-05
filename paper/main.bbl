@@ -63,6 +63,16 @@ Y.~Guo, C.~Binnig, T.~Kraska, and T.~U. Darmstadt.
 \newblock {\em HILDA 2017 - Proceedings of the Workshop on Human-In-the-Loop
   Data Analytics}, 2017.
 
+\bibitem{Heer2012}
+J.~Heer and B.~Shneiderman.
+\newblock {Interactive Dynamics for Visual Analysis}.
+\newblock {\em Queue}, 10(2):30, 2012. doi: {{%
+10\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}1145\discretionary{/}{%
+}{/}2133416\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}2146416}}
+
+
 \bibitem{Hoque2017}
 E.~Hoque, V.~Setlur, M.~Tory, and I.~Dykeman.
 \newblock {Applying Pragmatics Principles for Interaction with Visual
@@ -205,6 +215,17 @@ K.~Wongsuphasawat, D.~Moritz, A.~Anand, J.~Mackinlay, B.~Howe, and J.~Heer.
 }{/}TVCG\hspace{.1pt}\discretionary{.}{%
 }{.}\hspace{.4pt}2015\hspace{.1pt}\discretionary{.}{%
 }{.}\hspace{.4pt}2467191}}
+
+
+\bibitem{Wu2013}
+E.~Wu and S.~Madden.
+\newblock {Scorpion: Explaining Away Outliers in Aggregate Queries}.
+\newblock {\em Proceedings of the VLDB Endowment}, 6(8):553--564, 2013. doi:
+  {{%
+10\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}14778\discretionary{/}{%
+}{/}2536354\hspace{.1pt}\discretionary{.}{%
+}{.}\hspace{.4pt}2536356}}
 
 
 \bibitem{Xin2007}
