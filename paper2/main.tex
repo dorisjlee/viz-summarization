@@ -1,0 +1,226 @@
+\documentclass[10pt,journal,compsoc]{IEEEtran}
+% Load basic packages
+\usepackage{balance}  % to better equalize the last page
+\usepackage{graphics} % for EPS, load graphicx instead
+\usepackage[T1]{fontenc}
+% \usepackage{txfonts}
+% \usepackage{mathptmx}
+\usepackage[pdftex]{hyperref}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{textcomp}
+\usepackage{xspace}
+\usepackage{setspace}
+\usepackage[textsize=tiny]{todonotes}
+% Some optional stuff you might like/need.
+\usepackage{microtype} % Improved Tracking and Kerning
+% \usepackage[all]{hypcap}  % Fixes bug in hyperref caption linking
+\usepackage{ccicons}  % Cite your images correctly!
+% \usepackage[utf8]{inputenc} % for a UTF8 editor only
+\usepackage{verbatim}
+\usepackage{relsize}
+\usepackage{etoolbox}
+\usepackage{lipsum}   % for filler text
+\usepackage{setspace} % for \onehalfspacing and \singlespacing macros
+\usepackage[normalem]{ulem}
+\usepackage[sort,nocompress]{cite}
+\usepackage{xcolor}
+\usepackage{fixltx2e}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{afterpage}
+\usepackage{microtype}                 % use micro-typography (slightly more compact, better to read)
+\PassOptionsToPackage{warn}{textcomp}  % to address font issues with \textrightarrow
+\usepackage{times}                     % we use Times as the main font
+\renewcommand*\ttdefault{txtt}         % a nicer typewriter font
+\usepackage{cite}                      % needed to automatically sort the references
+\usepackage{tabu}                      % only used for the table example
+\usepackage{booktabs}                  % only used for the table example
+% \usepackage[linesnumbered,ruled]{algorithm2e}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage{subfig}
+\captionsetup{belowskip=-5pt,aboveskip=5pt}
+% \BeforeBeginEnvironment{table}{\vskip-1ex}
+% \AfterEndEnvironment{table}{\vskip-1ex}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+% llt: Define a global style for URLs, rather that the default one
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{
+    \def\UrlFont{\sf}
+  }{
+    \def\UrlFont{\small\bf\ttfamily}
+  }}
+\makeatother
+
+\newenvironment{denselist}{
+    \begin{list}{\small{$\bullet$}}%
+    {\setlength{\itemsep}{0ex} \setlength{\topsep}{0ex}
+    \setlength{\parsep}{0pt} \setlength{\itemindent}{0pt}
+    \setlength{\leftmargin}{1.5em}
+    \setlength{\partopsep}{0pt}}}%
+    {\end{list}}
+
+\newcommand{\squishlist}{
+   \begin{list}{$\bullet$}
+    { \setlength{\itemsep}{0pt}
+      \setlength{\parsep}{2pt}
+      \setlength{\topsep}{0pt}
+      \setlength{\partopsep}{0pt}
+      \leftmargin=25pt
+\rightmargin=0pt
+\labelsep=5pt
+\labelwidth=10pt
+\itemindent=0pt
+\listparindent=0pt
+\itemsep=\parsep
+    }
+}
+\newcommand{\squishend}{\end{list}}
+\newcommand{\npar}{\par \noindent}
+% use extensively to toggle between paper and TR
+\newcommand{\eat}[1]{}
+% \newcommand{\papertext}[1]{{\leavevmode\color{blue}{#1}}}
+% \newcommand{\techreport}[1]{{\leavevmode\color{red}{#1}}}
+\newcommand{\papertext}[1]{#1}
+\newcommand{\techreport}[1]{}
+\newcommand{\boldpara}[1]{\textbf{\paragraph{#1}}}
+% de-facto paragraph format
+\newcommand{\stitle}[1]{\par\noindent\textbf{#1}}
+\newcommand{\tvcg}[1]{{\leavevmode\color{blue}{#1}}}
+\newcommand{\cut}[1]{{\leavevmode\color{lightgray}{#1}}}
+\newcommand{\ccut}[1]{} %confirmed cut
+\newcommand{\system}{\textsc{Storyboard}\xspace}
+\newcommand{\cluster}{\textsc{Cluster}\xspace}
+\newcommand{\BFS}{\textsc{BFS}\xspace}
+\def\plaintitle{\system : Hierarchical Summary of Equivalent Visualizations across Data Subsets}
+\def\plainauthor{Doris Jung-Lin Lee*, Himel Dev*, Huizi Hu, Hazem Elmeleegy, Aditya Parameswaran}
+\def\emptyauthor{}
+\def\plainkeywords{Data visualization, exploratory data analysis, visual query, scientific data.}
+\def\plaingeneralterms{Documentation, Standardization}
+
+\newcommand{\agp}[1]{\textcolor{blue}{Aditya: #1}}
+\newcommand{\dor}[1]{\textcolor{green}{Doris: #1}}
+\newcommand{\hdev}[1]{\textcolor{magenta}{Himel: #1}}
+\newcommand{\haz}[1]{\textcolor{orange}{Hazem: #1}}
+\newcommand\notes[1]{\textcolor{red}{#1}}
+\urlstyle{leo}
+\AtBeginEnvironment{quote}{\small}
+% To make various LaTeX processors do the right thing with page size.
+\def\pprw{8.5in}
+\def\pprh{11in}
+\special{papersize=\pprw,\pprh}
+\setlength{\paperwidth}{\pprw}
+\setlength{\paperheight}{\pprh}
+\setlength{\pdfpagewidth}{\pprw}
+\setlength{\pdfpageheight}{\pprh}
+
+% Make sure hyperref comes last of your loaded packages, to give it a
+% fighting chance of not being over-written, since its job is to
+% redefine many LaTeX commands.
+\definecolor{linkColor}{RGB}{6,125,233}
+\hypersetup{%
+  pdftitle={\plaintitle},
+% Use \plainauthor for final version.
+%  pdfauthor={\plainauthor},
+  pdfauthor={\emptyauthor},
+  pdfkeywords={\plainkeywords},
+  bookmarksnumbered,
+  pdfstartview={FitH},
+  colorlinks,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=linkColor,
+  breaklinks=true}
+
+
+% Get rid of gaps between sections, subsections and subsubsections
+% \usepackage{titlesec}
+% \titlespacing*{\section}
+% {0pt}{0pt}{0pt}
+% \titlespacing*{\subsection}
+% {0pt}{0pt}{0pt}
+% \titlespacing*{\subsubsection}
+% {0pt}{0pt}{0pt}
+% End of preamble. Here it comes the document.
+
+\ifpdf%                                % if we use pdflatex
+  \pdfoutput=1\relax                   % create PDFs from pdfLaTeX
+  \pdfcompresslevel=9                  % PDF Compression
+  \pdfoptionpdfminorversion=7          % create PDF 1.7
+  \ExecuteOptions{pdftex}
+  \usepackage{graphicx}                % allow us to embed graphics files
+  \DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg} % for pdflatex we expect .pdf, .png, or .jpg files
+\else%                                 % else we use pure latex
+  \ExecuteOptions{dvips}
+  \usepackage{graphicx}                % allow us to embed graphics files
+  \DeclareGraphicsExtensions{.eps}     % for  pure latex we expect eps files
+\fi%
+
+%% it is recomended to use ``\autoref{sec:bla}'' instead of ``Figure ~\ref{sec:bla}''
+\graphicspath{{figures/}{pictures/}{images/}{./}} % where to search for the images
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% START OF THE PAPER %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\title{\system : Navigating Through Data Slices with Hierarchical Summary of Visualizations}
+\author{\plainauthor}
+% \IEEEcompsocitemizethanks{ \IEEEcompsocthanksitem The authors are with University of Illinois, Urbana-Champaign. Hazem Elmeleegy is with Amobee Inc.
+%  \protect\\ E-mail: jlee782, hdev3, huizihu2, skuzi2, adityagp@illinois.edu. hazem.elmeleegy@amobee.com.
+% }
+\IEEEtitleabstractindextext{%
+\begin{abstract}
+\input{0.Abstract}
+\end{abstract}
+
+\begin{IEEEkeywords}
+exploratory data analysis, visualization recommendation.
+\end{IEEEkeywords}}
+
+% make the title area
+\maketitle
+
+
+% To allow for easy dual compilation without having to reenter the
+% abstract/keywords data, the \IEEEtitleabstractindextext text will
+% not be used in maketitle, but will appear (i.e., to be "transported")
+% here as \IEEEdisplaynontitleabstractindextext when the compsoc
+% or transmag modes are not selected <OR> if conference mode is selected
+% - because all conference papers position the abstract like regular
+% papers do.
+\IEEEdisplaynontitleabstractindextext
+% \IEEEdisplaynontitleabstractindextext has no effect when using
+% compsoc or transmag under a non-conference mode.
+
+
+\begin{figure*}[bht]
+\centering
+\includegraphics[width=\linewidth]{figures/US_Election_Example.png}
+\caption{A set of visualizations from the 2016 Election polls. These visualizations show the percentage of votes for three candidates (Donald Trump, Hilary Clinton, and Others) in different demographic groups (based on race and gender).}
+\label{fig:elections_example}
+\end{figure*}
+
+\input{1.Introduction}
+\input{2.UseCase}
+\input{3.ProblemFormulation}
+\input{4.System}
+\input{5.Interactions}
+\input{6.UserStudyEvaluation}
+\input{7.Discussion}
+\input{8.RelatedWorks}
+\input{9.Conclusion}
+
+% \bibliographystyle{abbrv}
+\bibliographystyle{abbrv-doi}
+\bibliography{reference}
+
+\end{document}

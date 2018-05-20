@@ -1,0 +1,54 @@
+This is BibTeX, Version 0.99d (TeX Live 2014)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+The style file: abbrv-doi.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: reference.bib
+Warning--to sort, need author or key in titanic
+Warning--empty journal in ErnstAlthaus2009
+Warning--empty journal in Anand2015
+Warning--there's a number but no volume in Hoque2017
+Warning--empty journal in Hullman2017
+Warning--empty journal in Vartak2015
+You've used 27 entries,
+            2598 wiz_defined-function locations,
+            775 strings with 10008 characters,
+and the built_in function-call counts, 20507 in all, are:
+= -- 4278
+> -- 510
+< -- 666
++ -- 862
+- -- 188
+* -- 741
+:= -- 3028
+add.period$ -- 76
+call.type$ -- 27
+change.case$ -- 168
+chr.to.int$ -- 0
+cite$ -- 33
+duplicate$ -- 323
+empty$ -- 677
+format.name$ -- 174
+if$ -- 5308
+int.to.chr$ -- 0
+int.to.str$ -- 27
+missing$ -- 23
+newline$ -- 214
+num.names$ -- 52
+pop$ -- 174
+preamble$ -- 1
+purify$ -- 141
+quote$ -- 0
+skip$ -- 265
+stack$ -- 0
+substring$ -- 1186
+swap$ -- 73
+text.length$ -- 364
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 108
+warning$ -- 6
+while$ -- 113
+width$ -- 29
+write$ -- 672
+(There were 6 warnings)
