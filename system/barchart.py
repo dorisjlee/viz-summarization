@@ -11,7 +11,10 @@ sns.set_context(
        #"text.usetex": True,
        "font.family": 'serif',
        "font.serif": ['Palatino'],
-       "font.size": 20
+       "axes.titlesize":30,
+       "axes.labelsize":30,
+       "xtick.labelsize": 23,
+       "ytick.labelsize": 23
    })
 sns.set_style('white')
 
@@ -19,7 +22,7 @@ from matplotlib import rc
 font = {'family': 'serif', 'serif': ['Palatino'], 'size': 20}
 rc('font', **font)
 
-plt.rcParams["figure.figsize"] = (4, 4)
+plt.rcParams["figure.figsize"] = (5,5)
 plt.rcParams["figure.max_open_warning"]=500
 
 def millify(n):
@@ -81,6 +84,22 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
         title = " "
     elif title[0] == ',':
         title = title[2:-2]
+    #publication figure settings
+    # if title =="overall":
+    #     ax.set_title("overall",fontdict={'fontsize': 28,
+    #                              'fontweight' : 15})
+    # elif title.count('\n')==0:
+    #     ax.set_title("______________",fontdict={'fontsize': 28,
+    #                              'fontweight' : 15,'color':'white'})#, loc='left')#.set_position([-0.2,110])
+    #     ax.text(-0.15, 105, title,fontsize=30,weight=18)#,loc="center")
+    # elif title.count('\n')==1:
+    #     ax.set_title("______________\n_____________",fontdict={'fontsize': 28,
+    #                              'fontweight' : 15,'color':'white'})#, loc='left')#.set_position([-0.2,110])
+    #     ax.text(-0.15, 105, title,fontsize=30,weight=18)#,loc="center")
+    # elif title.count('\n')==2:
+    #     ax.set_title("______________\n______________\n______________",fontdict={'fontsize': 28,
+    #                              'fontweight' : 15,'color':'white'})#, loc='left')#.set_position([-0.2,110])
+    #     ax.text(-0.15, 105, title,fontsize=30,weight=18)#,loc="center")
     if title.count(',') < 3:
         ax.set_title(title)
     else:
@@ -96,6 +115,8 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
     xmin = -0.05
     xmax = 0.25 + 0.1 * (len(yVals) - 2)
     xtickpos = [np.abs(xmin - xmax) / (len(yVals) + 1.5) * (i + 0.7) for i in range(len(yVals))]
+    # print "xtickpos:",xtickpos
+    xtickpos = [0.025, 0.15, 0.27]
     ax.set_xticks(xtickpos)
     ax.set_xticklabels(xAttrs)
     # ax.set_xlabel(xtitle,fontsize=12)
