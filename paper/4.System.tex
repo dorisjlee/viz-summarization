@@ -55,7 +55,7 @@ We give an overview of our algorithms by first discussing the approaches to gene
   \While{|dashboard| < k}
       \State frontier $\gets$ getFrontier(dashboard,lattice)
       \State maxNode $\gets$ getMaxUtilityNode(frontier)
-      \State dashboard $\gets$ dashboard $\cap$ \{maxNode\}
+      \State dashboard $\gets$ dashboard $\cup$ \{maxNode\}
   \EndWhile
   \Return dashboard
   \EndProcedure
