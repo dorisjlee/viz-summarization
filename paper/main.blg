@@ -1,55 +1,96 @@
 This is BibTeX, Version 0.99d (TeX Live 2014)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
-The style file: abbrv-doi.bst
+The style file: ACM-Reference-Format.bst
 Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: reference.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--no key, author in titanic
+Warning--no author, editor, organization, or key in titanic
 Warning--to sort, need author or key in titanic
+Warning--no key, author in ctrp3
+Warning--no author, editor, organization, or key in ctrp3
 Warning--to sort, need author or key in ctrp3
-Warning--empty journal in ErnstAlthaus2009
-Warning--empty journal in Anand2015
-Warning--there's a number but no volume in Hoque2017
-Warning--empty journal in Hullman2017
-Warning--empty journal in Vartak2015
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=20001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Warning--no key, author in ctrp3
+Warning--no key, author in ctrp3
+Warning--no key, author in titanic
+Warning--no key, author in titanic
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--no key, author in ctrp3
+Warning--no author, editor, organization, or key in ctrp3
+Warning--empty author in ctrp3
+Warning--empty year in ctrp3
+Warning--no key, author in titanic
+Warning--no author, editor, organization, or key in titanic
+Warning--empty author in titanic
+Warning--empty year in titanic
+Warning--no number and no volume in Alipourfard2018
+Warning--no journal in ErnstAlthaus2009
+Warning--no journal in Anand2015
+Warning--page numbers missing in both pages and numpages fields in Anand2015
+Warning--no number and no volume in Binnig2017
+Warning--page numbers missing in both pages and numpages fields in Binnig2017
+Warning--no number and no volume in Boy2015
+Warning--no number and no volume in Guo2017
+Warning--page numbers missing in both pages and numpages fields in Guo2017
+Warning--unusual to have number, but no volume, for Hoque2017
+Warning--page numbers missing in both pages and numpages fields in Hoque2017
+Warning--no journal in Hullman2017
+Warning--page numbers missing in both pages and numpages fields in Hullman2017
+Warning--no number and no volume in Kim2017
+Warning--page numbers missing in both pages and numpages fields in Kim2017
+Warning--no number and no volume in Parameswaran2010
+Warning--no number and no volume in Sarawagi1999
+Warning--no number and no volume in Sarawagi2000
+Warning--no number and no volume in Sarawagi1998
+Warning--no journal in Vartak2015
+Warning--no number and no volume in Vartak2015
+Warning--page numbers missing in both pages and numpages fields in Vartak2015
+Warning--no number and no volume in Wall2017
+Warning--page numbers missing in both pages and numpages fields in Wall2017
 You've used 28 entries,
-            2598 wiz_defined-function locations,
-            779 strings with 10123 characters,
-and the built_in function-call counts, 20677 in all, are:
-= -- 4295
-> -- 511
-< -- 666
-+ -- 863
-- -- 188
-* -- 746
-:= -- 3047
-add.period$ -- 79
+            5719 wiz_defined-function locations,
+            1498 strings with 20553 characters,
+and the built_in function-call counts, 32321 in all, are:
+= -- 4532
+> -- 1209
+< -- 0
++ -- 398
+- -- 404
+* -- 2414
+:= -- 3212
+add.period$ -- 139
 call.type$ -- 28
-change.case$ -- 171
-chr.to.int$ -- 0
-cite$ -- 35
-duplicate$ -- 330
-empty$ -- 701
-format.name$ -- 174
-if$ -- 5351
-int.to.chr$ -- 0
-int.to.str$ -- 28
-missing$ -- 23
-newline$ -- 219
-num.names$ -- 52
-pop$ -- 184
+change.case$ -- 201
+chr.to.int$ -- 28
+cite$ -- 78
+duplicate$ -- 2588
+empty$ -- 1856
+format.name$ -- 492
+if$ -- 7987
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 92
+newline$ -- 362
+num.names$ -- 208
+pop$ -- 943
 preamble$ -- 1
-purify$ -- 143
+purify$ -- 439
 quote$ -- 0
-skip$ -- 270
+skip$ -- 840
 stack$ -- 0
-substring$ -- 1191
-swap$ -- 74
-text.length$ -- 364
+substring$ -- 2275
+swap$ -- 252
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 112
-warning$ -- 7
-while$ -- 113
-width$ -- 30
-write$ -- 681
-(There were 7 warnings)
+type$ -- 518
+warning$ -- 42
+while$ -- 181
+width$ -- 0
+write$ -- 599
+(There were 42 warnings)

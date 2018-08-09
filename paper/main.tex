@@ -1,12 +1,9 @@
-\documentclass[10pt,journal,compsoc]{IEEEtran}
+\documentclass[sigchi, review]{acmart}
 % Load basic packages
+\usepackage{booktabs} % For formal tables
 \usepackage{balance}  % to better equalize the last page
 \usepackage{graphics} % for EPS, load graphicx instead
 \usepackage[T1]{fontenc}
-% \usepackage{txfonts}
-% \usepackage{mathptmx}
-\usepackage[pdftex]{hyperref}
-\usepackage{color}
 \usepackage{xcolor}
 \usepackage{booktabs}
 \usepackage{textcomp}
@@ -24,7 +21,6 @@
 \usepackage{lipsum}   % for filler text
 \usepackage{setspace} % for \onehalfspacing and \singlespacing macros
 \usepackage[normalem]{ulem}
-\usepackage[sort,nocompress]{cite}
 \usepackage{xcolor}
 \usepackage{fixltx2e}
 \usepackage{amsmath}
@@ -34,7 +30,6 @@
 \PassOptionsToPackage{warn}{textcomp}  % to address font issues with \textrightarrow
 \usepackage{times}                     % we use Times as the main font
 \renewcommand*\ttdefault{txtt}         % a nicer typewriter font
-\usepackage{cite}                      % needed to automatically sort the references
 \usepackage{tabu}                      % only used for the table example
 \usepackage{booktabs}                  % only used for the table example
 % \usepackage[linesnumbered,ruled]{algorithm2e}
@@ -121,51 +116,25 @@
 \setlength{\pdfpagewidth}{\pprw}
 \setlength{\pdfpageheight}{\pprh}
 
-% Make sure hyperref comes last of your loaded packages, to give it a
-% fighting chance of not being over-written, since its job is to
-% redefine many LaTeX commands.
-\definecolor{linkColor}{RGB}{6,125,233}
-\hypersetup{%
-  pdftitle={\plaintitle},
-% Use \plainauthor for final version.
-%  pdfauthor={\plainauthor},
-  pdfauthor={\emptyauthor},
-  pdfkeywords={\plainkeywords},
-  bookmarksnumbered,
-  pdfstartview={FitH},
-  colorlinks,
-  citecolor=black,
-  filecolor=black,
-  linkcolor=black,
-  urlcolor=linkColor,
-  breaklinks=true}
 
+\setcopyright{licensedcagov}
+%\setcopyright{cagovmixed}
+%\setcopyright{licensedothergov}
 
-% Get rid of gaps between sections, subsections and subsubsections
-% \usepackage{titlesec}
-% \titlespacing*{\section}
-% {0pt}{0pt}{0pt}
-% \titlespacing*{\subsection}
-% {0pt}{0pt}{0pt}
-% \titlespacing*{\subsubsection}
-% {0pt}{0pt}{0pt}
-% End of preamble. Here it comes the document.
+% DOI
+\acmDOI{10.475/123_4}
 
-\ifpdf%                                % if we use pdflatex
-  \pdfoutput=1\relax                   % create PDFs from pdfLaTeX
-  \pdfcompresslevel=9                  % PDF Compression
-  \pdfoptionpdfminorversion=7          % create PDF 1.7
-  \ExecuteOptions{pdftex}
-  \usepackage{graphicx}                % allow us to embed graphics files
-  \DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg} % for pdflatex we expect .pdf, .png, or .jpg files
-\else%                                 % else we use pure latex
-  \ExecuteOptions{dvips}
-  \usepackage{graphicx}                % allow us to embed graphics files
-  \DeclareGraphicsExtensions{.eps}     % for  pure latex we expect eps files
-\fi%
+% ISBN
+\acmISBN{123-4567-24-567/08/06}
 
-%% it is recomended to use ``\autoref{sec:bla}'' instead of ``Figure ~\ref{sec:bla}''
-\graphicspath{{figures/}{pictures/}{images/}{./}} % where to search for the images
+%Conference
+\acmConference[WOODSTOCK'97]{ACM Woodstock conference}{July 1997}{El
+  Paso, Texas USA}
+\acmYear{1997}
+\copyrightyear{2016}
+
+\acmPrice{15.00}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%% START OF THE PAPER %%%%%%%%%%%%%%%%%%%%%%
@@ -173,41 +142,26 @@
 
 \begin{document}
 \title{\system : Navigating Through Data Slices with Hierarchical Summary of Visualizations}
-\author{\plainauthor}
-% \IEEEcompsocitemizethanks{ \IEEEcompsocthanksitem The authors are with University of Illinois, Urbana-Champaign. Hazem Elmeleegy is with Amobee Inc.
-%  \protect\\ E-mail: jlee782, hdev3, huizihu2, skuzi2, adityagp@illinois.edu. hazem.elmeleegy@amobee.com.
-% }
-\IEEEtitleabstractindextext{%
+% \author{\plainauthor}
 \begin{abstract}
-\input{0.Abstract}
+The task of navigating through a large, multidimensional dataset is a common challenge in exploratory analysis. Not only is manual drill-down and roll-up on data subsets tedious and inefficient for the analyst, the massive space of data subsets, lack of interesting patterns in most data subsets, fallacies of spurious correlations, and pitfalls of statistical paradoxes calls for a systematic and effective way for an analyst to make sense of and navigate through the large space of possible visualizations. In this paper, we present \system, an interactive visualization recommendation system that automatically identifies k connected visualizations that summarizes the interesting and informative trends in the dataset to the user. Given a dataset and the x and y axes of interest, \system\ intelligently explores the lattice of equivalent visualizations across data subsets, and recommends interesting and informative visualizations based on an intuitive user-expectation model. The recommended visualizations are then displayed in an interactive dashboard, where the visualizations are organized into a hierarchical layout. Our evaluation study shows that visualization dashboards generated by \system\ are interpretable and leads to higher performance in data analytic tasks compared to the competing baselines.
 \end{abstract}
+\keywords{exploratory data analysis, visualization recommendation.}
+\begin{teaserfigure}
+  \centering
+  \includegraphics[width=\linewidth]{figures/US_Election_Example.pdf}
+  \caption{A set of visualizations from the 2016 Election polls. These visualizations show the percentage of votes for three candidates (Donald Trump, Hilary Clinton, and Others) in different demographic groups (based on race and gender).}
+  \label{fig:elections_example}
+\end{teaserfigure}
 
-\begin{IEEEkeywords}
-exploratory data analysis, visualization recommendation.
-\end{IEEEkeywords}}
-
-% make the title area
 \maketitle
 
-
-% To allow for easy dual compilation without having to reenter the
-% abstract/keywords data, the \IEEEtitleabstractindextext text will
-% not be used in maketitle, but will appear (i.e., to be "transported")
-% here as \IEEEdisplaynontitleabstractindextext when the compsoc
-% or transmag modes are not selected <OR> if conference mode is selected
-% - because all conference papers position the abstract like regular
-% papers do.
-\IEEEdisplaynontitleabstractindextext
-% \IEEEdisplaynontitleabstractindextext has no effect when using
-% compsoc or transmag under a non-conference mode.
-
-
-\begin{figure*}[bht]
-\centering
-\includegraphics[width=\linewidth]{figures/US_Election_Example.pdf}
-\caption{A set of visualizations from the 2016 Election polls. These visualizations show the percentage of votes for three candidates (Donald Trump, Hilary Clinton, and Others) in different demographic groups (based on race and gender).}
-\label{fig:elections_example}
-\end{figure*}
+% \begin{figure*}[bht]
+% \centering
+% \includegraphics[width=\linewidth]{figures/US_Election_Example.pdf}
+% \caption{A set of visualizations from the 2016 Election polls. These visualizations show the percentage of votes for three candidates (Donald Trump, Hilary Clinton, and Others) in different demographic groups (based on race and gender).}
+% \label{fig:elections_example}
+% \end{figure*}
 
 \input{1.Introduction}
 \input{2.UseCase}
@@ -219,8 +173,7 @@ exploratory data analysis, visualization recommendation.
 \input{8.RelatedWorks}
 \input{9.Conclusion}
 
-% \bibliographystyle{abbrv}
-\bibliographystyle{abbrv-doi}
+\bibliographystyle{ACM-Reference-Format}
 \bibliography{reference}
 
 \end{document}
