@@ -30,9 +30,9 @@ All generated dashboards had k=10 visualizations. We randomize the ordering for 
 
 \stitle{Attribute Ranking:} Participants were given a worksheet with all the attributes listed and asked to rank the attribute in order of importance in contributing to one particular x-axis value (e.g. stop outcome = arrest, autism = yes)
 
-\stitle{Shallow Prediction:} Participants were given a separate worksheet and asked to draw an estimate for a visualization that is not present in the dashboard. The visualization to be estimated is ``shallow'' in the sense that it is a visualization with 2 filter combinations, with one parent present in the given dashboard. After making the prediction, participants are shown the actual data distribution and asked to rate on a Likert scale of 10 how surprising was the result.
+\stitle{Shallow Prediction:} Participants were given a separate worksheet and asked to draw an estimate for a visualization that is not present in the dashboard. The visualization to be estimated is considered ``shallow'' if it is a visualization with 2 filter combinations, with one parent present in the given dashboard. After making the prediction, participants are shown the actual data distribution and asked to rate on a Likert scale of 10 how surprising the result was.
 
-\stitle{Deep Prediction:} Similar to the shallow prediction, except that the visualization to be estimated is ``deep'' in the sense that it is a 3-combination filter, with only one parent in the given dashboard.
+\stitle{Deep Prediction:} Similar to the shallow prediction, except that the visualization to be estimated is ``deep'' in the sense that it has 3 filter combinations, with only one parent in the given dashboard.
 
 \par The second dataset in the study is the Autism dataset\cite{autism}, which includes the result of autism spectrum disorder screening for 704 adults. The attributes in the dataset are  binary responses to 10 questions that are part of the screening process. Participants are not given the descriptions of the questions nor the answers corresponding to the labels. We generate dashboard visualizations based on whether the participant is diagnosed with autism or not. We repeat the same procedure described above for the Autism dataset. At the end of the study, we asked two open-ended questions regarding the stories and insights that they have learned and what they like or dislike about each dashboard.
 %The user study is composed of two phases. Phase one of the experiment focuses on comparing our tool against a set of baselines intended to simulate the natural sequence of visualizations that an analyst would encounter through various approaches during exploratory analysis. The baselines include:
@@ -58,7 +58,7 @@ We obtain a consensus score for each visualization to measure how frequently the
 Given a consensus measure of how interesting a visualization is, we can define a rating score which measures how good a particular user's rating is, by taking the product of the consensus interestingness score and the rating value, as shown in Equation \ref{rank}. Intuitively, a rating should be rewarded more if it has retrieved interesting visualization agreed by many other users, likewise, ratings that does not retrieve such visualizations should be penalized more heavily.
 % describes how the rating score (which measures how good the user's particular rating is) is the product of consensus score (how frequently is a visualization regarded as interesting?) and the rated value ($\delta_{ij}$).
 \begin{equation}\label{rank}
-\textrm{rating score}(V_{ij}) =votes(V_i) \cdot \delta_{ij}
+\textrm{rating score}(V_{ij}) =\textrm{consensus}(V_i) \cdot \delta_{ij}
 \end{equation}
 Table~\ref{table:interestingScore} summarizes results of rating scores averaged over the tasks that the user performed.
 \begin{table}[ht!]
@@ -74,6 +74,7 @@ Table~\ref{table:interestingScore} summarizes results of rating scores averaged 
 	\caption{Average consensus-agreement score for different algorithm and datasets.}%\agp{breakdown by interested and not interested}}
 	\label{table:interestingScore}
 \end{table}
+\dor{We should consider doing a Chi square rather than averaging here to show significant difference between groups.}
 %Even though participants were asked to --- daily experiences to answer the question, b
 \npar Due to the highly subjective nature of the retrieval task, the interestingness selection for the Police dataset was biased by participant's priors and intuition about the attributes. For example, while all participants who have seen the visualization "duration=30+min" verbally noted that stop duration is a crucial factor that leads to arrest, only 4 users marked it as interesting. 5 participants marked the visualization as not interesting and 4 left it unselected, because the visualization was not very surprising as it agreed with their intuition that ``\textit{if the police stop is taking a long time, something has probably gone wrong}''.
 \par Since the attributes in the Autism dataset are simply question numbers, participants could not associate any priors to their interestingness selection. In this prior-agnostic case, participants who used \system\ found more visualizations of interest that corresponded to the consensus, indicating that there are more interesting visualizations picked out by \system\ than compared to the two baseline-generated dashboards.
