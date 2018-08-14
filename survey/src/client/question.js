@@ -7,17 +7,6 @@ var json = {
             placeHolder: "Jon Snow",
             isRequired: true
         }, {
-            name: "birthdate",
-            type: "text",
-            inputType: "date",
-            title: "Your birthdate:",
-            isRequired: true
-        }, {
-            name: "color",
-            type: "text",
-            inputType: "color",
-            title: "Your favorite color:"
-        }, {
             name: "email",
             type: "text",
             inputType: "email",
@@ -35,8 +24,7 @@ var json = {
 
 window.survey = new Survey.Model(json);
 
-survey
-    .onComplete
+survey.onComplete
     .add(function (result) {
         document
             .querySelector('#q1')
