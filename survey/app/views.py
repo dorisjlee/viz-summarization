@@ -8,5 +8,5 @@ def index():
 def task1():
     return render_template("task1.html", title="Basic Flask App")
 @app.route('/2')
-def task1():
+def task2():
     return render_template("task2.html", title="Basic Flask App")
