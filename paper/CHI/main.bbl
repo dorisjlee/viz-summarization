@@ -1,0 +1,483 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{28}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{??}{ctr}{[n. d.]}]%
+        {ctrp3}
+ \bibinfo{year}{[n. d.]}\natexlab{}.
+\newblock \bibinfo{title}{Connecticut Racial Profiling Prohibition Project Data
+  Portal}.
+\newblock \bibinfo{howpublished}{\url{http://ctrp3.ctdata.org/}}.
+\newblock
+\newblock
+\shownote{Accessed: 2018-07-16.}
+
+
+\bibitem[\protect\citeauthoryear{??}{tit}{[n. d.]}]%
+        {titanic}
+ \bibinfo{year}{[n. d.]}\natexlab{}.
+\newblock \bibinfo{title}{Titanic: Machine Learning from Disaster. {Kaggle}.}
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://www.kaggle.com/c/Titanic}
+\showURL{%
+\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Alipourfard, Fennell, and Lerman}{Alipourfard
+  et~al\mbox{.}}{2018}]%
+        {Alipourfard2018}
+\bibfield{author}{\bibinfo{person}{Nazanin Alipourfard},
+  \bibinfo{person}{Peter~G. Fennell}, {and} \bibinfo{person}{Kristina Lerman}.}
+  \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{{Can you Trust the Trend?}}
+\newblock \bibinfo{journal}{\emph{Proceedings of the Eleventh ACM International
+  Conference on Web Search and Data Mining - WSDM '18}} (\bibinfo{year}{2018}),
+  \bibinfo{pages}{19--27}.
+\newblock
+\showISBNx{9781450355810}
+\urldef\tempurl%
+\url{https://doi.org/10.1145/3159652.3159684}
+\showDOI{\tempurl}
+\showeprint[arxiv]{arXiv:1801.04385v1}
+
+
+\bibitem[\protect\citeauthoryear{Althaus, Blumenstock, Disterhoft, Hildebrandt,
+  and Krupp}{Althaus et~al\mbox{.}}{2009}]%
+        {ErnstAlthaus2009}
+\bibfield{author}{\bibinfo{person}{Ernst Althaus}, \bibinfo{person}{Markus
+  Blumenstock}, \bibinfo{person}{Alexej Disterhoft}, \bibinfo{person}{Andreas
+  Hildebrandt}, {and} \bibinfo{person}{Markus Krupp}.}
+  \bibinfo{year}{2009}\natexlab{}.
+\newblock \showarticletitle{{Algorithms for the Maximum Weight Connected
+  k-Induced Subgraph Problem}}.
+\newblock   \bibinfo{volume}{5573} (\bibinfo{year}{2009}),
+  \bibinfo{pages}{313--321}.
+\newblock
+\showISBNx{978-3-642-02025-4}
+\showISSN{0302-9743}
+\urldef\tempurl%
+\url{https://doi.org/10.1007/978-3-642-02026-1}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Anand and Talbot}{Anand and Talbot}{2015}]%
+        {Anand2015}
+\bibfield{author}{\bibinfo{person}{Anushka Anand} {and} \bibinfo{person}{Justin
+  Talbot}.} \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{{Automatic Selection of Partitioning Variables for
+  Small Multiple Displays}}.
+\newblock  \bibinfo{volume}{2626}, \bibinfo{number}{c} (\bibinfo{year}{2015}).
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1109/TVCG.2015.2467323}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Binnig and Stefani}{Binnig and
+  Stefani}{2017}]%
+        {Binnig2017}
+\bibfield{author}{\bibinfo{person}{Carsten Binnig} {and}
+  \bibinfo{person}{Lorenzo~De Stefani}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{{Towards Sustainable Insights or why polygamy is
+  bad for you}}.
+\newblock \bibinfo{journal}{\emph{Cidr}} (\bibinfo{year}{2017}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Boy, Detinenne, and Fekete}{Boy
+  et~al\mbox{.}}{2015}]%
+        {Boy2015}
+\bibfield{author}{\bibinfo{person}{Jeremy Boy}, \bibinfo{person}{Francoise
+  Detinenne}, {and} \bibinfo{person}{Jean-Daniel Fekete}.}
+  \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{{Storytelling in Information Visualizations : Does
+  it Engage Users to Explore Data?}}
+\newblock \bibinfo{journal}{\emph{CHI 2015}} (\bibinfo{year}{2015}),
+  \bibinfo{pages}{1449--1458}.
+\newblock
+\showISBNx{9781450331456}
+
+
+\bibitem[\protect\citeauthoryear{Fayez~Thabtah}{Fayez~Thabtah}{2017}]%
+        {autism}
+\bibfield{author}{\bibinfo{person}{Fadi Fayez~Thabtah}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \bibinfo{title}{Autism Screening Adult Data Set. {UCI} Machine
+  Learning Repository}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{http://archive.ics.uci.edu/ml}
+\showURL{%
+\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Guo, Binnig, Kraska, and Darmstadt}{Guo
+  et~al\mbox{.}}{2017}]%
+        {Guo2017}
+\bibfield{author}{\bibinfo{person}{Yue Guo}, \bibinfo{person}{Carsten Binnig},
+  \bibinfo{person}{Tim Kraska}, {and} \bibinfo{person}{T~U Darmstadt}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{{What you see is not what you get ! Detecting
+  Simpson ' s Paradoxes during Data Exploration}}.
+\newblock \bibinfo{journal}{\emph{HILDA 2017 - Proceedings of the Workshop on
+  Human-In-the-Loop Data Analytics}} (\bibinfo{year}{2017}).
+\newblock
+\showISBNx{9781450350297}
+
+
+\bibitem[\protect\citeauthoryear{Heer and Shneiderman}{Heer and
+  Shneiderman}{2012}]%
+        {Heer2012}
+\bibfield{author}{\bibinfo{person}{Jeffrey Heer} {and} \bibinfo{person}{Ben
+  Shneiderman}.} \bibinfo{year}{2012}\natexlab{}.
+\newblock \showarticletitle{{Interactive Dynamics for Visual Analysis}}.
+\newblock \bibinfo{journal}{\emph{Queue}} \bibinfo{volume}{10},
+  \bibinfo{number}{2} (\bibinfo{year}{2012}), \bibinfo{pages}{30}.
+\newblock
+\showISBNx{1542-7730}
+\showISSN{15427730}
+\urldef\tempurl%
+\url{https://doi.org/10.1145/2133416.2146416}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Hoque, Setlur, Tory, and Dykeman}{Hoque
+  et~al\mbox{.}}{2017}]%
+        {Hoque2017}
+\bibfield{author}{\bibinfo{person}{Enamul Hoque}, \bibinfo{person}{Vidya
+  Setlur}, \bibinfo{person}{Melanie Tory}, {and} \bibinfo{person}{Isaac
+  Dykeman}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{{Applying Pragmatics Principles for Interaction
+  with Visual Analytics}}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Visualization and
+  Computer Graphics}} \bibinfo{number}{c} (\bibinfo{year}{2017}).
+\newblock
+\showISBNx{1077-2626 VO - PP}
+\showISSN{10772626}
+\urldef\tempurl%
+\url{https://doi.org/10.1109/TVCG.2017.2744684}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Hullman, Drucker, {Henry Riche}, Lee, Fisher,
+  and Adar}{Hullman et~al\mbox{.}}{2013}]%
+        {Hullman2013}
+\bibfield{author}{\bibinfo{person}{Jessica Hullman}, \bibinfo{person}{Steven
+  Drucker}, \bibinfo{person}{Nathalie {Henry Riche}}, \bibinfo{person}{Bongshin
+  Lee}, \bibinfo{person}{Danyel Fisher}, {and} \bibinfo{person}{Eytan Adar}.}
+  \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{{A deeper understanding of sequence in narrative
+  visualization}}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Visualization and
+  Computer Graphics}} \bibinfo{volume}{19}, \bibinfo{number}{12}
+  (\bibinfo{year}{2013}), \bibinfo{pages}{2406--2415}.
+\newblock
+\showISBNx{1077-2626}
+\showISSN{10772626}
+\urldef\tempurl%
+\url{https://doi.org/10.1109/TVCG.2013.119}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Hullman, Kosara, and Lam}{Hullman
+  et~al\mbox{.}}{2017}]%
+        {Hullman2017}
+\bibfield{author}{\bibinfo{person}{Jessica Hullman}, \bibinfo{person}{Robert
+  Kosara}, {and} \bibinfo{person}{Heidi Lam}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{{Finding a Clear Path : Structuring Strategies for
+  Visualization Sequences}}.
+\newblock  \bibinfo{volume}{36}, \bibinfo{number}{3} (\bibinfo{year}{2017}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Kim, Wongsuphasawat, Hullman, and Heer}{Kim
+  et~al\mbox{.}}{2017}]%
+        {Kim2017}
+\bibfield{author}{\bibinfo{person}{Younghoon Kim}, \bibinfo{person}{Kanit
+  Wongsuphasawat}, \bibinfo{person}{Jessica Hullman}, {and}
+  \bibinfo{person}{Jeffrey Heer}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{{GraphScape: A Model for Automated Reasoning about
+  Visualization Similarity and Sequencing}}.
+\newblock \bibinfo{journal}{\emph{Proc. of ACM CHI 2017}}
+  (\bibinfo{year}{2017}).
+\newblock
+\showISBNx{9781450346559}
+\urldef\tempurl%
+\url{https://doi.org/10.1145/3025453.3025866}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Mackinlay, Hanrahan, and Stolte}{Mackinlay
+  et~al\mbox{.}}{2007}]%
+        {Mackinlay2007}
+\bibfield{author}{\bibinfo{person}{Jock~D. Mackinlay}, \bibinfo{person}{Pat
+  Hanrahan}, {and} \bibinfo{person}{Chris Stolte}.}
+  \bibinfo{year}{2007}\natexlab{}.
+\newblock \showarticletitle{{Show Me: Automatic presentation for visual
+  analysis}}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Visualization and
+  Computer Graphics}} \bibinfo{volume}{13}, \bibinfo{number}{6}
+  (\bibinfo{year}{2007}), \bibinfo{pages}{1137--1144}.
+\newblock
+\showISBNx{1077-2626 VO - 13}
+\showISSN{10772626}
+\urldef\tempurl%
+\url{https://doi.org/10.1109/TVCG.2007.70594}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Parameswaran, Garcia-Molina, and
+  Ullman}{Parameswaran et~al\mbox{.}}{2010}]%
+        {Parameswaran2010}
+\bibfield{author}{\bibinfo{person}{Aditya~G. Parameswaran},
+  \bibinfo{person}{Hector Garcia-Molina}, {and} \bibinfo{person}{Jeffrey~D.
+  Ullman}.} \bibinfo{year}{2010}\natexlab{}.
+\newblock \showarticletitle{{Evaluating, combining and generalizing
+  recommendations with prerequisites}}.
+\newblock \bibinfo{journal}{\emph{Proceedings of the 19th ACM international
+  conference on Information and knowledge management - CIKM '10}}
+  (\bibinfo{year}{2010}), \bibinfo{pages}{919}.
+\newblock
+\showISBNx{9781450300995}
+\urldef\tempurl%
+\url{https://doi.org/10.1145/1871437.1871555}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Pierson, Simoiu, Overgoor, Corbett-Davies,
+  Ramachandran, Phillips, and Goel}{Pierson et~al\mbox{.}}{2017}]%
+        {police}
+\bibfield{author}{\bibinfo{person}{E. Pierson}, \bibinfo{person}{C. Simoiu},
+  \bibinfo{person}{J. Overgoor}, \bibinfo{person}{S. Corbett-Davies},
+  \bibinfo{person}{V. Ramachandran}, \bibinfo{person}{C. Phillips}, {and}
+  \bibinfo{person}{S. Goel}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \bibinfo{title}{A large-scale analysis of racial disparities in
+  police stops across the United States}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://openpolicing.stanford.edu/data/}
+\showURL{%
+\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Sarawagi}{Sarawagi}{1999}]%
+        {Sarawagi1999}
+\bibfield{author}{\bibinfo{person}{Sunita Sarawagi}.}
+  \bibinfo{year}{1999}\natexlab{}.
+\newblock \showarticletitle{{Explaining differences in multidimensional
+  aggregates}}.
+\newblock \bibinfo{journal}{\emph{Proceedings of the VLDB Endowment}}
+  (\bibinfo{year}{1999}), \bibinfo{pages}{42--53}.
+\newblock
+\showISBNx{1-55860-615-7}
+
+
+\bibitem[\protect\citeauthoryear{Sarawagi}{Sarawagi}{2000}]%
+        {Sarawagi2000}
+\bibfield{author}{\bibinfo{person}{S. Sarawagi}.}
+  \bibinfo{year}{2000}\natexlab{}.
+\newblock \showarticletitle{{User-adaptive exploration of multidimensional
+  data}}.
+\newblock \bibinfo{journal}{\emph{Proc of the 26th Intl Conference on Very
+  Large}} (\bibinfo{year}{2000}), \bibinfo{pages}{307--316}.
+\newblock
+\showISBNx{1558607153}
+\urldef\tempurl%
+\url{http://citeseer.ist.psu.edu/sarawagi00useradaptive.html}
+\showURL{%
+\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Sarawagi, Agrawal, Megiddo, {Univ Politecn
+  Valencia}, and {Edbt Fdn}}{Sarawagi et~al\mbox{.}}{1998}]%
+        {Sarawagi1998}
+\bibfield{author}{\bibinfo{person}{S Sarawagi}, \bibinfo{person}{R Agrawal},
+  \bibinfo{person}{N Megiddo}, \bibinfo{person}{Generalitat Valenciana
+  Ajuntament~Valencia {Univ Politecn Valencia}}, {and} \bibinfo{person}{E~T H
+  Zurich Oracle Sybase Softlab~Iberia {Edbt Fdn}}.}
+  \bibinfo{year}{1998}\natexlab{}.
+\newblock \showarticletitle{{Discovery-driven exploration of OLAP data cubes}}.
+\newblock \bibinfo{journal}{\emph{6th International Conference on Extending
+  Database Technology (EDBT 98)}} (\bibinfo{year}{1998}),
+  \bibinfo{pages}{168--182}.
+\newblock
+\showISBNx{3-540-64264-1}
+\showISSN{03029743}
+
+
+\bibitem[\protect\citeauthoryear{Sarvghad, Tory, and Mahyar}{Sarvghad
+  et~al\mbox{.}}{2017}]%
+        {Sarvghad2017}
+\bibfield{author}{\bibinfo{person}{Ali Sarvghad}, \bibinfo{person}{Melanie
+  Tory}, {and} \bibinfo{person}{Narges Mahyar}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{{Visualizing Dimension Coverage to Support
+  Exploratory Analysis}}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Visualization and
+  Computer Graphics}} \bibinfo{volume}{23}, \bibinfo{number}{1}
+  (\bibinfo{year}{2017}), \bibinfo{pages}{21--30}.
+\newblock
+\showISSN{10772626}
+\urldef\tempurl%
+\url{https://doi.org/10.1109/TVCG.2016.2598466}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Schlimmer}{Schlimmer}{1987}]%
+        {mushroom}
+\bibfield{author}{\bibinfo{person}{Jeff Schlimmer}.}
+  \bibinfo{year}{1987}\natexlab{}.
+\newblock \bibinfo{title}{Mushroom Data Set. {UCI} Machine Learning
+  Repository}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{http://archive.ics.uci.edu/ml}
+\showURL{%
+\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Segel and Heer}{Segel and Heer}{2010}]%
+        {Segel2010}
+\bibfield{author}{\bibinfo{person}{Edward Segel} {and} \bibinfo{person}{Jeffrey
+  Heer}.} \bibinfo{year}{2010}\natexlab{}.
+\newblock \showarticletitle{{Narrative visualization: Telling stories with
+  data}}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Visualization and
+  Computer Graphics}} \bibinfo{volume}{16}, \bibinfo{number}{6}
+  (\bibinfo{year}{2010}), \bibinfo{pages}{1139--1148}.
+\newblock
+\showISBNx{1077-2626}
+\showISSN{10772626}
+\urldef\tempurl%
+\url{https://doi.org/10.1109/TVCG.2010.179}
+\showDOI{\tempurl}
+\showeprint[arxiv]{arXiv:1011.1669v3}
+
+
+\bibitem[\protect\citeauthoryear{Vartak, Rahman, Madden, Parameswaran, and
+  Polyzotis}{Vartak et~al\mbox{.}}{2015}]%
+        {Vartak2015}
+\bibfield{author}{\bibinfo{person}{Manasi Vartak}, \bibinfo{person}{Sajjadur
+  Rahman}, \bibinfo{person}{Samuel Madden}, \bibinfo{person}{Aditya
+  Parameswaran}, {and} \bibinfo{person}{Neoklis Polyzotis}.}
+  \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{{SEEDB : Efficient Data-Driven Visualization
+  Recommendations to Support Visual Analytics}}.
+\newblock  (\bibinfo{year}{2015}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Wall, Blaha, Franklin, and Endert}{Wall
+  et~al\mbox{.}}{2017}]%
+        {Wall2017}
+\bibfield{author}{\bibinfo{person}{Emily Wall}, \bibinfo{person}{Leslie~M
+  Blaha}, \bibinfo{person}{Lyndsey Franklin}, {and} \bibinfo{person}{Alex
+  Endert}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{{Warning, Bias May Occur: A Proposed Approach to
+  Detecting Cognitive Bias in Interactive Visual Analytics}}.
+\newblock \bibinfo{journal}{\emph{2017 IEEE Conference on Visual Analytics
+  Science and Technology (VAST)}} (\bibinfo{year}{2017}).
+\newblock
+\showISBNx{9781538631638}
+\urldef\tempurl%
+\url{https://www.cc.gatech.edu/{~}ewall9/media/papers/BiasVAST17.pdf}
+\showURL{%
+\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Wongsuphasawat, Moritz, Anand, Mackinlay,
+  Howe, and Heer}{Wongsuphasawat et~al\mbox{.}}{2016}]%
+        {Wongsuphasawat2016}
+\bibfield{author}{\bibinfo{person}{Kanit Wongsuphasawat},
+  \bibinfo{person}{Dominik Moritz}, \bibinfo{person}{Anushka Anand},
+  \bibinfo{person}{Jock Mackinlay}, \bibinfo{person}{Bill Howe}, {and}
+  \bibinfo{person}{Jeffrey Heer}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{{Voyager: Exploratory Analysis via Faceted Browsing
+  of Visualization Recommendations}}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Visualization and
+  Computer Graphics}} \bibinfo{volume}{22}, \bibinfo{number}{1}
+  (\bibinfo{year}{2016}), \bibinfo{pages}{649--658}.
+\newblock
+\showISBNx{1077-2626}
+\showISSN{10772626}
+\urldef\tempurl%
+\url{https://doi.org/10.1109/TVCG.2015.2467191}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Wu and Madden}{Wu and Madden}{2013}]%
+        {Wu2013}
+\bibfield{author}{\bibinfo{person}{Eugene Wu} {and} \bibinfo{person}{Samuel
+  Madden}.} \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{{Scorpion: Explaining Away Outliers in Aggregate
+  Queries}}.
+\newblock \bibinfo{journal}{\emph{Proceedings of the VLDB Endowment}}
+  \bibinfo{volume}{6}, \bibinfo{number}{8} (\bibinfo{year}{2013}),
+  \bibinfo{pages}{553--564}.
+\newblock
+\showISSN{21508097}
+\urldef\tempurl%
+\url{https://doi.org/10.14778/2536354.2536356}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Xin, Han, Li, Shao, and Wah}{Xin
+  et~al\mbox{.}}{2007}]%
+        {Xin2007}
+\bibfield{author}{\bibinfo{person}{Dong Xin}, \bibinfo{person}{Jiawei Han},
+  \bibinfo{person}{Xiaolei Li}, \bibinfo{person}{Zheng Shao}, {and}
+  \bibinfo{person}{Benjamin~W. Wah}.} \bibinfo{year}{2007}\natexlab{}.
+\newblock \showarticletitle{{Computing iceberg cubes by top-down and bottom-up
+  integration: The starcubing approach}}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Knowledge and Data
+  Engineering}} \bibinfo{volume}{19}, \bibinfo{number}{1}
+  (\bibinfo{year}{2007}), \bibinfo{pages}{111--126}.
+\newblock
+\showISBNx{0-12-722442-4}
+\showISSN{10414347}
+\urldef\tempurl%
+\url{https://doi.org/10.1109/TKDE.2007.250589}
+\showDOI{\tempurl}
+
+
+\end{thebibliography}

@@ -50,57 +50,65 @@ var json = {
         }
     ]
 };
-
-// Attempting normalization by percentage
-// var vspec =
-//     {
-// 		"$schema" : "https://vega.github.io/schema/vega-lite/v2.json",
-//         "data" : {"values" :data },
-//         "transform": [{
-//             "window": [{
-//                 "op": "sum",
-//                 "field": "NumRecord",
-//                 "as": "TotalRecords"
-//             }],
-//             "frame": [null, null]
-//           },
-//           {
-//             "calculate": "datum.NumRecord/datum.TotalRecords * 100",
-//             "as": "PercentOfTotal"
-//           }],
-//         "layer": [
-//         	{"mark":"bar",
-//         	 "encoding": {
-//                 "x":{
-//                     "field": "type",
-//                     "type": "nominal"
-//                 },
-//                 "y":{
-//                     "field": "PercentOfTotal",
-//                     "type": "quantitative"
-//                 }
-//               }
-//     		}
-// 		]
-// 	}
+var xObj = {
+    "field": "PercentOfTotal",
+    "type": "quantitative",
+    "axis": {"title":"Percent of Total"}
+}
 var vspec =
     {
-		"$schema" : "https://vega.github.io/schema/vega-lite/v2.json",
+		"$schema" : "https://vega.github.io/schema/vega-lite/v4.json",
         "data" : {"values" :data },
+        "transform": [
+           {
+              "aggregate": [{
+               "op": "sum",
+               "field": "NumRecord",
+               "as": "NRecord"
+              }],
+			  "groupby":["type"]
+           },
+		   {
+            "window": [{
+                "op": "sum",
+                "field": "NRecord",
+                "as": "TotalRecords"
+            }],
+            "frame": [null, null]
+          },
+          {
+            "calculate": "datum.NRecord/datum.TotalRecords * 100",
+            "as": "PercentOfTotal"
+          }],
         "layer": [
         	{"mark":"bar",
         	 "encoding": {
-                "x":{
-                     "aggregate": "count",
-                     "field": "Number of Records",
-                     "type": "quantitative"
-                },
                 "y":{
                     "field": "type",
                     "type": "nominal"
-                }
+                },
+                "x":xObj
               }
-    		}
+          },{
+            "mark": {
+              "type": "text",
+              "align": "right",
+              "baseline": "middle",
+              "dx": -25
+            },
+            "encoding": {
+			  "y":{
+                    "field": "type",
+                    "type": "nominal"
+                },
+              "text": {
+						"field": "PercentOfTotal",
+                        "type": "quantitative",
+                        "format": ".2f"
+				},
+			  "color":{"value":"white"}
+            }
+         }
 		]
 	}
 vegaEmbed("#testContainer",vspec,{"actions" : false})
