@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{3}
+\begin{thebibliography}{14}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -36,6 +36,99 @@
 \providecommand\bibinfo[2]{#2}
 \providecommand\natexlab[1]{#1}
 \providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{??}{ctr}{[n. d.]}]%
+        {ctrp3}
+ \bibinfo{year}{[n. d.]}\natexlab{}.
+\newblock \bibinfo{title}{Connecticut Racial Profiling Prohibition Project Data
+  Portal}.
+\newblock \bibinfo{howpublished}{\url{http://ctrp3.ctdata.org/}}.
+\newblock
+\newblock
+\shownote{Accessed: 2018-07-16.}
+
+
+\bibitem[\protect\citeauthoryear{Althaus, Blumenstock, Disterhoft, Hildebrandt,
+  and Krupp}{Althaus et~al\mbox{.}}{2009}]%
+        {ErnstAlthaus2009}
+\bibfield{author}{\bibinfo{person}{Ernst Althaus}, \bibinfo{person}{Markus
+  Blumenstock}, \bibinfo{person}{Alexej Disterhoft}, \bibinfo{person}{Andreas
+  Hildebrandt}, {and} \bibinfo{person}{Markus Krupp}.}
+  \bibinfo{year}{2009}\natexlab{}.
+\newblock \showarticletitle{{Algorithms for the Maximum Weight Connected
+  k-Induced Subgraph Problem}}.
+\newblock   \bibinfo{volume}{5573} (\bibinfo{year}{2009}),
+  \bibinfo{pages}{313--321}.
+\newblock
+\showISBNx{978-3-642-02025-4}
+\showISSN{0302-9743}
+\urldef\tempurl%
+\url{https://doi.org/10.1007/978-3-642-02026-1}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Binnig and Stefani}{Binnig and
+  Stefani}{2017}]%
+        {Binnig2017}
+\bibfield{author}{\bibinfo{person}{Carsten Binnig} {and}
+  \bibinfo{person}{Lorenzo~De Stefani}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{{Towards Sustainable Insights or why polygamy is
+  bad for you}}.
+\newblock \bibinfo{journal}{\emph{Cidr}} (\bibinfo{year}{2017}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Fayez~Thabtah}{Fayez~Thabtah}{2017}]%
+        {autism}
+\bibfield{author}{\bibinfo{person}{Fadi Fayez~Thabtah}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \bibinfo{title}{Autism Screening Adult Data Set. {UCI} Machine
+  Learning Repository}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{http://archive.ics.uci.edu/ml}
+\showURL{%
+\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Gray, Chaudhuri, Bosworth, Layman, Reichart,
+  Venkatrao, Pellow, and Pirahesh}{Gray et~al\mbox{.}}{1997}]%
+        {Gray1997}
+\bibfield{author}{\bibinfo{person}{Jim Gray}, \bibinfo{person}{Surajit
+  Chaudhuri}, \bibinfo{person}{Adam Bosworth}, \bibinfo{person}{Andrew Layman},
+  \bibinfo{person}{Don Reichart}, \bibinfo{person}{Murali Venkatrao},
+  \bibinfo{person}{Frank Pellow}, {and} \bibinfo{person}{Hamid Pirahesh}.}
+  \bibinfo{year}{1997}\natexlab{}.
+\newblock \showarticletitle{Data Cube: A Relational Aggregation Operator
+  Generalizing Group-By, Cross-Tab, and Sub-Totals}.
+\newblock \bibinfo{journal}{\emph{Data Mining and Knowledge Discovery}}
+  \bibinfo{volume}{1}, \bibinfo{number}{1} (\bibinfo{date}{01 Mar}
+  \bibinfo{year}{1997}), \bibinfo{pages}{29--53}.
+\newblock
+\showISSN{1573-756X}
+\urldef\tempurl%
+\url{https://doi.org/10.1023/A:1009726021843}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Hoque, Setlur, Tory, and Dykeman}{Hoque
+  et~al\mbox{.}}{2017}]%
+        {Hoque2017}
+\bibfield{author}{\bibinfo{person}{Enamul Hoque}, \bibinfo{person}{Vidya
+  Setlur}, \bibinfo{person}{Melanie Tory}, {and} \bibinfo{person}{Isaac
+  Dykeman}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{{Applying Pragmatics Principles for Interaction
+  with Visual Analytics}}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Visualization and
+  Computer Graphics}} \bibinfo{number}{c} (\bibinfo{year}{2017}).
+\newblock
+\showISBNx{1077-2626 VO - PP}
+\showISSN{10772626}
+\urldef\tempurl%
+\url{https://doi.org/10.1109/TVCG.2017.2744684}
+\showDOI{\tempurl}
+
 
 \bibitem[\protect\citeauthoryear{Hullman, Drucker, {Henry Riche}, Lee, Fisher,
   and Adar}{Hullman et~al\mbox{.}}{2013}]%
@@ -82,6 +175,94 @@
 \showISBNx{9781450346559}
 \urldef\tempurl%
 \url{https://doi.org/10.1145/3025453.3025866}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Parameswaran, Garcia-Molina, and
+  Ullman}{Parameswaran et~al\mbox{.}}{2010}]%
+        {Parameswaran2010}
+\bibfield{author}{\bibinfo{person}{Aditya~G. Parameswaran},
+  \bibinfo{person}{Hector Garcia-Molina}, {and} \bibinfo{person}{Jeffrey~D.
+  Ullman}.} \bibinfo{year}{2010}\natexlab{}.
+\newblock \showarticletitle{{Evaluating, combining and generalizing
+  recommendations with prerequisites}}.
+\newblock \bibinfo{journal}{\emph{Proceedings of the 19th ACM international
+  conference on Information and knowledge management - CIKM '10}}
+  (\bibinfo{year}{2010}), \bibinfo{pages}{919}.
+\newblock
+\showISBNx{9781450300995}
+\urldef\tempurl%
+\url{https://doi.org/10.1145/1871437.1871555}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Pierson, Simoiu, Overgoor, Corbett-Davies,
+  Ramachandran, Phillips, and Goel}{Pierson et~al\mbox{.}}{2017}]%
+        {police}
+\bibfield{author}{\bibinfo{person}{E. Pierson}, \bibinfo{person}{C. Simoiu},
+  \bibinfo{person}{J. Overgoor}, \bibinfo{person}{S. Corbett-Davies},
+  \bibinfo{person}{V. Ramachandran}, \bibinfo{person}{C. Phillips}, {and}
+  \bibinfo{person}{S. Goel}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \bibinfo{title}{A large-scale analysis of racial disparities in
+  police stops across the United States}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://openpolicing.stanford.edu/data/}
+\showURL{%
+\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Schlimmer}{Schlimmer}{1987}]%
+        {mushroom}
+\bibfield{author}{\bibinfo{person}{Jeff Schlimmer}.}
+  \bibinfo{year}{1987}\natexlab{}.
+\newblock \bibinfo{title}{Mushroom Data Set. {UCI} Machine Learning
+  Repository}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{http://archive.ics.uci.edu/ml}
+\showURL{%
+\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Wongsuphasawat, Moritz, Anand, Mackinlay,
+  Howe, and Heer}{Wongsuphasawat et~al\mbox{.}}{2016}]%
+        {Wongsuphasawat2016}
+\bibfield{author}{\bibinfo{person}{Kanit Wongsuphasawat},
+  \bibinfo{person}{Dominik Moritz}, \bibinfo{person}{Anushka Anand},
+  \bibinfo{person}{Jock Mackinlay}, \bibinfo{person}{Bill Howe}, {and}
+  \bibinfo{person}{Jeffrey Heer}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{{Voyager: Exploratory Analysis via Faceted Browsing
+  of Visualization Recommendations}}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Visualization and
+  Computer Graphics}} \bibinfo{volume}{22}, \bibinfo{number}{1}
+  (\bibinfo{year}{2016}), \bibinfo{pages}{649--658}.
+\newblock
+\showISBNx{1077-2626}
+\showISSN{10772626}
+\urldef\tempurl%
+\url{https://doi.org/10.1109/TVCG.2015.2467191}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Xin, Han, Li, Shao, and Wah}{Xin
+  et~al\mbox{.}}{2007}]%
+        {Xin2007}
+\bibfield{author}{\bibinfo{person}{Dong Xin}, \bibinfo{person}{Jiawei Han},
+  \bibinfo{person}{Xiaolei Li}, \bibinfo{person}{Zheng Shao}, {and}
+  \bibinfo{person}{Benjamin~W. Wah}.} \bibinfo{year}{2007}\natexlab{}.
+\newblock \showarticletitle{{Computing iceberg cubes by top-down and bottom-up
+  integration: The starcubing approach}}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Knowledge and Data
+  Engineering}} \bibinfo{volume}{19}, \bibinfo{number}{1}
+  (\bibinfo{year}{2007}), \bibinfo{pages}{111--126}.
+\newblock
+\showISBNx{0-12-722442-4}
+\showISSN{10414347}
+\urldef\tempurl%
+\url{https://doi.org/10.1109/TKDE.2007.250589}
 \showDOI{\tempurl}
 
 
