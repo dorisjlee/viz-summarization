@@ -1,7 +1,7 @@
 import math
 import matplotlib.pyplot as plt
 import numpy as np
-import StringIO
+# import StringIO
 import seaborn as sns
 sns.set_context(
    "talk",
@@ -53,7 +53,6 @@ def autolabel(rects, ax):
 
 
 def bar_chart(yVals, xAttrs, yErrs = [], xtitle="", ytitle="", title="", top_right_text="", N=1, width=0.1,autolabel_flag =True,fixed_ylim=True,rotation="",filename=""):
-
     ind = np.arange(N)  # the x locations for the groups
     if len(yVals)==2:
         colors = ["#fc9272","#9ecae1"]
@@ -67,12 +66,11 @@ def bar_chart(yVals, xAttrs, yErrs = [], xtitle="", ytitle="", title="", top_rig
     rects = []
     error_kw=dict(lw=1, capsize=5, capthick=1)
     for i in range(len(yVals)):
-    	if yErrs==[]:
-    		rect = ax.bar(ind + (i+0.5) * width, yVals[i], width)
-    	else:
-        	rect = ax.bar(ind + (i+0.5) * width, yVals[i], width, ecolor="black",yerr=yErrs[i],error_kw=error_kw)
+        if yErrs==[]:
+            rect = ax.bar(ind + (i+0.5) * width, yVals[i], width)
+        else:
+            rect = ax.bar(ind + (i+0.5) * width, yVals[i], width, ecolor="black",yerr=yErrs[i],error_kw=error_kw)
         rects.append(rect)
-
     xtitle = xtitle.replace('"', '')
     ytitle = ytitle.replace('"', '')
     #ax.set_xlabel(xtitle, fontsize=9)

@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{14}
+\begin{thebibliography}{18}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -48,6 +48,18 @@
 \shownote{Accessed: 2018-07-16.}
 
 
+\bibitem[\protect\citeauthoryear{??}{tit}{[n. d.]}]%
+        {titanic}
+ \bibinfo{year}{[n. d.]}\natexlab{}.
+\newblock \bibinfo{title}{Titanic: Machine Learning from Disaster. {Kaggle}.}
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://www.kaggle.com/c/Titanic}
+\showURL{%
+\tempurl}
+
+
 \bibitem[\protect\citeauthoryear{Althaus, Blumenstock, Disterhoft, Hildebrandt,
   and Krupp}{Althaus et~al\mbox{.}}{2009}]%
         {ErnstAlthaus2009}
@@ -76,6 +88,23 @@
   bad for you}}.
 \newblock \bibinfo{journal}{\emph{Cidr}} (\bibinfo{year}{2017}).
 \newblock
+
+
+\bibitem[\protect\citeauthoryear{Correll and Heer}{Correll and Heer}{2016}]%
+        {Correll2016}
+\bibfield{author}{\bibinfo{person}{Michael Correll} {and}
+  \bibinfo{person}{Jeffrey Heer}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{{Surprise! Bayesian Weighting for De-Biasing
+  Thematic Maps}}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Visualization and
+  Computer Graphics}} \bibinfo{volume}{2626}, \bibinfo{number}{c}
+  (\bibinfo{year}{2016}), \bibinfo{pages}{1--1}.
+\newblock
+\showISBNx{1077-2626}
+\showISSN{1077-2626}
+\urldef\tempurl%
+\url{https://doi.org/10.1109/TVCG.2016.2598618}
+\showDOI{\tempurl}
 
 
 \bibitem[\protect\citeauthoryear{Fayez~Thabtah}{Fayez~Thabtah}{2017}]%
@@ -161,6 +190,23 @@
 \newblock
 
 
+\bibitem[\protect\citeauthoryear{Itti and Baldi}{Itti and Baldi}{2009}]%
+        {Itti2009}
+\bibfield{author}{\bibinfo{person}{Laurent Itti} {and} \bibinfo{person}{Pierre
+  Baldi}.} \bibinfo{year}{2009}\natexlab{}.
+\newblock \showarticletitle{Bayesian surprise attracts human attention}.
+\newblock \bibinfo{journal}{\emph{Vision Res}} \bibinfo{volume}{49},
+  \bibinfo{number}{10} (\bibinfo{date}{19 May} \bibinfo{year}{2009}),
+  \bibinfo{pages}{1295--1306}.
+\newblock
+\showISSN{0042-6989}
+\urldef\tempurl%
+\url{https://doi.org/10.1016/j.visres.2008.09.007}
+\showDOI{\tempurl}
+\newblock
+\shownote{18834898[pmid].}
+
+
 \bibitem[\protect\citeauthoryear{Kim, Wongsuphasawat, Hullman, and Heer}{Kim
   et~al\mbox{.}}{2017}]%
         {Kim2017}
@@ -225,6 +271,19 @@
 \url{http://archive.ics.uci.edu/ml}
 \showURL{%
 \tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Vartak, Rahman, Madden, Parameswaran, and
+  Polyzotis}{Vartak et~al\mbox{.}}{2015}]%
+        {Vartak2015}
+\bibfield{author}{\bibinfo{person}{Manasi Vartak}, \bibinfo{person}{Sajjadur
+  Rahman}, \bibinfo{person}{Samuel Madden}, \bibinfo{person}{Aditya
+  Parameswaran}, {and} \bibinfo{person}{Neoklis Polyzotis}.}
+  \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{{SEEDB : Efficient Data-Driven Visualization
+  Recommendations to Support Visual Analytics}}.
+\newblock  (\bibinfo{year}{2015}).
+\newblock
 
 
 \bibitem[\protect\citeauthoryear{Wongsuphasawat, Moritz, Anand, Mackinlay,
