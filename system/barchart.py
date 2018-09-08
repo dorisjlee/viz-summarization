@@ -76,8 +76,8 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
     ytitle = ytitle.replace('"', '')
     #ax.set_xlabel(xtitle, fontsize=9)
     #ax.set_ylabel(ytitle, fontsize=9)
-    ax.set_xlabel(xtitle)
-    ax.set_ylabel(ytitle)
+    #ax.set_xlabel(xtitle)
+    #ax.set_ylabel(ytitle)
     title = title.replace('"','')
     title = title.replace("#", ",\n")
     if title == "collapsed":

@@ -60,8 +60,8 @@ function draw(node,edge) {
             improvedLayout:true,
             hierarchical: {
               enabled:true,
-              levelSeparation: 300,
-              nodeSpacing: 300,
+              levelSeparation: 250,
+              nodeSpacing: 230,
               treeSpacing: 600,
               blockShifting: true,
               edgeMinimization: true,

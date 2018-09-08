@@ -624,3 +624,7 @@ function generateSVG(cell_idx, chartarray/*, xLabel, yLabel*/) {
 //            svgString = "data:image/svg+xml;base64," + svgString
 //        })
 }
+
+function updateTextInput(val) {
+          document.getElementById('textInput').value=val;
+        }
