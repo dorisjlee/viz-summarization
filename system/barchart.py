@@ -124,7 +124,7 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
     # ax.legend((rects1[0], rects2[0]), xAttrs)
     ax.annotate(top_right_text, xy=(0.75, 0.85), xycoords='axes fraction')
     ax.set_xlim(xmin, xmax)
-    ax.set_ylim((0, 100))
+    ax.set_ylim((0, 110))
     size = 0
     for rect in rects:
         size += 1
