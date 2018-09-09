@@ -91,17 +91,23 @@ To determine attribute importance ranking for a dataset, we computed the Cramer'
     \label{table:ndcgRankingResult}
 \end{table}
 We see that \system\ performs better than clustering in both cases. Since clustering seeks for a set of visualization that exhibits diversity in the shape of the data distribution, it results in visualizations with many filter combination, which is hard to interpret without appropriate context to compare against. \BFS performs better than \system in the Police dataset, but not in the Autism dataset. \BFS may have performed better than \system\ in the Police dataset for a combination of two reasons: 1) since \BFS exhaustively displays all attributes sequentially, for the Police dataset it had happened to select several of the important attributes (related to contraband and search) to display as the first 10 visualizations and 2) as discussed earlier, some participants had priors on the data attribute which influenced their ranking. However, with a budget of k=10, only visualizations regarding diagnostic questions 1-5 fit in the dashboard for the Autism dataset, so the poor ranking behavior comes from the fact that the \BFS generated dashboard failed to display the important attributes (questions 6 and 9) given the limited budget. In general, our results indicate that using \system, users gain a better understanding of variable influence and correlation.
-
+\begin{figure*}[h!]
+\centering
+\includegraphics[width=\linewidth]{figures/prediction_results.pdf}
+\caption{On the left two columns, Euclidean distance between predicted and ground truth. In general, predictions made using \system is closer to the ground truth. On the right two columns, surprisingness rating reported by users after seeing the actual visualizations on a Likert scale of 10. In general, \system participants had a more accurate mental model of the unseen visualization and therefore reported less surprise than compared to the baseline.}
+\label{fig:distance}
+\end{figure*}
 \stitle{Prediction (RQ3):} Since we can not directly test compare between misleading and informative drill-down paths for RQ3, we use the prediction tasks as a proxy for how informative the selected visualizations in the dashboard are, by measuring how accurate the participants are at predicting an unseen visualization. In order to measure how accurate participants' decisions are, we computed the Euclidean distance between their predicted distributions and ground truth data distributions. As shown in Figure \ref{fig:distance} (top), all the shallow predictions made by using information from the \system\ is closer to the actual distribution compared to the baselines. This aligns with our findings in the formative study and indicates that users are able to more accurately reason about how unseen data would behave with \system. Figure \ref{fig:distance} (bottom) also shows that participants who used \system\ reported that they were less surprised when the unseen visualization is revealed, which again indicates that participants had a more accurate mental model of prediction.
 \par \system\ did not perform as well compared to the baselines for the Autism deep prediction task. One possible reason for this is due to the fact that the shallow and deep prediction tasks for the Autism dataset were correlated. Therefore, after learning about the insights that answering 1 on question 9 results in a very high probability for an autism diagnosis, some participants made use of that information when tackling the subsequent deep prediction task. By discussing with the baseline participants on how they have obtained the prediction estimates, they described how surprised they were by the finding in the shallow prediction and therefore adjusted the autism diagnosed values to be higher to compensate for their mistake in the subsequent deep prediction task.
 \par We also compute the variance of participants' predictions across the same task. In this case, low variance implies that any user who reads the dashboard is able to provide consistent predictions, whereas high variance implies that the dashboard did not convey a clear data-driven story that could guide their predictions, so instead participants relied on different priors or guessing to form the prediction. These trends can be observed in Figure \ref{fig:actual_predictions}, where the prediction variance amongst participants who used \system\ is much lower than the variance from the baselines.
-\begin{figure*}[bht]
-\centering
-\includegraphics[width=\linewidth]{figures/Devation_Surprisingness.pdf}
-\caption{Top: Euclidean distance between predicted and ground truth. Bottom: Surprisingness rating reported by users after seeing the actual visualizations on a Likert scale of 10.}
-\label{fig:distance}
-\end{figure*}
-\begin{figure*}[bht]
+% \begin{figure*}[bht]
+% \centering
+% \includegraphics[width=\linewidth]{figures/Devation_Surprisingness.pdf}
+% \caption{Top: Euclidean distance between predicted and ground truth. Bottom: Surprisingness rating reported by users after seeing the actual visualizations on a Likert scale of 10.}
+% \label{fig:distance}
+% \end{figure*}
+
+\begin{figure*}[h!]
 \centering
 \includegraphics[width=\linewidth]{figures/Prediction_Actual.png}
 \caption{Mean and variance of predicted values. Predictions based on \system exhibits lower variance (as indicated by the error bars) and great proximity to the ground truth values (dotted).}
