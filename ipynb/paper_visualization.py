@@ -1,23 +1,25 @@
 import math
 import matplotlib.pyplot as plt
+import warnings
+warnings.filterwarnings("ignore")
 import numpy as np
 # import StringIO
 import seaborn as sns
-sns.set_context(
-   "talk",
-   font_scale=1,
-   rc={
-       "lines.linewidth": 2,
-       #"text.usetex": True,
-       "font.family": 'serif',
-       "font.serif": ['Palatino'],
-       "font.size": 20
-   })
-sns.set_style('white')
+# sns.set_context(
+#    "talk",
+#    font_scale=1,
+#    rc={
+#        "lines.linewidth": 2,
+#        #"text.usetex": True,
+#        "font.family": 'serif',
+#        "font.serif": ['Palatino'],
+#        "font.size": 20
+#    })
+# sns.set_style('white')
 
-from matplotlib import rc
-font = {'family': 'serif', 'serif': ['Palatino'], 'size': 20}
-rc('font', **font)
+# from matplotlib import rc
+# font = {'family': 'serif', 'serif': ['Palatino'], 'size': 20}
+# rc('font', **font)
 
 plt.rcParams["figure.figsize"] = (4, 4)
 plt.rcParams["figure.max_open_warning"]=500
