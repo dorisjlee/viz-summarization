@@ -628,3 +628,4 @@ function generateSVG(cell_idx, chartarray/*, xLabel, yLabel*/) {
 function updateTextInput(val) {
           document.getElementById('textInput').value=val;
         }
+

@@ -311,3 +311,15 @@ select#soflow, select#soflow-color {
    width: 180px;
 }
 
+#yearSlider .slider-selection {
+	background: #BABABA;
+}
+
+.slider-handle{
+  width:60px;
+  height:60px;
+  line-height:60px;
+  text-align:center;
+  color:white;
+  top:-20px;
+}

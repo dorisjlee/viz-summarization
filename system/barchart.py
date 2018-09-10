@@ -19,7 +19,7 @@ sns.set_context(
 sns.set_style('white')
 
 from matplotlib import rc
-font = {'family': 'serif', 'serif': ['Palatino'], 'size': 20}
+font = {'family': 'serif', 'serif': ['Palatino'], 'size': 14}
 rc('font', **font)
 
 plt.rcParams["figure.figsize"] = (5,5)
@@ -52,7 +52,7 @@ def autolabel(rects, ax):
         label_position = height + (y_height * 0.01)
 
         ax.text(rect.get_x() + rect.get_width() / 2., label_position - (height / 2),
-                '%.1f' % height,
+                '%.1f' % height, fontsize=24,
                 ha='center', va='bottom')
 
 
@@ -122,7 +122,7 @@ def bar_chart(yVals, xAttrs, xtitle="", ytitle="", title="", top_right_text="", 
     # ax.set_xlabel(xtitle,fontsize=12)
 
     # ax.legend((rects1[0], rects2[0]), xAttrs)
-    ax.annotate(top_right_text, xy=(0.75, 0.85), xycoords='axes fraction')
+    ax.annotate(top_right_text, xy=(0.75, 0.75), xycoords='axes fraction')
     ax.set_xlim(xmin, xmax)
     ax.set_ylim((0, 110))
     size = 0

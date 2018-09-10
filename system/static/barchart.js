@@ -60,7 +60,7 @@ function draw(node,edge) {
             improvedLayout:true,
             hierarchical: {
               enabled:true,
-              levelSeparation: 250,
+              levelSeparation: 240,
               nodeSpacing: 230,
               treeSpacing: 600,
               blockShifting: true,
@@ -193,7 +193,7 @@ function showJQueryDialog(params, nodeID, selection) {
     title = "Expanding " + node_dataset._data[nodeID]["filterVal"] + "<br> with ";
     var d = document.getElementById('dlg_text');
     var input = '&nbsp;<input type="text" size="1" name="lastname" value="0"> additional visualizations &nbsp;<input type="submit" style="border-radius: 5px;" value="Submit">'
-    d.innerHTML = title + input ;
+    d.innerHTML = "<style='font-size:22px'>"+ title + input ;
     d.style.position = "fixed";
     d.style.display = "inline";
     d.style.left = params.pointer.DOM.x+40+'px';
