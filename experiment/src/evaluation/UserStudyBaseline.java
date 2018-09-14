@@ -27,7 +27,7 @@ public class UserStudyBaseline {
 	public static void main(String[] args) throws SQLException, FileNotFoundException, UnsupportedEncodingException 
 	{
 	   Experiment exp;
-	   int k =15;
+	   int k =9;
 	   Experiment.experiment_name="../ipynb/dashboards/json/UserInterface";
 	   String dataset_name="ct_police_stop";
 	   ArrayList<String> groupby = null;
