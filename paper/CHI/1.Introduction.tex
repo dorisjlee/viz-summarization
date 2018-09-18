@@ -1,5 +1,34 @@
 %!TEX root = main.tex
 \section{Introduction}
+
+%Exploring multidiemnsional dataset is hard.
+Visual data exploration is the \emph{de facto} first step in understanding a multi-dimensional dataset. This exploration serves a variety of purposes: identifying trends and patterns, spotting outliers and anomalies, and verifying hypotheses. However, as datasets grow in size and complexity, visual data exploration unfolds several challenges for the analysts. For example, to identify patterns that merit further investigation, an analyst needs to explore different subsets of the data, which grows exponentially w.r.t. the number of attributes. Generating and examining visualizations for this combinatorial space of data subsets is a major bottleneck in the exploration process.
+
+%Drill-Down for exploration
+A common practice of analysts that escapes the combinatorial space is to perform selective drill-downs. Specifically, an analyst generates visualizations to gain an overview of the data, then drills down to interesting subsets to generate more visualizations. For example, a campaign manager may be interested in understanding the voting patterns across different demographics (say, race, gender, social class) using the 2016 US election exit polls\footnote{https://edition.cnn.com/election/2016/results/exit-polls}. A natural first step would be to generate a bar chart for the entire population, where the x-axis shows the election candidates and the y-axis the percentage of votes for each of these candidates. They can then drill down to specific demographics of interest, say gender-based demographics, by generating bar charts for female voters.
+
+\begin{figure}[h!]
+% \includegraphics[width=\linewidth]{figures/elections_example_lattice.pdf}
+\includegraphics[width=\linewidth]{figures/elections_example_lattice_teaser.pdf}
+\caption{Example data subset lattice illustrating the misleading factor fallacy along the orange path as opposed to the informative purple path.}
+\label{fig:elections_example}
+\end{figure}
+
+%Drill-Down Fallacy
+
+During this exploration process each drill-down may lead to insights, which derive from the observed visualizations. As shown in Figure~\ref{fig:elections_example}, an analyst can either arrive at the \texttt{Black Female} visualization by going through the purple or orange drill-down path. An analyst that followed the purple path may be surprised at how drastically the \texttt{Black Female} voting behavior differs from that of \texttt{Female}. This behavior is no longer surprising if the analyst had went down the orange path, where the proper reference (vote distribution for \texttt{Black}) explains the vote distribution for \texttt{Black Female}. That is, even though the vote distribution for 
+\texttt{Black Female} is very different from that of \texttt{Female}, it can be explained by a more general phenomenon or \lq\lq root cause\rq\rq ---the vote distribution for \texttt{Black} community.
+
+The aforementioned example demonstrates \emph{drill-down fallacy}---incomplete insights that result from potentially confounding factors not explored along a drill-down path. In particular, while performing a drill-down, an analyst may find a \lq\lq local difference\rq\rq\ in trends, without being aware of the more \lq\lq general phenomenon\rq\rq\ that could explain the trend of interest. This is because of the random selection of drill-down attribute. If an analyst randomly selects an attribute to drill down on, he may not come across the proper reference (visualization) that explains the behavior of the visualization of interest. Thus, they are at risk of falling prey to the drill-down fallacy. A naive solution to avoid this fallacy is to explore all potential pathways along the drill-down path. For example, generating and exploring visualizations for both race and gender based demographics, before exploring any of their combinations. Unfortunately, this approach does not scale with increasing number of factors in the drill-down path.
+
+In this paper, we develop a visual data exploration tool with three-fold objectives: (i) \textbf{Safety.} present proper (informative) reference for shown visualizations, (ii) \textbf{Saliency.} capture globally insightful phenomena that satisfy our safety criteria, and (iii) \textbf{Summarization.} present a connected (unified) perspective. Our tool automatically identifies the best possible drill-down paths that lead to \emph{informative insights}, and simulataneously summarizes the paths to form a hierarchy of visualizations. The challenge of building such tool includes considerations for how each visualization influences user's perception on other visualizations and selecting a set of visualization that are collectively interesting amongst a large set of visualization. To address this challenge, we develop a notion of \emph{informativeness}, defined as the capability of an reference visualizations to explain the visualization of interest. Informative visualizations helps users identify meaningful insights that arise from something \textit{actually interesting} about the data (instead of confounding variables), thereby preventing users from the drill-down fallacy. Our user study result demonstrates that our tool that make use of this notion of informativeness can guide an analyst towards meaningful insights. The contribution of this paper include:
+\begin{denselist}
+\item Introducing the novel concept of \emph{informativeness} that helps avoid drill-down fallacy in data exploration (Section 3),
+\item Designing a tool that automatically identifies the best possible drill-down paths based on informative insights, and simultaneously summarizes those to form a unified perspective (Section 4),
+\item Demonstrating the efficacy of our system through a comprehensive user study evaluation (Section 5).
+\end{denselist}
+
+\iffalse
 To understand a multi-dimensional dataset, analysts often apply OLAP (Online Analytical Processing) operators to explore the space of attributes~\cite{Gray1997}. A common OLAP task includes generating visualizations to gain an overview of the data, then drilling down to interesting subsets to generate more visualizations. For example, a campaign manager may be interested in understanding the voting patterns across different demographics (say, race, gender, social class) using the 2016 US election exit polls\footnote{https://edition.cnn.com/election/2016/results/exit-polls}. A natural first step is to generate a bar chart for the entire population, where x-axis shows the election candidates and y-axis the percentage of votes for these candidates. He can then drill down to specific demographics of interest, say gender-based demographics by generating bar charts for female voters. %A further drill-down on race will lead to more specific demographics such as white male, and black female. 
 \begin{figure}[h!]
 % \includegraphics[width=\linewidth]{figures/elections_example_lattice.pdf}
@@ -19,8 +48,6 @@ In this paper, we develop a tool to help users explore a dataset while avoiding 
 \item Designing a tool that automatically identifies the best possible drill-down paths based on informative insights, and summarizes those (Section 4),
 \item Demonstrating the efficacy of our system through a comprehensive user study evaluation (Section 5).
 \end{denselist}
-
-\iffalse
 
 %\par Common analytics tasks, such as causal inference, feature selection, and outlier detection require studying data distributions at different levels of data granularity~\cite{Anand2015,Wu2013,Heer2012}. For example, a campaign manager may be interested in the voting patterns across different demographics (say, race, gender, social class) using the 2016 US election exit polls\footnote{\url{https://edition.cnn.com/election/2016/results/exit-polls}} to identify demographic groups for targeted advertisement. Visual analysis is the common approach for performing such analytics tasks, in which an analyst constructs visualizations to capture the distributions at different subsets of data. The goal of this visual analysis is to extract meaningful insights---when a set of visualizations along with human interpretation leads to informative and interesting facts about the underlying distributions.
 
