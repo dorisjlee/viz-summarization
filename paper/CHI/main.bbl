@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{23}
+\begin{thebibliography}{22}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -146,26 +146,6 @@
   Learning Repository}.
 \newblock
 \newblock
-
-
-\bibitem[\protect\citeauthoryear{Gray, Chaudhuri, Bosworth, Layman, Reichart,
-  Venkatrao, Pellow, and Pirahesh}{Gray et~al\mbox{.}}{1997}]%
-        {Gray1997}
-\bibfield{author}{\bibinfo{person}{Jim Gray}, \bibinfo{person}{Surajit
-  Chaudhuri}, \bibinfo{person}{Adam Bosworth}, \bibinfo{person}{Andrew Layman},
-  \bibinfo{person}{Don Reichart}, \bibinfo{person}{Murali Venkatrao},
-  \bibinfo{person}{Frank Pellow}, {and} \bibinfo{person}{Hamid Pirahesh}.}
-  \bibinfo{year}{1997}\natexlab{}.
-\newblock \showarticletitle{Data Cube: A Relational Aggregation Operator
-  Generalizing Group-By, Cross-Tab, and Sub-Totals}.
-\newblock \bibinfo{journal}{\emph{Data Mining and Knowledge Discovery}}
-  \bibinfo{volume}{1}, \bibinfo{number}{1} (\bibinfo{date}{01 Mar}
-  \bibinfo{year}{1997}), \bibinfo{pages}{29--53}.
-\newblock
-\showISSN{1573-756X}
-\urldef\tempurl%
-\url{https://doi.org/10.1023/A:1009726021843}
-\showDOI{\tempurl}
 
 
 \bibitem[\protect\citeauthoryear{Hoque, Setlur, Tory, and Dykeman}{Hoque
