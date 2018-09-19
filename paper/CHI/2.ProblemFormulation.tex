@@ -1,4 +1,27 @@
 %!TEX root = main.tex
+
+\section{Towards Informative Drill-Down\label{sec:datamodel}}
+\par In this section, we present our approach to prevent the drill-down fallacy. We first describe how analysts perform data exploration through drill-downs (Section 2.1), then discuss the basis of drill-down fallacy (Section 2.2), and finally present our idea of \emph{informative drill-downs} to prevent the drill-down fallacy (Section 2.3).
+
+\subsection{Exploration via Drill-Down}
+Research in visual data exploration shows that people prefer hierarchically structured visualizations with increasing levels of aggregation~\cite{Kim2017,Hullman2017,Hullman2013}. In this exploration process, analysts perform drill-downs to explore data at different levels of granularity by adding one filter at a time. Further, for each data subset that they encounter, they visualize their metrics of interest. As analysts perform a drill-down, they look at the most recent visualization in the drill-down path (known as the `parent') as a reference to establish what they expect to see in the new visualization (known as the `child'). Thus, a parent is any visualization that can be obtained by removing one filter constraint from the child---a drill-down path specifies only one of these parents. For example in Figure~\ref{fig:elections_example}, the visualizations \twxttt{Female} and \twxttt{Black} are the parents of the \twxttt{Black Female} visualization, explored along the purple and orange path respectively. 
+
+\subsection{The Drill-Down Fallacy}
+As analysts perform drill-downs, they may be misguided by the local deviation of a child visualization from one of its parents, in particular when other potential parents (i.e., parents not explored in the drill-down path) that could explain the more general phenomenon is overlooked. As exemplified by the drill-down along the purple path in Figure~\ref{fig:elections_example}, we refer to this phenomena as \emph{drill-down fallacy}, since the fallacy arises from the inductive nature of the drill-down operation. While such fallacies can be prevented if the analyst exhaustively browses through all possible parents of any visualization that he encounters in the dataset, the prohibitively large number of visualizations along with limited memory and attention of analysts make this task impractical.
+
+\subsection{Informative Drill-Down}
+
+Due to these challenges, our goal is to develop a mechanism that would  \emph{provide safety guarantee by picking the proper informative parent} as a reference when analysts navigate through the space of data subsets. To model this informativeness of an observed parent in the context of an unseen visualization, we characterize the capability of the parent in predicting the unseen visualization. An observed parent is \emph{informative} if its data distribution closely follows the data distribution of the unseen child visualization, since the visualization helps the analyst form an accurate mental picture of what to expect from the unseen visualization. Specifically, we formulate the informativeness of an observed parent $V_i^j$ of an unseen visualization $V_i$ as the similarity between their data distributions measured using a distance function $D(V_i, V_i^j)$. The most informative parents $V_i^*$ of an unseen visualization $V_i$ are the ones whose data distributions are most similar to the unseen.
+\begin{equation}
+    V_i^*=\underset{V_i^j}{argmin}\ D(V_i, V_i^j)
+\end{equation}
+We regard a visualization as informative if its distance falls within a user-defined threshold $\theta\%$ close to its most informative parent:
+\begin{equation}
+    V_i^{*, \theta} = \{V_i^j : \frac{D(V_i, V_i^*)}{D(V_i, V_i^j)} \geq \theta\}
+\end{equation}
+For example in Figure~\ref{fig:elections_example}, while both visualization Black and Female visualizations are considered parents of the Black Female visualization, only the Black visualization are considered the informative parent of the black female population, for any values of $\theta \geq 11\%$ via the Euclidean distance metric. Note that, our proposed system can work with different distance metrics such as cosine similarity and earth mover's distance. Without loss of generality, we chose to use Euclidean distance metric for the remainder of our paper.
+
+\iffalse
 \section{Problem Formulation\label{sec:datamodel}}
 \par In this section, we first describe how analysts explore the space of visualizations through drill-downs and introduce a common fallacy that arises when analysts have limited time and attention to examine all possible factors that contribute to the observed visualization. Then, we discuss how to resolve the problem of finding informative references along a drill-down path.
 % How users explore visualizations
@@ -25,3 +48,4 @@ We regard a visualization as informative if its distance falls within a user-def
     V_i^{*, \theta} = \{V_i^j : \frac{D(V_i, V_i^*)}{D(V_i, V_i^j)} \geq \theta\}
 \end{equation}
 For example in Figure~\ref{fig:elections_example}, while both visualization Black and Female visualizations are considered parents of the Black Female visualization, only the Black visualization are considered the informative parent of the black female population, for any values of $\theta \geq 11\%$ via the Euclidean distance metric. Note that, our proposed system can work with different distance metrics such as cosine similarity and earth mover's distance. Without loss of generality, we chose to use Euclidean distance metric for the remainder of our paper.
+\fi
