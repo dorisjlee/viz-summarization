@@ -1,5 +1,34 @@
 %!TEX root = main.tex
 
+\section{Towards Informative Exploration}
+In this section, we first describe how analysts manually explore the space of data subsets using drill-downs. We then introduce three principles that address the current challenges of manual exploration, and automatically lead to the key informative insights. 
+
+\subsection{Manual Exploration via Drill-Downs}
+During visual data exploration, an analyst may need to explore different subsets of the data, which form a combinatorial lattice. Figure 1 shows a partial lattice for the 2016 US election polls. The lattice contains the overall visualization with no filter at first level, all visualizations with a single filter at second level, all visualizations with two filters at third level, and so on. Analysts explore such combinatorial lattice hierarchically, by generating and examining visualizations with increasing levels of aggregation~\cite{Kim2017,Hullman2017,Hullman2013}. In particular, analysts perform drill-downs to access data subsets at lower levels by adding one filter at a time, and for each such data subset visualize their metrics of interest. Further, as analysts perform a drill-down, they use the most recent visualization in the drill-down path (known as the `parent') as a reference to establish what they expect to see in the new visualization (known as the `child'). For example in Figure~\ref{fig:elections_example}, the visualizations \texttt{Female} and \texttt{Black} are the parents of the \texttt{Black Female} visualization, explored along the purple and orange path respectively.
+
+As analysts perform drill-downs, they may be misguided by the local deviation of a child visualization from one of its parents, in particular when other potential parents (i.e., parents not explored in the drill-down path) that could explain the more general phenomenon is overlooked. As exemplified by the drill-down along the purple path in Figure~\ref{fig:elections_example}, we refer to this phenomena as \emph{drill-down fallacy}, since the fallacy arises from the inductive nature of the drill-down operation. 
+
+\subsection{Three Elements of Informative Exploration}
+The premise of our system is to enable analysts to avoid drill-down fallacies, and discover the key meaningful insights in a dataset. We argue in favor of three key principles for finding such meaningful insights---namely safety (informativeness), saliency (interestingness), and summarization (collectiveness). We adopt these principles to develop a visual exploration tool that automatically selects visualizations that collectively convey the key informative insights of a multidimensional dataset.
+
+\subsubsection{Safety}
+To prevent drill-down fallacy, we concentrate on \emph{safety}---using informative references for discovering insights. We identify informative references in drill-down context by modeling the \emph{informativeness} of an observed parent in characterizing the child visualization. An observed parent is informative if its data distribution closely follows the data distribution of the unseen child visualization, since it helps an analyst form an accurate mental picture of what to expect from the unseen visualization. Specifically, we formulate the informativeness of an observed parent $V_i^j$ of an unseen visualization $V_i$ as the similarity between their data distributions measured using a distance function $D(V_i, V_i^j)$. The most informative parents $V_i^*$ of an unseen visualization $V_i$ are the ones whose data distributions are most similar to the unseen.
+\begin{equation}
+    V_i^*=\underset{V_i^j}{argmin}\ D(V_i, V_i^j)
+\end{equation}
+We regard a visualization as informative if its distance falls within a user-defined threshold $\theta\%$ close to its most informative parent:
+\begin{equation}
+    V_i^{*, \theta} = \{V_i^j : \frac{D(V_i, V_i^*)}{D(V_i, V_i^j)} \geq \theta\}
+\end{equation}
+For example in Figure~\ref{fig:elections_example}, while both visualization Black and Female visualizations are considered parents of the Black Female visualization, only the Black visualization are considered the informative parent of the black female population, for any values of $\theta \geq 11\%$ via the Euclidean distance metric. Note that, our proposed system can work with different distance metrics such as cosine similarity and earth mover's distance. Without loss of generality, we chose to use Euclidean distance metric for the remainder of our paper.
+
+\subsubsection{Saliency}
+To discover insights, we emphasize on \emph{saliency}---identifying interesting visualizations that convey new information. In general, a visualization is interesting if its underlying data distribution differs from that of its parents, and thus offers new information or insights. The notion of such interestingness have been explored in past work~\cite{Vartak2015,Correll2016,Itti2009}, particularly through the usage of distance-based metrics. However, unlike past works, we concentrate on \emph{informative ineterestingness}, where we aim to identify interesting visualizations in presence of informative references. Specifically, to model the interestingness of an visualization $V_i$ in the context of its \emph{informative} parent $V_i^j$, we characterize the deviation between their data distributions using a distance function $D(V_i, V_i^j)$. Further, to nullify the effect of small subpopulation size, we downweigh the interestingness $D(V_i, V_i^j)$ between a parent $V_i^j$ and a child visualization $V_i$ by the ratio of their sizes  $U(V_i, V_i^j) = \frac{|V_i|}{|V_i^{j}|} \cdot D(V_i, V_i^j)$.
+
+\subsubsection{Summarization}
+To convey insights, we concentrate on \emph{summarization}---identifying a group of visualizations that collective offer insights. Specifically, we identify a set of $k$ visualizations that collectively offer informative insights by maximizing the proposed utility $U(V_i, V_i^j)$. The problem of finding a connected subgraph in the lattice that has the maximum combined edge utility is known as the maximum-weight connected subgraph problem~\cite{ErnstAlthaus2009} and is known to be NP-Complete, via a reduction from the \textsc{Clique Problem}~\cite{Parameswaran2010}.
+
+\iffalse
 \section{Towards Informative Drill-Down\label{sec:datamodel}}
 \par In this section, we present our approach to prevent the drill-down fallacy. We first describe how analysts perform data exploration through drill-downs (Section 2.1), then discuss the basis of drill-down fallacy (Section 2.2), and finally present our idea of \emph{informative drill-downs} to prevent the drill-down fallacy (Section 2.3).
 
@@ -21,7 +50,6 @@ We regard a visualization as informative if its distance falls within a user-def
 \end{equation}
 For example in Figure~\ref{fig:elections_example}, while both visualization Black and Female visualizations are considered parents of the Black Female visualization, only the Black visualization are considered the informative parent of the black female population, for any values of $\theta \geq 11\%$ via the Euclidean distance metric. Note that, our proposed system can work with different distance metrics such as cosine similarity and earth mover's distance. Without loss of generality, we chose to use Euclidean distance metric for the remainder of our paper.
 
-\iffalse
 \section{Problem Formulation\label{sec:datamodel}}
 \par In this section, we first describe how analysts explore the space of visualizations through drill-downs and introduce a common fallacy that arises when analysts have limited time and attention to examine all possible factors that contribute to the observed visualization. Then, we discuss how to resolve the problem of finding informative references along a drill-down path.
 % How users explore visualizations
