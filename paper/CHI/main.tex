@@ -115,7 +115,15 @@
 \setlength{\pdfpagewidth}{\pprw}
 \setlength{\pdfpageheight}{\pprh}
 
-
+\newcommand*\OK{\ding{51}}
+\renewenvironment{quote}{%
+   \list{}{%
+     \leftmargin0.15cm
+     \rightmargin\leftmargin
+   }
+   \item\relax
+}
+{\endlist}
 % \setcopyright{licensedcagov}
 %\setcopyright{cagovmixed}
 %\setcopyright{licensedothergov}
@@ -167,7 +175,6 @@ In this paper, we present \system, an interactive visualization recommendation s
 \input{2.ProblemFormulation}
 \input{3.System}
 \input{4.UserStudyEvaluation}
-\section{Discussion}
 \input{5.Discussion}
 \input{6.RelatedWorks}
 % \input{7.Conclusion}
