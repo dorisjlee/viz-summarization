@@ -1,27 +1,9 @@
 %!TEX root = main.tex
 
 \section{System\label{sec:system}}
-In this section, we present our system that succinctly conveys the key informative insights of a multidimensional dataset to promote further exploration. We first discuss the design principles of our tool (Section 3.1), then present a brief overview of the underlying algorithms (Section 3.2), and finally describe the user interaction mechanisms (Section 3.1).
+In this section, we present our system by first providing a high-level overview of the underlying algorithms, and then describing the user interaction mechanisms.
 
-\subsection{Design Principles}
-The key premise of our system is to enable users to discover informative insights, avoiding the trap of drill-down fallacy. We argue in favor of three key principles for finding meaningful insights---namely safety (informativeness), saliency (interestingness), and significance (strength). We adopt these principles to automatically select visualizations that we present to users via a hierarchical layout.
-
-\stitle{Safety:} As discussed in Section~\ref{sec:datamodel}, not selecting an \emph{informative} reference for a given visualization can lead to the drill-down fallacy. To resolve this issue, we require that for every visualization (except for the overall), at least one of its informative parents must be included within the set of selected visualizations. This ensures safety during drill-down based exploration.
-
-\stitle{Saliency:} Saliency involves identifying \textit{interesting} visualizations that convey new insight. In general, a visualization is interesting if its underlying data distribution differs from that of its parents; therefore offers new insight. The use of distance-based metrics to quantify interestingness have been widely adopted in past work~\cite{Vartak2015,Correll2016,Itti2009}. To model the interestingness of an visualization $V_i$ in the context of its \emph{informative} parent $V_i^j$, we characterize the deviation between their data distributions using a distance function $D(V_i, V_i^j)$. 
-
-\stitle{Significance:} The danger of spurious patterns and correlations in visualizations that contain small subpopulation size is a well-known problem in exploratory analysis~\cite{Binnig2017}. We take two preventive measures to avoid picking these misleading visualizations that are `insignificant' in size. When constructing the visualization lattice, we allow users to select an `iceberg condition' \footnote{The terminology is used in the discussion of iceberg cubes in OLAP literature~\cite{Xin2007}.} ($\delta$) to adjust the extent of pruning on visualizations whose sizes fall below a certain percentage of the overall population size. Second, we downweigh the interestingness edge utility $D(V_i, V_i^j)$ between a parent $V_i^j$ and a child visualization $V_i$ by the ratio of their sizes  $U(V_i, V_i^j) = \frac{|V_i|}{|V_i^{j}|} \cdot D(V_i, V_i^j)$.
-
-Given these principles, we select $k$ visualization to include in our dashboard that represent a connected set of visualizations that are collectively safe, salient and significant, based on maximizing the utility $U(V_i, V_i^j)$. The problem of finding a connected subgraph in the lattice that has the maximum combined edge utility is known as the maximum-weight connected subgraph problem~\cite{ErnstAlthaus2009} and is known to be NP-Complete, via a reduction from the \textsc{Clique Problem}~\cite{Parameswaran2010}. Next, we discuss heuristic algorithms used for deriving a locally optimal solution for ensuring interactive runtime. 
-
-\begin{figure*}[ht!]
-\centering
-\includegraphics[width=0.8\linewidth,frame]{figures/overview_interface_expand.pdf}
-\caption{a) Overview of the \system interface for the Police Stop dataset. Users can select x and y axes of interest, as well as a choice of an aggregation function. Default values are set for system related parameters such as the number of visualizations to show in the dashboard (k), iceberg condition for pruning ($\delta$), and informative parent criterion ($\theta$), which can be adjusted by the users via the sliders if needed. b) User clicks on the duration=30+min visualization to request 2 additional visualization. c) A preview of the added portion of the resulting dashboard is shown.}
-\label{fig:overview}
-\end{figure*}
-
-\subsection{Underlying Algorithms\label{sec:algorithms}}
+\subsection{Algorithms\label{sec:algorithms}}
 We discuss algorithms used for generating the visualization lattice, and then present a high-level overview of our traversal algorithms to selecting the k-connected maximum-weighted subgraph.
 
 \stitle{Lattice Generation:} Our system supports two variants of traversal algorithms based on the lattice generation procedure---offline variants that first generate the complete lattice and then work towards identifying the maximum utility solution, and online variants that incrementally generate the lattice and simultaneously identify the solution. The offline variants are appropriate for datasets with a small number of low-cardinality attributes, where we can generate the entire lattice in a reasonable time; whereas the online variants are appropriate for datasets with large number of high-cardinality attributes, where we incrementally generate a partial lattice.
