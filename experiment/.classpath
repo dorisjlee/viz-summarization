@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="experiment/" kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="/Users/Huizi/Research/viz-summarization/experiment/commons-math3-3.0.jar.zip"/>
+	<classpathentry kind="lib" path="/Users/Huizi/Research/viz-summarization/experiment/guava-21.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Huizi/Research/viz-summarization/experiment/postgresql-42.1.4.jar"/>
+	<classpathentry kind="lib" path="/Users/Huizi/Research/viz-summarization/experiment/javaml-0.1.5.zip"/>
+	<classpathentry kind="lib" path="build.sh"/>
+	<classpathentry kind="lib" path="run.sh"/>
+	<classpathentry kind="lib" path="pom.xml"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
