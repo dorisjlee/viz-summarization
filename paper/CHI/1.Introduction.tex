@@ -53,7 +53,6 @@ In this paper, we develop a visual data exploration tool with three-fold objecti
 \item Designing a tool that automatically identifies the best possible drill-down paths based on informative insights, and simultaneously summarizes those to form a unified perspective (Section 4),
 \item Demonstrating the efficacy of our system through a comprehensive user study evaluation (Section 5).
 \end{denselist}
-
 To understand a multi-dimensional dataset, analysts often apply OLAP (Online Analytical Processing) operators to explore the space of attributes~\cite{Gray1997}. A common OLAP task includes generating visualizations to gain an overview of the data, then drilling down to interesting subsets to generate more visualizations. For example, a campaign manager may be interested in understanding the voting patterns across different demographics (say, race, gender, social class) using the 2016 US election exit polls\footnote{https://edition.cnn.com/election/2016/results/exit-polls}. A natural first step is to generate a bar chart for the entire population, where x-axis shows the election candidates and y-axis the percentage of votes for these candidates. He can then drill down to specific demographics of interest, say gender-based demographics by generating bar charts for female voters. %A further drill-down on race will lead to more specific demographics such as white male, and black female. 
 \begin{figure}[h!]
 % \includegraphics[width=\linewidth]{figures/elections_example_lattice.pdf}
