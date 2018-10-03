@@ -1,7 +1,8 @@
 \PassOptionsToPackage{table}{xcolor}
-\documentclass[sigchi]{acmart}
-\settopmatter{printacmref=false} % Removes citation information below abstract
-\renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
+% \documentclass[sigchi]{acmart}
+\documentclass{sigchi}
+% \settopmatter{printacmref=false} % Removes citation information below abstract
+% \renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
 \pagestyle{plain} % removes running headers
 % Load basic packages
 \usepackage{booktabs} % For formal tables
@@ -137,7 +138,8 @@
 % \setcopyright{licensedcagov}
 %\setcopyright{cagovmixed}
 %\setcopyright{licensedothergov}
-
+\CopyrightYear{2018}
+\setcopyright{acmlicensed}
 % DOI
 % \acmDOI{10.475/123_4}
 
@@ -159,6 +161,7 @@
 
 \begin{document}
 \title{Avoiding Drill-down Fallacy with \system : Assisted and Accelerated Data Exploration Through Data Subsets}
+\maketitle
 % \author{\plainauthor}
 \begin{abstract}
 %The task of navigating through a large, multidimensional dataset is a common challenge in exploratory analysis. Due to limitations on the number of visualizations that an analyst can examine at one time, the narrow scope of drill-downs can often lead to inductive fallacies. %Not only is manual drill-down and roll-up on data subsets tedious and inefficient for the analyst, the massive space of data subsets, lack of interesting patterns in most data subsets, fallacies of spurious correlations, and pitfalls of statistical paradoxes calls for a systematic and effective way for analysts to make sense of and navigate through the large space of possible visualizations. 
@@ -174,7 +177,6 @@ As datasets continue to grow in size and complexity, exploring multi-dimensional
 %   \label{fig:elections_example}
 % \end{teaserfigure}
 
-\maketitle
 
 % \begin{figure*}[bht]
 % \centering
