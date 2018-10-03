@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{22}
+\begin{thebibliography}{00}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -22,371 +22,260 @@
 %%% ====================================================================
 
 \ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
-\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showDOI      \undefined \def \showDOI       #1{{\tt DOI:}\penalty0{#1}\ }
+  \fi
 \ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
 \ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
 \ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
 \ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
 \ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
 \ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
-\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
-% The following commands are used for tagged output and should be
-% invisible to TeX
-\providecommand\bibfield[2]{#2}
-\providecommand\bibinfo[2]{#2}
-\providecommand\natexlab[1]{#1}
-\providecommand\showeprint[2][]{arXiv:#2}
+\ifx \showURL      \undefined \def \showURL       #1{#1}          \fi
 
-\bibitem[\protect\citeauthoryear{??}{tit}{[n. d.]}]%
-        {titanic}
- \bibinfo{year}{[n. d.]}\natexlab{}.
-\newblock \bibinfo{title}{Titanic: Machine Learning from Disaster. {Kaggle}.}
-\newblock
+\bibitem{titanic}
+Titanic: Machine Learning from Disaster. {Kaggle}.
+\newblock   (????).
 \newblock
 
 
-\bibitem[\protect\citeauthoryear{Alipourfard, Fennell, and Lerman}{Alipourfard
-  et~al\mbox{.}}{2018}]%
-        {Alipourfard2018WSDM}
-\bibfield{author}{\bibinfo{person}{Nazanin Alipourfard},
-  \bibinfo{person}{Peter~G. Fennell}, {and} \bibinfo{person}{Kristina Lerman}.}
-  \bibinfo{year}{2018}\natexlab{}.
+\bibitem{exitpolls}
+ 2016.
+\newblock Elections 2016 Exit Polls.
+\newblock   (2016).
+\newblock
+\showURL{%
+\url{https://edition.cnn.com/election/2016/results/exit-polls}}
+
+
+\bibitem{Alipourfard2018WSDM}
+{Nazanin Alipourfard}, {Peter~G. Fennell}, {and} {Kristina Lerman}. 2018.
 \newblock \showarticletitle{Can You Trust the Trend?: Discovering Simpson's
-  Paradoxes in Social Data}. In \bibinfo{booktitle}{\emph{Proceedings of the
-  Eleventh ACM International Conference on Web Search and Data Mining}}
-  \emph{(\bibinfo{series}{WSDM '18})}. \bibinfo{publisher}{ACM},
-  \bibinfo{address}{New York, NY, USA}, \bibinfo{pages}{19--27}.
+  Paradoxes in Social Data}. In {\em Proceedings of the Eleventh ACM
+  International Conference on Web Search and Data Mining} {\em (WSDM '18)}.
+  ACM, New York, NY, USA, 19--27.
 \newblock
 \showISBNx{978-1-4503-5581-0}
-\urldef\tempurl%
-\url{https://doi.org/10.1145/3159652.3159684}
-\showDOI{\tempurl}
+\showDOI{%
+\url{http://dx.doi.org/10.1145/3159652.3159684}}
 
 
-\bibitem[\protect\citeauthoryear{Althaus, Blumenstock, Disterhoft, Hildebrandt,
-  and Krupp}{Althaus et~al\mbox{.}}{2009}]%
-        {ErnstAlthaus2009}
-\bibfield{author}{\bibinfo{person}{Ernst Althaus}, \bibinfo{person}{Markus
-  Blumenstock}, \bibinfo{person}{Alexej Disterhoft}, \bibinfo{person}{Andreas
-  Hildebrandt}, {and} \bibinfo{person}{Markus Krupp}.}
-  \bibinfo{year}{2009}\natexlab{}.
+\bibitem{ErnstAlthaus2009}
+{Ernst Althaus}, {Markus Blumenstock}, {Alexej Disterhoft}, {Andreas
+  Hildebrandt}, {and} {Markus Krupp}. 2009.
 \newblock \showarticletitle{{Algorithms for the Maximum Weight Connected
   k-Induced Subgraph Problem}}.
-\newblock   \bibinfo{volume}{5573} (\bibinfo{year}{2009}),
-  \bibinfo{pages}{313--321}.
+\newblock   {5573} (2009), 313--321.
 \newblock
 \showISBNx{978-3-642-02025-4}
 \showISSN{0302-9743}
-\urldef\tempurl%
-\url{https://doi.org/10.1007/978-3-642-02026-1}
-\showDOI{\tempurl}
+\showDOI{%
+\url{http://dx.doi.org/10.1007/978-3-642-02026-1}}
 
 
-\bibitem[\protect\citeauthoryear{Anand and Talbot}{Anand and Talbot}{2015}]%
-        {Anand2015}
-\bibfield{author}{\bibinfo{person}{Anushka Anand} {and} \bibinfo{person}{Justin
-  Talbot}.} \bibinfo{year}{2015}\natexlab{}.
+\bibitem{Anand2015}
+{Anushka Anand} {and} {Justin Talbot}. 2015.
 \newblock \showarticletitle{{Automatic Selection of Partitioning Variables for
   Small Multiple Displays}}.
-\newblock  \bibinfo{volume}{2626}, \bibinfo{number}{c} (\bibinfo{year}{2015}).
+\newblock  {2626}, c (2015).
 \newblock
-\urldef\tempurl%
-\url{https://doi.org/10.1109/TVCG.2015.2467323}
-\showDOI{\tempurl}
+\showDOI{%
+\url{http://dx.doi.org/10.1109/TVCG.2015.2467323}}
 
 
-\bibitem[\protect\citeauthoryear{Binnig and Stefani}{Binnig and
-  Stefani}{2017}]%
-        {Binnig2017}
-\bibfield{author}{\bibinfo{person}{Carsten Binnig} {and}
-  \bibinfo{person}{Lorenzo~De Stefani}.} \bibinfo{year}{2017}\natexlab{}.
-\newblock \showarticletitle{{Towards Sustainable Insights or why polygamy is
-  bad for you}}.
-\newblock \bibinfo{journal}{\emph{8th Biennial Conference on Innovative Data
-  Systems Research (CIDR '17)}} (\bibinfo{year}{2017}).
-\newblock
-
-
-\bibitem[\protect\citeauthoryear{Boy, Detinenne, and Fekete}{Boy
-  et~al\mbox{.}}{2015}]%
-        {Boy2015}
-\bibfield{author}{\bibinfo{person}{Jeremy Boy}, \bibinfo{person}{Francoise
-  Detinenne}, {and} \bibinfo{person}{Jean-Daniel Fekete}.}
-  \bibinfo{year}{2015}\natexlab{}.
+\bibitem{Boy2015}
+{Jeremy Boy}, {Francoise Detinenne}, {and} {Jean-Daniel Fekete}. 2015.
 \newblock \showarticletitle{{Storytelling in Information Visualizations : Does
   it Engage Users to Explore Data?}}
-\newblock \bibinfo{journal}{\emph{CHI 2015}} (\bibinfo{year}{2015}),
-  \bibinfo{pages}{1449--1458}.
+\newblock {\em CHI 2015\/} (2015), 1449--1458.
 \newblock
 \showISBNx{9781450331456}
 
 
-\bibitem[\protect\citeauthoryear{Correll and Heer}{Correll and Heer}{2016}]%
-        {Correll2016}
-\bibfield{author}{\bibinfo{person}{Michael Correll} {and}
-  \bibinfo{person}{Jeffrey Heer}.} \bibinfo{year}{2016}\natexlab{}.
+\bibitem{Correll2016}
+{Michael Correll} {and} {Jeffrey Heer}. 2016.
 \newblock \showarticletitle{{Surprise! Bayesian Weighting for De-Biasing
   Thematic Maps}}.
-\newblock \bibinfo{journal}{\emph{IEEE Transactions on Visualization and
-  Computer Graphics}} \bibinfo{volume}{2626}, \bibinfo{number}{c}
-  (\bibinfo{year}{2016}), \bibinfo{pages}{1--1}.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics\/}
+  {2626}, c (2016), 1--1.
 \newblock
 \showISBNx{1077-2626}
 \showISSN{1077-2626}
-\urldef\tempurl%
-\url{https://doi.org/10.1109/TVCG.2016.2598618}
-\showDOI{\tempurl}
+\showDOI{%
+\url{http://dx.doi.org/10.1109/TVCG.2016.2598618}}
 
 
-\bibitem[\protect\citeauthoryear{Fayez~Thabtah}{Fayez~Thabtah}{2017}]%
-        {autism}
-\bibfield{author}{\bibinfo{person}{Fadi Fayez~Thabtah}.}
-  \bibinfo{year}{2017}\natexlab{}.
-\newblock \bibinfo{title}{Autism Screening Adult Data Set. {UCI} Machine
-  Learning Repository}.
-\newblock
+\bibitem{autism}
+{Fadi Fayez~Thabtah}. 2017.
+\newblock Autism Screening Adult Data Set. {UCI} Machine Learning Repository.
+\newblock   (2017).
 \newblock
 
 
-\bibitem[\protect\citeauthoryear{Hoque, Setlur, Tory, and Dykeman}{Hoque
-  et~al\mbox{.}}{2017}]%
-        {Hoque2017}
-\bibfield{author}{\bibinfo{person}{Enamul Hoque}, \bibinfo{person}{Vidya
-  Setlur}, \bibinfo{person}{Melanie Tory}, {and} \bibinfo{person}{Isaac
-  Dykeman}.} \bibinfo{year}{2017}\natexlab{}.
+\bibitem{Hoque2017}
+{Enamul Hoque}, {Vidya Setlur}, {Melanie Tory}, {and} {Isaac Dykeman}. 2017.
 \newblock \showarticletitle{{Applying Pragmatics Principles for Interaction
   with Visual Analytics}}.
-\newblock \bibinfo{journal}{\emph{IEEE Transactions on Visualization and
-  Computer Graphics}} \bibinfo{number}{c} (\bibinfo{year}{2017}).
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics\/} c
+  (2017).
 \newblock
 \showISBNx{1077-2626 VO - PP}
 \showISSN{10772626}
-\urldef\tempurl%
-\url{https://doi.org/10.1109/TVCG.2017.2744684}
-\showDOI{\tempurl}
+\showDOI{%
+\url{http://dx.doi.org/10.1109/TVCG.2017.2744684}}
 
 
-\bibitem[\protect\citeauthoryear{Hullman, Drucker, {Henry Riche}, Lee, Fisher,
-  and Adar}{Hullman et~al\mbox{.}}{2013}]%
-        {Hullman2013}
-\bibfield{author}{\bibinfo{person}{Jessica Hullman}, \bibinfo{person}{Steven
-  Drucker}, \bibinfo{person}{Nathalie {Henry Riche}}, \bibinfo{person}{Bongshin
-  Lee}, \bibinfo{person}{Danyel Fisher}, {and} \bibinfo{person}{Eytan Adar}.}
-  \bibinfo{year}{2013}\natexlab{}.
+\bibitem{Hullman2013}
+{Jessica Hullman}, {Steven Drucker}, {Nathalie {Henry Riche}}, {Bongshin Lee},
+  {Danyel Fisher}, {and} {Eytan Adar}. 2013.
 \newblock \showarticletitle{{A deeper understanding of sequence in narrative
   visualization}}.
-\newblock \bibinfo{journal}{\emph{IEEE Transactions on Visualization and
-  Computer Graphics}} \bibinfo{volume}{19}, \bibinfo{number}{12}
-  (\bibinfo{year}{2013}), \bibinfo{pages}{2406--2415}.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics\/}
+  {19}, 12 (2013), 2406--2415.
 \newblock
 \showISBNx{1077-2626}
 \showISSN{10772626}
-\urldef\tempurl%
-\url{https://doi.org/10.1109/TVCG.2013.119}
-\showDOI{\tempurl}
+\showDOI{%
+\url{http://dx.doi.org/10.1109/TVCG.2013.119}}
 
 
-\bibitem[\protect\citeauthoryear{Hullman, Kosara, and Lam}{Hullman
-  et~al\mbox{.}}{2017}]%
-        {Hullman2017}
-\bibfield{author}{\bibinfo{person}{Jessica Hullman}, \bibinfo{person}{Robert
-  Kosara}, {and} \bibinfo{person}{Heidi Lam}.} \bibinfo{year}{2017}\natexlab{}.
+\bibitem{Hullman2017}
+{Jessica Hullman}, {Robert Kosara}, {and} {Heidi Lam}. 2017.
 \newblock \showarticletitle{{Finding a Clear Path : Structuring Strategies for
   Visualization Sequences}}.
-\newblock  \bibinfo{volume}{36}, \bibinfo{number}{3} (\bibinfo{year}{2017}).
+\newblock  {36}, 3 (2017).
 \newblock
 
 
-\bibitem[\protect\citeauthoryear{Itti and Baldi}{Itti and Baldi}{2009}]%
-        {Itti2009}
-\bibfield{author}{\bibinfo{person}{Laurent Itti} {and} \bibinfo{person}{Pierre
-  Baldi}.} \bibinfo{year}{2009}\natexlab{}.
+\bibitem{Itti2009}
+{Laurent Itti} {and} {Pierre Baldi}. 2009.
 \newblock \showarticletitle{Bayesian surprise attracts human attention}.
-\newblock \bibinfo{journal}{\emph{Vision Research}} \bibinfo{volume}{49},
-  \bibinfo{number}{10} (\bibinfo{date}{19 May} \bibinfo{year}{2009}),
-  \bibinfo{pages}{1295--1306}.
+\newblock {\em Vision Research\/} {49}, 10 (19 May 2009), 1295--1306.
 \newblock
 \showISSN{0042-6989}
-\urldef\tempurl%
-\url{https://doi.org/10.1016/j.visres.2008.09.007}
-\showDOI{\tempurl}
+\showDOI{%
+\url{http://dx.doi.org/10.1016/j.visres.2008.09.007}}
 
 
-\bibitem[\protect\citeauthoryear{Kim, Wongsuphasawat, Hullman, and Heer}{Kim
-  et~al\mbox{.}}{2017}]%
-        {Kim2017}
-\bibfield{author}{\bibinfo{person}{Younghoon Kim}, \bibinfo{person}{Kanit
-  Wongsuphasawat}, \bibinfo{person}{Jessica Hullman}, {and}
-  \bibinfo{person}{Jeffrey Heer}.} \bibinfo{year}{2017}\natexlab{}.
+\bibitem{Kim2017}
+{Younghoon Kim}, {Kanit Wongsuphasawat}, {Jessica Hullman}, {and} {Jeffrey
+  Heer}. 2017.
 \newblock \showarticletitle{{GraphScape: A Model for Automated Reasoning about
   Visualization Similarity and Sequencing}}.
-\newblock \bibinfo{journal}{\emph{Proc. of ACM CHI 2017}}
-  (\bibinfo{year}{2017}).
+\newblock {\em Proc. of ACM CHI 2017\/} (2017).
 \newblock
 \showISBNx{9781450346559}
-\urldef\tempurl%
-\url{https://doi.org/10.1145/3025453.3025866}
-\showDOI{\tempurl}
+\showDOI{%
+\url{http://dx.doi.org/10.1145/3025453.3025866}}
 
 
-\bibitem[\protect\citeauthoryear{Mackinlay, Hanrahan, and Stolte}{Mackinlay
-  et~al\mbox{.}}{2007}]%
-        {Mackinlay2007}
-\bibfield{author}{\bibinfo{person}{Jock~D. Mackinlay}, \bibinfo{person}{Pat
-  Hanrahan}, {and} \bibinfo{person}{Chris Stolte}.}
-  \bibinfo{year}{2007}\natexlab{}.
+\bibitem{Mackinlay2007}
+{Jock~D. Mackinlay}, {Pat Hanrahan}, {and} {Chris Stolte}. 2007.
 \newblock \showarticletitle{{Show Me: Automatic presentation for visual
   analysis}}.
-\newblock \bibinfo{journal}{\emph{IEEE Transactions on Visualization and
-  Computer Graphics}} \bibinfo{volume}{13}, \bibinfo{number}{6}
-  (\bibinfo{year}{2007}), \bibinfo{pages}{1137--1144}.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics\/}
+  {13}, 6 (2007), 1137--1144.
 \newblock
 \showISBNx{1077-2626 VO - 13}
 \showISSN{10772626}
-\urldef\tempurl%
-\url{https://doi.org/10.1109/TVCG.2007.70594}
-\showDOI{\tempurl}
+\showDOI{%
+\url{http://dx.doi.org/10.1109/TVCG.2007.70594}}
 
 
-\bibitem[\protect\citeauthoryear{Parameswaran, Garcia-Molina, and
-  Ullman}{Parameswaran et~al\mbox{.}}{2010}]%
-        {Parameswaran2010}
-\bibfield{author}{\bibinfo{person}{Aditya~G. Parameswaran},
-  \bibinfo{person}{Hector Garcia-Molina}, {and} \bibinfo{person}{Jeffrey~D.
-  Ullman}.} \bibinfo{year}{2010}\natexlab{}.
+\bibitem{McHugh2013}
+{Mary~L. McHugh}. 2013.
+\newblock \showarticletitle{The Chi-square test of independence}.
+\newblock {\em Biochem Med (Zagreb)\/} {23}, 2 (15 Jun 2013), 143--149.
+\newblock
+\showISSN{1330-0962}
+\showURL{%
+\url{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3900058/}}
+\newblock
+\shownote{biochem\_med-23-2-143-3[PII].}
+
+
+\bibitem{Parameswaran2010}
+{Aditya~G. Parameswaran}, {Hector Garcia-Molina}, {and} {Jeffrey~D. Ullman}.
+  2010.
 \newblock \showarticletitle{{Evaluating, combining and generalizing
   recommendations with prerequisites}}.
-\newblock \bibinfo{journal}{\emph{Proceedings of the 19th ACM international
-  conference on Information and knowledge management - CIKM '10}}
-  (\bibinfo{year}{2010}), \bibinfo{pages}{919}.
+\newblock {\em Proceedings of the 19th ACM international conference on
+  Information and knowledge management - CIKM '10\/} (2010), 919.
 \newblock
 \showISBNx{9781450300995}
-\urldef\tempurl%
-\url{https://doi.org/10.1145/1871437.1871555}
-\showDOI{\tempurl}
+\showDOI{%
+\url{http://dx.doi.org/10.1145/1871437.1871555}}
 
 
-\bibitem[\protect\citeauthoryear{Pierson, Simoiu, Overgoor, Corbett-Davies,
-  Ramachandran, Phillips, and Goel}{Pierson et~al\mbox{.}}{2017}]%
-        {police}
-\bibfield{author}{\bibinfo{person}{E. Pierson}, \bibinfo{person}{C. Simoiu},
-  \bibinfo{person}{J. Overgoor}, \bibinfo{person}{S. Corbett-Davies},
-  \bibinfo{person}{V. Ramachandran}, \bibinfo{person}{C. Phillips}, {and}
-  \bibinfo{person}{S. Goel}.} \bibinfo{year}{2017}\natexlab{}.
-\newblock \bibinfo{title}{A large-scale analysis of racial disparities in
-  police stops across the United States}.
+\bibitem{police}
+{E. Pierson}, {C. Simoiu}, {J. Overgoor}, {S. Corbett-Davies}, {V.
+  Ramachandran}, {C. Phillips}, {and} {S. Goel}. 2017.
+\newblock A large-scale analysis of racial disparities in police stops across
+  the United States.
+\newblock   (2017).
 \newblock
-\newblock
-\urldef\tempurl%
-\url{https://openpolicing.stanford.edu/data/}
 \showURL{%
-\tempurl}
+\url{https://openpolicing.stanford.edu/data/}}
 
 
-\bibitem[\protect\citeauthoryear{Segel and Heer}{Segel and Heer}{2010}]%
-        {Segel2010}
-\bibfield{author}{\bibinfo{person}{Edward Segel} {and} \bibinfo{person}{Jeffrey
-  Heer}.} \bibinfo{year}{2010}\natexlab{}.
+\bibitem{Segel2010}
+{Edward Segel} {and} {Jeffrey Heer}. 2010.
 \newblock \showarticletitle{{Narrative visualization: Telling stories with
   data}}.
-\newblock \bibinfo{journal}{\emph{IEEE Transactions on Visualization and
-  Computer Graphics}} \bibinfo{volume}{16}, \bibinfo{number}{6}
-  (\bibinfo{year}{2010}), \bibinfo{pages}{1139--1148}.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics\/}
+  {16}, 6 (2010), 1139--1148.
 \newblock
 \showISBNx{1077-2626}
 \showISSN{10772626}
-\urldef\tempurl%
-\url{https://doi.org/10.1109/TVCG.2010.179}
-\showDOI{\tempurl}
+\showDOI{%
+\url{http://dx.doi.org/10.1109/TVCG.2010.179}}
 
 
-\bibitem[\protect\citeauthoryear{Vartak, Rahman, Madden, Parameswaran, and
-  Polyzotis}{Vartak et~al\mbox{.}}{2015}]%
-        {Vartak2015}
-\bibfield{author}{\bibinfo{person}{Manasi Vartak}, \bibinfo{person}{Sajjadur
-  Rahman}, \bibinfo{person}{Samuel Madden}, \bibinfo{person}{Aditya
-  Parameswaran}, {and} \bibinfo{person}{Neoklis Polyzotis}.}
-  \bibinfo{year}{2015}\natexlab{}.
+\bibitem{Vartak2015}
+{Manasi Vartak}, {Sajjadur Rahman}, {Samuel Madden}, {Aditya Parameswaran},
+  {and} {Neoklis Polyzotis}. 2015.
 \newblock \showarticletitle{{SEEDB : Efficient Data-Driven Visualization
   Recommendations to Support Visual Analytics}}.
-\newblock  (\bibinfo{year}{2015}).
+\newblock  (2015).
 \newblock
 
 
-\bibitem[\protect\citeauthoryear{Wall, Blaha, Franklin, and Endert}{Wall
-  et~al\mbox{.}}{2017}]%
-        {Wall2017}
-\bibfield{author}{\bibinfo{person}{Emily Wall}, \bibinfo{person}{Leslie~M
-  Blaha}, \bibinfo{person}{Lyndsey Franklin}, {and} \bibinfo{person}{Alex
-  Endert}.} \bibinfo{year}{2017}\natexlab{}.
+\bibitem{Wall2017}
+{Emily Wall}, {Leslie~M Blaha}, {Lyndsey Franklin}, {and} {Alex Endert}. 2017.
 \newblock \showarticletitle{{Warning, Bias May Occur: A Proposed Approach to
   Detecting Cognitive Bias in Interactive Visual Analytics}}.
-\newblock \bibinfo{journal}{\emph{2017 IEEE Conference on Visual Analytics
-  Science and Technology (VAST)}} (\bibinfo{year}{2017}).
+\newblock {\em 2017 IEEE Conference on Visual Analytics Science and Technology
+  (VAST)\/} (2017).
 \newblock
 \showISBNx{9781538631638}
-\urldef\tempurl%
-\url{https://www.cc.gatech.edu/{~}ewall9/media/papers/BiasVAST17.pdf}
 \showURL{%
-\tempurl}
+\url{https://www.cc.gatech.edu/}}
 
 
-\bibitem[\protect\citeauthoryear{Wongsuphasawat, Moritz, Anand, Mackinlay,
-  Howe, and Heer}{Wongsuphasawat et~al\mbox{.}}{2016}]%
-        {Wongsuphasawat2016}
-\bibfield{author}{\bibinfo{person}{Kanit Wongsuphasawat},
-  \bibinfo{person}{Dominik Moritz}, \bibinfo{person}{Anushka Anand},
-  \bibinfo{person}{Jock Mackinlay}, \bibinfo{person}{Bill Howe}, {and}
-  \bibinfo{person}{Jeffrey Heer}.} \bibinfo{year}{2016}\natexlab{}.
+\bibitem{Wongsuphasawat2016}
+{Kanit Wongsuphasawat}, {Dominik Moritz}, {Anushka Anand}, {Jock Mackinlay},
+  {Bill Howe}, {and} {Jeffrey Heer}. 2016.
 \newblock \showarticletitle{{Voyager: Exploratory Analysis via Faceted Browsing
   of Visualization Recommendations}}.
-\newblock \bibinfo{journal}{\emph{IEEE Transactions on Visualization and
-  Computer Graphics}} \bibinfo{volume}{22}, \bibinfo{number}{1}
-  (\bibinfo{year}{2016}), \bibinfo{pages}{649--658}.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics\/}
+  {22}, 1 (2016), 649--658.
 \newblock
 \showISBNx{1077-2626}
 \showISSN{10772626}
-\urldef\tempurl%
-\url{https://doi.org/10.1109/TVCG.2015.2467191}
-\showDOI{\tempurl}
+\showDOI{%
+\url{http://dx.doi.org/10.1109/TVCG.2015.2467191}}
 
 
-\bibitem[\protect\citeauthoryear{Xin, Han, Li, Shao, and Wah}{Xin
-  et~al\mbox{.}}{2007}]%
-        {Xin2007}
-\bibfield{author}{\bibinfo{person}{Dong Xin}, \bibinfo{person}{Jiawei Han},
-  \bibinfo{person}{Xiaolei Li}, \bibinfo{person}{Zheng Shao}, {and}
-  \bibinfo{person}{Benjamin~W. Wah}.} \bibinfo{year}{2007}\natexlab{}.
-\newblock \showarticletitle{{Computing iceberg cubes by top-down and bottom-up
-  integration: The starcubing approach}}.
-\newblock \bibinfo{journal}{\emph{IEEE Transactions on Knowledge and Data
-  Engineering}} \bibinfo{volume}{19}, \bibinfo{number}{1}
-  (\bibinfo{year}{2007}), \bibinfo{pages}{111--126}.
-\newblock
-\showISBNx{0-12-722442-4}
-\showISSN{10414347}
-\urldef\tempurl%
-\url{https://doi.org/10.1109/TKDE.2007.250589}
-\showDOI{\tempurl}
-
-
-\bibitem[\protect\citeauthoryear{Zgraggen, Zhao, Zeleznik, and Kraska}{Zgraggen
-  et~al\mbox{.}}{2018}]%
-        {Zgraggen2018CHI}
-\bibfield{author}{\bibinfo{person}{Emanuel Zgraggen}, \bibinfo{person}{Zheguang
-  Zhao}, \bibinfo{person}{Robert Zeleznik}, {and} \bibinfo{person}{Tim
-  Kraska}.} \bibinfo{year}{2018}\natexlab{}.
+\bibitem{Zgraggen2018CHI}
+{Emanuel Zgraggen}, {Zheguang Zhao}, {Robert Zeleznik}, {and} {Tim Kraska}.
+  2018.
 \newblock \showarticletitle{Investigating the Effect of the Multiple
-  Comparisons Problem in Visual Analysis}. In
-  \bibinfo{booktitle}{\emph{Proceedings of the 2018 CHI Conference on Human
-  Factors in Computing Systems}} \emph{(\bibinfo{series}{CHI '18})}.
-  \bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY, USA}, Article
-  \bibinfo{articleno}{479}, \bibinfo{numpages}{12}~pages.
+  Comparisons Problem in Visual Analysis}. In {\em Proceedings of the 2018 CHI
+  Conference on Human Factors in Computing Systems} {\em (CHI '18)}. ACM, New
+  York, NY, USA, Article 479, 12 pages.
 \newblock
 \showISBNx{978-1-4503-5620-6}
-\urldef\tempurl%
-\url{https://doi.org/10.1145/3173574.3174053}
-\showDOI{\tempurl}
+\showDOI{%
+\url{http://dx.doi.org/10.1145/3173574.3174053}}
 
 
 \end{thebibliography}

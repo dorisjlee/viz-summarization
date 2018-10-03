@@ -3,7 +3,6 @@
 \documentclass{sigchi}
 % \settopmatter{printacmref=false} % Removes citation information below abstract
 % \renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
-\pagestyle{plain} % removes running headers
 % Load basic packages
 \usepackage{booktabs} % For formal tables
 \usepackage{balance}  % to better equalize the last page
@@ -42,10 +41,10 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
 \usepackage{subfig}
-
+\raggedbottom
 \DeclareMathOperator*{\argmax}{arg\,max}
 % llt: Define a global style for URLs, rather that the default one
-\makeatletter
+\makeatletter %making the spacing between paragraphs less dramatic
 \def\url@leostyle{%
   \@ifundefined{selectfont}{
     \def\UrlFont{\sf}
@@ -95,27 +94,22 @@
 \newcommand{\shortsystem}{\textsc{Storybd}\xspace}%shorthand for storyboard
 \newcommand{\cluster}{\textsc{Cluster}\xspace}
 \newcommand{\BFS}{\textsc{BFS}\xspace}
-\def\plaintitle{\system : Hierarchical Summary of Equivalent Visualizations across Data Subsets}
-\def\plainauthor{Doris Jung-Lin Lee*, Himel Dev*, Huizi Hu, Hazem Elmeleegy, Aditya Parameswaran}
-\def\emptyauthor{}
-\def\plainkeywords{Data visualization, exploratory data analysis, visual query, scientific data.}
-\def\plaingeneralterms{Documentation, Standardization}
-
 \newcommand{\agp}[1]{\textcolor{blue}{Aditya: #1}}
 \newcommand{\dor}[1]{\textcolor{green}{Doris: #1}}
 \newcommand{\hdev}[1]{\textcolor{magenta}{Himel: #1}}
 \newcommand{\haz}[1]{\textcolor{orange}{Hazem: #1}}
 \newcommand\notes[1]{\textcolor{red}{#1}}
 \urlstyle{leo}
-\AtBeginEnvironment{quote}{\small}
+% \AtBeginEnvironment{quote}{\small}
 \renewenvironment{quote}{%
+  \vspace{-3pt}
    \list{}{%
      \leftmargin0.15cm
      \rightmargin\leftmargin
    }
    \item\relax
 }
-{\endlist}
+{\vspace{-3pt} \endlist}
 
 % To make various LaTeX processors do the right thing with page size.
 \def\pprw{8.5in}
@@ -160,7 +154,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\title{Avoiding Drill-down Fallacy with \system : Assisted and Accelerated Data Exploration Through Data Subsets}
+\title{Avoiding Drill-down Fallacy with Storyboard : Assisted and Accelerated Data Exploration Through Data Subsets}
 \maketitle
 % \author{\plainauthor}
 \begin{abstract}
@@ -192,8 +186,8 @@ As datasets continue to grow in size and complexity, exploring multi-dimensional
 \input{5.Discussion}
 \input{6.RelatedWorks}
 % \input{7.Conclusion}
-
-\bibliographystyle{ACM-Reference-Format}
+\bibliographystyle{SIGCHI-Reference-Format}
+% \bibliographystyle{ACM-Reference-Format}
 \bibliography{reference}
 
 \end{document}

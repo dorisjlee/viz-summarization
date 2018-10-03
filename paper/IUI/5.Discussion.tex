@@ -1,7 +1,6 @@
 %!TEX root = main.tex
 \section{Discussion}
 To understand the usefulness of our recommended visualizations, we analyzed the user study transcriptions through an open coding process by two of the authors. For each task in our study, we assigned a binary-valued code to indicate whether or not a participant engaged in that particular task (action or thought process). Table~\ref{table:thematic_summary} highlights results from thematic coding, discussed in this section. We will use the notation [Participant.DatasetAlgorithm] to refer to a participant engaging with a dashboard created by an algorithm=\{1,2,3\}=\{\system, \cluster, \textsc{BFS}\} on a dataset =\{A,B\}=\{Police, Autism\}.
-
 % \stitle{\system promotes distribution-awareness by provoking comparisons against more informative contextual references.}We first studied the thematic codes to understand how participants select contextual references for visualizations. 
 \subsection{The Choice of Contextual References}
 \par As discussed earlier, analysts often make use of related visualizations as \emph{contextual references} to form their expectations on unseen visualizations. The choices of a proper informative parent is essential for ensuring the \emph{safety} of insights derived through drill-downs. To understand how `safe' dashboards generated from each condition were, we examined the types of visualizations that participants utilized and compared against to form their expectations regarding how other visualizations should look like. In particular, we thematically encoded participant's use of contextual parents based on the verbal explanations that they provided to justify their prediction task responses. Participants can (and often do) make comparisons against more than one type of contextual parent to obtain their prediction. We uncovered four main classes of contextual references, described below using the example visualization \texttt{gender=F, race=White, age=21-30} (in order of most to least similar) and illustrated graphically in Figure~\ref{fig:reference}:
@@ -22,12 +21,13 @@ He further explained how he ``\textit{would not want to see the intersections [(
 %despite our modification to KMeans which picks the visualizations with the least number of filters to show in the dashboard for improving interpretability
 %These themes are drawn from user's explanations of how they obtained certain insights or ---- that --different tasks or while interpreting the dashboards. 4 categories :
 \begin{table}[h!]
+\hspace{-10pt}
 \centering
 	\begin{tabular}{l|rrrr|r}
 	\hline
 	 Algorithm   &    Parent &   Sibling &   Relative & Overall &   Total \\
 	\hline
-	 \shortsystem     &    \cellcolor{blue!25} 12 &       8 &     0 &  11 &      \cellcolor{blue!25} 31 \\
+	 \system     &    \cellcolor{blue!25} 12 &       8 &     0 &  11 &      \cellcolor{blue!25} 31 \\
 	 \cluster     &         4 &        0 &         7 &          8 &      19 \\
 	 \BFS         &         0 &        5 &         1 &          8 &      14 \\
 	\hline
@@ -47,7 +47,7 @@ Likewise, P9 described how the hierarchical layout she saw for the Autism datase
 \begin{quote}
 If I had to look at this dataset in the format of the other one, this would be much more difficult. It was pretty hard for me to tell in the other one how to organize the tree, if there was even a tree to be organized. I like this layout much better, I think this layout allows me to approach it in a more meaningful way. I can decide, what do I think matters more: the overall trend? or the super detailed trends? and I know where to look to start, in the other one, every time I go back to it, I would say, where's the top level, where's the second level? I mentally did this. Like when you asked me that first question, it took much longer to find it, because I literally have to put every chart in a space in my head and that took a lot longer than knowing how to look at it.
 \end{quote}
-At the end of the study, some participants who saw table layouts sketched and explained how they would like the layout of the visualizations to be done. Participants expressed that they wanted ``groupings'' or layouts that arranged visualizations with the same attribute together. Other participants advocate for isolating the overall visualization outside of the dashboard table for facilitating easier comparisons. Both of these provides further motivation for our hierarchical layout and the idea of the collapsed visualizations as described in the System Section.%in Section \ref{sec:interaction}.
+At the end of the study, some participants who saw table layouts sketched and explained how they would like the layout of the visualizations to be done. Participants expressed that they wanted ``groupings'' or layouts that arranged visualizations with the same attribute together. Other participants advocate for isolating the overall visualization outside of the dashboard table for facilitating easier comparisons. Both of these provides further motivation for our hierarchical layout and the idea of the collapsed visualizations as described in the System section.%in Section \ref{sec:interaction}.
 \par Since we did not inform participants how the dashboards were generated, it was also interesting to note that some participants thought that the dashboards were hand-picked by a human analyst and described what this person's intentions were (e.g. ``\textit{It seems like the researcher who created this dashboard was specifically looking at people of Asian descent and people who are 60 or older.}'' [P7.A1]). We encoded this phenomenon by looking at instances where a participant either explicitly referring to a person who picked out the dashboard or implicitly described their intentions through personal pronouns. A total of 5 different participants referred to the dashboard generated by \system as generated by a human, whereas there was only 1 participant for \cluster and none for \BFS made such remarks. At the end of the study, many were surprised to learn that the \system dashboard was actually picked out by an algorithm, indicating that \system could automatically generate convincing dashboard stories similar to a dashboard that was authored with human intention.
 
 \stitle{Limitations of \system}
@@ -60,15 +60,16 @@ I feel like this one, not all the data is here, so we are already telling a stor
 \npar This sentiment is related to participants' desire to perform their own ad-hoc querying alongside the dashboard to inspect other related visualizations for verifying their hypothesis. For example, P7.A1 wanted to inspect all other first-level visualizations for driver's race to assess its influence. P7.A1 expressed that while he had learned many insights from the dashboard, ``\textit{the only thing I don't like is I cannot control the types of filter, which is fixed.}'' Outside the context of the user study, it is essential to explain how \system are picking the visualizations in a easy and interpretable manner to establish a sense of summarization guarantee for the users and help them make better inferences with the dashboard.
 \par As discussed earlier, subpopulation size is important in establishing the significance of a trend observed in a visualization. While subpopulation size is taken into account implicitly in our objective, we should design interfaces that can convey the notion of subpopulation size in our dashboard. Examples include Sankey-like flow diagrams indicating the percentage of the parent population broken down into individual subpopulations or subpopulation size explicitly specified via edge labels.%, either explicitly displayed as text when hovering over the visualization or changing the size or background color of the visualizations to encode subpopulation size.
 \begin{table}[ht!]
+\hspace{-10pt}
 	\begin{tabular}{l|l|l|l}
-	 & \shortsystem & \cluster & \BFS \\ \hline
+	 & \system & \cluster & \BFS \\ \hline
 	Difficulty with Interpretation & 0 & \cellcolor[HTML]{FD6864}3 & 1 \\ \hline
 	Misjudged Significance & 0 & \cellcolor[HTML]{FD6864}4 & 1 \\ \hline
 	``Human-like" Dashboard & \cellcolor[HTML]{9AFF99}5 & 1 & 0 \\ \hline
 	Number of Insights (Police) & \cellcolor[HTML]{9AFF99}11 & 8 & 9 \\ \hline
 	Number of Insights (Autism) & \cellcolor[HTML]{9AFF99}16 & 6 & 11
 	\end{tabular}
-\caption{Summary of qualitative insights from thematic coding.}
+\caption{Summary of qualitative insights from thematic coding. We record the number of insights based on overall findings regarding the dataset or information regarding one or more attributes that are discovered by more than two different participants. There were a total of 7 such insights that we coded for the Police dataset and 6 for the Autism dataset.}
 \label{table:thematic_summary}
 \end{table}
 %“I actually found it really confused at first because such a low arrest rate at the top, and then at the bottom the arrest rate was much higher, so I was like is this data wrong. Then I realized we’re not looking at all the data here, you’ve pulled out some of it. It took me a minute to realize that. And once I read the title of the charts I realized that makes sense.” [P2.A1]
