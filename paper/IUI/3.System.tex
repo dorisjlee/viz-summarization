@@ -1,15 +1,15 @@
 %!TEX root = main.tex
 
-\section{System\label{sec:system}}
+\section{\system System\label{sec:system}}
 In this section, we present our system, \system, by first providing a high-level overview of the underlying algorithms, and then describing the user interaction mechanisms.
 
 \subsection{Algorithms\label{sec:algorithms}}
-We discuss the algorithms used for generating the visualization lattice, and then present a high-level overview of our algorithms that traverse the lattice to select the k-connected maximum-weighted subgraph.
+We discuss the algorithms used for generating the visualization lattice, and then present an overview of how we traverse the lattice to select the k-connected maximum-weighted subgraph.
 
 \stitle{Lattice Generation:} Our system supports two variants of traversal algorithms based on the lattice generation procedure---offline variants that first generate the complete lattice and then work towards identifying the maximum utility solution, and online variants that incrementally generate the lattice and simultaneously identify the solution. The offline variants are appropriate for datasets with a small number of low-cardinality attributes, where we can generate the entire lattice in a reasonable time; whereas the online variants are appropriate for datasets with large number of high-cardinality attributes, where we incrementally generate a partial lattice.
 
 %In most cases, the lattice contains a large number of visualizations due to the presence of many attributes or high-cardinality attributes in the dataset. In such cases finding an optimal solution is computationally challenging.
-
+\agp{too abrupt}
 \stitle{Lattice Traversal:} Given the materialized lattice, the objective of the traversal algorithm is to find the connected subgraph in the lattice that has maximum combined edge utility. \ccut{Here, we discuss the \textit{frontier greedy} algorithm which is used for generating the dashboards for our user study and defer the details of other algorithms that we have developed to the technical report.}
 % \begin{figure}[ht!]
 % \centering
@@ -22,7 +22,7 @@ We discuss the algorithms used for generating the visualization lattice, and the
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\linewidth]{figures/frontier_greedy.pdf}
-\caption{Example illustrating how the frontier greedy algorithm incrementally build up the solution by selecting the maximal-edge utility node from the frontier at every step.}
+\caption{Example illustrating how the frontier greedy algorithm incrementally build up the solution by selecting the maximal-edge utility node from the frontier at every step.\agp{explain example}}
 \end{figure}
 \begin{algorithm}
   \begin{algorithmic}[1]
