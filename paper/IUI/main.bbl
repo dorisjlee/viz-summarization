@@ -32,12 +32,6 @@
 \ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
 \ifx \showURL      \undefined \def \showURL       #1{#1}          \fi
 
-\bibitem{titanic}
-Titanic: Machine Learning from Disaster. {Kaggle}.
-\newblock   (????).
-\newblock
-
-
 \bibitem{exitpolls}
  2016.
 \newblock Elections 2016 Exit Polls.
@@ -45,6 +39,13 @@ Titanic: Machine Learning from Disaster. {Kaggle}.
 \newblock
 \showURL{%
 \url{https://edition.cnn.com/election/2016/results/exit-polls}}
+
+
+\bibitem{titanic}
+ 2017.
+\newblock Titanic: Machine Learning from Disaster. {Kaggle}.
+\newblock   (2017).
+\newblock
 
 
 \bibitem{Alipourfard2018WSDM}
@@ -109,6 +110,17 @@ Titanic: Machine Learning from Disaster. {Kaggle}.
 \newblock Autism Screening Adult Data Set. {UCI} Machine Learning Repository.
 \newblock   (2017).
 \newblock
+
+
+\bibitem{Heer2012}
+{Jeffrey Heer} {and} {Ben Shneiderman}. 2012.
+\newblock \showarticletitle{{Interactive Dynamics for Visual Analysis}}.
+\newblock {\em Queue\/} {10}, 2 (2012), 30.
+\newblock
+\showISBNx{1542-7730}
+\showISSN{15427730}
+\showDOI{%
+\url{http://dx.doi.org/10.1145/2133416.2146416}}
 
 
 \bibitem{Hoque2017}
@@ -263,6 +275,17 @@ Titanic: Machine Learning from Disaster. {Kaggle}.
 \showISSN{10772626}
 \showDOI{%
 \url{http://dx.doi.org/10.1109/TVCG.2015.2467191}}
+
+
+\bibitem{Wu2013}
+{Eugene Wu} {and} {Samuel Madden}. 2013.
+\newblock \showarticletitle{{Scorpion: Explaining Away Outliers in Aggregate
+  Queries}}.
+\newblock {\em Proceedings of the VLDB Endowment\/} {6}, 8 (2013), 553--564.
+\newblock
+\showISSN{21508097}
+\showDOI{%
+\url{http://dx.doi.org/10.14778/2536354.2536356}}
 
 
 \bibitem{Zgraggen2018CHI}
