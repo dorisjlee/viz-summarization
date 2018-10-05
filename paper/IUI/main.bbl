@@ -112,6 +112,14 @@
 \newblock
 
 
+\bibitem{Han2005}
+{Jiawei Han}. 2005.
+\newblock {\em Data Mining: Concepts and Techniques}.
+\newblock Morgan Kaufmann Publishers Inc., San Francisco, CA, USA.
+\newblock
+\showISBNx{1558609016}
+
+
 \bibitem{Heer2012}
 {Jeffrey Heer} {and} {Ben Shneiderman}. 2012.
 \newblock \showarticletitle{{Interactive Dynamics for Visual Analysis}}.
