@@ -83,6 +83,15 @@
 \url{http://dx.doi.org/10.1109/TVCG.2015.2467323}}
 
 
+\bibitem{Binnig2017}
+{Carsten Binnig} {and} {Lorenzo~De Stefani}. 2017.
+\newblock \showarticletitle{{Towards Sustainable Insights or why polygamy is
+  bad for you}}.
+\newblock {\em 8th Biennial Conference on Innovative Data Systems Research
+  (CIDR '17)\/} (2017).
+\newblock
+
+
 \bibitem{Boy2015}
 {Jeremy Boy}, {Francoise Detinenne}, {and} {Jean-Daniel Fekete}. 2015.
 \newblock \showarticletitle{{Storytelling in Information Visualizations : Does
@@ -294,6 +303,20 @@
 \showISSN{21508097}
 \showDOI{%
 \url{http://dx.doi.org/10.14778/2536354.2536356}}
+
+
+\bibitem{Xin2007}
+{Dong Xin}, {Jiawei Han}, {Xiaolei Li}, {Zheng Shao}, {and} {Benjamin~W. Wah}.
+  2007.
+\newblock \showarticletitle{{Computing iceberg cubes by top-down and bottom-up
+  integration: The starcubing approach}}.
+\newblock {\em IEEE Transactions on Knowledge and Data Engineering\/} {19}, 1
+  (2007), 111--126.
+\newblock
+\showISBNx{0-12-722442-4}
+\showISSN{10414347}
+\showDOI{%
+\url{http://dx.doi.org/10.1109/TKDE.2007.250589}}
 
 
 \bibitem{Zgraggen2018CHI}
