@@ -38,7 +38,7 @@
 \newblock   (2016).
 \newblock
 \showURL{%
-\url{https://edition.cnn.com/election/2016/results/exit-polls}}
+\url{http://edition.cnn.com/election/2016/results/exit-polls}}
 
 
 \bibitem{titanic}
@@ -46,6 +46,8 @@
 \newblock Titanic: Machine Learning from Disaster. {Kaggle}.
 \newblock   (2017).
 \newblock
+\showURL{%
+\url{http://www.kaggle.com/c/titanic}}
 
 
 \bibitem{Alipourfard2018WSDM}
@@ -56,8 +58,8 @@
   ACM, New York, NY, USA, 19--27.
 \newblock
 \showISBNx{978-1-4503-5581-0}
-\showDOI{%
-\url{http://dx.doi.org/10.1145/3159652.3159684}}
+\showURL{%
+\url{doi.acm.org/10.1145/3159652.3159684}}
 
 
 \bibitem{ErnstAlthaus2009}
@@ -69,8 +71,8 @@
 \newblock
 \showISBNx{978-3-642-02025-4}
 \showISSN{0302-9743}
-\showDOI{%
-\url{http://dx.doi.org/10.1007/978-3-642-02026-1}}
+\showURL{%
+\url{dx.doi.org/10.1007/978-3-642-02026-1}}
 
 
 \bibitem{Anand2015}
@@ -79,8 +81,8 @@
   Small Multiple Displays}}.
 \newblock  {2626}, c (2015).
 \newblock
-\showDOI{%
-\url{http://dx.doi.org/10.1109/TVCG.2015.2467323}}
+\showURL{%
+\url{dx.doi.org/10.1109/TVCG.2015.2467323}}
 
 
 \bibitem{Ankerst1999}
@@ -92,26 +94,31 @@
   '99)}. ACM, New York, NY, USA, 392--396.
 \newblock
 \showISBNx{1-58113-143-7}
-\showDOI{%
-\url{http://dx.doi.org/10.1145/312129.312298}}
+\showURL{%
+\url{doi.acm.org/10.1145/312129.312298}}
 
 
 \bibitem{Binnig2017}
-{Carsten Binnig} {and} {Lorenzo~De Stefani}. 2017.
-\newblock \showarticletitle{{Towards Sustainable Insights or why polygamy is
-  bad for you}}.
-\newblock {\em 8th Biennial Conference on Innovative Data Systems Research
-  (CIDR '17)\/} (2017).
+{Carsten Binnig}, {Lorenzo~De Stefani}, {Tim Kraska}, {Eli Upfal}, {Emanuel
+  Zgraggen}, {and} {Zheguang Zhao}. 2017.
+\newblock \showarticletitle{Toward Sustainable Insights, or Why Polygamy is Bad
+  for You}. In {\em {CIDR} 2017, 8th Biennial Conference on Innovative Data
+  Systems Research, Chaminade, CA, USA, January 8-11, 2017}.
 \newblock
+\showURL{%
+\url{cidrdb.org/cidr2017/papers/p56-binnig-cidr17.pdf}}
 
 
 \bibitem{Boy2015}
-{Jeremy Boy}, {Francoise Detinenne}, {and} {Jean-Daniel Fekete}. 2015.
-\newblock \showarticletitle{{Storytelling in Information Visualizations : Does
-  it Engage Users to Explore Data?}}
-\newblock {\em CHI 2015\/} (2015), 1449--1458.
+{Jeremy Boy}, {Francoise Detienne}, {and} {Jean-Daniel Fekete}. 2015.
+\newblock \showarticletitle{Storytelling in Information Visualizations: Does It
+  Engage Users to Explore Data?}. In {\em Proceedings of the 33rd Annual ACM
+  Conference on Human Factors in Computing Systems} {\em (CHI '15)}. ACM, New
+  York, NY, USA, 1449--1458.
 \newblock
-\showISBNx{9781450331456}
+\showISBNx{978-1-4503-3145-6}
+\showURL{%
+\url{doi.acm.org/10.1145/2702123.2702452}}
 
 
 \bibitem{Correll2016}
@@ -123,8 +130,8 @@
 \newblock
 \showISBNx{1077-2626}
 \showISSN{1077-2626}
-\showDOI{%
-\url{http://dx.doi.org/10.1109/TVCG.2016.2598618}}
+\showURL{%
+\url{dx.doi.org/10.1109/TVCG.2016.2598618}}
 
 
 \bibitem{autism}
@@ -149,17 +156,17 @@
 \newblock
 \showISBNx{1542-7730}
 \showISSN{15427730}
-\showDOI{%
-\url{http://dx.doi.org/10.1145/2133416.2146416}}
+\showURL{%
+\url{dx.doi.org/10.1145/2133416.2146416}}
 
 
 \bibitem{Hermann2017}
 {Jeremy Hermann} {and} {Mike Del~Balso}. 2017.
-\newblock Meet Michelangelo: Uber’s Machine Learning Platform.
+\newblock Meet Michelangelo: Uber's Machine Learning Platform.
 \newblock   (September 2017).
 \newblock
 \showURL{%
-\url{https://eng.uber.com/michelangelo/}}
+\url{http://eng.uber.com/michelangelo/}}
 
 
 \bibitem{Hoque2017}
@@ -171,8 +178,8 @@
 \newblock
 \showISBNx{1077-2626 VO - PP}
 \showISSN{10772626}
-\showDOI{%
-\url{http://dx.doi.org/10.1109/TVCG.2017.2744684}}
+\showURL{%
+\url{dx.doi.org/10.1109/TVCG.2017.2744684}}
 
 
 \bibitem{Hullman2013}
@@ -185,16 +192,19 @@
 \newblock
 \showISBNx{1077-2626}
 \showISSN{10772626}
-\showDOI{%
-\url{http://dx.doi.org/10.1109/TVCG.2013.119}}
+\showURL{%
+\url{dx.doi.org/10.1109/TVCG.2013.119}}
 
 
 \bibitem{Hullman2017}
 {Jessica Hullman}, {Robert Kosara}, {and} {Heidi Lam}. 2017.
-\newblock \showarticletitle{{Finding a Clear Path : Structuring Strategies for
-  Visualization Sequences}}.
-\newblock  {36}, 3 (2017).
+\newblock \showarticletitle{Finding a Clear Path: Structuring Strategies for
+  Visualization Sequences}.
+\newblock {\em Comput. Graph. Forum\/} {36}, 3 (June 2017), 365--375.
 \newblock
+\showISSN{0167-7055}
+\showURL{%
+\url{doi.org/10.1111/cgf.13194}}
 
 
 \bibitem{Itti2009}
@@ -203,8 +213,8 @@
 \newblock {\em Vision Research\/} {49}, 10 (19 May 2009), 1295--1306.
 \newblock
 \showISSN{0042-6989}
-\showDOI{%
-\url{http://dx.doi.org/10.1016/j.visres.2008.09.007}}
+\showURL{%
+\url{dx.doi.org/10.1016/j.visres.2008.09.007}}
 
 
 \bibitem{Kim2017}
@@ -215,8 +225,8 @@
 \newblock {\em Proc. of ACM CHI 2017\/} (2017).
 \newblock
 \showISBNx{9781450346559}
-\showDOI{%
-\url{http://dx.doi.org/10.1145/3025453.3025866}}
+\showURL{%
+\url{dx.doi.org/10.1145/3025453.3025866}}
 
 
 \bibitem{Mackinlay2007}
@@ -228,20 +238,18 @@
 \newblock
 \showISBNx{1077-2626 VO - 13}
 \showISSN{10772626}
-\showDOI{%
-\url{http://dx.doi.org/10.1109/TVCG.2007.70594}}
+\showURL{%
+\url{dx.doi.org/10.1109/TVCG.2007.70594}}
 
 
 \bibitem{McHugh2013}
 {Mary~L. McHugh}. 2013.
 \newblock \showarticletitle{The Chi-square test of independence}.
-\newblock {\em Biochem Med (Zagreb)\/} {23}, 2 (15 Jun 2013), 143--149.
+\newblock {\em Biochemia Medica\/} {23}, 2 (15 Jun 2013), 143--149.
 \newblock
 \showISSN{1330-0962}
 \showURL{%
-\url{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3900058/}}
-\newblock
-\shownote{biochem\_med-23-2-143-3[PII].}
+\url{ncbi.nlm.nih.gov/pmc/articles/PMC3900058/}}
 
 
 \bibitem{Parameswaran2010}
@@ -253,8 +261,8 @@
   Information and knowledge management - CIKM '10\/} (2010), 919.
 \newblock
 \showISBNx{9781450300995}
-\showDOI{%
-\url{http://dx.doi.org/10.1145/1871437.1871555}}
+\showURL{%
+\url{dx.doi.org/10.1145/1871437.1871555}}
 
 
 \bibitem{Terence2018}
@@ -263,7 +271,7 @@
 \newblock   (September 2018).
 \newblock
 \showURL{%
-\url{http://explained.ai/decision-tree-viz/}}
+\url{explained.ai/decision-tree-viz/}}
 
 
 \bibitem{police}
@@ -274,7 +282,7 @@
 \newblock   (2017).
 \newblock
 \showURL{%
-\url{https://openpolicing.stanford.edu/data/}}
+\url{http://openpolicing.stanford.edu/data/}}
 
 
 \bibitem{Quinlan1986}
@@ -283,8 +291,8 @@
 \newblock {\em Mach. Learn.\/} {1}, 1 (March 1986), 81--106.
 \newblock
 \showISSN{0885-6125}
-\showDOI{%
-\url{http://dx.doi.org/10.1023/A:1022643204877}}
+\showURL{%
+\url{dx.doi.org/10.1023/A:1022643204877}}
 
 
 \bibitem{Segel2010}
@@ -296,17 +304,19 @@
 \newblock
 \showISBNx{1077-2626}
 \showISSN{10772626}
-\showDOI{%
-\url{http://dx.doi.org/10.1109/TVCG.2010.179}}
+\showURL{%
+\url{dx.doi.org/10.1109/TVCG.2010.179}}
 
 
 \bibitem{Vartak2015}
 {Manasi Vartak}, {Sajjadur Rahman}, {Samuel Madden}, {Aditya Parameswaran},
   {and} {Neoklis Polyzotis}. 2015.
-\newblock \showarticletitle{{SEEDB : Efficient Data-Driven Visualization
-  Recommendations to Support Visual Analytics}}.
-\newblock  (2015).
+\newblock \showarticletitle{SeeDB: efficient data-driven visualization
+  recommendations to support visual analytics}.
+\newblock {\em Proceedings of the VLDB Endowment\/} {8}, 13 (2015), 2182--2193.
 \newblock
+\showURL{%
+\url{dx.doi.org/10.14778/2831360.2831371}}
 
 
 \bibitem{Wall2017}
@@ -317,8 +327,6 @@
   (VAST)\/} (2017).
 \newblock
 \showISBNx{9781538631638}
-\showURL{%
-\url{https://www.cc.gatech.edu/}}
 
 
 \bibitem{Wongsuphasawat2016}
@@ -331,8 +339,8 @@
 \newblock
 \showISBNx{1077-2626}
 \showISSN{10772626}
-\showDOI{%
-\url{http://dx.doi.org/10.1109/TVCG.2015.2467191}}
+\showURL{%
+\url{dx.doi.org/10.1109/TVCG.2015.2467191}}
 
 
 \bibitem{Wu2013}
@@ -342,8 +350,8 @@
 \newblock {\em Proceedings of the VLDB Endowment\/} {6}, 8 (2013), 553--564.
 \newblock
 \showISSN{21508097}
-\showDOI{%
-\url{http://dx.doi.org/10.14778/2536354.2536356}}
+\showURL{%
+\url{dx.doi.org/10.14778/2536354.2536356}}
 
 
 \bibitem{Xin2007}
@@ -356,8 +364,8 @@
 \newblock
 \showISBNx{0-12-722442-4}
 \showISSN{10414347}
-\showDOI{%
-\url{http://dx.doi.org/10.1109/TKDE.2007.250589}}
+\showURL{%
+\url{dx.doi.org/10.1109/TKDE.2007.250589}}
 
 
 \bibitem{Zgraggen2018CHI}
@@ -369,8 +377,8 @@
   York, NY, USA, Article 479, 12 pages.
 \newblock
 \showISBNx{978-1-4503-5620-6}
-\showDOI{%
-\url{http://dx.doi.org/10.1145/3173574.3174053}}
+\showURL{%
+\url{doi.acm.org/10.1145/3173574.3174053}}
 
 
 \end{thebibliography}
