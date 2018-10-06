@@ -83,6 +83,19 @@
 \url{http://dx.doi.org/10.1109/TVCG.2015.2467323}}
 
 
+\bibitem{Ankerst1999}
+{Mihael Ankerst}, {Christian Elsen}, {Martin Ester}, {and} {Hans-Peter
+  Kriegel}. 1999.
+\newblock \showarticletitle{Visual Classification: An Interactive Approach to
+  Decision Tree Construction}. In {\em Proceedings of the Fifth ACM SIGKDD
+  International Conference on Knowledge Discovery and Data Mining} {\em (KDD
+  '99)}. ACM, New York, NY, USA, 392--396.
+\newblock
+\showISBNx{1-58113-143-7}
+\showDOI{%
+\url{http://dx.doi.org/10.1145/312129.312298}}
+
+
 \bibitem{Binnig2017}
 {Carsten Binnig} {and} {Lorenzo~De Stefani}. 2017.
 \newblock \showarticletitle{{Towards Sustainable Insights or why polygamy is
@@ -138,6 +151,15 @@
 \showISSN{15427730}
 \showDOI{%
 \url{http://dx.doi.org/10.1145/2133416.2146416}}
+
+
+\bibitem{Hermann2017}
+{Jeremy Hermann} {and} {Mike Del~Balso}. 2017.
+\newblock Meet Michelangelo: Uber’s Machine Learning Platform.
+\newblock   (September 2017).
+\newblock
+\showURL{%
+\url{https://eng.uber.com/michelangelo/}}
 
 
 \bibitem{Hoque2017}
@@ -235,6 +257,15 @@
 \url{http://dx.doi.org/10.1145/1871437.1871555}}
 
 
+\bibitem{Terence2018}
+{Terence Parr} {and} {Prince Grover}. 2018.
+\newblock How to visualize decision trees.
+\newblock   (September 2018).
+\newblock
+\showURL{%
+\url{http://explained.ai/decision-tree-viz/}}
+
+
 \bibitem{police}
 {E. Pierson}, {C. Simoiu}, {J. Overgoor}, {S. Corbett-Davies}, {V.
   Ramachandran}, {C. Phillips}, {and} {S. Goel}. 2017.
@@ -244,6 +275,16 @@
 \newblock
 \showURL{%
 \url{https://openpolicing.stanford.edu/data/}}
+
+
+\bibitem{Quinlan1986}
+{J.~R. Quinlan}. 1986.
+\newblock \showarticletitle{Induction of Decision Trees}.
+\newblock {\em Mach. Learn.\/} {1}, 1 (March 1986), 81--106.
+\newblock
+\showISSN{0885-6125}
+\showDOI{%
+\url{http://dx.doi.org/10.1023/A:1022643204877}}
 
 
 \bibitem{Segel2010}
