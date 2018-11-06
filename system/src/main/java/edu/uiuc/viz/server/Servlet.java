@@ -17,17 +17,57 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-
-import org.eclipse.jetty.http.HttpStatus;
-
+@SuppressWarnings("serial")
 public class Servlet extends HttpServlet {
-
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-
-		resp.setStatus(HttpStatus.OK_200);
-		resp.getWriter().println("EmbeddedJetty");
+	public List<String> names;
+	public List<FileItem> fileList;
+	
+	public Servlet() {
+		this.names = new ArrayList<String> ();
 	}
-}
+	
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String message = "";
+        try{
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            upload.setHeaderEncoding("UTF-8"); 
+            if(!ServletFileUpload.isMultipartContent(request)){
+                return;
+            }
+            this.fileList = upload.parseRequest(request);
+            System.out.println(fileList.size());
+            
+            for(FileItem item : fileList){
+               	if(item.isFormField()){
+                  String value = item.getString("UTF-8");              
+                  names.add(value);
+               	} else{
+            		String filename = item.getName();
+            		if(filename==null) continue;
+            		//File newFile = new File("../src/main/resources/uploaded_data/"+filename);
+//            		System.out.println(newFile.getCanonicalPath()); 
+            		File newFile = new File(filename);
+            		item.write(newFile);
+                    message = "success";
+                    this.names.add(newFile.getAbsolutePath().toString());
+                }
+            }
+            System.out.println("names: " + names);
+        }catch (Exception e) {
+            message= "fail";
+            e.printStackTrace();
+            
+        }
+//        System.out.println(message);
+    }
 
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+    
+    public List<String> upload(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	doPost(request, response);
+    	return this.names;
+    }
+}
