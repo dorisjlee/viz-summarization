@@ -7,7 +7,7 @@ var node_dataset = null;
 var totalclick = {};
 var options;
 function draw(node,edge) {
-
+    
     // create a network
     var container = document.getElementById('canvas-graph');
     container.removeChild(container.childNodes[0])
@@ -185,7 +185,7 @@ function draw(node,edge) {
         //params.nodes.update([{id:1, color:{background:'#0B131A'}}]);
     });*/
     var div = document.createElement('div')
-    div.innerHTML="<img src='resources/Eclipse.svg' id = 'loadingDashboard' style='display: none; position: relative; z-index: 10; width: 100%; height: 50%;'>"
+    div.innerHTML="<img src='css/Eclipse.svg' id = 'loadingDashboard' style='display: none; position: relative; z-index: 10; width: 100%; height: 50%;'>"
     container.prepend(div.firstChild);
 }
 function showJQueryDialog(params, nodeID, selection) {

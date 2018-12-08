@@ -75,19 +75,19 @@ function readDashboardFile(fname){
                     tableChecked[i] = 0;
                 }
                 for (row = 0; row < rownum; row++) {
-                    tr = document.createElement('tr');
+                    tr = document.createElement("tr");
                     tr.style = "border: 1px solid LightGray;border-collapse: separate"
-                    for (cell = 0; cell < colnum; cell++) {
+                    for (cell = 0; cell < colnum; cell++) {
                         var tdId = 'td' + (row * colnum + cell).toString();
-                        td = document.createElement('td');
+                        td = document.createElement('td');
                         td.setAttribute('id',tdId);
                         //td.setAttribute('height', 20%);
-                        tr.appendChild(td);
-                        td.style = "border: 5px solid grey;border-collapse: separate; align='center' "
+                        tr.appendChild(td);
+                        td.style = "border: 5px solid grey;border-collapse: separate; align='center' "
 
                         td.innerHTML = /*'<p style = "font-size:10px;color:#787878">'+(row * colnum + cell).toString()+'</p>'*/'<div id="c' +(row * colnum + cell).toString()+'" style = "border-collapse: separate;" onclick="showfilter(this)"></div>'
-                    }
-                    table.appendChild(tr);
+                    }
+                    table.appendChild(tr);
                 }
                 console.log(len)
                 var table = document.getElementById("charttable");
@@ -614,15 +614,7 @@ function generateSVG(cell_idx, chartarray/*, xLabel, yLabel*/) {
         }
     })
     return svgString
-//    $.post("/getBarchart",{
-//            "yVals" : JSON.stringify(yVals),
-//            "xAttrs" : JSON.stringify(xAttrs),
-//            "title" : JSON.stringify(t)
-//        },'application/json').success(function(data){
-//            //console.log(data)
-//            svgString = data
-//            svgString = "data:image/svg+xml;base64," + svgString
-//        })
+
 }
 
 function updateTextInput(val) {

@@ -1,3 +1,4 @@
+
 function constructQueryWithArgs(dataset,xAxis,algorithm,metric,ic,ip,k){
     query = {
         "dataset": dataset,
@@ -75,19 +76,19 @@ function readDashboardFile(fname){
                     tableChecked[i] = 0;
                 }
                 for (row = 0; row < rownum; row++) {
-                    tr = document.createElement('tr');
-                    tr.style = "border: 1px solid LightGray;border-collapse: separate"
-                    for (cell = 0; cell < colnum; cell++) {
+                    tr = document.createElement("tr");
+                    tr.style = "border: 1px solid LightGray;border-collapse: separate";
+                    for (cell = 0; cell < colnum; cell++) {
                         var tdId = 'td' + (row * colnum + cell).toString();
-                        td = document.createElement('td');
+                        td = document.createElement('td');
                         td.setAttribute('id',tdId);
                         //td.setAttribute('height', 20%);
-                        tr.appendChild(td);
-                        td.style = "border: 5px solid grey;border-collapse: separate; align='center' "
+                        tr.appendChild(td);
+                        td.style = "border: 5px solid grey;border-collapse: separate; align='center' "
 
                         td.innerHTML = /*'<p style = "font-size:10px;color:#787878">'+(row * colnum + cell).toString()+'</p>'*/'<div id="c' +(row * colnum + cell).toString()+'" style = "border-collapse: separate;" onclick="showfilter(this)"></div>'
-                    }
-                    table.appendChild(tr);
+                    }
+                table.appendChild(tr);
                 }
                 console.log(len)
                 var table = document.getElementById("charttable");
@@ -205,26 +206,7 @@ function mymenuicon(x) {
 // $("#submit").click(constructQuery)
 // $("#xaxis").change(constructQuery)
 // $("input[name='aggFunc']").change(constructQuery)
-function getNodeEdgeListThenDraw(nodeDicStr){
-    var jsonClean = true
-    if (typeof(nodeDicStr)=="object"){
-        jsonClean = false
-    }
-    document.getElementById("loadingDashboard").style.display = "inline"
-    $.post("/getNodeEdgeList",{
-        "nodeDic" : JSON.stringify(nodeDicStr),
-        "jsonClean":jsonClean
-    },'application/json').success(function(data){
-        edgeList = data[0];
-        nodeList = data[1];
-        console.log("edgeList:")
-        console.log(edgeList)
-        console.log("nodeList:")
-        console.log(nodeList)
-        draw(nodeList,edgeList)
-        document.getElementById("loadingDashboard").style.display = "none";
-    })
-}
+
 
 // Get the modal
 var modal = document.getElementById('message');
@@ -441,19 +423,18 @@ $("#graphDicSubmit").click(function(){
             tableChecked[i]=0;
         }
         for (row = 0; row < rownum; row++) {
-            tr = document.createElement('tr');
+            tr = document.createElement('tr');
             tr.style = "border: 1px solid LightGray;border-collapse: separate"
-            for (cell = 0; cell < colnum; cell++) {
+            for (cell = 0; cell < colnum; cell++) {
                 var tdId = 'td' + (row * colnum + cell).toString();
-                td = document.createElement('td');
+                td = document.createElement('td');
                 td.setAttribute('id',tdId);
                 //td.setAttribute('height', 20%);
-                tr.appendChild(td);
-                td.style = "border: 3px solid grey;border-collapse: separate; align='center' "
-
+                tr.appendChild(td);
+                td.style = "border: 3px solid grey;border-collapse: separate; align='center' "
                 td.innerHTML = '<p style = "font-size:10px;color:#787878">'+(row * colnum + cell).toString()+'</p><div id="c' +(row * colnum + cell).toString()+'" style = "border-collapse: separate;" onclick="showfilter(this)"></div>'
-            }
-            table.appendChild(tr);
+            }
+            table.appendChild(tr);
         }
         console.log(len)
         var table = document.getElementById("charttable");
@@ -614,18 +595,214 @@ function generateSVG(cell_idx, chartarray/*, xLabel, yLabel*/) {
         }
     })
     return svgString
-//    $.post("/getBarchart",{
-//            "yVals" : JSON.stringify(yVals),
-//            "xAttrs" : JSON.stringify(xAttrs),
-//            "title" : JSON.stringify(t)
-//        },'application/json').success(function(data){
-//            //console.log(data)
-//            svgString = data
-//            svgString = "data:image/svg+xml;base64," + svgString
-//        })
+
 }
 
 function updateTextInput(val) {
           document.getElementById('textInput').value=val;
         }
 
+/*function testajax(){
+    var svgString = '';
+    
+    $.ajax({
+        type: "POST",
+        url: "viz/test",
+        async: false,
+        data: {
+            "datasetName" : JSON.stringify("titanic"),
+            "yAxis" : JSON.stringify("id"),
+            "xAxis" : JSON.stringify("survived"),
+            "aggType" : JSON.stringify("COUNT"),
+            "k" : 9,
+            "ic" : 0,
+            "info" : 0.9
+        },
+        success: function(data) {
+                console.log(data);
+            }
+        
+    })
+    //console.log(svgString)
+}*/
+
+async function generateNode(nodeDicStr,callback){
+    var nodelist = [];
+    nodeDicStr = JSON.parse(nodeDicStr);
+
+    for(i in nodeDicStr){
+        var node = nodeDicStr[i];
+        //console.log(node);
+        var yVals = [];
+        var xAttrs = [];
+        var collapse = [];
+        var filterVal;
+        var xname;
+        var yname;
+        for(values in node){
+            if(node[values]['yAxis'])
+                yVals.push(node[values]['yAxis']);
+            if(node[values]['xAxis'])
+                xAttrs.push(node[values]['xAxis']);
+            if(node[values]["filter"]){
+                if(node[values]["filter"]=="#")
+                    filterVal="overall"
+                else if(node[values]["filter"]=="collapsed")
+                    filterVal="collapsed"
+                else
+                    filterVal = String(node[values]["filter"].split("#").join("\n").split("$").join("=")).slice(1, -1);
+            }
+            if(node[values]['xName'])
+                xname = node[values]['xName'];
+            if(node[values]['yName'])
+                yname = node[values]['yName'];
+            if(node[values]['collapse'])
+                collapse.push(node[values]['collapse']);
+        }
+        /*console.log(yVals);
+        console.log(xAttrs);
+        console.log(filterVal);
+        console.log(xname);
+        console.log(yname);
+        console.log(collapse);*/
+        //var vlSpec = bar_chart();
+        
+        vlSpec = {};
+        vlSpec['$schema'] = "https://vega.github.io/schema/vega-lite/v3.json";
+        vlSpec['width'] = 120;
+        vlSpec['height'] = 120;
+        vlSpec['title'] = filterVal;
+        vlSpec['data'] = {};
+        vlSpec['data']['values'] = [];
+        for(i in xAttrs){
+            vlSpec['data']['values'].push({});
+            vlSpec['data']['values'][i][xname] = xAttrs[i];
+            vlSpec['data']['values'][i][yname] = Math.max( Math.round(yVals[i] * 10) / 10, 2.8 ).toFixed(2);
+        }
+        
+        vlSpec['encoding'] = {
+            "x": {"field": xname, "type": "ordinal"},
+            "y": {"field": yname, "type": "quantitative"}/*,
+            "color": {
+              "field": yname, "type": "ordinal",
+              "scale": {"range": ["#98D2EA", "#58B6DD"]},
+              "legend": null
+            }*/
+          };
+        vlSpec['layer'] = [{
+            "mark": "bar"
+          }, {
+            "mark": {
+              "type": "text",
+              "align": "center",
+              "baseline": "top",
+              "dx": 3
+            },
+            "encoding": {
+              "text": {"field": yname, "type": "quantitative", "fontSize":20}
+            }
+          }];
+    
+        console.log(vlSpec);
+        
+        var vgSpec = vl.compile(vlSpec, {}).spec;
+        var view = new vega.View(vega.parse(vgSpec)).renderer('none').initialize();
+        // var svgString =  (view.toSVG()).then(function(result) {
+        //     nodelist.push({"id": parseInt(i), "filterVal":filterVal,"collapse":collapse,"image": "data:image/svg+xml;base64," + btoa(result), "shape": 'image', "color":{"border": "grey"} });
+        //  }).catch(function(err) { console.error(err); });
+        var svgString =  (view.toSVG()).then(function(result) {
+            nodelist.push({"id": parseInt(i), "filterVal":filterVal,"collapse":collapse,"image": "data:image/svg+xml;base64," + btoa(result), "shape": 'image', "color":{"border": "grey"} });
+            if (nodelist.length == Object.keys(nodeDicStr).length){//$("#kInputId").val()
+                var cur = 0;
+                for(idx in nodeDicStr){
+                    nodelist[cur].id = parseInt(idx);
+                    cur++;
+                }
+                console.log(nodelist);
+                callback(nodelist);
+            }
+         }).catch(function(err) { console.error(err); });
+        //console.log(t);
+    }
+    //console.log(nodelist);
+    // return nodelist;
+    // callback(nodelist);
+}
+
+function generateEdge(nodeDicStr){
+    var edgelist = [];
+    nodeDicStr = JSON.parse(nodeDicStr);
+    if(Object.keys(nodeDicStr).length>0){
+        var nBars = (Object.values(nodeDicStr)[0]).length -1;
+        for( key in (nodeDicStr)){
+            //console.log(key);
+            if(nodeDicStr[key][nBars]['childrenIndex'].length>0){
+                for(i in nodeDicStr[key][nBars]['childrenIndex']){
+                    var child = nodeDicStr[key][nBars]['childrenIndex'][i];
+                    //console.log(child);
+                    edgelist.push({"from": parseInt(key), "to": parseInt(child), "length": 200, "arrows":'to'});
+                }
+            }
+        }
+    }
+    
+    return edgelist;
+}
+
+function getNodeEdgeListThenDraw(nodeDicStr){
+    nodeDicStr = nodeDicStr.split("\\").join("");
+    console.log(nodeDicStr);
+//    nodeDicStr = JSON.stringify(nodeDicStr);
+//    console.log(nodeDicStr);
+    
+    var edgelist = generateEdge(nodeDicStr);
+    // var nodelist = generateNode(nodeDicStr, function(x){draw(x,edgelist)});
+    generateNode(nodeDicStr, function(x){draw(x,edgelist)});
+    // console.log("edgeList:")
+    // console.log(edgelist)
+    // console.log("nodeList:")
+    // console.log(nodelist)
+    // draw(nodelist, edgelist);
+}
+
+function testDraw(){
+    console.log(document.getElementById('agg').value)
+    $.ajax({
+        type: "POST",
+        url: "viz/draw",
+        async: false,
+        data: {
+            "datasetName" : JSON.stringify(document.getElementById('data').value),
+            "yAxis" : JSON.stringify(document.getElementById('y').value),
+            "xAxis" : JSON.stringify(document.getElementById('x').value),
+            "aggType" : JSON.stringify(document.getElementById('agg').value),
+            "k" : document.getElementById('kOutputId').value,
+            "ic" : document.getElementById('icOutputId').value,
+            "info" : document.getElementById('infoOutputId').value
+        },
+        success: function(data) {
+                console.log(data);
+                getNodeEdgeListThenDraw(data);
+            }
+        
+    })
+}
+
+function getCol(){
+    $.ajax({
+            type: "POST",
+            url: "viz/getCol",
+            async: false,
+            data: {
+                "datasetName" : JSON.stringify(document.getElementById('data').value),
+            },
+            success: function(data) {
+                    //console.log(data);
+                    document.getElementById("x").innerHTML = "";
+                    for(i = 0; i<data.length; i++){
+                        document.getElementById("x").innerHTML += "<option>" + data[i] + "</option>";
+                    }
+                }
+
+            })
+}

@@ -130,6 +130,14 @@ public class Experiment {
         db.c.close();
 	}
 	
+	public String runOutputReturnJSON(Experiment exp) throws SQLException {
+		algo.pickVisualizations(exp);
+		VizOutput vo = new VizOutput(exp);
+        String nodeDic = vo.generateNodeDic();
+        db.c.close();
+        return nodeDic;   
+	}
+	
 	public void runTableLayoutOutput(Experiment exp) throws SQLException {
 		algo.pickVisualizations(exp);
 		VizOutput vo = new VizOutput(exp);

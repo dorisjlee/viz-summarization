@@ -28,8 +28,8 @@ public class UserStudyBaseline {
 	{
 	   Experiment exp;
 	   int k =9;
-	   Experiment.experiment_name="../ipynb/dashboards/json/UserInterface";
-	   String dataset_name="ct_police_stop";
+	   Experiment.experiment_name="../ipynb/dashboards/";
+	   String dataset_name="titanic";
 	   ArrayList<String> groupby = null;
 	   String yAxis = null;
 	   String xAxis = null; 

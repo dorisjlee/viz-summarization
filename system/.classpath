@@ -22,5 +22,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Users/Huizi/Downloads/java-json.jar.zip"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
