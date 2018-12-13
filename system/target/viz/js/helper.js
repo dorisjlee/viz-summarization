@@ -650,7 +650,7 @@ async function generateNode(nodeDicStr,callback){
                 else if(node[values]["filter"]=="collapsed")
                     filterVal="collapsed"
                 else
-                    filterVal = String(node[values]["filter"].split("#").join("\n").split("$").join("=")).slice(1, -1);
+                    filterVal = String(node[values]["filter"].split("#").join("&").split("$").join("=")).slice(1, -1);
             }
             if(node[values]['xName'])
                 xname = node[values]['xName'];
@@ -682,12 +682,7 @@ async function generateNode(nodeDicStr,callback){
         
         vlSpec['encoding'] = {
             "x": {"field": xname, "type": "ordinal"},
-            "y": {"field": yname, "type": "quantitative"}/*,
-            "color": {
-              "field": yname, "type": "ordinal",
-              "scale": {"range": ["#98D2EA", "#58B6DD"]},
-              "legend": null
-            }*/
+            "y": {"field": yname, "type": "quantitative", "scale":{"domain": [0,100]}}
           };
         vlSpec['layer'] = [{
             "mark": "bar"
@@ -715,8 +710,6 @@ async function generateNode(nodeDicStr,callback){
             if (nodelist.length == Object.keys(nodeDicStr).length){//$("#kInputId").val()
                 var cur = 0;
                 for(idx in nodeDicStr){
-                    console.log(cur);
-                    console.log(idx);
                     nodelist[cur].id = parseInt(idx);
                     cur++;
                 }

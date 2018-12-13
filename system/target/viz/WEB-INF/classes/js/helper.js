@@ -715,8 +715,6 @@ async function generateNode(nodeDicStr,callback){
             if (nodelist.length == Object.keys(nodeDicStr).length){//$("#kInputId").val()
                 var cur = 0;
                 for(idx in nodeDicStr){
-                    console.log(cur);
-                    console.log(idx);
                     nodelist[cur].id = parseInt(idx);
                     cur++;
                 }

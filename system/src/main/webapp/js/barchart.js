@@ -7,7 +7,7 @@ var node_dataset = null;
 var totalclick = {};
 var options;
 function draw(node,edge) {
-    
+
     // create a network
     var container = document.getElementById('canvas-graph');
     container.removeChild(container.childNodes[0])
@@ -60,7 +60,7 @@ function draw(node,edge) {
             improvedLayout:true,
             hierarchical: {
               enabled:true,
-              levelSeparation: 240,
+              levelSeparation: 260,
               nodeSpacing: 230,
               treeSpacing: 600,
               blockShifting: true,
