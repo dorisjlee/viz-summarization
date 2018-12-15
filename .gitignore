@@ -1,5 +1,5 @@
 .idea/
-system/target/*
+system/target/
 *.csv
 *.pyc
 ipynb/.ipynb_checkpoints/
