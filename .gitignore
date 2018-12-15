@@ -1,3 +1,5 @@
+.idea/
+system/target/*
 *.csv
 *.pyc
 ipynb/.ipynb_checkpoints/
