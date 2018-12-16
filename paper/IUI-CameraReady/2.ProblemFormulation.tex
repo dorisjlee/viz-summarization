@@ -11,11 +11,15 @@ To prevent the drill-down fallacy, we concentrate on \emph{safety}---using infor
 \begin{equation}
     V_i^*=\{V_i^j : \underset{V_i^j}{argmin}\ D(V_i, V_i^j)\}
 \end{equation}
-We regard a parent visualization as informative if its distance from the child visualization falls within a user-defined threshold $\theta\%$ compared to the most informative parent:
-\begin{equation}
-    V_i^{*, \theta} = \{V_i^j : \frac{D(V_i, V_i^*)}{D(V_i, V_i^j)} \geq \theta\}
-\end{equation}
-For example in Figure~\ref{fig:elections_example}, while both \texttt{Black} and \texttt{Female} visualizations are considered parents of the \texttt{Black Female} visualization, only the \texttt{Black} visualization is considered an informative parent of the \texttt{Black Female} population, for any values of $\theta \geq 11\%$ via the Euclidean distance metric. Note that our proposed system can work with other common distance metrics such as Kullback-Leibler Divergence and Earth Mover's distance~\cite{Vartak2015}. Without loss of generality, we chose to use Euclidean distance metric for the remainder of our paper.
+\change{We regard a parent visualization as informative if its distance from the child visualization falls within a threshold $\theta\%$ compared to the most informative parent, set as default as 90\% and adjustable by user if needed.}
+\tr{
+    We regard a parent visualization as informative if its distance from the child visualization falls within a threshold $\theta\%$ compared to the most informative parent:
+    \begin{equation}
+        V_i^{*, \theta} = \{V_i^j : \frac{D(V_i, V_i^*)}{D(V_i, V_i^j)} \geq \theta\}
+    \end{equation}
+    For example in Figure~\ref{fig:elections_example}, while both \texttt{Black} and \texttt{Female} visualizations are considered parents of the \texttt{Black Female} visualization, only the \texttt{Black} visualization is considered an informative parent of the \texttt{Black Female} population, for any values of $\theta \geq 11\%$ via the Euclidean distance metric.
+}
+Note that our proposed system can work with other common distance metrics such as Kullback-Leibler Divergence and Earth Mover's distance~\cite{Vartak2015}. Without loss of generality, we chose to use Euclidean distance metric for the remainder of our paper.
 \subsubsection{Saliency}
 To discover insights, we emphasize \emph{saliency}---identifying interesting visualizations that convey new information. In general, a visualization is deemed to be \emph{interesting} if its underlying data distribution differs from that of its parents, and thus offers new information or unexpected insights. The notion of such interestingness have been explored in past work~\cite{Correll2016,Itti2009,Vartak2015}, particularly through the usage of distance-based metrics, where a large distance from some reference visualization indicates that the selected visualization is interesting. However, unlike past work, we concentrate on \emph{informative interestingness}, where the goal is to identify interesting visualizations in presence of informative references. Specifically, to model the interestingness of a visualization $V_i$ in the context of its informative parent $V_i^*$, we characterize the deviation between their data distributions using $D(V_i, V_i^*)$. Notice that our informativeness objective minimizes the distance between parent and child, whereas interestingness objective maximizes the resultant minimum distance. Accordingly, our overall objective function uses a maximin function of distance to capture informative insights. To incorporate the effect of subpopulation size into our objective function, we multiply the distance $D(V_i, V_i^*)$ between an informative parent $V_i^*$ and a child visualization $V_i$ by the ratio of their sizes  $U(V_i) = \frac{|V_i|}{|V_i^*|} \cdot D(V_i, V_i^*)$.\footnote{If multiple informative parents, $V_i^{*, \theta}$, are selected for a given visualization, $V_i$, then $U(V_i)$ is defined in terms of the most informative {\em selected} parent.}
 \subsubsection{Summarization}
