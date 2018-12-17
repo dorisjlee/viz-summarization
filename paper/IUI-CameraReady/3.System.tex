@@ -1,10 +1,10 @@
 %!TEX root = main.tex
 \section{Storyboard System\label{sec:system}}
 In this section, we present our system, \system, by first providing a high-level overview of the underlying algorithms, and then describing the user interaction mechanisms.
-
-\subsection{Algorithms\label{sec:algorithms}}
-We discuss the algorithms used for generating the visualization lattice, and then present an overview of how we traverse the lattice to select the k-connected maximum-weighted subgraph.
-
+\change{
+  \subsection{Lattice Traversal Algorithm\label{sec:algorithms}}
+  We discuss algorithm used for traversing the lattice to select the k-connected maximum-weighted subgraph.
+}%generating the visualization lattice, and then present an overview of how we
 \stitle{Lattice Generation:} Our system supports two variants of traversal based on the lattice generation procedure---offline variants that first generate the complete lattice and then work towards identifying the solution with maximum combined-edge utility, and online variants that incrementally generate the lattice and simultaneously identify the solution. The offline variants are appropriate for datasets with a small number of low-cardinality attributes, where we can generate the entire lattice in a reasonable time; whereas the online variants are appropriate for datasets with many high-cardinality attributes, where we need to incrementally generate a partial lattice. \tr{
   To prevent the danger of visualizations with small population size, users can also select an \textit{iceberg condition} ($\delta$) to adjust the extent of pruning on visualizations whose sizes fall below a certain percentage of the overall population size. \footnote{The terminology is used in the discussion of iceberg cubes in OLAP literature~\cite{Xin2007}.}
 }

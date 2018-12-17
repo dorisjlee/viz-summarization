@@ -81,7 +81,8 @@
 % use extensively to toggle between paper and TR
 \newcommand{\eat}[1]{}
 % \newcommand{\papertext}[1]{{\leavevmode\color{blue}{#1}}}
-\newcommand{\tr}[1]{{\leavevmode\color{green}{#1}}}
+% \newcommand{\tr}[1]{{\leavevmode\color{green}{#1}}}
+\newcommand{\tr}[1]{{\leavevmode\color{lightgray}{#1}}}
 \newcommand{\papertext}[1]{#1}
 % \newcommand{\tr}[1]{}
 \newcommand{\boldpara}[1]{\textbf{\paragraph{#1}}}
@@ -97,8 +98,7 @@
 \newcommand{\dor}[1]{\textcolor{green}{Doris: #1}}
 \newcommand{\hdev}[1]{\textcolor{magenta}{Himel: #1}}
 \newcommand{\haz}[1]{\textcolor{orange}{Hazem: #1}}
-\newcommand{\change}[1]{\textcolor{red}{#1}}
-\newcommand\notes[1]{\textcolor{red}{#1}}
+\newcommand{\change}[1]{{\leavevmode\color{red}#1}}
 \urlstyle{leo}
 % \AtBeginEnvironment{quote}{\small}
 \renewenvironment{quote}{%
