@@ -28,7 +28,7 @@ public class VizServer {
 
 	public static void main(String[] args) throws Exception {
 
-		Server server = new Server(6060);
+		Server server = new Server(8080);
 		
 		//ServletContextHandler handler = new ServletContextHandler(server, "/");
 		//handler.addServlet(Servlet.class, "/");

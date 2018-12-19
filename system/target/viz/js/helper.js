@@ -682,7 +682,7 @@ async function generateNode(nodeDicStr,callback){
         
         vlSpec['encoding'] = {
             "x": {"field": xname, "type": "ordinal"},
-            "y": {"field": yname, "type": "quantitative", "scale":{"domain": [0,100]}}
+            "y": {"field": yname, "type": "quantitative", "scale":{"domain": [0,100]},"axis": {"minExtent":0}}
           };
         vlSpec['layer'] = [{
             "mark": "bar"
@@ -691,7 +691,10 @@ async function generateNode(nodeDicStr,callback){
               "type": "text",
               "align": "center",
               "baseline": "top",
-              "dx": 3
+              "dx": 0,
+              "dy": 0,
+              "color": "white",
+              "fontSize": 12
             },
             "encoding": {
               "text": {"field": yname, "type": "quantitative", "fontSize":20}
@@ -760,8 +763,10 @@ function getNodeEdgeListThenDraw(nodeDicStr){
     // draw(nodelist, edgelist);
 }
 
-function testDraw(){
-    console.log(document.getElementById('agg').value)
+function Draw(){
+    //console.log(document.getElementById('agg').value)
+    //document.getElementById("canvas-graph").style.display = "none"
+    document.getElementById("loadingDashboard").style.display = "inline"
     $.ajax({
         type: "POST",
         url: "viz/draw",
@@ -772,12 +777,13 @@ function testDraw(){
             "xAxis" : JSON.stringify(document.getElementById('x').value),
             "aggType" : JSON.stringify(document.getElementById('agg').value),
             "k" : document.getElementById('kOutputId').value,
-            "ic" : document.getElementById('icOutputId').value,
-            "info" : document.getElementById('infoOutputId').value
+            "ic" : 0,
+            "info" : 0.9
         },
         success: function(data) {
                 console.log(data);
                 getNodeEdgeListThenDraw(data);
+                document.getElementById("loadingDashboard").style.display = "none";
             }
         
     })
