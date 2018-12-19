@@ -141,6 +141,16 @@
 \newblock
 
 
+\bibitem{Guo2017}
+{Yue Guo}, {Carsten Binnig}, {Tim Kraska}, {and} {T~U Darmstadt}. 2017.
+\newblock \showarticletitle{{What you see is not what you get ! Detecting
+  Simpson ' s Paradoxes during Data Exploration}}.
+\newblock {\em HILDA 2017 - Proceedings of the Workshop on Human-In-the-Loop
+  Data Analytics\/} (2017).
+\newblock
+\showISBNx{9781450350297}
+
+
 \bibitem{Han2005}
 {Jiawei Han}. 2005.
 \newblock {\em Data Mining: Concepts and Techniques}.
