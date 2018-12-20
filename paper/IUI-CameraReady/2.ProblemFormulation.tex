@@ -1,10 +1,45 @@
 %!TEX root = main.tex
 % \section{Towards Informative Exploration}
 \change{\section{Problem Formulation\label{sec:problem}}}
-In this section, we first describe how analysts manually explore the space of data subsets, and \change{the challenges that stem from this manual exploration}. We then introduce \change{three design principles that address these challenges}, and automatically guide analysts to the key informative insights.
+In this section, we first describe how analysts 
+manually explore the space of data subsets, 
+and \change{the challenges that stem from this manual exploration}. 
+We then introduce \change{three design principles 
+for a system that can address these challenges
+and automatically guide analysts to the key insights}.
 % \subsection{Manual Exploration via Drill-Downs}
-\subsection{\change{Manual Exploration and Challenges}}
-During visual data exploration, an analyst may need to explore different subsets of the data, which form a combinatorial \emph{lattice}. Figure 1 shows a partial lattice for the 2016 US election dataset. The lattice contains the overall visualization with no filter at the first level, all visualizations with a single filter at the second level, all visualizations with two filters at third level, and so on. Analysts explore such a combinatorial lattice from top to bottom, by generating and examining visualizations with increasing levels of specificity. In particular, analysts perform \emph{drill-downs} to access data subsets at lower levels by adding one filter at a time and visualize \change{their measures of interest for each data subset}. Further, as analysts perform drill-downs, they use the most recent visualization in the drill-down path (known as the `parent') as a reference to establish what they expect to see in the \change{next visualization (known as the `child') in the path}. For example in Figure~\ref{fig:elections_example}, the visualizations \texttt{Female} and \texttt{Black} are the \emph{parents} of the \texttt{Black Female} visualization, explored along the purple and orange path respectively.
+
+\change{\subsection{Manual Exploration: Approach and Challenges}}
+During visual data exploration, 
+an analyst may need to explore different subsets 
+of the data \change{that together form a combinatorial \emph{lattice}}. 
+Figure~\ref{fig:elections_example}
+shows a partial lattice for the 2016 US election dataset. 
+The lattice contains the overall visualization 
+with no filter at the first level, 
+all visualizations with a single filter 
+at the second level \change{(such as \texttt{Female})}, 
+all visualizations with two filters at third level, 
+and so on. 
+Analysts explore such a combinatorial lattice 
+from top to bottom, by generating and examining 
+visualizations with increasing levels of specificity. 
+In particular, analysts perform \emph{drill-downs}~\cite{OLAP} 
+to access data subsets at lower levels by 
+adding one filter at a time 
+\change{(such as adding XXX to YYY along the purple path)} 
+and visualize 
+\change{their measures of interest for each data subset---in this case XXX}. 
+Further, as analysts perform drill-downs, 
+they use the most recent visualization 
+in the drill-down path---the {\em parent}---as a \change{{\em reference}}
+to establish what they expect to see in the 
+\change{next visualization---the {\em child}---in the path}. 
+In Figure~\ref{fig:elections_example}, 
+the visualizations \texttt{Female} and \texttt{Black} 
+are the \emph{parents} of the \texttt{Black Female} visualization, 
+explored along the purple and orange path respectively.
+
 \par As exemplified by the purple path in Figure~\ref{fig:elections_example}, \change{while performing drill-downs} analysts may be misguided by improper parents (references) that exhibit a high local deviation, but do not generalize. This is likely to happen when other potential parents (i.e., parents not explored in the drill-down path) that could explain the more general phenomenon are overlooked. We refer to this misinterpretation as the \emph{drill-down fallacy}, since the fallacy arises from the inductive nature of the drill-down operation. \change{While this fallacy is applicable to any chart type that can be described as a probability distribution over data (e.g., bar charts, pie charts, heatmaps), we will limit our discussion to bar charts for brievity.}
 % \subsection{Three Elements of Informative Exploration}
 \subsection{\change{Design Principles for Informative Exploration}}
