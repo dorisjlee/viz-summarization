@@ -1,98 +1,94 @@
 %!TEX root = main.tex
 % \section{Towards Informative Exploration}
 \change{\section{Problem Formulation\label{sec:problem}}}
-In this section, we first describe how analysts 
-manually explore the space of data subsets, 
-and \change{the challenges that stem from this manual exploration}. 
-We then introduce \change{three design principles 
+In this section, we first describe how analysts
+manually explore the space of data subsets,
+and \change{the challenges that stem from this manual exploration}.
+We then introduce \change{three design principles
 for a system that can address these challenges
 and automatically guide analysts to the key insights}.
 % \subsection{Manual Exploration via Drill-Downs}
 
 \change{\subsection{Manual Exploration: Approach and Challenges}}
-During visual data exploration, 
-an analyst may need to explore different subsets 
-of the data \change{that together form a combinatorial \emph{lattice}}. 
+During visual data exploration,
+an analyst may need to explore different subsets
+of the data \change{that together form a combinatorial \emph{lattice}}.
 Figure~\ref{fig:elections_example}
-shows a partial lattice for the 2016 US election dataset. 
-The lattice contains the overall visualization 
-with no filter at the first level, 
-all visualizations with a single filter 
-at the second level \change{(such as \texttt{Female})}, 
-all visualizations with two filters at third level, 
-and so on. 
-Analysts explore such a combinatorial lattice 
-from top to bottom, by generating and examining 
-visualizations with increasing levels of specificity. 
-In particular, analysts perform \emph{drill-downs}~\cite{OLAP} 
-to access data subsets at lower levels by 
-adding one filter at a time 
-\change{(such as adding XXX to YYY along the purple path)} 
-and visualize 
-\change{their measures of interest for each data subset---in this case XXX}. 
-Further, as analysts perform drill-downs, 
-they use the most recent visualization 
+shows a partial lattice for the 2016 US election dataset.
+The lattice contains the overall visualization
+with no filter at the first level,
+all visualizations with a single filter
+at the second level \change{(such as \fem)},
+all visualizations with two filters at third level,
+and so on.
+Analysts explore such a combinatorial lattice
+from top to bottom, by generating and examining
+visualizations with increasing levels of specificity.
+In particular, analysts perform \emph{drill-downs}~\cite{OLAP}
+to access data subsets at lower levels by
+adding one filter at a time
+\change{(such as adding \blk to \fem along the purple path)}
+and visualize
+\change{their measures of interest for each data subset---in this case the percentage of votes for each candidate}.
+Further, as analysts perform drill-downs,
+they use the most recent visualization
 in the drill-down path---the {\em parent}---as a \change{{\em reference}}
-to establish what they expect to see in the 
-\change{next visualization---the {\em child}---in the path}. 
-In Figure~\ref{fig:elections_example}, 
-the visualizations \texttt{Female} and \texttt{Black} 
-are the \emph{parents} of the \texttt{Black Female} visualization, 
+to establish what they expect to see in the
+\change{next visualization in the path---the {\em child}}.
+In Figure~\ref{fig:elections_example},
+the visualizations \fem and \blk
+are the \emph{parents} of the \blkfem visualization,
 explored along the purple and orange path respectively.
 
-\par \change{As we saw in the purple path 
-in Figure~\ref{fig:elections_example}, 
-while performing drill-downs, 
-analysts may detect a local deviation 
-(we will formalize our notion of deviation subsequently) 
+\par \change{As we saw in the purple path
+in Figure~\ref{fig:elections_example},
+while performing drill-downs,
+analysts may detect a local deviation
+(we will formalize our notion of deviation subsequently)
 between
-a parent and a child to be significant. 
+a parent and a child to be significant.
 For example, they may be surprised by the fact
-that the \texttt{Female} and \texttt{Black Female}
+that the \fem and \blkfem
 visualizations are very different from each other,
 and find this to be a novel insight.
-However, this deviation 
-is because \texttt{Female} is not
-the {\em proper} parent or reference for
-\texttt{Black Female}.
-Here, a different parent, \texttt{Black},
-is the proper reference of \texttt{Black Female} 
-because it is one that exhibits the least deviation relative 
-to \texttt{Black Female}.
-In this case, we find 
-that the \texttt{Black Female} visualization
-is not really all that surprising given the \texttt{Black}
-visualization. 
+However, this deviation is a result of \fem not being the {\em proper} parent or reference for \blkfem. Here, a different parent, \blk,
+is the proper reference of \blkfem
+because it is one that exhibits the least deviation relative
+to \blkfem.
+In this case, we find
+that the \blkfem visualization
+is not really all that surprising given the \blk
+visualization.
 We refer to this phenomenon of being deceived by
-a local difference or deviation relative to an improper 
+a local difference or deviation relative to an improper
 reference as an instance of the {\em drill-down fallacy}.
 The way to avoid such fallacies is to ensure that the proper parent
 is present for each visualization so that analysts
-do not draw incorrect conclusions. 
-While this fallacy is applicable to any 
-chart type that can be described as a 
-probability distribution over data 
-(e.g., bar charts, pie charts, heatmaps), 
+do not draw incorrect conclusions.
+While this fallacy is applicable to any
+chart type that can be described as a
+probability distribution over data
+(e.g., bar charts, pie charts, heatmaps),
 we will limit our discussion to bar charts for brevity.}
 
 % \subsection{Three Elements of Informative Exploration}
 \change{\subsection{Design Principles for Informative Exploration}}
 
-Our goal is to help analysts discover 
-the key informative insights in a dataset, 
-while avoiding drill-down fallacies. 
-We \change{outline} 
-three essential principles for 
-finding such insights---the three S's: 
-\emph{safety}, \emph{saliency}, and \emph{summarization}. 
-We adopt these principles to 
-develop a visual exploration tool 
-that automatically selects visualizations 
-that collectively convey the key 
+Our goal is to help analysts discover
+the key informative insights in a dataset,
+while avoiding drill-down fallacies.
+We \change{outline}
+three essential principles for
+finding such insights---the three S's:
+\emph{safety}, \emph{saliency}, and \emph{summarization}.
+We adopt these principles to
+develop a visual exploration tool
+that automatically selects visualizations
+that collectively convey the key
 informative insights in a multidimensional dataset.
 \subsubsection{Safety}
 To prevent the drill-down fallacy, we concentrate on \emph{safety}---using informative references for discovering insights. We identify informative references in a drill-down context by modeling the \emph{informativeness} of an observed parent in characterizing the child visualization. An observed parent is \emph{informative} if its data distribution closely follows the child visualization's data distribution, since the parent serves as a proper reference that helps analysts form an accurate mental picture of what to expect from the child visualization. Specifically, we formulate the informativeness of an observed parent $V_i^j$ for a visualization $V_i$ as the similarity between their data distributions measured using a distance function $D$. \change{For bar charts, the data distribution refers to the height of bars assigned to the categories labeled by the x-axis. Accordingly, the computed distance $D(V_i, V_i^j)$ refers to the cumulative distance between the height of bars across different categories.} The most informative parents $V_i^*$ for visualization $V_i$ are the ones whose data distributions are most similar to $V_i$.
-%The distance $D(V_i, V_i^j)$ is computed based on the probability distributions represented by each visualization (in this case, a vector of bar values). \tr{For example, based on the Figure~\ref{fig:elections_example} example, the Euclidean distance between \texttt{Female} ($V_i^j$=[54,41,5]) and \texttt{Black Female} ($V_i$=[94,4,2]) is 54.57.} sqrt((94-54)**2+(41-4)**2+3**2)
+%The distance $D(V_i, V_i^j)$ is computed based on the probability distributions represented by each visualization (in this case, a vector of bar values). \tr{For example, based on the Figure~\ref{fig:elections_example} example, the Euclidean distance between \fem ($V_i^j$=[54,41,5]) and \blkfem ($V_i$=[94,4,2]) is 54.57.} sqrt((94-54)**2+(41-4)**2+3**2)
 
 \begin{equation}
     V_i^*=\{V_i^j : \underset{V_i^j}{argmin}\ D(V_i, V_i^j)\}
@@ -103,7 +99,7 @@ To prevent the drill-down fallacy, we concentrate on \emph{safety}---using infor
     \begin{equation}
         V_i^{*, \theta} = \{V_i^j : \frac{D(V_i, V_i^*)}{D(V_i, V_i^j)} \geq \theta\}
     \end{equation}
-    For example in Figure~\ref{fig:elections_example}, while both \texttt{Black} and \texttt{Female} visualizations are considered parents of the \texttt{Black Female} visualization, only the \texttt{Black} visualization is considered an informative parent of the \texttt{Black Female} population, for any values of $\theta \geq 11\%$ via the Euclidean distance metric.
+    For example in Figure~\ref{fig:elections_example}, while both \blk and \fem visualizations are considered parents of the \blkfem visualization, only the \blk visualization is considered an informative parent of the \blkfem population, for any values of $\theta \geq 11\%$ via the Euclidean distance metric.
 }
 Note that our proposed system can work with other common distance metrics such as Kullback-Leibler Divergence and Earth Mover's distance~\cite{Vartak2015}. Without loss of generality, we chose to use Euclidean distance metric for the remainder of our paper.
 \subsubsection{Saliency}

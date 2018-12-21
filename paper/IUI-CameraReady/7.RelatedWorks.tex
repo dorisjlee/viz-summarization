@@ -1,5 +1,5 @@
 %!TEX root = main.tex
-\section{Related Work}
+\section{Related Work\label{sec:related}}
 Our work draws from, and improves upon, past research in multidimensional data exploration and fallacies in visual analytics. \change{Other less-relevant past work on decision tree visualization and visualization storytelling is included as reference in the technical report.}
 \subsection{Guided Exploration of Multidimensional Data}
 Given a dataset, tools such as Tableau support automatic generation of visualizations based on perceptual graphical presentation rules~\cite{Mackinlay2007,Wongsuphasawat2016}. A more recent body of work automatically selects visualizations based on statistical measures, such as scagnostics and deviation. Given a scatterplot, Anand et al. \cite{Anand2015} applies randomized permutation tests to select partitioning variables that reveals interesting small multiples using scagnostics. Given a bar chart, Vartak et al. \cite{Vartak2015} finds other interesting bar charts that deviate from the input chart using a deviation-based measure. Our work extends the deviation-based measure to formulate user expectation. However, unlike existing works, we concentrate on informativeness, which enables our system to avoid drill-down fallacies.

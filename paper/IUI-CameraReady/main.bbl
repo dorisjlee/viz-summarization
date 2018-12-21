@@ -98,6 +98,15 @@
 \url{doi.acm.org/10.1145/312129.312298}}
 
 
+\bibitem{Armstrong2014}
+{Zan Armstrong} {and} {Martin Wattenberg}. 2014.
+\newblock \showarticletitle{Visualizing statistical mix effects and simpson's
+  paradox}.
+\newblock {\em IEEE transactions on visualization and computer graphics\/}
+  {20}, 12 (2014), 2132--2141.
+\newblock
+
+
 \bibitem{Binnig2017}
 {Carsten Binnig}, {Lorenzo~De Stefani}, {Tim Kraska}, {Eli Upfal}, {Emanuel
   Zgraggen}, {and} {Zheguang Zhao}. 2017.
@@ -237,6 +246,29 @@
 \showISSN{21508097}
 
 
+\bibitem{Kandel2012}
+{Sean Kandel}, {Ravi Parikh}, {Andreas Paepcke}, {Joseph Hellerstein}, {and}
+  {Jeffrey Heer}. 2012.
+\newblock \showarticletitle{Profiler: Integrated Statistical Analysis and
+  Visualization for Data Quality Assessment}. In {\em Advanced Visual
+  Interfaces}.
+\newblock
+\showURL{%
+\url{http://vis.stanford.edu/papers/profiler}}
+
+
+\bibitem{Key2012}
+{Alicia Key}, {Bill Howe}, {Daniel Perry}, {and} {Cecilia Aragon}. 2012.
+\newblock \showarticletitle{{VizDeck}}.
+\newblock {\em Proceedings of the 2012 international conference on Management
+  of Data - SIGMOD '12\/} (2012), 681.
+\newblock
+\showISBNx{9781450312479}
+\showISSN{07308078}
+\showDOI{%
+\url{http://dx.doi.org/10.1145/2213836.2213931}}
+
+
 \bibitem{Kim2017}
 {Younghoon Kim}, {Kanit Wongsuphasawat}, {Jessica Hullman}, {and} {Jeffrey
   Heer}. 2017.
@@ -247,6 +279,15 @@
 \showISBNx{9781450346559}
 \showURL{%
 \url{dx.doi.org/10.1145/3025453.3025866}}
+
+
+\bibitem{Lee2018}
+{Doris Jung-Lin Lee} {and} {Aditya Parameswaran}. 2018.
+\newblock \showarticletitle{{The Case for a Visual Discovery Assistant: A
+  Holistic Solution for Accelerating Visual Data Exploration}}.
+\newblock {\em IEEE Bulletin of Technical Committee on Data Engineering\/}
+  (2018).
+\newblock
 
 
 \bibitem{Mackinlay2007}
@@ -326,6 +367,17 @@
 \showISSN{10772626}
 \showURL{%
 \url{dx.doi.org/10.1109/TVCG.2010.179}}
+
+
+\bibitem{Siddiqui2017}
+{Tarique Siddiqui}, {Albert Kim}, {John Lee}, {Karrie Karahalios}, {and}
+  {Aditya Parameswaran}. 2016.
+\newblock \showarticletitle{Effortless data exploration with zenvisage: an
+  expressive and interactive visual analytics system}.
+\newblock {\em Proceedings of the VLDB Endowment\/} {10}, 4 (2016), 457--468.
+\newblock
+\showDOI{%
+\url{http://dx.doi.org/10.14778/3025111.3025126}}
 
 
 \bibitem{Vartak2015}
