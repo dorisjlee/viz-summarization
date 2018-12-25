@@ -28,6 +28,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{afterpage}
+\usepackage[htt]{hyphenat}
 \usepackage{microtype}                 % use micro-typography (slightly more compact, better to read)
 \PassOptionsToPackage{warn}{textcomp}  % to address font issues with \textrightarrow
 \usepackage{times}                     % we use Times as the main font
@@ -83,7 +84,7 @@
 % \newcommand{\papertext}[1]{{\leavevmode\color{blue}{#1}}}
 % \newcommand{\tr}[1]{{\leavevmode\color{green}{#1}}}
 \newcommand{\tr}[1]{{\leavevmode\color{lightgray}{#1}}}
-\newcommand{\papertext}[1]{#1}
+\newcommand{\papertext}[1]{{\leavevmode\color{green}{#1}}}
 % \newcommand{\tr}[1]{}
 \newcommand{\boldpara}[1]{\textbf{\paragraph{#1}}}
 % de-facto paragraph format

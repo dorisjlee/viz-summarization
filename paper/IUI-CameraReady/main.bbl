@@ -150,6 +150,19 @@
 \newblock
 
 
+\bibitem{Gray1997}
+{Jim Gray}, {Surajit Chaudhuri}, {Adam Bosworth}, {Andrew Layman}, {Don
+  Reichart}, {Murali Venkatrao}, {Frank Pellow}, {and} {Hamid Pirahesh}. 1997.
+\newblock \showarticletitle{Data Cube: A Relational Aggregation Operator
+  Generalizing Group-By, Cross-Tab, and Sub-Totals}.
+\newblock {\em Data Mining and Knowledge Discovery\/} {1}, 1 (01 Mar 1997),
+  29--53.
+\newblock
+\showISSN{1573-756X}
+\showURL{%
+\url{doi.org/10.1023/A:1009726021843}}
+
+
 \bibitem{Guo2017}
 {Yue Guo}, {Carsten Binnig}, {Tim Kraska}, {and} {T~U Darmstadt}. 2017.
 \newblock \showarticletitle{{What you see is not what you get ! Detecting
