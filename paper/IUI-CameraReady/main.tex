@@ -77,14 +77,16 @@
 \itemsep=\parsep
     }
 }
+\newcommand{\origcolor}[1]{\color[HTML]{7C0FFF}{#1}}
+\newcommand{\diffcolor}[1]{\color[HTML]{FA7300}{#1}}
 \newcommand{\squishend}{\end{list}}
 \newcommand{\npar}{\par \noindent}
 % use extensively to toggle between paper and TR
 \newcommand{\eat}[1]{}
-% \newcommand{\papertext}[1]{{\leavevmode\color{blue}{#1}}}
+\newcommand{\papertext}[1]{#1}
 % \newcommand{\tr}[1]{{\leavevmode\color{green}{#1}}}
 \newcommand{\tr}[1]{{\leavevmode\color{lightgray}{#1}}}
-\newcommand{\papertext}[1]{{\leavevmode\color{green}{#1}}}
+% \newcommand{\papertext}[1]{{\leavevmode\color{green}{#1}}}
 % \newcommand{\tr}[1]{}
 \newcommand{\boldpara}[1]{\textbf{\paragraph{#1}}}
 % de-facto paragraph format
@@ -148,26 +150,38 @@
 \settopmatter{printacmref=true}
 \fancyhead{}
 
-% DOI
-% \acmDOI{10.475/123_4}
-
-% ISBN
-% \acmISBN{123-4567-24-567/08/06}
-
-%Conference
-% \acmConference[WOODSTOCK'97]{ACM Woodstock conference}{July 1997}{El
-%   Paso, Texas USA}
-% \acmYear{1997}
-% \copyrightyear{2016}
-
-% \acmPrice{15.00}
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%% START OF THE PAPER %%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
+\author{Doris Jung-Lin Lee}
+\affiliation{
+  \institution{University of Illinois, Urbana-Champaign}
+}
+\email{jlee782@illinois.edu}
+
+\author{Himel Dev}
+\affiliation{
+  \institution{University of Illinois, Urbana-Champaign}
+}
+\email{hdev3@illinois.edu}
+\author{Huizi Hu}
+\affiliation{
+  \institution{University of Illinois, Urbana-Champaign}
+}
+\email{huizihu2@illinois.edu}
+\author{Hazem Elmeleegy}
+\affiliation{%
+  \institution{Google, Inc.}
+}
+\email{elmeleegy@google.com}
+
+\author{Aditya Parameswaran}
+\affiliation{%
+  \institution{University of Illinois, Urbana-Champaign}
+}
+\email{adityagp@illinois.edu}
 %\title{Avoiding the Drill-down Fallacy with Storyboard: Assisted and Accelerated Data Exploration Through Data Subsets}
 \title{Avoiding Drill-down Fallacies with {\em VisPilot}: Assisted Exploration of Data Subsets}
 \begin{abstract}

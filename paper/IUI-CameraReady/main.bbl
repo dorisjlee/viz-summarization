@@ -326,6 +326,16 @@
 \url{ncbi.nlm.nih.gov/pmc/articles/PMC3900058/}}
 
 
+\bibitem{Muller1993}
+{Michael~J. Muller} {and} {Sarah Kuhn}. 1993.
+\newblock \showarticletitle{Participatory Design}.
+\newblock {\it Commun. ACM} {36}, 6 (June 1993), 24--28.
+\newblock
+\showISSN{0001-0782}
+\showDOI{%
+\url{http://dx.doi.org/10.1145/153571.255960}}
+
+
 \bibitem{Parameswaran2010}
 {Aditya~G. Parameswaran}, {Hector Garcia-Molina}, {and} {Jeffrey~D. Ullman}.
   2010.
