@@ -85,19 +85,6 @@
 \url{dx.doi.org/10.1109/TVCG.2015.2467323}}
 
 
-\bibitem{Ankerst1999}
-{Mihael Ankerst}, {Christian Elsen}, {Martin Ester}, {and} {Hans-Peter
-  Kriegel}. 1999.
-\newblock \showarticletitle{Visual Classification: An Interactive Approach to
-  Decision Tree Construction}. In {\em Proceedings of the Fifth ACM SIGKDD
-  International Conference on Knowledge Discovery and Data Mining} {\em (KDD
-  '99)}. ACM, New York, NY, USA, 392--396.
-\newblock
-\showISBNx{1-58113-143-7}
-\showURL{%
-\url{doi.acm.org/10.1145/312129.312298}}
-
-
 \bibitem{Armstrong2014}
 {Zan Armstrong} {and} {Martin Wattenberg}. 2014.
 \newblock \showarticletitle{Visualizing statistical mix effects and simpson's
@@ -150,6 +137,18 @@
 \newblock
 
 
+\bibitem{Gotz2016}
+{David Gotz}, {Shun Sun}, {and} {Nan Cao}. 2016.
+\newblock \showarticletitle{{Adaptive Contextualization: Combating Bias During
+  High-Dimensional Visualization and Data Selection}}.
+\newblock {\em Proceedings of the 21st International Conference on Intelligent
+  User Interfaces - IUI '16\/} (2016), 85--95.
+\newblock
+\showISBNx{9781450341370}
+\showDOI{%
+\url{http://dx.doi.org/10.1145/2856767.2856779}}
+
+
 \bibitem{Gray1997}
 {Jim Gray}, {Surajit Chaudhuri}, {Adam Bosworth}, {Andrew Layman}, {Don
   Reichart}, {Murali Venkatrao}, {Frank Pellow}, {and} {Hamid Pirahesh}. 1997.
@@ -192,15 +191,6 @@
 \url{dx.doi.org/10.1145/2133416.2146416}}
 
 
-\bibitem{Hermann2017}
-{Jeremy Hermann} {and} {Mike Del~Balso}. 2017.
-\newblock Meet Michelangelo: Uber's Machine Learning Platform.
-\newblock   (September 2017).
-\newblock
-\showURL{%
-\url{http://eng.uber.com/michelangelo/}}
-
-
 \bibitem{Hoque2017}
 {Enamul Hoque}, {Vidya Setlur}, {Melanie Tory}, {and} {Isaac Dykeman}. 2017.
 \newblock \showarticletitle{{Applying Pragmatics Principles for Interaction
@@ -212,20 +202,6 @@
 \showISSN{10772626}
 \showURL{%
 \url{dx.doi.org/10.1109/TVCG.2017.2744684}}
-
-
-\bibitem{Hullman2013}
-{Jessica Hullman}, {Steven Drucker}, {Nathalie {Henry Riche}}, {Bongshin Lee},
-  {Danyel Fisher}, {and} {Eytan Adar}. 2013.
-\newblock \showarticletitle{{A deeper understanding of sequence in narrative
-  visualization}}.
-\newblock {\em IEEE Transactions on Visualization and Computer Graphics\/}
-  {19}, 12 (2013), 2406--2415.
-\newblock
-\showISBNx{1077-2626}
-\showISSN{10772626}
-\showURL{%
-\url{dx.doi.org/10.1109/TVCG.2013.119}}
 
 
 \bibitem{Hullman2017}
@@ -349,15 +325,6 @@
 \url{dx.doi.org/10.1145/1871437.1871555}}
 
 
-\bibitem{Terence2018}
-{Terence Parr} {and} {Prince Grover}. 2018.
-\newblock How to visualize decision trees.
-\newblock   (September 2018).
-\newblock
-\showURL{%
-\url{explained.ai/decision-tree-viz/}}
-
-
 \bibitem{police}
 {E. Pierson}, {C. Simoiu}, {J. Overgoor}, {S. Corbett-Davies}, {V.
   Ramachandran}, {C. Phillips}, {and} {S. Goel}. 2017.
@@ -367,16 +334,6 @@
 \newblock
 \showURL{%
 \url{http://openpolicing.stanford.edu/data/}}
-
-
-\bibitem{Quinlan1986}
-{J.~R. Quinlan}. 1986.
-\newblock \showarticletitle{Induction of Decision Trees}.
-\newblock {\em Mach. Learn.\/} {1}, 1 (March 1986), 81--106.
-\newblock
-\showISSN{0885-6125}
-\showURL{%
-\url{dx.doi.org/10.1023/A:1022643204877}}
 
 
 \bibitem{Segel2010}
@@ -403,6 +360,18 @@
 \url{http://dx.doi.org/10.14778/3025111.3025126}}
 
 
+\bibitem{Dang2014}
+{{Tuan Nhon Dang}} {and} {{Leland Wilkinson}}. 2014.
+\newblock \showarticletitle{{ScagExplorer: Exploring Scatterplots by Their
+  Scagnostics}}.
+\newblock {\em 2014 IEEE Pacific Visualization Symposium\/} (2014), 73--80.
+\newblock
+\showISBNx{978-1-4799-2873-6}
+\showISSN{21658773}
+\showDOI{%
+\url{http://dx.doi.org/10.1109/PacificVis.2014.42}}
+
+
 \bibitem{Vartak2015}
 {Manasi Vartak}, {Sajjadur Rahman}, {Samuel Madden}, {Aditya Parameswaran},
   {and} {Neoklis Polyzotis}. 2015.
@@ -422,6 +391,13 @@
   (VAST)\/} (2017).
 \newblock
 \showISBNx{9781538631638}
+
+
+\bibitem{Wilkinson2005}
+{Leland Wilkinson}, {{Anushka Anand}}, {and} {{Robert Grossman}}. 2005.
+\newblock \showarticletitle{{Graph-Theoretic Scagnostics}}.
+\newblock {\em IEEE Symposium on Information Visualization (INFOVIS)\/} (2005).
+\newblock
 
 
 \bibitem{Wongsuphasawat2016}
@@ -447,20 +423,6 @@
 \showISSN{21508097}
 \showURL{%
 \url{dx.doi.org/10.14778/2536354.2536356}}
-
-
-\bibitem{Xin2007}
-{Dong Xin}, {Jiawei Han}, {Xiaolei Li}, {Zheng Shao}, {and} {Benjamin~W. Wah}.
-  2007.
-\newblock \showarticletitle{{Computing iceberg cubes by top-down and bottom-up
-  integration: The starcubing approach}}.
-\newblock {\em IEEE Transactions on Knowledge and Data Engineering\/} {19}, 1
-  (2007), 111--126.
-\newblock
-\showISBNx{0-12-722442-4}
-\showISSN{10414347}
-\showURL{%
-\url{dx.doi.org/10.1109/TKDE.2007.250589}}
 
 
 \bibitem{Zgraggen2018CHI}
