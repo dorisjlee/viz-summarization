@@ -417,6 +417,17 @@
 \showISBNx{9781538631638}
 
 
+\bibitem{wiki:minimax}
+{{Wikipedia contributors}}. 2018.
+\newblock Minimax --- {Wikipedia}{,} The Free Encyclopedia.
+\newblock   (2018).
+\newblock
+\showURL{%
+\url{https://en.wikipedia.org/w/index.php?title=Minimax&oldid=866945016}}
+\newblock
+\shownote{[Online; accessed 30-December-2018].}
+
+
 \bibitem{Wilkinson2005}
 {Leland Wilkinson}, {{Anushka Anand}}, {and} {{Robert Grossman}}. 2005.
 \newblock \showarticletitle{{Graph-Theoretic Scagnostics}}.

@@ -167,20 +167,69 @@ where the interestingness of a child visualization
 is only defined in the presence of informative parent references.
 Second, we weigh the interestingness by the proportion of the 
 population captured by the child visualization.
-(That is,  )\agp{got till here.}}
-However, unlike past work, we concentrate 
-on \emph{informative interestingness}, where we 
-identify interesting visualizations 
-in presence of informative references. 
-Specifically, to model the interestingness 
-of a visualization $V_i$ in the context of its informative parent $V_i^*$, we characterize the deviation between their data distributions using $D(V_i, V_i^*)$. Notice that our informativeness objective minimizes the distance between parent and child, whereas interestingness objective maximizes the resultant minimum distance. Accordingly, our overall objective function uses a maximin function of distance to capture informative insights. To incorporate the effect of subpopulation size into our objective function, we multiply the distance $D(V_i, V_i^*)$ between an informative parent $V_i^*$ and a child visualization $V_i$ by the ratio of their sizes  $U(V_i) = \frac{|V_i|}{|V_i^*|} \cdot D(V_i, V_i^*)$.\footnote{If multiple informative parents, $V_i^{*, \theta}$, are selected for a given visualization, $V_i$, then $U(V_i)$ is defined in terms of the most informative {\em selected} parent.}
-\subsubsection{Summarization}
-To succinctly convey insights, we concentrate on \emph{summarization}---identifying a group of visualizations that collectively contain informative insights. Since our aim is to identify a unified narrative, instead of discrete insights, we enforce that any selected visualization must have at least one of its informative parents present in the dashboard. Specifically, we identify a set of $k$ connected visualizations that collectively maximize the sum of the proposed utility $U(V_i)$ across each selected visualization, $V_i$, and thus succinctly convey informative insights, more formally stated as follows:
-\par \textsc{Problem.} \textit{Given a dataset and user-provided X, Y attributes, select $k$ visualizations from the lattice of data subsets $\mathcal{L}$ to be included in the dashboard, such that:
-\\ (i) one of the selected visualization is the overall visualization, corresponding to the entire dataset with no filter;
-\\ (ii) for each visualization except for the overall, at least one of its informative parents is present in the $k$ visualizations;
-\\ (iii) the $k$ selected visualizations maximize the total utility $\sum_{V_i \in \mathcal{L}} U(V_i)$ as defined above.
-}% and aggregation function G, a lattice $\mathcal{L}$ consisting of visualizations $V_i$ for all possible filter $F_i$ that could be constructed from dataset D:}
+(That is, when a deviation is manifested in a larger population,
+it is deemed to be more significant and therefore more interesting.)
+Thus, we define the utility of a visualization $V_i$, $U(V_i)$ as follows:
+\[
+    U(V_i)= 
+\begin{cases}
+     \frac{|V_i|}{|V_i^*|} \cdot D(V_i, V_i^*) & \text{if } V_i^* \text{ is present}\\
+    -\infty             & \text{otherwise}
+\end{cases}
+\]
+That is, the utility or interestingness of a visualization
+is the distance between the visualization and its informative
+parent, if present\footnote{If multiple informative parents, $V_i^{*, \theta}$, are present for a given visualization, $V_i$, then $U(V_i)$ is defined in terms of the most informative parent that is present.}. 
+To incorporate the effect of subpopulation size into our objective function, we multiply the distance $D(V_i, V_i^*)$ between an informative parent $V_i^*$ and a child visualization $V_i$ by the ratio of their sizes. 
+Notice that the objective $U$ has a minimax form~\cite{wiki:minimax},
+in that informativeness aims to minimize the distance between parent and child,
+while interestingness aims to maximize the resulting minimum distance. 
+For convenience, we define $U(V_0)$, where $V_0$ is the overall visualization,
+to be $1$, which is the maximum value that the expression $\frac{|V_i|}{|V_i^*|} \cdot D(V_i, V_i^*)$ can take, ensuring that the overall visualization
+is always valuable to include. 
+}
+
+\subsubsection{Succinctness}
+\change{
+We can't possibly display all of the visualizations
+in the lattice of data subsets: this lattice scales
+exponentially in the number of attributes. 
+Instead, we aim for {\em succinctness},
+where we only return a subset $S$ of all visualizations of size $|S| = k$.
+We define the utility of $S$: 
+$$U(S) = \sum_{V_i \in S}{U(V_i)}$$
+In this subset, for every visualization except for the overall
+visualization, one of its informative 
+parents must be present (otherwise $U = -\infty$).
+Thus, this subset ends up being a connected network
+(a sub-graph of the overall lattice) rooted at the overall visualization,
+ensuring that for each visualization, there is an informative parent available
+for context.
+We can now formally define our problem statement.
+\par \textsc{Problem.} \textit{Given a dataset and user-provided X, Y attributes, select a subset $S, |S| = k$ visualizations from the lattice of data subsets $\mathcal{L}$, such that $U(S)$ is maximized.}
+\\
+Thanks to how we have defined $U$, $S$ will include the overall visualization, 
+corresponding to the entire dataset with no filter. And,
+for each visualization in $S$ except the overall one, 
+at least one of its informative parents will be present in $S$.
+This network of visualizations $S$ can be displayed on a dashboard.
+
+
+% To succinctly convey insights, we concentrate on \emph{summarization}---identifying a group of visualizations that collectively contain informative insights. Since our aim is to identify a unified narrative, instead of discrete insights, we enforce that any selected visualization must have at least one of its informative parents present in the dashboard. Specifically, we identify a set of $k$ connected visualizations that collectively maximize the sum of the proposed utility $U(V_i)$ across each selected visualization, $V_i$, and thus succinctly convey informative insights, more formally stated as follows:
+% \par \textsc{Problem.} \textit{Given a dataset and user-provided X, Y attributes, select $k$ visualizations from the lattice of data subsets $\mathcal{L}$ to be included in the dashboard, such that:
+% \\ (i) one of the selected visualization is the overall visualization, corresponding to the entire dataset with no filter;
+% \\ (ii) for each visualization except for the overall, at least one of its informative parents is present in the $k$ visualizations;
+% \\ (iii) the $k$ selected visualizations maximize the total utility $\sum_{V_i \in \mathcal{L}} U(V_i)$ as defined above.
+% }
+% and aggregation function G, a lattice $\mathcal{L}$ consisting of visualizations $V_i$ for all possible filter $F_i$ that could be constructed from dataset D:}
 % \\ \texttt{$V_i$ = SELECT X, G(Y) FROM D WHERE $F_i$ GROUP BY X}
 % \\ \textit{find k visualizations from $\mathcal{L}$ to include in dashboard $\mathcal{S}$, such that the total utility $\sum_{V_i \in \mathcal{L}} U(V_i)$ as defined above is maximized, while enforcing that all $V_i \in \mathcal{S}$ is connected.}
-\par This problem of finding a connected subgraph in the lattice that has the maximum total edge utility is known as the \emph{maximum-weight connected subgraph problem}~\cite{ErnstAlthaus2009} and is known to be NP-Complete~\cite{Parameswaran2010}. We design several approximate algorithms to solve this problem efficiently.
+Unfortunately, the problem of finding a 
+connected subgraph in a lattice with 
+maximum total edge utility is known 
+as the \emph{maximum-weight connected subgraph problem}~\cite{ErnstAlthaus2009} 
+and is known to be {\sc NP-Complete}~\cite{Parameswaran2010}. 
+\agp{This doesn't actually show that our problem is hard. We need to reduce max-weighted subgraph to our problem, not the other way around. I am leaving a pointer here
+to think about it later.}
+We design several approximate algorithms to solve this problem efficiently, next.
+}
