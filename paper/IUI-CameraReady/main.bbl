@@ -130,6 +130,19 @@
 \url{dx.doi.org/10.1109/TVCG.2016.2598618}}
 
 
+\bibitem{Ding2016}
+{Bolin Ding}, {Silu Huang}, {Surajit Chaudhuri}, {Kaushik Chakrabarti}, {and}
+  {Chi Wang}. 2016.
+\newblock \showarticletitle{Sample + Seek: Approximating Aggregates with
+  Distribution Precision Guarantee}. In {\em Proceedings of the 2016
+  International Conference on Management of Data} {\em (SIGMOD '16)}. ACM, New
+  York, NY, USA, 679--694.
+\newblock
+\showISBNx{978-1-4503-3531-7}
+\showDOI{%
+\url{http://dx.doi.org/10.1145/2882903.2915249}}
+
+
 \bibitem{autism}
 {Fadi Fayez~Thabtah}. 2017.
 \newblock Autism Screening Adult Data Set. {UCI} Machine Learning Repository.
@@ -277,6 +290,17 @@
 \newblock {\em IEEE Bulletin of Technical Committee on Data Engineering\/}
   (2018).
 \newblock
+
+
+\bibitem{Macke2018}
+{Stephen Macke}, {Yiming Zhang}, {Silu Huang}, {and} {Aditya Parameswaran}.
+  2018.
+\newblock \showarticletitle{Adaptive Sampling for Rapidly Matching Histograms}.
+\newblock {\em Proc. VLDB Endow.\/} {11}, 10 (June 2018), 1262--1275.
+\newblock
+\showISSN{2150-8097}
+\showDOI{%
+\url{http://dx.doi.org/10.14778/3231751.3231753}}
 
 
 \bibitem{Mackinlay2007}
