@@ -153,41 +153,63 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\author{Doris Jung-Lin Lee}
+\author{Doris Jung-Lin Lee$^\dagger$, Himel Dev$^\dagger$, Huizi Hu$^\dagger$, Hazem Elmeleegy$^\star$, Aditya Parameswaran$^\dagger$}
 \affiliation{
-  \institution{University of Illinois, Urbana-Champaign}
+  \institution{$^\dagger$University of Illinois, Urbana-Champaign, $^\star$Google, Inc.}
 }
-\email{jlee782@illinois.edu}
+\email{jlee782|hdev3|huizihu2|adityagp@illinois.edu, elmeleegy@google.com}
 
-\author{Himel Dev}
-\affiliation{
-  \institution{University of Illinois, Urbana-Champaign}
-}
-\email{hdev3@illinois.edu}
-\author{Huizi Hu}
-\affiliation{
-  \institution{University of Illinois, Urbana-Champaign}
-}
-\email{huizihu2@illinois.edu}
-\author{Hazem Elmeleegy}
-\affiliation{%
-  \institution{Google, Inc.}
-}
-\email{elmeleegy@google.com}
 
-\author{Aditya Parameswaran}
-\affiliation{%
-  \institution{University of Illinois, Urbana-Champaign}
-}
-\email{adityagp@illinois.edu}
+% \author{Doris Jung-Lin Lee}
+% \affiliation{
+%   \institution{University of Illinois, Urbana-Champaign}
+% }
+% \email{jlee782@illinois.edu}
+
+% \author{Himel Dev}
+% \affiliation{
+%   \institution{University of Illinois, Urbana-Champaign}
+% }
+% \email{hdev3@illinois.edu}
+% \author{Huizi Hu}
+% \affiliation{
+%   \institution{University of Illinois, Urbana-Champaign}
+% }
+% \email{huizihu2@illinois.edu}
+% \author{Hazem Elmeleegy}
+% \affiliation{%
+%   \institution{Google, Inc.}
+% }
+% \email{elmeleegy@google.com}
+
+% \author{Aditya Parameswaran}
+% \affiliation{%
+%   \institution{University of Illinois, Urbana-Champaign}
+% }
+% \email{adityagp@illinois.edu}
 %\title{Avoiding the Drill-down Fallacy with Storyboard: Assisted and Accelerated Data Exploration Through Data Subsets}
 \title{Avoiding Drill-down Fallacies with {\em VisPilot}: Assisted Exploration of Data Subsets}
 \begin{abstract}
-As datasets continue to grow in size and complexity, exploring multi-dimensional datasets remain challenging for analysts. A common operation during this exploration is drill-down---understanding the behavior of data subsets by adding filters. While widely used, in the absence of careful attention towards confounding factors, drill-downs could lead to inductive fallacies. Specifically, an analyst may end up being \lq\lq deceived\rq\rq\ into thinking that a deviation in trend is attributable to a local change, when in fact it is more generalized phenomenon; we call this the drill-down fallacy. A naive solution to prevent the drill-down fallacy is to exhaustively explore all potential drill-down paths, which quickly becomes infeasible on large and complex datasets with many attributes. In this paper, we present \system, an accelerated visual data exploration tool that guides analysts to the key insights in a dataset, while avoiding drill-down fallacies. Our user study results show that \system helps analysts discover interesting visualizations, understand attribute importance, and predict unseen visualizations better than other summarization baselines.
+As datasets continue to grow in size and complexity, 
+exploring multi-dimensional datasets remain challenging for analysts. 
+A common operation during this exploration is drill-down---understanding 
+the behavior of data subsets by \change{progressively} adding filters. 
+While widely used, in the absence of careful attention towards confounding factors, 
+drill-downs could lead to inductive fallacies. 
+Specifically, an analyst may end up being \lq\lq deceived\rq\rq\ into thinking that a deviation in trend is attributable to a local change, when in fact \change{it is a more general phenomenon}; 
+we term this the \change{{\em drill-down fallacy}}. 
+\change{One way to avoid falling prey to drill-down fallacies} 
+is to exhaustively explore all potential drill-down paths, 
+which quickly becomes infeasible \change{on complex datasets with many attributes}. 
+We present \system, an accelerated visual data exploration tool that guides analysts 
+\change{through the} key insights in a dataset, while avoiding drill-down fallacies. 
+Our user study results show that \system helps analysts discover 
+interesting visualizations, understand attribute importance, 
+and predict unseen visualizations better than other summarization baselines.
 %towards meaningful insights for a variety of tasks.
 \end{abstract}
 \maketitle
-% \author{\plainauthor}
+ \author{Doris Jung-Lin Lee, Himel Dev, Huizi Hu, Hazem Elmeleegy, Aditya Parameswaran}
 
 
 \keywords{exploratory data analysis, visualization recommendation.}

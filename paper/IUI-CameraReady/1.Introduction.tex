@@ -11,7 +11,8 @@ in these subsets.}
 \change{Unfortunately, manually}
 generating and examining each visualization
 in this space of data subsets
-(which grows exponentially in number of attributes) presents a major bottleneck \change{during exploration}.
+(which grows exponentially in number of attributes) 
+presents a major bottleneck \change{during exploration}.
 %Drill-Down for exploration
 \begin{figure}[ht!]
 % \includegraphics[width=\linewidth]{figures/elections_example_lattice.pdf}
@@ -22,8 +23,7 @@ in this space of data subsets
 \end{figure}
 \par One way of navigating this combinatorial space
 is to perform \change{{\em drill-downs}}
-on the space of data subsets
-(hereafter referred to as the \emph{lattice}).
+on the space\change{---a {\em lattice}---}of data subsets.
 For example, a campaign manager
 who is interested in understanding
 voting patterns across different
@@ -38,13 +38,14 @@ corresponds to the overall population.
 The analyst may then \change{use their intuition to}
 drill down to specific demographics of interest,
 say gender-based demographics,
-by generating bar charts for female voters,
+by generating bar charts for female voters \change{by following the purple path},
 as shown in the second visualization
-at the second row of Figure~\ref{fig:elections_example}.
+at the second row of Figure~\ref{fig:elections_example}\change{,
+and then to the visualization corresponding to \blkfem voters
+in the third row}.
 %Challenges associated with drill-down
 
-\par
-\noindent
+\stitle{\change{Challenges with Manual Drill-down.}}
 There are three challenges associated
 with performing manual drill downs in this manner:
 
@@ -89,9 +90,10 @@ local deviations in trend during drill-down
 to contextualize the behavior of the visualization of interest (\blkfem).} One approach to avoid this fallacy
 is to \change{exhaustively} explore all potential drill-down paths. Unfortunately, this approach does not
 scale.
+
 \par \change{While there have been a number of statistical
 reasoning fallacies that have been identified
-in visual analytics, including Simpson's Paradox~\cite{Guo2017,Armstrong2014}, Multiple Comparison's Problem~\cite{Zgraggen2018CHI}, Selection Bias~\cite{Gotz2016},
+in visual analytics, including Simpson's paradox~\cite{Guo2017,Armstrong2014}, multiple comparisons~\cite{Zgraggen2018CHI}, and selection bias~\cite{Gotz2016},
 to the best of our knowledge,
 our paper is the first to identify the drill-down fallacy,
 a common fallacy that appears during manual
@@ -110,7 +112,8 @@ We discuss this and other
 related work in more detail in Section~\ref{sec:related}.}
 
  \par
- We present a visual data exploration tool, titled \system,
+ \stitle{\change{\system with Safety, Saliency, and Succinctness.}}
+We present a visual data exploration tool, titled \system,
  that addresses the three aforementioned
  challenges of exploration \change{by espousing}
  three principles:
@@ -121,9 +124,9 @@ related work in more detail in Section~\ref{sec:related}.}
  (ii) \textbf{Saliency}
  (i.e., identify interesting visualizations
  that convey new information or insights),
- and (iii) \textbf{Summarization}
- (i.e., succinctly convey the key
- insights in \change{the} dataset).
+ and (iii) \change{\textbf{Succinctness}}
+ (i.e., \change{convey only the key
+ insights in the} dataset).
  To facilitate safety, we develop a
  notion of \emph{informativeness}---the capability
  of a reference \change{parent}
@@ -133,34 +136,33 @@ related work in more detail in Section~\ref{sec:related}.}
  difference between a visualization and
  its informative reference
  in terms of underlying data distribution.
- Finally, to facilitate summarization,
- we embrace a \emph{collective} measure of
- visualization utility by recommending a
- connected network of visualizations that collectively
- offer informative insights.
+ Finally, to facilitate \change{succinctness,
+ we embrace a collective measure of
+ visualization utility by recommending a {\em compact}
+ connected network of visualizations}.
  Based on these three principles,
  \change{\system\ {\em  automatically identifies a
- network of {\bf \em interesting} and {\bf \em informative} visualizations
- that {\bf \em collectively} convey the key
+ {\bf \em compact} network of  {\bf \em informative} and  {\bf \em interesting} visualizations
+ that collectively convey the key
  insights in a dataset}.
  Our user study results demonstrate that
  \system can help analysts gain a better understanding
- of the dataset and guide them toward meaningful
- insights, for a variety of tasks}.
+ of the dataset and help them accomplish a variety of tasks}.
  Our contributions include:
 \begin{denselist}
-\item Identifying and characterizing
-the notion of ``drill-down fallacy'', a common fallacy
-that have not been studied extensively in the past;
-\item Introducing the novel concept of \emph{informativeness}
-that helps users identify meaningful insights
+\item Identifying 
+the notion of \change{a {\em drill-down fallacy}};
+\item Introducing the concept of \emph{informativeness}
+that helps identify insights
 that arise from something
-\change{\textit{truly interesting}
+\change{that holds
 in the data (as opposed to confounding local phenomena)};
+\item \change{Extending the concept of informativeness to a
+measure to quantify the benefit of a network of visualizations};
 \item Designing \system,
 \change{which efficiently and automatically identifies}
- a network of visualizations that succinctly conveys
+ a network of visualizations \change{conveying}
  the key insights in a dataset; and
 %that builds a dashboard by
-\item Demonstrating the efficacy of our system through a user study evaluation on how well users can retrieve interesting visualizations, judge the importance of attributes, and predict unseen visualizations, against two other summarization baselines.
+\item Demonstrating the efficacy of \change{\system} through a user study evaluation on how well users can retrieve interesting visualizations, judge the importance of attributes, and predict unseen visualizations, against two baselines.
 \end{denselist}
