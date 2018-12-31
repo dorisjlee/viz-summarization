@@ -78,7 +78,7 @@ probability distribution over data
 we will limit our discussion to bar charts for brevity.}
 
 % \subsection{Three Elements of Informative Exploration}
-\achange{\subsection{The ``3S'' Design Principles for Insightful Exploration}}
+\change{\subsection{The ``3S'' Design Principles}}
 Our goal is to help analysts discover
 the key insights in a dataset,
 while avoiding drill-down fallacies.
@@ -104,7 +104,7 @@ A parent is said to be {\em informative}
 if its data distribution closely follows the child
 visualization's data distribution,
 since the presence of the parent allows
-the \achange{analyst to form an} accurate mental model
+the analyst to form an accurate mental model
 of what to expect from the child visualization.
 We compute the informativeness of
 the $j^{th}$ parent $V_i^j$
@@ -119,7 +119,7 @@ $D(V_i, V_i^j)$
 refers to the sum of the distances
 between the normalized heights of bars across different categories.
 Quantifying deviation using distances between normalized versions of visualizations
-in this manner is not \achange{a novel concept}---we leverage prior work for this~\cite{Vartak2015,Siddiqui2017,Macke2018,Ding2016}.
+in this manner is not a novel idea---we leverage prior work for this~\cite{Vartak2015,Siddiqui2017,Macke2018,Ding2016}.
 The specific distance measure $D$ is not important; while we use the Euclidean metric,
 we can easily work with other common distance metrics such as Kullback-Leibler Divergence and Earth Mover's distance~\cite{Vartak2015}.
 The most informative parent $V_i^\dagger$ for a visualization $V_i$ is
@@ -151,7 +151,7 @@ we also want to emphasize {\em saliency} by
 identifying visualizations that convey new information.
 In general, a visualization is deemed to be \emph{interesting}
 if its underlying data distribution differs
-from that of its \achange{informative} parents,
+from that of its parents,
 and thus offers new unexpected information or insight.
 Such distance-based notions of interestingness
 have been explored in past work~\cite{Correll2016,Itti2009,Vartak2015},
@@ -160,7 +160,7 @@ indicates that the selected visualization is interesting.
 We deviate from this prior work in two ways:
 first, we concentrate on {\em informative} interestingness,
 where the interestingness of a child visualization
-is only defined \achange{with respect to} informative parent references.
+is only defined with respect to informative parent references.
 Second, we weigh the interestingness by the proportion of the
 population captured by the child visualization.
 (That is, when a deviation is manifested in a larger population,
@@ -175,7 +175,7 @@ Thus, we define the utility of a visualization $V_i$, $U(V_i)$ as follows:
 $$
 That is, the utility or interestingness of a visualization
 is the distance between the visualization and its informative
-parent, if present\footnote{If multiple informative parents, \achange{$V_i^*$}, are present for a given visualization, $V_i$, then $U(V_i)$ is defined in terms of the most informative parent present.}.%$V_i^{*, \theta}$
+parent, if present\footnote{If multiple informative parents, $V_i^*$, are present for a given visualization, $V_i$, then $U(V_i)$ is defined in terms of the most informative parent present.}.%$V_i^{*, \theta}$
 To incorporate the effect of subpopulation size into our objective function, we multiply the distance $D(V_i, V_i^*)$ between an informative parent $V_i^*$ and a child visualization $V_i$ by the ratio of their sizes.
 Notice that the objective $U$ has a minimax form~\cite{wiki:minimax},
 in that informativeness aims to minimize the distance between parent and child,
@@ -202,7 +202,9 @@ Thus, this subset ends up being a connected network
 ensuring that for each visualization, there is an informative parent available
 for context.
 We can now formally define our problem statement.
-\par \textsc{Problem.} \textit{Given a dataset and user-provided X, Y attributes, select a subset $S, \achange{consisting of} |S| = k$ visualizations from the lattice of data subsets $\mathcal{L}$, such that $U(S)$ is maximized.}
+\par \textsc{Problem.} \textit{Given a dataset and user-provided X, Y attributes, 
+select a subset $S$ of $|S| = k$ visualizations from the lattice of data 
+subsets $\mathcal{L}$, such that $U(S)$ is maximized.}
 \\
 Thanks to how we have defined $U$, $S$ will include the overall visualization,
 corresponding to the entire dataset with no filter. And,
