@@ -27,7 +27,7 @@ to access data subsets at lower levels by
 adding one filter at a time
 \change{(such as adding \blk to \fem along the purple path)}
 and visualize
-\change{their measures of interest for each data subset---in 
+\change{their measures of interest for each data subset---in
 this case the percentage of votes for each candidate}.
 Further, as analysts perform drill-downs,
 they use the most recent visualization
@@ -51,14 +51,14 @@ that the \fem and \blkfem
 visualizations are very different from each other,
 and may
 find this to be a novel insight.
-However, this deviation is a result of \fem 
-not being an  
+However, this deviation is a result of \fem
+not being an
 {\em informative}
 parent or reference for \blkfem---instead, it is a
-{\em deceptive} reference. 
+{\em deceptive} reference.
 Here, a different parent, \blk,
 is the most informative parent or reference of \blkfem
-because it is the parent that exhibits the 
+because it is the parent that exhibits the
 least deviation relative
 to \blkfem.
 Here, the \blkfem visualization
@@ -67,7 +67,7 @@ visualization.
 We refer to this phenomenon of being deceived by
 a local difference or deviation relative to a deceptive
 reference as an instance of the {\em drill-down fallacy}.
-One way to avoid such fallacies is to ensure that one or more 
+One way to avoid such fallacies is to ensure that one or more
 informative parents
 are present for each visualization so that analysts
 can contextualize the visualization accurately.
@@ -78,15 +78,14 @@ probability distribution over data
 we will limit our discussion to bar charts for brevity.}
 
 % \subsection{Three Elements of Informative Exploration}
-\change{\subsection{Design Principles for Informative Exploration}}
-
+\achange{\subsection{The ``3S'' Design Principles for Insightful Exploration}}
 Our goal is to help analysts discover
 the key insights in a dataset,
 while avoiding drill-down fallacies.
 We \change{outline}
 three essential principles for
 finding such insights---the three S's:
-\emph{safety}, \emph{saliency}, and \change{\emph{succinctness}, 
+\emph{safety}, \emph{saliency}, and \change{\emph{succinctness},
 and progressively layer these principles to formalize
 a measure of utility for a network of visualizations}.
 We adopt these principles to
@@ -98,31 +97,31 @@ insights in a multidimensional dataset}.
 \subsubsection{Safety}
 \change{To prevent
 drill-down fallacies,
-we ensure {\em safety}---by making sure 
+we ensure {\em safety}---by making sure
 that informative parents are present
 to accurately contextualize visualizations.
 A parent is said to be {\em informative}
-if its data distribution closely follows the child 
+if its data distribution closely follows the child
 visualization's data distribution,
 since the presence of the parent allows
 the analysts to form a accurate mental model
 of what to expect from the child visualization.
-We compute the informativeness of 
+We compute the informativeness of
 the $j^{th}$ parent $V_i^j$
-for a visualization $V_i$ 
-as the similarity between their data distributions 
-measured using a distance function $D$. 
-For bar charts, the data distribution refers to 
+for a visualization $V_i$
+as the similarity between their data distributions
+measured using a distance function $D$.
+For bar charts, the data distribution refers to
 the height of bars assigned to the categories labeled by the x-axis,
-suitably normalized. 
-Accordingly, the computed distance 
-$D(V_i, V_i^j)$ 
-refers to the sum of the distances 
+suitably normalized.
+Accordingly, the computed distance
+$D(V_i, V_i^j)$
+refers to the sum of the distances
 between the normalized heights of bars across different categories.
 Quantifying deviation using distances between normalized versions of visualizations
 in this manner is not new---we leverage prior work for this~\cite{Vartak2015,Siddiqui2017,Macke2018,Ding2016}.
 The specific distance measure $D$ is not important; while we use the Euclidean metric,
-we can easily work with other common distance metrics such as Kullback-Leibler Divergence and Earth Mover's distance~\cite{Vartak2015}. 
+we can easily work with other common distance metrics such as Kullback-Leibler Divergence and Earth Mover's distance~\cite{Vartak2015}.
 The most informative parent $V_i^\dagger$ for a visualization $V_i$ is
 the one whose data distribution is most similar to $V_i$.
 }
@@ -135,11 +134,11 @@ the one whose data distribution is most similar to $V_i$.
 parent is always present to contextualize a given child visualization,
 we relax our requirement somewhat: we don't need {\em the
 most} informative parent to be present, just {\em an} informative parent.
-We define a parent to be  
-informative (denoted $V_i^*$) 
-if its distance from the child 
-falls within a threshold $\theta\%$ of the 
-most informative parent---the default is set to 90\% 
+We define a parent to be
+informative (denoted $V_i^*$)
+if its distance from the child
+falls within a threshold $\theta\%$ of the
+most informative parent---the default is set to 90\%
 and adjustable by the user.}
 \tr{
     We regard a parent visualization as informative if its distance from the child visualization falls within a threshold $\theta\%$ compared to the most informative parent:
@@ -149,57 +148,57 @@ and adjustable by the user.}
     For example in Figure~\ref{fig:elections_example}, while both \blk and \fem visualizations are considered parents of the \blkfem visualization, only the \blk visualization is considered an informative parent of the \blkfem population, for any values of $\theta \geq 11\%$ via the Euclidean distance metric.
 }
 \subsubsection{Saliency}
-\change{Simply ensuring that 
+\change{Simply ensuring that
 informative parents are present is insufficient;
 we also want to emphasize {\em saliency} by
 identifying visualizations that convey new information.
-In general, a visualization is deemed to be \emph{interesting} 
-if its underlying data distribution differs 
-from that of its parents, 
-and thus offers new unexpected information or insight. 
-Such distance-based notions of interestingness 
-have been explored in past work~\cite{Correll2016,Itti2009,Vartak2015}, 
-where a large distance from some reference visualization 
-indicates that the selected visualization is interesting. 
+In general, a visualization is deemed to be \emph{interesting}
+if its underlying data distribution differs
+from that of its parents,
+and thus offers new unexpected information or insight.
+Such distance-based notions of interestingness
+have been explored in past work~\cite{Correll2016,Itti2009,Vartak2015},
+where a large distance from some reference visualization
+indicates that the selected visualization is interesting.
 We deviate from this prior work in two ways:
 first, we concentrate on {\em informative} interestingness,
 where the interestingness of a child visualization
 is only defined in the presence of informative parent references.
-Second, we weigh the interestingness by the proportion of the 
+Second, we weigh the interestingness by the proportion of the
 population captured by the child visualization.
 (That is, when a deviation is manifested in a larger population,
 it is deemed to be more significant and therefore more interesting.)
 Thus, we define the utility of a visualization $V_i$, $U(V_i)$ as follows:
-\[
-    U(V_i)= 
+ $$
+    U(V_i)=
 \begin{cases}
      \frac{|V_i|}{|V_i^*|} \cdot D(V_i, V_i^*) & \text{if } V_i^* \text{ is present}\\
     -\infty             & \text{otherwise}
 \end{cases}
-\]
+$$
 That is, the utility or interestingness of a visualization
 is the distance between the visualization and its informative
-parent, if present\footnote{If multiple informative parents, $V_i^{*, \theta}$, are present for a given visualization, $V_i$, then $U(V_i)$ is defined in terms of the most informative parent present.}. 
-To incorporate the effect of subpopulation size into our objective function, we multiply the distance $D(V_i, V_i^*)$ between an informative parent $V_i^*$ and a child visualization $V_i$ by the ratio of their sizes. 
+parent, if present\footnote{If multiple informative parents, $V_i^{*, \theta}$, are present for a given visualization, $V_i$, then $U(V_i)$ is defined in terms of the most informative parent present.}.
+To incorporate the effect of subpopulation size into our objective function, we multiply the distance $D(V_i, V_i^*)$ between an informative parent $V_i^*$ and a child visualization $V_i$ by the ratio of their sizes.
 Notice that the objective $U$ has a minimax form~\cite{wiki:minimax},
 in that informativeness aims to minimize the distance between parent and child,
-while interestingness aims to maximize the resulting minimum distance. 
+while interestingness aims to maximize the resulting minimum distance.
 For convenience, we define $U(V_0)$, where $V_0$ is the overall visualization,
 to be $1$, which is the maximum value that the expression $\frac{|V_i|}{|V_i^*|} \cdot D(V_i, V_i^*)$ can take, ensuring that the overall visualization
-is always valuable to include. 
+is always valuable to include.
 }
 
 \subsubsection{Succinctness}
 \change{
 We can't possibly display all of the visualizations
 in the lattice of data subsets: this lattice scales
-exponentially in the number of attributes. 
+exponentially in the number of attributes.
 Instead, we aim for {\em succinctness},
 where we only return a subset $S$ of all visualizations of size $|S| = k$.
-We define the utility of $S$: 
+We define the utility of $S$:
 $$U(S) = \sum_{V_i \in S}{U(V_i)}$$
 In this subset, for every visualization except for the overall
-visualization, one of its informative 
+visualization, one of its informative
 parents must be present (otherwise $U = -\infty$).
 Thus, this subset ends up being a connected network
 (a sub-graph of the overall lattice) rooted at the overall visualization,
@@ -208,9 +207,9 @@ for context.
 We can now formally define our problem statement.
 \par \textsc{Problem.} \textit{Given a dataset and user-provided X, Y attributes, select a subset $S, |S| = k$ visualizations from the lattice of data subsets $\mathcal{L}$, such that $U(S)$ is maximized.}
 \\
-Thanks to how we have defined $U$, $S$ will include the overall visualization, 
+Thanks to how we have defined $U$, $S$ will include the overall visualization,
 corresponding to the entire dataset with no filter. And,
-for each visualization in $S$ except the overall one, 
+for each visualization in $S$ except the overall one,
 at least one of its informative parents will be present in $S$.
 This network of visualizations $S$ can be displayed on a dashboard.
 
@@ -224,11 +223,11 @@ This network of visualizations $S$ can be displayed on a dashboard.
 % and aggregation function G, a lattice $\mathcal{L}$ consisting of visualizations $V_i$ for all possible filter $F_i$ that could be constructed from dataset D:}
 % \\ \texttt{$V_i$ = SELECT X, G(Y) FROM D WHERE $F_i$ GROUP BY X}
 % \\ \textit{find k visualizations from $\mathcal{L}$ to include in dashboard $\mathcal{S}$, such that the total utility $\sum_{V_i \in \mathcal{L}} U(V_i)$ as defined above is maximized, while enforcing that all $V_i \in \mathcal{S}$ is connected.}
-Unfortunately, the problem of finding a 
-connected subgraph in a lattice with 
-maximum total edge utility is known 
-as the \emph{maximum-weight connected subgraph problem}~\cite{ErnstAlthaus2009} 
-and is known to be {\sc NP-Complete}~\cite{Parameswaran2010}. 
+Unfortunately, the problem of finding a
+connected subgraph in a lattice with
+maximum total edge utility is known
+as the \emph{maximum-weight connected subgraph problem}~\cite{ErnstAlthaus2009}
+and is known to be {\sc NP-Complete}~\cite{Parameswaran2010}.
 \agp{This doesn't actually show that our problem is hard. We need to reduce max-weighted subgraph to our problem, not the other way around. I am leaving a pointer here
 to think about it later.}
 We design several approximate algorithms to solve this problem efficiently, next.
