@@ -28,7 +28,7 @@ titled {\em frontier-greedy}, is inspired
 from \cite{Parameswaran2010}.
 The algorithm incrementally grows a subgraph $S'$ until
 $k$ nodes are selected.
-At all stages, it maintains a list of {\em frontier} nodes---nodes
+Throughout, the algorithm maintains a list of {\em frontier} nodes---nodes
 that are connected to the existing subgraph solution $S'$
 but have not yet been
 added. The frontier nodes includes all of the children of the nodes
@@ -86,5 +86,23 @@ mouse clicks, and key bindings.
 Users can also select the x and y axes of interest, 
 aggregation function, and \change{set the number of visualizations ($k$)} 
 to generate a dashboard. 
-As shown in Figure \ref{fig:overview}a, the analyst \change{first generates} a 7-visualization dashboard \change{for} the Police Stop dataset~\cite{police}. The dataset contains records of vehicle and pedestrian stops from law enforcement departments in Connecticut, dated from 2013 to 2015. In this case, the analyst is interested in the percentages of police stops \change{(Y)} that led to different outcomes \change{(X)}, such as ticket, warning, or arrest.
-\par After browsing through visualizations in the dashboard, users may be interested in getting more information about a specific visualization. \system allows users \change{perform additional drill-downs by requesting} a new dashboard centered on a chosen visualization of interest as the new starting point (or equivalently, the root of the lattice) for analysis. The analyst learns that for \change{drivers} who had contraband found in the vehicle, the arrest rate for those who are 60 and over is surprisingly higher than usual, whereas for Asian drivers the arrest rate is lower. Say the analyst is now interested in learning more about the other factor that contributes to the high arrest rate: duration=30+min. In Figure~\ref{fig:overview}b, she can click on the corresponding visualization \change{to} request for additional visualizations. Upon seeing the updated dashboard in Figure~\ref{fig:overview}c, she learns that any visualization that involves the duration=30+min filter is likely to result in high ticketing and arrest rates. This implies that if a police stop lasts more than 30 minutes, the outcome would more or less be the same, independent of other factors such as the driver's race or age. To generate the expanded dashboard, \system uses the same models and algorithms as before, except the root node is now set as the selected visualization, rather than the overall visualization. This node expansion capability is motivated by the idea of \textit{iterative view refinement} \change{common to other} visual analytics systems, which is essential for users to iterate on and explore different hypotheses~\cite{Hoque2017,Wongsuphasawat2016}.
+\change{Figure~\ref{fig:overview} displays
+\system in action on the Police stop dataset~\cite{police}.
+}
+The dataset contains records of vehicle and pedestrian stops from law enforcement departments in Connecticut, dated from 2013 to 2015. In this case, the analyst is interested in the percentages of police stops \change{(Y)} that led to different outcomes \change{(X)}, such as ticket, warning, or arrest. 
+\change{As shown in Figure \ref{fig:overview}a, the analyst 
+may begin by generating a 7-visualization dashboard.}\agp{I think the narrative here is a bit missing. What do they learn overall from this dashboard? I think we should say that there's something to be gained from the overall dashboard which leads to interesting insights and spurs the analyst to then drill-down further, centered
+on something else..}
+
+After browsing through visualizations in the dashboard, 
+users may be interested in getting more information 
+about a specific visualization. 
+\system allows users \change{to perform additional 
+drill-downs by requesting} 
+a new dashboard centered on a chosen visualization 
+of interest as the new starting point 
+(or equivalently, the root of the lattice) 
+for analysis. 
+\change{In our setting,} 
+the analyst learns that for \change{drivers} 
+who had contraband found in the vehicle, the arrest rate for those who are 60 and over is surprisingly higher than usual, whereas for Asian drivers the arrest rate is lower. Say the analyst is now interested in learning more about the other factor that contributes to the high arrest rate: duration=30+min. In Figure~\ref{fig:overview}b, she can click on the corresponding visualization \change{to} request for additional visualizations. Upon seeing the updated dashboard in Figure~\ref{fig:overview}c, she learns that any visualization that involves the duration=30+min filter is likely to result in high ticketing and arrest rates. This implies that if a police stop lasts more than 30 minutes, the outcome would more or less be the same, independent of other factors such as the driver's race or age. To generate the expanded dashboard, \system uses the same models and algorithms as before, except the root node is now set as the selected visualization, rather than the overall visualization. This node expansion capability is motivated by the idea of \textit{iterative view refinement} \change{common to other} visual analytics systems, which is essential for users to iterate on and explore different hypotheses~\cite{Hoque2017,Wongsuphasawat2016}.
