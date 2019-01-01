@@ -283,6 +283,15 @@
 \url{dx.doi.org/10.1145/3025453.3025866}}
 
 
+\bibitem{TR}
+{Doris Jung-Lin Lee}, {Himel Dev}, {Huizi Hu}, {Hazem Elmeleegy}, {and} {Aditya
+  Parameswaran}. 2019.
+\newblock \showarticletitle{Avoiding Drill-down Fallacies with VisPilot:
+  Assisted Exploration of Data Subsets (Technical Report)}.
+\newblock  (2019).
+\newblock
+
+
 \bibitem{Lee2018}
 {Doris Jung-Lin Lee} {and} {Aditya Parameswaran}. 2018.
 \newblock \showarticletitle{{The Case for a Visual Discovery Assistant: A
