@@ -4,8 +4,8 @@
 \vspace{-10pt}
 \includegraphics[width=\linewidth]{figures/frontier_greedy.pdf}
 \vspace{-20pt}
-\caption{Example illustrating how the frontier greedy algorithm incrementally builds up the solution by selecting the maximal-edge utility node from the frontier at every step. On the left, given the three existing nodes in the solution (blue), we select the node with the highest edge utility \change{(yellow)} amongst the frontier nodes \change{(green)}. On the right, the newly added node results in an updated frontier and a maximum-edge utility node is selected amongst them.
-\agp{I think the edge weights in the figure are really confusing. I would propose dropping it. Or, attach the utility to the nodes instead of the edges. In this case, I would say it might be interesting to set the utility of the 0.5 node to be $-\infty$ until the one with 0.4 is added first (an informative parent, perhaps). That will add to the richness of the example. Right now I can't tell if the example has edge-weights, node-weights... overall, I can't even tell what the mapping to the utility is here.}\dor{Will change after traversal details confirmed.}
+\caption{Example illustrating how the frontier greedy algorithm incrementally builds up the solution by selecting the maximal-edge utility node from the frontier at every step. \achange{Starting from a pre-materialized lattice consisting of only connections to informative parents (left) and three nodes in the existing} solution (blue), we select the node with the highest edge utility \change{(yellow)} amongst the frontier nodes \change{(green)}. On the right, the newly added node results in an updated frontier and a maximum-edge utility node is selected amongst them.
+\agp{I think the edge weights in the figure are really confusing. I would propose dropping it. Or, attach the utility to the nodes instead of the edges. In this case, I would say it might be interesting to set the utility of the 0.5 node to be $-\infty$ until the one with 0.4 is added first (an informative parent, perhaps). That will add to the richness of the example. Right now I can't tell if the example has edge-weights, node-weights... overall, I can't even tell what the mapping to the utility is here.}\dor{Changed.}
 }
 \vspace{-10pt}
 \label{fig:frontier_greedy}
@@ -14,7 +14,7 @@
 In this section, we present our system, \system, by first providing a high-level overview of the underlying algorithms, and then describing the user interaction mechanisms.
 \change{
   \subsection{Lattice Traversal Algorithm\label{sec:algorithms}}
-  We discuss the algorithm used for traversing the
+  \achange{For a given dataset and user-selected X, Ys, we first enumerating all possible attribute-value combinations (i.e. filters) to construct the lattice by  retaining only edge connections to informative parents. Now, we }discuss the algorithm used for traversing the
   lattice to select the connected subgraph $S$ of $k$
   visualizations (or equivalently, nodes in the lattice) that maximize
   the utility $U$.
@@ -24,17 +24,18 @@ In this section, we present our system, \system, by first providing a high-level
   To prevent the danger of visualizations with small population size, users can also select an \textit{iceberg condition} ($\delta$) to adjust the extent of pruning on visualizations whose sizes fall below a certain percentage of the overall population size. \footnote{The terminology is used in the discussion of iceberg cubes in OLAP literature~\cite{Xin2007}.}
 }
 %In most cases, the lattice contains a large number of visualizations due to the presence of many attributes or high-cardinality attributes in the dataset. In such cases finding an optimal solution is computationally challenging.
-\stitle{Lattice Traversal:} We first describe the offline version of the algorithm before outlining the modification required for the online variant of the algorithm. Given a lattice that has been materialized offline,}
+\stitle{Lattice Traversal:} We first describe the offline version of the algorithm before outlining the modification required for the online variant of the algorithm. Given a lattice that has been materialized offline,
+}
 \change{Our algorithm,
 titled {\em frontier-greedy}, is inspired
 \achange{by the notion of ``externals'' in Parameswaran et al.}\cite{Parameswaran2010}.
 The algorithm incrementally grows a subgraph $S'$ until
 $k$ nodes are selected.
-Throughout, the algorithm maintains a list of {\em frontier} nodes---nodes
+Throughout, the algorithm maintains a \achange{set} of {\em frontier} nodes \achange{$\mathcal{F}$}---nodes
 that are connected to the existing subgraph solution $S'$
 but have not yet been
 added. The frontier nodes includes all of the children of the nodes
-in $S'$. \achange{Given a pre-materialized lattice where only edge connections to informative parents are retained, any frontier node is guaranteed to have an informative parent in the the existing solution and can be added to $S$ without violating the informativeness principle.}
+in $S'$. \achange{Given that our pre-materialized lattice only contain edge connections to informative parents, any frontier node is guaranteed to have an informative parent in the the existing solution and can be added to $S$ without violating the informativeness principle.}
 %Any frontier node whose informative parent is present in the existing solution can potentially be added to the existing solution, without violating the informativeness principle.
 At each iteration, the algorithm adds the node from the frontier
 nodes that leads to the greatest increase in the utility of $S'$: i.e.,
@@ -49,12 +50,12 @@ Algorithm~\ref{algo:frontier_greedy} provides the pseudocode.
   \Procedure{PickVisualizations}{$k$, \achange{$\mathcal{L}$}}
   \State $S' \gets$ \{$V_0$\}  \text{/* adding the overall node */}
   \While{$|S'| < k$}
-      \State frontier $\gets$ getFrontier($S'$, \achange{$\mathcal{L}$})
+      \State \achange{$\mathcal{F}$} $\gets$ getFrontier($S'$, \achange{$\mathcal{L}$})
       \State bestUtility $\gets$ $U(S')$
-      \For{node $\in$ frontier}
-      \If{$U(S' \cup \{$node$\})>$bestUtility}
-      \State maxNode $\gets$ node
-      \State bestUtility $\gets U(S' \cup \{$node$\})$
+      \For{$\achange{V_i}$ $\in$ \achange{$\mathcal{F}$}}
+      \If{$U(S' \cup \{\achange{V_i}\})>$bestUtility}
+      \State maxNode $\gets$ $\achange{V_i}$
+      \State bestUtility $\gets U(S' \cup \{\achange{V_i}\})$
       \EndIf
       \EndFor
       \State $S' \gets S' \cup$ \{maxNode\}
