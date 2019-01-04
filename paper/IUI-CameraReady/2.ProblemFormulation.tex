@@ -187,12 +187,12 @@ is always valuable to include.
 
 \subsubsection{Succinctness}
 \change{
-We \achange{cannot} possibly display all of the visualizations
+We cannot possibly display all of the visualizations
 in the lattice of data subsets: this lattice scales
 exponentially in the number of attributes.
 Instead, we aim for {\em succinctness},
-where we only \achange{select a subset $S$ of size $|S| = k$ from all visualizations}.
-We define the utility of $S$:
+where we only select a subset $S$ of size $|S| = k$ from all the visualizations.
+We define the utility of $S$ as follows:
 $$U(S) = \sum_{V_i \in S}{U(V_i)}$$
 In this subset, for every visualization except for the overall
 visualization, one of its informative
@@ -228,4 +228,4 @@ maximum total edge utility is known
 as the \emph{maximum-weight connected subgraph problem}~\cite{ErnstAlthaus2009}
 and is known to be {\sc NP-Complete}~\cite{Parameswaran2010}.
 \agp{This doesn't actually show that our problem is hard. We need to reduce max-weighted subgraph to our problem, not the other way around. I am leaving a pointer here to think about it later.}
-\achange{Next,} we design several approximate algorithms to solve this problem efficiently.
+\change{Next,} we design several approximate algorithms to solve this problem efficiently.

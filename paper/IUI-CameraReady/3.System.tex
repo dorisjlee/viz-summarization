@@ -4,19 +4,28 @@
 \vspace{-10pt}
 \includegraphics[width=\linewidth]{figures/frontier_greedy.pdf}
 \vspace{-20pt}
-\caption{Example illustrating how the frontier greedy algorithm incrementally builds up the solution by selecting the maximal-edge utility node from the frontier at every step. \achange{Starting from a pre-materialized lattice consisting of only connections to informative parents (left) and three nodes in the existing} solution (blue), we select the node with the highest edge utility \change{(yellow)} amongst the frontier nodes \change{(green)}. On the right, the newly added node results in an updated frontier and a maximum-edge utility node is selected amongst them.
-\agp{I think the edge weights in the figure are really confusing. I would propose dropping it. Or, attach the utility to the nodes instead of the edges. In this case, I would say it might be interesting to set the utility of the 0.5 node to be $-\infty$ until the one with 0.4 is added first (an informative parent, perhaps). That will add to the richness of the example. Right now I can't tell if the example has edge-weights, node-weights... overall, I can't even tell what the mapping to the utility is here.}\dor{Changed.}
+\caption{Example illustrating how the frontier greedy algorithm incrementally builds up the solution by selecting the node 
+\change{or visualization 
+that leads to the highest gain in utility from the frontier at every step. Starting from a pruned lattice comprising only connections to informative parents (left) and three nodes in the existing solution (blue), we select the node with the highest utility gain (yellow) amongst the frontier nodes (green). On the right, the newly added node results in an updated frontier and the node 
+leading to the highest utility gain is selected among them.}
 }
 \vspace{-10pt}
 \label{fig:frontier_greedy}
 \end{figure}
-\section{Storyboard System\label{sec:system}}
-In this section, we present our system, \system, by first providing a high-level overview of the underlying algorithms, and then describing the user interaction mechanisms.
+\section{\system System\label{sec:system}}
+In this section, we present our system, \system, by first providing a high-level overview of the underlying algorithm, 
+and then describing the user interaction mechanisms.
 \change{
   \subsection{Lattice Traversal Algorithm\label{sec:algorithms}}
-  \achange{For a given dataset and user-selected X, Ys, we first enumerating all possible attribute-value combinations (i.e. filters) to construct the lattice by  retaining only edge connections to informative parents. Now, we }discuss the algorithm used for traversing the
+  For a given dataset and user-selected X and Y axes, 
+  we first enumerate all possible attribute-value combinations 
+  (i.e., filters) to construct the lattice upfront. We retain
+  only the edges that correspond to informative parents: this
+  helps simplify the presentation somewhat.  
+  Then, we traverse this pruned 
   lattice to select the connected subgraph $S$ of $k$
-  visualizations (or equivalently, nodes in the lattice) that maximize
+  visualizations (or equivalently, nodes in the lattice)
+  that maximizes
   the utility $U$.
 }%generating the visualization lattice, and then present an overview of how we
 \tr{
@@ -26,16 +35,23 @@ In this section, we present our system, \system, by first providing a high-level
 %In most cases, the lattice contains a large number of visualizations due to the presence of many attributes or high-cardinality attributes in the dataset. In such cases finding an optimal solution is computationally challenging.
 \stitle{Lattice Traversal:} We first describe the offline version of the algorithm before outlining the modification required for the online variant of the algorithm. Given a lattice that has been materialized offline,
 }
-\change{Our algorithm,
+\change{Our algorithm for traversing the lattice,
 titled {\em frontier-greedy}, is inspired
-\achange{by the notion of ``externals'' in Parameswaran et al.}\cite{Parameswaran2010}.
+by the notion of ``externals'' in 
+Parameswaran et al.~\cite{Parameswaran2010}.
 The algorithm incrementally grows a subgraph $S'$ until
 $k$ nodes are selected.
-Throughout, the algorithm maintains a \achange{set} of {\em frontier} nodes \achange{$\mathcal{F}$}---nodes
+Throughout, the algorithm maintains a set 
+of {\em frontier} nodes $\mathcal{F}$---nodes
 that are connected to the existing subgraph solution $S'$
 but have not yet been
 added. The frontier nodes includes all of the children of the nodes
-in $S'$. \achange{Given that our pre-materialized lattice only contain edge connections to informative parents, any frontier node is guaranteed to have an informative parent in the the existing solution and can be added to $S$ without violating the informativeness principle.}
+in $S'$. 
+Given that our pruned 
+lattice only retains edges between children and their 
+informative parents, all frontier nodes are guaranteed 
+to have an informative parent in the the existing solution 
+and can be added to $S$ without violating informativeness.
 %Any frontier node whose informative parent is present in the existing solution can potentially be added to the existing solution, without violating the informativeness principle.
 At each iteration, the algorithm adds the node from the frontier
 nodes that leads to the greatest increase in the utility of $S'$: i.e.,
@@ -47,15 +63,15 @@ Algorithm~\ref{algo:frontier_greedy} provides the pseudocode.
 }
 \begin{algorithm}
   \begin{algorithmic}[1]
-  \Procedure{PickVisualizations}{$k$, \achange{$\mathcal{L}$}}
+  \Procedure{PickVisualizations}{$k$, $\mathcal{L}$}
   \State $S' \gets$ \{$V_0$\}  \text{/* adding the overall node */}
   \While{$|S'| < k$}
-      \State \achange{$\mathcal{F}$} $\gets$ getFrontier($S'$, \achange{$\mathcal{L}$})
-      \State bestUtility $\gets$ $U(S')$
-      \For{$\achange{V_i}$ $\in$ \achange{$\mathcal{F}$}}
-      \If{$U(S' \cup \{\achange{V_i}\})>$bestUtility}
-      \State maxNode $\gets$ $\achange{V_i}$
-      \State bestUtility $\gets U(S' \cup \{\achange{V_i}\})$
+      \State $\mathcal{F}$ $\gets$ getFrontier($S'$, $\mathcal{L}$)
+      \State bestUtility $\gets$ $-\infty$
+      \For{$V_i$ $\in$ $\mathcal{F}$}
+      \If{$U(S' \cup \{V_i\})>$bestUtility}
+      \State maxNode $\gets$ $V_i$
+      \State bestUtility $\gets U(S' \cup \{V_i\})$
       \EndIf
       \EndFor
       \State $S' \gets S' \cup$ \{maxNode\}
@@ -63,7 +79,7 @@ Algorithm~\ref{algo:frontier_greedy} provides the pseudocode.
   \Return $S'$
   \EndProcedure
   \end{algorithmic}
-  \caption{Frontier Greedy Algorithm\agp{The pseudocode had some inaccuracies that I tried fixing. Please carefully check.}\dor{Minor changes. Do we need to initialize maxNode in the pseudocode? For bestUtility $\gets U(S')$, would it be more clear if we initialize as bestUtility $\gets -\infty$?}}\label{algo:frontier_greedy}
+  \caption{Frontier Greedy Algorithm}\label{algo:frontier_greedy}
 \end{algorithm}
 %The frontier greedy algorithm first compiles a list of candidate nodes known as the \textit{frontier} nodes, which encompasses all nodes that are connected to the existing subgraph solution. As long as the informative parents of frontier nodes are already present in the solution, the frontier nodes can be appended to the current solution without violating requirement (ii) in the problem formulation, enforcing the presence of informative parent for every selected visualization. To obtain the frontier nodes, the algorithm scans and adds all children of leaf nodes of the current dashboard as part of the frontier. \tr{In the online version, it additionally checks for each child whether its informative parent is present in the current dashboard.} As illustrated in Figure~\ref{fig:frontier_greedy}, at each step, our algorithm greedily picks the node with the maximum edge utility amongst the eligible frontier nodes to add to the current solution, and updates the frontier accordingly. \ccut{The \textit{frontier greedy} algorithm discussed here is used for generating the dashboards for our user study and we defer the details of other algorithms that we have developed for lattice traversal to the technical report. }
 %\par The frontier greedy algorithm obtains a list of candidate nodes known as the \textit{frontier} nodes, which encompasses all neighbors of nodes in the existing subgraph solution. Any of the nodes in the frontier can be added to the current solution since their informative parent is present in the solution. To obtain the frontier nodes, the algorithm scans and adds all children of leaf nodes of the current dashboard as part of the frontier. In the online version, it additionally checks for each child whether its informative parent is present in the current dashboard. At each step, our algorithm greedily picks the node with the maximum utility amongst the frontier nodes to add to the current solution, and updates the frontier accordingly. \tr{The path merging algorithm first generate the informative paths from root to every candidate node. Then, it greedily merges the paths with high-utility to create a subgraph whose size is less than or equal to maximum capacity $k$.}
@@ -92,9 +108,9 @@ to generate a dashboard.
 The dataset contains records of vehicle and pedestrian stops from law enforcement departments in Connecticut, dated from 2013 to 2015. In this case, the analyst is interested in the percentages of police stops \change{(Y)} that led to different outcomes \change{(X)}, such as ticket, warning, or arrest.
 \change{As shown in Figure \ref{fig:overview}a, the analyst
 may begin by generating a 7-visualization dashboard.
-\achange{She} would learn that if a search is conducted (\texttt{search\_conducted=t}),
-then the probability of being arrested increases from \achange{6.2\% to 42.1\%}.
-However, the probability goes down to \achange{23.1\%}
+They would learn that if a search is conducted (\texttt{search\_conducted=t}),
+then the probability of being arrested increases from 6.2\% to 42.1\%.
+However, the probability goes down to 23.1\%
 if the driver is Asian (\texttt{driver\_race=Asian, search\_conducted=t}).
 When examining these visualizations, the analyst can be confident that
 any deviations are both informative and interesting: that is, the informative
@@ -109,22 +125,22 @@ whereas for Asian drivers the arrest rate is lower.
 }
 
 After browsing through visualizations in the dashboard,
-\achange{the analyst} may be interested in getting more information
+\change{the analyst} may be interested in getting more information
 about a specific visualization.
-\system allows \achange{analysts} \change{to perform additional
+\system allows \change{analysts} \change{to perform additional
 drill-downs by requesting}
 a new dashboard centered on a chosen visualization
 of interest as the new starting point
 (or equivalently, the root of the lattice)
 for analysis.
 Say the analyst is now interested in learning more
-about the other factor that contributes to \achange{high arrest rates}:
+about the other factor that contributes to \change{high arrest rates}:
 \change{a long stop with \texttt{duration=30+min}}.
-In Figure~\ref{fig:overview}b, \achange{she}
+In Figure~\ref{fig:overview}b, they 
 can click on the corresponding visualization
 \change{to} request additional visualizations.
 Upon seeing the updated dashboard in Figure~\ref{fig:overview}c,
-she learns that any visualization
+they learn that any visualization
 that involves the \change{\texttt{duration=30+min}}
 filter is likely to result in high ticketing and arrest rates.
 This implies that if a police stop lasts more than 30 minutes,
@@ -132,7 +148,8 @@ the outcome would more or less be the same,
 independent of other factors such as the driver's race or age.
 To generate the expanded dashboard, \system uses the same models
 and algorithms as before,
-except the \achange{the overall visualization $V_0$ at the root node is now set as the selected visualization}.
+except the \change{selected visualization is set as the 
+the overall visualization $V_0$ at the root node of the new lattice}.
 This node expansion capability is motivated
 by the idea of \textit{iterative view refinement}
 \change{common in other} visual analytics systems,
