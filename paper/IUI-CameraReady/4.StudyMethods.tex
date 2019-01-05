@@ -5,19 +5,9 @@ In this section, we describe the methodology
 for \change{a user study}
 we conducted for evaluating the
 \change{usefulness of \system
-for various exploratory analysis tasks.
-We aim to evaluate whether \system
-obeys the ``3S'' design principles in order
-to effortlessly identify insights in comparison
-with \change{conventional approaches for multidimensional data exploration}.}%other dashboard generation baselines
-% addressing the following research questions:
-% \begin{denselist}
-% 	\item RQ1: How \textit{interesting} are the visualizations in the dashboard perceived subjectively by the users?
-% 	\item RQ2: How well \change{does} the dashboard \textit{summarize} the relative importance of different attributes within a given dataset?
-% 	\item RQ3: How \textit{informative} are the visualizations in the dashboard at providing users with an accurate understanding of unseen child visualizations?
-% \end{denselist}
-% These research questions roughly correspond to the three S's in our objective---saliency, summarization, and safety.
-
+for various exploratory analysis tasks}.
+We aim to evaluate whether \change{\system's ``3S'' design principles enables analysts }to effortlessly identify insights in comparison
+with \change{conventional approaches for multidimensional data exploration}.%other dashboard generation baselines
 \subsection{\change{Participants and Conditions}}
 We recruited 18 participants \change{(10 Male; 8 Female)}
 with prior experience in working with data.
@@ -121,7 +111,7 @@ We generated dashboard visualizations
 based on \change{the percentage of adults that were diagnosed with autism}.
 
 \change{\subsection{Study Procedure}
-After the tutorial, for each dataset, participants}
+\par After the tutorial, for each dataset, participants}
 were given some time to read through a worksheet
 containing the descriptions of the data attributes.
 Then, they were given an attention check question
@@ -133,32 +123,26 @@ and asked about the corresponding visualization in the dashboard.
 After understanding the dataset and chart schema,
 participants were asked to accomplish the following
 tasks in \change{the order listed}:
-\stitle{\change{Interestingness Label (Saliency)}:}
+\stitle{\change{Interestingness Label}:}
 Participants were asked to talk aloud
 as they interpreted the visualizations
 in the dashboard and \change{label}
 each visualization as interesting or
 not interesting, \change{or leave it unselected}.
 This \change{subjective task measures}
-how \change{\emph{interesting}
-the selected visualizations were}
-to participants (RQ\change{3}).%well are participants at retrieving interesting visualizations (RQ1).
-\stitle{Attribute Ranking \change{(Succinctness)}:}
+how \change{interesting \emph{individual} selected visualizations were}
+to participants. % (RQ\change{1}).%well are participants at retrieving interesting visualizations (RQ1).
+\stitle{Attribute Ranking:}
 Participants were given a sheet of paper
 with all the attributes listed
 and asked to rank the attributes
 in order of importance in contributing
-to a particular outcome 
-(e.g., factors leading to an arrest or autism diagnosis). 
+to a particular outcome
+(e.g., factors leading to an arrest or autism diagnosis).
 Participants were allowed to assign equal ranks to more than one attribute or skip attributes that they were unable to infer importance for.
-Attribute ranking tasks are common in feature selection and other data science 
-\change{use-cases.
-Since all dashboards were equally {\em compact} in
-that they contained $k = 10$ visualizations, our goal was
-to check whether this compactness came at the cost of {\em overall understanding}.
-Thus, the goal of this task was to measure how well participants}
-understood the relative importance of each attribute in contributing towards an outcome (RQ2).
-\stitle{Informative Prediction \change{(Safety}):}
+Attribute ranking tasks are \change{common in many data science
+use-cases, such as feature selection and key driver analysis. Since all dashboards were equal in size, our goal was to check whether this size limitation came at the cost of \emph{overall} dataset understanding. Thus, the goal of this task was to study participant's overall dataset understanding by measuring how well participants judged the relative importance of each attribute.}% in contributing towards an outcome. %(RQ3).
+\stitle{Informative Prediction:}
 Participants were given a separate worksheet
 and asked to sketch an estimate for a visualization
 that is not present in the dashboard.
@@ -170,15 +154,8 @@ participants were shown the actual data
 distribution and asked to rate on a Likert scale
 of 10 how surprising the result was
 \change{(1: not surprising and 10: very surprising)}.
-\change{This task measured how \emph{informative} 
-the displayed visualizations are in allowing participants
-to predict unseen visualizations (RQ1).}
-
+\change{This task measured how well participants inferred the behavior of \emph{related}, unobserved visualizations based on a limited set of selected dashboard visualizations.} %(RQ2).}
+%\change{This task measured how \emph{informative} the displayed visualizations are in allowing participants to predict unseen visualizations.}
 \smallskip
-\noindent At the end of the study, we asked two open-ended questions regarding the insights
-\change{gained by} participants
-and what they
-\change{liked or disliked}
-about each dashboard. On average, the study lasted around 48 minutes.
-
-\agp{Order of RQs here and in study results are different. The way the RQs are described are different as well. Please fix before I look at S5}\dor{Earlier, we arranged the results in S5 in the chronological order in which it was conducted through the study, but the interestingness task is the most subjective and underwhelming result, so we instead focus on the informative task first as RQ1 to reinforce the connection with drill-down fallacy. I've changed the RQ labels in S4 to fit this, albeit still a bit awkward in S4.}
+\par At the end of the study, we asked two open-ended questions regarding the insights \change{gained by} participants and what they \change{liked or disliked} about each dashboard. On average, the study lasted around 48 minutes.
+%\agp{Order of RQs here and in study results are different. The way the RQs are described are different as well. Please fix before I look at S5}\dor{Earlier, we arranged the results in S5 in the chronological order in which it was conducted through the study, but the interestingness task is the most subjective and underwhelming result, so we instead focus on the informative task first as RQ1 to reinforce the connection with drill-down fallacy. I've changed the RQ labels in S4 to fit this, albeit still a bit awkward in S4.}
