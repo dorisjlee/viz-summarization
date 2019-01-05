@@ -62,19 +62,6 @@
 \url{doi.acm.org/10.1145/3159652.3159684}}
 
 
-\bibitem{ErnstAlthaus2009}
-{Ernst Althaus}, {Markus Blumenstock}, {Alexej Disterhoft}, {Andreas
-  Hildebrandt}, {and} {Markus Krupp}. 2009.
-\newblock \showarticletitle{{Algorithms for the Maximum Weight Connected
-  k-Induced Subgraph Problem}}.
-\newblock   {5573} (2009), 313--321.
-\newblock
-\showISBNx{978-3-642-02025-4}
-\showISSN{0302-9743}
-\showURL{%
-\url{dx.doi.org/10.1007/978-3-642-02026-1}}
-
-
 \bibitem{Anand2015}
 {Anushka Anand} {and} {Justin Talbot}. 2015.
 \newblock \showarticletitle{{Automatic Selection of Partitioning Variables for

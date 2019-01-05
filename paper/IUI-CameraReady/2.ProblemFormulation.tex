@@ -222,10 +222,22 @@ This network of visualizations $S$ can be displayed on a dashboard.
 % and aggregation function G, a lattice $\mathcal{L}$ consisting of visualizations $V_i$ for all possible filter $F_i$ that could be constructed from dataset D:}
 % \\ \texttt{$V_i$ = SELECT X, G(Y) FROM D WHERE $F_i$ GROUP BY X}
 % \\ \textit{find k visualizations from $\mathcal{L}$ to include in dashboard $\mathcal{S}$, such that the total utility $\sum_{V_i \in \mathcal{L}} U(V_i)$ as defined above is maximized, while enforcing that all $V_i \in \mathcal{S}$ is connected.}
-Unfortunately, the problem of finding a
-connected subgraph in a lattice with
-maximum total edge utility is known
-as the \emph{maximum-weight connected subgraph problem}~\cite{ErnstAlthaus2009}
-and is known to be {\sc NP-Complete}~\cite{Parameswaran2010}.
-\agp{This doesn't actually show that our problem is hard. We need to reduce max-weighted subgraph to our problem, not the other way around. I am leaving a pointer here to think about it later.}
+\bchange{Since the edges between non-informative parents to children are not 
+pertinent to the solution, 
+we can remove those edges from the lattice, leaving
+only the edges from the informative parents to the children. 
+Then, we are left with an arbitrary graph,
+from which we need to select a rooted subgraph of size $k$,
+with greatest utility $U$.
+For arbitrary distance metrics $D$, 
+this problem can be viewed to be {\sc NP-Hard} via a
+reduction from the {\sc NP-Hard} problem of selecting items
+with prerequisites~\cite{Parameswaran2010} (specifically, the AND graph variant). 
+}
+% Unfortunately, the problem of finding a
+% connected subgraph in a lattice with
+% maximum total edge utility is known
+% as the \emph{maximum-weight connected subgraph problem}~\cite{ErnstAlthaus2009}
+% and is known to be {\sc NP-Complete}~\cite{Parameswaran2010}.
+% \agp{This doesn't actually show that our problem is hard. We need to reduce max-weighted subgraph to our problem, not the other way around. I am leaving a pointer here to think about it later.}
 \change{Next,} we design several approximate algorithms to solve this problem efficiently.
