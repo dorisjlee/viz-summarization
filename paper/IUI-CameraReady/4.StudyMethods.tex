@@ -121,28 +121,44 @@ a verbal description of the visualization filter
 \change{(i.e., data subset)}
 and asked about the corresponding visualization in the dashboard.
 After understanding the dataset and chart schema,
-participants were asked to accomplish the following
-tasks in \change{the order listed}:
-\stitle{\change{Interestingness Label}:}
+participants were asked to accomplish 
+\bchange{various 
+tasks.
+Since \system was developed 
+based on a joint utility objective, 
+it is impossible to design tasks that evaluate 
+each of the ``3S'' principles individually.
+Instead, our tasks were selected to measure 
+the overall efficacy and usefulness 
+of the dashboards 
+in helping a participant 
+understand and become aware of different aspects of
+and insights within a dataset
+during drill-down analysis.
+These different aspects of 
+dataset understanding 
+can be roughly illustrated 
+via Figure~\ref{fig:frontier_greedy}, 
+from insights 
+gained from \emph{individual} 
+displayed visualizations (blue selected nodes), 
+to predicting behavior of \emph{related} 
+visualizations (green related nodes), 
+to understanding \emph{overall} attribute importance 
+(entire lattice, a mix of green, blue, and unselected white nodes). 
+}
+
+\stitle{\bchange{Labeling (Individual Assessment):}}
 Participants were asked to talk aloud
 as they interpreted the visualizations
 in the dashboard and \change{label}
-each visualization as interesting or
+each one as interesting or
 not interesting, \change{or leave it unselected}.
 This \change{subjective task measures}
-how \change{interesting \emph{individual} selected visualizations were}
+how \change{interesting \emph{individual} 
+selected visualizations were}
 to participants. % (RQ\change{1}).%well are participants at retrieving interesting visualizations (RQ1).
-\stitle{Attribute Ranking:}
-Participants were given a sheet of paper
-with all the attributes listed
-and asked to rank the attributes
-in order of importance in contributing
-to a particular outcome
-(e.g., factors leading to an arrest or autism diagnosis).
-Participants were allowed to assign equal ranks to more than one attribute or skip attributes that they were unable to infer importance for.
-Attribute ranking tasks are \change{common in many data science
-use-cases, such as feature selection and key driver analysis. Since all dashboards were equal in size, our goal was to check whether this size limitation came at the cost of \emph{overall} dataset understanding. Thus, the goal of this task was to study participant's overall dataset understanding by measuring how well participants judged the relative importance of each attribute.}% in contributing towards an outcome. %(RQ3).
-\stitle{Informative Prediction:}
+\stitle{\bchange{Prediction (Related Assessment):}}
 Participants were given a separate worksheet
 and asked to sketch an estimate for a visualization
 that is not present in the dashboard.
@@ -154,7 +170,21 @@ participants were shown the actual data
 distribution and asked to rate on a Likert scale
 of 10 how surprising the result was
 \change{(1: not surprising and 10: very surprising)}.
-\change{This task measured how well participants inferred the behavior of \emph{related}, unobserved visualizations based on a limited set of selected dashboard visualizations.} %(RQ2).}
+\change{This task measured how well participants 
+inferred the behavior of \emph{related}, 
+unobserved visualizations based on a 
+limited set of selected dashboard visualizations.}
+\stitle{\bchange{Ranking (Overall Assessment):}}
+Participants were given a sheet of paper
+with all the attributes listed
+and asked to rank the attributes
+in order of importance in contributing
+to a particular outcome
+(e.g., factors leading to an arrest or autism diagnosis).
+Participants were allowed to assign equal ranks to more than one attribute or skip attributes that they were unable to infer importance for.
+Attribute ranking tasks are \change{common in many data science
+use-cases, such as feature selection and key driver analysis. Since all dashboards were equal in size, our goal was to check whether this size limitation came at the cost of \emph{overall} dataset understanding. Thus, the goal of this task was to study participant's overall dataset understanding by measuring how well participants judged the relative importance of each attribute.}% in contributing towards an outcome. %(RQ3).
+ %(RQ2).}
 %\change{This task measured how \emph{informative} the displayed visualizations are in allowing participants to predict unseen visualizations.}
 \smallskip
 \par At the end of the study, we asked two open-ended questions regarding the insights \change{gained by} participants and what they \change{liked or disliked} about each dashboard. On average, the study lasted around 48 minutes.

@@ -1,46 +1,92 @@
-\change{
-	\vspace{10pt}
-	\section{Study Results}
-	% at different levels of (scope?)
-	Since \system was developed based on a joint objective, it is impossible to design tasks that evaluate each of the ``3S'' objective independently. Instead, each of the tasks in our study focusses on measuring how useful are the provided dashboard in helping participant understand and become aware of different aspects of a dataset during drill-down analysis. These different aspects of dataset understanding can be roughly illustrated via the Figure~\ref{fig:frontier_greedy}, from insights that could be gained from \emph{individual} displayed visualizations (blue selected nodes), to predicting behavior of \emph{related} visualizations (green related nodes), to understanding \emph{overall} attribute importance (entire lattice, a mix of green, blue, and unselected white nodes). We introduce the study findings for each task starting from the narrowest scope of \emph{individual} visualizations to the widest scope of \emph{overall} dataset understanding.
-	%organized by increasing scope of understanding + insight, how much participants can learn , how useful is it to Participants
-	%at varying levels
-	%Illustrated in Figure~\ref{fig:frontier_greedy}
-	%from inidvidual selected visualization
+%!TEX root = main.tex
 
+	\section{Study Results}
+	\bchange{
+	 We introduce the study findings for each task starting from the narrowest scope of \emph{individual} visualizations to the widest scope of \emph{overall} dataset understanding.
 }
 \change{\stitle{RQ1: How are \emph{individual} selected visualizations in the dashboard perceived subjectively by the users?}
 }
-\npar Using the click-stream data logged from the user study, we recorded whether a
-participant \change{labelled} a visualization in the dashboard as interesting, not interesting, or left the visualization unselected. Table~\ref{table:interestingScore} summarizes counts of visualizations marked as interesting or not interesting aggregated across conditions. We also normalize the interestingness count by the total number of selected visualizations to account for variations in how some participants select more visualizations than others. The results indicate that participants who used \system\ \change{saw} more visualizations that they found interesting compared to the \BFS and \cluster \change{\xspace conditions}. \change{While the labelling task is inherently subjective with varied reasons why a participant may have marked a visualization as interesting, this result is some indication that the selected visualizations were of relevance} to the users.
+\npar Using click-stream data logged from the user study, 
+we recorded whether a
+participant \bchange{labeled each} visualization 
+in the dashboard as interesting, not interesting, 
+or left the visualization unselected. 
+Table~\ref{table:interestingScore} summarizes 
+\bchange{the} counts of visualizations 
+marked as interesting or not interesting 
+aggregated across conditions. 
+We also normalize the interestingness count 
+by the total number of selected visualizations 
+to account for variations in how some participants 
+select more visualizations than others. 
+The results indicate that participants who 
+used \system\ \change{saw} more 
+visualizations that they found interesting compared 
+to the \BFS and \cluster \change{\xspace conditions}. 
+\change{While  \bchange{this task is 
+inherently subjective, with many possible
+reasons why a participant may have marked a visualization 
+as interesting, this result is indicative of the fact that the
+selected visualizations were deemed to be relevant
+by users. We will drill into possible reasons why in the next section.}}
 \begin{table}[h!]
+\vspace{-5pt}
 	\centering
-	\begin{tabular}{|l|rrr|}
-	\hline
+	\begin{tabular}{lrrr}
 	 \small{Condition}             &   \small{\system} &   \small{\BFS} &   \small{\cluster} \\
 	\hline
 	 \small{Interesting}            &  \cellcolor{blue!25}       66    & 61    &      51   \\
 	 \small{Not Interesting}        &  \cellcolor{blue!25}       10    & 20    &      22   \\
 	 \small{Interesting (Normalized)} &   \cellcolor{blue!25}       0.87 &  0.75 &       0.7 \\
-	\hline
 	\end{tabular}
 	\caption{Total counts of visualizations marked as interesting or not interesting across the different conditions. \system leads to more visualizations marked as interesting and fewer visualizations marked as uninteresting.}
 	\label{table:interestingScore}
+	\vspace{-20pt}
 \end{table}
-\stitle{\change{RQ2: How well do the dashboard visualizations provide users with an accurate depiction of \emph{related} visualizations?}}
-\npar \change{As discussed in Section~\ref{sec:problem}, an accurate and informative understanding of causal relationships between visualization distributions (more specifically, the ``root cause'' that led to the child distribution) can help prevent users from falling prey to the drill-down fallacy. To this end,} the prediction task serves as a proxy for evaluating how accurately analysts understood the distributions present in various drill-down paths. \change{In particular, we examine }how accurately participants could use visualizations present in the dashboard to predict an unseen visualization.
+\stitle{\change{RQ2: How well do dashboard visualizations provide users with an accurate \bchange{understanding} of \emph{related} visualizations?}}
+\npar 
+\bchange{As discussed in Section~\ref{sec:problem}, 
+contextualizing visualizations correctly with informative
+references can help prevent users from falling prey to 
+drill-down fallacies. To this end,
+the prediction task aims to assess whether
+users can employ visualizations in the dashboard
+to correctly predict unseen ones. 
+Indeed, if the dashboard is constructed well,
+one would expect that only the visualizations
+that are not very surprising relative to their informative parents
+would be excluded from the dashboard 
+(i.e., their deviation from their informative parents is not large).} 
 \begin{figure}[h!]
 \centering
+\vspace{-10pt}
 \includegraphics[width=0.95\linewidth]{figures/prediction_surprisingness_distance.pdf}
-\caption{Left: Euclidean distance between predicted and ground truth. In general, predictions made using \system are closer to ground truth. Right: Surprisingness rating reported by users after seeing the actual visualizations on a Likert scale of 10. \system participants had a more accurate mental model of the unseen visualization and therefore reported less surprise than compared to the baseline.}
+\caption{Left: Euclidean distance between predicted and ground truth. In general, predictions made using \system are closer to ground truth. Right: Surprisingness rating reported by users after seeing the actual visualizations on a Likert scale of 10. \system participants had a more accurate mental model of the unseen visualization and therefore reported less surprise than compared to the baselines.}
+\vspace{-10pt}
 \label{fig:distance}
 \end{figure}
-\par The accuracy of participants' predictions was measured by the Euclidean distance between \change{their} predicted distributions and ground truth data distributions. As shown in Figure~\ref{fig:distance} (left), predictions made using \system\ (highlighted in red) were closer to the actual distribution than compared to the baselines, as indicated by the smaller Euclidean distances. Figure~\ref{fig:distance} (right) also shows that \system participants \change{were able to more accurately reason about the expected properties of unseen data subsets, since they rated the resulting visualizations to be less surprising}. \cluster may have performed better in the Police dataset than it did in the Autism dataset due to the same reason as in the attribute ranking task, where more univariate visualizations happened to be selected.
-\par We also compute the variance of participants' predictions across the same condition. In this case, low variance implies that any participant who reads the dashboard is able to provide consistent predictions, whereas high variance implies that the dashboard did not convey a clear data-driven story that could guide participants' predictions. So instead, participants \change{had to rely} on different priors or guessing to form their prediction. These trends can be observed in both Figure~\ref{fig:distance} and in more detail in Figure \ref{fig:actual_predictions}, where the prediction variance amongst participants who used \system\ is generally lower than the variance from the baselines. \change{Both the prediction mean and variance indicates that \system provides participants with a more accurate mental model of unseen \emph{related} visualizations.}
+\par The accuracy of participants' predictions 
+\bchange{is measured using}
+the Euclidean distance between \change{their} predicted distributions and ground truth data distributions. 
+As shown in Figure~\ref{fig:distance} (left), 
+predictions made using \system\ (highlighted in red) 
+were closer to the actual distribution than compared to the baselines, 
+as indicated by the smaller Euclidean distances. 
+Figure~\ref{fig:distance} (right) also shows 
+that \system participants \change{were able to more 
+accurately reason about the expected properties of 
+unseen data subsets \bchange{(or visualizations)}, 
+since they rated the resulting visualizations to be less surprising}. 
+\cluster may have performed better \bchange{for} 
+the Police dataset than it did \bchange{for} 
+the Autism \bchange{one} 
+due to the same reason as in the attribute ranking task, where more univariate visualizations happened to be selected. \agp{please fix}
+
+\par We also compute the variance of participants' predictions across the same condition. In this case, low variance implies that any participant who reads the dashboard is able to provide consistent predictions, whereas high variance implies that the dashboard did not convey a clear data-driven story that could guide participants' predictions. So instead, participants \change{had to rely} on different priors or guessing to form their prediction(s). These trends can be observed in both Figure~\ref{fig:distance} and in more detail in Figure \ref{fig:actual_predictions}, where the prediction variance amongst participants who used \system\ is generally lower than the variance from the baselines. \change{Both the prediction mean and variance indicates that \system provides participants with a more accurate mental model of unseen \emph{related} visualizations.}
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.85\linewidth]{figures/prediction.pdf}
-\caption{Mean and variance of predicted values. Predictions based on \system exhibit lower variance \change{(error bars)} and closer proximity to the ground truth values (dotted).}
+\caption{Mean and variance of predicted values. Predictions based on \system exhibit lower variance \change{(error bars)} and closer proximity to the ground truth values (dotted).\agp{Fix}}
 \label{fig:actual_predictions}
 \end{figure}
 \change{
