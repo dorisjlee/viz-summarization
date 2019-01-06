@@ -1,43 +1,72 @@
 %!TEX root = main.tex
 \change{\section{Discussion of Study Results}}
-To \change{further understand how participants made use of the recommended visualizations in their drill-down analysis}, we analyzed the user study transcriptions through an open coding process~\cite{Muller1993} by two of the authors. For each task in our study, we assigned a binary-valued code to indicate whether or not a participant engaged in a particular action or thought process. Table~\ref{table:thematic_summary} highlights results from thematic coding discussed in this section. We will use the notation [Participant.DatasetAlgorithm] to refer to a participant engaging with a dashboard created by an algorithm=\{1,2,3\}=\{\system, \cluster, \textsc{BFS}\} on a dataset =\{A,B\}=\{Police, Autism\}.
+To \bchange{further understand how participants 
+made use of the recommended visualizations during their analysis}, 
+we analyzed the user study \bchange{transcripts}
+through an open coding process~\cite{Muller1993} by two of the authors. 
+For each task in our study, we assigned a binary-valued code to indicate whether or not a participant engaged in a particular action or thought process. Table~\ref{table:thematic_summary} highlights results from thematic coding discussed in this section. We will use the notation [Participant.DatasetAlgorithm] to refer to a participant engaging with a dashboard created by an algorithm=\{1,2,3\}=\{\system, \cluster, \textsc{BFS}\} on a dataset =\{A,B\}=\{Police, Autism\}.
 % \stitle{\system promotes distribution-awareness by provoking comparisons against more informative contextual references.}We first studied the thematic codes to understand how participants select contextual references for visualizations.
 \subsection{The Choice of Contextual References}
-\par As discussed earlier, analysts often make use of related visualizations to form their expectations for unseen visualization. We refer to visualizations used for such purposes as \emph{contextual references}. The choices of a proper contextual references (ideally as the informative parent) is essential for ensuring the \emph{safety} of insights derived through drill-downs. To understand how ``safe'' the dashboards generated from each condition were, we examined \change{the visualizations} that participants utilized and compared against to form their expectations \change{for unseen visualizations}. In particular, we thematically encoded participants' use of contextual references based on \change{their} verbal explanations \change{for justifying} their prediction task responses. As shown in Table \ref{table:contextualReferenceCount}, in general, we find that participants make more comparisons in total using \system than compared to \cluster and \BFS.
-\par Participants can (and often do) make comparisons against more than one type of contextual references to obtain their prediction. We uncovered four main classes of contextual references, described below using the example visualization $V_i$=\texttt{\origcolor{gender=F, race=White, age=21-30}} (in the order of most to least similar to $V_i$) and illustrated graphically in Figure~\ref{fig:reference}:
-\dor{modified this section with purple colored filter attributes-values indicating the ones corresponding to $V_i$ and orange as ones that are different.}
+\par As discussed earlier, 
+analysts often make use of 
+related visualizations to 
+form their expectations for 
+unseen \bchange{visualizations}. 
+We refer to \bchange{the}
+visualizations used 
+for such purposes as \emph{contextual references}. 
+\bchange{The appropriate choice
+of a contextual reference (such as an informative parent)
+is necessary to ensure the \emph{safety} of
+insights derived through drill-downs.} 
+To understand how ``safe'' the dashboards 
+generated from each condition were, 
+we examined \change{the visualizations} 
+that participants compared against 
+to form their expectations \change{for unseen visualizations}. 
+In particular, we thematically encoded 
+\bchange{the}
+participants' use of contextual references 
+based on \change{their} verbal explanations 
+\change{for justifying} their prediction task responses. 
+As shown in Table \ref{table:contextualReferenceCount}, 
+in general, we find that participants make more comparisons in total using \system than compared to \cluster and \BFS.
+\begin{table}[h!]
+\vspace{-5pt}
+\centering
+	\begin{tabular}{l|rrrr|r}
+	 \small{Algorithm}   &    \small{Parent} &   \small{Sibling} &   \small{Relative} & \small{Overall} &   \small{Total} \\
+	\hline
+	 \small{\system}     &    \cellcolor{blue!25} 12 &       8 &     0 &  11 &      \cellcolor{blue!25} 31 \\
+	 \small{\cluster}     &         4 &        0 &         7 &          8 &      19 \\
+	 \small{\BFS}         &         0 &        5 &         1 &          8 &      14 \\
+	\end{tabular}
+\caption{Out of 12 participants, the number of participants who made use of each contextual reference across the two datasets. Participant behavior shows a similar trend in individual datasets. \system participants made more comparisons in general and against parents compared to the baselines.}
+\label{table:contextualReferenceCount}
+\vspace{-20pt}
+\end{table}
+\par Participants can (and often do) make comparisons against more than one type of contextual references to obtain their prediction. We uncovered four main classes of contextual references, described below using the 
+example visualization $V_i$=\texttt{\origcolor{gender=F, race=White, age=21-30}} (in the order of most to least similar to $V_i$) and illustrated in Figure~\ref{fig:reference}:
 \begin{enumerate}
-	\item \textbf{Parent} : Comparison against a visualization with one filter criterion removed (e.g., \texttt{\origcolor{gender=F, race=White}})
-	\item \textbf{Siblings} : Comparison against a visualization that shares the same parent. In other words, the filter types are the same, but with one criterion changed to inherit a different value. (e.g., \texttt{\origcolor{gender=F, race=White, age=}\diffcolor{60+}})
-	\item \textbf{Relatives} : Comparison against a visualization that shares some common ancestor (excluding overall), but not necessarily the same parent. In other words, these visualizations share at least one common filter type, but with more than one criterion that inherits a different value. (e.g., \texttt{\origcolor{gender=F, race=White, age=}\diffcolor{60+, search conducted=T}})
+	\item \textbf{Parent} : Comparison against a visualization with one 
+	filter removed (e.g., \texttt{\origcolor{gender=F, race=White}})
+	\item \textbf{Siblings} : Comparison against a visualization that shares the same parent. In other words, the \bchange{filtered attributes are the same, but one filter has a different value}. (e.g., \texttt{\origcolor{gender=F, race=White, age=}\diffcolor{60+}})
+	\item \textbf{Relatives} : Comparison against a visualization that shares some common ancestor (excluding overall), but not necessarily the same parent. \bchange{These} visualizations share at least one \bchange{common filter, but with more than one filter or filter value being different}\agp{I updated it based on what I thought this should have been--see figure for more}. (e.g., \texttt{\origcolor{gender=F, race=White, age=}\diffcolor{60+, search conducted=T}})
 	\item \textbf{Overall} : Comparison against the distribution that describes the overall population (no filters applied).
 \end{enumerate}
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.7\linewidth]{figures/contextual_reference.pdf}
-\caption{\change{Different types of contextual references} for a given visualization of interest $V_i$. The degree of similarity with respect to $V_i$ is denoted by darkest to lightest color hue.}
+\caption{\change{Different types of contextual references} for a given visualization of interest $V_i$. The degree of similarity with respect to $V_i$ is denoted by darkest to lightest color hue.\agp{I don't see how the relative is actually a relative. It shares no similarity with $V_i$, and is no different from the other white node. (One way to see this is that the common ancestor for both the so-called relative and the white node and $V_i$ are the same -- the overall one.)}}
 \label{fig:reference}
+\vspace{-10pt}
 \end{figure}
 \par \change{Studying participants' use of contextual references reveals inherent challenges that arise from using the dashboards generated by \BFS and \cluster.} For \cluster, participants mainly compared against relatives and overall visualizations. Since \cluster optimizes the diversity of shape distributions amongst the visualizations, the selected visualizations had up to 4 filters and were disconnected from each other. For this reason, in many cases participants could only rely on relatives and the overall visualizations as contextual references. For example, P4.A2 pointed at a 4-filter visualization with extreme values (100\% for warning; 0\% for arrest and ticket) and indicated how ``\textit{a lot of [the visualizations] are far too specific. This is not very helpful. You can't really hypothesize that all people are \change{[sic]} going to be warned, because it is such a specific category, it might just be one person}''. %, you need to have a bigger dataset. And that category will not really give you such extremes to make it more credible''.
 He further explained how he ``\textit{would not want to see the intersections [(visualizations with many filters)] at first and would want to see all the bases [(univariate summaries)] then dig in from there.}'' The lack of informative contextual references in the \cluster dashboard is also reflected in how analysts exhibited high variance and deviation in their prediction responses. Note that the prediction task was chosen so that exactly one parent must be present in the dashboard, so these results do not point to the absence of parent visualizations in these dashboard, but rather indicate how participants made use of the information presented in the dashboards to form their prediction.
 \par Furthermore, \change{improper comparisons against contextual references often make} it difficult for analysts to \change{interpret} displayed visualizations. In particular, when visualizations composed of multiple filter conditions were shown in \cluster dashboards, 25\% of participants had trouble \change{making sense of the meaning of a filter} for at least one of the datasets \change{(e.g., understanding that \texttt{gender=F AND age=60+} corresponds to female drivers with ages larger than 60 years old) at some point during the study}. In contrast, as shown in Table~\ref{table:thematic_summary}, this confusion only happened once for \BFS and none for \system. This is due to the fact that \cluster dashboards \change{seemed} random to the users, making it challenging to find ``close'' contextual references to compare against and form an accurate mental model. \change{In contrast, the linear ordering of \BFS and hierarchical ordering of \system were natural and interpretable for participants}. %In contrast, \BFS follows a linear ordering and \system follows a hierarchical ordering, which were more natural and interpretable for participants.
 %despite our modification to KMeans which picks the visualizations with the least number of filters to show in the dashboard for improving interpretability
 %These themes are drawn from user's explanations of how they obtained certain insights or ---- that --different tasks or while interpreting the dashboards. 4 categories :
-\begin{table}[h!]
-\hspace{-10pt}
-\centering
-	\begin{tabular}{|l|rrrr|r|}
-	\hline
-	 \small{Algorithm}   &    \small{Parent} &   \small{Sibling} &   \small{Relative} & \small{Overall} &   \small{Total} \\
-	\hline
-	 \small{\system}     &    \cellcolor{blue!25} 12 &       8 &     0 &  11 &      \cellcolor{blue!25} 31 \\
-	 \small{\cluster}     &         4 &        0 &         7 &          8 &      19 \\
-	 \small{\BFS}         &         0 &        5 &         1 &          8 &      14 \\
-	\hline
-	\end{tabular}
-\caption{Out of 12 participants, the number of participants who made use of each contextual reference across the two datasets. Participant behavior shows a similar trend in individual datasets. \system participants made more comparisons in general and against parents compared to the baselines.}
-\label{table:contextualReferenceCount}
-\end{table}
+
 \par For \BFS, most comparisons were based on the overall and siblings. Due to the sequential level-wise picking approach, the overall visualization for \BFS dashboards corresponded to the immediate parent, so they are not explicitly recorded as a parent. While the overall and sibling comparisons can be informative, \change{the incomplete comparisons, due to the limited number of first-level visualizations displayed, can result in flawed reasoning, likewise observed in the aforementioned Autism prediction task.} In contrast, for \system, almost all users compared against the overall and parents, while some also exploited \change{sibling comparisons} to make weaker guesses for less-frequently observed attributes (e.g., using a 2-filter sibling visualization involving \texttt{driver\_age} to infer another 2-filter visualization involving \texttt{driver\_age} with a different parent.)
 % \subsection{Improper contextual reference can lead to misleading insights.}
 \begin{table*}[ht!]
