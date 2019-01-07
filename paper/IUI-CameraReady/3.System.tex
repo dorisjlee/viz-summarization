@@ -4,29 +4,28 @@
 \vspace{-10pt}
 \includegraphics[width=\linewidth]{figures/frontier_greedy.pdf}
 \vspace{-20pt}
-\caption{Example illustrating how the frontier greedy algorithm incrementally builds up the solution by selecting the node 
-\change{or visualization 
+\caption{Example illustrating how the frontier greedy algorithm incrementally builds up the solution by selecting the node
+\change{or visualization
 that leads to the highest gain in utility from the frontier at every step. Starting from a pruned lattice comprising only connections to informative parents (left) and three nodes in the existing solution (blue), we select the node with the highest utility gain (yellow) amongst the frontier nodes (green). \bchange{The contribution
-to the utility of a node/visualization is depicted as the number within the node.}
-On the right, the newly added node results in an updated frontier and the node 
+to the utility of a node/visualization is depicted as the number within the node.} On the right, the newly added node results in an updated frontier and the node
 leading to the highest utility gain is selected among them.
-\agp{Please change "max edge utility node" to "max utility node". Can you also 
+\agp{Please change "max edge utility node" to "max utility node". Can you also
 add an edge between 0.8 and 0.7 so that it doesn't look like a tree? Also another edge between 0.65 to one of the -$\infty$s}}
-}
+}\dor{Changed.}
 \vspace{-10pt}
 \label{fig:frontier_greedy}
 \end{figure}
 \section{\system: Our Solution\label{sec:system}}
-We present our system, \system, by first providing a high-level overview of the underlying algorithm, 
+We present our system, \system, by first providing a high-level overview of the underlying algorithm,
 and then describing the user interaction mechanisms.
 \change{
   \subsection{Lattice Traversal Algorithm\label{sec:algorithms}}
-  For a given dataset and user-selected X and Y axes, 
-  we first enumerate all possible attribute-value combinations 
-  (i.e., filters) to construct the lattice upfront. 
+  For a given dataset and user-selected X and Y axes,
+  we first enumerate all possible attribute-value combinations
+  (i.e., filters) to construct the lattice upfront.
   \bchange{Like we described in the previous section, we retain
-  only the edges that correspond to informative parents.}  
-  Then, we traverse this pruned 
+  only the edges that correspond to informative parents.}
+  Then, we traverse this pruned
   lattice to select the connected subgraph $S$ of $k$
   visualizations (or equivalently, nodes in the lattice)
   that maximizes
@@ -41,20 +40,20 @@ and then describing the user interaction mechanisms.
 }
 \change{Our algorithm for traversing the lattice,
 titled {\em frontier-greedy}, is inspired
-by the notion of ``externals'' in 
+by the notion of ``externals'' in
 Parameswaran et al.~\cite{Parameswaran2010}.
 The algorithm incrementally grows a subgraph $S'$ until
 $k$ nodes are selected.
-Throughout, the algorithm maintains a set 
+Throughout, the algorithm maintains a set
 of {\em frontier} nodes $\mathcal{F}$---nodes
 that are connected to the existing subgraph solution $S'$
 but have not yet been
 added. The frontier nodes includes all of the children of the nodes
-in $S'$. 
-Given that our pruned 
-lattice only retains edges between children and their 
-informative parents, all frontier nodes are guaranteed 
-to have an informative parent in the the existing solution 
+in $S'$.
+Given that our pruned
+lattice only retains edges between children and their
+informative parents, all frontier nodes are guaranteed
+to have an informative parent in the the existing solution
 and can be added to $S$ without violating informativeness.
 %Any frontier node whose informative parent is present in the existing solution can potentially be added to the existing solution, without violating the informativeness principle.
 At each iteration, the algorithm adds the node from the frontier
@@ -140,7 +139,7 @@ for analysis.
 Say the analyst is now interested in learning more
 about the other factor that contributes to \change{high arrest rates}:
 \change{a long stop with \texttt{duration=30+min}}.
-In Figure~\ref{fig:overview}b, they 
+In Figure~\ref{fig:overview}b, they
 can click on the corresponding visualization
 \change{to} request additional visualizations.
 Upon seeing the updated dashboard in Figure~\ref{fig:overview}c,
@@ -149,10 +148,7 @@ that involves the \change{\texttt{duration=30+min}}
 filter is likely to result in high ticketing and arrest rates.
 This implies that if a police stop lasts more than 30 minutes,
 the outcome would more or less be the same,
-independent of other factors such as the driver's race or age.
-To generate the expanded dashboard, \system uses the same models
-and algorithms as before,
-except the \change{selected visualization is set as the 
+independent of other factors such as the driver's race or age. To generate the expanded dashboard, \system uses the same models and algorithms as before, except the \change{selected visualization is set as the
 the overall visualization $V_0$ at the root node of the new lattice}.
 This node expansion capability is motivated
 by the idea of \textit{iterative view refinement}
