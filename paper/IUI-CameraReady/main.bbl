@@ -312,6 +312,13 @@
 \url{dx.doi.org/10.1109/TVCG.2007.70594}}
 
 
+\bibitem{Mannino2018QetchTS}
+{Miro Mannino} {and} {Azza Abouzeid}. 2018.
+\newblock \showarticletitle{Qetch: Time Series Querying with Expressive
+  Sketches}. In {\em SIGMOD Conference}.
+\newblock
+
+
 \bibitem{McHugh2013}
 {Mary~L. McHugh}. 2013.
 \newblock \showarticletitle{The Chi-square test of independence}.
@@ -380,6 +387,17 @@
 \url{http://dx.doi.org/10.14778/3025111.3025126}}
 
 
+\bibitem{DBLP:journals/corr/abs-1811-07977}
+{Tarique Siddiqui}, {Zesheng Wang}, {Paul Luh}, {Karrie Karahalios}, {and}
+  {Aditya~G. Parameswaran}. 2018.
+\newblock \showarticletitle{ShapeSearch: {A} Flexible and Efficient System for
+  Shape-based Exploration of Trendlines}.
+\newblock {\em CoRR\/}  {abs/1811.07977} (2018).
+\newblock
+\showURL{%
+\url{http://arxiv.org/abs/1811.07977}}
+
+
 \bibitem{Dang2014}
 {{Tuan Nhon Dang}} {and} {{Leland Wilkinson}}. 2014.
 \newblock \showarticletitle{{ScagExplorer: Exploring Scatterplots by Their
@@ -390,6 +408,17 @@
 \showISSN{21658773}
 \showDOI{%
 \url{http://dx.doi.org/10.1109/PacificVis.2014.42}}
+
+
+\bibitem{DBLP:journals/pvldb/VartakMPP14}
+{Manasi Vartak}, {Samuel Madden}, {Aditya~G. Parameswaran}, {and} {Neoklis
+  Polyzotis}. 2014.
+\newblock \showarticletitle{{SEEDB:} Automatically Generating Query
+  Visualizations}.
+\newblock {\em {PVLDB}\/} {7}, 13 (2014), 1581--1584.
+\newblock
+\showDOI{%
+\url{http://dx.doi.org/10.14778/2733004.2733035}}
 
 
 \bibitem{Vartak2015}
