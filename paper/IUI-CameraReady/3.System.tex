@@ -1,4 +1,7 @@
 %!TEX root = main.tex
+\section{\system: Our Solution\label{sec:system}}
+We present our system, \system, by first providing a high-level overview of the underlying algorithm,
+and then describing the user interaction mechanisms.
 \begin{figure}[h!]
 \centering
 \vspace{-10pt}
@@ -6,7 +9,7 @@
 \vspace{-20pt}
 \caption{Example illustrating how the frontier greedy algorithm incrementally builds up the solution by selecting the node
 \change{or visualization
-that leads to the highest gain in utility from the frontier at every step. Starting from a pruned lattice comprising only connections to informative parents (left) and three nodes in the existing solution (blue), we select the node with the highest utility gain (yellow) amongst the frontier nodes (green). \bchange{The contribution
+that leads to the highest gain in utility from the frontier at every step. Starting from a pruned lattice comprising only connections to informative parents (left) and three nodes in the existing solution (blue), we select the node with the highest utility gain (yellow) amongst the frontier nodes (green). \change{The contribution
 to the utility of a node/visualization is depicted as the number within the node.} On the right, the newly added node results in an updated frontier and the node
 leading to the highest utility gain is selected among them.
 }
@@ -14,15 +17,12 @@ leading to the highest utility gain is selected among them.
 \vspace{-10pt}
 \label{fig:frontier_greedy}
 \end{figure}
-\section{\system: Our Solution\label{sec:system}}
-We present our system, \system, by first providing a high-level overview of the underlying algorithm,
-and then describing the user interaction mechanisms.
 \change{
   \subsection{Lattice Traversal Algorithm\label{sec:algorithms}}
   For a given dataset and user-selected X and Y axes,
   we first enumerate all possible attribute-value combinations
   (i.e., filters) to construct the lattice upfront.
-  \bchange{Like we described in the previous section, we retain
+  \change{Like we described in the previous section, we retain
   only the edges that correspond to informative parents.}
   Then, we traverse this pruned
   lattice to select the connected subgraph $S$ of $k$

@@ -210,7 +210,6 @@ for each visualization in $S$ except the overall one,
 at least one of its informative parents will be present in $S$.
 This network of visualizations $S$ can be displayed on a dashboard.
 }
-
 % To succinctly convey insights, we concentrate on \emph{summarization}---identifying a group of visualizations that collectively contain informative insights. Since our aim is to identify a unified narrative, instead of discrete insights, we enforce that any selected visualization must have at least one of its informative parents present in the dashboard. Specifically, we identify a set of $k$ connected visualizations that collectively maximize the sum of the proposed utility $U(V_i)$ across each selected visualization, $V_i$, and thus succinctly convey informative insights, more formally stated as follows:
 % \par \textsc{Problem.} \textit{Given a dataset and user-provided X, Y attributes, select $k$ visualizations from the lattice of data subsets $\mathcal{L}$ to be included in the dashboard, such that:
 % \\ (i) one of the selected visualization is the overall visualization, corresponding to the entire dataset with no filter;
@@ -220,7 +219,7 @@ This network of visualizations $S$ can be displayed on a dashboard.
 % and aggregation function G, a lattice $\mathcal{L}$ consisting of visualizations $V_i$ for all possible filter $F_i$ that could be constructed from dataset D:}
 % \\ \texttt{$V_i$ = SELECT X, G(Y) FROM D WHERE $F_i$ GROUP BY X}
 % \\ \textit{find k visualizations from $\mathcal{L}$ to include in dashboard $\mathcal{S}$, such that the total utility $\sum_{V_i \in \mathcal{L}} U(V_i)$ as defined above is maximized, while enforcing that all $V_i \in \mathcal{S}$ is connected.}
-\bchange{Since the edges between non-informative parents to children are not
+\change{Since the edges between non-informative parents to children are not
 pertinent to the solution,
 we can remove those edges from the lattice, leaving
 only the edges from the informative parents to the children.
@@ -239,5 +238,5 @@ with prerequisites~\cite{Parameswaran2010} (specifically, the AND graph variant)
 % as the \emph{maximum-weight connected subgraph problem}~\cite{ErnstAlthaus2009}
 % and is known to be {\sc NP-Complete}~\cite{Parameswaran2010}.
 % \agp{This doesn't actually show that our problem is hard. We need to reduce max-weighted subgraph to our problem, not the other way around. I am leaving a pointer here to think about it later.}
-\bchange{Next, we design an approximate algorithm
+\change{Next, we design an approximate algorithm
  to solve this problem.}

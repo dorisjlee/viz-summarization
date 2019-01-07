@@ -1,35 +1,35 @@
 %!TEX root = main.tex
 \change{\section{Discussion of Study Results}}
-To \bchange{further understand how participants 
-made use of the recommended visualizations during their analysis}, 
-we analyzed the user study \bchange{transcripts}
-through an open coding process~\cite{Muller1993} by two of the authors. 
+To \change{further understand how participants
+made use of the recommended visualizations during their analysis},
+we analyzed the user study \change{transcripts}
+through an open coding process~\cite{Muller1993} by two of the authors.
 For each task in our study, we assigned a binary-valued code to indicate whether or not a participant engaged in a particular action or thought process. Table~\ref{table:thematic_summary} highlights results from thematic coding discussed in this section. We will use the notation [Participant.DatasetAlgorithm] to refer to a participant engaging with a dashboard created by an algorithm=\{1,2,3\}=\{\system, \cluster, \textsc{BFS}\} on a dataset =\{A,B\}=\{Police, Autism\}.
 % \stitle{\system promotes distribution-awareness by provoking comparisons against more informative contextual references.}We first studied the thematic codes to understand how participants select contextual references for visualizations.
 \subsection{The Choice of Contextual References}
-\par As discussed earlier, 
-analysts often make use of 
-related visualizations to 
-form their \bchange{expectation or mental model} for 
-unseen \bchange{visualizations}. 
-We refer to \bchange{the}
-visualizations used 
-for such purposes as \emph{contextual references}. 
-\bchange{The appropriate choice
+\par As discussed earlier,
+analysts often make use of
+related visualizations to
+form their \change{expectation or mental model} for
+unseen \change{visualizations}.
+We refer to \change{the}
+visualizations used
+for such purposes as \emph{contextual references}.
+\change{The appropriate choice
 of a contextual reference (such as an informative parent)
 is necessary to ensure the \emph{safety} of
-insights derived through drill-downs.} 
-To understand how ``safe'' the dashboards 
-generated from each condition were, 
-we examined \change{the visualizations} 
-that participants compared against 
-to \bchange{inform unseen visualizations}. 
-In particular, we thematically encoded 
-\bchange{the}
-participants' use of contextual references 
-based on \change{their} verbal explanations 
-\change{for justifying} their prediction task responses. 
-As shown in Table \ref{table:contextualReferenceCount}, 
+insights derived through drill-downs.}
+To understand how ``safe'' the dashboards
+generated from each condition were,
+we examined \change{the visualizations}
+that participants compared against
+to \change{inform unseen visualizations}.
+In particular, we thematically encoded
+\change{the}
+participants' use of contextual references
+based on \change{their} verbal explanations
+\change{for justifying} their prediction task responses.
+As shown in Table \ref{table:contextualReferenceCount},
 we find that participants make more comparisons in total using \system than \cluster and \BFS.
 \begin{table}[h!]
 \vspace{-5pt}
@@ -45,50 +45,51 @@ we find that participants make more comparisons in total using \system than \clu
 \label{table:contextualReferenceCount}
 \vspace{-20pt}
 \end{table}
-\par Participants can (and often do) make comparisons against more than one type of contextual references to obtain their prediction. We uncovered four main classes of contextual references, described below using the 
-example visualization $V_i$=\texttt{\origcolor{gender=F, race=White, age=21-30}} (in the order of most to least similar to $V_i$) and illustrated in Figure~\ref{fig:reference}:
+\par Participants can (and often do) make comparisons against more than one type of contextual references to obtain their prediction. We uncovered four main classes of contextual references, described below using the
+example visualization $V_i$=\texttt{\origcolor{gender=F, age=21-30}} (in the order of most to least similar to $V_i$): %and illustrated in Figure~\ref{fig:reference}:
+\dor{Changed the example by using Vi as a two-filter visualization (instead of three for clarity). Removed illustration figure, since simplified example should be sufficient (also relatives makes edges in diagram too complex and hard to trace back).}
 \begin{enumerate}
-	\item \textbf{Parent} : Comparison against a visualization with one 
-	filter removed (e.g., \texttt{\origcolor{gender=F, race=White}})
-	\item \textbf{Siblings} : Comparison against a visualization that shares the same parent. In other words, the \bchange{filtered attributes are the same, but one filter has a different value}. (e.g., \texttt{\origcolor{gender=F, race=White, age=}\diffcolor{60+}})
-	\item \textbf{Relatives} : Comparison against a visualization that shares some common ancestor (excluding overall), but not necessarily the same parent. \bchange{These} visualizations share at least one \bchange{common filter, but with more than one filter or filter value being different}\agp{I updated it based on what I thought this should have been--see figure for more}. (e.g., \texttt{\origcolor{gender=F, race=White, age=}\diffcolor{60+, search conducted=T}})
+	\item \textbf{Parent} : Comparison against a visualization with one
+	filter removed (e.g., \texttt{\origcolor{gender=F}})
+	\item \textbf{\achange{Sibling}} : Comparison against a visualization that shares the same parent. In other words, the \change{filtered attributes are the same, but one filter has a different value}. (e.g., \texttt{\origcolor{gender=F, age=}\diffcolor{60+}})
+	\item \textbf{\achange{Relative}} : Comparison against a visualization that shares some common ancestor (excluding overall), but not necessarily the same parent. \change{These} visualizations share at least one \change{common filter, but with more than one filter or filter value being different}. (e.g., \texttt{\origcolor{gender=F, age=}\diffcolor{60+, race=White}})
+	%\agp{I updated it based on what I thought this should have been--see figure for more}
 	\item \textbf{Overall} : Comparison against the distribution that describes the overall population (no filters applied).
 \end{enumerate}
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.7\linewidth]{figures/contextual_reference.pdf}
-\caption{\change{Different types of contextual references} for a given visualization of interest $V_i$. The degree of similarity with respect to $V_i$ is denoted by darkest to lightest color hue.\agp{I don't see how the relative is actually a relative. It shares no similarity with $V_i$, and is no different from the other white node. (One way to see this is that the common ancestor for both the so-called relative and the white node and $V_i$ are the same -- the overall one.)}}
-\label{fig:reference}
-\vspace{-10pt}
-\end{figure}
-\par \bchange{Studying the participants' use of contextual references 
-reveals inherent challenges that arise from 
-using the \BFS and \cluster dashboards.} 
-For \cluster, participants mainly compared 
-against relatives and overall visualizations. 
-Since \cluster optimizes the diversity of distributions 
-amongst the \bchange{selected} visualizations, 
-\bchange{these} visualizations had up to 4 filters 
-and were disconnected from each other. 
-For this reason, in many cases\change{,} 
-participants could only rely on relatives 
-and the overall visualization as contextual references. 
-For example, P4.A2 pointed at a 4-filter visualization 
-with extreme values (100\% for warning; 0\% for arrest and ticket) 
-and indicated how ``\textit{a lot of} [the visualizations] 
-\textit{are far too specific. This is not very helpful. 
-You can't really hypothesize that all people are} \change{[sic]} 
-\textit{going to be warned, because it is such a specific category, 
+% \begin{figure}[h!]
+% \centering
+% \includegraphics[width=0.7\linewidth]{figures/contextual_reference.pdf}
+% \caption{\change{Different types of contextual references} for a given visualization of interest $V_i$. The degree of similarity with respect to $V_i$ is denoted by darkest to lightest color hue.\agp{I don't see how the relative is actually a relative. It shares no similarity with $V_i$, and is no different from the other white node. (One way to see this is that the common ancestor for both the so-called relative and the white node and $V_i$ are the same -- the overall one.)}}
+% \label{fig:reference}
+% \vspace{-10pt}
+% \end{figure}
+\par \change{Studying the participants' use of contextual references
+reveals inherent challenges that arise from
+using the \BFS and \cluster dashboards.}
+For \cluster, participants mainly compared
+against relatives and overall visualizations.
+Since \cluster optimizes the diversity of distributions
+amongst the \change{selected} visualizations,
+\change{these} visualizations had up to 4 filters
+and were disconnected from each other.
+For this reason, in many cases\change{,}
+participants could only rely on relatives
+and the overall visualization as contextual references.
+For example, P4.A2 pointed at a 4-filter visualization
+with extreme values (100\% for warning; 0\% for arrest and ticket)
+and indicated how ``\textit{a lot of} [the visualizations]
+\textit{are far too specific. This is not very helpful.
+You can't really hypothesize that all people are} \change{[sic]}
+\textit{going to be warned, because it is such a specific category,
 it might just be one person}''. %, you need to have a bigger dataset. And that category will not really give you such extremes to make it more credible''.
-He further explained how he ``\textit{would not want to see the intersections} [visualizations with many filters] \textit{at first and would want to see all the bases} [univariate summaries] \textit{then dig in from there.}'' The lack of informative contextual references in the \cluster dashboard is also reflected in how analysts exhibited high variance and deviation in their prediction responses. Note that the prediction task was chosen so that exactly one parent must be present in the dashboard, so these results do not point to the absence of parent visualizations in these \change{dashboards}, but rather indicate how participants made use of the information presented in the dashboards to form their prediction.
-\agp{I don't understand the previous sentence.}
+He further explained how he ``\textit{would not want to see the intersections} [visualizations with many filters] \textit{at first and would want to see all the bases} [univariate summaries] \textit{then dig in from there.}'' The lack of informative contextual references in the \cluster dashboard is also reflected in how analysts exhibited high variance and deviation in their prediction responses. %Note that the prediction task was chosen so that exactly one parent must be present in the dashboard, so these results do not point to the absence of parent visualizations in these \change{dashboards}, but rather indicate how participants made use of the information presented in the dashboards to form their prediction. \agp{I don't understand the previous sentence.}
 
-\par Furthermore, \change{improper comparisons against contextual references often make} it difficult to \change{interpret} displayed visualizations. In particular, when visualizations composed of multiple filter conditions were shown in \cluster dashboards, 25\% of \bchange{the} participants had trouble \change{making sense of the meaning of a filter} for at least one of the datasets \change{(e.g., understanding that \texttt{gender=F AND age=60+} corresponds to female drivers with ages larger than 60 years old) at some point during the study}. In contrast, as shown in Table~\ref{table:thematic_summary}, this confusion only happened once for \BFS and none for \system. This is due to the fact that \cluster dashboards \change{seemed} random to the users, making it challenging to find ``close'' contextual references to compare against. 
+\par Furthermore, \change{improper comparisons against contextual references often make} it difficult to \change{interpret} displayed visualizations. In particular, when visualizations composed of multiple filter conditions were shown in \cluster dashboards, 25\% of \change{the} participants had trouble \change{making sense of the meaning of a filter} for at least one of the datasets \change{(e.g., understanding that \texttt{gender=F AND age=60+} corresponds to female drivers with ages larger than 60 years old) at some point during the study}. In contrast, as shown in Table~\ref{table:thematic_summary}, this confusion only happened once for \BFS and none for \system. This is due to the fact that \cluster dashboards \change{seemed} random to the users, making it challenging to find ``close'' contextual references to compare against.
 \change{In contrast, the linear ordering of \BFS and hierarchical ordering of \system were natural and interpretable for participants}. %In contrast, \BFS follows a linear ordering and \system follows a hierarchical ordering, which were more natural and interpretable for participants.
 %despite our modification to KMeans which picks the visualizations with the least number of filters to show in the dashboard for improving interpretability
 %These themes are drawn from user's explanations of how they obtained certain insights or ---- that --different tasks or while interpreting the dashboards. 4 categories :
-\par For \BFS, most comparisons were based on the overall \bchange{visualization} and siblings. Due to the sequential level-wise picking approach, the overall visualization for \BFS dashboards corresponded to the immediate parent\agp{of what?}, so they are not explicitly recorded as a parent. While the overall and sibling comparisons can be informative, \bchange{the incomplete comparisons, due to the limited number of first-level visualizations displayed, can result in flawed reasoning, as observed
-in the Autism prediction task.} In contrast, for \system, almost all users compared against the overall \bchange{one} and parents, while some also exploited \change{sibling comparisons} to make weaker guesses for less-frequently observed attributes (e.g., using a 2-filter sibling visualization involving \texttt{driver\_age} to infer another 2-filter visualization involving \texttt{driver\_age} with a different parent.)
+\par For \BFS, most comparisons were based on the overall \change{visualization} and siblings. Due to the sequential level-wise picking approach, the overall visualization \achange{ corresponded to the immediate parent of all dashboard visualizations generated by \BFS (all of which are univariate distributions for $k=10$)}, so they are not explicitly recorded as a parent. While the overall and sibling comparisons can be informative, \change{the incomplete comparisons, due to the limited number of first-level visualizations displayed, can result in flawed reasoning, as observed
+in the Autism prediction task.} In contrast, for \system, almost all users compared against the overall \change{one} and parents, while some also exploited \change{sibling comparisons} to make weaker guesses for less-frequently observed attributes (e.g., using a 2-filter sibling visualization involving \texttt{driver\_age} to infer another 2-filter visualization involving \texttt{driver\_age} with a different parent.)
 % \subsection{Improper contextual reference can lead to misleading insights.}
 \begin{table}[ht!]
 \vspace{-10pt}
@@ -118,24 +119,25 @@ Likewise, P9 described how \system's hierarchical layout for the Autism dataset 
 \begin{quote}
 \textit{If I had to look at this dataset in the format of the other one, this would be much more difficult. It was pretty hard for me to tell in the other one how to organize the tree, if there was even a tree to be organized. I like this layout much better, I think this layout allows me to approach it in a more meaningful way. I can decide, what do I think matters more: the overall trend? or the super detailed trends? and I know where to look to start, in the other one, every time I go back to it, I would say, where's the top level, where's the second level? I mentally did this. Like when you asked me that first question, it took much longer to find it, because I literally have to put every chart in a space in my head and that took a lot longer than knowing how to look at it.}
 \end{quote}
-At the end of the study, some participants \change{who were assigned dashboard conditions with \bchange{$5 \times 2$} table layouts \bchange{(i.e., they were assigned \BFS and \cluster)}\agp{plz confirm}} sketched and explained how they would like the layout of the visualizations to be done. \change{These} participants expressed that they wanted ``groupings'' or layouts that arranged visualizations with the same attribute together. Other participants advocated for isolating the overall visualization outside of the dashboard table for facilitating easier comparisons. Both of these suggestions provide further motivation for our hierarchical organization of visualizations. \bchange{\papertext{Our findings echo prior work on visualization sequences and storytelling~\cite{Hullman2017,Segel2010,Boy2015,Kim2017} in that analysts prefer visualization sequences structured hierarchically based on shared data properties such as levels of aggregation, ordered by increasing levels of summarization.\agp{I don't understand what "ordered by increasing levels of summarization" is here, and why it makes sense}}}
+At the end of the study, some participants \change{who were assigned dashboard conditions with \change{$5 \times 2$} table layouts \change{(i.e., \BFS and \cluster \achange{conditions})}} sketched and explained how they would like the layout of the visualizations to be done. \change{These} participants expressed that they wanted ``groupings'' or layouts that arranged visualizations with the same attribute together. Other participants advocated for isolating the overall visualization outside of the dashboard table for facilitating easier comparisons. Both of these suggestions provide further motivation for our hierarchical organization of visualizations. \change{\papertext{Our findings echo prior work on visualization sequences and storytelling~\cite{Hullman2017,Segel2010,Boy2015,Kim2017} in that analysts prefer visualization sequences structured hierarchically based on shared data properties, such as \achange{ordering by increasing levels of aggregation.}}}
+%\agp{I don't understand what "ordered by increasing levels of summarization" is here, and why it makes sense}}}%, ordered by increasing levels of summarization.
 %Kim et al.~\cite{Kim2017} modeled relationships between charts by empirically estimating transition (edge) cost between moving from one visualization (node) to another. They found that participants preferred ``\textit{starting from the entire data and introducing increasing levels of summarization}''.
  %layout and the idea of the collapsed visualizations as described earlier.%in Section \ref{sec:interaction}.
-\par Since we did not inform participants about how the dashboards were generated, it was \change{surprising to see} that some participants \change{presumed} that \bchange{some} dashboards were hand-picked by a human analyst and \change{hypothesized} what this \change{fictitious analyst}'s intentions were (e.g., ``\textit{It seems like the researcher who created this dashboard was specifically looking at people of Asian descent and people who are 60 or older.}'' [P7.A1]). \change{Table~\ref{table:thematic_summary} shows how} 5 out of 12 participants referred to the \system dashboards as if they were generated by a human, whereas only 1 participant for \cluster and none for \BFS made such remarks\change{\footnote{We encoded this phenomenon by looking at instances where a participant either explicitly \change{referred} to a person who picked out the dashboard or implicitly described their intentions through personal pronouns.}}. At the end of the study, many were surprised to learn that the \system dashboard was actually picked out by an algorithm, indicating that \system could automatically \change{generate convincing dashboards similar to ones that were} authored with human intention. The interpretability of \system dashboards may have contributed to the increased number of insights discovered in both datasets compared to the two baselines, as summarized in Table~\ref{table:thematic_summary}.
+\par Since we did not inform participants about how the dashboards were generated, it was \change{surprising to see} that some participants \change{presumed} that \achange{certain} dashboards were hand-picked by a human analyst and \change{hypothesized} what this \change{fictitious analyst}'s intentions were (e.g., ``\textit{It seems like the researcher who created this dashboard was specifically looking at people of Asian descent and people who are 60 or older.}'' [P7.A1]). \change{Table~\ref{table:thematic_summary} shows how} 5 out of 12 participants referred to the \system dashboards as if they were generated by a human, whereas only 1 participant for \cluster and none for \BFS made such remarks\change{\footnote{We encoded this phenomenon by looking at instances where a participant either explicitly \change{referred} to a person who picked out the dashboard or implicitly described their intentions through personal pronouns.}}. At the end of the study, many were surprised to learn that the \system dashboard was actually picked out by an algorithm, indicating that \system could automatically \change{generate convincing dashboards similar to ones that were} authored with human intention. The interpretability of \system dashboards may have contributed to the increased number of insights discovered in both datasets compared to the two baselines, as summarized in Table~\ref{table:thematic_summary}.
 \subsection{Limitations of \system}
 % Interestingness task is highly subjective, so not conclusive whether interesting or not , despite the positive result
 % Due to the highly subjective nature of the retrieval task, the interestingness selection for the Police dataset was biased by participant's priors and intuition about the attributes. For example, while all participants who have seen the visualization "duration=30+min" verbally noted that stop duration is a crucial factor that leads to arrest, only 4 users marked it as interesting. 5 participants marked the visualization as not interesting and 4 left it unselected, because the visualization was not very surprising as it agreed with their intuition that ``\textit{if the police stop is taking a long time, something has probably gone wrong}''.
-\par As described earlier, since the details of how the dashboards were obtained \change{were} not explained to the users during the study, some users expressed that they were initially confused by \system\ \change{as} not all variables were present in the dashboard. Others also found it confusing that the addition of filters did not always correspond to the same variables. For example, P2.A1 \bchange{felt that} the dashboard was intentionally biased:
+\par As described earlier, since the details of how the dashboards were obtained \change{were} not explained to the users during the study, some users expressed that they were initially confused by \system\ \change{as} not all variables were present in the dashboard. Others also found it confusing that the addition of filters did not always correspond to the same variables. For example, P2.A1 \change{felt that} the dashboard was intentionally biased:
 \begin{quote}
 \textit{I feel like this one, not all the data is here, so we are already telling a story, you are trying to steer the viewer to look at certain things. And the focus seems to be on where the arrest rate is high. You probably could have found other things that led to ticket being high, but you didn't pull those out. You are trying to see if there are other factors that lead to more arrests.}
 \end{quote}
-\npar This sentiment is related to participants' desire to perform their own ad-hoc querying alongside the dashboard to inspect other related visualizations for verifying their hypothesis. For example, P7.A1 wanted to inspect all other first-level visualizations for driver's race to assess its influence. P7.A1 expressed that while he had learned many insights from the dashboard, ``\textit{the only thing I don't like is I cannot control the types of filter, which is fixed.}'' 
-\bchange{Since our current goal was to simply provide an informative dashboard and evaluate its utility,
-the present version of \system is limited in its interactivity and the extent of free-form data exploration it supports. This result also points to how} \system could serve as a helpful \change{assistant} alongside other conventional visualization tools, such as Tableau. Outside the context of the user study, it is essential to explain how \system\ \change{selects} the visualizations in \change{an} easy and interpretable manner to establish a sense of \bchange{the} 
-summarization guarantee(s) for the users and 
+\npar This sentiment is related to participants' desire to perform their own ad-hoc querying alongside the dashboard to inspect other related visualizations for verifying their hypothesis. For example, P7.A1 wanted to inspect all other first-level visualizations for driver's race to assess its influence. P7.A1 expressed that while he had learned many insights from the dashboard, ``\textit{the only thing I don't like is I cannot control the types of filter, which is fixed.}''
+\change{Since our current goal was to simply provide an informative dashboard and evaluate its utility,
+the present version of \system is limited in its interactivity and the extent of free-form data exploration it supports. This result also points to how} \system could serve as a helpful \change{assistant} alongside other conventional visualization tools, such as Tableau. Outside the context of the user study, it is essential to explain how \system\ \change{selects} the visualizations in \change{an} easy and interpretable manner to establish a sense of \bchange{the}
+summarization guarantee(s)\dor{not sure if this makes sense here} for the users and
 help them make better inferences with the dashboard.
 
-\bchange{%a small set of analytic tasks corresponding to each design objectives, with
+\change{%a small set of analytic tasks corresponding to each design objectives, with
 Since the goal of our study is to evaluate whether \system can assist users in drill-down exploration, our preliminary study is limited to comparisons against baselines stemming from conventional approaches for multidimensional data exploration. While we understand how the \system study condition may confound the hierarchical layout with the algorithmic choice of visualizations, our intention for the baseline
 was to simulate how analysts generate a large number of visualizations individually, typically arranged in a table grid layout, rather than using a hierarchical layout. Further evaluation comparing how different hierarchically-displayed visualization selection algorithms assist users in drill-down exploration is a direction of future work.
 }
