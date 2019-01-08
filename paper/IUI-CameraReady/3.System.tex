@@ -85,17 +85,15 @@ Algorithm~\ref{algo:frontier_greedy} provides the pseudocode.
 \end{algorithm}
 %The frontier greedy algorithm first compiles a list of candidate nodes known as the \textit{frontier} nodes, which encompasses all nodes that are connected to the existing subgraph solution. As long as the informative parents of frontier nodes are already present in the solution, the frontier nodes can be appended to the current solution without violating requirement (ii) in the problem formulation, enforcing the presence of informative parent for every selected visualization. To obtain the frontier nodes, the algorithm scans and adds all children of leaf nodes of the current dashboard as part of the frontier. \tr{In the online version, it additionally checks for each child whether its informative parent is present in the current dashboard.} As illustrated in Figure~\ref{fig:frontier_greedy}, at each step, our algorithm greedily picks the node with the maximum edge utility amongst the eligible frontier nodes to add to the current solution, and updates the frontier accordingly. \ccut{The \textit{frontier greedy} algorithm discussed here is used for generating the dashboards for our user study and we defer the details of other algorithms that we have developed for lattice traversal to the technical report. }
 %\par The frontier greedy algorithm obtains a list of candidate nodes known as the \textit{frontier} nodes, which encompasses all neighbors of nodes in the existing subgraph solution. Any of the nodes in the frontier can be added to the current solution since their informative parent is present in the solution. To obtain the frontier nodes, the algorithm scans and adds all children of leaf nodes of the current dashboard as part of the frontier. In the online version, it additionally checks for each child whether its informative parent is present in the current dashboard. At each step, our algorithm greedily picks the node with the maximum utility amongst the frontier nodes to add to the current solution, and updates the frontier accordingly. \tr{The path merging algorithm first generate the informative paths from root to every candidate node. Then, it greedily merges the paths with high-utility to create a subgraph whose size is less than or equal to maximum capacity $k$.}
-
-\subsection{User Interaction\label{sec:interaction}}
 \begin{figure*}[ht!]
 \centering
-\includegraphics[width=0.82\linewidth,frame]{figures/overview_interface_expand.pdf}
+\includegraphics[width=0.9\linewidth,frame]{figures/overview_interface_expand.pdf}
 \caption{a) Overview of the \system interface for the Police Stop dataset. Users can  select \change{x, y axes, and aggregation function via the dropdown menu, to define the visualization space of interest, as well as adjusting dashboard parameters, such as the number of visualizations to show in the dashboard (k) via the sliders.} b) User clicks on the duration=30+min visualization to request 2 additional visualizations. c) A preview of the added portion of the resulting dashboard is shown.}
 % Default values are set for system related parameters such as the number of visualizations to show in the dashboard (k), iceberg condition for pruning ($\delta$), and informative parent criterion ($\theta$), which can be adjusted by the users via the sliders if needed.
 \label{fig:overview}
 \vspace{-10pt}
 \end{figure*}%optional system parameter settings
-
+\subsection{User Interaction\label{sec:interaction}}
 \change{Given the visualizations in $S'$,
 we can render these visualizations in a dashboard,}
 where users can inspect the \change{visualizations}
