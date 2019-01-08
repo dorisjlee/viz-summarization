@@ -1,26 +1,23 @@
 %!TEX root = main.tex
 \section{Introduction}
-
-
 %Exploring multidiemnsional dataset is hard
 \par Visual data exploration is the {\em de facto} first step in understanding multi-dimensional datasets. This exploration enables analysts to identify trends and patterns, generate and verify hypotheses, and detect outliers and anomalies. However, as datasets grow in size and complexity, visual data exploration becomes challenging. In particular, to
 \change{understand how a global pattern came about,
 an analyst may need to explore different subsets of the data
 to see whether the same or different pattern manifests itself
-in these subsets.}
-\change{Unfortunately, manually}
+in these subsets.} \change{Unfortunately, manually}
 generating and examining each visualization
 in this space of data subsets
 (which grows exponentially in \change{the} number of attributes)
 presents a major bottleneck \change{during exploration}.
 %Drill-Down for exploration
-\begin{figure}[ht!]
+\begin{figure}[b!]
 % \includegraphics[width=\linewidth]{figures/elections_example_lattice.pdf}
 \includegraphics[width=0.95\linewidth]{figures/elections_example_lattice_teaser.pdf}
-\vspace{-5pt}
+\vspace{-12pt}
 \caption{Example data subset lattice from the 2016 US election dataset illustrating the drill-down fallacy along the purple path as opposed to the informative orange path.}
 \label{fig:elections_example}
-\vspace{-10pt}
+\vspace{-15pt}
 \end{figure}
 \par One way of navigating this combinatorial space
 is to perform \change{{\em drill-downs}}

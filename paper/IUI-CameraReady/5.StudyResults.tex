@@ -32,7 +32,7 @@ by users. We will drill into \achange{the} possible reasons why in the next sect
 \begin{table}[h!]
 \vspace{-5pt}
 	\centering
-	\begin{tabular}{lrrr}
+	\begin{tabular}{l|r|r|r}
 	 \small{Condition}             &   \small{\system} &   \small{\BFS} &   \small{\cluster} \\
 	\hline
 	 \small{Interesting}            &  \cellcolor{blue!25}       66    & 61    &      51   \\
@@ -127,8 +127,8 @@ the three most important attributes for each dataset.
 \begin{table}[ht!]
 	\centering
 	\vspace{-10pt}
-	\begin{tabular}{lllll}
-	         & \multicolumn{2}{c}{Police}                                   & \multicolumn{2}{c}{Autism}                                   \\ \hline
+	\begin{tabular}{l|ll|ll}
+	         & \multicolumn{2}{c|}{Police}                                  & \multicolumn{2}{c}{Autism}                                   \\ \hline
 	Metric   & F                             & AP                            & F                             & AP                            \\ \hline
 	\system  & \cellcolor{blue!25}0.750 & \cellcolor{blue!25}0.867 & 0.723                         & 0.600                         \\
 	\cluster & 0.739                         & 0.691                         & \cellcolor{blue!25}0.725 & \cellcolor{blue!25}0.665 \\
