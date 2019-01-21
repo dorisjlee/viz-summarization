@@ -1,0 +1,264 @@
+\PassOptionsToPackage{table}{xcolor}
+\PassOptionsToPackage{warn}{textcomp}
+\documentclass[sigchi]{acmart}
+% Load basic packages
+\usepackage{booktabs} % For formal tables
+\usepackage{balance}  % to better equalize the last page
+\usepackage{graphics} % for EPS, load graphicx instead
+\usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage{textcomp}
+\usepackage{xspace}
+\usepackage{setspace}
+\usepackage[textsize=tiny]{todonotes}
+% Some optional stuff you might like/need.
+\usepackage{microtype} % Improved Tracking and Kerning
+% \usepackage[all]{hypcap}  % Fixes bug in hyperref caption linking
+\usepackage{ccicons}  % Cite your images correctly!
+% \usepackage[utf8]{inputenc} % for a UTF8 editor only
+\usepackage{verbatim}
+\usepackage{relsize}
+\usepackage{etoolbox}
+\usepackage{lipsum}   % for filler text
+\usepackage{setspace} % for \onehalfspacing and \singlespacing macros
+\usepackage[normalem]{ulem}
+\usepackage{fixltx2e}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{afterpage}
+\usepackage[htt]{hyphenat}
+\usepackage{microtype}                 % use micro-typography (slightly more compact, better to read)
+% \usepackage{times}
+\renewcommand*\ttdefault{txtt}         % a nicer typewriter font
+\usepackage{tabu}                      % only used for the table example
+\usepackage{booktabs}                  % only used for the table example
+% \usepackage[linesnumbered,ruled]{algorithm2e}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage{subfig}
+\raggedbottom
+\DeclareMathOperator*{\argmax}{arg\,max}
+% llt: Define a global style for URLs, rather that the default one
+\makeatletter %making the spacing between paragraphs less dramatic
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{
+    \def\UrlFont{\sf}
+  }{
+    \def\UrlFont{\small\bf\ttfamily}
+  }}
+\makeatother
+
+\newenvironment{denselist}{
+    \begin{list}{\small{$\bullet$}}%
+    {\setlength{\itemsep}{0ex} \setlength{\topsep}{0ex}
+    \setlength{\parsep}{0pt} \setlength{\itemindent}{0pt}
+    \setlength{\leftmargin}{1.5em}
+    \setlength{\partopsep}{0pt}}}%
+    {\end{list}}
+
+\newcommand{\squishlist}{
+   \begin{list}{$\bullet$}
+    { \setlength{\itemsep}{0pt}
+      \setlength{\parsep}{2pt}
+      \setlength{\topsep}{0pt}
+      \setlength{\partopsep}{0pt}
+      \leftmargin=25pt
+\rightmargin=0pt
+\labelsep=5pt
+\labelwidth=10pt
+\itemindent=0pt
+\listparindent=0pt
+\itemsep=\parsep
+    }
+}
+\newcommand{\squishend}{\end{list}}
+\newcommand{\npar}{\par \noindent}
+% use extensively to toggle between paper and TR
+\newcommand{\eat}[1]{}
+\newcommand{\papertext}[1]{}
+% \newcommand{\tr}[1]{{\leavevmode\color{lightgray}{#1}}}
+% \newcommand{\tr}[1]{}
+\newcommand{\tr}[1]{{\leavevmode\color{red}#1}}
+\newcommand{\boldpara}[1]{\textbf{\paragraph{#1}}}
+% de-facto paragraph format
+\newcommand{\stitle}[1]{\par\noindent\textbf{#1}}
+\newcommand{\opt}[1]{{\leavevmode\color{purple}{#1}}} %optional if need cut (may go into TR)
+\newcommand{\cut}[1]{} %confirmed cut
+\newcommand{\system}{\textsc{VisPilot}\xspace}
+\newcommand{\shortsystem}{\textsc{VP}\xspace} %shorthand for system
+\newcommand{\cluster}{\textsc{Cluster}\xspace}
+\newcommand{\BFS}{\textsc{BFS}\xspace}
+% \newcommand{\fem}{{\small\texttt{Female}}\xspace}
+% \newcommand{\blk}{{\small\texttt{African-American}}\xspace}
+% \newcommand{\blkfem}{{\small\texttt{African-American Female}}\xspace}
+\newcommand{\fem}{\texttt{Female}\xspace}
+\newcommand{\blk}{\texttt{African-American}\xspace}
+\newcommand{\blkfem}{\texttt{African-American Female}\xspace}
+
+\newcommand{\agp}[1]{\leavevmode\textcolor[HTML]{AFCD38}{Aditya: #1}}
+\newcommand{\dor}[1]{\leavevmode\textcolor[HTML]{00E8D8}{Doris: #1}}
+\newcommand{\hdev}[1]{\leavevmode\textcolor[HTML]{9B6191}{Himel: #1}}
+\newcommand{\haz}[1]{\leavevmode\textcolor[HTML]{E59400}{Hazem: #1}}
+% \newcommand{\change}[1]{{\leavevmode\color{red}#1}}
+% \newcommand{\achange}[1]{{\leavevmode\color{blue}#1}}
+% \newcommand{\bchange}[1]{{\leavevmode\color{cyan}#1}}
+% \newcommand{\origcolor}[1]{\color[HTML]{7C0FFF}{#1}}
+% \newcommand{\diffcolor}[1]{\color[HTML]{FA7500}{#1}}
+\newcommand{\origcolor}[1]{{\leavevmode\color{blue}#1}}
+\newcommand{\diffcolor}[1]{{\leavevmode\color{red}#1}}
+\newcommand{\change}[1]{#1}
+\newcommand{\achange}[1]{#1}
+\newcommand{\bchange}[1]{#1}
+\urlstyle{leo}
+% \AtBeginEnvironment{quote}{\small}
+\renewenvironment{quote}{%
+  \vspace{-3pt}
+   \list{}{%
+     \leftmargin0.15cm
+     \rightmargin\leftmargin
+   }
+   \item\relax
+}
+{\vspace{-3pt} \endlist}
+
+% To make various LaTeX processors do the right thing with page size.
+\def\pprw{8.5in}
+\def\pprh{11in}
+\special{papersize=\pprw,\pprh}
+\setlength{\paperwidth}{\pprw}
+\setlength{\paperheight}{\pprh}
+\setlength{\pdfpagewidth}{\pprw}
+\setlength{\pdfpageheight}{\pprh}
+
+\newcommand*\OK{\ding{51}}
+\renewenvironment{quote}{%
+   \list{}{%
+     \leftmargin0.15cm
+     \rightmargin\leftmargin
+   }
+   \item\relax
+}
+{\endlist}
+
+\copyrightyear{2019}
+\acmYear{2019}
+\setcopyright{acmcopyright}
+\acmConference[IUI '19]{24th International Conference on Intelligent User Interfaces}{March 17--20, 2019}{Marina del Rey, CA, USA}
+\acmBooktitle{24th International Conference on Intelligent User Interfaces (IUI '19), March 17--20, 2019, Marina del Rey, CA, USA}
+\acmPrice{15.00}
+\acmDOI{10.1145/3301275.3302307}
+\acmISBN{978-1-4503-6272-6/19/03}
+
+\settopmatter{printacmref=false}
+% \settopmatter{printacmref=true}
+% \fancyhead{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% START OF THE PAPER %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\author{Doris Jung-Lin Lee$^\dagger$, Himel Dev$^\dagger$, Huizi Hu$^\dagger$, Hazem Elmeleegy$^\star$, Aditya Parameswaran$^\dagger$}
+\renewcommand{\shortauthors}{D. Lee, H. Dev, H. Hu, H. Elmeleegy, A. Parameswaran}
+\affiliation{
+  \institution{$^\dagger$University of Illinois, Urbana-Champaign, $^\star$Google, Inc.}
+}
+\email{jlee782|hdev3|huizihu2|adityagp@illinois.edu, elmeleegy@google.com}
+% \author{Doris Jung-Lin Lee}
+% \affiliation{
+%   \institution{University of Illinois, Urbana-Champaign}
+% }
+% \email{jlee782@illinois.edu}
+
+% \author{Himel Dev}
+% \affiliation{
+%   \institution{University of Illinois, Urbana-Champaign}
+% }
+% \email{hdev3@illinois.edu}
+% \author{Huizi Hu}
+% \affiliation{
+%   \institution{University of Illinois, Urbana-Champaign}
+% }
+% \email{huizihu2@illinois.edu}
+% \author{Hazem Elmeleegy}
+% \affiliation{%
+%   \institution{Google, Inc.}
+% }
+% \email{elmeleegy@google.com}
+
+% \author{Aditya Parameswaran}
+% \affiliation{%
+%   \institution{University of Illinois, Urbana-Champaign}
+% }
+% \email{adityagp@illinois.edu}
+%\title{Avoiding the Drill-down Fallacy with Storyboard: Assisted and Accelerated Data Exploration Through Data Subsets}
+\title[Avoiding Drill-down Fallacies with {\em VisPilot}]{Avoiding Drill-down Fallacies with {\em VisPilot}:\\ Assisted Exploration of Data Subsets}
+% \author{Doris Jung-Lin Lee, Himel Dev, Huizi Hu, Hazem Elmeleegy, Aditya Parameswaran}
+\begin{abstract}
+As datasets continue to grow in size and complexity,
+exploring multi-dimensional datasets remain challenging for analysts.
+A common operation during this exploration is drill-down---understanding
+the behavior of data subsets by \change{progressively} adding filters.
+While widely used, in the absence of careful attention towards confounding factors,
+drill-downs could lead to inductive fallacies.
+Specifically, an analyst may end up being \lq\lq deceived\rq\rq\ into thinking that a deviation in trend is attributable to a local change, when in fact \change{it is a more general phenomenon};
+we term this the \change{{\em drill-down fallacy}}. \change{One way to avoid falling prey to drill-down fallacies}
+is to exhaustively explore all potential drill-down paths,
+which quickly becomes infeasible \change{on complex datasets with many attributes}.
+We present \system, an accelerated visual data exploration tool that guides analysts \change{through the} key insights in a dataset, while avoiding drill-down fallacies. Our user study results show that \system helps analysts discover interesting visualizations, understand attribute importance, and predict unseen visualizations better than other \change{multidimensional data analysis} baselines.
+%towards meaningful insights for a variety of tasks.
+\end{abstract}
+\begin{CCSXML}
+<ccs2012>
+<concept>
+<concept_id>10003120.10003145.10003147.10010365</concept_id>
+<concept_desc>Human-centered computing~Visual analytics</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+<concept>
+<concept_id>10003120.10003145.10003147.10010923</concept_id>
+<concept_desc>Human-centered computing~Information visualization</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+<concept>
+<concept_id>10003120.10003121.10003122.10003332</concept_id>
+<concept_desc>Human-centered computing~User models</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+<concept>
+<concept_id>10003120.10003121.10003122.10003334</concept_id>
+<concept_desc>Human-centered computing~User studies</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+% <concept>
+% <concept_id>10002951.10003227.10003241.10003244</concept_id>
+% <concept_desc>Information systems~Data analytics</concept_desc>
+% <concept_significance>500</concept_significance>
+% </concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Human-centered computing~Visual analytics}
+\ccsdesc[500]{Human-centered computing~Information visualization}
+\ccsdesc[500]{Human-centered computing~User models}
+\ccsdesc[500]{Human-centered computing~User studies}
+% \ccsdesc[500]{Information systems~Data analytics}
+\keywords{exploratory data analysis, visualization recommendation, drill-down data analysis}
+\maketitle
+\input{1.Introduction}
+\input{2.ProblemFormulation}
+\input{3.System}
+\input{4.StudyMethods}
+\input{5.StudyResults.tex}
+\input{6.Discussion.tex}
+\input{7.RelatedWorks.tex}
+\input{8.Conclusion.tex}
+\medskip
+ \stitle{Acknowledgments.} \bchange{We thank the anonymous reviewers for their valuable feedback. We acknowledge support from grants IIS-1513407, IIS-1633755, IIS-1652750, and IIS-1733878 awarded by the National Science Foundation, and funds from Microsoft, 3M, Adobe, Toyota Research Institute, Google, and the Siebel Energy Institute. The content is solely the responsibility of the authors and does not necessarily represent the official views of the funding agencies and organizations.}
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{reference}
+
+\end{document}
