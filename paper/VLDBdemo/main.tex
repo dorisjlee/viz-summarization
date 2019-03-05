@@ -1,0 +1,107 @@
+% THIS IS AN EXAMPLE DOCUMENT FOR VLDB 2012
+% based on ACM SIGPROC-SP.TEX VERSION 2.7
+% Modified by  Gerald Weber <gerald@cs.auckland.ac.nz>
+% Removed the requirement to include *bbl file in here. (AhmetSacan, Sep2012)
+% Fixed the equation on page 3 to prevent line overflow. (AhmetSacan, Sep2012)
+
+\documentclass{vldb}
+\usepackage{graphicx}
+\usepackage{balance}  % for  \balance command ON LAST PAGE  (only there!)
+\usepackage{xspace}
+\usepackage{url}
+\newcommand{\vispilot}{\textsc{VisPilot}\xspace}
+\newcommand{\stitle}[1]{\par\noindent\textbf{#1}}
+
+% Comments 
+\newcommand{\agp}[1]{\leavevmode\textcolor[HTML]{AFCD38}{Aditya: #1}}
+\newcommand{\dor}[1]{\leavevmode\textcolor[HTML]{00E8D8}{Doris: #1}}
+\newcommand{\hdev}[1]{\leavevmode\textcolor[HTML]{9B6191}{Himel: #1}}
+\newcommand{\haz}[1]{\leavevmode\textcolor[HTML]{E59400}{Hazem: #1}}
+
+\urlstyle{leo}
+% Include information below and uncomment for camera ready
+\vldbTitle{A Sample Proceedings of the VLDB Endowment Paper in LaTeX Format}
+\vldbAuthors{Ben Trovato, G. K. M. Tobin, Lars Th{\sf{\o}}rv{$\ddot{\mbox{a}}$}ld, Lawrence P. Leipuner, Sean Fogarty, Charles Palmer, John Smith, Julius P.~Kumquat, and Ahmet Sacan}
+\vldbDOI{https://doi.org/10.14778/xxxxxxx.xxxxxxx}
+\vldbVolume{12}
+\vldbNumber{xxx}
+\vldbYear{2019}
+
+\begin{document}
+
+% ****************** TITLE ****************************************
+
+\title{VisPilot: Navigating Through Data Subsets with Hierarchical Summary of Visualizations}
+
+\numberofauthors{5} 
+\author{
+       \alignauthor
+       Doris Jung-Lin Lee\\
+       \affaddr{University of Illinois}\\
+       \email{jlee782@illinois.edu}
+       \alignauthor
+       Himel Dev\\
+       \affaddr{University of Illinois}\\
+       \email{hdev3@illinois.edu}
+       \alignauthor
+       Huizi Hu\\
+       \affaddr{University of Illinois}\\
+       \email{huizihu2@illinois.edu}
+       \and  
+       \alignauthor
+       Hazem Elmeleegy\\
+       \affaddr{Google Inc.}\\
+       \email{elmeleegy@google.com}
+       \alignauthor
+       Aditya Parameswaran\\
+       \affaddr{University of Illinois}\\
+       \email{adityagp@illinois.edu}
+}
+
+% \author{Doris Jung-Lin Lee$^\dagger$, Himel Dev$^\dagger$, Huizi Hu$^\dagger$, Hazem Elmeleegy$^\star$, Aditya Parameswaran$^\dagger$}
+% \renewcommand{\shortauthors}{D. Lee, H. Dev, H. Hu, H. Elmeleegy, A. Parameswaran}
+% \affiliation{
+%   \institution{$^\dagger$University of Illinois, Urbana-Champaign, $^\star$Google, Inc.}
+% }
+% \email{jlee782|hdev3|huizihu2|adityagp@illinois.edu, elmeleegy@google.com}
+
+% There's nothing stopping you putting the seventh, eighth, etc.
+% author on the opening page (as the 'third row') but we ask,
+% for aesthetic reasons that you place these 'additional authors'
+% in the \additional authors block, viz.
+% \additionalauthors{Additional authors: John Smith (The Th{\o}rv\"{a}ld Group, {\texttt{jsmith@affiliation.org}}), Julius P.~Kumquat
+% (The \raggedright{Kumquat} Consortium, {\small \texttt{jpkumquat@consortium.net}}), and Ahmet Sacan (Drexel University, {\small \texttt{ahmetdevel@gmail.com}})}
+% \date{30 July 1999}
+% Just remember to make sure that the TOTAL number of authors
+% is the number that will appear on the first page PLUS the
+% number that will appear in the \additionalauthors section.
+
+
+\maketitle
+
+\begin{abstract}
+The abstract for your paper for the PVLDB Journal submission.
+The template and the example document are based on the ACM SIG Proceedings  templates. This file is part of a package for preparing the submissions for review. These files are in the camera-ready format, but they do not contain the full copyright note.
+Note that after the notification of acceptance, there will be an updated style file for the camera-ready submission containing the copyright note.
+\end{abstract}
+
+\input{1-Intro}
+\input{2-DemoScenario}
+\input{3-System}
+\input{4-Conclusion}
+% ensure same length columns on last page (might need two sub-sequent latex runs)
+\balance
+
+%ACKNOWLEDGMENTS are optional
+\medskip
+\stitle{Acknowledgments.} We thank the anonymous reviewers for their valuable feedback. We acknowledge support from grants IIS-1513407, IIS-1633755, IIS-1652750, and IIS-1733878 awarded by the National Science Foundation, and funds from Microsoft, 3M, Adobe, Toyota Research Institute, Google, and the Siebel Energy Institute. The content is solely the responsibility of the authors and does not necessarily represent the official views of the funding agencies and organizations.
+% \section{Acknowledgments}
+% This section is optional; it is a location for you
+% to acknowledge grants, funding, editing assistance and
+% what have you.  In the present case, for example, the
+% authors would like to thank Gerald Murray of ACM for
+% his help in codifying this \textit{Author's Guide}
+% and the \textbf{.cls} and \textbf{.tex} files that it describes.
+\bibliographystyle{abbrv}
+\bibliography{reference}  % vldb_sample.bib is the name of the Bibliography in this case
+\end{document}

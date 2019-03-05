@@ -1,0 +1,34 @@
+\section{System Design}
+\subsection{Recommendation Objective}
+\subsection{System Architecture}
+\vispilot is a web application built on top of a traditional in-memory database, PostgresSQL. Given a set of user selection via the frontend interface, the Interaction Manager relays the corresponding HTTP request to the Java backend. The backend runs within an embedded Jetty web-server and is responsible for managing the lattice (Lattice Manager) and querying data distributions for specified data subsets (Query Manager). The lattice manager consists of three modules: 1) construction of the lattice, 2) storage the lattice for subsequent reuse, and 3) traversal across the lattice in search of a maximal subgraph. Amongst the three modules, lattice construction is the most computationally intensive step, since the size of the lattice grows exponentially with the cardinality (across all attributes) in the dataset. \vispilot employs several optimization to ensure that the system generates a dashboard at interactive speeds.
+\begin{enumerate}
+	\item Instead of sending large numbers of independent database queries for every single data subset, the Query Manager applies sharing-based optimizations from Vartak et al.~\cite{Vartak2015}, submitting only a single query to the RDBMS via the Database Communicator and combining multiple aggregates to obtain the aggregate values for the requested subset.
+	\item When generating the lattice combinatorially, we apply an early stopping criterion that limits the lattice to be no larger than 4 levels (default setting, further adjustable by users). This shell-fragment approach \cite{Li2004} is based on the observation that most analysts are only interested in data subsets with small numbers of filters, beyond that the filter becomes difficult to interpret. %The level cutoff parameter is adjustable by users if needed. 
+	\item To eliminate insignificant subsets with small population sizes, users can also select an \textit{iceberg condition}~\cite{Xin2007} to adjust the extent of pruning on visualizations whose sizes fall below a certain percentage of the overall population size. %\footnote{The terminology is used in the discussion of iceberg cubes in OLAP literature. This also serves as a early pruning condition
+\end{enumerate}
+After the lattice is materialized, we cache the generated lattice both in-memory and in the database to facilitate further reuse. Upon a new dashboard request, \vispilot first performs a lookup in the Storage Module to see if a corresponding lattice has been generated for the selected set of \{Dataset, x,y, aggregation function\}. This ensures that dashboard refinement operations that requires low-latency, such as changing the number of requested dashboard (k) or requesting for a dashboard expansion, does not require lattice recomputation. The traversal module operates on top of the materialized lattice to search for the maximal weighted subgraph, via the fontier-greedy algorithm described in our paper (CITE). Finally, the recommended subgraph is sent to the frontend in a JSON format. The Dashboard Renderer generates the recommended visualizations through Vega-Lite\footnote{\url{https://vega.github.io/vega-lite/}} and displays the visualizations in a connected graph layout through vis.js \footnote{\url{http://visjs.org/}}. 
+% when the backend retreives the aggregated data values from the database through SQL. 
+
+% In most cases, the lattice contains a large number of visualizations due to the presence of many attributes or high-cardinality attributes in the dataset. In such cases finding an optimal solution is computationally challenging.
+%  ---- There are several system optimizations 
+
+
+
+% communicating with the database, managing and constructing the lattice, as well as traversing through the lattice in search of the recommendation. First, the backend retreives the aggregated data values from the database through SQL. The data values are used to construct the lattice combinatorially in a level-wise order. 
+
+% - lattice construction 
+% - traversal modules
+% visualization rendered using Vega-Lite\footnote{\url{https://vega.github.io/vega-lite/}}
+% Frontend: 
+% 	- handles requests
+% 	- graph layout through vis.js \footnote{\url{http://visjs.org/}}
+%     - communication through HTTP request
+
+
+
+
+%Our system supports two variants of traversal based on the lattice generation procedure---offline variants that first generate the complete lattice and then work towards identifying the solution with maximum combined-edge utility, and online variants that incrementally generate the lattice and simultaneously identify the solution. The offline variants are appropriate for datasets with a small number of low-cardinality attributes, where we can generate the entire lattice in a reasonable time; whereas the online variants are appropriate for datasets with many high-cardinality attributes, where we need to incrementally generate a partial lattice. 
+
+
+
