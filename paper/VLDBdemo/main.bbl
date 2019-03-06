@@ -1,0 +1,45 @@
+\begin{thebibliography}{1}
+
+\bibitem{Anand2015}
+A.~Anand and J.~Talbot.
+\newblock {Automatic Selection of Partitioning Variables for Small Multiple
+  Displays}.
+\newblock 2626(c), 2015.
+
+\bibitem{Heer2012}
+J.~Heer and B.~Shneiderman.
+\newblock {Interactive Dynamics for Visual Analysis}.
+\newblock {\em Queue}, 10(2):30, 2012.
+
+\bibitem{Lee2019}
+D.~J. Lee, H.~Dev, H.~Hu, H.~Elmeleegy, and A.~Parameswaran.
+\newblock Avoiding the drill-down fallacy with storyboard: Assisted and
+  accelerated data exploration.
+\newblock {\em 24th International Conference on Intelligent User Interfaces
+  (IUI '19)}, 2019.
+
+\bibitem{Li2004}
+X.~Li, J.~Han, and H.~Gonzalez.
+\newblock {High-dimensional OLAP: A minimal cubing approach}.
+\newblock {\em Proceedings of the Thirtieth international conference on Very
+  large data bases-Volume 30}, pages 528--539, 2004.
+
+\bibitem{Vartak2015}
+M.~Vartak, S.~Rahman, S.~Madden, A.~Parameswaran, and N.~Polyzotis.
+\newblock Seedb: efficient data-driven visualization recommendations to support
+  visual analytics.
+\newblock {\em Proceedings of the VLDB Endowment}, 8(13):2182--2193, 2015.
+
+\bibitem{Wu2013}
+E.~Wu and S.~Madden.
+\newblock {Scorpion: Explaining Away Outliers in Aggregate Queries}.
+\newblock {\em Proceedings of the VLDB Endowment}, 6(8):553--564, 2013.
+
+\bibitem{Xin2007}
+D.~Xin, J.~Han, X.~Li, Z.~Shao, and B.~W. Wah.
+\newblock {Computing iceberg cubes by top-down and bottom-up integration: The
+  starcubing approach}.
+\newblock {\em IEEE Transactions on Knowledge and Data Engineering},
+  19(1):111--126, 2007.
+
+\end{thebibliography}
